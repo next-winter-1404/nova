@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme {
+  /* Black colors */
+  --color-black-transparent-16: rgb(0 0 0 / 0.16);
+  --color-black-transparent-12: rgb(0 0 0 / 0.12);
+  --color-black-transparent-8:  rgb(0 0 0 / 0.08);
+  --color-black-transparent-6:  rgb(0 0 0 / 0.06);
+  --color-black-transparent-4:  rgb(0 0 0 / 0.04);
+
+  /* dark colors */
+  --color-dark-900: #232323;
+  --color-dark-860: #2E2E2E;
+  --color-dark-850: #2D2D2D;
+  --color-dark-800: #363636;
+  --color-dark-800-transparent-20: rgb(54 54 54 / 0.2);
+  --color-dark-700: #393939;
+  --color-dark-650: #404040;
+  --color-dark-600: #444444;
+
+  /* Gray colors */
+  --color-gray-500: #8C8C8C;
+  --color-gray-450: #9A9A9A;
+  --color-gray-400: #94979C;
+  --color-gray-300: #AAAAAA;
+
+  /* White colors */
+  --color-white-pure: #FFFFFF;
+  --color-white-transparent-20: rgb(255 255 255 / 0.2);
+  --color-white-transparent-16: rgb(255 255 255 / 0.16);
+  --color-white-transparent-12: rgb(255 255 255 / 0.12);
+
+  /* Purple-blue colors */
+  --color-blue-purple-500: #7569FF;
+  --color-blue-transparent-40: rgb(86 121 244 / 0.4);
+  --color-blue-transparent-20: rgb(86 121 244 / 0.2);
+
+  /* Green colors */
+  --color-primary-accent-green: #8CFF45;
+  --color-primary-accent-green-transparent-64: rgb(140 255 68 / 0.64);
+  --color-primary-accent-green-transparent-20: rgb(140 255 68 / 0.2);
+  --color-primary-accent-green-transparent-12: rgb(140 255 68 / 0.12);
+  --color-primary-accent-green-transparent-8:  rgb(140 255 68 / 0.08);
+
+  /* red colors */
+  --color-tomato-red: #FF5555;
+  --color-tomato-red-transparent-20: rgb(255 85 85 / 0.2);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* utility classes */
+.flex-center {
+  @apply flex items-center justify-center;
+}
+
+.flex-between {
+  @apply flex justify-between items-center;
+}
+
+/* Text styles */
+.text-32-semibold {
+  @apply font-semibold text-[32px] whitespace-nowrap text-white-pure;
+}
+
+.text-32-medium {
+  @apply font-medium text-[32px] whitespace-nowrap text-white-pure;
+}
+
+.text-20-regular {
+  @apply font-normal text-[20px] whitespace-nowrap text-white-pure;
+}
+
+.text-20-medium {
+  @apply font-medium text-[20px] whitespace-nowrap text-white-pure;
+}
+
+.text-16-semibold {
+  @apply font-semibold text-[16px] whitespace-nowrap text-white-pure;
+}
+
+.text-16-medium {
+  @apply font-medium text-[16px] whitespace-nowrap text-white-pure;
+}
+
+.text-13-regular {
+  @apply font-normal text-[13px] whitespace-nowrap text-white-pure;
+}
