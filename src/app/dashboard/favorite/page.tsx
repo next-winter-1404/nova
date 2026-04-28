@@ -3,7 +3,8 @@ import React from 'react'
 const FavoritePage = () => {
   return (
     <div>
-      FavortePage
+      FavoritePage
+      hyjd;oyihjs;phep
     </div>
   )
 }
