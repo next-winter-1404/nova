@@ -5,14 +5,16 @@ const Button: FC<IButtonProps> = ({
     textStyle,
     backgroundColor,
     icon,
+    children,
     onClick,
     disabled = false,
     size,
     width,
     height,
     color,
+    buttonStyle
 }) => {
-    const buttonStyle = {
+    const baseStyles: React.CSSProperties = {
         backgroundColor : "#FF5555",
         color : "#FFFFFF",
         border : "none",
@@ -22,12 +24,24 @@ const Button: FC<IButtonProps> = ({
         display : "flex",
         alignItems : "center",
         justifyContent : "center",
-        gap: '8px',
-        
+        gap: '8px',       
     }
+
+    const finalButtonStyles : React.CSSProperties = {
+        ...baseStyles,
+        ...buttonStyle,
+
+    };
+
+    const content = children || (
+        <>
+            {icon && <span style={{display: "flex"}}>{icon}</span>}
+            {text && <span style={textStyle}>{text}</span>}
+        </>
+    )
   return (
     <button
-        style={buttonStyle}
+        style={finalButtonStyles}
         onClick={onClick}
         disabled ={disabled}
     >
