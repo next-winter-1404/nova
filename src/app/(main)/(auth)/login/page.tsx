@@ -4,6 +4,7 @@ import LoginInstructions from "@/src/components/login/LoginInstructions";
 import WelcomeText from "@/src/components/login/welcomeText";
 import line from "../../../../assets/images/line.svg";
 import Image from "next/image";
+import Input from "@/src/components/common/input/Input";
 
 const LoginPage = () => {
   return (
@@ -31,7 +32,26 @@ const LoginPage = () => {
           />
         </div>
         <Image alt="line" src={line} className="w-full" />
-        
+       <div className="flex gap-9">
+       <Input
+        name="email_field_123"
+          InputHeight={"h-[43px]"}
+          htmlFor={"email"}
+          id={"email"}
+          labelText={"ایمیل شما * :"}
+          parentWidth={"w-1/2"}
+          placeHolder={"example@gmail.com"}
+          type={"email"}
+        />
+        <Input
+          InputHeight={"h-[43px]"}
+          htmlFor={"password"}
+          id={"password"}
+          labelText={"کلمه عبور * :"}
+          parentWidth={"w-1/2"}
+          type={"password"}
+        />
+       </div>
       </div>
     </div>
   );
