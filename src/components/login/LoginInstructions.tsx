@@ -3,13 +3,16 @@ import { useState } from "react";
 import loginUser from "../../assets/icons/loginIcon.svg"
 import signinUser from "../../assets/icons/signinIcon.svg"
 import Image from "next/image";
+import { useRouter } from 'next/navigation'
 const LoginInstructions = () => {
+  const router = useRouter()
   const [selectedBtn, setSelectedBtn] = useState("login");
   const handleLoginClick = () => {
     setSelectedBtn("login");
   };
   const handleSignInClick = () => {
     setSelectedBtn("signin");
+    router.push("/signup")
   };
   return (
     <div className="w-full bg-unSelectedButton h-12 rounded-2xl  flex-between gap-8 p-2">
