@@ -1,12 +1,5 @@
-import { FC, ReactNode } from "react";
-interface CardContainerProps {
-  color: string;
-  labelSize: "md" | "lg";
-  cavity: "sharp" | "round";
-  labelContent:ReactNode
-  mainContent:ReactNode
-  width:string
-}
+import { CardContainerProps } from "@/src/core/types/ICardProps";
+import { FC } from "react";
 
 const CardContainer: FC<CardContainerProps> = ({
   color,

@@ -7,4 +7,5 @@ export interface IInputProp {
     InputHeight?: string;
     placeHolder?: string;
     name?: string;
+    value?:string
   }

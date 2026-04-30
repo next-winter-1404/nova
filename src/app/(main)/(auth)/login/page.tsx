@@ -1,21 +1,13 @@
-import LoginImage from "@/src/components/login/LoginImage";
-import LoginInstructions from "@/src/components/login/LoginInstructions";
-import WelcomeText from "@/src/components/login/welcomeText";
-import line from "../../../../assets/images/line.svg";
 import leftArrow from "../../../../assets/icons/leftArrow.svg";
 import Image from "next/image";
 import Input from "@/src/components/common/input/Input";
-import LoginWays from "@/src/components/login/LoginWays";
+import LoginWrapper from "@/src/components/login/wrapper/page";
+import LoginButton from "@/src/components/login/button/LoginButton";
 
 const LoginPage = () => {
   return (
-    <div className="flex-center w-full gap-24 p-8 ">
-      <LoginImage />
-      <div className="w-1/2  flex flex-col gap-9 " dir="rtl">
-        <WelcomeText />
-        <LoginInstructions />
-       <LoginWays/>
-        <Image alt="line" src={line} className="w-full" />
+    <LoginWrapper
+      content={
         <div className="flex gap-9">
           <Input
             name="email_field_123"
@@ -44,8 +36,10 @@ const LoginPage = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      }
+      ButtonSection={<LoginButton buttonText="ورود به حساب کاربری"  width="w-full"/>}
+
+    />
   );
 };
 

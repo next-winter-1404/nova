@@ -9,6 +9,7 @@ const Input: FC<IInputProp> = ({
   InputHeight,
   placeHolder,
   name,
+  value
 }) => {
   return (
     <div className={`${parentWidth} relative`}>
@@ -22,6 +23,7 @@ const Input: FC<IInputProp> = ({
         autoComplete="new-password"
         name={name}
         type={type}
+        value={value}
         id={id}
         className={` w-full border border-white rounded-2xl  text-gray-300 px-6 ${InputHeight}`}
         placeholder={placeHolder}
