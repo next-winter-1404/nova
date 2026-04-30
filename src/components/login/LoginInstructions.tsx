@@ -17,7 +17,7 @@ const LoginInstructions = () => {
         onClick={handleLoginClick}
         className={`${
           selectedBtn == "login"
-            ? "bg-primary-accent-green shadow-inner-custom text-selectedButtonText"
+            ? "selected-button"
             : ""
         } transition-all w-1/2 rounded-xl h-full  cursor-pointer text-gray-300 `}
       >
@@ -28,7 +28,7 @@ const LoginInstructions = () => {
         onClick={handleSignInClick}
         className={`${
           selectedBtn == "signin"
-            ? "bg-primary-accent-green shadow-inner-custom text-selectedButtonText"
+            ? "selected-button"
             : ""
         } transition-all w-1/2 rounded-xl h-full  cursor-pointer text-gray-300 `}
       >

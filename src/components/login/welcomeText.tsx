@@ -2,12 +2,12 @@ import React from 'react'
 
 const WelcomeText = () => {
   return (
-    <div>
+    <div className='flex flex-col gap-6'>
     <div className="flex ">
-      <h2>به خانواده دلتا،</h2>
-      <h2>خوش برگشتی!</h2>
+      <h2 className='text-32-medium'>به خانواده دلتا،</h2>
+      <h2 className='text-32-semibold'>خوش برگشتی!</h2>
     </div>
-    <span>
+    <span className='text-16-medium'>
       با وارد کردن اطلاعات خود به راحتی وارد پنل خودتون بشید و از پروژه
       هاتون خبر بگیرید !
     </span>
