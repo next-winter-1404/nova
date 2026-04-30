@@ -1,7 +1,8 @@
-"use client"
-
+"use client";
 import { useState } from "react";
-
+import loginUser from "../../assets/icons/loginIcon.svg"
+import signinUser from "../../assets/icons/signinIcon.svg"
+import Image from "next/image";
 const LoginInstructions = () => {
   const [selectedBtn, setSelectedBtn] = useState("login");
   const handleLoginClick = () => {
@@ -16,23 +17,21 @@ const LoginInstructions = () => {
         name="loginBtn"
         onClick={handleLoginClick}
         className={`${
-          selectedBtn == "login"
-            ? "selected-button"
-            : ""
-        } transition-all w-1/2 rounded-xl h-full  cursor-pointer text-gray-300 `}
+          selectedBtn == "login" ? "selected-button" : ""
+        } transition-all w-1/2 rounded-xl h-full  cursor-pointer text-gray-300  flex-center gap-3`}
       >
-        ورود به حساب کاربری
+        <Image  src={loginUser} alt="loginUser"/>
+        <span>ورود به حساب کاربری</span>
       </button>
       <button
         name="sinInBtn"
         onClick={handleSignInClick}
         className={`${
-          selectedBtn == "signin"
-            ? "selected-button"
-            : ""
-        } transition-all w-1/2 rounded-xl h-full  cursor-pointer text-gray-300 `}
+          selectedBtn == "signin" ? "selected-button" : ""
+        } transition-all w-1/2 rounded-xl h-full  cursor-pointer text-gray-300 flex-center gap-3`}
       >
-        ساخت حساب کاربری
+           <Image  src={signinUser} alt="signinUser"/>
+        <span> ساخت حساب کاربری</span>
       </button>
     </div>
   );
