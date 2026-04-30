@@ -12,41 +12,39 @@ const Button: FC<IButtonProps> = ({
     width,
     height,
     color,
-    buttonStyle
+    className = "",
+    borderRadius,
 }) => {
-    const baseStyles: React.CSSProperties = {
-        backgroundColor : "#FF5555",
-        color : "#FFFFFF",
-        border : "none",
-        width : "150px",
-        height : "43px",
-        borderRadius :"16px",
-        display : "flex",
-        alignItems : "center",
-        justifyContent : "center",
-        gap: '8px',       
+    const baseClasses = `
+        flex items-center gap-2
+        border-none
+        justify-center
+        ${disabled? 'opacity-50 cursor-not-allowed' : ''}
+    `;
+
+    const finalClasses = `${baseClasses} ${className}`;
+
+    const buttonStyle : React.CSSProperties = {
+        backgroundColor : backgroundColor || undefined,
+        width : width || undefined,
+        height : height || undefined,
+        borderRadius : borderRadius || undefined
     }
-
-    const finalButtonStyles : React.CSSProperties = {
-        ...baseStyles,
-        ...buttonStyle,
-
-    };
 
     const content = children || (
         <>
-            {icon && <span style={{display: "flex"}}>{icon}</span>}
+            {icon && <span className="flex">{icon}</span>}
             {text && <span style={textStyle}>{text}</span>}
         </>
     )
   return (
     <button
-        style={finalButtonStyles}
+        className={finalClasses}
+        style={buttonStyle}
         onClick={onClick}
         disabled ={disabled}
     >
-        {icon && <span>{icon}</span>} 
-        {text && <span style={textStyle}>{text}</span>}
+        {content}
     </button>
   )
 }

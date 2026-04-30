@@ -10,5 +10,6 @@ export interface IButtonProps{
     width ? : string;
     height ? : string;
     textStyle ? : React.CSSProperties;
-    buttonStyle ? : React.CSSProperties;
+    className? : string;
+    borderRadius ? : string;
 }
