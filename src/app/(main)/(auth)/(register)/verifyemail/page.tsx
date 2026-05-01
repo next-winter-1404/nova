@@ -2,6 +2,8 @@ import Input from "@/src/components/common/input/Input";
 import LoginWrapper from "@/src/components/login/wrapper/page";
 import Image from "next/image";
 import smallLeftArrow from "@/src/assets/icons/smallLeftArrow.svg";
+import clock from "@/src/assets/icons/clock 2.svg";
+import refresh from "@/src/assets/icons/refresh 2.svg";
 import LoginButton from "@/src/components/login/button/LoginButton";
 import Button from "@/src/components/common/button/page";
 
@@ -12,7 +14,6 @@ const VerifyEmailPage = () => {
         content={
           <div className="flex gap-18">
             <Input
-              name="email_field_123"
               InputHeight={"h-[43px]"}
               htmlFor={"email"}
               id={"email"}
@@ -20,26 +21,31 @@ const VerifyEmailPage = () => {
               parentWidth={"w-[48%]"}
               type={"email"}
             />
-            <div className="flex flex-col gap-4 w-1/3 ">
-                <div className="bg-blue-purple-500 rounded-xl h-4/5 p-1">
-                    <button className="bg-white rounded-[10px] h-full w-[60%] flex-center gap-2">
-                        <span>ارسال دوباره رمز</span>
-                        <Image alt="arrow" src={smallLeftArrow}/>
-                    </button>
-                </div>
+            <div className="bg-blue-purple-500 rounded-xl h-4/5 p-1 w-1/3 flex items-center gap-4">
+              <button className="bg-white rounded-[10px] h-full w-[60%] flex-center gap-2">
+                <span className="cursor-pointer">ارسال دوباره رمز</span>
+                <Image alt="arrow" src={smallLeftArrow} />
+              </button>
+              <div className="flex-center gap-3">
+                <span className="text-16-semibold">1:58</span>
+                <Image alt="clock" src={clock} />
+              </div>
             </div>
           </div>
         }
         ButtonSection={
           <div className="flex gap-8">
             <Button
-              text={"salam"}
+              text={"تغییر ایمیل"}
               buttonStyle={{
                 width: "100%",
                 background: "transparent",
                 border: "1px solid white",
-                fontSize:"semibold"
+                fontSize: "semibold",
+                display: "flex",
+                gap: 12,
               }}
+              icon={<Image src={refresh} alt="refresh" />}
             />
             <LoginButton
               buttonText="ساخت حساب کاربری"

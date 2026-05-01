@@ -11,7 +11,6 @@ const LoginPage = () => {
       content={
         <div className="flex gap-9">
           <Input
-            name="email_field_123"
             InputHeight={"h-[43px]"}
             htmlFor={"email"}
             id={"email"}
