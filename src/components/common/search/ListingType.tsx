@@ -27,7 +27,7 @@ const ListingType = () => {
         const isActive = listType.labelName === selectedLabel;
         return (
           <div className="flex items-center gap-3" key={listType.labelName}>
-            {/* Animated vertical divider */}
+            
             <motion.div
               animate={{
                 backgroundColor: isActive ? "#ffffff" : "#AAAAAA",
@@ -42,7 +42,7 @@ const ListingType = () => {
               whileTap={{ scale: 0.96 }}
               transition={{ duration: 0.1 }}
             >
-              {/* Animated text color */}
+      
               <motion.span
                 className="text-[16px]"
                 animate={{
