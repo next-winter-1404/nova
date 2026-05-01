@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme {
   /* Black colors */
   --color-black-transparent-16: rgb(0 0 0 / 0.16);
@@ -22,6 +17,7 @@
   --color-dark-700: #393939;
   --color-dark-650: #404040;
   --color-dark-600: #444444;
+  --color-unSelectedButton: #303030;
 
   /* Gray colors */
   --color-gray-500: #8C8C8C;
@@ -51,24 +47,53 @@
   --color-tomato-red: #FF5555;
   --color-tomato-red-transparent-20: rgb(255 85 85 / 0.2);
 
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* shadows */
+
+  --inset-shadow-fff-16: inset -2 2px 12px rgb(255 255 255 / 0.16);
+  --inset-shadow-fff-8: inset 2 2px 16px rgb(255 255 255 / 0.08);
+  --shadow-3xl: 0 8px 6px rgb(54 54 54 / 0.2); 
+  --shadow-000-16: 0 12px 24px rgb(0 0 0 / 0.16); 
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.container {
+  @apply mx-auto container flex flex-col sm:px-6 py-20 px-4 ;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Text styles */
+.text-32-semibold {
+  @apply font-semibold sm:text-[32px] text-[16px] whitespace-nowrap text-white-pure;
 }
+
+.text-32-medium {
+  @apply font-medium text-[32px] whitespace-nowrap text-white-pure;
+}
+
+.text-semibold-24 {
+  @apply font-semibold  sm:text-[24px] text-[16px] text-white-pure;
+
+}
+
+/* .text-20-regular {
+  @apply font-normal text-[20px] whitespace-nowrap text-white-pure;
+} */
+
+.text-20-medium {
+  @apply sm:text-[20px] text-[12px] text-white-pure;
+}
+
+.text-16-semibold {
+  @apply font-semibold text-[16px] whitespace-nowrap;
+}
+
+.text-16-medium {
+  @apply font-medium sm:text-[16px] text-[12px] whitespace-nowrap;
+}
+
+/* .text-13-regular {
+  @apply font-normal text-[13px] whitespace-nowrap text-white-pure;
+} */
 
 * {
   margin: 0;
@@ -81,35 +106,64 @@ body {
   @apply flex items-center justify-center;
 }
 
+.flex-col-center {
+  @apply flex flex-col justify-center;
+}
+
 .flex-between {
   @apply flex justify-between items-center;
 }
 
-/* Text styles */
-.text-32-semibold {
-  @apply font-semibold text-[32px] whitespace-nowrap text-white-pure;
+@utility padding-section {
+  @apply px-8 py-6
 }
 
-.text-32-medium {
-  @apply font-medium text-[32px] whitespace-nowrap text-white-pure;
+.p-8-16 {
+  @apply sm:px-4 px-1.5 sm:py-2 py-1
 }
 
-.text-20-regular {
-  @apply font-normal text-[20px] whitespace-nowrap text-white-pure;
+
+@utility glass {
+    @apply bg-dark-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl border-b;
 }
 
-.text-20-medium {
-  @apply font-medium text-[20px] whitespace-nowrap text-white-pure;
+main {
+  @apply padding-section;
 }
 
-.text-16-semibold {
-  @apply font-semibold text-[16px] whitespace-nowrap text-white-pure;
-}
+  header {
+        @apply md:w-[96%] w-[90%] inset-x-0 mx-auto glass shadow-3xl inset-shadow-fff-16 rounded-2xl absolute top-6 z-50;
 
-.text-16-medium {
-  @apply font-medium text-[16px] whitespace-nowrap text-white-pure;
-}
+        nav {
+            @apply flex flex-row justify-between mx-auto container sm:p-1.5 px-3 sm:text-[16px] text-[14px];
+            
+            div {
+              @apply w-full flex items-center justify-between;
+              a {
+                @apply flex items-center sm:gap-2 p-1.5;
+                
+                span {
+                    @apply flex justify-center items-center gap-2 sm:px-1.5 px-0.5 ;
 
-.text-13-regular {
-  @apply font-normal text-[13px] whitespace-nowrap text-white-pure;
+                    p {
+                        @apply text-white sm:text-[16px] text-[14px];
+                    }
+                }
+            }
+            }
+        }
+
+
+       
+        /* ul {
+            @apply flex flex-row items-center gap-6;
+        } */
+    }
+
+  
+.menu-wrapper {
+  @apply glass absolute right-8.25 z-10 w-32  px-4 py-1;
+}  
+ .menuItem {
+  @apply w-full flex justify-end items-center py-1 text-white-pure hover:bg-dark-900
 }
