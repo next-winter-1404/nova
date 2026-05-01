@@ -1,6 +1,22 @@
-import { IButtonProps } from '@/src/core/types/IButtonProps'
 import React, { FC } from 'react'
-const Button: FC<IButtonProps> = ({
+
+export interface ButtonProps{
+    text: string | number;
+    backgroundColor?: string;
+    color? :string,
+    icon? : React.ReactNode;
+    children ? : React.ReactNode;
+    onClick? : () => void;
+    disabled ? : boolean;
+    size ? : "lg" | "md";
+    width ? : string;
+    height ? : string;
+    textStyle ? : React.CSSProperties;
+    buttonStyle ? : React.CSSProperties;
+}
+
+
+const Button: FC<ButtonProps> = ({
     text,
     textStyle,
     backgroundColor,
@@ -29,7 +45,7 @@ const Button: FC<IButtonProps> = ({
     const finalButtonStyles : React.CSSProperties = {
         ...baseStyles,
         ...buttonStyle,
-
+        
     };
 
     const content = children || (

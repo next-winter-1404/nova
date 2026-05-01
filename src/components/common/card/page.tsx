@@ -1,12 +1,5 @@
-import { FC, ReactNode } from "react";
-interface CardContainerProps {
-  color: string;
-  labelSize: "md" | "lg";
-  cavity: "sharp" | "round";
-  labelContent?:ReactNode
-  mainContent:ReactNode
-  width:string
-}
+import { CardContainerProps } from "@/src/core/types/ICardProps";
+import { FC } from "react";
 
 const CardContainer: FC<CardContainerProps> = ({
   color,
@@ -17,7 +10,7 @@ const CardContainer: FC<CardContainerProps> = ({
   width
 }) => {
   return (
-    <div className={`flex  items-end mt-60  relative justify-center flex-col `} style={{width:width}}>
+    <div className={`flex  items-end relative justify-center flex-col `} style={{width:width}}>
        <div
         className={`flex items-end relative ${
           labelSize === "lg" ? "w-1/2 md:w-2/5 lg:w-1/6" : "w-1/2 md:w-1/3"

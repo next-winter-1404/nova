@@ -1,5 +1,5 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { getServerSideCookie } from "../helper/cookies/serverSideCookie";
+import { getServerSideCookie } from "../../helper/cookies/serverSideCookie";
 
 const BASE_URL = process.env.NEXT_API_URL;
 
@@ -43,3 +43,4 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+export default instance;

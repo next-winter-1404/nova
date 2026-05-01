@@ -11,19 +11,23 @@ const AboutUs = () => {
       <span className =' text-[32px]'>!دلتا رو بیشتر بشناس </span>
       <h2 className='text-[16px]'>.تیم دلتا با ارائه بهترین نیرو های خدماتی و سرویس های املاکی سعی دارد تا بتواند در تمام لحظات کنار شما باشد</h2>
       <div className ='flex w-full border items-center justify-center gap-5 h-[500px] border-amber-50'>
-        <div className ='flex flex-col w-[445px] border h-[470px] border-amber-50 items-center justify-center'>
-          <CardContainer 
-          color='bg-dark-700'
-          cavity='round'
-          labelSize='md'
-          mainContent
-          width='445px'
-          labelContent ={<div className='h-6'></div>}
-          > 
-          </CardContainer>
+        <div className ='flex flex-col w-[445px] border h-[470px] border-amber-50 justify-center'>
+          <CardContainer
+            color='bg-dark-700'
+            cavity='sharp'
+            labelSize='md'
+            mainContent={<div className='w-[421px] h-[198px]'><CardContainer 
+              color='bg-dark-900' 
+              cavity='sharp' 
+              labelSize='md' 
+              mainContent={<div className=''><h2>7 / 24  ساعت شبانه روز تیم پشتیبانی در تمام طول روز همراه شما هستن</h2></div>}
+              labelContent={<div></div>}>
+              </CardContainer></div>}
+            labelContent={<div></div>}
+          ></CardContainer>
         </div>
         <div className ='flex w-[445px] border h-[470px] border-amber-50 items-center justify-center'>
-          <CardContainer 
+          {/* <CardContainer 
             color='bg-dark-700'
             labelSize='md'
             cavity='round'
@@ -40,7 +44,7 @@ const AboutUs = () => {
             labelContent = {<div className='h-6'></div>}
             height='470px'
           >
-          </CardContainer>
+          </CardContainer> */}
         </div>
         <div className ='flex w-[445px] border h-[470px] border-amber-50'></div>
       </div>
