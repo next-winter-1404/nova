@@ -6,7 +6,8 @@ import LoginButton from "@/src/components/login/button/LoginButton";
 
 const LoginPage = () => {
   return (
-    <LoginWrapper
+    <form className="w-1/2  flex flex-col gap-9" dir="rtl">
+      <LoginWrapper
       content={
         <div className="flex gap-9">
           <Input
@@ -37,9 +38,10 @@ const LoginPage = () => {
           </div>
         </div>
       }
-      ButtonSection={<LoginButton buttonText="ورود به حساب کاربری"  width="w-full"/>}
+      ButtonSection={<LoginButton buttonText="ورود به حساب کاربری"  width="w-full" loadingText="loading"/>}
 
     />
+    </form>
   );
 };
 
