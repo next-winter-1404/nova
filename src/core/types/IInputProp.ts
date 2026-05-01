@@ -1,3 +1,5 @@
+import { ChangeEvent } from "react";
+
 export interface IInputProp {
     parentWidth?: string;
     htmlFor?: string;
@@ -7,5 +9,7 @@ export interface IInputProp {
     InputHeight?: string;
     placeHolder?: string;
     name?: string;
-    value?:string
+    value?:string|number,
+    onChange?: (e:ChangeEvent<HTMLInputElement>) => void
   }
+ 

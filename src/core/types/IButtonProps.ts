@@ -13,6 +13,8 @@ export interface IButtonProps{
     buttonStyle ? : React.CSSProperties;
 }
 export interface ILoginButtonProp{
-    buttonText:string,
+    buttonText:string, 
+    loadingText:string, 
     width:string,
+    type?: "button" | "submit" | "reset"
 }

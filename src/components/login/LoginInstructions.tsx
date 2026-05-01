@@ -9,6 +9,8 @@ const LoginInstructions = () => {
   const [selectedBtn, setSelectedBtn] = useState("login");
   const handleLoginClick = () => {
     setSelectedBtn("login");
+    router.push("/login")
+
   };
   const handleSignInClick = () => {
     setSelectedBtn("signin");

@@ -11,14 +11,14 @@ interface IProp{
 }
 const LoginWrapper = ({content,ButtonSection}:IProp) => {
   return (
-    <div className="w-1/2  flex flex-col gap-9 " dir="rtl">
+    <>
       <WelcomeText />
       <LoginInstructions />
       <LoginWays />
       <Image alt="line" src={line} className="w-full" />
       {content}
      {ButtonSection}
-    </div>
+    </>
   );
 };
 
