@@ -47,12 +47,7 @@ export const sendEmail = async (
       },
     };
   } catch (error: any) {
-    console.log("❌ 6. Error occurred:");
-    console.log("   - Message:", error.message);
-    console.log("   - Status:", error.response?.status);
-    console.log("   - Response data:", error.response?.data);
     console.log("   - Full error:", error);
-    
     return {
       success: false,
       message: error.response?.data?.message || "خطا در ارسال کد",
