@@ -1,32 +1,39 @@
 "use client";
 import Input from "@/src/components/common/input/Input";
-import { sendEmail } from "@/src/utils/sevices/api/auth/register/sendEmail";
 import LoginButton from "@/src/components/login/button/LoginButton";
 import LoginWrapper from "@/src/components/login/wrapper/page";
-import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { SendEmailResult, sendEmail } from "@/src/utils/sevices/api/auth/register/sendEmail";
 
 const SignUpPage = () => {
-  const [state, formAction] = useActionState(sendEmail, { message: "" });
   const router = useRouter();
+  const [state, formAction] = useActionState(sendEmail, {
+    success: false,
+    message: "",
+  } );
+
   useEffect(() => {
-    if (state?.message) {
-      if (state.message === "کد تایید ارسال شد") {
-        toast.success(state.message);
-        router.push("/verifyemail");
-      } else {
-        toast.error(state.message);
-      }
-      console.log("state.message=========>", state.message);
+    if (!state?.message) return;
+
+    if (state.success) {
+      // ✅ موفقیت - دیتا رو داری
+      toast.success(state.message);
+      
+      // ذخیره دیتا برای مرحله بعد
+      
+      // یا مستقیم بفرست به صفحه بعد
+      router.push("/verifyemail");
+      
+    } else {
+      // ❌ خطا
+      toast.error(state.message);
     }
-  }, [state]);
+  }, [state, router]);
+
   return (
-    <form
-      action={formAction}
-      className="md:w-1/2 w-full  flex flex-col gap-9"
-      dir="rtl"
-    >
+    <form action={formAction} className="md:w-1/2 w-full flex flex-col gap-9" dir="rtl">
       <LoginWrapper
         ButtonSection={
           <LoginButton

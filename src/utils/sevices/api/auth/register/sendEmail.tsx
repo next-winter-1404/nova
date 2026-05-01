@@ -4,35 +4,58 @@ import instance from "@/src/utils/sevices/interseptor";
 import { z } from "zod";
 
 const EmailSchema = z.object({
-  email: z.email("فرمت ایمیل صحیح نیست"), 
+  email: z.string().email("فرمت ایمیل صحیح نیست"),
 });
 
-export interface IResponse {
+export interface SendEmailResult {
+  success: boolean;
   message: string;
-}
+  data?: {
+    tempUserId: number;
+    verificationCode: string;
+    email?: string;
+  };
+};
 
-export const sendEmail = async (prevState: IResponse, formData: FormData) => {
+export const sendEmail = async (
+  prevState: SendEmailResult,
+  formData: FormData
+): Promise<SendEmailResult> => {
   const email = formData.get("email");
 
-  console.log("📧 Email received:", email);
-
   const validationResult = EmailSchema.safeParse({ email });
-
   if (!validationResult.success) {
-    const errorMessage = validationResult.error.message;
-    return { message: "فرمت ایمیل صحیح نیست" };
+    return {
+      success: false,
+      message: validationResult.error.message,
+    };
   }
-
-  const validatedEmail = validationResult.data.email;
 
   try {
     const res = await instance.post("/api/auth/register", {
-      email: validatedEmail,
+      email: validationResult.data.email,
     });
-    console.log("✅ Response:", res.data);
-    return { message: "کد تایید ارسال شد" };
+    const dataResponse = res.data || res;
+
+    return {
+      success: true,
+      message: "کد تایید ارسال شد",
+      data: {
+        tempUserId: dataResponse.tempUserId,
+        verificationCode: dataResponse.verificationCode,
+        email: validationResult.data.email,
+      },
+    };
   } catch (error: any) {
-    console.log("❌ Error:", error.response?.data || error.message);
-    return { message: error.response?.data?.message || "network error" };
+    console.log("❌ 6. Error occurred:");
+    console.log("   - Message:", error.message);
+    console.log("   - Status:", error.response?.status);
+    console.log("   - Response data:", error.response?.data);
+    console.log("   - Full error:", error);
+    
+    return {
+      success: false,
+      message: error.response?.data?.message || "خطا در ارسال کد",
+    };
   }
 };
