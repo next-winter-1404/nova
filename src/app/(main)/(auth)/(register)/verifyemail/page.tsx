@@ -21,7 +21,7 @@ const VerifyEmailPage = () => {
               parentWidth={"w-[48%]"}
               type={"email"}
             />
-            <div className="bg-blue-purple-500 md:rounded-xl rounded-xl h-4/5 p-1 lg:w-1/3 w-1/2 flex items-center gap-2 md:gap-4">
+            <div className="bg-blue-purple-500  rounded-xl h-4/5 p-1 lg:w-1/3 w-1/2 flex items-center gap-2 md:gap-4">
               <button className="bg-white md:rounded-[10px]  rounded-md h-full w-[60%] flex-center md:gap-2 ">
                 <span className="cursor-pointer  text-[13px] whitespace-nowrap">ارسال دوباره رمز</span>
                 <Image alt="arrow" src={smallLeftArrow} />

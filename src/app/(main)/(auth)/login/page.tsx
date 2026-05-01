@@ -5,6 +5,7 @@ import LoginWrapper from "@/src/components/login/wrapper/page";
 import LoginButton from "@/src/components/login/button/LoginButton";
 
 const LoginPage = () => {
+
   return (
     <form className="md:w-1/2 w-full flex flex-col gap-9" dir="rtl">
       <LoginWrapper
