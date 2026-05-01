@@ -1,20 +1,30 @@
-import Image from "next/image";
 
-import HeroBackground from "../../assets/images/HeroSectionBackground.jpg"
-import building from "../../assets/images/building.png"
+import CardContainer from "@/src/components/common/card/page";
 export default function Home() {
-  const imageStyle = {
-    width: '100%',
-    height: '100vh',
-  }
+
   return (
     <div className="relative flex-center">
-      <Image src={building} alt="pic" className="absolute w-1/3 h-[90%] bottom-0"/>
-      <Image 
-      src={HeroBackground} 
-      alt="pic" 
-      style={imageStyle}
-    ></Image>
-    </div>
+   
+    <CardContainer
+    
+      cavity="sharp"
+      labelContent={<div className="h-[32px]"></div>}
+      labelSize="lg"
+      mainContent={
+        <CardContainer
+          cavity="round"
+          labelBackground="bg-[#eee]"
+          labelContent="eee"
+          labelSize="lg"
+          mainBackground="bg-[#eee]"
+          mainContent={<div>salam</div>}
+          width="w-full"
+        />
+      }
+      width="w-full"
+      labelBackground="bg-[#2D2D2D]"
+      mainBackground="bg-[#2D2D2D]"
+    />
+  </div>
   );
 }

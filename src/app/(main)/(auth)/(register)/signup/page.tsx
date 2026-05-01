@@ -14,7 +14,7 @@ const SignUpPage = () => {
     }
   }, [state]);
   return (
-    <form action={formAction} className="w-1/2 flex flex-col gap-9" dir="rtl">
+    <form action={formAction} className="md:w-1/2 w-full  flex flex-col gap-9" dir="rtl">
       <LoginWrapper
         ButtonSection={
           <LoginButton

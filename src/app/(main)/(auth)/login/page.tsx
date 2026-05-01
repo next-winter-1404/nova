@@ -6,7 +6,7 @@ import LoginButton from "@/src/components/login/button/LoginButton";
 
 const LoginPage = () => {
   return (
-    <form className="w-1/2  flex flex-col gap-9" dir="rtl">
+    <form className="md:w-1/2 w-full flex flex-col gap-9" dir="rtl">
       <LoginWrapper
       content={
         <div className="flex gap-9">
@@ -29,7 +29,7 @@ const LoginPage = () => {
               type={"password"}
             />
             <div className="flex gap-3">
-              <span className="text-16-medium indent-3">
+              <span className="text-16-medium md:indent-3">
                 رمز عبور خود را فراموش کردم
               </span>
               <Image src={leftArrow} alt="arrow" />
