@@ -3,7 +3,7 @@ interface CardContainerProps {
   color: string;
   labelSize: "md" | "lg";
   cavity: "sharp" | "round";
-  labelContent:ReactNode
+  labelContent?:ReactNode
   mainContent:ReactNode
   width:string
 }

@@ -11,4 +11,5 @@ export interface IButtonProps{
     height ? : string;
     textStyle ? : React.CSSProperties;
     buttonStyle ? : React.CSSProperties;
+    border? : string
 }

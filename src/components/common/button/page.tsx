@@ -12,7 +12,8 @@ const Button: FC<IButtonProps> = ({
     width,
     height,
     color,
-    buttonStyle
+    buttonStyle,
+    border
 }) => {
     const baseStyles: React.CSSProperties = {
         backgroundColor : "#FF5555",
