@@ -5,35 +5,36 @@ import LoginWrapper from "@/src/components/login/wrapper/page";
 import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { SendEmailResult, sendEmail } from "@/src/utils/sevices/api/auth/register/sendEmail";
+import {
+  SendEmailResult,
+  sendEmail,
+} from "@/src/utils/sevices/api/auth/register/sendEmail";
 
 const SignUpPage = () => {
   const router = useRouter();
   const [state, formAction] = useActionState(sendEmail, {
     success: false,
     message: "",
-  } );
+  });
 
   useEffect(() => {
     if (!state?.message) return;
 
     if (state.success) {
-      // ✅ موفقیت - دیتا رو داری
       toast.success(state.message);
-      
-      // ذخیره دیتا برای مرحله بعد
-      
-      // یا مستقیم بفرست به صفحه بعد
+
       router.push("/verifyemail");
-      
     } else {
-      // ❌ خطا
       toast.error(state.message);
     }
   }, [state, router]);
 
   return (
-    <form action={formAction} className="md:w-1/2 w-full flex flex-col gap-9" dir="rtl">
+    <form
+      action={formAction}
+      className="md:w-1/2 w-full flex flex-col gap-9"
+      dir="rtl"
+    >
       <LoginWrapper
         ButtonSection={
           <LoginButton
