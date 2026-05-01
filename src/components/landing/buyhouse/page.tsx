@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import Button from '../../common/button/page'
+import CardContainer from '../../common/card/page'
 
 const BuyHouse = () => {
     return (
@@ -10,12 +11,48 @@ const BuyHouse = () => {
                 <h2 className='text-primary-accent-green text-[16px]' >!خونه از خودت میخوای </h2>
                 <div className='flex justify-between'>
                 <Button text=" مشاهده همه" width='w-[137px]' height='h-[36px]' buttonStyle={{backgroundColor : "dark-700",
-                    border: "border-white-pure"
+                    border: "2px solid #FFF"
                 }}></Button>
                 <span className='text-[32px] text-white-pure'>خرید و فروش ملک در دلتا</span>
                 </div>
+                <div className='w-[1440px] flex border border-amber-50 h-[450px] items-center justify-center'>
+                    <div className='w-11/10 h-5/6 border border-amber-50 flex justify-between'>
+                        <CardContainer 
+                            color='bg-dark-700'
+                            cavity='sharp'
+                            labelSize='md'
+                            labelContent={<div className='w-[67px] h-[32px] bg-white-pure rounded-2xl'></div>}
+                            mainContent={<div className='w-[297px] h-[156px] bg-dark-600 rounded-2xl'>gfkfponkxf gkhkhl.k vil</div>}
+                            width='329px'
+                            
+                        ></CardContainer>
+                        <CardContainer 
+                            color='bg-dark-700'
+                            cavity='sharp'
+                            labelSize='md'
+                            labelContent={<div className='w-[67px] h-[32px] bg-white-pure rounded-2xl'></div>}
+                            mainContent={<div className='w-[297px] h-[156px]'>gfkfponkxf</div>}
+                            width='329px'
+                        ></CardContainer>
+                       <CardContainer 
+                            color='bg-dark-700'
+                            cavity='sharp'
+                            labelSize='md'
+                            labelContent={<div className='w-[67px] h-[32px] bg-white-pure rounded-2xl'></div>}
+                            mainContent={<div className='w-[297px] h-[156px]'>gfkfponkxf</div>}
+                            width='329px'
+                        ></CardContainer>
+                        <CardContainer 
+                            color='bg-dark-700'
+                            cavity='sharp'
+                            labelSize='md'
+                            labelContent={<div className='w-[67px] h-[32px] bg-white-pure rounded-2xl'></div>}
+                            mainContent={<div className='w-[297px] h-[156px]'>gfkfponkxf</div>}
+                            width='329px'
+                        ></CardContainer>
+                    </div>
+                </div>      
             </div>  
-            <div className='w-[1440px] h-5 flex border border-amber-50'></div>      
         </div>
     )
 }
