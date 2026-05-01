@@ -1,20 +1,19 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 
 import LoginButton from '../auth/LoginButton'
 import { FiMenu } from 'react-icons/fi';
+import { BsChevronDown } from "react-icons/bs";
 
-import MenuButton from './menu/MenuButton';
-import Menu from "./menu/Menu";
-import MenuItems from "./menu/MenuItems";
-import MenuItem from "./menu/MenuItem";
-import MenuWrapper from "./menu/MenuWrapper";
+import {Menu, MenuWrapper, MenuItems, MenuItem, MenuButton} from "@/src/components/common/menu"
+import NavbarTab from "./navbar/NavbarTab";
+import Divider from "./Divider";
 
 const navigation = [
-  { labelName: 'Dashboard', href: '#', current: true },
-  { labelName: 'درباره دلتا', href: '/aboutus', current: false },
-  { labelName: 'مقالات ما', href: '/blogs', current: false },
   { labelName: 'تماس با ما', href: '/contactus', current: false },
+  { labelName: 'مقالات ما', href: '/blogs', current: false },
+  { labelName: 'درباره دلتا', href: '/aboutus', current: false },
 ]
 
 const Navbar = () => {
@@ -34,27 +33,44 @@ const Navbar = () => {
               </Link>
            </span>
           </div>
-          <span aria-hidden="true">
+
+        {/* Desktop version: visible on medium screens and up */}
+        <div className="test text-amber-50 flex items-center">
+            <div className="flex gap-3 items-center text-amber-50">
+              {navigation.map((item) => {
+                return (
+                  <NavbarTab key={item.labelName} label={item.labelName} href={item.href} />
+                )
+              })}
+              <NavbarTab label="رهن و اجاره" href="#" icon={<BsChevronDown className="w-3 h-3"/>}/>
+              <NavbarTab label="رزرو سریع" href="#" icon={<BsChevronDown className="w-3 h-3"/>}/>
+           
+              <Divider color="#4A4A4A" width="3" height="20"/>
+              <span className='w-22 h-8 rounded-xl bg-[#4A4A4A]'></span>
+            </div>
+            
+        </div>
+
+
+          {/* Mobile menu button*/}
+          <span className="lg:hidden block" aria-hidden="true">
             <Menu>
+
               <MenuButton>
-                <FiMenu className="text-white w-5 h-5"/>
+                <FiMenu className="text-white w-5 h-5" />
               </MenuButton>
-              {/* <MenuWrapper>
+
+              <MenuWrapper>
                 <MenuItems>
-                  {navigation.map((item) => {
-                  return (
-                    <MenuItem
-                    key={item.labelName} 
-                    labelName={item.labelName} 
-                    href={item.href}
-                    current={item.current}
-                    />
-                  )
-                })}
+                  {navigation.map((item) => (
+                    <MenuItem key={item.labelName} {...item} />
+                  ))}
                 </MenuItems>
-              </MenuWrapper> */}
+              </MenuWrapper>
             </Menu>
           </span>
+
+          
         </div>
       </nav>
     </header> 
@@ -64,24 +80,21 @@ const Navbar = () => {
 export default Navbar
 
 
-  {/* Desktop version: visible on medium screens and up */}
-        // <div className="hidden md:block text-amber-50">
-        //   <span>
-        //       <div className="flex gap-3 items-center">
-        //           <span className='be-seller-btn'>
-        //             <Link href="#">
-        //               <p >! فروشنده شو</p>
-        //             </Link>
-        //             </span>
-        //           <span><Link href="/contactus">تماس با ما</Link></span>
-        //           <span><Link href="/blogs">مقالات ما</Link></span>
-        //           <span><Link href="/aboutus">درباره دلتا</Link></span>
-        //           <span><Link href="/rentanddeposit">رهن و اجاره</Link></span>
-        //           <span><Link href="/quickreserve">رزرو سریع</Link></span>
-        //       </div>
-        //       <div className="flex gap-3 items-center">
-        //         <span>|</span>
-        //         <span className='w-22 h-8 rounded-xl bg-[#4A4A4A]'></span>
-        //       </div>
-        //   </span>
-        // </div>
+// <span>
+//               <div className="flex gap-3 items-center">
+//                   <span className='be-seller-btn'>
+//                     <Link href="#">
+//                       <p >! فروشنده شو</p>
+//                     </Link>
+//                     </span>
+//                   <span><Link href="/contactus">تماس با ما</Link></span>
+//                   <span><Link href="/blogs">مقالات ما</Link></span>
+//                   <span><Link href="/aboutus">درباره دلتا</Link></span>
+//                   <span><Link href="/rentanddeposit">رهن و اجاره</Link></span>
+//                   <span><Link href="/quickreserve">رزرو سریع</Link></span>
+//               </div>
+//               <div className="flex gap-3 items-center">
+//                 <span>|</span>
+//                 <span className='w-22 h-8 rounded-xl bg-[#4A4A4A]'></span>
+//               </div>
+//           </span>

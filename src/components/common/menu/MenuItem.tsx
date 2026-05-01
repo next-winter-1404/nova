@@ -1,18 +1,24 @@
-import Link from "next/link";
+'use client';
+
+import { useMenu } from './MenuContext';
 
 interface MenuItemProps {
-    labelName: string;
-    href: string;
-    current?: boolean;
+  labelName: string;
+  href: string;
+  current?: boolean;
 }
 
-
-const MenuItem = ({labelName,href,current} : MenuItemProps) => {
+export default function MenuItem({ labelName, href, current }: MenuItemProps) {
+  const { close } = useMenu();
   return (
-    <Link href={href} className="menuItem">
+    <a
+      href={href}
+      role="menuitem"
+      aria-current={current ? 'page' : undefined}
+      onClick={close}
+      className="px-4 py-2 hover:bg-gray-100"
+    >
       {labelName}
-    </Link>
-  )
+    </a>
+  );
 }
-
-export default MenuItem

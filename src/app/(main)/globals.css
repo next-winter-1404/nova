@@ -162,8 +162,30 @@ main {
 
   
 .menu-wrapper {
-  @apply glass absolute right-8.25 z-10 w-32  px-4 py-1;
+  @apply glass absolute right-0 top-5 z-10 w-32  px-4 py-1;
 }  
  .menuItem {
-  @apply w-full flex justify-end items-center py-1 text-white-pure hover:bg-dark-900
+  @apply w-full flex justify-end items-center py-1 text-white-pure hover:bg-dark-900 rounded-[12px]
+}
+
+.test {
+  @apply hidden lg:block
+}
+
+.nav-tab {
+  @apply text-gray-300 hover:text-primary-accent-green
+}
+
+.nav-tab {
+  @apply text-gray-300 hover:text-primary-accent-green relative;
+}
+
+.nav-tab::after {
+  @apply absolute -bottom-1.75 left-0 w-full h-0.75 bg-primary-accent-green opacity-0 rounded-[1px];
+  content: '';
+  transition: opacity 0.2s ease;
+}
+
+.nav-tab:hover::after {
+  @apply opacity-100;
 }

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-import  FaChevronLeft  from "@/public/icons/FaChevronLeft.svg";
+import { BsChevronLeft } from "react-icons/bs";
 import Container from "../common/Container";
 
 import HeroBackground from "../../assets/images/HeroSectionBackground.jpg"
@@ -21,8 +21,8 @@ const HeroSection = () => {
     <div style={{ backgroundImage: `url(${HeroBackground.src})` }} className="relative h-screen w-full bg-cover bg-center flex-center">
      <div className="w-full absolute z-5 ">
         <Container>
-          <div className="w-full flex lg:flex-row flex-col-reverse items-end lg:items-center justify-between gap-4 relative sm:top-15 -top-8">
-            <div className="relative flex flex-col max-w-[350px]">
+          <div className="md:w-full w-[98.5%] flex lg:flex-row flex-col-reverse items-end lg:items-center justify-between gap-4 relative sm:top-15 -top-8">
+            <div className="relative lg:top-2.5 flex flex-col md:max-w-87.5 max-w-62">
               <span className="absolute sm:-right-6 -right-3 sm:top-0.5 top-0.5 text-white-pure sm:text-[20px] text-[12px]">
                 ✦                    
               </span>
@@ -32,13 +32,19 @@ const HeroSection = () => {
                      رزور ، رهن ، اجاره و حتی خرید و فروش ملک مورد
 نظرتون مثل آب خوردن فقط در دلت                       
                   </p>
-                  <span className="relative -top-2.5 right-4">
+                  <span className="hidden md:block relative -top-2.5 right-4">
                     <Divider color="#fff" width="121" height="2"/>
                   </span>
                 </span>
                 <span className="flex items-center justify-end gap-6">
-                  <Button text={"رهن و اجاره ملک"}/>
-                  <Button text={"آسون رزرو کن"}/>
+                  <span className="flex-center p-8-16 text-16-medium whitespace-nowrap gap-2 rounded-xl  text-black  bg-white ">
+                    <BsChevronLeft className="w-2 h-2"/>
+                    <Link href="#">رهن و اجاره ملک</Link>
+                  </span>
+                  <span className="flex-center p-8-16 text-16-medium whitespace-nowrap gap-2 rounded-xl  text-white-pure  bg-black ">
+                    <BsChevronLeft className="w-2 h-2"/>
+                    <Link href="#">آسون رزرو کن</Link>
+                  </span>
                 </span>
                 <span className="sm:flex-center flex justify-end items-center sm:gap-7 gap-4 whitespace-nowrap">
                   <span className="flex-col-center text-right">
@@ -54,9 +60,9 @@ const HeroSection = () => {
               </div>
             </div>
             <div className="relative max-w-[309px] text-right flex flex-col justify-end items-end gap-1">
-              <AvatarGroup />
+              <AvatarGroup/>
               <span>
-                <p className="text-32-semibold">بیش از 7000+</p>
+                <p className="sm:text-[26px] text-[20px] text-white">بیش از 7000+</p>
                 <p className="text-16-medium text-white-pure leading-9">رضایت مشتریانی که به دلتا اعتماد کرده اند</p>
               </span>
             </div>
@@ -66,7 +72,7 @@ const HeroSection = () => {
 
 
      <div className="absolute top-18 z-1 w-[90%]"><Image src={DeltaTextGradient} alt="pic"/></div>
-     <div className="w-full flex sm:justify-center justify-end z-1 relative -bottom-10"><Image src={building} alt="pic" width={440}/></div>
+     <div className="w-full flex sm:justify-center justify-end z-1 relative -bottom-10 sm:right-0 right-18"><Image src={building} alt="pic" width={440}/></div>
      <div className="absolute bottom-0 z-2 h-80 w-full bg-gradient-to-t from-[#232323] to-[#23232300]"></div>
      <div className="w-full absolute bottom-10 z-3">
         <div className="flex justify-center">

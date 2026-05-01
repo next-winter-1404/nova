@@ -1,3 +1,5 @@
+import { MenuProvider } from "./MenuContext";
+
 interface MenuProps {
     children: React.ReactNode;
 }
@@ -5,7 +7,9 @@ interface MenuProps {
 const Menu = ({children} : MenuProps) => {
   return (
     <div className="relative">
-       {children} 
+       <MenuProvider>
+        {children} 
+       </MenuProvider>
     </div>
   )
 }

@@ -38,7 +38,7 @@ const AvatarGroup = async () => {
     // const users = await getUser();
     // console.log("users information", users)
   return (
-    <div className='flex justify-end'>
+    <div className='hidden md:flex justify-end'>
       {userPic.map((user) => {
         return (
             <div key={user.fullName} className='relative'>
