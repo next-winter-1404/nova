@@ -1,16 +1,31 @@
-import { CardContainerProps } from "@/src/core/types/ICardProps";
-import { FC } from "react";
+import { FC, ReactNode,CSSProperties } from "react";
+interface CardContainerProps {
+  labelSize: "md" | "lg";
+  cavity: "sharp" | "round";
+  labelContent:ReactNode
+  mainContent:ReactNode
+  width?:string,
+  mainBackground:string,
+  labelBackground?:string,
+  parentExtraStyle?:CSSProperties,
+  mainExtraStyle?:CSSProperties,
+  labelExtraStyle?:CSSProperties,
+}
 
 const CardContainer: FC<CardContainerProps> = ({
-  color,
-  labelSize,
-  cavity,
-  labelContent,
+  labelSize,  //md or lg
+  cavity, //sharp or round
+  labelContent, 
   mainContent,
-  width
+  width, //tailwind
+  labelBackground, //tailwind
+  mainBackground, //tailwind
+  parentExtraStyle, //inline css ==> {{}},
+  labelExtraStyle, //inline css ==> {{}},
+  mainExtraStyle //inline css ==> {{}},
 }) => {
   return (
-    <div className={`flex  items-end relative justify-center flex-col `} style={{width:width}}>
+    <div className={`flex  items-end relative justify-center flex-col ${width} `} style={parentExtraStyle}  >
        <div
         className={`flex items-end relative ${
           labelSize === "lg" ? "w-1/2 md:w-2/5 lg:w-1/6" : "w-1/2 md:w-1/3"
@@ -26,7 +41,7 @@ const CardContainer: FC<CardContainerProps> = ({
           style={{
             boxShadow: `${
               cavity == "round" ? "5px 4px" : "10px 10px"
-            } ${color}`,
+            } ${mainBackground}`,
           }}
         ></div>
         
@@ -34,17 +49,17 @@ const CardContainer: FC<CardContainerProps> = ({
           <div
             className={`w-5 h-15  z-10 absolute bottom-2 rotate-45
   left-[-18px] `}
-            style={{ boxShadow: `25px 10px 0px 0px ${color}` }}
+            style={{ boxShadow: `25px 10px 0px 0px ${mainBackground}` }}
           ></div>
         )}
 
-        <div className="flex-center bg-[#2D2D2D]   rounded-se-[30px]  rounded-ss-[60px]  w-full p-2 ">
+        <div className={`${labelBackground} flex-center    rounded-se-[30px]  rounded-ss-[60px]  w-full p-2`} style={labelExtraStyle}>
          {labelContent}
         </div>
 
       </div>
 
-      <div className="rounded-ss-[30px] rounded-b-[30px] bg-[#2D2D2D] w-full  flex-center p-6 ">
+      <div className={`${mainBackground} rounded-ss-[30px] rounded-b-[30px]  w-full  flex-center p-6 `} style={mainExtraStyle}>
       {mainContent}
       </div>
     </div>

@@ -13,11 +13,11 @@ const AboutUs = () => {
       <div className ='flex w-full border items-center justify-center gap-5 h-[500px] border-amber-50'>
         <div className ='flex flex-col w-[445px] border h-[470px] border-amber-50 justify-center'>
           <CardContainer
-            color='bg-dark-700'
+            mainBackground= 'bg-[dark-700]'
             cavity='sharp'
             labelSize='md'
             mainContent={<div className='w-[421px] h-[198px]'><CardContainer 
-              color='bg-dark-900' 
+              mainBackground='bg-[dark-900]' 
               cavity='sharp' 
               labelSize='md' 
               mainContent={<div className=''><h2>7 / 24  ساعت شبانه روز تیم پشتیبانی در تمام طول روز همراه شما هستن</h2></div>}
