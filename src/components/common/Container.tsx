@@ -6,7 +6,7 @@ const Container = ({
     children
 } : ContainerProps) => {
   return (
-    <div className='container'>
+    <div className='Container'>
       {children}
     </div>
   )

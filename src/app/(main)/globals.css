@@ -52,12 +52,14 @@
 
   --inset-shadow-fff-16: inset -2 2px 12px rgb(255 255 255 / 0.16);
   --inset-shadow-fff-8: inset 2 2px 16px rgb(255 255 255 / 0.08);
+  --inset-shadow-fff-4: inset -1 -1px 8px rgb(255 255 255 / 0.04);
   --shadow-3xl: 0 8px 6px rgb(54 54 54 / 0.2); 
   --shadow-000-16: 0 12px 24px rgb(0 0 0 / 0.16); 
+  --shadow-primary-accent-green-transparent-20: 0 4px 12px rgb(0 0 0 / 0.16);
 
 }
 
-.container {
+.Container {
   @apply mx-auto container flex flex-col sm:px-6 py-20 px-4 ;
 }
 
@@ -95,14 +97,14 @@
   @apply font-normal text-[13px] whitespace-nowrap text-white-pure;
 } */
 
-* {
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 /* utility classes */
-.flex-center {
+@utility flex-center {
   @apply flex items-center justify-center;
 }
 
@@ -188,4 +190,12 @@ main {
 
 .nav-tab:hover::after {
   @apply opacity-100;
+}
+
+.dropMenu {
+  @apply w-full relative flex-center justify-between text-white-pure border border-white-pure rounded-2xl
+}
+
+.serach-button {
+  @apply cursor-pointer flex-center gap-2 p-5 bg-primary-accent-green rounded-2xl shadow-primary-accent-green-transparent-20 inset-shadow-fff-4 py-5
 }
