@@ -4,7 +4,7 @@ import instance from "@/src/utils/sevices/interseptor";
 import { z } from "zod";
 
 const EmailSchema = z.object({
-  email: z.string().email("فرمت ایمیل صحیح نیست"),
+  email: z.email("فرمت ایمیل صحیح نیست"),
 });
 
 export interface SendEmailResult {
