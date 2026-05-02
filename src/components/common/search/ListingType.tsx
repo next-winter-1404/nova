@@ -22,7 +22,7 @@ const ListingType = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-end gap-3">
+    <div className="relative flex items-center justify-end gap-3 whitespace-nowrap">
       {types.map((listType) => {
         const isActive = listType.labelName === selectedLabel;
         return (

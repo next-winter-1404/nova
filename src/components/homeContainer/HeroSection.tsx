@@ -68,17 +68,17 @@ const HeroSection = () => {
             </div>
           </div>
         </Container>
+        <div className="w-full absolute sm:-bottom-[25%] -bottom-[30%] z-3">
+        <div className="flex justify-center relative top-12">
+            <SearchContainer />
+        </div>
+     </div>
      </div>
 
 
      <div className="absolute top-18 z-1 w-[90%]"><Image src={DeltaTextGradient} alt="pic"/></div>
-     <div className="w-full flex sm:justify-center justify-end z-1 relative -bottom-10 sm:right-0 right-18"><Image src={building} alt="pic" width={440}/></div>
+     <div className="w-full flex sm:justify-center justify-end z-1 relative sm:-bottom-[15%] -bottom-[23%] lg:-bottom-[10%] lg:-right-20  md:-bottom-[20%] md:right-24 sm:right-0 right-18"><Image src={building} alt="pic" width={440}/></div>
      <div className="absolute bottom-0 z-2 h-80 w-full bg-gradient-to-t from-[#232323] to-[#23232300]"></div>
-     <div className="w-full absolute bottom-10 z-3">
-        <div className="flex justify-center">
-            <SearchContainer />
-        </div>
-     </div>
     
     </div>
 
