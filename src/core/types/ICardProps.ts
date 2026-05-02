@@ -6,6 +6,6 @@ export interface CardContainerProps {
     cavity: "sharp" | "round";
     labelContent:ReactNode
     mainContent:ReactNode
-    width:string
+    width?:string
   }
   

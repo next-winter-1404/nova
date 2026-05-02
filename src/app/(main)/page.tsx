@@ -1,30 +1,16 @@
 
-import CardContainer from "@/src/components/common/card/page";
+import Landing from "@/src/components/landing/page";
 export default function Home() {
 
   return (
-    <div className="relative flex-center">
-   
-    <CardContainer
-    
-      cavity="sharp"
-      labelContent={<div className="h-[32px]"></div>}
-      labelSize="lg"
-      mainContent={
-        <CardContainer
-          cavity="round"
-          labelBackground="bg-[#eee]"
-          labelContent="eee"
-          labelSize="lg"
-          mainBackground="bg-[#eee]"
-          mainContent={<div>salam</div>}
-          width="w-full"
-        />
-      }
-      width="w-full"
-      labelBackground="bg-[#2D2D2D]"
-      mainBackground="bg-[#2D2D2D]"
-    />
-  </div>
+    <div className ="relative w-full">
+      {/* <Image src={building} alt="pic" className="absolute w-1/3 h-[90%] bottom-0"/>
+      <Image 
+      src={HeroBackground} 
+      alt="pic" 
+      style={imageStyle}
+    ></Image> */}
+    <Landing></Landing>
+    </div>
   );
 }

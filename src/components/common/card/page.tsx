@@ -4,9 +4,9 @@ interface CardContainerProps {
   cavity: "sharp" | "round";
   labelContent:ReactNode
   mainContent:ReactNode
-  width:string,
+  width?:string,
   mainBackground:string,
-  labelBackground:string,
+  labelBackground?:string,
   parentExtraStyle?:CSSProperties,
   mainExtraStyle?:CSSProperties,
   labelExtraStyle?:CSSProperties,
@@ -25,7 +25,7 @@ const CardContainer: FC<CardContainerProps> = ({
   mainExtraStyle //inline css ==> {{}},
 }) => {
   return (
-    <div className={`flex  items-end mt-60  relative justify-center flex-col ${width} `} style={parentExtraStyle}  >
+    <div className={`flex  items-end relative justify-center flex-col ${width} `} style={parentExtraStyle}  >
        <div
         className={`flex items-end relative ${
           labelSize === "lg" ? "w-1/2 md:w-2/5 lg:w-1/6" : "w-1/2 md:w-1/3"

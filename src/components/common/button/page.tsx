@@ -28,19 +28,18 @@ const Button: FC<ButtonProps> = ({
     width,
     height,
     color,
-    buttonStyle
+    buttonStyle,
 }) => {
     const baseStyles: React.CSSProperties = {
         backgroundColor : "#FF5555",
-        color : "#FFFFFF",
-        border : "none",
+        color : "#FFFFFF",        
         width : "150px",
         height : "43px",
         borderRadius :"16px",
         display : "flex",
         alignItems : "center",
         justifyContent : "center",
-        gap: '8px',       
+        gap: '8px',   
     }
 
     const finalButtonStyles : React.CSSProperties = {
