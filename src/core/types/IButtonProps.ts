@@ -13,3 +13,10 @@ export interface IButtonProps{
     buttonStyle ? : React.CSSProperties;
     border? : string
 }
+export interface ILoginButtonProp{
+    type?:"button"|"submit"|"reset",
+    loadingText?:string
+    width?:string
+    buttonText?:string
+
+}

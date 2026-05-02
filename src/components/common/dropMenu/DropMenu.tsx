@@ -22,7 +22,7 @@ const DropMenu = ({options, onChange, value, placeholder="... انتخاب کن�
     return (
         <Menu>
             <MenuButton>
-                <div className="dropMenu p-5">
+                <div className="dropMenu p-5 w-full ">
                     <span className="max-w-[91px] whitespace-nowrap absolute bg-dark-800 -top-4 right-4">{dropDownLabel}</span>
                     <BsChevronDown />
                     <span>{selectedOption?.label || placeholder}</span>

@@ -11,12 +11,14 @@ const Input: FC<IInputProp> = ({
   name,
   value,
   onChange,
+  tagBgStyle
 }) => {
   return (
     <div className={`${parentWidth} relative`}>
       <label
         htmlFor={htmlFor}
-        className="text-13-regular absolute -top-3 right-5 h-5 bg-dark-900 p-2 flex-center"
+        className="text-13-regular absolute -top-3 right-5 h-5 p-2 flex-center "
+        style={tagBgStyle}
       >
         {labelText}
       </label>

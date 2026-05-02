@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import React from "react";
 
-export const middleware = (request: NextRequest) => {
+export const proxy = (request: NextRequest) => {
   const serverAccessToken = request.cookies.get("serverAccessToken")?.value;
   if (serverAccessToken) {
     return NextResponse.next();

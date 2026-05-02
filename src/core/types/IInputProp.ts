@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent,CSSProperties } from "react";
 
 export interface IInputProp {
     parentWidth?: string;
@@ -10,6 +10,7 @@ export interface IInputProp {
     placeHolder?: string;
     name?: string;
     value?:string|number,
-    onChange?: (e:ChangeEvent<HTMLInputElement>) => void
+    onChange?: (e:ChangeEvent<HTMLInputElement>) => void,
+    tagBgStyle?:CSSProperties
   }
  
