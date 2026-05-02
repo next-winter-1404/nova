@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme {
   /* Black colors */
   --color-black-transparent-16: rgb(0 0 0 / 0.16);
@@ -53,10 +48,16 @@
   --color-tomato-red: #ff5555;
   --color-tomato-red-transparent-20: rgb(255 85 85 / 0.2);
 
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* shadows */
+
+  --inset-shadow-fff-16: inset -2 2px 12px rgb(255 255 255 / 0.16);
+  --inset-shadow-fff-8: inset 2 2px 16px rgb(255 255 255 / 0.08);
+  --inset-shadow-fff-4: inset -1 -1px 8px rgb(255 255 255 / 0.04);
+  --shadow-3xl: 0 8px 6px rgb(54 54 54 / 0.2); 
+  --shadow-000-16: 0 12px 24px rgb(0 0 0 / 0.16); 
+  --shadow-primary-accent-green-transparent-20: 0 4px 12px rgb(0 0 0 / 0.16);
+
 }
 
 .selected-button {
@@ -73,6 +74,43 @@
     --foreground: #ededed;
   }
 }
+.Container {
+  @apply mx-auto container flex flex-col items-center sm:px-6 py-20 px-4 ;
+}
+
+/* Text styles */
+.text-32-semibold {
+  @apply font-semibold sm:text-[32px] text-[16px] whitespace-nowrap text-white-pure;
+}
+
+.text-32-medium {
+  @apply font-medium sm:text-[32px] text-[20px] whitespace-nowrap text-white-pure;
+}
+
+.text-semibold-24 {
+  @apply font-semibold  sm:text-[24px] text-[16px] text-white-pure;
+
+}
+
+/* .text-20-regular {
+  @apply font-normal text-[20px] whitespace-nowrap text-white-pure;
+} */
+
+.text-20-medium {
+  @apply sm:text-[20px] text-[12px] text-white-pure;
+}
+
+.text-16-semibold {
+  @apply font-semibold text-[16px] whitespace-nowrap;
+}
+
+.text-16-medium {
+  @apply font-medium sm:text-[16px] text-[12px] whitespace-nowrap;
+}
+
+/* .text-13-regular {
+  @apply font-normal text-[13px] whitespace-nowrap text-white-pure;
+} */
 
 body {
   background: #232323;
@@ -88,39 +126,101 @@ body {
 }
 
 /* utility classes */
-.flex-center {
+@utility flex-center {
   @apply flex items-center justify-center;
+}
+
+.flex-col-center {
+  @apply flex flex-col justify-center;
 }
 
 .flex-between {
   @apply flex justify-between items-center;
 }
 
-/* Text styles */
-.text-32-semibold {
-  @apply font-semibold text-[32px] whitespace-nowrap text-white-pure;
+@utility padding-section {
+  @apply px-8 py-6
 }
 
-.text-32-medium {
-  @apply font-medium text-[32px] whitespace-nowrap text-white-pure;
+.p-8-16 {
+  @apply sm:px-4 px-1.5 sm:py-2 py-1
 }
 
-.text-20-regular {
-  @apply font-normal text-[20px] whitespace-nowrap text-white-pure;
+
+@utility glass {
+    @apply bg-dark-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl border-b;
 }
 
-.text-20-medium {
-  @apply font-medium text-[20px] whitespace-nowrap text-white-pure;
+main {
+  @apply padding-section;
 }
 
-.text-16-semibold {
-  @apply font-semibold text-[16px] whitespace-nowrap text-white-pure;
+  header {
+        @apply md:w-[96%] w-[90%] inset-x-0 mx-auto glass shadow-3xl inset-shadow-fff-16 rounded-2xl absolute top-6 z-50;
+
+        nav {
+            @apply flex flex-row justify-between mx-auto container sm:p-1.5 px-3 sm:text-[16px] text-[14px];
+            
+            div {
+              @apply w-full flex items-center justify-between;
+              a {
+                @apply flex items-center sm:gap-2 p-1.5;
+                
+                span {
+                    @apply flex justify-center items-center gap-2 sm:px-1.5 px-0.5 ;
+
+                    p {
+                        @apply text-white sm:text-[16px] text-[14px];
+                    }
+                }
+            }
+            }
+        }
+
+
+       
+        /* ul {
+            @apply flex flex-row items-center gap-6;
+        } */
+    }
+
+  
+.menu-wrapper {
+  @apply glass absolute right-0 top-5 z-10 w-32  px-4 py-1;
+}  
+ .menuItem {
+  @apply w-full flex justify-end items-center py-1 text-white-pure hover:bg-dark-900 rounded-[12px]
 }
 
-.text-16-medium {
-  @apply font-medium text-[16px] whitespace-nowrap text-white-pure;
+.test {
+  @apply hidden lg:block
 }
 
 .text-13-regular {
   @apply font-normal text-[13px] whitespace-nowrap text-white-pure;
+}
+.nav-tab {
+  @apply text-gray-300 hover:text-primary-accent-green
+}
+
+.nav-tab {
+  @apply text-gray-300 hover:text-primary-accent-green relative;
+}
+
+.nav-tab::after {
+  @apply absolute -bottom-1.75 left-0 w-full h-0.75 bg-primary-accent-green opacity-0 rounded-[1px];
+  content: '';
+  transition: opacity 0.2s ease;
+}
+
+.nav-tab:hover::after {
+  @apply opacity-100;
+}
+
+.dropMenu {
+  @apply w-full relative flex-center justify-between text-white-pure border border-white-pure rounded-2xl
+}
+
+.serach-button {
+  @apply cursor-pointer flex-center gap-2 p-5 bg-primary-accent-green rounded-2xl shadow-primary-accent-green-transparent-20 inset-shadow-fff-4 py-5
 }
