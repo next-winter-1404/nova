@@ -48,7 +48,7 @@ export const sendEmail = async (
     };
   } catch (error: any) {
     console.log("   - Full error:", error);
-    console.log("   - errorResponse:", error);
+    console.log("   - errorResponse:", error.response);
     return {
       success: false,
       message: error.response|| "خطا در ارسال کد",
