@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import CardContainer from '../card/page'
+import CardContainer from '@/src/components/common/card/page'
 import Location from "@/src/assets/icons/Location.svg"
 import bed from "@/src/assets/icons/bed.svg"
 import houseTree from "@/src/assets/icons/houseTree.svg"

@@ -60,7 +60,10 @@
 
 }
 
-.selected-button {
+.Container {
+  @apply mx-auto container flex flex-col items-center sm:px-6 py-20 px-4 ;
+}
+  .selected-button {
   box-shadow: inset -1px -1px 8px 0px #0000000a,
     inset 2px 2px 12px 0px #ffffff33, 0px 8px 12px 0px #8cff4529;
   color: var(--color-selectedButtonText);
@@ -74,9 +77,7 @@
     --foreground: #ededed;
   }
 }
-.Container {
-  @apply mx-auto container flex flex-col items-center sm:px-6 py-20 px-4 ;
-}
+
 
 /* Text styles */
 .text-32-semibold {
@@ -101,7 +102,7 @@
 }
 
 .text-16-semibold {
-  @apply font-semibold text-[16px] whitespace-nowrap;
+  @apply font-semibold sm:text-[16px] whitespace-nowrap;
 }
 
 .text-16-medium {
@@ -124,6 +125,7 @@ body {
 * {
   box-sizing: border-box;
 }
+
 
 /* utility classes */
 @utility flex-center {
@@ -223,4 +225,7 @@ main {
 
 .serach-button {
   @apply cursor-pointer flex-center gap-2 p-5 bg-primary-accent-green rounded-2xl shadow-primary-accent-green-transparent-20 inset-shadow-fff-4 py-5
+}
+.text-13-regular {
+  @apply font-normal text-[13px] whitespace-nowrap text-white-pure;
 }

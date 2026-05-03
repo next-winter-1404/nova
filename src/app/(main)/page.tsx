@@ -1,6 +1,5 @@
-import Button from "@/src/components/common/button/page";
-import CardContainer from "@/src/components/common/card/page";
-import {HeroSection, CategorySection} from "@/src/components/homeContainer/index";
+
+import {HeroSection, CategorySection, SpecialOfferSection} from "@/src/components/homeContainer/index";
 import Landing from "@/src/components/landing/page";
 
 export default function Home() {
@@ -8,6 +7,7 @@ export default function Home() {
     <div className="flex-col-center gap-49 bg-dark-900 ">
       <HeroSection />
       <CategorySection />
+      <SpecialOfferSection />
       <Landing></Landing>
     </div>
 
