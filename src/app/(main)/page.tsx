@@ -3,6 +3,7 @@ import Image from "next/image";
 import HeroBackground from "../../assets/images/HeroSectionBackground.jpg"
 import building from "../../assets/images/building.png"
 import Landing from "@/src/components/landing/page";
+import Footer from "@/src/components/footer/page";
 export default function Home() {
   const imageStyle = {
     width: '100%',
@@ -17,6 +18,7 @@ export default function Home() {
       style={imageStyle}
     ></Image> */}
     <Landing></Landing>
+    <Footer/>
     </div>
   );
 }
