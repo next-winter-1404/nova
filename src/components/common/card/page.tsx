@@ -8,10 +8,10 @@ const CardContainer: FC<CardContainerProps> = ({
   mainContent,
   width, //tailwind
   labelBackground, //tailwind
-  mainBackground, //tailwind
   parentExtraStyle, //inline css ==> {{}},
   labelExtraStyle, //inline css ==> {{}},
-  mainExtraStyle //inline css ==> {{}},
+  mainExtraStyle, //inline css ==> {{}},
+  curveColor
 }) => {
   return (
     <div className={`flex  items-end relative justify-center flex-col ${width} `} style={parentExtraStyle}  >
@@ -24,21 +24,21 @@ const CardContainer: FC<CardContainerProps> = ({
           className={`${
             cavity == "round"
               ? "w-5 h-5 bottom-0 left-[-18px]"
-              : "w-5 h-14 -bottom-2  left-[-28px] rotate-41"
+              : "w-5 h-14 -bottom-2  left-[-28px] rotate-41 border"
           }  rounded-br-full z-10 absolute 
              `}
           style={{
             boxShadow: `${
-              cavity == "round" ? "5px 4px" : "10px 10px"
-            } ${mainBackground}`,
+              cavity == "round" ? `5px 4px ` : `10px 10px `
+            } ${curveColor}`,
           }}
-        ></div>
+        >pokfpeokt</div>
         
         {cavity == "sharp" && (
           <div
             className={`w-5 h-15  z-10 absolute bottom-2 rotate-45
   left-[-18px] `}
-            style={{ boxShadow: `25px 10px 0px 0px ${mainBackground}` }}
+            style={{ boxShadow: `25px 10px 0px 0px ${curveColor}` }}
           ></div>
         )}
 
@@ -48,7 +48,7 @@ const CardContainer: FC<CardContainerProps> = ({
 
       </div>
 
-      <div className={`${mainBackground} rounded-ss-[30px] rounded-b-[30px]  w-full  flex-center p-6 `} style={mainExtraStyle}>
+      <div className={` rounded-ss-[30px] rounded-b-[30px]  w-full  flex-center p-6 `} style={mainExtraStyle}>
       {mainContent}
       </div>
     </div>

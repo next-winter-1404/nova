@@ -27,7 +27,7 @@ export const sendEmail = async (
   if (!validationResult.success) {
     return {
       success: false,
-      message: validationResult.error.message,
+      message: "فرمت ایمیل صحیح نیست",
     };
   }
 

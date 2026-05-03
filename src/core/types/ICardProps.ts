@@ -6,11 +6,12 @@ export interface CardContainerProps {
   labelContent:ReactNode
   mainContent:ReactNode
   width?:string,
-  mainBackground:string,
   labelBackground?:string,
   parentExtraStyle?:CSSProperties,
   mainExtraStyle?:CSSProperties,
   labelExtraStyle?:CSSProperties,
+  color?:string,
+  curveColor?:string
 }
 
   
