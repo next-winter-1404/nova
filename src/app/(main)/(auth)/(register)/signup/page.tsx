@@ -2,19 +2,53 @@
 import Input from "@/src/components/common/input/Input";
 import LoginButton from "@/src/components/login/button/LoginButton";
 import LoginWrapper from "@/src/components/login/wrapper/page";
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import {
+  SendEmailResult,
+  sendEmail,
+} from "@/src/utils/sevices/api/auth/register/sendEmail";
+
 const SignUpPage = () => {
-  
+  const router = useRouter();
+  const [state, formAction] = useActionState(sendEmail, {
+    success: false,
+    message: "",
+  });
+
+  useEffect(() => {
+    if (!state?.message) return;
+
+    if (state.success) {
+      toast.success(state.message);
+
+      router.push("/verifyemail");
+    } else {
+      toast.error(state.message);
+    }
+  }, [state, router]);
+
   return (
-    <form className="w-1/2  flex flex-col gap-9" dir="rtl">
+    <form
+      action={formAction}
+      className="md:w-1/2 w-full flex flex-col gap-9"
+      dir="rtl"
+    >
       <LoginWrapper
         ButtonSection={
-          <LoginButton loadingText="در حال ارسال کد" buttonText="ارسال کد تایید" width="w-full" />
+          <LoginButton
+            loadingText="در حال ارسال کد"
+            buttonText="ارسال کد تایید"
+            width="w-full"
+          />
         }
         content={
           <Input
+            name="email"
             labelText="ایمیل شما* : "
             InputHeight={"h-[43px]"}
-            htmlFor=""
+            htmlFor="email"
             parentWidth="w-full"
             placeHolder="example@gmail.com"
           />

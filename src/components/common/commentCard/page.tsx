@@ -12,7 +12,7 @@ const CommentCard = () => {
                     <Image src={leftArrow} alt='leftArrow' />
                 </div>
                 <CardContainer
-                    cavity="sharp"
+                    cavity="round"
                     labelContent={<div className='w-[67px] h-[30px] mt-[5px] flex items-center  text-dark-800 justify-center gap-1 bg-white-pure rounded-[8px] '><Image src={Star} alt='star'/> 4.5</div>}
                     labelSize="lg"
                     mainContent={<div className='w-[665px] h-[220px] flex flex-col items-center justify-center gap-6 text-right'>
@@ -30,7 +30,9 @@ const CommentCard = () => {
                     </div>                   
                     }                            
                     labelBackground="bg-[#393939] "
-                    mainBackground="bg-[#393939] "
+                    // mainBackground="bg-[#393939] "
+                    curveColor='#393939'
+                    mainExtraStyle={{background:"#393939"}}
                     labelExtraStyle={{height:'40px'}}
                     width='w-[678px]'
                 /> 

@@ -9,7 +9,7 @@ const AmusementCard = () => {
   return (
     <CardContainer
                     cavity='sharp'
-                    labelContent={<div className='h-[2px]'></div>}
+                    labelContent={<div className='h-[35px]'></div>}
                     labelSize='lg'
                     mainContent={<div className='flex gap-12 flex-col w-[1376px] h-[535px]'>
                         <div className='flex gap-6 flex-col'>
@@ -32,8 +32,9 @@ const AmusementCard = () => {
                         <InnerAmusementCard></InnerAmusementCard>
                         </div>
                     </div>}
-                    mainBackground = "bg-[#232323]"
-                    labelBackground='bg-[#232323]'                
+                mainExtraStyle={{background:"#232323"}}
+                    labelBackground='bg-[#232323]'     
+                    curveColor='#232323'           
                 />
   )
 }
