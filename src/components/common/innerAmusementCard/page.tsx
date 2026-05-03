@@ -11,14 +11,15 @@ const InnerAmusementCard = () => {
                 <Image src={leftArrow} alt='leftArrow' />
             </div>
             <CardContainer
-                cavity="sharp"
+                cavity="round"
                 labelContent={<div className='w-[67px] h-[30px] mt-[5px] flex items-center  text-dark-800 justify-center gap-1 bg-white-pure rounded-[8px] '><Image src={Star} alt='star'/> 4.5</div>}
                 labelSize="md"
                 mainContent={<div className='w-[274px]  h-[156px] bg-dark-600 rounded-2xl'></div>
                     
                 }                            
                 labelBackground="bg-[#393939] hover:bg-primary-accent-green"
-                mainBackground="bg-[#393939] hover:bg-primary-accent-green"
+                // mainBackground="bg-[#393939] hover:bg-primary-accent-green"
+                mainExtraStyle={{background:"#393939"}} curveColor='#393939'
                 labelExtraStyle={{height:'40px'}}
                 width='w-[306px]'
             />

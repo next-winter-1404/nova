@@ -15,16 +15,16 @@ const InnerHouseCard = () => {
                         <div className='w-[45px] absolute flex justify-center rounded-[8px] h-[22px] bg-dark-700'>
                             <Image src={leftArrow} alt='leftArrow' />
                         </div>
-                        <CardContainer
-                            cavity="sharp"
-                            labelContent={<div className='w-[67px] h-[30px] mt-[5px] flex items-center  text-dark-800 justify-center gap-1 bg-white-pure rounded-[8px] '><Image src={Star} alt='star'/> 4.5</div>}
+                        <CardContainer  curveColor='#393939'
+                            cavity="round"
+                            labelContent={<div className='w-[67px] h-[30px] mt-[5px] flex items-center  text-dark-800 justify-center gap-1 bg-white-pure rounded-[8px] z-20 '><Image src={Star} alt='star'/> 4.5</div>}
                             labelSize="md"
                             mainContent={<div className='w-[297px] h-[156px] bg-dark-600 rounded-2xl'></div>
                                 
                             }                            
                             labelBackground="bg-[#393939]"
-                            mainBackground="bg-[#393939]"
-                            labelExtraStyle={{height:'40px'}}
+                            labelExtraStyle={{height:'50px'}}
+                            mainExtraStyle={{background:"var(--color-dark-700)"}}
                         />
                         <span className='text-[20px]'>آپارتمان لوکس زعفرانیه</span>
                         <div className='flex justify-end gap-3'><h2 className='text-[16px] text-gray-300'> گیلان ، رشت</h2><Image src={Location} alt='Location'/></div>
