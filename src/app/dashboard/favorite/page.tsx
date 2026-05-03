@@ -4,6 +4,7 @@ const FavoritePage = () => {
   return (
     <div>
       FavoritePage
+      hyjd;oyihjs;phep
     </div>
   )
 }

@@ -4,47 +4,48 @@
   /* Black colors */
   --color-black-transparent-16: rgb(0 0 0 / 0.16);
   --color-black-transparent-12: rgb(0 0 0 / 0.12);
-  --color-black-transparent-8:  rgb(0 0 0 / 0.08);
-  --color-black-transparent-6:  rgb(0 0 0 / 0.06);
-  --color-black-transparent-4:  rgb(0 0 0 / 0.04);
+  --color-black-transparent-8: rgb(0 0 0 / 0.08);
+  --color-black-transparent-6: rgb(0 0 0 / 0.06);
+  --color-black-transparent-4: rgb(0 0 0 / 0.04);
 
   /* dark colors */
   --color-dark-900: #232323;
-  --color-dark-860: #2E2E2E;
-  --color-dark-850: #2D2D2D;
+  --color-dark-860: #2e2e2e;
+  --color-dark-850: #2d2d2d;
   --color-dark-800: #363636;
   --color-dark-800-transparent-20: rgb(54 54 54 / 0.2);
   --color-dark-700: #393939;
   --color-dark-650: #404040;
   --color-dark-600: #444444;
   --color-unSelectedButton: #303030;
+  --color-selectedButtonText: #363636;
 
   /* Gray colors */
-  --color-gray-500: #8C8C8C;
-  --color-gray-450: #9A9A9A;
-  --color-gray-400: #94979C;
-  --color-gray-300: #AAAAAA;
+  --color-gray-500: #8c8c8c;
+  --color-gray-450: #9a9a9a;
+  --color-gray-400: #94979c;
+  --color-gray-300: #aaaaaa;
 
   /* White colors */
-  --color-white-pure: #FFFFFF;
+  --color-white-pure: #ffffff;
   --color-white-transparent-20: rgb(255 255 255 / 0.2);
   --color-white-transparent-16: rgb(255 255 255 / 0.16);
   --color-white-transparent-12: rgb(255 255 255 / 0.12);
 
   /* Purple-blue colors */
-  --color-blue-purple-500: #7569FF;
+  --color-blue-purple-500: #7569ff;
   --color-blue-transparent-40: rgb(86 121 244 / 0.4);
   --color-blue-transparent-20: rgb(86 121 244 / 0.2);
 
   /* Green colors */
-  --color-primary-accent-green: #8CFF45;
+  --color-primary-accent-green: #8cff45;
   --color-primary-accent-green-transparent-64: rgb(140 255 68 / 0.64);
   --color-primary-accent-green-transparent-20: rgb(140 255 68 / 0.2);
   --color-primary-accent-green-transparent-12: rgb(140 255 68 / 0.12);
-  --color-primary-accent-green-transparent-8:  rgb(140 255 68 / 0.08);
+  --color-primary-accent-green-transparent-8: rgb(140 255 68 / 0.08);
 
   /* red colors */
-  --color-tomato-red: #FF5555;
+  --color-tomato-red: #ff5555;
   --color-tomato-red-transparent-20: rgb(255 85 85 / 0.2);
 
 
@@ -61,6 +62,20 @@
 
 .Container {
   @apply mx-auto container flex flex-col items-center sm:px-6 py-20 px-4 ;
+}
+  .selected-button {
+  box-shadow: inset -1px -1px 8px 0px #0000000a,
+    inset 2px 2px 12px 0px #ffffff33, 0px 8px 12px 0px #8cff4529;
+  color: var(--color-selectedButtonText);
+  background: var(--color-primary-accent-green);
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
 /* Text styles */
@@ -86,7 +101,7 @@
 }
 
 .text-16-semibold {
-  @apply font-semibold text-[16px] whitespace-nowrap;
+  @apply font-semibold sm:text-[16px] whitespace-nowrap;
 }
 
 .text-16-medium {
@@ -98,10 +113,11 @@
 } */
 
 body {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
+
 
 /* utility classes */
 @utility flex-center {
@@ -198,4 +214,7 @@ main {
 
 .serach-button {
   @apply cursor-pointer flex-center gap-2 p-5 bg-primary-accent-green rounded-2xl shadow-primary-accent-green-transparent-20 inset-shadow-fff-4 py-5
+}
+.text-13-regular {
+  @apply font-normal text-[13px] whitespace-nowrap text-white-pure;
 }
