@@ -118,7 +118,7 @@ body {
 }
 
 .text-16-medium {
-  @apply font-medium text-[16px] whitespace-nowrap text-white-pure;
+  @apply font-medium text-[16px] whitespace-nowrap;
 }
 
 .text-13-regular {
