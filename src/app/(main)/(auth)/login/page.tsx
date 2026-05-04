@@ -16,6 +16,7 @@ const LoginPage = () => {
             htmlFor={"email"}
             id={"email"}
             labelText={"ایمیل شما * :"}
+            tagBgStyle={{background:"var(--color-dark-900)"}}
             parentWidth={"w-1/2"}
             placeHolder={"example@gmail.com"}
             type={"email"}
@@ -29,6 +30,7 @@ const LoginPage = () => {
               htmlFor={"password"}
               id={"password"}
               labelText={"کلمه عبور * :"}
+              tagBgStyle={{background:"var(--color-dark-900)"}}
               parentWidth={"w-full"}
               type={"password"}
               textColor="text-gray-300"

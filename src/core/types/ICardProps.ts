@@ -11,7 +11,8 @@ export interface CardContainerProps {
   mainExtraStyle?:CSSProperties,
   labelExtraStyle?:CSSProperties,
   color?:string,
-  curveColor?:string
+  curveColor?:string,
+  groupHoverStyle?:string
 }
 
   

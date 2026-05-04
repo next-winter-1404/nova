@@ -11,7 +11,8 @@ const CardContainer: FC<CardContainerProps> = ({
   parentExtraStyle, //inline css ==> {{}},
   labelExtraStyle, //inline css ==> {{}},
   mainExtraStyle, //inline css ==> {{}},
-  curveColor
+  curveColor ,//inline css ==> {{}}
+  groupHoverStyle
 }) => {
   return (
     <div className={`flex  items-end relative justify-center flex-col ${width} `} style={parentExtraStyle}  >
@@ -48,7 +49,7 @@ const CardContainer: FC<CardContainerProps> = ({
 
       </div>
 
-      <div className={` rounded-ss-[30px] rounded-b-[30px]  w-full  flex-center p-6 `} style={mainExtraStyle}>
+      <div className={` rounded-ss-[30px] rounded-b-[30px]  w-full  flex-center p-6  ${groupHoverStyle}`} style={mainExtraStyle}>
       {mainContent}
       </div>
     </div>
