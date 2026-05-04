@@ -1,9 +1,14 @@
+'use client'
 import React from 'react'
 import CardContainer from '../card/page'
 import LeftTriangle from "@/src/assets/images/LeftTriangle.svg"
 import smallLeftArrowWhite from "@/src/assets/icons/smallLeftArrowWhite.svg"
 import Image from 'next/image'
 import Button from '../button/page'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, Navigation } from 'swiper/modules'
+import 'swiper/css';
+import 'swiper/css/pagination';
 import InnerAmusementCard from '../innerAmusementCard/page'
 const AmusementCard = () => {
   return (
@@ -25,11 +30,36 @@ const AmusementCard = () => {
                                 <span className='text-[32px] text-white-pure'> جدید ترین مناقط تفریحی</span>
                             </div>
                         </div>
-                        <div className ='w-full flex h-[282px] items-center justify-between'>
-                        <InnerAmusementCard></InnerAmusementCard>
-                        <InnerAmusementCard></InnerAmusementCard>
-                        <InnerAmusementCard></InnerAmusementCard>
-                        <InnerAmusementCard></InnerAmusementCard>
+                        <div className ='w-full flex h-[295px] items-center justify-between overflow-hidden'>
+                            <Swiper
+                                modules={[Navigation, Autoplay]}
+                                spaceBetween={10}
+                                slidesPerView={1}
+                                autoplay = {{delay : 3000,
+                                disableOnInteraction : false
+                                }}
+                                breakpoints={{
+                                640 : {slidesPerView:2},
+                                1024 : {slidesPerView:4}
+                                }}
+                                className='w-full h-full'
+                            >        
+                                <SwiperSlide>
+                                    <InnerAmusementCard/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <InnerAmusementCard/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <InnerAmusementCard/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <InnerAmusementCard/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <InnerAmusementCard/>
+                                </SwiperSlide>
+                            </Swiper>
                         </div>
                     </div>}
                 mainExtraStyle={{background:"#232323"}}

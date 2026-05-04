@@ -33,7 +33,7 @@ const Input: FC<IInputProp> = ({
         value={value}
         id={id}
         onChange={onChange}
-        className={` w-full border ${borderColor} ${textSize} rounded-2xl  ${textColor} px-6 ${InputHeight}`}
+        className={` w-full border focus:outline-none ${borderColor} ${textSize} rounded-2xl  ${textColor} px-6 ${InputHeight}`}
         placeholder={placeHolder}
       />
     </div>
