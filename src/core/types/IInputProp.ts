@@ -12,5 +12,9 @@ export interface IInputProp {
     value?:string|number,
     onChange?: (e:ChangeEvent<HTMLInputElement>) => void,
     tagBgStyle?:CSSProperties
+    borderColor?: string
+    textColor? : string
+    labelTextSize?: string
+    textSize? : string
   }
  
