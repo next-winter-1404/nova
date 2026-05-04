@@ -4,10 +4,10 @@ import CardContainer from "../../common/card/page";
 
 const AboutUs = () => {
   return (
-    <div className="flex flex-col w-full items-center gap-6 h-[800px] bg-dark-900 rounded-br-[64px] rounded-bl-[64px] text-white-pure">
+    <div className="flex flex-col w-full items-center md:gap-6 gap-4 h-[800px] bg-dark-900 rounded-br-[64px] rounded-bl-[64px] text-white-pure">
       <Triangle text="درباره ما" />
-      <span className=" text-[32px]">!دلتا رو بیشتر بشناس </span>
-      <h2 className="text-[16px]">
+      <span className=" md:text-[32px] text-[28px]">!دلتا رو بیشتر بشناس </span>
+      <h2 className="md:text-[16px] text-[10px]">
         .تیم دلتا با ارائه بهترین نیرو های خدماتی و سرویس های املاکی سعی دارد تا
         بتواند در تمام لحظات کنار شما باشد
       </h2>

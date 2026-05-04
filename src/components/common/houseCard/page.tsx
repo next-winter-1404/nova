@@ -2,29 +2,48 @@
 import React from 'react'
 import InnerHouseCard from '../innerHouseCard/page'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Navigation } from 'swiper/modules'
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation'
 
 
-const HouseCard = () => {
-  
-  return (  
-    
-    <div className ='w-[1440px] flex h-[495px] items-center justify-between overflow-hidden'>
-      
+const HouseCard = () => { 
+  return ( 
+    <>   
+    <style jsx global>
+      {`
+      .my-house-swiper{
+        padding-bottom :50px !important
+      }
+        .my-house-swiper .swiper-pagination .swiper-pagination-bullet {
+        background: #D9D9D9 !important;
+        opacity: 1 !important;
+        }
+        .my-house-swiper .swiper-pagination .swiper-pagination-bullet-active{
+  background: #8CFF45 !important;
+}
+      `}
+    </style> 
+    <div className ='w-[1440px] flex h-[495px] items-center justify-between overflow-hidden'>     
       <Swiper
-        modules={[Navigation, Autoplay]}
+        modules={[Navigation, Autoplay,Pagination]}
         spaceBetween={20}
         slidesPerView={4}
+        
         autoplay = {{delay : 3000,
           disableOnInteraction : false
         }}
         breakpoints={{
+          390 : {slidesPerView:1},
           640 : {slidesPerView:2},
           1024 : {slidesPerView:4}
         }}
-        className='w-full h-full'
+        pagination ={{
+          clickable : true,
+        }}
+        
+        className='my-house-swiper'
       >        
         <SwiperSlide>
           <InnerHouseCard/>
@@ -43,6 +62,7 @@ const HouseCard = () => {
         </SwiperSlide>
       </Swiper>
     </div> 
+    </>
   )
 }
 

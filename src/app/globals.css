@@ -79,6 +79,12 @@
 }
 
 
+
+.swiper-pagination-bullet-active{
+  background: #8CFF45;
+}
+
+
 /* Text styles */
 .text-32-semibold {
   @apply font-semibold sm:text-[32px] text-[16px] whitespace-nowrap text-white-pure;
