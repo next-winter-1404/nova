@@ -23,7 +23,7 @@ const HouseReservePage = () => {
   return (
     <div className="items-center flex justify-center flex-col">
       <TopReserveHouseSection />
-      <div className="bg-dark-800 flex  mt-6 p-6 w-[1375px] rounded-[40px] ">
+      <div className="bg-dark-800 flex  mt-6 p-6  lg:max-w-[1375px] w-[90%] rounded-[40px] ">
         <div className="w-[40%]  rounded-[40px] h-[1032px] border">map</div>
 
         <div className="w-[60%] flex flex-col gap-6 items-center ">
