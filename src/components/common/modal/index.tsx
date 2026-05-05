@@ -15,7 +15,7 @@ export const Modal: FC<IModalProps> = ({
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger asChild>{modalBtn}</Dialog.Trigger>
+      <Dialog.Trigger asChild className='cursor-pointer'>{modalBtn}</Dialog.Trigger>
 
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/50" />

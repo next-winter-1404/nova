@@ -4,7 +4,7 @@ import DropMenu from "@/src/components/common/dropMenu/DropMenu";
 import TopReserveHouseSection from "@/src/components/reserveHouse/topSection";
 import Input from "@/src/components/common/input/Input";
 import { Breadcrumb, BreadcrumbItem } from "@/src/components/common/breadCrumbs";
-import { Modal } from "@/src/components/common/modal";
+import ToolTip from "@/src/components/common/tooltip";
 
 const HouseReservePage = () => {
   
