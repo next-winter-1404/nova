@@ -17,7 +17,7 @@ const TopReserveHouseSection = () => {
   ];
   return (
     <div className="mt-4 bg-dark-800 flex-between rounded-3xl p-4 w-full" dir="rtl">
-      <div className="flex justify-evenly w-4/5">
+      <div className="flex justify-between w-[81%] items-center ">
         <DropMenu
           options={cities}
           value={checkInDate}
@@ -35,7 +35,11 @@ const TopReserveHouseSection = () => {
         <Input
           labelText="جستجو"
           InputHeight="h-[50px]"
-          tagBgStyle={{ background: "var(--color-dark-800)" }}
+          tagBgStyle={{ background: "var(--color-dark-800)",color:"white" }}
+          borderColor="border-white border"
+          textColor="text-white"
+          placeHolder="نام هتل مورد نظر ....."
+          parentWidth="lg:w-[619px]"
         />
       </div>
       <Button

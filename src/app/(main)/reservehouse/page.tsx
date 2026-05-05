@@ -4,6 +4,7 @@ import DropMenu from "@/src/components/common/dropMenu/DropMenu";
 import TopReserveHouseSection from "@/src/components/reserveHouse/topSection";
 import Input from "@/src/components/common/input/Input";
 import { Breadcrumb, BreadcrumbItem } from "@/src/components/common/breadCrumbs";
+import { Modal } from "@/src/components/common/modal";
 
 const HouseReservePage = () => {
   
@@ -27,13 +28,15 @@ const HouseReservePage = () => {
       href: "/reservehouse",
       label: "رزرو هتل",
     },
+    {
+      label: `رزرو هتل ${"رشت"}`,
+    },
 
   ];
   return (
    <div className="flex-center">
      <div className="items-end flex mt-15 flex-col lg:max-w-[1375px] w-[90%] ">
         <Breadcrumb items={items} twClassname="mt-14  "/>
-
       <TopReserveHouseSection />
       <div className="bg-dark-800 flex  mt-6 p-6  w-full rounded-[40px] ">
         <div className="w-[40%]  rounded-[40px] h-[1032px] bg-dark-900"></div>
