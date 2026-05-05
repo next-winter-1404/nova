@@ -15,7 +15,7 @@ const CardContainer: FC<CardContainerProps> = ({
   groupHoverStyle
 }) => {
   return (
-    <div className={`flex  items-end relative justify-center flex-col ${width} `} style={parentExtraStyle}  >
+    <div  className={`flex  items-end relative justify-center flex-col ${width} `} style={parentExtraStyle}  >
        <div
         className={`flex items-end relative ${
           labelSize === "lg" ? "w-1/2 md:w-2/5 lg:w-1/6" : "w-1/2 md:w-1/3"

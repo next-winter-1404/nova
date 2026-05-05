@@ -38,7 +38,7 @@ const LoginPage = () => {
               labelTextSize="text-13-regular"
             />
             <div className="flex gap-3">
-              <span className="text-16-medium md:indent-3">
+              <span className="text-16-medium md:indent-3 text-white">
                 رمز عبور خود را فراموش کردم
               </span>
               <Image src={leftArrow} alt="arrow" />
