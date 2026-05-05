@@ -16,7 +16,7 @@ const TopReserveHouseSection = () => {
     { value: "chi", label: "Chicago" },
   ];
   return (
-    <div className="mt-23 bg-dark-800 flex-between rounded-3xl p-4 lg:max-w-[1375px] w-[90%]" dir="rtl">
+    <div className="mt-4 bg-dark-800 flex-between rounded-3xl p-4 w-full" dir="rtl">
       <div className="flex justify-evenly w-4/5">
         <DropMenu
           options={cities}
