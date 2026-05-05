@@ -6,8 +6,8 @@ import Star from "@/src/assets/icons/Star.svg"
 
 const InnerAmusementCard = () => {
     return (
-        <div className='h-[232px] flex flex-col gap-6'>
-            <div className='w-[45px] absolute flex justify-center rounded-[8px] h-[22px] bg-dark-700'>
+        <div className='h-[232px] relative items-center flex flex-col gap-6'>
+            <div className='w-[45px] absolute md:left-5 left-12 flex justify-center rounded-[8px] h-[22px] bg-dark-700'>
                 <Image src={leftArrow} alt='leftArrow' />
             </div>
             <CardContainer
