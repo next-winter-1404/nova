@@ -1,5 +1,5 @@
 
-import {HeroSection, CategorySection, SpecialOfferSection} from "@/src/components/homeContainer/index";
+import {HeroSection, CategorySection, SpecialOfferSection, MostPopulerDestinationSection, DepositAndRentSection} from "@/src/components/homeContainer/index";
 import Landing from "@/src/components/landing/page";
 
 export default function Home() {
@@ -8,6 +8,8 @@ export default function Home() {
       <HeroSection />
       <CategorySection />
       <SpecialOfferSection />
+      <MostPopulerDestinationSection />
+      <DepositAndRentSection />
       <Landing></Landing>
     </div>
 
