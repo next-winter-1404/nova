@@ -19,6 +19,9 @@ const LoginPage = () => {
             parentWidth={"w-1/2"}
             placeHolder={"example@gmail.com"}
             type={"email"}
+            textColor="text-gray-300"
+            borderColor="text-white-pure"
+            labelTextSize="text-13-regular"            
           />
           <div className="flex flex-col gap-4 w-1/2">
             <Input
@@ -28,6 +31,9 @@ const LoginPage = () => {
               labelText={"کلمه عبور * :"}
               parentWidth={"w-full"}
               type={"password"}
+              textColor="text-gray-300"
+              borderColor="text-white"
+              labelTextSize="text-13-regular"
             />
             <div className="flex gap-3">
               <span className="text-16-medium md:indent-3">

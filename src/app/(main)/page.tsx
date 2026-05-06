@@ -1,9 +1,9 @@
 
 import {HeroSection, CategorySection, SpecialOfferSection, MostPopulerDestinationSection, DepositAndRentSection} from "@/src/components/homeContainer/index";
 import Landing from "@/src/components/landing/page";
-
+import Footer from "@/src/components/footer/page";
 export default function Home() {
-  return (
+  return ( 
     <div className="flex-col-center gap-49 bg-dark-900 ">
       <HeroSection />
       <CategorySection />
@@ -11,6 +11,7 @@ export default function Home() {
       <MostPopulerDestinationSection />
       <DepositAndRentSection />
       <Landing></Landing>
+      <Footer/>
     </div>
 
   );

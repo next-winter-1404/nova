@@ -1,6 +1,10 @@
-import React from 'react'
+"use client"
 import BlureLightCircle from '../common/BlureLightCircle'
 import Container from '../common/Container'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 import Image from 'next/image';
 import arrowRight from "@/public/icons/Group34.svg"
@@ -36,55 +40,98 @@ const DepositAndRentSection = () => {
                             <h3 className='flex-center justify-end text-32-medium'>رهن و اجاره ملک در دلتا</h3>
                     </div>
                     <Container>
-                         <div className="flex-center gap-8">
-                            <ProductCard
-                         seeMore
-                         mode='col'
-                         title='آپارتمان لوکس زعفرانیه'
-                         capacityAndRoom='2 خوابه ، 2 حمامه ، ظرفیت 6 نفر'
-                         location='گیلان ، رشت'
-                         price= "50000"
-                         rate='4.5'
-                         oldPrice="2500000"
-                         stayingLength= "6 شب"
-                         buttonText='قیمت خرید :'
-                         />
-                         <ProductCard
-                         seeMore
-                         mode='col'
-                         title='آپارتمان لوکس زعفرانیه'
-                         capacityAndRoom='2 خوابه ، 2 حمامه ، ظرفیت 6 نفر'
-                         location='گیلان ، رشت'
-                         price= "50000"
-                         rate='4.5'
-                         oldPrice="2500000"
-                         stayingLength= "6 شب"
-                         buttonText='قیمت خرید :'
-                         />
-                         <ProductCard
-                         seeMore
-                         mode='col'
-                         title='آپارتمان لوکس زعفرانیه'
-                         capacityAndRoom='2 خوابه ، 2 حمامه ، ظرفیت 6 نفر'
-                         location='گیلان ، رشت'
-                         price= "50000"
-                         rate='4.5'
-                         oldPrice="2500000"
-                         stayingLength= "6 شب"
-                         buttonText='قیمت خرید :'
-                         />
-                         <ProductCard
-                         seeMore
-                         mode='col'
-                         title='آپارتمان لوکس زعفرانیه'
-                         capacityAndRoom='2 خوابه ، 2 حمامه ، ظرفیت 6 نفر'
-                         location='گیلان ، رشت'
-                         price= "50000"
-                         rate='4.5'
-                         oldPrice="2500000"
-                         stayingLength= "6 شب"
-                         buttonText='قیمت خرید :'
-                         />
+                        <div className="w-full overflow-hidden flex-center gap-8">
+                            <Swiper
+                                modules={[Navigation, Autoplay,Pagination]}
+                                spaceBetween={20}
+                                slidesPerView={4}
+                                
+                                autoplay = {{delay : 3000,
+                                disableOnInteraction : false
+                                }}
+                                breakpoints={{
+                                390 : {slidesPerView:1},
+                                640 : {slidesPerView:2},
+                                1024 : {slidesPerView:4}
+                                }}
+                                pagination ={{
+                                clickable : true,
+                                }}
+                                
+                                className='my-house-swiper'
+                            >        
+                                <SwiperSlide>
+                                <ProductCard
+                                    seeMore
+                                    mode='col'
+                                    title='آپارتمان لوکس زعفرانیه'
+                                    capacityAndRoom='2 خوابه ، 2 حمامه ، ظرفیت 6 نفر'
+                                    location='گیلان ، رشت'
+                                    price= "50000"
+                                    rate='4.5'
+                                    oldPrice="2500000"
+                                    stayingLength= "6 شب"
+                                    buttonText='قیمت خرید :'
+                                    />
+                                </SwiperSlide>            
+                                <SwiperSlide>
+                                <ProductCard
+                                    seeMore
+                                    mode='col'
+                                    title='آپارتمان لوکس زعفرانیه'
+                                    capacityAndRoom='2 خوابه ، 2 حمامه ، ظرفیت 6 نفر'
+                                    location='گیلان ، رشت'
+                                    price= "50000"
+                                    rate='4.5'
+                                    oldPrice="2500000"
+                                    stayingLength= "6 شب"
+                                    buttonText='قیمت خرید :'
+                                    />
+                                </SwiperSlide>  
+                                <SwiperSlide>
+                                <ProductCard
+                                    seeMore
+                                    mode='col'
+                                    title='آپارتمان لوکس زعفرانیه'
+                                    capacityAndRoom='2 خوابه ، 2 حمامه ، ظرفیت 6 نفر'
+                                    location='گیلان ، رشت'
+                                    price= "50000"
+                                    rate='4.5'
+                                    oldPrice="2500000"
+                                    stayingLength= "6 شب"
+                                    buttonText='قیمت خرید :'
+                                    />
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                <ProductCard
+                                    seeMore
+                                    mode='col'
+                                    title='آپارتمان لوکس زعفرانیه'
+                                    capacityAndRoom='2 خوابه ، 2 حمامه ، ظرفیت 6 نفر'
+                                    location='گیلان ، رشت'
+                                    price= "50000"
+                                    rate='4.5'
+                                    oldPrice="2500000"
+                                    stayingLength= "6 شب"
+                                    buttonText='قیمت خرید :'
+                                    />
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                <ProductCard
+                                    seeMore
+                                    mode='col'
+                                    title='آپارتمان لوکس زعفرانیه'
+                                    capacityAndRoom='2 خوابه ، 2 حمامه ، ظرفیت 6 نفر'
+                                    location='گیلان ، رشت'
+                                    price= "50000"
+                                    rate='4.5'
+                                    oldPrice="2500000"
+                                    stayingLength= "6 شب"
+                                    buttonText='قیمت خرید :'
+                                    />
+                                </SwiperSlide>
+                            </Swiper>
+                            
                         </div>
                     </Container>
                  </div>
