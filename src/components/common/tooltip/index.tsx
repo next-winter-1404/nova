@@ -1,3 +1,4 @@
+'use client';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import { ReactNode, FC } from "react";
 
@@ -11,7 +12,7 @@ export const ToolTip: FC<ITooltipProp> = ({ mainContent, tooltipText,twClassname
     return (
         <Tooltip.Provider delayDuration={200}>
             <Tooltip.Root>
-                <Tooltip.Trigger className='cursor-pointer' asChild>
+                <Tooltip.Trigger className='cursor-pointer' >
                     {mainContent}
                 </Tooltip.Trigger>
                 <Tooltip.Portal>
