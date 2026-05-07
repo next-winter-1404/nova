@@ -7,14 +7,14 @@ interface IHouseProp {
 }
 const HouseMainInformation: FC<IHouseProp> = ({ houseTitle, houseAddress }) => {
   return (
-    <div className="flex flex-col gap-5" dir="rtl">
-      <h1 className="text-32-semibold">{houseTitle}</h1>
-      <div className="flex gap-2 items-center text-16-medium text-white">
+    <div className="flex-center flex-col md:gap-5 gap-7 md:items-start" dir="rtl">
+      <h1 className="lg:text-32-semibold text-white text-4xl">{houseTitle}</h1>
+      <div className="flex gap-6 items-center w-full text-white">
         <div className="flex gap-1 items-center">
           <Image alt="icon" src={location} />
           <span>ادرس:</span>
         </div>
-        <span>{houseAddress}</span>
+        <span className="text-md  ">{houseAddress}</span>
       </div>
     </div>
   );
