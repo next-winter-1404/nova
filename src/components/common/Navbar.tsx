@@ -43,10 +43,10 @@ const Navbar = () => {
                 )
               })}
               <NavbarTab label="رهن و اجاره" href="#" icon={<BsChevronDown className="w-3 h-3"/>}/>
-              <NavbarTab label="رزرو سریع" href="#" icon={<BsChevronDown className="w-3 h-3"/>}/>
+              <NavbarTab label="رزرو سریع" href="/reserve-house" icon={<BsChevronDown className="w-3 h-3"/>}/>
            
               <Divider color="#4A4A4A" width="3" height="20"/>
-              <span className='w-22 h-8 rounded-xl bg-[#4A4A4A]'></span>
+              <Link  href="/" className='w-22 h-8 rounded-xl bg-[#4A4A4A]'></Link>
             </div>
             
         </div>

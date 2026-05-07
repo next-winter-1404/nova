@@ -51,6 +51,10 @@ const SignUpPage = () => {
             htmlFor="email"
             parentWidth="w-full"
             placeHolder="example@gmail.com"
+            borderColor="border-white "
+            tagBgStyle={{background:"var(--color-dark-900)",color:"white"}}
+            textColor="text-white"
+
           />
         }
       />

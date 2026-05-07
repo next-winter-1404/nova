@@ -1,6 +1,9 @@
-import { Menu, MenuWrapper, MenuItems, MenuItem, MenuButton } from "@/src/components/common/menu/index";
-
+'use client'
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { Calendar, CalendarProvider, TimePicker } from "@iprg/zaman";
+import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
+
 
 interface Option {
     value: string;
@@ -17,29 +20,42 @@ interface DropMenuProps {
 
 
 const DropMenu = ({options, onChange, value, placeholder="... انتخاب کنید ", dropDownLabel} : DropMenuProps) => {
-  const selectedOption = options.find(opt => opt.value === value);
-  
+    const [calendarValue, setCalendarValue] = useState(new Date())
     return (
-        <Menu>
-            <MenuButton>
-                <div className="dropMenu p-5 w-full ">
-                    <span className="max-w-[91px] whitespace-nowrap absolute bg-dark-800 -top-4 right-4">{dropDownLabel}</span>
-                    <BsChevronDown />
-                    <span>{selectedOption?.label || placeholder}</span>
-                </div>
-            </MenuButton>
-            <MenuWrapper>
-                <MenuItems>
-                    {options.map(option => (
-                        <MenuItem 
-                        key={option.value}
-                        labelName={option.label}
-                        onClick={() => {onChange(option.value)}} 
-                        />
-                    ))}
-                </MenuItems>
-            </MenuWrapper>
-        </Menu>
+      <DropdownMenu.Root>
+      <DropdownMenu.Trigger asChild>
+        <button className="IconButton dropMenu p-5 w-full" aria-label="Customise options">
+           <BsChevronDown className="w-3 h-3"/>
+           <i>{placeholder}</i> 
+        </button>
+      </DropdownMenu.Trigger>
+
+      <DropdownMenu.Portal>
+        <DropdownMenu.Content className="DropdownMenuContent w-full p-4 rounded rounded-xl z-100 bg-dark-800" sideOffset={5}>
+          
+          <DropdownMenu.Item className="DropdownMenuItem" onSelect={() => console.log("New Tab")}>
+           <div className="RightSlot">
+             <CalendarProvider>
+              <Calendar
+                defaultValue={calendarValue}
+                onChange={(e) => setCalendarValue(new Date(e.value))}
+              />
+            </CalendarProvider>
+            </div>
+          </DropdownMenu.Item>
+          <DropdownMenu.Item className="DropdownMenuItem" onSelect={() => console.log("New Window")}>
+            New Window <div className="RightSlot">⌘+N</div>
+          </DropdownMenu.Item>
+          <DropdownMenu.Item className="DropdownMenuItem" disabled>
+            New Private Window <div className="RightSlot">⇧+⌘+N</div>
+          </DropdownMenu.Item>
+
+          <DropdownMenu.Separator className="DropdownMenuSeparator" />
+
+        </DropdownMenu.Content>
+      </DropdownMenu.Portal>
+    </DropdownMenu.Root>
+        
   )
 }
 

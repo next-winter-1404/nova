@@ -38,8 +38,8 @@ const ProductCard = ({
   const effectiveMode = isSmallScreen ? "col" : mode;
   
   return (
-    <div className={`group h-[430px] text-white-pure flex 
-    ${effectiveMode === "col" ? "flex-col gap-4" : "w-full w-[730px] flex-row-reverse items-center justify-between gap-4"}`}>                   
+    <div className={`group  text-white-pure flex 
+    ${effectiveMode === "col" ? "flex-col gap-4" : "max-w-[600px] min-h-[192px] flex-row-reverse items-center justify-between gap-4"}`}>                   
       {seeMore && (
         <div className='group-hover:bg-primary-accent-green w-[45px] absolute flex justify-center rounded-[8px] h-[22px] bg-dark-700'>
           <Image src={leftArrow} alt='leftArrow' />
@@ -57,10 +57,10 @@ const ProductCard = ({
             </div>
           }
           labelSize="md"
-          mainContent={<div className='w-[297px] h-[156px] bg-dark-600 rounded-2xl'></div>}                            
+          mainContent={<div className={`${mode === "col" ? "w-[297px] h-[156px]" : "w-[156px] h-[110px]" } bg-dark-600 rounded-2xl`}></div>}                            
           labelBackground="group-hover:bg-[#8cff45] bg-[#393939]"
-          labelExtraStyle={{height:'50px'}}
-          mainExtraStyle="group-hover:bg-primary-accent-green bg-dark-800"
+          labelExtraStyle={{minHeight:'25px'}}
+          mainExtraStyle="group-hover:bg-primary-accent-green bg-dark-700"
       />
       
     {effectiveMode === "col" &&  
@@ -100,7 +100,7 @@ const ProductCard = ({
     }
 
     {effectiveMode === "row" && 
-      <div className='group w-full flex-col-center gap-4'>
+      <div className='group w-[413px] flex-col-center gap-4'>
         {offer && 
           <div className="flex justify-between items-center ">
             <span className="flex-center gap-4">
@@ -125,26 +125,31 @@ const ProductCard = ({
             <span>{  price }</span>
             
           </span>
-          <span className='text-[20px] flex justify-end text-semibold-24'>{title}</span>
+          <span className='flex justify-end text-20-medium  whitespace-nowrap'>{title}</span>
         </div>
         <span className="flex-center justify-between">
-          <span className="flex-center gap-2.5 text-primary-accent-green group-hover:text-dark-800 whitespace-nowrap px-6 py-3 border border-primary-accent-green rounded-[14px] group-hover:bg-primary-accent-green inset-shadow-fff-24 text-16-semibold">
-            <FaBuilding />
-          همین الان رزرو کن 
-          </span>
-        <div>
-          <div className='flex justify-end gap-3'>
-          <h2 className='text-[16px] text-gray-300'>{location}</h2>
-          <Image src={Location} alt='Location'/>                                                 
+          
+        <div className='flex flex-col gap-6'>
+          <div className='flex justify-start gap-1.5'>
+          <h2 className='text-[16px] text-gray-300 text-right'>{location}</h2>
+          <Image src={Location} alt='Location' className='w-4 h-4'/>                                                 
         </div>
         {stayingLength && (
-          <span className="flex-center gap-2 whitespace-nowrap text-[16px]">
-             <span className="flex-center gap-1">
-              {stayingLength}
+          <span className="flex-center justify-between gap-2 whitespace-nowrap text-[16px]">
+             <span className="w-full flex-center justify-between text-right">
+              <span className="flex-center gap-2.5 text-primary-accent-green group-hover:text-dark-800 whitespace-nowrap px-6 py-3 border border-primary-accent-green rounded-[14px] group-hover:bg-primary-accent-green inset-shadow-fff-24 text-16-semibold">
+                <FaBuilding />
+              همین الان رزرو کن 
+              </span>
+              <span className='flex-center gap-1'>
+                {stayingLength}
               <i className="text-gray-300">: مدت زمان</i>
+              <MdAccessTime className="text-gray-300"/>
+              </span>
+             
              </span>
               
-              <MdAccessTime className="text-gray-300"/>
+              
             
           </span>
         )}
