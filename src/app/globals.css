@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+@theme {
+  /* Black colors */
+  --color-black-transparent-16: rgb(0 0 0 / 0.16);
+  --color-black-transparent-12: rgb(0 0 0 / 0.12);
+  --color-black-transparent-8: rgb(0 0 0 / 0.08);
+  --color-black-transparent-6: rgb(0 0 0 / 0.06);
+  --color-black-transparent-4: rgb(0 0 0 / 0.04);
+
+  /* dark colors */
+  --color-dark-900: #232323;
+  --color-dark-860: #2e2e2e;
+  --color-dark-850: #2d2d2d;
+  --color-dark-800: #363636;
+  --color-dark-800-transparent-20: rgb(54 54 54 / 0.2);
+  --color-dark-700: #393939;
+  --color-dark-650: #404040;
+  --color-dark-600: #444444;
+  --color-unSelectedButton: #303030;
+  --color-selectedButtonText: #363636;
+
+  /* Gray colors */
+  --color-gray-500: #8c8c8c;
+  --color-gray-450: #9a9a9a;
+  --color-gray-400: #94979c;
+  --color-gray-300: #aaaaaa;
+  --color-gray-200: #565656;
+  --color-gray-250: #4D4D4D;
+
+  /* White colors */
+  --color-white-pure: #ffffff;
+  --color-white-transparent-20: rgb(255 255 255 / 0.2);
+  --color-white-transparent-16: rgb(255 255 255 / 0.16);
+  --color-white-transparent-12: rgb(255 255 255 / 0.12);
+
+  /* Purple-blue colors */
+  --color-blue-purple-500: #7569ff;
+  --color-blue-transparent-40: rgb(86 121 244 / 0.4);
+  --color-blue-transparent-20: rgb(86 121 244 / 0.2);
+
+  /* Green colors */
+  --color-primary-accent-green: #8cff45;
+  --color-primary-accent-green-transparent-64: rgb(140 255 68 / 0.64);
+  --color-primary-accent-green-transparent-20: rgb(140 255 68 / 0.2);
+  --color-primary-accent-green-transparent-12: rgb(140 255 68 / 0.12);
+  --color-primary-accent-green-transparent-8: rgb(140 255 68 / 0.08);
+
+  /* red colors */
+  --color-tomato-red: #ff5555;
+  --color-tomato-red-transparent-20: rgb(255 85 85 / 0.2);
+
+
+  /* shadows */
+
+  --inset-shadow-fff-16: inset -2 2px 12px rgb(255 255 255 / 0.16);
+  --inset-shadow-fff-8: inset 2 2px 16px rgb(255 255 255 / 0.08);
+  --inset-shadow-fff-4: inset -1 -1px 8px rgb(255 255 255 / 0.04);
+  --shadow-3xl: 0 8px 6px rgb(54 54 54 / 0.2); 
+  --shadow-000-16: 0 12px 24px rgb(0 0 0 / 0.16); 
+  --shadow-primary-accent-green-transparent-20: 0 4px 12px rgb(0 0 0 / 0.16);
+
+}
+
+.Container {
+  @apply mx-auto container flex flex-col items-center sm:px-6 py-20 px-4 ;
+}
+  .selected-button {
+  box-shadow: inset -1px -1px 8px 0px #0000000a,
+    inset 2px 2px 12px 0px #ffffff33, 0px 8px 12px 0px #8cff4529;
+  color: var(--color-selectedButtonText);
+  background: var(--color-primary-accent-green);
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+
+
+.swiper-pagination-bullet-active{
+  background: #8CFF45;
+}
+
+
+/* Text styles */
+.text-32-semibold {
+  @apply font-semibold sm:text-[32px] text-[16px] whitespace-nowrap text-white-pure;
+}
+
+.text-32-medium {
+  @apply font-medium sm:text-[32px] text-[20px] whitespace-nowrap text-white-pure;
+}
+
+.text-semibold-24 {
+  @apply font-semibold  sm:text-[24px] text-[16px] text-white-pure;
+
+}
+
+/* .text-20-regular {
+  @apply font-normal text-[20px] whitespace-nowrap text-white-pure;
+} */
+
+.text-20-medium {
+  @apply sm:text-[20px] text-[12px] text-white-pure;
+}
+
+.text-16-semibold {
+  @apply font-semibold sm:text-[16px] whitespace-nowrap;
+}
+
+.text-16-medium {
+  @apply font-medium sm:text-[16px] text-[12px] whitespace-nowrap;
+}
+
+/* .text-13-regular {
+  @apply font-normal text-[13px] whitespace-nowrap text-white-pure;
+} */
+
+body {
+  background: #232323;
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* utility classes */
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
+.flex-col-center {
+  @apply flex flex-col justify-center;
+}
+
+.flex-between {
+  @apply flex justify-between items-center;
+}
+
+@utility padding-section {
+  @apply px-8 py-6
+}
+
+.p-8-16 {
+  @apply sm:px-4 px-1.5 sm:py-2 py-1
+}
+
+
+@utility glass {
+    @apply bg-dark-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl border-b;
+}
+
+main {
+  @apply padding-section;
+}
+
+  header {
+        @apply md:w-[96%] w-[90%] inset-x-0 mx-auto glass shadow-3xl inset-shadow-fff-16 rounded-2xl absolute top-6 z-50;
+
+        nav {
+            @apply flex flex-row justify-between mx-auto container sm:p-1.5 px-3 sm:text-[16px] text-[14px];
+            
+            div {
+              @apply w-full flex items-center justify-between;
+              a {
+                @apply flex items-center sm:gap-2 p-1.5;
+                
+                span {
+                    @apply flex justify-center items-center gap-2 sm:px-1.5 px-0.5 ;
+
+                    p {
+                        @apply text-white sm:text-[16px] text-[14px];
+                    }
+                }
+            }
+            }
+        }
+
+
+       
+        /* ul {
+            @apply flex flex-row items-center gap-6;
+        } */
+    }
+
+  
+.menu-wrapper {
+  @apply glass absolute right-0 top-5 z-10 w-32  px-4 py-1;
+}  
+ .menuItem {
+  @apply w-full flex justify-end items-center py-1 text-white-pure hover:bg-dark-900 rounded-[12px]
+}
+
+.text-16-medium {
+  @apply font-medium text-[16px] whitespace-nowrap;
+}
+.text-16-regular {
+  @apply font-normal text-[16px] whitespace-nowrap;
+}
+.test {
+  @apply hidden lg:block
+}
+
+.text-13-regular {
+  @apply font-normal text-[13px] whitespace-nowrap ;
+}
+.nav-tab {
+  @apply text-gray-300 hover:text-primary-accent-green
+}
+
+.nav-tab {
+  @apply text-gray-300 hover:text-primary-accent-green relative;
+}
+
+.nav-tab::after {
+  @apply absolute -bottom-1.75 left-0 w-full h-0.75 bg-primary-accent-green opacity-0 rounded-[1px];
+  content: '';
+  transition: opacity 0.2s ease;
+}
+
+.nav-tab:hover::after {
+  @apply opacity-100;
+}
+
+.dropMenu {
+  @apply w-full relative flex-center justify-between text-white-pure border border-white-pure rounded-2xl
+}
+
+.serach-button {
+  @apply cursor-pointer flex-center gap-2 p-5 bg-primary-accent-green rounded-2xl shadow-primary-accent-green-transparent-20 inset-shadow-fff-4 py-5
+}
+.text-13-regular {
+  @apply font-normal text-[13px] whitespace-nowrap text-white-pure;
+}

@@ -1,9 +1,7 @@
-import React from 'react'
+import { redirect } from "next/navigation";
 
-const page = () => {
-  return (
-    <div>page</div>
-  )
+
+export default function ProcessReserve () {
+    redirect('processreserve/travelerinfo');
 }
 
-export default page

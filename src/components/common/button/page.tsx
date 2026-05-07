@@ -1,5 +1,7 @@
-import { IButtonProps } from '@/src/core/types/IButtonProps'
+import { IButtonProps } from '@/src/core/types/IButtonProps';
 import React, { FC } from 'react'
+
+
 const Button: FC<IButtonProps> = ({
     text,
     textStyle,
@@ -14,6 +16,8 @@ const Button: FC<IButtonProps> = ({
     color,
     className = "",
     borderRadius,
+    border
+
 }) => {
     const baseClasses = `
         flex items-center gap-2
@@ -28,7 +32,7 @@ const Button: FC<IButtonProps> = ({
         backgroundColor : backgroundColor || undefined,
         width : width || undefined,
         height : height || undefined,
-        borderRadius : borderRadius || undefined
+        borderRadius : borderRadius || undefined,
     }
 
     const content = children || (
