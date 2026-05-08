@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,7 +14,6 @@ import test from "@/src/assets/images/HeroSectionBackground.jpg";
 import { ITab } from "@/src/core/types/ITab";
 import building from "@/src/assets/icons/house-building.svg";
 import InfoCardContainer from "@/src/components/common/infoCardContainer";
-import DropMenu from "@/src/components/common/dropMenu/DropMenu";
 import { useState } from "react";
 const SingleReserveHousePage = () => {
   const [checkOutDate, setCheckOutDate] = useState("nyc");
@@ -44,7 +43,7 @@ const SingleReserveHousePage = () => {
     { value: "facilities", label: " امکانات اقامتگاه" },
     { value: "comment", label: "نظرات کاربران" },
   ];
-  
+
   return (
     <div className="flex-center bg-dark-900">
       <div className="flex items-end flex-col gap-6 w-4/5 lg:w-[1375px] mt-17 ">
@@ -117,9 +116,7 @@ const SingleReserveHousePage = () => {
               <span>:رزرو خونه برای</span>
               <Image alt="icon" src={building} className="w-5 h-5" />
             </div>
-            
           </InfoCardContainer>
-
         </section>
       </div>
     </div>
