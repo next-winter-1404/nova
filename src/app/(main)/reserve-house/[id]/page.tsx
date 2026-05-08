@@ -16,7 +16,6 @@ import building from "@/src/assets/icons/house-building.svg";
 import InfoCardContainer from "@/src/components/common/infoCardContainer";
 import DropMenu from "@/src/components/common/dropMenu/DropMenu";
 import { useState } from "react";
-import SimpleDropdown from "@/src/components/common/dropDown";
 const SingleReserveHousePage = () => {
   const [checkOutDate, setCheckOutDate] = useState("nyc");
   const [checkInDate, setCheckInDate] = useState("nyc");
@@ -118,7 +117,7 @@ const SingleReserveHousePage = () => {
               <span>:رزرو خونه برای</span>
               <Image alt="icon" src={building} className="w-5 h-5" />
             </div>
-            <SimpleDropdown options={cities} paramKey="date" placeholder="انتخاب تاریخ"/>
+            
           </InfoCardContainer>
 
         </section>
