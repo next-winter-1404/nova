@@ -35,7 +35,7 @@ const Input: FC<IInputProp> = ({
         onChange={onChange}
         className={` w-full border ${borderColor} ${textSize} rounded-2xl  ${textColor} px-6 ${InputHeight}`}
         placeholder={placeHolder}
-      />
+    />
     </div>
   );
 };

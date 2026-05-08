@@ -25,6 +25,7 @@
   --color-gray-450: #9a9a9a;
   --color-gray-400: #94979c;
   --color-gray-300: #aaaaaa;
+  --color-gray-550: #565656;
 
   /* White colors */
   --color-white-pure: #ffffff;
@@ -90,6 +91,10 @@
 
 .text-semibold-24 {
   @apply font-semibold  sm:text-[24px] text-[16px] text-white-pure;
+
+}
+.text-semibold-20 {
+  @apply font-semibold  sm:text-[20px] text-[16px] text-white-pure;
 
 }
 
