@@ -43,13 +43,13 @@ const CardContainer: FC<CardContainerProps> = ({
           ></div>
         )}
 
-        <div className={`${labelBackground} flex-center    rounded-se-[30px]  rounded-ss-[60px]  w-full p-2`} style={labelExtraStyle}>
+        <div className={`${labelBackground} flex-center  rounded-se-[30px]  rounded-ss-[60px]  w-full p-2`} style={labelExtraStyle}>
          {labelContent}
         </div>
 
       </div>
 
-      <div className={` rounded-ss-[30px] rounded-b-[30px]  w-full  flex-center p-6  ${groupHoverStyle}`} style={mainExtraStyle}>
+      <div className={` rounded-ss-[30px] rounded-b-[30px]  w-full  flex-center p-6 ${mainExtraStyle}`}>
       {mainContent}
       </div>
     </div>

@@ -34,7 +34,7 @@ const SingleReserveHousePage = () => {
     { value: "comment", label: "نظرات کاربران" },
   ];
   return (
-    <div className="flex-center">
+    <div className="flex-center bg-dark-900">
       <div className="flex items-end flex-col gap-6 w-4/5 lg:w-[1375px] mt-17 ">
         <Breadcrumb items={items} twClassname="lg:mt-14 mt-6" />
         <div className="flex  flex-col gap-8 md:gap-4 lg:flex-row-reverse lg:items-end justify-between  w-full mt-4 p-4">

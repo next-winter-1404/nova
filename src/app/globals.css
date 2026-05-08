@@ -15,6 +15,7 @@
   --color-dark-800: #363636;
   --color-dark-800-transparent-20: rgb(54 54 54 / 0.2);
   --color-dark-700: #393939;
+  --color-dark-700-transparent-81: rgb(57 57 57 / 0.81);
   --color-dark-650: #404040;
   --color-dark-600: #444444;
   --color-unSelectedButton: #303030;
@@ -55,9 +56,14 @@
   --inset-shadow-fff-16: inset -2 2px 12px rgb(255 255 255 / 0.16);
   --inset-shadow-fff-8: inset 2 2px 16px rgb(255 255 255 / 0.08);
   --inset-shadow-fff-4: inset -1 -1px 8px rgb(255 255 255 / 0.04);
+  --inset-shadow-fff-24: inset 2 2px 10px rgb(255 255 255 / 0.24);
+  --inset-shadow-000-4: inset -1 -1px 6px rgb(0 0 0 / 0.04);
   --shadow-3xl: 0 8px 6px rgb(54 54 54 / 0.2); 
   --shadow-000-16: 0 12px 24px rgb(0 0 0 / 0.16); 
   --shadow-primary-accent-green-transparent-20: 0 4px 12px rgb(0 0 0 / 0.16);
+  --shadow-curve-round: 5px 4px 0;
+  --shadow-curve-sharp: 10px 10px 0;
+
 
 }
 
@@ -80,6 +86,12 @@
 }
 
 
+
+.swiper-pagination-bullet-active{
+  background: #8CFF45;
+}
+
+
 /* Text styles */
 .text-32-semibold {
   @apply font-semibold sm:text-[32px] text-[16px] whitespace-nowrap text-white-pure;
@@ -87,6 +99,11 @@
 
 .text-32-medium {
   @apply font-medium sm:text-[32px] text-[20px] whitespace-nowrap text-white-pure;
+}
+
+.text-semibold-28 {
+  @apply font-semibold sm:text-[28px] text-[18px];
+
 }
 
 .text-semibold-24 {
@@ -98,6 +115,8 @@
 
 }
 
+
+
 /* .text-20-regular {
   @apply font-normal text-[20px] whitespace-nowrap text-white-pure;
 } */
@@ -107,11 +126,11 @@
 }
 
 .text-16-semibold {
-  @apply font-semibold sm:text-[16px] whitespace-nowrap;
+  @apply font-semibold text-[16px] whitespace-nowrap;
 }
 
 .text-16-medium {
-  @apply font-medium sm:text-[16px] text-[12px] whitespace-nowrap;
+  @apply font-medium sm:text-[16px] text-[10px] whitespace-nowrap;
 }
 
 /* .text-13-regular {
@@ -119,12 +138,12 @@
 } */
 
 body {
-  background: #232323;
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* background: #232323; */
+  /* color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif; */
   padding: 0;
   margin: 0;
-
+  overflow-x: hidden;
 }
 
 * {

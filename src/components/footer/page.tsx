@@ -27,26 +27,26 @@ import Star20 from "@/src/assets/images/Star 20.svg"
 const Footer = () => {
   return (
     <div className='h-[1310px] relative w-full flex justify-center items-center '>
-        <div className='w-[756px] absolute top-[-10px] left-[65px] flex justify-center rounded-[8px] h-[140px] '>
+        <div className='md:w-[756px] w-[290px] absolute md:top-[-10px] top-[-1px] left-[20px] md:left-[65px] flex justify-center rounded-[8px] h-[140px] '>
           <Image src={text} alt='src'/>
         </div>
         <div className='w-11/12'>            
         <CardContainer
             cavity='sharp'
             labelSize='md'
-            labelContent={<div className='w-[330px] h-[50px] mt-[5px] flex gap-2 items-center text-[16px] text-white-pure justify-center bg-dark-900 rounded-[16px] '><Image src={phone} alt='phone'/> 09229167194 - 09154569872 </div>}
-            mainExtraStyle={{background:"var(--color-primary-accent-green)"}}
+            labelContent={<div className='md:w-[330px] w-[150px] z-40 md:h-[50px] h-[40px] pl-5 md:pl-0 mt-[5px] flex gap-2 items-center md:text-[16px] text-[12px] text-white-pure justify-center bg-dark-900 rounded-[16px] '><Image src={phone} alt='phone'/> 09229167194 - 09154569872 </div>}
+            mainExtraStyle="bg-primary-accent-green"
             curveColor='var(--color-primary-accent-green)'
             labelBackground='bg-primary-accent-green'
-            mainContent={<div className='h-[1100px] gap-[66px] w-full flex flex-col' dir='rtl'>
-              <div className='h-[145px] w-[825px] gap-6 flex-col flex'>                
-                  <div className='flex w-[150px] h-5 text-16-medium text-selectedButtonText gap-4 '>همیشه کنارتیم <Image src={leftBlackTriangle} alt='leftBlackTriangle'/></div>      
-                  <h2 className='text-[32px] text-selectedButtonText'>24 ساعت روز و 7 روز هفته در اختیار شماییم !</h2>        
-                  <h2 className='text-selectedButtonText text-[20px]'>تیم دلتا با ارائه بهترین نیرو های خدماتی و سرویس های املاکی سعی دارد تا بتواند در تمام لحظات کنار شما باشد .</h2>  
+            mainContent={<div className='h-[1100px] items-center md:gap-[66px] gap-4 md:w-full w-[340px] flex flex-col' dir='rtl'>
+              <div className='h-[145px]  md:w-[1545px] w-[330px] md:gap-6 gap-3 flex-col flex'>                
+                  <div className='flex w-[150px] h-5 md:text-[16px] text-[12px] text-selectedButtonText md:gap-4 gap-2'>همیشه کنارتیم <Image src={leftBlackTriangle} alt='leftBlackTriangle'/></div>      
+                  <h2 className='md:text-[32px] text-[20px] text-selectedButtonText'>24 ساعت روز و 7 روز هفته در اختیار شماییم !</h2>        
+                  <h2 className='text-selectedButtonText md:text-[20px] text-[16px] w-[300px] md:w-full'>تیم دلتا با ارائه بهترین نیرو های خدماتی و سرویس های املاکی سعی دارد تا بتواند در تمام لحظات کنار شما باشد .</h2>  
               </div> 
-              <div className='flex w-full relative'>
-              <form className='h-[345px] w-[620px] flex flex-col items-center border border-amber-50 gap-[42px]' >
-                <div className='flex w-full h-[59px] gap-6'>     
+              <div className='flex md:w-full items-center w-[330px] relative'>
+              <form className='md:h-[345px] h-[290px] md:w-[620px] w-[330px] flex flex-col items-center  md:gap-[42px] gap-8' >
+                <div className='flex md:w-full w-[330px] h-[59px] gap-6'>     
                   <Input
                       labelText={'نام و نام خانوادگی :'} 
                       id={'name'} 
@@ -54,10 +54,10 @@ const Footer = () => {
                       htmlFor={'name'}
                       type={'name'}
                       placeHolder={'وارد کنید ....'}
-                      parentWidth='w-[297px]'
+                      parentWidth='md:w-[297px] w-[150px]'
                       borderColor='border-selectedButtonText'               
-                      labelTextSize='text-16-regular'
-                      textSize='text-[20px]'
+                      labelTextSize='md:text-[16px] text-[12px]'
+                      textSize='md:text-[20px] text-[16px]'
                     />            
                     <Input
                       labelText={'شماره یا ایمیل :'} 
@@ -66,23 +66,23 @@ const Footer = () => {
                       htmlFor={'email'}
                       type={'email'}
                       placeHolder={'وارد کنید ....'}
-                      parentWidth='w-[297px]'
+                      parentWidth='md:w-[297px] w-[150px]'
                       borderColor='border-selectedButtonText'               
-                      labelTextSize='text-16-regular'
-                      textSize='text-[20px]'
+                      labelTextSize='md:text-[16px] text-[12px]'
+                      textSize='md:text-[20px] text-[16px]'
                     />                    
                 </div>
-                <div className='w-full h-[156px]'>
+                <div className='md:w-full w-[330px] h-[156px]'>
                 <Input
                       labelText={'پیام شما :'} 
                       id={'message'} 
                       InputHeight={'h-[156px]'}
                       htmlFor={'message'}
                       type={'message'}                      
-                      parentWidth='w-full'
+                      parentWidth='md:w-full w-[322px]'
                       borderColor='border-selectedButtonText'               
-                      labelTextSize='text-16-regular'
-                      textSize='text-[20px]'
+                      labelTextSize='md:text-[16px] text-[12px]'
+                      textSize='md:text-[20px] text-[16px]'
                     />
                 </div>
               {/* <LoginButton /> */}
@@ -99,50 +99,54 @@ const Footer = () => {
                 <div className='absolute left-[300px] top-[-200px]'><Image src={Star20} alt='Star20'/></div>
               </div>
               </div>              
-              <div className='w-full h-[460px] justify-center rounded-[56px] bg-dark-900 flex flex-col items-center' >
-                <div className='border-b border-amber-50 h-[360px] flex flex-col w-11/12 gap-6'>
-                  <span className='text-[32px] text-white-pure'>پلتفرم دلتا</span>
-                  <div className='w-full h-[180px] flex gap-14 text-white-pure text-[16px]'>
-                    <h2 className='w-2/5 leading-9'>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت ..</h2>
-                    <div className='w-1/5 flex flex-col gap-5'>
-                      <h2 className='text-[20px]'>نحوه رزرو اقامتگاه</h2>
-                      <div className='flex flex-col gap-3'>
+              <div className='w-full md:h-[460px] h-[540px] justify-center rounded-[56px] bg-dark-900 flex flex-col items-center' >
+                <div className='border-b border-amber-50 md:h-[360px] h-[450px] flex flex-col w-11/12 gap-6'>
+                  <span className='md:text-[32px] text-[26px] text-white-pure'>پلتفرم دلتا</span>
+                  <div className='w-full md:h-[180px] h-[320px] flex md:flex-row flex-col md:gap-0 gap-2.5 text-white-pure text-[12px] md:text-[16px]'>
+                    <div className=' h-[200px] flex md:w-3/5 md:gap-14 gap-5'>
+                    <h2 className='w-3/5 md:leading-9 leading-6'>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت ..</h2>
+                    <div className='md:w-1/5 w-2/5 flex flex-col md:gap-5 gap-1.5'>
+                      <h2 className='md:text-[20px] text-[18px]'>نحوه رزرو اقامتگاه</h2>
+                      <div className='flex flex-col gap-1.5 md:gap-3'>
                         <h2 className='flex gap-2.5'><Image src={whiteTriangle} alt='whiteTriangle'/> راهنمای رزرو اقامتگاه</h2>
                         <h2 className='text-gray-300'>شیوه پرداخت</h2>
                         <h2 className='text-gray-300'>لغو رزرو اقامتگاه</h2>
                       </div>
                     </div>
-                    <div className='w-1/5 flex flex-col gap-5'>
-                      <h2 className='text-[20px]'> خدمات مشتریان</h2>
-                      <div className='flex flex-col gap-3 text-gray-300'>
-                        <h2>پرسش های متداول مهمان</h2>                       
-                        <h2>لغو رزرو اقامتگاه</h2>
-                        <h2>چطور اقامتگاه ثبت کنم ؟</h2>
-                        <h2>حریم شخصی کاربران</h2>
-                      </div>
                     </div>
-                    <div className='w-2/5 flex flex-col gap-5'>
-                      <h2 className='text-[20px]'> خدمات مشتریان</h2>
-                      <div className='flex flex-col gap-3 text-gray-300'>
-                        <h2 className='flex gap-2.5 '><Image src={phoneGray} alt='phoneGray'/> 09229167194 - 098541612310</h2>                     
-                        <h2 className='flex gap-2.5'><Image src={at} alt='at'/>Delta@gmail.com </h2>
-                        <h2 className='flex gap-2.5' ><Image src={Location} alt='Location'/> گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظیمی زاده</h2>
+                    <div className='flex md:w-3/5 gap-14'>
+                      <div className='md:w-1/5 w-3/5 flex flex-col md:gap-5 gap-1.5'>
+                        <h2 className='md:text-[20px] text-[18px]'> خدمات مشتریان</h2>
+                        <div className='flex flex-col gap-3 text-gray-300'>
+                          <h2>پرسش های متداول مهمان</h2>                       
+                          <h2>لغو رزرو اقامتگاه</h2>
+                          <h2>چطور اقامتگاه ثبت کنم ؟</h2>
+                          <h2>حریم شخصی کاربران</h2>
+                        </div>
+                      </div>
+                      <div className='md:w-2/5 flex flex-col md:gap-5 gap-1.5'>
+                        <h2 className='md:text-[20px] text-[18px]'> راه ارتباطی دلتا</h2>
+                        <div className='flex flex-col gap-3 text-gray-300'>
+                          <h2 className='flex gap-2.5'><Image src={phoneGray} alt='phoneGray'/> 09229167194 - 098541612310</h2>                     
+                          <h2 className='flex gap-2.5'><Image src={at} alt='at'/>Delta@gmail.com </h2>
+                          <h2 className='flex gap-2.5' ><Image src={Location} alt='Location'/> گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظیمی زاده</h2>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div className='h-[56px] flex gap-6 w-2/11'>
-                    <div className='hover:cursor-pointer w-1/4 h-full rounded-2xl bg-white-pure border border-white-pure flex items-center justify-center'><Image src={z2} alt='z2'/></div>
-                    <div className='hover:cursor-pointer w-1/4 h-full rounded-2xl border border-white-pure flex items-center justify-center'><Image src={T1_1591355889268} alt='T1_1591355889268'/></div>
-                    <div className='w-1/4 h-full hover:cursor-pointer rounded-2xl border border-white-pure flex items-center justify-center'><Image src={file_20191206_1550_36991} alt='file_20191206_1550_36991'/></div>
+                  <div className='md:h-[56px] h-8 flex gap-2 md:gap-6 w-1/3 md:w-2/11'>
+                    <div className='hover:cursor-pointer w-1/3 h-full md:rounded-2xl rounded-[10px] bg-white-pure border border-white-pure flex items-center justify-center'><Image src={z2} alt='z2'/></div>
+                    <div className='hover:cursor-pointer w-1/3 h-full md:rounded-2xl rounded-[10px] border border-white-pure flex items-center justify-center'><Image src={T1_1591355889268} alt='T1_1591355889268'/></div>
+                    <div className='w-1/3 h-full md:rounded-2xl rounded-[10px] hover:cursor-pointer border border-white-pure flex items-center justify-center'><Image src={file_20191206_1550_36991} alt='file_20191206_1550_36991'/></div>
                   </div>
                 </div>
                 <div className='h-20 flex items-center justify-between w-11/12'>
-                  <h2 className='text-[16px] text-white-pure'>تمام حقوق مادی و معنوی این اثر برای دلتا محفوظ است .</h2>
-                  <div className='h-10 w-1/6 flex gap-4'>
-                    <div className='hover:cursor-pointer border flex justify-center border-amber-50 h-full w-1/3 rounded-2xl bg-white-pure'><Image src={inI} alt='inI'/></div>
-                    <div className='hover:cursor-pointer border border-amber-50 flex justify-center h-full w-1/3 rounded-2xl'><Image src={instagram} alt='instagram'/></div>
-                    <div className='hover:cursor-pointer border border-amber-50 h-full w-1/3 flex justify-center rounded-2xl'><Image src={telegram} alt='telegram'/></div>
-                    <div className='hover:cursor-pointer border border-amber-50 h-full w-1/3 rounded-2xl flex justify-center'><Image src={whatsApp} alt='whatsApp'/></div>
+                  <h2 className='md:text-[16px] text-[12px] text-white-pure'>تمام حقوق مادی و معنوی این اثر برای دلتا محفوظ است .</h2>
+                  <div className='md:h-10 md:w-1/6 w-1/2 flex md:gap-4 gap-1.5'>
+                    <div className='hover:cursor-pointer border flex justify-center border-amber-50 md:h-full h-8 w-1/3 rounded-2xl bg-white-pure'><Image src={inI} alt='inI'/></div>
+                    <div className='hover:cursor-pointer border border-amber-50 flex justify-center md:h-full h-8 w-1/3 rounded-2xl'><Image src={instagram} alt='instagram'/></div>
+                    <div className='hover:cursor-pointer border border-amber-50 md:h-full h-8 w-1/3 flex justify-center rounded-2xl'><Image src={telegram} alt='telegram'/></div>
+                    <div className='hover:cursor-pointer border border-amber-50 md:h-full h-8 w-1/3 rounded-2xl flex justify-center'><Image src={whatsApp} alt='whatsApp'/></div>
                   </div>
                 </div>
               </div>
