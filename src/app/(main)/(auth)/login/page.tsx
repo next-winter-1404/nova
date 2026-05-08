@@ -16,6 +16,7 @@ const LoginPage = () => {
             htmlFor={"email"}
             id={"email"}
             labelText={"ایمیل شما * :"}
+            tagBgStyle={{background:"var(--color-dark-900)"}}
             parentWidth={"w-1/2"}
             placeHolder={"example@gmail.com"}
             type={"email"}
@@ -29,6 +30,7 @@ const LoginPage = () => {
               htmlFor={"password"}
               id={"password"}
               labelText={"کلمه عبور * :"}
+              tagBgStyle={{background:"var(--color-dark-900)"}}
               parentWidth={"w-full"}
               type={"password"}
               textColor="text-gray-300"
@@ -36,7 +38,7 @@ const LoginPage = () => {
               labelTextSize="text-13-regular"
             />
             <div className="flex gap-3">
-              <span className="text-16-medium md:indent-3">
+              <span className="text-16-medium md:indent-3 text-white">
                 رمز عبور خود را فراموش کردم
               </span>
               <Image src={leftArrow} alt="arrow" />

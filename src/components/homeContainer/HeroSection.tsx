@@ -18,8 +18,8 @@ import Button from "../common/button/page";
 const HeroSection = () => {
 
   return (
-    <div style={{ background: `url(${HeroBackground.src})` }} className="relative h-screen w-full bg-cover bg-center flex-center">
-     <div className="w-full absolute z-5 ">
+    <div style={{ background: `url(${HeroBackground.src})`, backgroundRepeat:"no-repeat", backgroundSize:"100%" }} className="relative h-screen w-full bg-cover bg-center flex-center">
+     <div className="w-[90%] absolute z-5 ">
         <Container>
           <div className="md:w-full w-[98.5%] flex lg:flex-row flex-col-reverse items-end lg:items-center justify-between gap-4 relative sm:top-15 -top-8">
             <div className="relative lg:top-2.5 flex flex-col md:max-w-87.5 max-w-62">
@@ -68,7 +68,7 @@ const HeroSection = () => {
             </div>
           </div>
         </Container>
-        <div className="w-full absolute sm:-bottom-[25%] -bottom-[30%] z-3">
+        <div className="w-full absolute sm:-bottom-[40px] z-3">
         <div className="flex justify-center relative top-12">
             <SearchContainer />
         </div>
@@ -77,7 +77,9 @@ const HeroSection = () => {
 
 
      <div className="absolute top-18 z-1 w-[90%]"><Image src={DeltaTextGradient} alt="pic"/></div>
-     <div className="flex sm:justify-center justify-end z-1 relative sm:-bottom-[15%] -bottom-[23%] lg:-bottom-[10%] lg:-right-20  md:-bottom-[20%] md:right-24 sm:right-0 right-18"><Image src={building} alt="pic" width={440}/></div>
+     <div className="flex sm:justify-center justify-end z-1">
+      <Image src={building} alt="pic" width={440}/>
+     </div>
      <div className="absolute bottom-0 z-2 h-80 w-full bg-gradient-to-t from-[#232323] to-[#23232300]"></div>
     
     </div>

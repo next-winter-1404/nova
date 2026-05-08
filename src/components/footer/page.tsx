@@ -26,7 +26,7 @@ import Star20 from "@/src/assets/images/Star 20.svg"
 
 const Footer = () => {
   return (
-    <div className='h-[1310px] relative w-full flex justify-center items-center '>
+    <div className='h-[1310px] bg-dark-900 relative w-full flex justify-center items-center '>
         <div className='md:w-[756px] w-[290px] absolute md:top-[-10px] top-[-1px] left-[20px] md:left-[65px] flex justify-center rounded-[8px] h-[140px] '>
           <Image src={text} alt='src'/>
         </div>
@@ -35,12 +35,12 @@ const Footer = () => {
             cavity='sharp'
             labelSize='md'
             labelContent={<div className='md:w-[330px] w-[150px] z-40 md:h-[50px] h-[40px] pl-5 md:pl-0 mt-[5px] flex gap-2 items-center md:text-[16px] text-[12px] text-white-pure justify-center bg-dark-900 rounded-[16px] '><Image src={phone} alt='phone'/> 09229167194 - 09154569872 </div>}
-            mainExtraStyle={{background:"var(--color-primary-accent-green)"}}
+            mainExtraStyle="bg-primary-accent-green"
             curveColor='var(--color-primary-accent-green)'
             labelBackground='bg-primary-accent-green'
             mainContent={<div className='h-[1100px] items-center md:gap-[66px] gap-4 md:w-full w-[340px] flex flex-col' dir='rtl'>
-              <div className='h-[145px] md:w-[1310px] w-[330px] md:gap-6 gap-3 flex-col flex'>                
-                  <div className='flex w-[150px] h-5 md:text-[16px] text-[12px] text-selectedButtonText md:gap-4 gap-2'>همیشه کنارتیم <Image src={leftBlackTriangle} alt='leftBlackTriangle'/></div>      
+              <div className='h-[145px] md:w-full  w-[330px] md:gap-6 gap-3 flex-col flex'>                
+                  <div className='flex w-[160px] h-5 md:text-[16px] text-[12px] text-selectedButtonText md:gap-4 gap-2'>همیشه کنارتیم <Image src={leftBlackTriangle} alt='leftBlackTriangle'/></div>      
                   <h2 className='md:text-[32px] text-[20px] text-selectedButtonText'>24 ساعت روز و 7 روز هفته در اختیار شماییم !</h2>        
                   <h2 className='text-selectedButtonText md:text-[20px] text-[16px] w-[300px] md:w-full'>تیم دلتا با ارائه بهترین نیرو های خدماتی و سرویس های املاکی سعی دارد تا بتواند در تمام لحظات کنار شما باشد .</h2>  
               </div> 

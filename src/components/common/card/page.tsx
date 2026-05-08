@@ -11,10 +11,11 @@ const CardContainer: FC<CardContainerProps> = ({
   parentExtraStyle, //inline css ==> {{}},
   labelExtraStyle, //inline css ==> {{}},
   mainExtraStyle, //inline css ==> {{}},
-  curveColor
+  curveColor ,//inline css ==> {{}}
+  groupHoverStyle
 }) => {
   return (
-    <div className={`flex  items-end relative justify-center flex-col ${width} `} style={parentExtraStyle}  >
+    <div  className={`flex  items-end relative justify-center flex-col ${width} `} style={parentExtraStyle}  >
        <div
         className={`flex items-end relative ${
           labelSize === "lg" ? "w-1/2 md:w-2/5 lg:w-1/6" : "w-1/2 md:w-1/3"
@@ -42,13 +43,13 @@ const CardContainer: FC<CardContainerProps> = ({
           ></div>
         )}
 
-        <div className={`${labelBackground} flex-center    rounded-se-[30px]  rounded-ss-[60px]  w-full p-2`} style={labelExtraStyle}>
+        <div className={`${labelBackground} flex-center  rounded-se-[30px]  rounded-ss-[60px]  w-full p-2`} style={labelExtraStyle}>
          {labelContent}
         </div>
 
       </div>
 
-      <div className={` rounded-ss-[30px] rounded-b-[30px]  w-full  flex-center p-6 `} style={mainExtraStyle}>
+      <div className={` rounded-ss-[30px] rounded-b-[30px]  w-full  flex-center p-6 ${mainExtraStyle}`}>
       {mainContent}
       </div>
     </div>

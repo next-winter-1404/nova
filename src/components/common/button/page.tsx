@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 export interface ButtonProps{
-    text: string | number;
+    text?: string | number;
     backgroundColor?: string;
     color? :string,
     icon? : React.ReactNode;

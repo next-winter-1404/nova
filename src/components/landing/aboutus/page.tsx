@@ -14,7 +14,7 @@ const AboutUs = () => {
       <div className="flex w-full border items-center justify-center gap-5 h-[500px] border-amber-50">
         <div className="flex flex-col w-[445px] border h-[470px] border-amber-50 justify-center">
           <CardContainer
-            mainExtraStyle={{ background: "var(--color-dark-700)"}}
+            mainExtraStyle="bg-dark-700"
             cavity="sharp"           
             labelSize="md"
             labelContent={<div className="h-9"></div>}
@@ -27,7 +27,7 @@ const AboutUs = () => {
                   labelSize="md"
                   labelBackground="bg-dark-900"
                   curveColor="var(--color-dark-900)"
-                  mainExtraStyle={{ background: "var(--color-dark-900)"}}
+                  mainExtraStyle="bg-dark-900"
                   mainContent={
                     <div className="">
                       <h2>
@@ -43,7 +43,7 @@ const AboutUs = () => {
             
             />
             <CardContainer
-            mainExtraStyle={{ background: "var(--color-dark-700)" }}
+            mainExtraStyle="bg-dark-700"
             cavity="sharp"           
             labelSize="md"
             labelContent={<div className="h-9"></div>}
@@ -56,7 +56,7 @@ const AboutUs = () => {
                   labelSize="md"
                   labelBackground="bg-dark-900"
                   curveColor="var(--color-dark-900)"
-                  mainExtraStyle={{ background: "var(--color-dark-900)" }}
+                  mainExtraStyle="bg-dark-900"
                   
                   
                   mainContent={

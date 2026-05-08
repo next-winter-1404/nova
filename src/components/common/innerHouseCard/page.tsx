@@ -24,7 +24,7 @@ const InnerHouseCard = () => {
             }                            
             labelBackground="bg-[#393939]"
             labelExtraStyle={{height:'50px'}}
-            mainExtraStyle={{background:"var(--color-dark-700)"}}
+            mainExtraStyle="bg-dark-700"
         />
         <span className='text-[20px]'>آپارتمان لوکس زعفرانیه</span>
         <div className='flex justify-end gap-3'><h2 className='text-[16px] text-gray-300'> گیلان ، رشت</h2><Image src={Location} alt='Location'/></div>
