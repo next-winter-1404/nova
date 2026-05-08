@@ -23,18 +23,17 @@ const SearchWrapper = () => {
   ];
 
   return (
-    <div className='container flex-2 flex-wrap bg-dark-800 border-2 border-dark-650 shadow-000-16 inset-shadow-fff-8 rounded-4xl px-6 py-5'>
+    <div className='flex md:flex-row flex-col-reverse items-center justify-between gap-6 bg-dark-800 border-2 border-dark-650 shadow-000-16 inset-shadow-fff-8 rounded-4xl px-6 py-5'>
       
-      <div className='flex-center gap-6'>
         <div className='serach-button'>
         <span>جستوجو کنید</span>
         <FaSearch />
         </div>
-        <div className='flex-1'>
+        <div className='flex-1 w-full'>
         <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
             <button className="IconButton dropMenu p-5 w-full relative" aria-label="Customise options">
-              <span className="bg-dark-700 absolute -top-3.5 right-3.5">IMPLEMENT LABEL</span>
+              <span className="bg-dark-700 absolute -top-3.5 right-3.5 whitespace-nowrap">: تاریخ خروج</span>
               <BsChevronDown className="w-3 h-3"/>
               <i>تاریخ خروج</i> 
             </button>
@@ -59,11 +58,11 @@ const SearchWrapper = () => {
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
         </div>
-        <div className='flex-1'>
+        <div className='flex-1 w-full'>
         <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
             <button className="IconButton dropMenu relative p-5 w-full " aria-label="Customise options">
-              <span className="bg-dark-700 absolute -top-3.5 right-3.5">IMPLEMENT LABEL</span>
+              <span className="bg-dark-700 absolute -top-3.5 right-3.5">: تاریخ ورود</span>
               <BsChevronDown className="w-3 h-3"/>
               <i>تاریخ ورود</i> 
             </button>
@@ -89,7 +88,7 @@ const SearchWrapper = () => {
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
         </div>
-        <div className='flex-2'>
+        <div className='flex-2 w-full'>
           <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
             <button className="IconButton dropMenu p-5 w-full relative" aria-label="Customise options">
@@ -113,7 +112,7 @@ const SearchWrapper = () => {
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
         </div>
-        </div>
+        
 
     </div>
   )

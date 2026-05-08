@@ -21,7 +21,7 @@ const Input: FC<IInputProp> = ({
     <div className={`${parentWidth} relative`}>
       <label
         htmlFor={htmlFor}
-        className={`${labelTextSize} absolute -top-3 right-5 h-5 p-2 flex-center `}
+        className={`${labelTextSize} absolute -top-3 right-5 h-5 p-2 flex-center whitespace-nowrap`}
         style={tagBgStyle}
       >
         {labelText}
