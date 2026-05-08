@@ -1,3 +1,4 @@
+"use client"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,7 +14,18 @@ import test from "@/src/assets/images/HeroSectionBackground.jpg";
 import { ITab } from "@/src/core/types/ITab";
 import building from "@/src/assets/icons/house-building.svg";
 import InfoCardContainer from "@/src/components/common/infoCardContainer";
+import DropMenu from "@/src/components/common/dropMenu/DropMenu";
+import { useState } from "react";
+import SimpleDropdown from "@/src/components/common/dropDown";
 const SingleReserveHousePage = () => {
+  const [checkOutDate, setCheckOutDate] = useState("nyc");
+  const [checkInDate, setCheckInDate] = useState("nyc");
+
+  const cities = [
+    { value: "nyc", label: "New York" },
+    { value: "la", label: "Los Angeles" },
+    { value: "chi", label: "Chicago" },
+  ];
   const items: BreadcrumbItem[] = [
     {
       href: "/reserve-house",
@@ -33,6 +45,7 @@ const SingleReserveHousePage = () => {
     { value: "facilities", label: " امکانات اقامتگاه" },
     { value: "comment", label: "نظرات کاربران" },
   ];
+  
   return (
     <div className="flex-center bg-dark-900">
       <div className="flex items-end flex-col gap-6 w-4/5 lg:w-[1375px] mt-17 ">
@@ -105,7 +118,9 @@ const SingleReserveHousePage = () => {
               <span>:رزرو خونه برای</span>
               <Image alt="icon" src={building} className="w-5 h-5" />
             </div>
+            <SimpleDropdown options={cities} paramKey="date" placeholder="انتخاب تاریخ"/>
           </InfoCardContainer>
+
         </section>
       </div>
     </div>

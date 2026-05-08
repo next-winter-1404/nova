@@ -139,54 +139,6 @@ const HouseReservePage = () => {
               <div className="w-[100%] border-2 border-[#4E4E4E]"/>
             </div>
             
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
-            <div>salam</div>
           </div>
         </div>
       </div>
