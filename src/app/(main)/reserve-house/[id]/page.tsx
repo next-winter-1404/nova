@@ -1,4 +1,3 @@
-"use client";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,10 +13,11 @@ import test from "@/src/assets/images/HeroSectionBackground.jpg";
 import { ITab } from "@/src/core/types/ITab";
 import building from "@/src/assets/icons/house-building.svg";
 import InfoCardContainer from "@/src/components/common/infoCardContainer";
-import { useState } from "react";
+import DaysCounter from "@/src/components/reserveHouse/daysCounter";
+import dolor from "@/src/assets/icons/dollor.svg"
+import LoginButton from "@/src/components/login/button/LoginButton";
 const SingleReserveHousePage = () => {
-  const [checkOutDate, setCheckOutDate] = useState("nyc");
-  const [checkInDate, setCheckInDate] = useState("nyc");
+
 
   const cities = [
     { value: "nyc", label: "New York" },
@@ -103,10 +103,10 @@ const SingleReserveHousePage = () => {
             className="md:w-full  lg:max-w-[1100px] lg:h-[420px] rounded-[40px]"
           />
         </div>
-        <section className="flex flex-row-reverse justify-between border w-full items-center">
+        <section className="flex flex-row-reverse justify-between border w-full items-start">
           <div className="w-[999px] bg-dark-700 rounded-2xl h-[52px] mt-4 flex justify-end gap-6 p-1">
             {tabs.map((tab) => (
-              <div className="min-w-[140px] h-full bg-primary-accent-green rounded-xl flex-center ">
+              <div key={tab.label} className="min-w-[140px] h-full bg-primary-accent-green rounded-xl flex-center ">
                 <button className="w-full cursor-pointer">{tab.label}</button>
               </div>
             ))}
@@ -116,6 +116,26 @@ const SingleReserveHousePage = () => {
               <span>:رزرو خونه برای</span>
               <Image alt="icon" src={building} className="w-5 h-5" />
             </div>
+            <DaysCounter/>
+            <div className="border-t-2 border-b-2 border-gray-550  w-[92%] flex flex-col items-center gap-6 pb-6">
+              <div className="w-[178px] h-9 rounded-b-3xl bg-gray-550 flex-center gap-2 text-16-semibold text-white" dir="rtl">
+                <Image alt="icon" src={dolor} className="w-4 h-4"/>
+                <span>قیمت رزرو :</span>
+              </div>
+              <div className="flex justify-between w-full" dir="rtl">
+                <span className="text-gray-300 text-16-bold">★ 5 شب * 17000 </span>
+                <span className="text-16-bold text-white"> 18.000.000 ت</span>
+              </div>
+              <div className="flex justify-between w-full" dir="rtl">
+                <span className="text-gray-300 text-16-bold">★ 5 شب * 17000 </span>
+                <span className="text-16-bold text-white"> 18.000.000 ت</span>
+              </div>
+              <div className="flex justify-between w-full" dir="rtl">
+                <span className="text-gray-300 text-16-bold">★ 5 شب * 17000 </span>
+                <span className="text-16-bold text-white"> 18.000.000 ت</span>
+              </div>
+            </div>
+              <LoginButton buttonText="همین حالا رزرو کن" loadingText="در حال رزرو" type="submit" width="w-full mt-6"/>
           </InfoCardContainer>
         </section>
       </div>

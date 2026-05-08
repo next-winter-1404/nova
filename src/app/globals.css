@@ -125,6 +125,9 @@
   @apply sm:text-[20px] text-[12px] text-white-pure;
 }
 
+.text-16-bold {
+  @apply font-bold text-[16px] whitespace-nowrap;
+}
 .text-16-semibold {
   @apply font-semibold text-[16px] whitespace-nowrap;
 }
@@ -138,7 +141,7 @@
 } */
 
 body {
-  /* background: #232323; */
+  background: #232323;
   /* color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif; */
   padding: 0;
