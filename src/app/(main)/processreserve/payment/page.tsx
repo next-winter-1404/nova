@@ -12,7 +12,7 @@ import UseStepNavigation from '../navigation'
 const Payment = () => {
     const searchParams = useSearchParams();  
     const currentStep = searchParams.get('step') || 'payment'
-    const {goToNext, goToPrev} = UseStepNavigation();
+    const {goToNext} = UseStepNavigation();
     const router = useRouter();
     const handleGoHome = () => {
         router.push("/processreserve")

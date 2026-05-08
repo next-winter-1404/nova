@@ -1,6 +1,6 @@
 'use client'
-import { redirect, useSearchParams } from 'next/navigation'
-import React, { FC, ReactNode } from 'react'
+import { useSearchParams } from 'next/navigation'
+import React, {ReactNode } from 'react'
 import hotel  from '@/src/assets/icons/hotel.svg'
 import Image from 'next/image';
 import payment  from '@/src/assets/icons/payment.svg'
