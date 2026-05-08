@@ -23,16 +23,16 @@ const Payment = () => {
                 <Image src={checkMarkCorrect} alt='checkMarkCorrect'/>
                 <h2 className='h-[50px] text-white-pure text-[40px]' >رزرو بلیط شما با موفقیت انجام شد !</h2>
                 <div className='flex gap-4'>
-                        <Button
-                        text={"بازگشت به صفحه اصلی"} icon={<Image src={rightArrow} alt='rightArrow' style={{marginBottom:"-2px", width:"8px"}}/>}
-                        textStyle={{color: "#FFFFFF", fontSize:"16px"}} buttonStyle={{border:"2px solid #FFFFFF", borderRadius:"12px", background:"transparent", height:"36px", width:"190px"}}
-                        onClick={handleGoHome}
-                        /> 
-                        <Button 
-                        text={"بلیط های من"} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen' style={{marginBottom:"-2px", width:"8px"}}/>} 
-                        textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"133px", direction:"ltr"}}
-                        onClick={() => goToNext(currentStep)}
-                        />  
+                    <Button
+                    text={"بازگشت به صفحه اصلی"} icon={<Image src={rightArrow} alt='rightArrow' style={{marginBottom:"-2px", width:"8px"}}/>}
+                    textStyle={{color: "#FFFFFF", fontSize:"16px"}} buttonStyle={{border:"2px solid #FFFFFF", borderRadius:"12px", background:"transparent", height:"36px", width:"190px"}}
+                    onClick={handleGoHome}
+                    /> 
+                    <Button 
+                    text={"بلیط های من"} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen' style={{marginBottom:"-2px", width:"8px"}}/>} 
+                    textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"133px", direction:"ltr"}}
+                    onClick={() => goToNext(currentStep)}
+                    />  
                 </div> 
             </div>         
         </div>
