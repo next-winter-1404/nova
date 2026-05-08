@@ -60,9 +60,37 @@ const Traveler = () => {
             </div>        
           </div>
           <div className='w-[1440px] h-[90px] border'>
-            <div className='w-[1410ps] h-[66px] border flex justify-between items-center'>
-              {/* <Input/> */}
-            </div>
+            <form className='w-[1410px] h-[66px] border flex justify-between items-center'>              
+              <Input
+                labelText='نام شما :'
+                parentWidth='w-[250px]'
+                InputHeight={'h-[50px]'}
+                labelTextSize='md:text-[13px] text-[9px]'
+                textSize='md:text-[16px] text-[12px]'
+                borderColor='border-gray-300'
+                textColor='text-gray-300'
+                labelTextColor='text-gray-300'
+                id={'name'}
+                placeHolder='وارد کنید ...'
+                type='text'
+                htmlFor={'name'}
+              />
+              <Input
+                labelText='نام خانوادگی :'
+                parentWidth='w-[250px]'
+                InputHeight={'h-[50px]'}
+                labelTextSize='md:text-[13px] text-[9px]'
+                textSize='md:text-[16px] text-[12px]'
+                borderColor='border-gray-300'
+                textColor='text-gray-300'
+                labelTextColor='text-gray-300'
+                id={'family'}
+                placeHolder='وارد کنید ...'
+                type='text'
+                htmlFor={'family'}
+              />
+              
+            </form>
           </div>
         </div>
     </div>

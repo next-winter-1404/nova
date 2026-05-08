@@ -52,7 +52,7 @@ const Footer = () => {
                       id={'name'} 
                       InputHeight={'h-[59px]'}
                       htmlFor={'name'}
-                      type={'name'}
+                      type={'text'}
                       placeHolder={'وارد کنید ....'}
                       parentWidth='md:w-[297px] w-[150px]'
                       borderColor='border-selectedButtonText'               
@@ -64,7 +64,7 @@ const Footer = () => {
                       id={'email'} 
                       InputHeight={'h-[59px]'}
                       htmlFor={'email'}
-                      type={'email'}
+                      type={'text'}
                       placeHolder={'وارد کنید ....'}
                       parentWidth='md:w-[297px] w-[150px]'
                       borderColor='border-selectedButtonText'               
