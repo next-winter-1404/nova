@@ -13,6 +13,8 @@ import { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { getResetCode, getVerificationCode } from "@/src/utils/helper/cookies/getVrificationCode/getVrificationCode";
 import { forgetPasswordVerifyCode } from "@/src/utils/sevices/api/auth/forgetPassword/verificationCode";
+import Timer from "@/src/utils/hooks/timer";
+
 
 const VerifyEmailPage = () => { 
   const [verificationCode, setVerificationCode] = useState("");    
@@ -43,17 +45,17 @@ const VerifyEmailPage = () => {
 
   return (
     <form action={formAction} className="md:w-1/2 w-full flex flex-col gap-9" dir="rtl">
+       
       <LoginWrapper
       description="لطفا کد ارسال شده به ایمیل خود را وارد کنید"
         content={
-          <div className="flex gap-18">
             <Input
               InputHeight={"h-[43px]"}
               htmlFor={"verificationCode"}
               id={"verificationCode"}
               name={"verificationCode"}
               labelText={"کد ورود * :"}
-              parentWidth={"w-[48%]"}
+              parentWidth={"w-full"}
               type={"text"}
               borderColor="border-white"
               tagBgStyle={{ background: "var(--color-dark-900)" }}
@@ -62,43 +64,16 @@ const VerifyEmailPage = () => {
               value={verificationCode} 
               onChange={(e) => setVerificationCode(e.target.value)} 
             />
-            <div className="bg-blue-purple-500 rounded-xl h-4/5 p-1 lg:w-1/3 w-1/2 flex items-center gap-2 md:gap-4">
-              <button 
-                type="button" 
-                className="bg-white md:rounded-[10px] rounded-md h-full w-[60%] flex-center md:gap-2"
-              >
-                <span className="cursor-pointer text-[13px] whitespace-nowrap">
-                  ارسال دوباره رمز
-                </span>
-                <Image alt="arrow" src={smallLeftArrow} />
-              </button>
-              <div className="flex-center md:gap-3">
-                <span className="text-16-semibold">1:58</span>
-                <Image alt="clock" src={clock} />
-              </div>
-            </div>
-          </div>
+
+            
         }
         ButtonSection={
-          <div className="flex gap-8">
-            <Button
-              text={"تغییر ایمیل"}
-              buttonStyle={{
-                width: "100%",
-                background: "transparent",
-                border: "1px solid white",
-                fontSize: "semibold",
-                display: "flex",
-                gap: 12,
-              }}
-              icon={<Image src={refresh} alt="refresh" />}
-            />
+            
             <LoginButton
               buttonText="ساخت حساب کاربری"
               width="w-full"
               loadingText="loading"
             />
-          </div>
         }
       />
     </form>
