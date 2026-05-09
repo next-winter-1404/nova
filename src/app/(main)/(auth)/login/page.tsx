@@ -1,5 +1,5 @@
 "use client"
-import leftArrow from "../../../../assets/icons/leftArrow.svg";
+import leftArrow from "@/src/assets/icons/leftArrow.svg";
 import Image from "next/image";
 import Input from "@/src/components/common/input/Input";
 import LoginWrapper from "@/src/components/login/wrapper";
@@ -17,7 +17,7 @@ const LoginPage = () => {
   });
 
   useEffect(() => {
-   
+    if (!state?.message) return;
     if (state.success) {
       toast.success(state.message);
       router.push("/dashboard");
