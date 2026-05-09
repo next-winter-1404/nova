@@ -11,11 +11,11 @@ const LoginImage = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const isPhoneNumberActive = pathname === "/phoneNumber-signUp";
+  const isPhoneNumberActive = pathname === "/register-phone";
   const isEmailActive = pathname === "/login";
 
   const handleLoginPhoneClick = () => {
-    router.push("/phoneNumber-signUp");
+    router.push("/register-phone");
   };
 
   const handleLoginClick = () => {
