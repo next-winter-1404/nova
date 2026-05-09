@@ -15,21 +15,9 @@ const SetPasswordAndPhonePage = () => {
   });
 
   useEffect(() => {
-    console.log("State changed:", state);
-  }, [state]);
-
-  useEffect(() => {
-    if (!state?.message) {
-      console.log("No message in state");
-      return;
-    }
-
-    console.log("Message:", state.message);
-    console.log("Success:", state.success);
-
+  
     if (state.success) {
       toast.success(state.message);
-      console.log("Redirecting to dashboard...");
       router.push("/dashboard");
     } else {
       toast.error(state.message);

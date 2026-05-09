@@ -1,13 +1,33 @@
+"use client"
 import leftArrow from "../../../../assets/icons/leftArrow.svg";
 import Image from "next/image";
 import Input from "@/src/components/common/input/Input";
 import LoginWrapper from "@/src/components/login/wrapper";
 import LoginButton from "@/src/components/login/button/LoginButton";
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect } from "react";
+import { Login } from "@/src/utils/sevices/api/auth/login/login";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
+  const router = useRouter();
+  const [state, formAction] = useActionState(Login, {
+    success: false,
+    message: "",
+  });
+
+  useEffect(() => {
+   
+    if (state.success) {
+      toast.success(state.message);
+      router.push("/dashboard");
+    } else {
+      toast.error(state.message);
+    }
+  }, [state, router]);
 
   return (
-    <form className="md:w-1/2 w-full flex flex-col gap-9" dir="rtl">
+    <form action={formAction} className="md:w-1/2 w-full flex flex-col gap-9" dir="rtl">
       <LoginWrapper
       content={
         <div className="flex gap-9">
@@ -15,6 +35,7 @@ const LoginPage = () => {
             InputHeight={"h-[43px]"}
             htmlFor={"email"}
             id={"email"}
+            name={"email"}
             labelText={"ایمیل شما * :"}
             tagBgStyle={{background:"var(--color-dark-900)"}}
             parentWidth={"w-1/2"}
@@ -29,6 +50,7 @@ const LoginPage = () => {
               InputHeight={"h-[43px]"}
               htmlFor={"password"}
               id={"password"}
+              name={"password"}
               labelText={"کلمه عبور * :"}
               tagBgStyle={{background:"var(--color-dark-900)"}}
               parentWidth={"w-full"}
