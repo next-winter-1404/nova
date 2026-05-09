@@ -12,6 +12,7 @@ import car from "@/src/assets/icons/car.svg"
 import bathroom from "@/src/assets/icons/bathroom.svg"
 import leftArrow from "@/src/assets/icons/leftArrow.svg"
 import Star from "@/src/assets/icons/Star.svg"
+import OldPriceComponent from './OldPrice';
 
 interface ProductCardProps {
     mode: "row" | "col";
@@ -83,13 +84,7 @@ const ProductCard = ({
         <div className='w-full h-[36px] group-hover:bg-primary-accent-green bg-dark-600 text-white-pure group-hover:text-dark-800 rounded-[12px] flex items-center justify-between pl-3 pr-3'>                            
           <h2 className='text-[16px]'> {price} </h2>
           <h2 className='text-gray-300 text-[16px]'>
-            {offer ? <span className="flex-center gap-2 relative text-gray-300 text-16-semibold">
-                        <i>تومان</i>
-                        <span className="flex-center gap-1">
-                          <span className="absolute top-2 -right-1 -rotate-12 w-20 h-0.5 bg-gray-300"></span>
-                          {oldPrice}
-                        </span>
-                      </span> 
+            {offer ? <OldPriceComponent oldPrice='55000000' />
                       : <span>{buttonText}</span>}
           </h2>
       </div>

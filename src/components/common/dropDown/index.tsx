@@ -40,11 +40,11 @@ const SimpleDropdown: FC<IDropDownProps> = ({
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className=" bg-white w-full rounded-md shadow-lg border border-gray-200 py-1 mt-1 z-50">
+        <DropdownMenu.Content className="DropdownMenuContent w-full p-4 rounded rounded-xl z-100 bg-dark-800">
           {options.map((op) => (
             <DropdownMenu.Item
               key={op.value}
-              className="px-4 py-2 text-sm text-gray-700 border cursor-pointer outline-none flex justify-between items-center"
+              className="DropdownMenuItem"
               onSelect={() => handleCitySelect(op.value)}
             >
               {op.label}
