@@ -25,10 +25,10 @@ const SearchWrapper = () => {
   return (
     <div className='flex md:flex-row flex-col-reverse items-center justify-between gap-6 bg-dark-800 border-2 border-dark-650 shadow-000-16 inset-shadow-fff-8 rounded-4xl px-6 py-5'>
       
-        <div className='serach-button'>
+        <button type="submit" className='serach-button'>
         <span>جستوجو کنید</span>
         <FaSearch />
-        </div>
+        </button>
         <div className='flex-1 w-full'>
         <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
