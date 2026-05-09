@@ -25,7 +25,7 @@ const HouseReservePage = () => {
   ];
   const items:BreadcrumbItem[] = [
     {
-      href: "/reservehouse",
+      href: "/reserve-house",
       label: "رزرو هتل",
     },
     {
@@ -34,7 +34,7 @@ const HouseReservePage = () => {
 
   ];
   return (
-   <div className="flex-center">
+   <div className="flex-center bg-dark-900">
      <div className="items-end flex mt-15 flex-col lg:max-w-[1375px] w-[90%] ">
         <Breadcrumb items={items} twClassname="mt-14  "/>
       <TopReserveHouseSection />

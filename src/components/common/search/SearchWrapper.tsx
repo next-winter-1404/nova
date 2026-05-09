@@ -3,10 +3,17 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Calendar, CalendarProvider, TimePicker } from "@iprg/zaman";
 import { BsChevronDown } from "react-icons/bs";
+import SimpleDropdown from "../dropDown";
 
 import { useState } from 'react'
 import { FaSearch } from 'react-icons/fa';
 import Link from "next/link";
+
+const op1 = [
+  { label: "رهن و اجاره", value:"1" },
+  { label: "خرید و فروش", value:"2" },
+  { label: "رزرو ملک", value:"3" },
+];
 
 
 const SearchWrapper = () => {
@@ -15,6 +22,7 @@ const SearchWrapper = () => {
   const [checkInDate, setCheckInDate] = useState('nyc');
   const [checkOutDate, setCheckOutDate] = useState('nyc');
   const [calendarValue, setCalendarValue] = useState(new Date())
+
 
   const cities = [
     { value: 'nyc', label: 'New York' },

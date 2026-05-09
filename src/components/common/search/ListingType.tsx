@@ -6,6 +6,8 @@ import Image from "next/image";
 import bookingIcon from "@/public/icons/booking.svg";
 import houseBuildingIcon from "@/public/icons/house-building.svg";
 import moneyCheckEdit from "@/public/icons/money-check-edit.svg";
+import { useRouter, useSearchParams } from 'next/navigation';
+
 
 const types = [
   { labelName: "رهن و اجاره", iconSrc: moneyCheckEdit, current: false, paramValue: "rent" },
@@ -15,11 +17,17 @@ const types = [
 
 const ListingType = () => {
   const initialActive = types.find((t) => t.current)?.labelName || null;
-  const [selectedLabel, setSelectedLabel] = useState<string | null>(initialActive);
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const [selectedLabel, setSelectedLabel] = useState<string | "">(searchParams.get("stateType") || "" );
 
-  const handleSelect = (paramValue: string) => {
-    setSelectedLabel(paramValue);
-  };
+  const handleSelect = (labelName: string) => {
+      setSelectedLabel(labelName);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("stateType", selectedLabel)
+      console.log("params:", params)
+      router.push(`?${params.toString()}`)
+  }
 
   return (
     <div className="relative flex items-center justify-end gap-3 whitespace-nowrap">

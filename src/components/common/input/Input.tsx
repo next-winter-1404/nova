@@ -10,6 +10,7 @@ const Input: FC<IInputProp> = ({
   placeHolder,
   name,
   value,
+  defaultValue,
   onChange,
   tagBgStyle,
   borderColor,
@@ -35,7 +36,8 @@ const Input: FC<IInputProp> = ({
         onChange={onChange}
         className={` w-full border focus:outline-none ${borderColor} ${textSize} rounded-2xl  ${textColor} px-6 ${InputHeight}`}
         placeholder={placeHolder}
-      />
+        defaultValue={defaultValue}
+    />
     </div>
   );
 };

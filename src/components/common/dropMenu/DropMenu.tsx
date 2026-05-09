@@ -30,7 +30,7 @@ const DropMenu = ({options, onChange, value, placeholder="... انتخاب کن�
         </button>
       </DropdownMenu.Trigger>
 
-      <DropdownMenu.Portal>
+      <DropdownMenu.Portal> 
         <DropdownMenu.Content className="DropdownMenuContent w-full p-4 rounded rounded-xl z-100 bg-dark-800" sideOffset={5}>
           
           <DropdownMenu.Item className="DropdownMenuItem" onSelect={() => console.log("New Tab")}>

@@ -10,6 +10,7 @@ const LoginButton: FC<ILoginButtonProp> = ({ buttonText, width ,type,loadingText
 
   return (
     <button
+    dir="rtl"
       className={` ${pending?"opacity-60":""} flex-center gap-4 selected-button rounded-2xl h-[43px]  cursor-pointer ${width}`}
       type={type}
       disabled={pending}
