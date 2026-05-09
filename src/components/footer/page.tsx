@@ -39,7 +39,7 @@ const Footer = () => {
             curveColor='var(--color-primary-accent-green)'
             labelBackground='bg-primary-accent-green'
             mainContent={<div className='h-[1100px] items-center md:gap-[66px] gap-4 md:w-full w-[340px] flex flex-col' dir='rtl'>
-              <div className='h-[145px] md:w-full  w-[330px] md:gap-6 gap-3 flex-col flex'>                
+              <div className='md:h-[145px] md:w-full h-[200px] w-[330px] md:gap-6 gap-3 flex-col flex'>                
                   <div className='flex w-[160px] h-5 md:text-[16px] text-[12px] text-selectedButtonText md:gap-4 gap-2'>همیشه کنارتیم <Image src={leftBlackTriangle} alt='leftBlackTriangle'/></div>      
                   <h2 className='md:text-[32px] text-[20px] text-selectedButtonText'>24 ساعت روز و 7 روز هفته در اختیار شماییم !</h2>        
                   <h2 className='text-selectedButtonText md:text-[20px] text-[16px] w-[300px] md:w-full'>تیم دلتا با ارائه بهترین نیرو های خدماتی و سرویس های املاکی سعی دارد تا بتواند در تمام لحظات کنار شما باشد .</h2>  
@@ -99,13 +99,13 @@ const Footer = () => {
                 <div className='absolute left-[300px] top-[-200px]'><Image src={Star20} alt='Star20'/></div>
               </div>
               </div>              
-              <div className='w-full md:h-[460px] h-[540px] justify-center rounded-[56px] bg-dark-900 flex flex-col items-center' >
-                <div className='border-b border-amber-50 md:h-[360px] h-[450px] flex flex-col w-11/12 gap-6'>
+              <div className='w-full md:h-[460px] h-[560px] justify-center rounded-[56px] bg-dark-900 flex flex-col items-center' >
+                <div className='border-b border-amber-50 md:h-[360px] h-[550px] flex flex-col w-11/12 gap-8 md:gap-6'>
                   <span className='md:text-[32px] text-[26px] text-white-pure'>پلتفرم دلتا</span>
-                  <div className='w-full md:h-[180px] h-[320px] flex md:flex-row flex-col md:gap-0 gap-2.5 text-white-pure text-[12px] md:text-[16px]'>
+                  <div className='w-full md:h-[180px] h-[340px] flex md:flex-row flex-col md:gap-0 gap-2.5 text-white-pure text-[12px] md:text-[16px]'>
                     <div className=' h-[200px] flex md:w-3/5 md:gap-14 gap-5'>
                     <h2 className='w-3/5 md:leading-9 leading-6'>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت ..</h2>
-                    <div className='md:w-1/5 w-2/5 flex flex-col md:gap-5 gap-1.5'>
+                    <div className='md:w-1/5 w-2/5 flex flex-col md:gap-5 gap-1'>
                       <h2 className='md:text-[20px] text-[18px]'>نحوه رزرو اقامتگاه</h2>
                       <div className='flex flex-col gap-1.5 md:gap-3'>
                         <h2 className='flex gap-2.5'><Image src={whiteTriangle} alt='whiteTriangle'/> راهنمای رزرو اقامتگاه</h2>
@@ -115,7 +115,7 @@ const Footer = () => {
                     </div>
                     </div>
                     <div className='flex md:w-3/5 gap-14'>
-                      <div className='md:w-1/5 w-3/5 flex flex-col md:gap-5 gap-1.5'>
+                      <div className='md:w-1/5 w-full flex flex-col md:gap-5 gap-1'>
                         <h2 className='md:text-[20px] text-[18px]'> خدمات مشتریان</h2>
                         <div className='flex flex-col gap-3 text-gray-300'>
                           <h2>پرسش های متداول مهمان</h2>                       
@@ -143,10 +143,10 @@ const Footer = () => {
                 <div className='h-20 flex items-center justify-between w-11/12'>
                   <h2 className='md:text-[16px] text-[12px] text-white-pure'>تمام حقوق مادی و معنوی این اثر برای دلتا محفوظ است .</h2>
                   <div className='md:h-10 md:w-1/6 w-1/2 flex md:gap-4 gap-1.5'>
-                    <div className='hover:cursor-pointer border flex justify-center border-amber-50 md:h-full h-8 w-1/3 rounded-2xl bg-white-pure'><Image src={inI} alt='inI'/></div>
-                    <div className='hover:cursor-pointer border border-amber-50 flex justify-center md:h-full h-8 w-1/3 rounded-2xl'><Image src={instagram} alt='instagram'/></div>
-                    <div className='hover:cursor-pointer border border-amber-50 md:h-full h-8 w-1/3 flex justify-center rounded-2xl'><Image src={telegram} alt='telegram'/></div>
-                    <div className='hover:cursor-pointer border border-amber-50 md:h-full h-8 w-1/3 rounded-2xl flex justify-center'><Image src={whatsApp} alt='whatsApp'/></div>
+                    <div className='hover:cursor-pointer border flex justify-center border-amber-50 md:h-full h-7 w-1/3 rounded-2xl bg-white-pure'><Image src={inI} alt='inI'/></div>
+                    <div className='hover:cursor-pointer border border-amber-50 flex justify-center md:h-full h-7 w-1/3 rounded-2xl'><Image src={instagram} alt='instagram'/></div>
+                    <div className='hover:cursor-pointer border border-amber-50 md:h-full h-7 w-1/3 flex justify-center rounded-2xl'><Image src={telegram} alt='telegram'/></div>
+                    <div className='hover:cursor-pointer border border-amber-50 md:h-full h-7 w-1/3 rounded-2xl flex justify-center'><Image src={whatsApp} alt='whatsApp'/></div>
                   </div>
                 </div>
               </div>

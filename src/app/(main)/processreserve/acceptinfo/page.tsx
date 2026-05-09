@@ -22,45 +22,45 @@ const AcceptInfo = () => {
     const {goToNext, goToPrev} = UseStepNavigation();
         
       return (
-        <div className='flex flex-col items-center gap-[36px] w-[1683px] h-[1150px]' dir='rtl'>           
-            <div className='w-11/12 flex flex-col items-center justify-center h-[185px] bg-dark-700 rounded-3xl gap-6 relative'>
-              <div className=' w-22/23 h-[44px] rounded-2xl bg-gray-250 flex justify-center items-center gap-6'>
-                <div className='w-[1417px] items-center flex justify-between'>
-                  <div className='w-[160px] h-[21px] flex gap-3 items-center text-[16px] text-white-pure'><Image src={usersAlt} alt='usersAlt'/>مشخصات مسافران </div>
+        <div className='flex flex-col items-center md:gap-[36px] gap-[30px] w-[1683px] md:h-[1150px]' dir='rtl'>           
+            <div className='md:w-11/12 w-[340px] flex flex-col items-center justify-center md:h-[185px] h-[730px] bg-dark-700 rounded-3xl md:gap-6 gap-3 relative'>
+              <div className=' w-22/23 h-[44px] rounded-2xl bg-gray-250 flex justify-center items-center gap-3 md:gap-6'>
+                <div className='md:w-[1417px] w-[300px] items-center flex md:justify-between'>
+                  <div className='w-[160px] h-[21px] flex gap-3 items-center md:text-[16px] text-[12px] text-white-pure'><Image src={usersAlt} alt='usersAlt'/>مشخصات مسافران </div>
                   <Button text={"ویرایش مسافران"} icon={<Image src={edit} alt='edit'/>} textStyle={{fontSize:"16px", color:"#8CFF45"}} buttonStyle={{height:"20px", width:"170px", background:"#F550"}}/>
                 </div>        
               </div>
-              <div className='absolute top-[130px] w-22/23 border border-gray-150'></div>
-              <div className='w-22/23 flex items-center justify-between h-[100px] gap-5'>
-                <div className='flex flex-col items-center w-[74px] text-[16px] gap-[40px]'>
+              <div className='hidden md:block absolute top-[130px] w-22/23 border border-gray-150'></div>
+              <div className='w-22/23 flex md:flex-row flex-col items-center justify-between h-[650px] md:h-[100px] md:gap-5'>
+                <div className='flex flex-col items-center w-[74px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>بازه سنی</h2>
                   <h2 className='text-white-pure'> بزرگسال</h2>
                 </div>
-                <div className='flex flex-col items-center w-[149px] text-[16px] gap-[40px]'>
+                <div className='flex flex-col items-center w-[149px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'> نام و نام خانوادگی</h2>
                   <h2 className='text-white-pure'> محمد رضا ساداتی</h2>
                 </div>
-                <div className='flex flex-col items-center w-[70px] text-[16px] gap-[40px]'>
+                <div className='flex flex-col items-center w-[70px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>جنسیت</h2>
                   <h2 className='text-white-pure'> مرد</h2>
                 </div>
-                <div className='flex flex-col items-center w-[217px] text-[16px] gap-[40px]'>
+                <div className='flex flex-col items-center w-[217px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>کدملی / شماره یا پاسپورت</h2>
                   <h2 className='text-primary-accent-green'> 09229167194</h2>
                 </div>
-                <div className='flex flex-col items-center w-[100px] text-[16px] gap-[40px]'>
+                <div className='flex flex-col items-center w-[100px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>تاریخ تولد</h2>
                   <h2 className='text-white-pure'> 1350 / 5 / 12</h2>
                 </div>
-                <div className='flex items-center flex-col w-[60px] text-[16px] gap-[40px]'>
+                <div className='flex items-center flex-col w-[60px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>خدمات</h2>
                   <h2 className='text-white-pure'> -</h2>
                 </div>
-                <div className='flex flex-col items-center w-[100px] text-[16px] gap-[40px]'>
+                <div className='flex flex-col items-center w-[100px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>مبلغ خدمات</h2>
                   <h2 className='text-white-pure'> -</h2>
                 </div>
-                <div className='flex flex-col items-center w-[100px] text-[16px] gap-[40px]'>
+                <div className='flex flex-col items-center w-[100px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>قیمت</h2>
                   <h2 className='text-white-pure'> 1.520.000 ت</h2>
                 </div>
@@ -86,59 +86,60 @@ const AcceptInfo = () => {
                 </div> */}
               </div>
             </div>
-            <div className='w-11/12 flex flex-col items-center justify-center h-[240px] bg-dark-700 rounded-3xl gap-5'>
+            <div className='md:w-11/12 w-[340px] flex flex-col items-center justify-center md:h-[240px] h-[550px] bg-dark-700 rounded-3xl gap-5'>
               <div className=' w-22/23 h-[44px] rounded-2xl bg-gray-250 flex justify-center items-center gap-6'>
-                <div className='w-[1417px] flex justify-between'>
-                  <div className='w-[460px] h-[21px] gap-3 flex items-center text-[16px] text-white-pure'><Image src={doller} alt='doller'/>                     
-                    <h2 className='text-16px'>هزینه جانبی </h2> 
+                <div className='md:w-[1417px] flex'>
+                  <div className='md:w-[460px] w-[300px] h-[21px] gap-3 flex items-center text-[16px] text-white-pure'>
+                    <Image src={doller} alt='doller'/>                     
+                    <h2 className='md:text-16px text-[12px]'>هزینه جانبی </h2> 
                   </div>
                 </div>                     
               </div>
-              <div className='w-[1410px] text-[16px] h-[150px] leading-[30px] text-white-pure'>
+              <div className='md:w-[1410px] w-[300px] md:text-[16px] text-[12px] md:h-[150px] h-[450px] leading-[30px] text-white-pure'>
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای
                 متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص 
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای
                 متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص 
               </div>                       
             </div>
-            <div className='w-11/12 flex flex-col items-center justify-center h-[120px] bg-dark-700 rounded-3xl gap-5'>
+            <div className='md:w-11/12 w-[340px] flex flex-col items-center justify-center h-[150px] md:h-[120px] bg-dark-700 rounded-3xl gap-5'>
               <div className=' w-22/23 h-[44px] rounded-2xl bg-gray-250 flex justify-center items-center gap-6'>
-                <div className='w-[1417px] flex justify-between'>
-                  <div className='w-[600px] h-[21px] gap-3 flex items-center text-[16px] text-white-pure'><Image src={megaphone} alt='megaphone'/> 
+                <div className='md:w-[1417px] flex md:justify-between'>
+                  <div className='md:w-[600px] w-[300px] h-[21px] md:gap-3 gap-2 flex items-center text-[14px] md:text-[16px] text-white-pure'><Image src={megaphone} alt='megaphone'/> 
                     <div className='flex'>
-                      <h2 > اطلاع رسانی سفر </h2> <h2 className='text-primary-accent-green'>  ( اطلاعات بلیط و اطلاع رسانی بعدی به این آدرس ارسال می شود . )</h2>
+                      <h2 > اطلاع رسانی سفر </h2> <h2 className='hidden md:block text-primary-accent-green'>  ( اطلاعات بلیط و اطلاع رسانی بعدی به این آدرس ارسال می شود . )</h2>
                     </div>
                   </div>
                 </div>                        
               </div>
-              <div className='w-[1410px] flex gap-4 items-center h-[40px] '> 
-                <div className='w-[230px] h-[15px] items-center gap-2 border-l border-gray-150 flex text-[16px]'>
-                  <Image src={star25} alt='star25'/>
-                  <h2 className='text-white-pure'>شماره تماس : </h2>
+              <div className='md:w-[1410px] w-[300px] flex md:gap-4 gap-2 items-center h-[60px] md:h-[40px] '> 
+                <div className='md:w-[230px] w-[150px] md:h-[15px] md:flex-row flex-col items-center md:gap-2 gap-0.5 border-l border-gray-150 flex text-[12px] md:text-[16px]'>
+                <div className='hidden md:block'><Image src={star25} alt='star25'/></div>
+                <h2 className='text-white-pure'>شماره تماس : </h2>
                   <h2 className='text-primary-accent-green'>09229167194</h2>
                 </div> 
-                <div className='w-[230px] h-[15px] items-center gap-2 flex text-[16px]'>
-                  <Image src={star25} alt='star25'/>
+                <div className='md:w-[230px] w-[150px] md:h-[15px] md:flex-row flex-col items-center md:gap-2 gap-0.5 flex text-[12px] md:text-[16px]'>
+                  <div className='hidden md:block'><Image src={star25} alt='star25'/></div>
                   <h2 className='text-white-pure'>ایمیل : </h2>
                   <h2 className='text-primary-accent-green'>Example@gmail.com</h2>
                 </div>                  
               </div>          
             </div>
-            <div className='w-11/12 flex flex-col items-center justify-center h-[166px] bg-dark-700 rounded-3xl gap-5'>
+            <div className='md:w-11/12 w-[340px] flex flex-col items-center justify-center h-[180px] md:h-[166px] bg-dark-700 rounded-3xl gap-5'>
               <div className=' w-22/23 h-[44px] rounded-2xl bg-gray-250 flex justify-center items-center gap-6'>
-                <div className='w-[1417px] flex justify-between'>
-                  <div className='w-[460px] h-[21px] gap-3 flex items-center text-[16px] text-white-pure'><Image src={badgepercent} alt='badgepercent'/>                     
+                <div className='md:w-[1417px] flex justify-between'>
+                  <div className='md:w-[460px] w-[300px] h-[21px] gap-3 flex items-center text-[12px] md:text-[16px] text-white-pure'><Image src={badgepercent} alt='badgepercent'/>                     
                       کد تخفیف 
                   </div>
                 </div>        
               </div>
-              <div className='w-[1410px] gap-6 flex items-center h-[70px] '>                   
+              <div className='md:w-[1410px] md:flex-row flex-col md:gap-6 gap-3 flex items-center h-[100px] md:h-[70px] '>                   
                 <form className='h-[50px] flex gap-5 items-center'>              
                   <Input
                     labelText='کد تخفیف :'
-                    parentWidth='w-[296px]'
+                    parentWidth='md:w-[296px] w-[250px]'
                     InputHeight={'h-[50px]'}
-                    labelTextSize='md:text-[13px] text-[9px]'
+                    labelTextSize='text-[13px]'
                     textSize='md:text-[16px] text-[12px]'
                     borderColor='border-gray-300'
                     textColor='text-gray-300'
@@ -152,9 +153,9 @@ const AcceptInfo = () => {
                 <Button text={" اعمال کد تخفیف"} icon={<Image src={checkCircle} alt='checkCircle'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"156px"}}/>          
               </div>          
             </div>
-            <div className='h-[84px] w-11/12 flex items-center justify-center border-3 border-dashed rounded-4xl border-gray-300'>
-                <div className='h-9 w-[1410px] flex justify-between'>
-                  <div className='w-[300px] h-[30px] gap-3 flex items-center text-[24px] text-white-pure'>
+            <div className='h-[84px] md:w-11/12 w-[340px] flex items-center justify-center border-3 border-dashed rounded-4xl border-gray-300'>
+                <div className='md:h-9 md:w-[1410px] md:flex-row flex-col gap-1.5 md:gap-0 h-full flex md:justify-between'>
+                  <div className='md:w-[300px] h-[30px] md:gap-3 gap-2 flex justify-center items-center md:text-[24px] text-[18px] text-white-pure'>
                       <Image src={ticket} alt='ticket'/> 
                       <div className='flex gap-0.5'>
                         <h2 > قیمت بلیط : </h2> <h2 className='text-primary-accent-green'> 1.500.000ت </h2>
