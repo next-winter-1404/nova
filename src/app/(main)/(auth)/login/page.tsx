@@ -1,7 +1,7 @@
 import leftArrow from "../../../../assets/icons/leftArrow.svg";
 import Image from "next/image";
 import Input from "@/src/components/common/input/Input";
-import LoginWrapper from "@/src/components/login/wrapper/page";
+import LoginWrapper from "@/src/components/login/wrapper";
 import LoginButton from "@/src/components/login/button/LoginButton";
 
 const LoginPage = () => {

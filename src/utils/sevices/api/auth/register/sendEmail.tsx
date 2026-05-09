@@ -1,6 +1,6 @@
 "use server";
 
-import { setServerSideCookie } from "@/src/utils/helper/cookies/serverSideCookie";
+import { setServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import instance from "@/src/utils/sevices/interseptor";
 import { z } from "zod";
 
@@ -36,7 +36,6 @@ export const sendEmail = async (
     const res = await instance.post("/api/auth/register", {
       email: validationResult.data.email,
     });
-    console.log("api response:", res);
 
     const dataResponse = res.data || res;
     if (dataResponse.tempUserId && dataResponse.verificationCode) {
@@ -63,8 +62,8 @@ export const sendEmail = async (
       },
     };
   } catch (error: any) {
-    console.log("   - Full error:", error);
-    console.log("   - errorResponse:", error.response);
+    console.error("Error message:", error.message);
+    console.error("Error response data:", error.response?.data);
     return {
       success: false,
       message: error.response || "خطا در ارسال کد",
