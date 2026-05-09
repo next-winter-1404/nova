@@ -5,14 +5,11 @@ import LoginWrapper from "@/src/components/login/wrapper";
 import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import {
-  SendEmailResult,
-  sendEmail,
-} from "@/src/utils/sevices/api/auth/register/sendEmail";
+import { RequestPassword } from "@/src/utils/sevices/api/auth/forgetPassword/requestPass";
 
-const SignUpPage = () => {
+const ForgetPassWordRequest = () => {
   const router = useRouter();
-  const [state, formAction] = useActionState(sendEmail, {
+  const [state, formAction] = useActionState(RequestPassword, {
     success: false,
     message: "",
   });
@@ -23,7 +20,7 @@ const SignUpPage = () => {
     if (state.success) {
       toast.success(state.message);
 
-      router.push("/verifyemail");
+      router.push("/forgetPassword/verify");
     } else {
       toast.error(state.message);
     }
@@ -36,7 +33,7 @@ const SignUpPage = () => {
       dir="rtl"
     >
       <LoginWrapper
-      description="جهت شروع فرایند ساخت اکانت ایمیل خود را وارد کنید"
+      description="ایمیل خود را وارد کنید تا کد را دریافت کنید"
         ButtonSection={
           <LoginButton
             loadingText="در حال ارسال کد"
@@ -63,4 +60,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default ForgetPassWordRequest;

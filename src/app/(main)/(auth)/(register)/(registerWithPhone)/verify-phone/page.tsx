@@ -42,6 +42,7 @@ const VerifyPhoneNumber = () => {
   return (
     <form action={formAction} className="md:w-1/2 w-full flex flex-col gap-9" dir="rtl">
       <LoginWrapper
+      description="لطفا کد پیامک شده را وارد کنید"
         content={
           <div className="flex gap-18">
             <Input

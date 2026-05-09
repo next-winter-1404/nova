@@ -11,20 +11,20 @@ import Button from "@/src/components/common/button/page";
 import { useRouter } from "next/navigation"; 
 import { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { verifyCode } from "@/src/utils/sevices/api/auth/register/verifyCode";
-import { getVerificationCode } from "@/src/utils/helper/cookies/getVrificationCode/getVrificationCode";
+import { getResetCode, getVerificationCode } from "@/src/utils/helper/cookies/getVrificationCode/getVrificationCode";
+import { forgetPasswordVerifyCode } from "@/src/utils/sevices/api/auth/forgetPassword/verificationCode";
 
 const VerifyEmailPage = () => { 
   const [verificationCode, setVerificationCode] = useState("");    
   const router = useRouter();
-  const [state, formAction] = useActionState(verifyCode, {
+  const [state, formAction] = useActionState(forgetPasswordVerifyCode, {
     success: false,
     message: "",
   });
 
   useEffect(() => {
     const loadCode = async () => {
-      const code = await getVerificationCode(); 
+      const code = await getResetCode(); 
       setVerificationCode(code);
     };
     loadCode();
@@ -35,7 +35,7 @@ const VerifyEmailPage = () => {
 
     if (state.success) {
       toast.success(state.message);
-      router.push("/final-step");
+      router.push("/forgetPassword/reset");
     } else {
       toast.error(state.message);
     }

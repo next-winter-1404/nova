@@ -31,6 +31,8 @@ const SetPasswordAndPhonePage = () => {
       dir="rtl"
     >
       <LoginWrapper
+      headerText="خوش اومدی!"
+      description="جهت ساخت اکانت شماره تماس و رمز مورد نظر خود را وارد کنید"
         content={
           <div className="flex gap-9">
             <Input

@@ -11,6 +11,15 @@ export const getVerificationCode = async () => {
     return "";
   }
 };
+export const getResetCode = async () => {
+  try {
+    const code = await getServerSideCookie("resetCode");
+    return code || "";
+  } catch (error) {
+    console.error("Error getting reset code:", error);
+    return "";
+  }
+};
 export const getNumberVerificationCode = async () => {
   try {
     const code = await getServerSideCookie("numberVerificationCode");

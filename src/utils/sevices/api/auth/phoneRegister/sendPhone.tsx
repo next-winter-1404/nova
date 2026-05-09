@@ -30,7 +30,7 @@ export const sendPhone = async (
   if (!validationResult.success) {
     return {
       success: false,
-      message: "قرمت شماره صحصح نیست", // ✅ پیام دقیق
+      message: "قرمت شماره صحصح نیست",    
     };
   }
 

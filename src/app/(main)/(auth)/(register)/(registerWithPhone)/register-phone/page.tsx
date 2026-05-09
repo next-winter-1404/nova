@@ -34,6 +34,7 @@ const RegisterWithPhone = () => {
       dir="rtl"
     >
       <LoginWrapper
+      description="جهت ساخت اکانت با شماره تلفن لطفا شماره تماس خود را وارد کنید"
         ButtonSection={
           <LoginButton
             loadingText="در حال ارسال کد"
