@@ -11,7 +11,6 @@ export default function Home() {
       <MostPopulerDestinationSection />
       <DepositAndRentSection />
       <Landing></Landing>
-      <Footer/>
     </div>
 
   );
