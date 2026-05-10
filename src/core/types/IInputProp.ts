@@ -6,6 +6,7 @@ export interface IInputProp {
     labelText: string;
     type?: string;
     id?: string;
+    
     InputHeight?: string;
     placeHolder?: string;
     name?: string;
