@@ -18,5 +18,7 @@ export interface ILoginButtonProp{
     loadingText?:string
     width?:string
     buttonText?:string
+    height?:string
+    radius?:string
 
 }

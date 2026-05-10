@@ -25,7 +25,11 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { FiCopy } from "react-icons/fi";
-
+import AboutHouseContainer from "@/src/components/reserveHouse/aboutHouseContainer";
+import HouseItemsComponent from "@/src/components/reserveHouse/houseItemsComponent";
+import Input from "@/src/components/common/input/Input";
+import line from "@/src/assets/images/divideLine.svg"
+import StarRatingContainer from "@/src/components/reserveHouse/starRatingcontainer";
 const SingleReserveHousePage = () => {
   const cities = [
     { value: "nyc", label: "New York" },
@@ -125,7 +129,54 @@ const SingleReserveHousePage = () => {
           />
         </div>
         <section className="flex flex-row-reverse justify-between  w-full items-start">
-          <SelectedTab options={tabs} twClassname="w-[1000px]" />
+          <section className=" w-[1000px] flex flex-col gap-8">
+            <SelectedTab options={tabs} twClassname="w-full" />
+            {/* <AboutHouseContainer/> */}
+            {/* <HouseItemsComponent/> */}
+            <div className="flex flex-col gap-8">
+              <StarRatingContainer/>
+              <div className="flex">
+                <Input
+                  labelText="نام و نام خانوادگی"
+                  InputHeight="h-[50px]"
+                  borderColor="border-white"
+                  labelTextSize="text-white"
+                  tagBgStyle={{ background: "var(--color-dark-900)" }}
+                  textColor="text-white"
+                />
+                <Input
+                  labelText="ایمیل شما"
+                  InputHeight="h-[50px]"
+                  borderColor="border-white"
+                  labelTextSize="text-white"
+                  tagBgStyle={{ background: "var(--color-dark-900)" }}
+                  textColor="text-white"
+                />
+              </div>
+              <div className="flex-center gap-8 w-full">
+              <LoginButton
+                  buttonText="ارسال"
+                  loadingText="در حال ارسال پیام"
+                  type="submit"
+                  width="w-[111px] "
+                  height="h-9"
+                  radius="rounded-[10px]"
+                />
+                <Input
+                  labelText="پیام شما"
+                  InputHeight="h-[50px]"
+                  borderColor="border-white"
+                  labelTextSize="text-white"
+                  tagBgStyle={{ background: "var(--color-dark-900)" }}
+                  textColor="text-white"
+                  parentWidth="w-full"
+                />
+               
+              </div>
+              <Image alt="icon" src={line}/>
+              <div></div>
+            </div>
+          </section>
           <InfoCardContainer
             icon={<Image alt="icon" src={building} className="w-5 h-5" />}
             labelText="رزرو خونه برای :"
