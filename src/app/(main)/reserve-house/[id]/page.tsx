@@ -25,11 +25,14 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { FiCopy } from "react-icons/fi";
+
 import AboutHouseContainer from "@/src/components/reserveHouse/aboutHouseContainer";
 import HouseItemsComponent from "@/src/components/reserveHouse/houseItemsComponent";
 import Input from "@/src/components/common/input/Input";
-import line from "@/src/assets/images/divideLine.svg"
+import line from "@/src/assets/images/divideLine.svg";
 import StarRatingContainer from "@/src/components/reserveHouse/starRatingcontainer";
+import CommentSection from "@/src/components/reserveHouse/commentSection";
+import SimilarHouses from "@/src/components/reserveHouse/SimilarHouses";
 const SingleReserveHousePage = () => {
   const cities = [
     { value: "nyc", label: "New York" },
@@ -135,7 +138,7 @@ const SingleReserveHousePage = () => {
             {/* <HouseItemsComponent/> */}
             <div className="flex flex-col gap-8 justify-center">
               <div className="flex justify-end gap-10">
-              <StarRatingContainer/>
+                <StarRatingContainer />
 
                 <Input
                   labelText="نام و نام خانوادگی"
@@ -145,7 +148,6 @@ const SingleReserveHousePage = () => {
                   tagBgStyle={{ background: "var(--color-dark-900)" }}
                   textColor="text-white"
                   parentWidth="w-[35%]"
-
                 />
                 <Input
                   labelText="ایمیل شما"
@@ -155,12 +157,10 @@ const SingleReserveHousePage = () => {
                   tagBgStyle={{ background: "var(--color-dark-900)" }}
                   textColor="text-white"
                   parentWidth="w-[35%]"
-
                 />
-
               </div>
               <div className="flex-center gap-8 w-full">
-              <LoginButton
+                <LoginButton
                   buttonText="ارسال"
                   loadingText="در حال ارسال پیام"
                   type="submit"
@@ -177,12 +177,12 @@ const SingleReserveHousePage = () => {
                   textColor="text-white"
                   parentWidth="w-full"
                 />
-               
               </div>
-              <Image alt="icon" src={line}/>
-              <div></div>
+              <Image alt="icon" src={line} />
+              <CommentSection />
             </div>
           </section>
+
           <InfoCardContainer
             icon={<Image alt="icon" src={building} className="w-5 h-5" />}
             labelText="رزرو خونه برای :"
@@ -242,6 +242,7 @@ const SingleReserveHousePage = () => {
             />
           </InfoCardContainer>
         </section>
+        <SimilarHouses/>
       </div>
     </div>
   );
