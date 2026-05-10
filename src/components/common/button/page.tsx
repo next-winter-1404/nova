@@ -57,8 +57,7 @@ const Button: FC<IButtonProps> = ({
     )
   return (
     <button
-        className={finalClasses}
-        style={buttonStyle}
+        style={finalButtonStyles}
         onClick={onClick}
         disabled ={disabled}
     >
