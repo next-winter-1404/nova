@@ -5,8 +5,6 @@ import {
 import Button from "@/src/components/common/button/page";
 import HouseMainInformation from "@/src/components/common/houseMainInformation";
 import ToolTip from "@/src/components/common/tooltip";
-import { FaStar } from "react-icons/fa";
-import { FiCopy } from "react-icons/fi";
 import share from "@/src/assets/icons/share-square.svg";
 import Image from "next/image";
 import test from "@/src/assets/images/HeroSectionBackground.jpg";
@@ -19,6 +17,15 @@ import LoginButton from "@/src/components/login/button/LoginButton";
 import DatePickerComponent from "@/src/components/common/datePicker";
 import PassengerCounter from "@/src/components/reserveHouse/counter";
 import OldPriceComponent from "@/src/components/common/productCard/OldPrice";
+import SelectedTab from "@/src/components/common/propertyTab";
+import {
+  FaRegCommentDots,
+  FaRegSave,
+  FaRegFileAlt,
+  FaStar,
+} from "react-icons/fa";
+import { FiCopy } from "react-icons/fi";
+
 const SingleReserveHousePage = () => {
   const cities = [
     { value: "nyc", label: "New York" },
@@ -40,9 +47,22 @@ const SingleReserveHousePage = () => {
     },
   ];
   const tabs: ITab[] = [
-    { value: "about", label: "درباره ملک" },
-    { value: "facilities", label: " امکانات اقامتگاه" },
-    { value: "comment", label: "نظرات کاربران" },
+    {
+      value: "comment",
+      label: "نظرات کاربران",
+      icon: <FaRegCommentDots className="w-4 h-4" />,
+    },
+    {
+      value: "facilities",
+      label: " امکانات اقامتگاه",
+      icon: <FaRegSave className="w-4 h-4" />,
+    },
+
+    {
+      value: "about",
+      label: "درباره ملک",
+      icon: <FaRegFileAlt className="w-4 h-4" />,
+    },
   ];
 
   return (
@@ -104,17 +124,8 @@ const SingleReserveHousePage = () => {
             className="md:w-full  lg:max-w-[1100px] lg:h-[420px] rounded-[40px]"
           />
         </div>
-        <section className="flex flex-row-reverse justify-between border w-full items-start">
-          <div className="w-[999px] bg-dark-700 rounded-2xl h-[52px] mt-4 flex justify-end gap-6 p-1">
-            {tabs.map((tab) => (
-              <div
-                key={tab.label}
-                className="min-w-[140px] h-full bg-primary-accent-green rounded-xl flex-center "
-              >
-                <button className="w-full cursor-pointer">{tab.label}</button>
-              </div>
-            ))}
-          </div>
+        <section className="flex flex-row-reverse justify-between  w-full items-start">
+          <SelectedTab options={tabs} twClassname="w-[1000px]" />
           <InfoCardContainer
             icon={<Image alt="icon" src={building} className="w-5 h-5" />}
             labelText="رزرو خونه برای :"
