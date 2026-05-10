@@ -12,4 +12,6 @@ export interface IButtonProps{
     textStyle ? : React.CSSProperties;
     className? : string;
     borderRadius ? : string;
+    buttonStyle ? : React.CSSProperties;
+    
 }
