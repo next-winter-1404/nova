@@ -1,5 +1,5 @@
 export interface IButtonProps{
-    text: string | number;
+    text?: string | number;
     backgroundColor?: string;
     color? :string,
     icon? : React.ReactNode;
@@ -10,8 +10,6 @@ export interface IButtonProps{
     width ? : string;
     height ? : string;
     textStyle ? : React.CSSProperties;
-    className? : string;
-    borderRadius ? : string;
     buttonStyle ? : React.CSSProperties;
-    
+    className ? : string
 }
