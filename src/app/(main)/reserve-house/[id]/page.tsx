@@ -14,11 +14,12 @@ import { ITab } from "@/src/core/types/ITab";
 import building from "@/src/assets/icons/house-building.svg";
 import InfoCardContainer from "@/src/components/common/infoCardContainer";
 import DaysCounter from "@/src/components/reserveHouse/daysCounter";
-import dolor from "@/src/assets/icons/dollor.svg"
+import dolor from "@/src/assets/icons/dollor.svg";
 import LoginButton from "@/src/components/login/button/LoginButton";
+import DatePickerComponent from "@/src/components/common/datePicker";
+import PassengerCounter from "@/src/components/reserveHouse/counter";
+import OldPriceComponent from "@/src/components/common/productCard/OldPrice";
 const SingleReserveHousePage = () => {
-
-
   const cities = [
     { value: "nyc", label: "New York" },
     { value: "la", label: "Los Angeles" },
@@ -106,36 +107,71 @@ const SingleReserveHousePage = () => {
         <section className="flex flex-row-reverse justify-between border w-full items-start">
           <div className="w-[999px] bg-dark-700 rounded-2xl h-[52px] mt-4 flex justify-end gap-6 p-1">
             {tabs.map((tab) => (
-              <div key={tab.label} className="min-w-[140px] h-full bg-primary-accent-green rounded-xl flex-center ">
+              <div
+                key={tab.label}
+                className="min-w-[140px] h-full bg-primary-accent-green rounded-xl flex-center "
+              >
                 <button className="w-full cursor-pointer">{tab.label}</button>
               </div>
             ))}
           </div>
-          <InfoCardContainer>
-            <div className="w-[233px] h-[50px] bg-gray-550 rounded-b-[32px] flex-center gap-2 text-semibold-20">
-              <span>:رزرو خونه برای</span>
-              <Image alt="icon" src={building} className="w-5 h-5" />
+          <InfoCardContainer
+            icon={<Image alt="icon" src={building} className="w-5 h-5" />}
+            labelText="رزرو خونه برای :"
+          >
+            <div className="relative flex flex-col w-full gap-6">
+              <DatePickerComponent />
+              <DatePickerComponent />
+              <DaysCounter />
             </div>
-            <DaysCounter/>
+            <PassengerCounter />
             <div className="border-t-2 border-b-2 border-gray-550  w-[92%] flex flex-col items-center gap-6 pb-6">
-              <div className="w-[178px] h-9 rounded-b-3xl bg-gray-550 flex-center gap-2 text-16-semibold text-white" dir="rtl">
-                <Image alt="icon" src={dolor} className="w-4 h-4"/>
+              <div
+                className="w-[178px] h-9 rounded-b-3xl bg-gray-550 flex-center gap-2 text-16-semibold text-white"
+                dir="rtl"
+              >
+                <Image alt="icon" src={dolor} className="w-4 h-4" />
                 <span>قیمت رزرو :</span>
               </div>
               <div className="flex justify-between w-full" dir="rtl">
-                <span className="text-gray-300 text-16-bold">★ 5 شب * 17000 </span>
+                <span className="text-gray-300 text-16-bold">
+                  ★ 5 شب * 17000{" "}
+                </span>
                 <span className="text-16-bold text-white"> 18.000.000 ت</span>
               </div>
               <div className="flex justify-between w-full" dir="rtl">
-                <span className="text-gray-300 text-16-bold">★ 5 شب * 17000 </span>
+                <span className="text-gray-300 text-16-bold">
+                  ★ 5 شب * 17000{" "}
+                </span>
                 <span className="text-16-bold text-white"> 18.000.000 ت</span>
               </div>
               <div className="flex justify-between w-full" dir="rtl">
-                <span className="text-gray-300 text-16-bold">★ 5 شب * 17000 </span>
+                <span className="text-gray-300 text-16-bold">
+                  ★ 5 شب * 17000{" "}
+                </span>
                 <span className="text-16-bold text-white"> 18.000.000 ت</span>
               </div>
             </div>
-              <LoginButton buttonText="همین حالا رزرو کن" loadingText="در حال رزرو" type="submit" width="w-full mt-6"/>
+            <div className="w-full px-2 flex flex-col justify-start gap-4">
+              <div className="flex gap-4 w-full">
+                <Button
+                  text={"15%"}
+                  buttonStyle={{ height: 25, width: 40, borderRadius: 8 }}
+                />
+                <OldPriceComponent oldPrice="25.000.000" />
+              </div>
+
+              <div className="text-primary-accent-green font-semibold text-[24px] flex gap-2">
+                <i>تومان</i>
+                <span>15.000.000</span>
+              </div>
+            </div>
+            <LoginButton
+              buttonText="همین حالا رزرو کن"
+              loadingText="در حال رزرو"
+              type="submit"
+              width="w-full"
+            />
           </InfoCardContainer>
         </section>
       </div>

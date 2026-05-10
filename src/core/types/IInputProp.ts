@@ -16,6 +16,7 @@ export interface IInputProp {
     textColor? : string
     labelTextSize?: string
     textSize? : string
-    defaultValue?:string
+    defaultValue?:string,
+    dir?:string,
   }
  
