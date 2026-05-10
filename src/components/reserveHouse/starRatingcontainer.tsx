@@ -9,11 +9,11 @@ const StarRatingContainer = () => {
       setUserRating(rate);
     };
   return (
-    <div>
+    <div className=' flex-center'>
       <StarRate 
         initialRateNumber={userRating}
         onRate={handleRating}
-        size={24}
+        size={35}
       />
       
 

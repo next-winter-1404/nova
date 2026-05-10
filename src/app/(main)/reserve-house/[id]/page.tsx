@@ -133,9 +133,10 @@ const SingleReserveHousePage = () => {
             <SelectedTab options={tabs} twClassname="w-full" />
             {/* <AboutHouseContainer/> */}
             {/* <HouseItemsComponent/> */}
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-8 justify-center">
+              <div className="flex justify-end gap-10">
               <StarRatingContainer/>
-              <div className="flex">
+
                 <Input
                   labelText="نام و نام خانوادگی"
                   InputHeight="h-[50px]"
@@ -143,6 +144,8 @@ const SingleReserveHousePage = () => {
                   labelTextSize="text-white"
                   tagBgStyle={{ background: "var(--color-dark-900)" }}
                   textColor="text-white"
+                  parentWidth="w-[35%]"
+
                 />
                 <Input
                   labelText="ایمیل شما"
@@ -151,7 +154,10 @@ const SingleReserveHousePage = () => {
                   labelTextSize="text-white"
                   tagBgStyle={{ background: "var(--color-dark-900)" }}
                   textColor="text-white"
+                  parentWidth="w-[35%]"
+
                 />
+
               </div>
               <div className="flex-center gap-8 w-full">
               <LoginButton
