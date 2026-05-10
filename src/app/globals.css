@@ -10,6 +10,7 @@
 
   /* dark colors */
   --color-dark-900: #232323;
+  --color-dark-900-transparent-64: #232323A3;
   --color-dark-860: #2e2e2e;
   --color-dark-850: #2d2d2d;
   --color-dark-800: #363636;
@@ -60,6 +61,7 @@
   --inset-shadow-000-4: inset -1 -1px 6px rgb(0 0 0 / 0.04);
   --shadow-3xl: 0 8px 6px rgb(54 54 54 / 0.2); 
   --shadow-000-16: 0 12px 24px rgb(0 0 0 / 0.16); 
+  --shadow-000-8: 0 12px 32px rgb(0 0 0 / 0.08); 
   --shadow-primary-accent-green-transparent-20: 0 4px 12px rgb(0 0 0 / 0.16);
   --shadow-curve-round: 5px 4px 0;
   --shadow-curve-sharp: 10px 10px 0;
