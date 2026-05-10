@@ -11,7 +11,7 @@ const CardContainer: FC<CardContainerProps> = ({
   parentExtraStyle, //inline css ==> {{}},
   labelExtraStyle, //inline css ==> {{}},
   mainExtraStyle, //inline css ==> {{}},
-  curveColor ,//inline css ==> {{}}
+  curveColor ,//just write your color
   groupHoverStyle
 }) => {
   return (

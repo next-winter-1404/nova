@@ -1,5 +1,6 @@
 "use server";
 
+import { setServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import instance from "@/src/utils/sevices/interseptor";
 import { z } from "zod";
 
@@ -15,7 +16,7 @@ export interface SendEmailResult {
     verificationCode: string;
     email?: string;
   };
-};
+}
 
 export const sendEmail = async (
   prevState: SendEmailResult,
@@ -35,8 +36,22 @@ export const sendEmail = async (
     const res = await instance.post("/api/auth/register", {
       email: validationResult.data.email,
     });
-    const dataResponse = res.data || res;
 
+    const dataResponse = res.data || res;
+    if (dataResponse.tempUserId && dataResponse.verificationCode) {
+      await setServerSideCookie(
+        "tempUserId",
+        dataResponse.tempUserId.toString()
+      );
+      await setServerSideCookie(
+        "verificationCode",
+        dataResponse.verificationCode
+      );
+      await setServerSideCookie(
+        "verificationEmail",
+        validationResult.data.email
+      );
+    }
     return {
       success: true,
       message: "کد تایید ارسال شد",
@@ -47,11 +62,11 @@ export const sendEmail = async (
       },
     };
   } catch (error: any) {
-    console.log("   - Full error:", error);
-    console.log("   - errorResponse:", error.response);
+    console.error("Error message:", error.message);
+    console.error("Error response data:", error.response?.data);
     return {
       success: false,
-      message: error.response|| "خطا در ارسال کد",
+      message: error.response || "خطا در ارسال کد",
     };
   }
 };

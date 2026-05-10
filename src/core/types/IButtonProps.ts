@@ -10,6 +10,7 @@ export interface IButtonProps{
     width ? : string;
     height ? : string;
     textStyle ? : React.CSSProperties;
+    borderRadius ? : string;
     buttonStyle ? : React.CSSProperties;
     className ? : string
 }
@@ -19,5 +20,7 @@ export interface ILoginButtonProp{
     loadingText?:string
     width?:string
     buttonText?:string
+    height?:string
+    radius?:string
 
 }

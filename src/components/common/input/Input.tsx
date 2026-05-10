@@ -10,19 +10,28 @@ const Input: FC<IInputProp> = ({
   placeHolder,
   name,
   value,
+  defaultValue,
   onChange,
   tagBgStyle,
   borderColor,
   textColor,
   labelTextSize,
   textSize,
+<<<<<<< HEAD
   labelTextColor,
+=======
+  dir="ltr"
+>>>>>>> 93c8eba5762a64b2b37e39f88eae31c51a9d851d
 }) => {
   return (
-    <div className={`${parentWidth} relative`}>
+    <div className={`${parentWidth} relative`} dir={dir}>
       <label
         htmlFor={htmlFor}
+<<<<<<< HEAD
         className={`${labelTextSize} ${labelTextColor} absolute -top-3 right-5 h-5 p-2 flex-center `}
+=======
+        className={`${labelTextSize} absolute -top-3 right-5 h-5 p-2 flex-center whitespace-nowrap`}
+>>>>>>> 93c8eba5762a64b2b37e39f88eae31c51a9d851d
         style={tagBgStyle}
       >
         {labelText}
@@ -36,7 +45,8 @@ const Input: FC<IInputProp> = ({
         onChange={onChange}
         className={` w-full border focus:outline-none ${borderColor} ${textSize} rounded-2xl  ${textColor} px-6 ${InputHeight}`}
         placeholder={placeHolder}
-      />
+        defaultValue={defaultValue}
+    />
     </div>
   );
 };

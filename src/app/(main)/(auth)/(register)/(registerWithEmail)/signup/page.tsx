@@ -1,7 +1,7 @@
 "use client";
 import Input from "@/src/components/common/input/Input";
 import LoginButton from "@/src/components/login/button/LoginButton";
-import LoginWrapper from "@/src/components/login/wrapper/page";
+import LoginWrapper from "@/src/components/login/wrapper";
 import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -36,6 +36,7 @@ const SignUpPage = () => {
       dir="rtl"
     >
       <LoginWrapper
+      description="جهت شروع فرایند ساخت اکانت ایمیل خود را وارد کنید"
         ButtonSection={
           <LoginButton
             loadingText="در حال ارسال کد"

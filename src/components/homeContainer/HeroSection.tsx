@@ -18,12 +18,12 @@ import Button from "../common/button/page";
 const HeroSection = () => {
 
   return (
-    <div style={{ background: `url(${HeroBackground.src})`, backgroundRepeat:"no-repeat", backgroundSize:"100%" }} className="relative h-screen w-full bg-cover bg-center flex-center">
+    <div style={{ background: `url(${HeroBackground.src})`, backgroundRepeat:"no-repeat", backgroundSize:"100%" }} className="relative min-h-screen w-full bg-cover bg-center flex-center">
      <div className="w-[90%] absolute z-5 ">
         <Container>
-          <div className="md:w-full w-[98.5%] flex lg:flex-row flex-col-reverse items-end lg:items-center justify-between gap-4 relative sm:top-15 -top-8">
-            <div className="relative lg:top-2.5 flex flex-col md:max-w-87.5 max-w-62">
-              <span className="absolute sm:-right-6 -right-3 sm:top-0.5 top-0.5 text-white-pure sm:text-[20px] text-[12px]">
+          <div className="md:w-full flex lg:flex-row flex-col-reverse items-end lg:items-center justify-between gap-4 relative sm:top-15 -top-8">
+            <div className="relative lg:top-2.5 hidden lg:flex flex-col md:max-w-87.5 max-w-62">
+              <span className=" absolute sm:-right-6 -right-3 sm:top-0.5 top-0.5 text-white-pure sm:text-[20px] text-[12px]">
                 ✦                    
               </span>
               <div className="flex-col-center sm:gap-7 gap-4">
@@ -36,7 +36,7 @@ const HeroSection = () => {
                     <Divider color="#fff" width="121" height="2"/>
                   </span>
                 </span>
-                <span className="flex items-center justify-end gap-6">
+                <span className="hidden md:flex items-center justify-end gap-6">
                   <span className="flex-center p-8-16 text-16-medium whitespace-nowrap gap-2 rounded-xl  text-black  bg-white ">
                     <BsChevronLeft className="w-2 h-2"/>
                     <Link href="#">رهن و اجاره ملک</Link>
@@ -59,7 +59,7 @@ const HeroSection = () => {
 
               </div>
             </div>
-            <div className="relative max-w-[309px] text-right flex flex-col justify-end items-end gap-1">
+            <div className="relative max-w-[309px] text-right hidden lg:flex flex-col justify-end items-end gap-1">
               <AvatarGroup/>
               <span>
                 <p className="sm:text-[26px] text-[20px] text-white">بیش از 7000+</p>
@@ -76,11 +76,11 @@ const HeroSection = () => {
      </div>
 
 
-     <div className="absolute top-18 z-1 w-[90%]"><Image src={DeltaTextGradient} alt="pic"/></div>
+     <div className="absolute top-18 mx-auto z-1 w-[90%]"><Image src={DeltaTextGradient} alt="pic"/></div>
      <div className="flex sm:justify-center justify-end z-1">
-      <Image src={building} alt="pic" width={440}/>
+      <Image src={building} alt="pic" className="w-2/3 md:w-1/2 lg:w-[440px]"/>
      </div>
-     <div className="absolute bottom-0 z-2 h-80 w-full bg-gradient-to-t from-[#232323] to-[#23232300]"></div>
+     <div className="absolute md:bottom-0 z-2 h-80 w-full bg-gradient-to-t from-[#232323] to-[#23232300]"></div>
     
     </div>
 

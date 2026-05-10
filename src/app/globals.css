@@ -17,6 +17,7 @@
   --color-dark-700: #393939;
   --color-dark-700-transparent-81: rgb(57 57 57 / 0.81);
   --color-dark-650: #404040;
+  --color-dark-620: #4E4E4E;
   --color-dark-600: #444444;
   --color-unSelectedButton: #303030;
   --color-selectedButtonText: #363636;
@@ -26,9 +27,13 @@
   --color-gray-450: #9a9a9a;
   --color-gray-400: #94979c;
   --color-gray-300: #aaaaaa;
+<<<<<<< HEAD
   --color-gray-200: #565656;
   --color-gray-250: #4D4D4D;
   --color-gray-150: #CCCCCC;
+=======
+  --color-gray-550: #565656;
+>>>>>>> 93c8eba5762a64b2b37e39f88eae31c51a9d851d
 
   /* White colors */
   --color-white-pure: #ffffff;
@@ -104,12 +109,16 @@
 }
 
 .text-semibold-28 {
-  @apply font-semibold sm:text-[28px] text-[18px];
+  @apply font-semibold sm:text-[20px] text-[18px];
 
 }
 
 .text-semibold-24 {
   @apply font-semibold  sm:text-[24px] text-[16px] text-white-pure;
+
+}
+.text-semibold-20 {
+  @apply font-semibold  sm:text-[20px] text-[16px] text-white-pure;
 
 }
 
@@ -123,6 +132,9 @@
   @apply sm:text-[20px] text-[12px] text-white-pure;
 }
 
+.text-16-bold {
+  @apply font-bold text-[16px] whitespace-nowrap;
+}
 .text-16-semibold {
   @apply font-semibold text-[16px] whitespace-nowrap;
 }
@@ -137,17 +149,12 @@
 
 body {
   background: #232323;
-  /* color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif; */
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
   padding: 0;
   margin: 0;
   overflow-x: hidden;
 }
-
-* {
-  box-sizing: border-box;
-}
-
 
 /* utility classes */
 @utility flex-center {

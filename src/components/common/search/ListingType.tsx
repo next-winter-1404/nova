@@ -6,27 +6,35 @@ import Image from "next/image";
 import bookingIcon from "@/public/icons/booking.svg";
 import houseBuildingIcon from "@/public/icons/house-building.svg";
 import moneyCheckEdit from "@/public/icons/money-check-edit.svg";
+import { useRouter, useSearchParams } from 'next/navigation';
+
 
 const types = [
-  { labelName: "رهن و اجاره", iconSrc: moneyCheckEdit, current: false },
-  { labelName: "خرید و فروش", iconSrc: houseBuildingIcon, current: false },
-  { labelName: "رزرو ملک", iconSrc: bookingIcon, current: true },
+  { labelName: "رهن و اجاره", iconSrc: moneyCheckEdit, current: false, paramValue: "rent" },
+  { labelName: "خرید و فروش", iconSrc: houseBuildingIcon, current: false, paramValue: "saleAndBuy" },
+  { labelName: "رزرو ملک", iconSrc: bookingIcon, current: true, paramValue: "booking" },
 ];
 
 const ListingType = () => {
   const initialActive = types.find((t) => t.current)?.labelName || null;
-  const [selectedLabel, setSelectedLabel] = useState<string | null>(initialActive);
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const [selectedLabel, setSelectedLabel] = useState<string | "">(searchParams.get("stateType") || "" );
 
   const handleSelect = (labelName: string) => {
-    setSelectedLabel(labelName);
-  };
+      setSelectedLabel(labelName);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("stateType", selectedLabel)
+      console.log("params:", params)
+      router.push(`?${params.toString()}`)
+  }
 
   return (
     <div className="relative flex items-center justify-end gap-3 whitespace-nowrap">
-      {types.map((listType) => {
-        const isActive = listType.labelName === selectedLabel;
+      {types.map((type) => {
+        const isActive = type.labelName === selectedLabel;
         return (
-          <div className="flex items-center gap-3" key={listType.labelName}>
+          <div className="flex items-center gap-3" key={type.labelName}>
             
             <motion.div
               animate={{
@@ -38,7 +46,7 @@ const ListingType = () => {
 
             <motion.div
               className="flex-center gap-2 cursor-pointer"
-              onClick={() => handleSelect(listType.labelName)}
+              onClick={() => handleSelect(type.paramValue)}
               whileTap={{ scale: 0.96 }}
               transition={{ duration: 0.1 }}
             >
@@ -50,11 +58,11 @@ const ListingType = () => {
                 }}
                 transition={{ duration: 0.2 }}
               >
-                {listType.labelName}
+                {type.labelName}
               </motion.span>
 
               <span>
-                <Image src={listType.iconSrc} alt="icon" width={16} height={16} />
+                <Image src={type.iconSrc} alt="icon" width={16} height={16} />
               </span>
             </motion.div>
           </div>
