@@ -10,14 +10,14 @@ import Image from "next/image";
 import test from "@/src/assets/images/HeroSectionBackground.jpg";
 import { ITab } from "@/src/core/types/ITab";
 import building from "@/src/assets/icons/house-building.svg";
-import InfoCardContainer from "@/src/components/common/infoCardContainer";
+import InfoCardContainer from "@/src/components/reserveHouse/InfoCardContainer";
 import DaysCounter from "@/src/components/reserveHouse/daysCounter";
 import dolor from "@/src/assets/icons/dollor.svg";
 import LoginButton from "@/src/components/login/button/LoginButton";
 import DatePickerComponent from "@/src/components/common/datePicker";
 import PassengerCounter from "@/src/components/reserveHouse/counter";
 import OldPriceComponent from "@/src/components/common/productCard/OldPrice";
-import SelectedTab from "@/src/components/common/propertyTab";
+import SelectedTab from "@/src/components/reserveHouse/SelectedTab";
 import {
   FaRegCommentDots,
   FaRegSave,
@@ -32,7 +32,7 @@ import Input from "@/src/components/common/input/Input";
 import line from "@/src/assets/images/divideLine.svg";
 import StarRatingContainer from "@/src/components/reserveHouse/starRatingcontainer";
 import CommentSection from "@/src/components/reserveHouse/commentSection";
-import SimilarHouses from "@/src/components/reserveHouse/SimilarHouses";
+import SimilarHouses from "@/src/components/reserveHouse/SimilarHousesNavbar";
 const SingleReserveHousePage = () => {
   const cities = [
     { value: "nyc", label: "New York" },
