@@ -6,6 +6,7 @@ export interface IInputProp {
     labelText: string;
     type?: string;
     id?: string;
+    
     InputHeight?: string;
     placeHolder?: string;
     name?: string;
@@ -16,11 +17,8 @@ export interface IInputProp {
     textColor? : string
     labelTextSize?: string
     textSize? : string
-<<<<<<< HEAD
     labelTextColor? : string
-=======
     defaultValue?:string,
     dir?:string,
->>>>>>> 93c8eba5762a64b2b37e39f88eae31c51a9d851d
   }
  
