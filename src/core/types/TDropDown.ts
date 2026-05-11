@@ -7,4 +7,6 @@ export interface IOption {
     paramKey:string,
     placeholder:string,
     labelText?:string,
+    triggerClassName?:string,
+    tagBg?:string,
   }

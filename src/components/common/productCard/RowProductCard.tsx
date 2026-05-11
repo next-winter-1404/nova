@@ -1,7 +1,5 @@
-import React, { FC } from "react";
-import CardContainer from "../card/page";
+import { FC } from "react";
 import Image from "next/image";
-import Star from "@/src/assets/icons/Star.svg";
 import { FaStar } from "react-icons/fa";
 import Location from "@/src/assets/icons/Location.svg";
 import bed from "@/src/assets/icons/bed.svg";
@@ -12,14 +10,24 @@ import leftArrow from "@/src/assets/icons/leftArrow.svg";
 import Button from "../button/page";
 import { IHouse } from "@/src/core/types/IHouse";
 
-const RowProductCard: FC<IHouse> = ({ price, rate, address, title,bathrooms,rooms,parking }) => {
+const RowProductCard: FC<IHouse> = ({
+  price,
+  rate,
+  address,
+  title,
+  bathrooms,
+  rooms,
+  parking,
+}) => {
   return (
     <div className="flex">
       <div className="flex flex-col justify-end flex-1 gap-4 whitespace-nowrap">
-        <span className="flex-center gap-2 px-3 py-1.5 whitespace-nowrap text-semibold-28 text-primary-accent-green">
-          <i>ت</i>
-          <span>{price}</span>
-        </span>
+        {price && (
+          <span className="flex-center gap-2 px-3 py-1.5 whitespace-nowrap text-semibold-28 text-primary-accent-green">
+            <i>ت</i>
+            <span>{price}</span>
+          </span>
+        )}
         <Button
           text={"مشاهده ملک"}
           backgroundColor="8cff45"
@@ -30,7 +38,7 @@ const RowProductCard: FC<IHouse> = ({ price, rate, address, title,bathrooms,room
             color: "var(--color-primary-accent-green)",
             fontSize: "16px",
             fontWeight: "600",
-            border: "1px solid var(--color-primary-accent-green)",
+            border: "1px solid var(--color-primary-accent-green) ",
             padding: "12px 16px",
           }}
         />
@@ -50,12 +58,12 @@ const RowProductCard: FC<IHouse> = ({ price, rate, address, title,bathrooms,room
             </span>
           </div>
           <span className="flex justify-end text-20-medium whitespace-nowrap">
-            {title}
+            {title || "عنوانی وجود ندارد"}
           </span>
           <div className="flex flex-col items-end gap-5">
             <div className="flex justify-start gap-1.5">
               <h2 className="text-[16px] text-gray-300 text-right  whitespace-nowrap">
-                {address}
+                {address || "ادرسی وجود ندارد"}
               </h2>
               <Image src={Location} alt="Location" className="w-4 h-4" />
             </div>
@@ -64,20 +72,18 @@ const RowProductCard: FC<IHouse> = ({ price, rate, address, title,bathrooms,room
                 حیاط <Image src={houseTree} alt="houseTree" />
               </div>
               <div className="border-l border-gray-300 w-[85px] text-[13px] justify-center flex gap-2.5 ">
-                <span>{bathrooms}</span>
+                <span>{bathrooms || "--"}</span>
                 <span>حمام</span> <Image src={bathroom} alt="bathroom" />
               </div>
               <div className="border-l border-gray-300 w-[91px] text-[13px] justify-center flex gap-2.5">
-             <span>{parking}</span>
-             <span>پارکینگ</span>
-             <Image src={car} alt="car" />
+                <span>{parking || "--"}</span>
+                <span>پارکینگ</span>
+                <Image src={car} alt="car" />
               </div>
               <div className="border-l border-gray-300 w-[77px] text-[13px] justify-end flex gap-2.5">
-               <span>
-               {rooms}
-               </span>
-               <span>خوابه</span>
-              <Image src={bed} alt="bed" />
+                <span>{rooms || "--"}</span>
+                <span>خوابه</span>
+                <Image src={bed} alt="bed" />
               </div>
             </div>
           </div>

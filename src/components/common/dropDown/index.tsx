@@ -8,7 +8,9 @@ const SimpleDropdown: FC<IDropDownProps> = ({
   options,
   paramKey,
   placeholder,
-  labelText
+  labelText,
+  triggerClassName="w-full",
+  tagBg="bg-dark-700"
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -33,9 +35,9 @@ const SimpleDropdown: FC<IDropDownProps> = ({
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild className="border">
-        <button className="IconButton dropMenu p-5 w-full relative" aria-label="Customise options">
+        <button className={`IconButton dropMenu p-5  relative ${triggerClassName}`}  aria-label="Customise options">
           <span>{showSelected()}</span>
-          <span className="bg-dark-700 absolute -top-3.5 right-3.5">{labelText}</span>
+          <span className={`absolute -top-3 p-0.5 px-2 right-3.5 ${tagBg}`}>:{labelText}</span>
 
         </button>
       </DropdownMenu.Trigger>
