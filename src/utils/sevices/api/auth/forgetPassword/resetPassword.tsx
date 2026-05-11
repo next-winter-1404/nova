@@ -4,8 +4,12 @@ import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/ser
 import instance from "@/src/utils/sevices/interseptor";
 import {  z } from "zod";
 
-const VerificationSchema = z.object({
-  code: z.string().min(1,"پسوورد صحیح نیست"),
+const ResetPasswordSchema = z.object({
+  password: z.string().min(6, "رمز عبور باید حداقل ۶ کاراکتر باشد"),
+  confirmPassword: z.string().min(6, "تکرار رمز عبور الزامی است"),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "رمز عبور با تکرار آن مطابقت ندارد",
+  path: ["confirmPassword"],
 });
 
 export interface VerifyResult {
@@ -14,22 +18,24 @@ export interface VerifyResult {
   data?: any;
 }
 
-export const forgetPasswordVerifyCode = async (prevState: any, formData: FormData) => {
-  const code = formData.get("verificationCode");
-  const validation = VerificationSchema.safeParse({ code });
+export const forgetPasswordResetCode = async (prevState: any, formData: FormData) => {
+  const password  = formData.get("password");
+  const confirmPassword = formData.get("confirmPassword");
+  const validation = ResetPasswordSchema.safeParse({ password, confirmPassword });
   if (!validation.success) {
     return {
       success: false,
-      message: "پسوورد صحیح نیست",
+      message: "رمز عبور با تکرار آن مطابقت ندارد",
     };
   }
 
   try {
     const verificationEmail = await getServerSideCookie("verificationEmail");
-    console.log("----verificationEmail from cookie:", verificationEmail);
-    const res = await instance.post("/api/auth/forgot-password/verify", {
-      email:verificationEmail,
-      code: validation.data.code.toString(),
+    const resetCode = await getServerSideCookie("resetCode");
+    const res = await instance.post("/api/auth/forgot-password/reset", {
+        email:verificationEmail,
+      code:resetCode,
+      newPassword: validation.data.password,
     });
 
     const dataResponse = res.data || res;
