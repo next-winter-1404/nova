@@ -16,11 +16,11 @@ const AmusementCard = () => {
                     cavity='sharp'
                     labelContent={<div className='h-[35px]'></div>}
                     labelSize='lg'
-                    mainContent={<div className='flex gap-12 flex-col md:w-[1376px] w-[390px] md:h-[535px]'>
-                        <div className='md:w-full w-[389px] flex gap-6 flex-col'>
-                            <div className='flex justify-end gap-4'>
-                                <Image src={LeftTriangle} alt='LeftTriangle'/>
+                    mainContent={<div className='flex gap-12 flex-col items-center md:w-full w-[390px] md:h-[545px]'>
+                        <div className='md:w-[1400px] w-[389px] flex gap-6 flex-col ' >
+                            <div className='flex gap-4' dir='rtl'>
                                 <h2 className='md:text-[16px] text-[14px] text-primary-accent-green'>جدید ترین نقاط</h2>
+                                <Image src={LeftTriangle} alt='LeftTriangle'/>
                             </div>
                             <div className='flex flex-row items-center justify-between'>
                                 <Button 
@@ -30,7 +30,7 @@ const AmusementCard = () => {
                                 <span className='md:text-[32px] text-[24px] text-white-pure'> جدید ترین مناقط تفریحی</span>
                             </div>
                         </div>
-                        <div className ='md:w-full w-[390px] flex h-[295px] items-center justify-between overflow-hidden'>
+                        <div className ='md:w-full w-[390px] flex items-center justify-between overflow-hidden'>
                             <Swiper
                                 modules={[Navigation, Autoplay]}
                                 spaceBetween={20}
@@ -41,7 +41,7 @@ const AmusementCard = () => {
                                 breakpoints={{
                                 640 : {slidesPerView:2},
                                 1024 : {slidesPerView:4}
-                                }}
+                                }}                            
                                 className='w-full h-full'
                             >        
                                 <SwiperSlide>
@@ -62,9 +62,9 @@ const AmusementCard = () => {
                             </Swiper>
                         </div>
                     </div>}
-                mainExtraStyle={{background:"#232323"}}
-                    labelBackground='bg-[#232323]'     
-                    curveColor='#232323'           
+                    mainExtraStyle='bg-dark-900'
+                    labelBackground='bg-dark-900'     
+                    curveColor='dark-900'           
                 />
   )
 }
