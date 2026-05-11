@@ -9,25 +9,11 @@ import SimpleDropdown from "@/src/components/common/dropDown";
 import { 
    getHouses } from "@/src/utils/sevices/api/houses/getHouses";
 import { IHouse } from "@/src/core/types/IHouse";
+import BottomNavbarFilter from "@/src/components/reserveHouse/bottomNavbarFilter";
 
 const HouseReservePage = async () => {
-  const housesResult = await getHouses();
-  const houses = housesResult?.houses || [];
-  console.log('houses',houses)
-  const Facilities = [
-    {
-      value: "room",
-      label: "room",
-    },
-    {
-      value: "bath",
-      label: "bath",
-    },
-    {
-      value: "balcony",
-      label: "balcony",
-    },
-  ];
+  const { houses }:any= await getHouses();
+  
   const items: BreadcrumbItem[] = [
     {
       href: "/reserve-house",
@@ -46,38 +32,9 @@ const HouseReservePage = async () => {
           <div className="w-[40%] rounded-[40px] h-[1032px] bg-dark-900"></div>
 
           <div className="w-[60%] flex flex-col gap-6 items-center ">
-            <div className="flex justify-evenly items-center  w-full">
-              <SimpleDropdown
-                options={Facilities}
-                paramKey="facilities"
-                placeholder="امکانات"
-                labelText="امکانات"
-              />
-              <Input
-                labelText=":حداقل قیمت"
-                tagBgStyle={{ background: "var(--color-dark-800)" }}
-                InputHeight="h-[50]"
-                placeHolder="تومان"
-                textColor="text-[#AAAAAA]"
-                textSize="indent-5"
-                borderColor="border-[#DDDDDD]"
-                labelTextSize="text-[#AAAAAA]"
-                type="number"
-              />
-              <Input
-                labelText=":حداکثر قیمت"
-                tagBgStyle={{ background: "var(--color-dark-800)" }}
-                InputHeight="h-[50]"
-                placeHolder="تومان"
-                textColor="text-[#AAAAAA]"
-                textSize="indent-5"
-                borderColor="border-[#DDDDDD]"
-                labelTextSize="text-[#AAAAAA]"
-                type="number"
-              />
-            </div>
+            <BottomNavbarFilter/>
             <div className="w-[90%] border-2 border-[#4E4E4E]" />
-            <div className="flex flex-col gap-12 p-6 items-center max-h-[911px] overflow-auto border w-[90%]">
+            <div className="flex flex-col gap-12 p-6 items-center max-h-[911px] overflow-auto  w-[90%]">
               {houses.map((house:IHouse) => (
                 <div
                   key={house.id}
