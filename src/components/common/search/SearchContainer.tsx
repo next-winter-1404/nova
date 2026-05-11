@@ -1,12 +1,18 @@
-import SearchWrapper from './SearchWrapper';
-import ListingType from './ListingType';
+"use server"
+import axios from "axios"
+import ListingType from "./ListingType";
+import SearchWrapper from "./SearchWrapper";
+// import { getAllLocation } from '@/src/utils/sevices/api/locations/getAllLocations/getAllLocation';
 
-const SearchContainer = () => {
+
+const SearchContainer = async() => {
+  // const location = await getAllLocation();
+  // console.log(location )
   return (
-    <div className='flex flex-col gap-4 w-[86%] h-30'>
+    <form className='flex flex-col gap-4 w-[86%] h-30'>
       <ListingType />
-      <SearchWrapper />
-    </div>
+          <SearchWrapper />
+    </form>
   )
 }
 

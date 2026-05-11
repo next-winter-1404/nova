@@ -6,4 +6,5 @@ export interface IOption {
     options:IOption[],
     paramKey:string,
     placeholder:string,
+    labelText?:string,
   }

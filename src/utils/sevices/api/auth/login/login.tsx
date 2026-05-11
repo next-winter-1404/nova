@@ -1,8 +1,6 @@
 "use server";
 
 import {
-  deleteServerSideCookie,
-  getServerSideCookie,
   setServerSideCookie,
 } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import instance from "@/src/utils/sevices/interseptor";

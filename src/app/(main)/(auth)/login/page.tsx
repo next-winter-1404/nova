@@ -1,5 +1,5 @@
 "use client"
-import leftArrow from "../../../../assets/icons/leftArrow.svg";
+import leftArrow from "@/src/assets/icons/leftArrow.svg";
 import Image from "next/image";
 import Input from "@/src/components/common/input/Input";
 import LoginWrapper from "@/src/components/login/wrapper";
@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { Login } from "@/src/utils/sevices/api/auth/login/login";
 import toast from "react-hot-toast";
+import Timer from "@/src/utils/hooks/timer";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -17,7 +18,7 @@ const LoginPage = () => {
   });
 
   useEffect(() => {
-   
+    if (!state?.message) return;
     if (state.success) {
       toast.success(state.message);
       router.push("/dashboard");
@@ -29,6 +30,10 @@ const LoginPage = () => {
   return (
     <form action={formAction} className="md:w-1/2 w-full flex flex-col gap-9" dir="rtl">
       <LoginWrapper
+      description="
+      با وارد کردن اطلاعات خود به راحتی وارد پنل خودتون بشید و از پروژه
+      هاتون خبر بگیرید !"
+      headerText="خوش برگشتی!"
       content={
         <div className="flex gap-9">
           <Input
@@ -60,7 +65,7 @@ const LoginPage = () => {
               labelTextSize="text-13-regular"
             />
             <div className="flex gap-3">
-              <span className="text-16-medium md:indent-3 text-white">
+              <span className="text-16-medium md:indent-3 text-white cursor-pointer" onClick={()=>{router.push("/forgetPassword/request");}}>
                 رمز عبور خود را فراموش کردم
               </span>
               <Image src={leftArrow} alt="arrow" />

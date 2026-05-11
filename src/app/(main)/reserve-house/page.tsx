@@ -4,7 +4,7 @@ import DropMenu from "@/src/components/common/dropMenu/DropMenu";
 import TopReserveHouseSection from "@/src/components/reserveHouse/topSection";
 import Input from "@/src/components/common/input/Input";
 import { Breadcrumb, BreadcrumbItem } from "@/src/components/common/breadCrumbs";
-import ProductCard from "@/src/components/common/productCard/ProductCard";
+import RowProductCard from "@/src/components/common/productCard/RowProductCard";
 
 const HouseReservePage = () => {
   
@@ -76,69 +76,40 @@ const HouseReservePage = () => {
           <div className="w-[90%] border-2 border-[#4E4E4E]"/>
           <div className="flex flex-col gap-12 p-6 items-center max-h-[911px] overflow-auto border w-[90%]">
             <div className="flex-col-center bg- gap-6">
-              <ProductCard 
-                mode="row"
-                title="هتل سراوان رانین رشت"
-                buttonText="بررسی و رزرو هتل"
-                location="آدرس : گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظ...."
-                offer="15"
-                oldPrice="25.000.000 "
-                rate="5"
-                price="15.000.000 "
-                stayingLength="6"
-              />
+              <RowProductCard />
+            <div className="w-[100%] border-2 border-[#4E4E4E]"/>
+            </div>
+
+            <div className="flex-col-center bg- gap-6">
+              <RowProductCard />
               <div className="w-[100%] border-2 border-[#4E4E4E]"/>
             </div>
 
             <div className="flex-col-center bg- gap-6">
-              <ProductCard 
-                mode="row"
-                title="هتل سراوان رانین رشت"
-                buttonText="بررسی و رزرو هتل"
-                location="آدرس : گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظ...."
-                offer="15"
-                oldPrice="25.000.000 "
-                rate="5"
-                price="15.000.000 "
-                stayingLength="6"
-              />
+              <RowProductCard />
               <div className="w-[100%] border-2 border-[#4E4E4E]"/>
             </div>
-
 
             <div className="flex-col-center bg- gap-6">
-              <ProductCard 
-                mode="row"
-                title="هتل سراوان رانین رشت"
-                buttonText="بررسی و رزرو هتل"
-                location="آدرس : گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظ...."
-                offer="15"
-                oldPrice="25.000.000 "
-                rate="5"
-                price="15.000.000 "
-                stayingLength="6"
-              />
+              <RowProductCard />
               <div className="w-[100%] border-2 border-[#4E4E4E]"/>
             </div>
-
-
-
 
             <div className="flex-col-center bg- gap-6">
-              <ProductCard 
-                mode="row"
-                title="هتل سراوان رانین رشت"
-                buttonText="بررسی و رزرو هتل"
-                location="آدرس : گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظ...."
-                offer="15"
-                oldPrice="25.000.000 "
-                rate="5"
-                price="15.000.000 "
-                stayingLength="6"
-              />
+              <RowProductCard />
               <div className="w-[100%] border-2 border-[#4E4E4E]"/>
             </div>
-            
+
+            <div className="flex-col-center bg- gap-6">
+              <RowProductCard />
+              <div className="w-[100%] border-2 border-[#4E4E4E]"/>
+            </div>
+
+            <div className="flex-col-center bg- gap-6">
+              <RowProductCard />
+              <div className="w-[100%] border-2 border-[#4E4E4E]"/>
+            </div>
+
           </div>
         </div>
       </div>

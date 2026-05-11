@@ -1,5 +1,5 @@
 export interface IButtonProps{
-    text: string | number;
+    text?: string | number;
     backgroundColor?: string;
     color? :string,
     icon? : React.ReactNode;
@@ -10,13 +10,17 @@ export interface IButtonProps{
     width ? : string;
     height ? : string;
     textStyle ? : React.CSSProperties;
+    borderRadius ? : string;
     buttonStyle ? : React.CSSProperties;
-    border? : string
+    className ? : string
 }
+
 export interface ILoginButtonProp{
     type?:"button"|"submit"|"reset",
     loadingText?:string
     width?:string
     buttonText?:string
+    height?:string
+    radius?:string
 
 }

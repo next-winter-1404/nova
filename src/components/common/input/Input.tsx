@@ -16,13 +16,15 @@ const Input: FC<IInputProp> = ({
   borderColor,
   textColor,
   labelTextSize,
-  textSize
+  textSize,
+  labelTextColor,
+  dir="ltr"
 }) => {
   return (
-    <div className={`${parentWidth} relative`}>
+    <div className={`${parentWidth} relative`} dir={dir}>
       <label
         htmlFor={htmlFor}
-        className={`${labelTextSize} absolute -top-3 right-5 h-5 p-2 flex-center `}
+        className={`${labelTextSize} ${labelTextColor} absolute -top-3 right-5 h-5 p-2 flex-center whitespace-nowrap`}
         style={tagBgStyle}
       >
         {labelText}
