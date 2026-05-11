@@ -6,7 +6,8 @@ import {
 } from "@/src/components/common/breadCrumbs";
 import RowProductCard from "@/src/components/common/productCard/RowProductCard";
 import SimpleDropdown from "@/src/components/common/dropDown";
-import { IHousesResponse, getHouses } from "@/src/utils/sevices/api/houses/getHouses";
+import { 
+   getHouses } from "@/src/utils/sevices/api/houses/getHouses";
 import { IHouse } from "@/src/core/types/IHouse";
 
 const HouseReservePage = async () => {

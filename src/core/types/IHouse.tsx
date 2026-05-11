@@ -28,5 +28,5 @@ export interface IHouse {
 
 export interface IHousesResponse {
     houses: IHouse[];
-    totalCount: number;
+    totalCount?: number;
   }
