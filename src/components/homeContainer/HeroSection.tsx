@@ -76,7 +76,7 @@ const HeroSection = () => {
      </div>
 
 
-     <div className="absolute top-18 z-1 w-[90%]"><Image src={DeltaTextGradient} alt="pic"/></div>
+     <div className="absolute top-18 sm:left-[7%] left-5 mx-auto z-1 w-[90%]"><Image src={DeltaTextGradient} alt="pic"/></div>
      <div className="flex sm:justify-center justify-end z-1">
       <Image src={building} alt="pic" width={440}/>
      </div>
