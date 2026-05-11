@@ -1,12 +1,8 @@
-import axios, {
-  AxiosResponse,
-  AxiosError,
-  InternalAxiosRequestConfig,
-} from "axios";
-import { getServerSideCookie } from "../../helper/cookies/serverCookie/serverSideCookie";
+import axios, { AxiosResponse, AxiosError, InternalAxiosRequestConfig } from "axios";
+import { getClientCookie, setClientCookie } from "../../helper/cookies/clientCookie/clientSideCookie"; // ← تغییر
 import { RefreshTokenClient } from "../../helper/refreshToken/ClientRefreshToken";
 
-const BASE_URL = process.env.NEXT_API_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL; 
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -19,6 +15,8 @@ const onSuccess = <T>(response: AxiosResponse<T>): T => {
 };
 
 const onError = async (error: AxiosError): Promise<never> => {
+  const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
+  
   if (error.response) {
     if (error.response.status >= 404 && error.response.status < 500) {
       console.log(
@@ -30,17 +28,20 @@ const onError = async (error: AxiosError): Promise<never> => {
         "Server Error",
         error.response.status + error.response.statusText
       );
-    } else if (error.response.status === 401) {
+    } else if (error.response.status === 401 && originalRequest && !originalRequest._retry) {
       console.error(" Unauthorized - Token might be expired");
-
-      if (!isRefreshing && error.config) {
+      
+      originalRequest._retry = true;
+      
+      if (!isRefreshing) {
         isRefreshing = true;
-
+        
         try {
           await RefreshTokenClient();
           isRefreshing = false;
-
-          return instance(error.config);
+          
+          return instance(originalRequest);
+          
         } catch (refreshError) {
           isRefreshing = false;
           if (typeof window !== "undefined") {
@@ -56,10 +57,11 @@ const onError = async (error: AxiosError): Promise<never> => {
 };
 
 instance.interceptors.response.use(onSuccess, onError);
+
 instance.interceptors.request.use(
-  async (config) => {
-    const token = await getServerSideCookie("ServerAccessToken");
-    if (token != null) {
+  (config) => {
+    const token = getClientCookie("serverAccessToken"); 
+    if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
