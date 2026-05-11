@@ -151,7 +151,7 @@ body {
 }
 
 .flex-col-center {
-  @apply flex flex-col justify-center;
+  @apply flex flex-col justify-center items-center;
 }
 
 .flex-between {
