@@ -35,7 +35,7 @@ const Footer = () => {
             cavity='sharp'
             labelSize='md'
             labelContent={<div className='md:w-[330px] w-[150px] z-40 md:h-[50px] h-[40px] pl-5 md:pl-0 mt-[5px] flex gap-2 items-center md:text-[16px] text-[12px] text-white-pure justify-center bg-dark-900 rounded-[16px] '><Image src={phone} alt='phone'/> 09229167194 - 09154569872 </div>}
-            mainExtraStyle="bg-primary-accent-green"
+            mainExtraStyle="bg-primary-accent-green p-6"
             curveColor='var(--color-primary-accent-green)'
             labelBackground='bg-primary-accent-green'
             mainContent={<div className='h-[1100px] items-center md:gap-[66px] gap-4 md:w-full w-[340px] flex flex-col' dir='rtl'>
