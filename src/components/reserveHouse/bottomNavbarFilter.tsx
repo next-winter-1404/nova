@@ -12,7 +12,7 @@ const Facilities = [
   },
   {
     value: "area",
-    label: "منظقه",
+    label: "منطقه",
   },
 ];
 const BottomNavbarFilter = () => {
