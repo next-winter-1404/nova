@@ -1,5 +1,10 @@
-import axios, { AxiosResponse, AxiosError } from "axios";
+import axios, {
+  AxiosResponse,
+  AxiosError,
+  InternalAxiosRequestConfig,
+} from "axios";
 import { getServerSideCookie } from "../../helper/cookies/serverCookie/serverSideCookie";
+import { RefreshTokenClient } from "../../helper/refreshToken/ClientRefreshToken";
 
 const BASE_URL = process.env.NEXT_API_URL;
 
@@ -7,11 +12,13 @@ const instance = axios.create({
   baseURL: BASE_URL,
 });
 
+let isRefreshing = false;
+
 const onSuccess = <T>(response: AxiosResponse<T>): T => {
   return response.data;
 };
 
-const onError = (error: AxiosError): Promise<never> => {
+const onError = async (error: AxiosError): Promise<never> => {
   if (error.response) {
     if (error.response.status >= 404 && error.response.status < 500) {
       console.log(
@@ -25,11 +32,29 @@ const onError = (error: AxiosError): Promise<never> => {
       );
     } else if (error.response.status === 401) {
       console.error(" Unauthorized - Token might be expired");
+
+      if (!isRefreshing && error.config) {
+        isRefreshing = true;
+
+        try {
+          await RefreshTokenClient();
+          isRefreshing = false;
+
+          return instance(error.config);
+        } catch (refreshError) {
+          isRefreshing = false;
+          if (typeof window !== "undefined") {
+            window.location.href = "/login";
+          }
+          return Promise.reject(refreshError);
+        }
+      }
     }
   }
   console.error(error);
   return Promise.reject(error);
 };
+
 instance.interceptors.response.use(onSuccess, onError);
 instance.interceptors.request.use(
   async (config) => {
@@ -43,4 +68,5 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
 export default instance;

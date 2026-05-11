@@ -28,17 +28,11 @@ import { FiCopy } from "react-icons/fi";
 
 import AboutHouseContainer from "@/src/components/reserveHouse/aboutHouseContainer";
 import HouseItemsComponent from "@/src/components/reserveHouse/houseItemsComponent";
-import Input from "@/src/components/common/input/Input";
-import line from "@/src/assets/images/divideLine.svg";
 import StarRatingContainer from "@/src/components/reserveHouse/starRatingcontainer";
-import CommentSection from "@/src/components/reserveHouse/commentSection";
 import SimilarHouses from "@/src/components/reserveHouse/SimilarHousesNavbar";
+import CommentSection from "@/src/components/reserveHouse/commentSection";
 const SingleReserveHousePage = () => {
-  const cities = [
-    { value: "nyc", label: "New York" },
-    { value: "la", label: "Los Angeles" },
-    { value: "chi", label: "Chicago" },
-  ];
+ 
   const items: BreadcrumbItem[] = [
     {
       href: "/reserve-house",
@@ -136,51 +130,7 @@ const SingleReserveHousePage = () => {
             <SelectedTab options={tabs} twClassname="w-full" />
             {/* <AboutHouseContainer/> */}
             {/* <HouseItemsComponent/> */}
-            <div className="flex flex-col gap-8 justify-center">
-              <div className="flex justify-end gap-10">
-                <StarRatingContainer />
-
-                <Input
-                  labelText="نام و نام خانوادگی"
-                  InputHeight="h-[50px]"
-                  borderColor="border-white"
-                  labelTextSize="text-white"
-                  tagBgStyle={{ background: "var(--color-dark-900)" }}
-                  textColor="text-white"
-                  parentWidth="w-[35%]"
-                />
-                <Input
-                  labelText="ایمیل شما"
-                  InputHeight="h-[50px]"
-                  borderColor="border-white"
-                  labelTextSize="text-white"
-                  tagBgStyle={{ background: "var(--color-dark-900)" }}
-                  textColor="text-white"
-                  parentWidth="w-[35%]"
-                />
-              </div>
-              <div className="flex-center gap-8 w-full">
-                <LoginButton
-                  buttonText="ارسال"
-                  loadingText="در حال ارسال پیام"
-                  type="submit"
-                  width="w-[111px] "
-                  height="h-9"
-                  radius="rounded-[10px]"
-                />
-                <Input
-                  labelText="پیام شما"
-                  InputHeight="h-[50px]"
-                  borderColor="border-white"
-                  labelTextSize="text-white"
-                  tagBgStyle={{ background: "var(--color-dark-900)" }}
-                  textColor="text-white"
-                  parentWidth="w-full"
-                />
-              </div>
-              <Image alt="icon" src={line} />
-              <CommentSection />
-            </div>
+            {/* <CommentSection/> */}
           </section>
 
           <InfoCardContainer

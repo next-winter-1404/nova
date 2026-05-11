@@ -51,9 +51,7 @@ export const Login = async (prevState: any, formData: FormData) => {
     });
 
     const dataResponse = res.data || res;
-    console.log("=== Full Response ===");
-    console.log("dataResponse:", JSON.stringify(dataResponse, null, 2));
-
+  
     if (dataResponse.accessToken) {
       await setServerSideCookie("serverAccessToken", dataResponse.accessToken);
       await setServerSideCookie("refreshToken", dataResponse.refreshToken);
