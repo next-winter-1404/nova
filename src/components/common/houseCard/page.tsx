@@ -1,14 +1,25 @@
 'use client'
-import React from 'react'
+import React, { FC } from 'react'
 import InnerHouseCard from '../innerHouseCard/page'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation'
+import { IHouse } from '@/src/core/types/IHouse'
 
-
-const HouseCard = () => { 
+interface HouseCardProps {
+  houses : IHouse[];
+}
+const HouseCard: FC<HouseCardProps> = ({houses}) => { 
+  // console.log("houses in HouseCard:", houses);
+  // console.log("is array?", Array.isArray(houses));
+  if (!houses || ! Array.isArray(houses)){
+    return(
+      <p>در حال بارگذاری</p>
+    )
+  }
+  // const houses = result?.houses || []
   return ( 
     <>   
     <style jsx global>
@@ -44,22 +55,22 @@ const HouseCard = () => {
         }}
         
         className='my-house-swiper'
-      >        
-        <SwiperSlide>
-          <InnerHouseCard/>
-        </SwiperSlide>            
-        <SwiperSlide>
-          <InnerHouseCard/>
-        </SwiperSlide>  
-        <SwiperSlide>
-          <InnerHouseCard/>
-        </SwiperSlide>
-        <SwiperSlide>
-          <InnerHouseCard/>
-        </SwiperSlide>
-        <SwiperSlide>
-          <InnerHouseCard/>
-        </SwiperSlide>
+      >    
+      {houses.map((house:IHouse) => (
+        <SwiperSlide key={house.id}>
+        <InnerHouseCard 
+          address={house.address}
+          bathrooms={house.bathrooms}
+          rooms={house.rooms}
+          rate={house.rate}
+          photos={house.photos}
+          price={house.price}
+          parking={house.parking}
+          title={house.title}
+        />
+      </SwiperSlide>   
+      ))}    
+                        
       </Swiper>
     </div> 
     </>

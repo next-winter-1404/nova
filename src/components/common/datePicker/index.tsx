@@ -3,11 +3,10 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Calendar, CalendarProvider } from "@iprg/zaman";
 import { useEffect, useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { ITimePicker } from "@/src/core/types/ITimePicker";
 
 const DatePickerComponent = ({paramKey,placeholder,labelText,onChange,value}:ITimePicker) => {
-  const router = useRouter()
   const searchParams = useSearchParams();
   const initailDate = searchParams.get(paramKey)
   ? new Date(searchParams.get(paramKey) as string) : new Date()

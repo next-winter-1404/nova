@@ -36,7 +36,7 @@ const SearchWrapper = ({ cityOptions }: SearchWrapperProps) => {
       queryParams.append("checkingOutDate", checkOutDate);
     }
     
-    router.push(`${stateType}/${queryParams.toString()}`);
+    router.push(`${stateType}?${queryParams.toString()}`);
     console.log("Navigate to: ", queryParams.toString())
   };
 
