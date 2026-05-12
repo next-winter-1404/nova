@@ -75,6 +75,7 @@ const HouseReservePage = async ({
                       title={house.title}
                       rate={house.rate}
                       rooms={house.rooms}
+                      id={house.id}
                     />
                     <div className="w-[100%] border-2 border-[#4E4E4E]" />
                   </div>

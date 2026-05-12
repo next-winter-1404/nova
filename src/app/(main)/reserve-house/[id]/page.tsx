@@ -31,9 +31,17 @@ import HouseItemsComponent from "@/src/components/reserveHouse/houseItemsCompone
 import StarRatingContainer from "@/src/components/reserveHouse/starRatingcontainer";
 import SimilarHouses from "@/src/components/reserveHouse/SimilarHousesNavbar";
 import CommentSection from "@/src/components/reserveHouse/commentSection";
-const SingleReserveHousePage = async({searchParams}:{searchParams:Promise<{tab?:string}>}) => {
- const params = await searchParams
- const activeTab = params.tab || "about"
+import { FC } from "react";
+interface IProps {
+  params: Promise<{ id: string }>; 
+  searchParams: Promise<{ tab?: string }>;
+}
+
+const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
+  const { id } = await params; 
+  const param = await searchParams;
+  const activeTab = param.tab || "about";
+  console.log("House ID:", id);
   const items: BreadcrumbItem[] = [
     {
       href: "/reserve-house",
@@ -140,7 +148,7 @@ const SingleReserveHousePage = async({searchParams}:{searchParams:Promise<{tab?:
         <section className="flex flex-row-reverse justify-between  w-full items-start">
           <section className=" w-[1000px] flex flex-col gap-8">
             <SelectedTab options={tabs} twClassname="w-full" />
-           
+
             {renderContent()}
           </section>
 
@@ -203,7 +211,7 @@ const SingleReserveHousePage = async({searchParams}:{searchParams:Promise<{tab?:
             />
           </InfoCardContainer>
         </section>
-        <SimilarHouses/>
+        <SimilarHouses />
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ import leftArrow from "@/src/assets/icons/leftArrow.svg";
 import Button from "../button/page";
 import { IHouse } from "@/src/core/types/IHouse";
 import imgPlaceholder from "@/src/assets/images/imagePlaceHolder (2).png"
+import Link from "next/link";
 const RowProductCard: FC<IHouse> = ({
   price,
   rate,
@@ -18,6 +19,7 @@ const RowProductCard: FC<IHouse> = ({
   bathrooms,
   rooms,
   parking,
+  id
 }) => {
   return (
     <div className="flex">
@@ -28,20 +30,23 @@ const RowProductCard: FC<IHouse> = ({
             <span>{price}</span>
           </span>
         )}
-        <Button
-          text={"مشاهده ملک"}
-          backgroundColor="8cff45"
-          icon={<Image src={leftArrow} alt="icon" />}
-          buttonStyle={{
-            background: "transparent",
-            width: "130px",
-            color: "var(--color-primary-accent-green)",
-            fontSize: "16px",
-            fontWeight: "600",
-            border: "1px solid var(--color-primary-accent-green) ",
-            padding: "12px 16px",
-          }}
-        />
+        <Link href={`/reserve-house/${id}`}>
+          <Button
+            text={"مشاهده ملک"}
+            backgroundColor="8cff45"
+            icon={<Image src={leftArrow} alt="icon" />}
+            buttonStyle={{
+              background: "transparent",
+              width: "130px",
+              color: "var(--color-primary-accent-green)",
+              fontSize: "16px",
+              fontWeight: "600",
+              border: "1px solid var(--color-primary-accent-green)",
+              padding: "12px 16px",
+              cursor: "pointer",
+            }}
+          />
+        </Link>
       </div>
       <div className="flex flex-2 gap-4">
         <div className="flex flex-col justify-end flex-1 gap-4 ">
