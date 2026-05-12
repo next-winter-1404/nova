@@ -1,12 +1,36 @@
 "use client";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Calendar, CalendarProvider } from "@iprg/zaman";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ITimePicker } from "@/src/core/types/ITimePicker";
 
-const DatePickerComponent = () => {
-  const [calendarValue, setCalendarValue] = useState(new Date());
-  console.log(calendarValue);
+const DatePickerComponent = ({paramKey,placeholder,labelText,onChange,value}:ITimePicker) => {
+  const router = useRouter()
+  const searchParams = useSearchParams();
+  const initailDate = searchParams.get(paramKey)
+  ? new Date(searchParams.get(paramKey) as string) : new Date()
+  const [calendarValue, setCalendarValue] = useState<Date>(initailDate);
+  
+  useEffect(() =>{
+    if (value) {
+      setCalendarValue(new Date(value));
+    }
+  },[value])
+  console.log("this is value: ", value)
+
+  const handleChange = (e:any) => {
+    const selectedDate = new Date(e.value);
+    setCalendarValue(selectedDate);
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(paramKey,selectedDate.toISOString())
+
+    onChange?.(selectedDate.toISOString());
+    console.log("selectedDate is: ", selectedDate)
+  }
+
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -15,7 +39,7 @@ const DatePickerComponent = () => {
           aria-label="Customise options"
         >
           <BsChevronDown className="w-3 h-3" />
-          <i>انتخاب کنید ...</i>
+          <i>{placeholder}</i>
         </button>
       </DropdownMenu.Trigger>
 
@@ -32,7 +56,7 @@ const DatePickerComponent = () => {
               <CalendarProvider>
                 <Calendar
                   defaultValue={calendarValue}
-                  onChange={(e) => setCalendarValue(new Date(e.value))}
+                  onChange={handleChange}
                 />
               </CalendarProvider>
             </div>

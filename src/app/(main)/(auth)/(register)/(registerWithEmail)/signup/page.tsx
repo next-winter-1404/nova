@@ -36,6 +36,7 @@ const SignUpPage = () => {
       dir="rtl"
     >
       <LoginWrapper
+      description="جهت شروع فرایند ساخت اکانت ایمیل خود را وارد کنید"
         ButtonSection={
           <LoginButton
             loadingText="در حال ارسال کد"

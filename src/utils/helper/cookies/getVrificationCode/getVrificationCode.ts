@@ -11,3 +11,30 @@ export const getVerificationCode = async () => {
     return "";
   }
 };
+export const getResetCode = async () => {
+  try {
+    const code = await getServerSideCookie("resetCode");
+    return code || "";
+  } catch (error) {
+    console.error("Error getting reset code:", error);
+    return "";
+  }
+};
+export const getNumberVerificationCode = async () => {
+  try {
+    const code = await getServerSideCookie("numberVerificationCode");
+    return code || "";
+  } catch (error) {
+    console.error("Error getting verification code:", error);
+    return "";
+  }
+};
+export const getPhoneNumber = async () => {
+  try {
+    const code = await getServerSideCookie("phonenumber");
+    return code || "";
+  } catch (error) {
+    console.error("Error getting phoneNumber:", error);
+    return "";
+  }
+};

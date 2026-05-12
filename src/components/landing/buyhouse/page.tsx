@@ -17,7 +17,7 @@ const BuyHouse = () => {
                     </div>
                     <div className='flex flex-row items-center justify-between'>
                         <Button 
-                            text=" مشاهده همه" width='md:w-[137px]'  height='h-[36px]' buttonStyle={{display: "flex", justifyContent:"center", alignItems:"center",fontSize :"16px",gap:"20px" , backgroundColor : "dark-700",border: "2px solid #FFF"}} 
+                            text=" مشاهده همه" width='md:w-[137px]' textStyle={{color:"#FFFFFF"}}  height='h-[36px]'  buttonStyle={{display: "flex", justifyContent:"center", alignItems:"center",fontSize :"16px",gap:"20px" , backgroundColor : "dark-700",border: "2px solid #FFF"}} 
                             icon={<Image src={smallLeftArrowWhite} alt='smallLeftArrow'/>}>
                         </Button>                  
                         <span className='md:text-[32px] text-[24px] text-white-pure'>خرید و فروش ملک در دلتا</span>

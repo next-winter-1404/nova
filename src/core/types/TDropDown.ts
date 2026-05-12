@@ -6,4 +6,7 @@ export interface IOption {
     options:IOption[],
     paramKey:string,
     placeholder:string,
+    labelText?:string,
+    value?: string;
+    onChange?: (value: string) => void;
   }

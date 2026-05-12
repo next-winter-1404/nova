@@ -5,7 +5,7 @@ const DaysCounter = () => {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="w-[55px] h-[55px] rounded-2xl bg-blue-purple-500 flex-center flex-col text-white ">
+    <div className=" absolute top-12 left-10 w-[55px] h-[55px] rounded-2xl bg-blue-purple-500 flex-center flex-col text-white ">
       <FiChevronUp
         className="w-4 h-6 cursor-pointer "
         strokeWidth={5}
