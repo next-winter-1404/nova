@@ -31,8 +31,9 @@ import HouseItemsComponent from "@/src/components/reserveHouse/houseItemsCompone
 import StarRatingContainer from "@/src/components/reserveHouse/starRatingcontainer";
 import SimilarHouses from "@/src/components/reserveHouse/SimilarHousesNavbar";
 import CommentSection from "@/src/components/reserveHouse/commentSection";
-const SingleReserveHousePage = () => {
- 
+const SingleReserveHousePage = async({searchParams}:{searchParams:Promise<{tab?:string}>}) => {
+ const params = await searchParams
+ const activeTab = params.tab || "about"
   const items: BreadcrumbItem[] = [
     {
       href: "/reserve-house",
@@ -65,7 +66,18 @@ const SingleReserveHousePage = () => {
       icon: <FaRegFileAlt className="w-4 h-4" />,
     },
   ];
-
+  const renderContent = () => {
+    switch (activeTab) {
+      case "about":
+        return <AboutHouseContainer />;
+      case "comment":
+        return <CommentSection />;
+      case "facilities":
+        return <HouseItemsComponent />;
+      default:
+        return <AboutHouseContainer />;
+    }
+  };
   return (
     <div className="flex-center bg-dark-900">
       <div className="flex items-end flex-col gap-6 w-4/5 lg:w-[1375px] mt-17 ">
@@ -128,9 +140,8 @@ const SingleReserveHousePage = () => {
         <section className="flex flex-row-reverse justify-between  w-full items-start">
           <section className=" w-[1000px] flex flex-col gap-8">
             <SelectedTab options={tabs} twClassname="w-full" />
-            {/* <AboutHouseContainer/> */}
-            {/* <HouseItemsComponent/> */}
-            {/* <CommentSection/> */}
+           
+            {renderContent()}
           </section>
 
           <InfoCardContainer

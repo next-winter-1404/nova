@@ -9,7 +9,7 @@ import bathroom from "@/src/assets/icons/bathroom.svg";
 import leftArrow from "@/src/assets/icons/leftArrow.svg";
 import Button from "../button/page";
 import { IHouse } from "@/src/core/types/IHouse";
-
+import imgPlaceholder from "@/src/assets/images/imagePlaceHolder (2).png"
 const RowProductCard: FC<IHouse> = ({
   price,
   rate,
@@ -89,7 +89,9 @@ const RowProductCard: FC<IHouse> = ({
             </div>
           </div>
         </div>
-        <div className="w-[120px] h-[160px] bg-amber-500"></div>
+        <div className="w-[200px] h-[160px] ">
+          <Image src={imgPlaceholder} alt="image placeholder" className="w-fit h-full rounded-xl"/>
+        </div>
       </div>
     </div>
   );

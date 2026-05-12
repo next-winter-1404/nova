@@ -9,7 +9,7 @@ import { FaStar } from "react-icons/fa";
 import { FiChevronLeft } from "react-icons/fi";
 const UserComments = () => {
   return (
-    <div className="w-full overflow-hidden flex-center gap-8">
+    <div className="w-full overflow-hidden flex-center gap-8 border h-[500px]">
       <Swiper
         modules={[Navigation, Autoplay, Pagination]}
         spaceBetween={20}
@@ -25,7 +25,7 @@ const UserComments = () => {
         }}
         className=" w-full"
       >
-        <SwiperSlide>
+        <SwiperSlide className="w-full border border-amber-100">
           <CardContainer
             cavity="round"
             labelContent={
@@ -36,14 +36,14 @@ const UserComments = () => {
             }
             labelSize="lg"
             mainContent={
-              <div className=" w-full md:h-[220px] h-[210px] flex flex-col items-center justify-center md:gap-6 gap-1 text-right">
+              <div className=" w-full md:h-[220px] h-[310px] flex flex-col items-center justify-center md:gap-6 gap-1 text-right border">
                 <h2 className="md:text-[20px] text-[14px] leading-10 text-white-pure">
                   ” لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
                   با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و
                   مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
                   تکنولوژی مورد نیاز و کاربرد.... “
                 </h2>
-                <div className="md:w-full w-[351px] md:h-fit p-2  bg-dark-600 md:rounded-3xl rounded-2xl flex justify-center items-center">
+                <div className="md:w-full w-[351px] md:h-[310px] p-2  bg-dark-600 md:rounded-3xl rounded-2xl flex justify-center items-center">
                   <div className="w-12/13 md:h-[57px] h-[50px] flex items-center justify-between  md:gap-4 gap-2">
                     <Button backgroundColor="" width="w-[112px]" className="" buttonStyle={{background:"transparent",border:"1px solid white",borderRadius:12}} text={"ثبت پاسخ"} icon={<FiChevronLeft/>}/>
                     <div className=" w-full flex  items-center gap-4">
@@ -61,7 +61,7 @@ const UserComments = () => {
             }
             labelBackground="bg-dark-700 "
             curveColor="#393939"
-            mainExtraStyle="bg-dark-700"
+            mainExtraStyle="bg-dark-700 h-[500px]"
             labelExtraStyle={{ height: "40px" }}
             width="md:w-[480px] w-[380px]"
           />
