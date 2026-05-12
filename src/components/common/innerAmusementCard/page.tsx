@@ -11,7 +11,7 @@ const InnerAmusementCard = () => {
                 <Image src={leftArrow} alt='leftArrow' />
             </div>
             <CardContainer
-                curveColor='bg-dark-700'
+                curveColor='#393939'
                 cavity="round"
                 labelContent={<div className='w-[67px] h-[30px] mt-[9px] ml-[5px] flex items-center  text-dark-800 justify-center gap-1 bg-white-pure rounded-[8px] z-20 '><Image src={Star} alt='star'/> 4.5</div>}
                 labelSize="md"
