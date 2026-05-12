@@ -1,7 +1,7 @@
 "use client";
 
 import { ITab } from "@/src/core/types/ITab";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { FC, ReactNode, useState } from "react";
 
@@ -12,6 +12,8 @@ interface IPropertyTab {
 const SelectedTab: FC<IPropertyTab> = ({ options, twClassname }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
+;
+
   const [selectedTab, setSelectedTab] = useState<string>(
     searchParams.get("tab") ||  options[options.length - 1]?.value || ""
   );

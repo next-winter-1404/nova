@@ -28,7 +28,7 @@ const HouseReservePage = async ({
   const location = params.address;
   const search = params.search;
 
-  const { houses }: any = await getHouses({
+  const  result : any = await getHouses({
     minRent,
     maxRent,
     propertyType,
@@ -37,6 +37,8 @@ const HouseReservePage = async ({
     sort,
     transactionType: "rental", //just rental house will show on this page
   });
+  const houses = result?.houses || [];
+  const totalCount = result?.totalCount || 0;
 
   const items: BreadcrumbItem[] = [
     {
@@ -51,7 +53,7 @@ const HouseReservePage = async ({
     <div className="flex-center bg-dark-900">
       <div className="items-end flex mt-15 flex-col lg:max-w-[1375px] w-[90%] ">
         <Breadcrumb items={items} twClassname="mt-14  " />
-        <TopReserveHouseSection />
+        <TopReserveHouseSection totalCount={totalCount}/>
         <div className="bg-dark-800 flex  mt-6 p-6  w-full rounded-[40px] ">
           <div className="w-[40%] rounded-[40px] h-[1032px] bg-dark-900"></div>
 
