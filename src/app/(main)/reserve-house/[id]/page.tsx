@@ -194,8 +194,8 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
             labelText="رزرو خونه برای :"
           >
             <div className="relative flex flex-col w-full gap-6">
-              <DatePickerComponent />
-              <DatePickerComponent />
+              <DatePickerComponent paramKey="date" placeholder="تاریخ ورورد"/>
+              <DatePickerComponent  paramKey="second" placeholder="تاریخ خروج"/>
               <DaysCounter />
             </div>
             <PassengerCounter />

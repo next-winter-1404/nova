@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, FC } from "react";
+import React, { useState, FC, useEffect } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { useRouter, useSearchParams } from "next/navigation";
 import { IDropDownProps } from "@/src/core/types/TDropDown";
@@ -9,6 +9,8 @@ const SimpleDropdown: FC<IDropDownProps> = ({
   paramKey,
   placeholder,
   labelText,
+  onChange,
+  value,
   triggerClassName="w-full",
   tagBg="bg-dark-700"
 }) => {
@@ -19,11 +21,18 @@ const SimpleDropdown: FC<IDropDownProps> = ({
     searchParams.get(paramKey) || ""
   );
 
+    useEffect(() =>{
+      if (value) {
+        setSelectedValue(value);
+      }
+    },[value])
+
   const handleCitySelect = (cityValue: string) => {
     setSelectedValue(cityValue);
 
     const params = new URLSearchParams(searchParams.toString());
     params.set(paramKey, cityValue);
+    onChange?.(selectedValue);
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
