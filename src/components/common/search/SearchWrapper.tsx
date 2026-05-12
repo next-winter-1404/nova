@@ -35,6 +35,9 @@ const SearchWrapper = ({ cityOptions }: SearchWrapperProps) => {
     if (checkOutDate) {
       queryParams.append("checkingOutDate", checkOutDate);
     }
+    if (city) {
+      queryParams.append("address", city);
+    }
     
     router.push(`${stateType}?${queryParams.toString()}`);
     console.log("Navigate to: ", queryParams.toString())
@@ -69,11 +72,11 @@ const SearchWrapper = ({ cityOptions }: SearchWrapperProps) => {
         </div>
         <div className="flex-2 w-full">
           <SimpleDropdown
-            paramKey="city"
+            paramKey="address"
             placeholder="... استان ، شهر ، اقامتگاه"
             options={cityOptions}
-            value={city}
-            onChange={setCity}
+            city={city}
+            setCity={setCity}
           />
         </div>
       </div>

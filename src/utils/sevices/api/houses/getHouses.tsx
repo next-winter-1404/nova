@@ -1,6 +1,6 @@
 import React from "react";
-import instance from "../../interseptor";
-import { IHouse, IHousesResponse } from "@/src/core/types/IHouse";
+import instance from "@/src/utils/sevices/interseptor/index";
+import { IHousesResponse } from "@/src/core/types/IHouse";
 import { AxiosResponse } from "axios";
 
 export const getHouses = async (apiParams = {}): Promise<AxiosResponse<IHousesResponse>> => {
