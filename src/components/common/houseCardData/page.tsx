@@ -4,7 +4,7 @@ import HouseCard from '../houseCard/page';
 
 const HouseData = async () => {
     const {houses}:any = await getHouses();
-    console.log("houses1 :", houses)   
+    // console.log("houses1 :", houses)   
   return (
     <HouseCard houses ={houses}/>
   )  

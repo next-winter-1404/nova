@@ -12,7 +12,8 @@ interface HouseCardProps {
   houses : IHouse[];
 }
 const HouseCard: FC<HouseCardProps> = ({houses}) => { 
-  console.log("houses:" ,houses)
+  // console.log("houses in HouseCard:", houses);
+  // console.log("is array?", Array.isArray(houses));
   if (!houses || ! Array.isArray(houses)){
     return(
       <p>در حال بارگذاری</p>
