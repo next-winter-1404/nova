@@ -49,7 +49,7 @@ const CardContainer: FC<CardContainerProps> = ({
 
       </div>
 
-      <div className={` rounded-ss-[30px] rounded-b-[30px]  w-full  flex-center p-6 ${mainExtraStyle}`}>
+      <div className={` rounded-ss-[30px] rounded-b-[30px]  w-full  flex-center  ${mainExtraStyle}`}>
       {mainContent}
       </div>
     </div>

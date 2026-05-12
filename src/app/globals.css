@@ -236,7 +236,7 @@ header {
 }
 
 .dropMenu {
-  @apply w-full relative flex-center justify-between text-white-pure border border-white-pure rounded-2xl;
+  @apply  relative flex-center justify-between text-white-pure border border-white-pure rounded-2xl;
 }
 
 .serach-button {

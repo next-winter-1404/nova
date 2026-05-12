@@ -9,4 +9,6 @@ export interface IOption {
     labelText?:string,
     value?: string;
     onChange?: (value: string) => void;
+    triggerClassName?:string,
+    tagBg?:string,
   }

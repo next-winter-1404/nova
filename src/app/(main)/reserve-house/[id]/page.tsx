@@ -10,14 +10,14 @@ import Image from "next/image";
 import test from "@/src/assets/images/HeroSectionBackground.jpg";
 import { ITab } from "@/src/core/types/ITab";
 import building from "@/src/assets/icons/house-building.svg";
-import InfoCardContainer from "@/src/components/common/infoCardContainer";
+import InfoCardContainer from "@/src/components/reserveHouse/InfoCardContainer";
 import DaysCounter from "@/src/components/reserveHouse/daysCounter";
 import dolor from "@/src/assets/icons/dollor.svg";
 import LoginButton from "@/src/components/login/button/LoginButton";
 import DatePickerComponent from "@/src/components/common/datePicker";
 import PassengerCounter from "@/src/components/reserveHouse/counter";
 import OldPriceComponent from "@/src/components/common/productCard/OldPrice";
-import SelectedTab from "@/src/components/common/propertyTab";
+import SelectedTab from "@/src/components/reserveHouse/SelectedTab";
 import {
   FaRegCommentDots,
   FaRegSave,
@@ -25,17 +25,15 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { FiCopy } from "react-icons/fi";
+
 import AboutHouseContainer from "@/src/components/reserveHouse/aboutHouseContainer";
 import HouseItemsComponent from "@/src/components/reserveHouse/houseItemsComponent";
-import Input from "@/src/components/common/input/Input";
-import line from "@/src/assets/images/divideLine.svg"
 import StarRatingContainer from "@/src/components/reserveHouse/starRatingcontainer";
-const SingleReserveHousePage = () => {
-  const cities = [
-    { value: "nyc", label: "New York" },
-    { value: "la", label: "Los Angeles" },
-    { value: "chi", label: "Chicago" },
-  ];
+import SimilarHouses from "@/src/components/reserveHouse/SimilarHousesNavbar";
+import CommentSection from "@/src/components/reserveHouse/commentSection";
+const SingleReserveHousePage = async({searchParams}:{searchParams:Promise<{tab?:string}>}) => {
+ const params = await searchParams
+ const activeTab = params.tab || "about"
   const items: BreadcrumbItem[] = [
     {
       href: "/reserve-house",
@@ -68,7 +66,18 @@ const SingleReserveHousePage = () => {
       icon: <FaRegFileAlt className="w-4 h-4" />,
     },
   ];
-
+  const renderContent = () => {
+    switch (activeTab) {
+      case "about":
+        return <AboutHouseContainer />;
+      case "comment":
+        return <CommentSection />;
+      case "facilities":
+        return <HouseItemsComponent />;
+      default:
+        return <AboutHouseContainer />;
+    }
+  };
   return (
     <div className="flex-center bg-dark-900">
       <div className="flex items-end flex-col gap-6 w-4/5 lg:w-[1375px] mt-17 ">
@@ -131,58 +140,10 @@ const SingleReserveHousePage = () => {
         <section className="flex flex-row-reverse justify-between  w-full items-start">
           <section className=" w-[1000px] flex flex-col gap-8">
             <SelectedTab options={tabs} twClassname="w-full" />
-            {/* <AboutHouseContainer/> */}
-            {/* <HouseItemsComponent/> */}
-            <div className="flex flex-col gap-8 justify-center">
-              <div className="flex justify-end gap-10">
-              <StarRatingContainer/>
-
-                <Input
-                  labelText="نام و نام خانوادگی"
-                  InputHeight="h-[50px]"
-                  borderColor="border-white"
-                  labelTextSize="text-white"
-                  tagBgStyle={{ background: "var(--color-dark-900)" }}
-                  textColor="text-white"
-                  parentWidth="w-[35%]"
-
-                />
-                <Input
-                  labelText="ایمیل شما"
-                  InputHeight="h-[50px]"
-                  borderColor="border-white"
-                  labelTextSize="text-white"
-                  tagBgStyle={{ background: "var(--color-dark-900)" }}
-                  textColor="text-white"
-                  parentWidth="w-[35%]"
-
-                />
-
-              </div>
-              <div className="flex-center gap-8 w-full">
-              <LoginButton
-                  buttonText="ارسال"
-                  loadingText="در حال ارسال پیام"
-                  type="submit"
-                  width="w-[111px] "
-                  height="h-9"
-                  radius="rounded-[10px]"
-                />
-                <Input
-                  labelText="پیام شما"
-                  InputHeight="h-[50px]"
-                  borderColor="border-white"
-                  labelTextSize="text-white"
-                  tagBgStyle={{ background: "var(--color-dark-900)" }}
-                  textColor="text-white"
-                  parentWidth="w-full"
-                />
-               
-              </div>
-              <Image alt="icon" src={line}/>
-              <div></div>
-            </div>
+           
+            {renderContent()}
           </section>
+
           <InfoCardContainer
             icon={<Image alt="icon" src={building} className="w-5 h-5" />}
             labelText="رزرو خونه برای :"
@@ -242,6 +203,7 @@ const SingleReserveHousePage = () => {
             />
           </InfoCardContainer>
         </section>
+        <SimilarHouses/>
       </div>
     </div>
   );

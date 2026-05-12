@@ -10,8 +10,9 @@ const SimpleDropdown: FC<IDropDownProps> = ({
   placeholder,
   labelText,
   onChange,
-  value
-
+  value,
+  triggerClassName="w-full",
+  tagBg="bg-dark-700"
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -43,15 +44,15 @@ const SimpleDropdown: FC<IDropDownProps> = ({
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild className="border">
-        <button className="IconButton dropMenu p-5 w-full relative" aria-label="Customise options">
+        <button className={`IconButton dropMenu p-5  relative  ${triggerClassName}`}  aria-label="Customise options" dir="rtl">
           <span>{showSelected()}</span>
-          <span className="bg-dark-700 absolute -top-3.5 right-3.5">{labelText}</span>
+          <span className={`absolute -top-3 p-0.5 px-2 right-3.5 ${tagBg}`}>{labelText}:</span>
 
         </button>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className="DropdownMenuContent w-full p-4 rounded rounded-xl z-100 bg-dark-800">
+        <DropdownMenu.Content className="DropdownMenuContent w-full p-4 rounded-xl z-100 bg-dark-800 text-white cursor-pointer">
           {options.map((op) => (
             <DropdownMenu.Item
               key={op.value}
@@ -60,7 +61,7 @@ const SimpleDropdown: FC<IDropDownProps> = ({
             >
               {op.label}
               {selectedValue === op.value && (
-                <span className="text-blue-500 text-xs">✓</span>
+                <span className="text-blue-500 text-xs mx-2">✓</span>
               )}
             </DropdownMenu.Item>
           ))}
