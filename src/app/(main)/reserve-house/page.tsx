@@ -35,7 +35,7 @@ const HouseReservePage = async ({
     search,
     location,
     sort,
-    transactionType: "rental", //just rental house will show on this page
+    transactionType: "reservation", //just rental house will show on this page
   });
   const houses = result?.houses || [];
   const totalCount = result?.totalCount || 0;
