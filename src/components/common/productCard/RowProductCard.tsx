@@ -69,7 +69,8 @@ const RowProductCard: FC<IHouse> = ({
             </div>
             <div className=" h-[16px] flex items-center justify-end text-gray-300 gap-1 whitespace-nowrap">
               <div className=" w-[30px] text-[13px] justify-center flex gap-2.5">
-                حیاط <Image src={houseTree} alt="houseTree" />
+                حیاط 
+                <Image src={houseTree} alt="houseTree" />
               </div>
               <div className="border-l border-gray-300 w-[85px] text-[13px] justify-center flex gap-2.5 ">
                 <span>{bathrooms || "--"}</span>
