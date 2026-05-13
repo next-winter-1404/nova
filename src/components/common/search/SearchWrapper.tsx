@@ -4,7 +4,6 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Calendar, CalendarProvider, TimePicker } from "@iprg/zaman";
 import { BsChevronDown } from "react-icons/bs";
 import SimpleDropdown from "../dropDown";
-
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import DatePickerComponent from "../datePicker";
@@ -34,6 +33,9 @@ const SearchWrapper = ({ cityOptions }: SearchWrapperProps) => {
     }
     if (checkOutDate) {
       queryParams.append("checkingOutDate", checkOutDate);
+    }
+    if (city) {
+      queryParams.append("address", city);
     }
     
     router.push(`${stateType}?${queryParams.toString()}`);
@@ -69,11 +71,11 @@ const SearchWrapper = ({ cityOptions }: SearchWrapperProps) => {
         </div>
         <div className="flex-2 w-full">
           <SimpleDropdown
-            paramKey="city"
+            paramKey="address"
             placeholder="... استان ، شهر ، اقامتگاه"
             options={cityOptions}
-            value={city}
-            onChange={setCity}
+            city={city}
+            setCity={setCity}
           />
         </div>
       </div>

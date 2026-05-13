@@ -12,9 +12,15 @@ const PassengerCounter = () => {
 
   useEffect(() => {
     const param = new URLSearchParams(searchParams.toString());
-    param.set("passengerCount", count.toString());
+    if (count > 0) {
+      param.set("passengerCount", count.toString());
+    } else {
+      param.delete("passengerCount");
+    }
     router.replace(`?${param.toString()}`, { scroll: false });
-  }, [count, router]);
+  }, [count]);
+
+
   const addCount = () => {
     setCount((prev) => prev + 1);
   };

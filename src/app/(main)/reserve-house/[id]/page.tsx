@@ -7,17 +7,8 @@ import HouseMainInformation from "@/src/components/common/houseMainInformation";
 import ToolTip from "@/src/components/common/tooltip";
 import share from "@/src/assets/icons/share-square.svg";
 import Image from "next/image";
-import test from "@/src/assets/images/HeroSectionBackground.jpg";
 import deaf from "@/src/assets/images/imagePlaceHolder (2).png";
 import { ITab } from "@/src/core/types/ITab";
-import building from "@/src/assets/icons/house-building.svg";
-import InfoCardContainer from "@/src/components/reserveHouse/InfoCardContainer";
-import DaysCounter from "@/src/components/reserveHouse/daysCounter";
-import dolor from "@/src/assets/icons/dollor.svg";
-import LoginButton from "@/src/components/login/button/LoginButton";
-import DatePickerComponent from "@/src/components/common/datePicker";
-import PassengerCounter from "@/src/components/reserveHouse/counter";
-import OldPriceComponent from "@/src/components/common/productCard/OldPrice";
 import SelectedTab from "@/src/components/reserveHouse/SelectedTab";
 import {
   FaRegCommentDots,
@@ -33,6 +24,7 @@ import CommentSection from "@/src/components/reserveHouse/commentSection";
 import { FC } from "react";
 import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail";
 import { notFound } from "next/navigation";
+import ReserveBox from "@/src/components/reserveHouse/reserveBox";
 interface IProps {
   params: Promise<{ id: number }>;
   searchParams: Promise<{ tab?: string }>;
@@ -43,7 +35,6 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   const house = await getHousesDetail(id);
   const param = await searchParams;
   const activeTab = param.tab || "about";
-  console.log("House :", house);
 
   if (!house) {
     return notFound();
@@ -189,64 +180,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
             {renderContent()}
           </section>
 
-          <InfoCardContainer
-            icon={<Image alt="icon" src={building} className="w-5 h-5" />}
-            labelText="رزرو خونه برای :"
-          >
-            <div className="relative flex flex-col w-full gap-6">
-              <DatePickerComponent paramKey="date" placeholder="تاریخ ورورد"/>
-              <DatePickerComponent  paramKey="second" placeholder="تاریخ خروج"/>
-              <DaysCounter />
-            </div>
-            <PassengerCounter />
-            <div className="border-t-2 border-b-2 border-gray-550  w-[92%] flex flex-col items-center gap-6 pb-6">
-              <div
-                className="w-[178px] h-9 rounded-b-3xl bg-gray-550 flex-center gap-2 text-16-semibold text-white"
-                dir="rtl"
-              >
-                <Image alt="icon" src={dolor} className="w-4 h-4" />
-                <span>قیمت رزرو :</span>
-              </div>
-              <div className="flex justify-between w-full" dir="rtl">
-                <span className="text-gray-300 text-16-bold">
-                  ★ 5 شب * 17000{" "}
-                </span>
-                <span className="text-16-bold text-white"> 18.000.000 ت</span>
-              </div>
-              <div className="flex justify-between w-full" dir="rtl">
-                <span className="text-gray-300 text-16-bold">
-                  ★ 5 شب * 17000{" "}
-                </span>
-                <span className="text-16-bold text-white"> 18.000.000 ت</span>
-              </div>
-              <div className="flex justify-between w-full" dir="rtl">
-                <span className="text-gray-300 text-16-bold">
-                  ★ 5 شب * 17000{" "}
-                </span>
-                <span className="text-16-bold text-white"> 18.000.000 ت</span>
-              </div>
-            </div>
-            <div className="w-full px-2 flex flex-col justify-start gap-4">
-              <div className="flex gap-4 w-full">
-                <Button
-                  text={"15%"}
-                  buttonStyle={{ height: 25, width: 40, borderRadius: 8 }}
-                />
-                <OldPriceComponent oldPrice="25.000.000" />
-              </div>
-
-              <div className="text-primary-accent-green font-semibold text-[24px] flex gap-2">
-                <i>تومان</i>
-                <span>15.000.000</span>
-              </div>
-            </div>
-            <LoginButton
-              buttonText="همین حالا رزرو کن"
-              loadingText="در حال رزرو"
-              type="submit"
-              width="w-full"
-            />
-          </InfoCardContainer>
+        <ReserveBox/>
         </section>
         <SimilarHouses />
       </div>

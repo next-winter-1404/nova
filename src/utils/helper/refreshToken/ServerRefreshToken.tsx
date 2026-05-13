@@ -9,7 +9,7 @@ export const ServerRefreshToken = async () => {
     const refreshToken = await getServerSideCookie("refreshToken"); 
     
     if (!refreshToken) {
-      console.log("refresh token does not exist");
+      // console.log("refresh token does not exist");
       return {
         success: false,
         message: "رفرش توکن یافت نشد",

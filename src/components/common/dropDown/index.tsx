@@ -9,30 +9,34 @@ const SimpleDropdown: FC<IDropDownProps> = ({
   paramKey,
   placeholder,
   labelText,
-  onChange,
-  value,
-  triggerClassName="w-full",
-  tagBg="bg-dark-700"
+  setCity,
+  city,
+  triggerClassName = "w-full",
+  tagBg = "bg-dark-700",
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const [selectedValue, setSelectedValue] = useState<string>(
-    searchParams.get(paramKey) || ""
+    searchParams.get(paramKey) || "",
   );
 
-    useEffect(() =>{
-      if (value) {
-        setSelectedValue(value);
-      }
-    },[value])
+  useEffect(() => {
+    if (city) {
+      setSelectedValue(city);
+    }
+  }, [city]);
 
   const handleCitySelect = (cityValue: string) => {
+    // console.log("selected city value:", cityValue);
+
     setSelectedValue(cityValue);
 
     const params = new URLSearchParams(searchParams.toString());
     params.set(paramKey, cityValue);
-    onChange?.(selectedValue);
+
+    setCity?.(cityValue);
+
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
@@ -44,10 +48,15 @@ const SimpleDropdown: FC<IDropDownProps> = ({
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild className="border">
-        <button className={`IconButton dropMenu p-5  relative  ${triggerClassName}`}  aria-label="Customise options" dir="rtl">
+        <button
+          className={`IconButton dropMenu p-5  relative  ${triggerClassName}`}
+          aria-label="Customise options"
+          dir="rtl"
+        >
           <span>{showSelected()}</span>
-          <span className={`absolute -top-3 p-0.5 px-2 right-3.5 ${tagBg}`}>{labelText}:</span>
-
+          <span className={`absolute -top-3 p-0.5 px-2 right-3.5 ${tagBg}`}>
+            {labelText}:
+          </span>
         </button>
       </DropdownMenu.Trigger>
 

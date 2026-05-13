@@ -26,7 +26,7 @@ export const forgetPasswordVerifyCode = async (prevState: any, formData: FormDat
 
   try {
     const verificationEmail = await getServerSideCookie("verificationEmail");
-    console.log("----verificationEmail from cookie:", verificationEmail);
+    // console.log("----verificationEmail from cookie:", verificationEmail);
     const res = await instance.post("/api/auth/forgot-password/verify", {
       email:verificationEmail,
       code: validation.data.code.toString(),

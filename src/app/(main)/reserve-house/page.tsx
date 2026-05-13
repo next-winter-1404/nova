@@ -35,7 +35,7 @@ const HouseReservePage = async ({
     search,
     location,
     sort,
-    transactionType: "reservation", //just rental house will show on this page
+    transactionType: "reservation", //just reservation house will show on this page
   });
   const houses = result?.houses || [];
   const totalCount = result?.totalCount || 0;
@@ -46,7 +46,7 @@ const HouseReservePage = async ({
       label: "رزرو هتل",
     },
     {
-      label: `رزرو هتل ${"رشت"}`,
+      label: `رزرو هتل ${location || ""}`,
     },
   ];
   return (
@@ -55,7 +55,8 @@ const HouseReservePage = async ({
         <Breadcrumb items={items} twClassname="mt-14  " />
         <TopReserveHouseSection totalCount={totalCount}/>
         <div className="bg-dark-800 flex  mt-6 p-6  w-full rounded-[40px] ">
-          <div className="w-[40%] rounded-[40px] h-[1032px] bg-dark-900"></div>
+          <div className="w-[40%] rounded-[40px] h-[1032px] bg-dark-900">
+          </div>
 
           <div className="w-[60%] flex flex-col gap-6 items-center ">
             <BottomNavbarFilter />

@@ -7,8 +7,8 @@ export interface IOption {
     paramKey:string,
     placeholder:string,
     labelText?:string,
-    value?: string;
-    onChange?: (value: string) => void;
+    city?: string;
+    setCity?: (value: string) => void;
     triggerClassName?:string,
     tagBg?:string,
   }

@@ -30,7 +30,6 @@ export interface FinalStepResult  {
 export const finalStep = async (prevState: any, formData: FormData) => {
   const phoneNumber = formData.get("phoneNumber");
   const password = formData.get("password");
-  console.log("Code value:", phoneNumber);
   const validation = FinalStepSchema.safeParse({ 
     phoneNumber: phoneNumber?.toString(), 
     password: password?.toString() 
