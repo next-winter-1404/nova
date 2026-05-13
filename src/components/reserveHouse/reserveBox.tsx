@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import InfoCardContainer from "./InfoCardContainer";
 import Image from "next/image";
 import DatePickerComponent from "../common/datePicker";
@@ -12,18 +12,28 @@ import dolor from "@/src/assets/icons/dollor.svg";
 import building from "@/src/assets/icons/house-building.svg";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useDebounce } from "use-debounce";
+import { calculateDaysBetween } from "@/src/utils/hooks/countDays";
+import { IHouse } from "@/src/core/types/IHouse";
 
-const ReserveBox = () => {
+const ReserveBox:FC<IHouse> = ({price}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const [checkInDate, setCheckInDate] = useState<string>("");
   const [checkOutDate, setCheckOutDate] = useState<string>("");
-  console.log("checkInDate",Number(checkInDate )- Number(checkOutDate) )
-  const [days] = useState<number>(0);
-  const [passengers] = useState<number>(1);
+  const [days, setDays] = useState<number>(0);
+  const [passengers, setPassengers] = useState<number>(1); 
   const [debouncedCheckIn] = useDebounce(checkInDate, 500);
   const [debouncedCheckOut] = useDebounce(checkOutDate, 500);
+
+  useEffect(() => {
+    if (checkInDate && checkOutDate) {
+      const diff = calculateDaysBetween(checkInDate, checkOutDate);
+      setDays(diff);
+    } else {
+      setDays(0);
+    }
+  }, [checkInDate, checkOutDate]);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(searchParams.toString());
@@ -40,40 +50,30 @@ const ReserveBox = () => {
       queryParams.delete("checkOutDate");
     }
 
-    
-
     router.replace(`?${queryParams.toString()}`, { scroll: false });
   }, [debouncedCheckIn, debouncedCheckOut]);
+
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const queryParams = new URLSearchParams();
 
-    if (checkInDate) {
-      queryParams.append("checkInDate", checkInDate);
-    }
-    if (checkOutDate) {
-      queryParams.append("checkOutDate", checkOutDate);
-    }
-    if (days) {
-      queryParams.append("days", days.toString());
-    }
-    if (passengers) {
-      queryParams.append("passengers", passengers.toString());
-    }
+    if (checkInDate) queryParams.append("checkInDate", checkInDate);
+    if (checkOutDate) queryParams.append("checkOutDate", checkOutDate);
+    if (days) queryParams.append("days", days.toString());
+    if (passengers) queryParams.append("passengers", passengers.toString());
 
     router.push(`/processreserve/travelerinfo?${queryParams.toString()}`);
   };
+  const priceNumber = Number(price) || 0;
+  const totalPrice = days > 0 ? priceNumber * days : priceNumber;
 
   return (
     <InfoCardContainer
       icon={<Image alt="icon" src={building} className="w-5 h-5" />}
       labelText="رزرو خونه برای :"
     >
-      <form
-        onSubmit={handleSearchSubmit}
-        className="relative flex flex-col w-full gap-6"
-      >
+      <form onSubmit={handleSearchSubmit} className="relative flex flex-col w-full gap-6">
         <DatePickerComponent
           paramKey="checkInDate"
           placeholder="تاریخ ورود را وارد کنید"
@@ -86,8 +86,10 @@ const ReserveBox = () => {
           value={checkOutDate}
           onChange={setCheckOutDate}
         />
-        <DaysCounter />
-        <PassengerCounter />
+        
+        <DaysCounter days={days} />
+        
+        <PassengerCounter  />
 
         <div className="border-t-2 border-b-2 border-gray-550 w-[92%] flex flex-col items-center gap-6 pb-6">
           <div
@@ -99,23 +101,24 @@ const ReserveBox = () => {
           </div>
           <div className="flex justify-between w-full" dir="rtl">
             <span className="text-gray-300 text-16-bold">
-              ★ {days} شب * {passengers} نفر
+              ★ {days} شب  
             </span>
-            <span className="text-16-bold text-white">تومان</span>
+            <div className="flex gap-2 text-16-bold text-white">
+              <span>{totalPrice}</span>
+            <span>تومان</span>
+
+            </div>
           </div>
         </div>
 
         <div className="w-full px-2 flex flex-col justify-start gap-4">
           <div className="flex gap-4 w-full">
-            <Button
-              text={"15%"}
-              buttonStyle={{ height: 25, width: 40, borderRadius: 8 }}
-            />
+            <Button text={"15%"} buttonStyle={{ height: 25, width: 40, borderRadius: 8 }} />
             <OldPriceComponent oldPrice="25.000.000" />
           </div>
           <div className="text-primary-accent-green font-semibold text-[24px] flex gap-2">
             <i>تومان</i>
-            <span>15.000.000</span>
+            <span>{price}</span>
           </div>
         </div>
 

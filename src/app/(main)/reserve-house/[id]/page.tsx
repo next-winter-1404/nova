@@ -180,7 +180,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
             {renderContent()}
           </section>
 
-        <ReserveBox/>
+        <ReserveBox price={house.price}/>
         </section>
         <SimilarHouses />
       </div>
