@@ -53,7 +53,7 @@ export const Login = async (prevState: any, formData: FormData) => {
     const dataResponse = res.data || res;
   
     if (dataResponse.accessToken) {
-      await setServerSideCookie("serverAccessToken", dataResponse.accessToken);
+      await setServerSideCookie("ServerAccessToken", dataResponse.accessToken);
       await setServerSideCookie("refreshToken", dataResponse.refreshToken);
       
       

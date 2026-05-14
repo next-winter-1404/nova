@@ -19,7 +19,6 @@ const HouseCard: FC<HouseCardProps> = ({houses}) => {
       <p>در حال بارگذاری</p>
     )
   }
-  // const houses = result?.houses || []
   return ( 
     <>   
     <style jsx global>
@@ -69,8 +68,7 @@ const HouseCard: FC<HouseCardProps> = ({houses}) => {
           title={house.title}
         />
       </SwiperSlide>   
-      ))}    
-                        
+      ))}                            
       </Swiper>
     </div> 
     </>

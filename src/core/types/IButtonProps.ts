@@ -22,5 +22,5 @@ export interface ILoginButtonProp{
     buttonText?:string
     height?:string
     radius?:string
-
+    buttonStyle ? : string;
 }
