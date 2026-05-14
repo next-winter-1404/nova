@@ -20,6 +20,7 @@ const HouseReservePage = async ({
     search?: string;
   }>;
 }) => {
+  
   const params = await searchParams;
   const minRent = params.minPrice;
   const maxRent = params.maxPrice;
@@ -27,16 +28,16 @@ const HouseReservePage = async ({
   const sort = params.sort;
   const location = params.address;
   const search = params.search;
-
-  const  result : any = await getHouses({
-    minRent,
-    maxRent,
-    propertyType,
-    search,
-    location,
-    sort,
-    transactionType: "reservation", //just reservation house will show on this page
-  });
+  const filters: any = {
+    transactionType: "reservation",
+  };
+  if (minRent) filters.minRent = minRent;
+  if (maxRent) filters.maxRent = maxRent;
+  if (propertyType) filters.propertyType = propertyType;
+  if (sort) filters.sort = sort;
+  if (location) filters.location = location;
+  if (search) filters.search = search;
+  const  result  = await getHouses(filters);
   const houses = result?.houses || [];
   const totalCount = result?.totalCount || 0;
 

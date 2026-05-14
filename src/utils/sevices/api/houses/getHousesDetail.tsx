@@ -10,7 +10,7 @@ export const getHousesDetail = async (id: number): Promise<IHouse | null> => {
       if (!response ) {
         return null;
       }
-      return response as IHouse;
+      return response.data as IHouse;
     } catch (error) {
       console.error(`Error fetching house ${id}:`, error);
       return null;  

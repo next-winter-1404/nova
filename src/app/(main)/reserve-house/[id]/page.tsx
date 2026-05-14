@@ -25,6 +25,9 @@ import { FC } from "react";
 import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail";
 import { notFound } from "next/navigation";
 import ReserveBox from "@/src/components/reserveHouse/reserveBox";
+import { getHousesComment } from "@/src/utils/sevices/api/comments/reserveHouseDetailComment/getComment";
+import { IComment, ICommentResponse } from "@/src/core/types/IComment";
+import { AxiosResponse } from "axios";
 interface IProps {
   params: Promise<{ id: number }>;
   searchParams: Promise<{ tab?: string }>;
@@ -35,6 +38,11 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   const house = await getHousesDetail(id);
   const param = await searchParams;
   const activeTab = param.tab || "about";
+//get comments
+  const commentsData = await getHousesComment(id)  ;
+  const comments = commentsData?.comments || []
+
+  console.log("comments:", comments);
 
   if (!house) {
     return notFound();
@@ -81,7 +89,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
           />
         );
       case "comment":
-        return <CommentSection />;
+        return <CommentSection comments={comments}/>;
       case "facilities":
         return (
           <HouseItemsComponent

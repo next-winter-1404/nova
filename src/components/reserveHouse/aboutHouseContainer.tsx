@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import Image from "next/image";
-import home from "@/src/assets/images/home.png";
-import home2 from "@/src/assets/images/home (2).png";
+// import Image from "next/image";
+// import home from "@/src/assets/images/home.png";
+// import home2 from "@/src/assets/images/home (2).png";
 import { IHouse } from "@/src/core/types/IHouse";
 
 const AboutHouseContainer: FC<IHouse> = ({ title, caption }) => {
