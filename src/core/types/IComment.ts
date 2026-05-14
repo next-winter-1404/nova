@@ -5,7 +5,7 @@ export interface ICommentUser {
   }
   
   export interface IComment {
-    id?: number;
+    id: number|string;
     house_id?: number;
     title?: string;
     caption?: string;
