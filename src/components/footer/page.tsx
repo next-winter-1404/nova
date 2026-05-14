@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import CardContainer from '../common/card/page'
 import phone from "@/src/assets/icons/phone.svg"
 import text from "@/src/assets/images/text.svg"
@@ -23,8 +24,68 @@ import Star17 from "@/src/assets/images/Star 17.svg"
 import Star18 from "@/src/assets/images/Star 18.svg"
 import Star19 from "@/src/assets/images/Star 19.svg"
 import Star20 from "@/src/assets/images/Star 20.svg"
+import { useRouter } from 'next/navigation'
+import { getServerSideCookie } from '@/src/utils/helper/cookies/serverCookie/serverSideCookie'
+import toast from 'react-hot-toast'
+import { postCommentsLand } from '@/src/utils/sevices/api/contactus/postCommentLand'
+import LoginButton from '../login/button/LoginButton'
 
 const Footer = () => {
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  useEffect(() => {
+    const CheckAuth = async () => {
+      try{
+        const response = await fetch ("/src//utils/sevices/api/contactus/checkAuth/checkAuth.ts");
+        const data = await response.json();
+        setIsAuthenticated(data.isAuthenticated)
+      } catch (error) {
+        console.log("Error checking auth :", error)
+      }
+      finally{
+        setLoading(false)
+      }
+    };
+    CheckAuth();
+  }, [])
+
+  const [formData, setFormData] = useState({
+        title: "",
+        message : ""
+  })
+
+  const [loading, setLoading] = useState(false)
+
+  const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const {name, value} = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name] : value
+    }));
+  };
+  
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!isAuthenticated){
+      toast.error("ابتدا وارد حساب کاربری شوید")
+      router.push("/login")
+      return
+    }
+    try {
+      await postCommentsLand({
+        title : formData.title,
+        message : formData.message
+      });
+      toast.success("پیام شما با موفقیت ارسال شد!")
+      setFormData({title:"", message:""})
+    } catch (error){
+      toast.error("متاسفانه خطایی رخ داده لطفا دوباره تلاش کنید.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className='h-[1310px] bg-dark-900 relative w-full flex justify-center items-center '>
         <div className='md:w-[756px] w-[290px] absolute md:top-[-10px] top-[-1px] left-[20px] md:left-[65px] flex justify-center rounded-[8px] h-[140px] '>
@@ -45,21 +106,24 @@ const Footer = () => {
                   <h2 className='text-selectedButtonText md:text-[20px] text-[16px] w-[300px] md:w-full'>تیم دلتا با ارائه بهترین نیرو های خدماتی و سرویس های املاکی سعی دارد تا بتواند در تمام لحظات کنار شما باشد .</h2>  
               </div> 
               <div className='flex md:w-full items-center w-[330px] relative'>
-              <form className='md:h-[345px] h-[290px] md:w-[620px] w-[330px] flex flex-col items-center  md:gap-[42px] gap-8' >
+              <form className='md:h-[345px] h-[290px] md:w-[620px] w-[330px] flex flex-col items-center  md:gap-[42px] gap-8' onSubmit={handleSubmit}> 
                 <div className='flex md:w-full w-[330px] h-[59px] gap-6'>     
                   <Input
-                      labelText={'نام و نام خانوادگی :'} 
-                      id={'name'} 
+                      labelText={':عنوان'} 
+                      id={'title'} 
                       InputHeight={'h-[59px]'}
-                      htmlFor={'name'}
+                      htmlFor={'title'}
                       type={'text'}
                       placeHolder={'وارد کنید ....'}
                       parentWidth='md:w-[297px] w-[150px]'
                       borderColor='border-selectedButtonText'               
                       labelTextSize='md:text-[16px] text-[12px]'
                       textSize='md:text-[20px] text-[16px]'
+                      value={formData.title}
+                      onChange={handleChange}
+                      name='title'
                     />            
-                    <Input
+                    {/* <Input
                       labelText={'شماره یا ایمیل :'} 
                       id={'email'} 
                       InputHeight={'h-[59px]'}
@@ -70,11 +134,11 @@ const Footer = () => {
                       borderColor='border-selectedButtonText'               
                       labelTextSize='md:text-[16px] text-[12px]'
                       textSize='md:text-[20px] text-[16px]'
-                    />                    
+                    />                     */}
                 </div>
-                <div className='md:w-full w-[330px] h-[156px]'>
+                <div className='md:w-full w-[330px] h-[156px]' >
                 <Input
-                      labelText={'پیام شما :'} 
+                      labelText={':پیام شما'} 
                       id={'message'} 
                       InputHeight={'h-[156px]'}
                       htmlFor={'message'}
@@ -83,9 +147,20 @@ const Footer = () => {
                       borderColor='border-selectedButtonText'               
                       labelTextSize='md:text-[16px] text-[12px]'
                       textSize='md:text-[20px] text-[16px]'
+                      // tagBgStyle={{color:"transparent"}}
+                      value={formData.message}
+                      name='message'
+                      onChange={handleChange}
                     />
                 </div>
-              {/* <LoginButton /> */}
+              <LoginButton
+                type='submit'
+                buttonText='ارسال پیام'
+                width='w-full'
+                buttonStyle={{
+                  backgroundColor:"[#232323]"
+                }}
+              />
               </form>
               <div className='hidden md:block'>
                 <div className='absolute top-[-174px] left-[21px]'>

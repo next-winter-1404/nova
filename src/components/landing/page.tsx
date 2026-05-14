@@ -5,7 +5,7 @@ import UserComment from './usercomment/page'
 const Landing = () => {
   return (
     <div> <AboutUs></AboutUs>
-    <BuyHouse></BuyHouse>
+    <BuyHouse/>
     <UserComment></UserComment>
     </div>
   )

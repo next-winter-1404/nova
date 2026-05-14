@@ -12,6 +12,7 @@ const LoginButton: FC<ILoginButtonProp> = ({
   loadingText,
   height = "h-[43px]",
   radius = "rounded-2xl ",
+  buttonStyle
 }) => {
   const { pending } = useFormStatus();
 

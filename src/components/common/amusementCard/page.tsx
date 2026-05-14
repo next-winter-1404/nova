@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { FC } from 'react'
 import CardContainer from '../card/page'
 import LeftTriangle from "@/src/assets/images/LeftTriangle.svg"
 import smallLeftArrowWhite from "@/src/assets/icons/smallLeftArrowWhite.svg"
@@ -10,7 +10,17 @@ import { Autoplay, Navigation } from 'swiper/modules'
 import 'swiper/css';
 import 'swiper/css/pagination';
 import InnerAmusementCard from '../innerAmusementCard/page'
-const AmusementCard = () => {
+import { IHouse } from '@/src/core/types/IHouse'
+
+interface AmusementCardProp {
+    houses : IHouse[];
+}
+const AmusementCard : FC<AmusementCardProp> = ({houses}) => {
+    if (!houses || ! Array.isArray(houses)){
+        return(
+            <p>در حال بارگذاری</p>
+        )
+    }
   return (
     <CardContainer
         cavity='sharp'
@@ -44,21 +54,15 @@ const AmusementCard = () => {
                     }}                            
                     className='w-full h-full'
                 >        
-                    <SwiperSlide>
-                        <InnerAmusementCard/>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <InnerAmusementCard/>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <InnerAmusementCard/>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <InnerAmusementCard/>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <InnerAmusementCard/>
-                    </SwiperSlide>
+                {houses.map((house:IHouse) => (
+                    <SwiperSlide key={house.id}>
+                    <InnerAmusementCard
+                        title={house.title}
+                        photos={house.photos}
+                        rate={house.rate}
+                    />
+                </SwiperSlide>
+                ))}                                        
                 </Swiper>
             </div>
         </div>}

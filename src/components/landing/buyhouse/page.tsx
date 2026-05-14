@@ -3,8 +3,8 @@ import React from 'react'
 import Button from '../../common/button/page'
 import LeftTriangle from "@/src/assets/images/LeftTriangle.svg"
 import smallLeftArrowWhite from "@/src/assets/icons/smallLeftArrowWhite.svg"
-import AmusementCard from '../../common/amusementCard/page'
-import HouseData from '../../common/houseCardData/page'
+import HouseData from '../houseCardData/page'
+import AmusementCardData from '../amusmentCardData/page'
 const BuyHouse = () => {
     return (
         <div className='bg-dark-850 md:w-full w-[390px] md:h-[1600px] h-[1350px] md:items-center  rounded-bl-[64px] rounded-br-[64px] flex-col  justify-center flex overflow-hidden'>
@@ -25,7 +25,7 @@ const BuyHouse = () => {
                 <HouseData/>             
             </div>  
             <div className='md:mt-28 mt-20 w-[390px] md:w-[1440px] md:h-[551px]'>
-                <AmusementCard/>
+                <AmusementCardData/>
             </div>
         </div>
     )
