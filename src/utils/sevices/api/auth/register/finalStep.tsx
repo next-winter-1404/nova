@@ -1,9 +1,14 @@
 "use server";
 
-import { deleteServerSideCookie, getServerSideCookie, setServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import {
+  deleteServerSideCookie,
+  getServerSideCookie,
+  setServerSideCookie,
+} from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import instance from "@/src/utils/sevices/interseptor";
 import { z } from "zod";
 import { IUser } from "@/src/core/types/IRegister";
+import { setClientCookie } from "@/src/utils/helper/cookies/clientCookie/clientSideCookie";
 
 const FinalStepSchema = z.object({
   phoneNumber: z
@@ -16,12 +21,12 @@ const FinalStepSchema = z.object({
     .max(20, "رمز عبور حداکثر ۲۰ کاراکتر می‌تواند باشد"),
 });
 export interface RegisterResponse {
-    message: string;
-    user:IUser;
-    accessToken?: string;  
-    refreshToken?: string;  
-  }
-export interface FinalStepResult  {
+  message: string;
+  user: IUser;
+  accessToken?: string;
+  refreshToken?: string;
+}
+export interface FinalStepResult {
   success: boolean;
   message: string;
   data?: RegisterResponse;
@@ -30,9 +35,9 @@ export interface FinalStepResult  {
 export const finalStep = async (prevState: any, formData: FormData) => {
   const phoneNumber = formData.get("phoneNumber");
   const password = formData.get("password");
-  const validation = FinalStepSchema.safeParse({ 
-    phoneNumber: phoneNumber?.toString(), 
-    password: password?.toString() 
+  const validation = FinalStepSchema.safeParse({
+    phoneNumber: phoneNumber?.toString(),
+    password: password?.toString(),
   });
   if (!validation.success) {
     return {
@@ -52,7 +57,7 @@ export const finalStep = async (prevState: any, formData: FormData) => {
       };
     }
     const res = await instance.post("/api/auth/complete-registration", {
-        userId: parseInt(tempUserId),
+      userId: parseInt(tempUserId),
       password: validation.data.password,
       PhoneNumberCode: validation.data.phoneNumber,
     });
@@ -60,11 +65,12 @@ export const finalStep = async (prevState: any, formData: FormData) => {
     const dataResponse = res.data || res;
 
     if (dataResponse.accessToken) {
-        await setServerSideCookie("ServerAccessToken", dataResponse.accessToken);
-        await setServerSideCookie("refreshToken", dataResponse.refreshToken);
-        await deleteServerSideCookie("verificationCode")
-        
-      }
+      await setServerSideCookie("ServerAccessToken", dataResponse.accessToken);
+      await setServerSideCookie("refreshToken", dataResponse.refreshToken);
+      setClientCookie("accessToken", dataResponse.accessToken);
+      setClientCookie("refreshToken", dataResponse.refreshToken);
+      await deleteServerSideCookie("verificationCode");
+    }
     if (dataResponse.success || dataResponse.message?.includes("success")) {
       return {
         success: true,

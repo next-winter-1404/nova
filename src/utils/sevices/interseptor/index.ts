@@ -1,73 +1,90 @@
-import axios, { AxiosResponse, AxiosError, InternalAxiosRequestConfig } from "axios";
-import { getClientCookie, setClientCookie } from "../../helper/cookies/clientCookie/clientSideCookie"; 
-import { RefreshTokenClient } from "../../helper/refreshToken/ClientRefreshToken";
+"use server";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL; 
+import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
+import { getServerSideCookie } from "../../helper/cookies/serverCookie/serverSideCookie";
+import { ServerRefreshToken } from "../../helper/refreshToken/ServerRefreshToken";
+
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const instance = axios.create({
   baseURL: BASE_URL,
 });
 
 let isRefreshing = false;
+let refreshSubscribers: ((token: string) => void)[] = [];
 
-const onSuccess = (response:any) => {
-  return response;
-};
+function onRefreshed(token: string) {
+  refreshSubscribers.forEach((cb) => cb(token));
+  refreshSubscribers = [];
+}
+
+function addSubscriber(callback: (token: string) => void) {
+  refreshSubscribers.push(callback);
+}
+
+const onSuccess = (response: any) => response;
+
 const onError = async (error: AxiosError): Promise<never> => {
   const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
-  
+
   if (error.response) {
-    if (error.response.status >= 404 && error.response.status < 500) {
-      console.log(
-        "Client Error!! :",
-        error.response.status + error.response.statusText
-      );
-    } else if (error.response.status >= 500) {
-      console.error(
-        "Server Error",
-        error.response.status + error.response.statusText
-      );
-    } else if (error.response.status === 401 && originalRequest && !originalRequest._retry) {
-      console.error(" Unauthorized - Token might be expired");
-      
+    const status = error.response.status;
+
+    if (status >= 404 && status < 500 && status !== 401) {
+      console.log("Client Error!! :", `${status} ${error.response.statusText}`);
+    } else if (status >= 500) {
+      console.error("Server Error:", `${status} ${error.response.statusText}`);
+    } else if (status === 401 && originalRequest && !originalRequest._retry) {
+      console.error("Unauthorized - Token might be expired");
       originalRequest._retry = true;
-      
-      if (!isRefreshing) {
-        isRefreshing = true;
-        
-        try {
-          await RefreshTokenClient();
+
+      if (isRefreshing) {
+        return new Promise((resolve) => {
+          addSubscriber((token: string) => {
+            originalRequest.headers.Authorization = `Bearer ${token}`;
+            resolve(instance(originalRequest));
+          });
+        }) as never;
+      }
+
+      isRefreshing = true;
+
+      try {
+        const refreshResult = await ServerRefreshToken();
+
+        if (!refreshResult.success || !refreshResult.accessToken) {
           isRefreshing = false;
-          
-          return instance(originalRequest);
-          
-        } catch (refreshError) {
-          isRefreshing = false;
-          if (typeof window !== "undefined") {
-            window.location.href = "/login";
-          }
-          return Promise.reject(refreshError);
+          return Promise.reject(error);
         }
+
+        const newToken = refreshResult.accessToken;
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
+        onRefreshed(newToken);
+        isRefreshing = false;
+
+        return instance(originalRequest) as never;
+      } catch (refreshError) {
+        isRefreshing = false;
+        return Promise.reject(refreshError);
       }
     }
   }
+
   console.error(error);
   return Promise.reject(error);
 };
 
-instance.interceptors.response.use(onSuccess, onError);
-
 instance.interceptors.request.use(
-  (config) => {
-    const token = getClientCookie("ServerAccessToken"); 
+ async  (config) => {
+    const token =await getServerSideCookie("ServerAccessToken");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
+
+instance.interceptors.response.use(onSuccess, onError);
 
 export default instance;

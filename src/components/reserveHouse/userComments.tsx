@@ -67,7 +67,7 @@ const UserComments: FC<ICommentsProps> = ({ comments }) => {
                                 >
                                   پاسخ ها برای این نظر :
                                   {replies.map((reply) => (
-                                    <div>
+                                    <div key={reply.id}>
                                       <div className="flex items-start gap-3 bg-dark-800 p-3 rounded-2xl">
                                         <div className="w-10 h-10 bg-dark-600 rounded-3xl"></div>
                                         <div className="flex flex-col gap-4">

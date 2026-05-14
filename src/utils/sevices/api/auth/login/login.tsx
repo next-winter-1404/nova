@@ -1,11 +1,10 @@
 "use server";
 
-import {
-  setServerSideCookie,
-} from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import { setServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import instance from "@/src/utils/sevices/interseptor";
 import { z } from "zod";
 import { ILoginUser } from "@/src/core/types/IRegister";
+import { setClientCookie } from "@/src/utils/helper/cookies/clientCookie/clientSideCookie";
 
 const LoginSchema = z.object({
   email: z.string().email("فرمت ایمیل صحیح نیست"),
@@ -16,8 +15,8 @@ const LoginSchema = z.object({
 });
 
 export interface LoginResponse {
-  message?: string;  
-  user?: ILoginUser; 
+  message?: string;
+  user?: ILoginUser;
   accessToken?: string;
   refreshToken?: string;
 }
@@ -31,12 +30,12 @@ export interface LoginResult {
 export const Login = async (prevState: any, formData: FormData) => {
   const email = formData.get("email");
   const password = formData.get("password");
-  
+
   const validation = LoginSchema.safeParse({
     email: email?.toString(),
     password: password?.toString(),
   });
-  
+
   if (!validation.success) {
     return {
       success: false,
@@ -51,14 +50,15 @@ export const Login = async (prevState: any, formData: FormData) => {
     });
 
     const dataResponse = res.data || res;
-  
+
     if (dataResponse.accessToken) {
       await setServerSideCookie("ServerAccessToken", dataResponse.accessToken);
       await setServerSideCookie("refreshToken", dataResponse.refreshToken);
-      
-      
+      setClientCookie("accessToken", dataResponse.accessToken);
+      setClientCookie("refreshToken", dataResponse.refreshToken);
+
       return {
-        success: true,  
+        success: true,
         message: "ورود موفقیت‌آمیز بود",
         data: dataResponse,
       };
@@ -68,11 +68,10 @@ export const Login = async (prevState: any, formData: FormData) => {
         message: dataResponse.message || "خطا در ورود - توکن دریافت نشد",
       };
     }
-    
   } catch (error: any) {
     console.error("Error message:", error.message);
     console.error("Error response data:", error.response?.data);
-    
+
     return {
       success: false,
       message: error.response?.data?.message || error.message || "خطا در ورود",

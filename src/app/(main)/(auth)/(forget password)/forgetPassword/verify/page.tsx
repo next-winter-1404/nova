@@ -11,7 +11,7 @@ import Button from "@/src/components/common/button/page";
 import { useRouter } from "next/navigation"; 
 import { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { getResetCode, getVerificationCode } from "@/src/utils/helper/cookies/getVrificationCode/getVrificationCode";
+import { getResetCode, getVerificationCode } from "@/src/utils/helper/getVrificationCode/getVrificationCode";
 import { forgetPasswordVerifyCode } from "@/src/utils/sevices/api/auth/forgetPassword/verificationCode";
 import Timer from "@/src/utils/hooks/timer";
 

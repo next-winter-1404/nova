@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { verifyCode } from "@/src/utils/sevices/api/auth/register/verifyCode";
-import { getVerificationCode } from "@/src/utils/helper/cookies/getVrificationCode/getVrificationCode";
+import { getVerificationCode } from "@/src/utils/helper/getVrificationCode/getVrificationCode";
 import Timer from "@/src/utils/hooks/timer";
 
 const VerifyEmailPage = () => { 

@@ -89,7 +89,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
           />
         );
       case "comment":
-        return <CommentSection comments={comments}/>;
+        return <CommentSection houseId={house.id} comments={comments}/>;
       case "facilities":
         return (
           <HouseItemsComponent
@@ -176,11 +176,11 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
                 ))}
           </div>
           <Image
-            alt="icon"
+            alt="house picture"
             src={house?.photos?.[0] || deaf}
-            width={"1100"}
+            width={1100}
             height={420}
-            className="md:w-full  lg:max-w-[1100px] lg:h-[420px] rounded-[40px]"
+            className="md:w-full  lg:max-w-[1100px] lg:h-[420px] rounded-[40px] border border-dark-800"
           />
         </div>
         <section className="flex flex-row-reverse justify-between  w-full items-start">
