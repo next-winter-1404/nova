@@ -42,7 +42,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   const commentsData = await getHousesComment(id)  ;
   const comments = commentsData?.comments || []
 
-  console.log("comments:", comments);
+  // console.log("comments:", comments);
 
   if (!house) {
     return notFound();
@@ -178,6 +178,8 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
           <Image
             alt="icon"
             src={house?.photos?.[0] || deaf}
+            width={"1100"}
+            height={420}
             className="md:w-full  lg:max-w-[1100px] lg:h-[420px] rounded-[40px]"
           />
         </div>

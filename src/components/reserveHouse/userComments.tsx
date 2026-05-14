@@ -10,10 +10,13 @@ import { FiChevronLeft } from "react-icons/fi";
 import { FC } from "react";
 import { ICommentsProps } from "./commentSection";
 import { Modal } from "../common/modal";
-import line from "@/src/assets/icons/replyLine.svg"
+import line from "@/src/assets/icons/replyLine.svg";
 import Image from "next/image";
 import { FaCalendarAlt } from "react-icons/fa";
 const UserComments: FC<ICommentsProps> = ({ comments }) => {
+  const getReply = (commentId: number | string) => {
+    return comments.filter((comment) => comment.parent_comment_id == commentId);
+  };
   return (
     <div className="w-full overflow-hidden flex-center gap-8 ">
       <Swiper
@@ -32,6 +35,7 @@ const UserComments: FC<ICommentsProps> = ({ comments }) => {
         className=" w-full"
       >
         {comments?.map((comment) => {
+          const replies = getReply(comment.id);
           if (!comment.parent_comment_id)
             return (
               <SwiperSlide key={comment.id}>
@@ -47,39 +51,79 @@ const UserComments: FC<ICommentsProps> = ({ comments }) => {
                   mainContent={
                     <div className=" w-full md:h-full lg:max-w-[480px] p-4 py-8 flex flex-col items-center justify-between  gap-1 text-right brder">
                       <div className=" w-full flex flex-col gap-1  md:text-[20px] text-[14px] leading-10 text-white-pure">
-                        <h2 className="font-bold">{comment.title}</h2>
+                        <h2 className="text-32-semibold">{comment.title}</h2>
                         <p>{comment.caption}</p>
                       </div>
-                    <div className="flex-col flex gap-6 items-end">
-                    <div className="w-full  flex-center gap-6">
-                        <Image alt="icon" src={line}/>
-                        <Modal
-
-                          mainContent={<div>salam</div>}
-                          modalBtn={
-                            <Button
-                              width="w-[112px] "
-                              buttonStyle={{
-                                background: "var(--color-blue-purple-500)",
-                                borderRadius: 16,
-                                cursor:"pointer"
-                              }}
-                              text={"پاسخ کاربران"}
-                              icon={<FiChevronLeft />}
+                      {replies.length > 0 && (
+                        <div className="flex-col flex gap-6 items-end">
+                          <div className="w-full  flex-center gap-6">
+                            <Image alt="icon" src={line} />
+                            <Modal
+                              contentClassName="bg-dark-900"
+                              mainContent={
+                                <div
+                                  className="flex flex-col gap-5 text-white"
+                                  dir="rtl"
+                                >
+                                  پاسخ ها برای این نظر :
+                                  {replies.map((reply) => (
+                                    <div>
+                                      <div className="flex items-start gap-3 bg-dark-800 p-3 rounded-2xl">
+                                        <div className="w-10 h-10 bg-dark-600 rounded-3xl"></div>
+                                        <div className="flex flex-col gap-4">
+                                          <h1 className="mt-2 font-bold text-[18px]">
+                                            {`${reply.user?.firstName || ""} ${
+                                              reply.user?.lastName || ""
+                                            }` || "کاربر ناشناس"}
+                                          </h1>
+                                          <div className="flex flex-col gap-1">
+                                            <h2 className="font-semibold">
+                                              {reply.title}
+                                            </h2>
+                                            <p>{reply.caption}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              }
+                              modalBtn={
+                                <Button
+                                  width="w-[112px] "
+                                  buttonStyle={{
+                                    background: "var(--color-blue-purple-500)",
+                                    borderRadius: 16,
+                                    cursor: "pointer",
+                                  }}
+                                  text={`(${replies.length})  پاسخ کاربران `}
+                                />
+                              }
                             />
-                          }
-                        />
-                      </div>
-                      <div className="flex-center gap-4">
-                        <div className="flex-center gap-2 text-gray-300">
-                        <span className="text-[13px] ">12 مرداد - 1401 / 12:33</span>
-                        <FaCalendarAlt className="w-3 h-3"/>
+                          </div>
+                          <div className="flex-center gap-4">
+                            <div className="flex-center gap-2 text-gray-300">
+                              <span className="text-[13px] ">
+                                {replies[0].created_at?.slice(0, 10)}
+                              </span>
+                              <FaCalendarAlt className="w-3 h-3" />
+                            </div>
+                            <div className="w-0.5 h-4 bg-white" />
+                            <h2 className="text-white">
+                              {" "}
+                              {`${replies[0].user?.firstName || ""} ${
+                                replies[0].user?.lastName || ""
+                              }` || "کاربر ناشناس"}
+                            </h2>
+                          </div>
+                          <div className="flex flex-col gap-3 text-white">
+                            <h2 className="font-semibold">
+                              {replies[0].title}
+                            </h2>
+                            <p>{replies[0].caption}</p>
+                          </div>
                         </div>
-                        <div className="w-0.5 h-4 bg-white"/>
-                        <h2 className="text-white">محمد رضا ساداتی</h2>
-                      </div>
-                      <p className="text-white">” لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گ...</p>
-                    </div>
+                      )}
                       <div className="w-full p-4 md:h-[80px] h-[50px] rounded-3xl flex items-center bg-dark-600 justify-between  md:gap-4 gap-2">
                         <Button
                           backgroundColor=""

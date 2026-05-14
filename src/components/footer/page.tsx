@@ -25,36 +25,64 @@ import Star18 from "@/src/assets/images/Star 18.svg"
 import Star19 from "@/src/assets/images/Star 19.svg"
 import Star20 from "@/src/assets/images/Star 20.svg"
 import { useRouter } from 'next/navigation'
-import { getServerSideCookie } from '@/src/utils/helper/cookies/serverCookie/serverSideCookie'
 import toast from 'react-hot-toast'
 import { postCommentsLand } from '@/src/utils/sevices/api/contactus/postCommentLand'
 import LoginButton from '../login/button/LoginButton'
 
 const Footer = () => {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  useEffect(() => {
-    const CheckAuth = async () => {
-      try{
-        const response = await fetch ("/src//utils/sevices/api/contactus/checkAuth/checkAuth.ts");
-        const data = await response.json();
-        setIsAuthenticated(data.isAuthenticated)
-      } catch (error) {
-        console.log("Error checking auth :", error)
-      }
-      finally{
-        setLoading(false)
-      }
-    };
-    CheckAuth();
-  }, [])
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
-        title: "",
-        message : ""
-  })
+    title: "",
+    message: ""
+  });
 
-  const [loading, setLoading] = useState(false)
+  const checkAuth = async (): Promise<boolean> => {
+    try {
+      const response = await fetch("/api/auth/check");
+      const data = await response.json();
+      console.log("Auth check response:", data); 
+      setIsAuthenticated(data.isAuthenticated);
+      return data.isAuthenticated;
+    } catch (error) {
+      console.log("Error checking auth:", error);
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const isAuth = await checkAuth();
+    
+    if (!isAuth) {
+      sessionStorage.setItem("redirectAfterLogin", window.location.pathname);
+      toast.error("ابتدا وارد حساب کاربری شوید");
+      router.push("/login");
+      return;
+    }
+    
+    try {
+      await postCommentsLand({
+        title: formData.title,
+        message: formData.message
+      });
+      toast.success("پیام شما با موفقیت ارسال شد!");
+      setFormData({ title: "", message: "" });
+    } catch (error) {
+      toast.error("متاسفانه خطایی رخ داده لطفا دوباره تلاش کنید.");
+    }
+  };
+
+
+
 
   const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = e.target;
@@ -65,26 +93,7 @@ const Footer = () => {
   };
   
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!isAuthenticated){
-      toast.error("ابتدا وارد حساب کاربری شوید")
-      router.push("/login")
-      return
-    }
-    try {
-      await postCommentsLand({
-        title : formData.title,
-        message : formData.message
-      });
-      toast.success("پیام شما با موفقیت ارسال شد!")
-      setFormData({title:"", message:""})
-    } catch (error){
-      toast.error("متاسفانه خطایی رخ داده لطفا دوباره تلاش کنید.")
-    } finally {
-      setLoading(false)
-    }
-  }
+ 
 
   return (
     <div className='h-[1310px] bg-dark-900 relative w-full flex justify-center items-center '>
@@ -115,10 +124,11 @@ const Footer = () => {
                       htmlFor={'title'}
                       type={'text'}
                       placeHolder={'وارد کنید ....'}
-                      parentWidth='md:w-[297px] w-[150px]'
+                      parentWidth='md:w-full w-[150px]'
                       borderColor='border-selectedButtonText'               
                       labelTextSize='md:text-[16px] text-[12px]'
                       textSize='md:text-[20px] text-[16px]'
+                      tagBgStyle={{background:"var(--color-primary-accent-green)"}}
                       value={formData.title}
                       onChange={handleChange}
                       name='title'
@@ -147,7 +157,7 @@ const Footer = () => {
                       borderColor='border-selectedButtonText'               
                       labelTextSize='md:text-[16px] text-[12px]'
                       textSize='md:text-[20px] text-[16px]'
-                      // tagBgStyle={{color:"transparent"}}
+                      tagBgStyle={{background:"var(--color-primary-accent-green)"}}
                       value={formData.message}
                       name='message'
                       onChange={handleChange}
@@ -157,7 +167,9 @@ const Footer = () => {
                 type='submit'
                 buttonText='ارسال پیام'
                 width='w-full'
-                buttonStyle={{background :"[#232323]"}}
+                buttonStyle="bg-dark-800 text-white"
+                loadingText='درحال ارسال پیام'
+                
               />
               </form>
               <div className='hidden md:block'>

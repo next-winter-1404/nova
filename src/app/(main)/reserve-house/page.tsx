@@ -11,14 +11,7 @@ import BottomNavbarFilter from "@/src/components/reserveHouse/bottomNavbarFilter
 const HouseReservePage = async ({
   searchParams,
 }: {
-  searchParams: Promise<{
-    minPrice?: string;
-    maxPrice?: string;
-    propertyType?: string;
-    sort?: string;
-    address?: string;
-    search?: string;
-  }>;
+  searchParams: Promise<IFilters>;
 }) => {
   
   const params = await searchParams;
@@ -28,7 +21,7 @@ const HouseReservePage = async ({
   const sort = params.sort;
   const location = params.address;
   const search = params.search;
-  const filters: any = {
+  const filters :IFilters= {
     transactionType: "reservation",
   };
   if (minRent) filters.minRent = minRent;

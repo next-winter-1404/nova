@@ -12,7 +12,7 @@ const LoginButton: FC<ILoginButtonProp> = ({
   loadingText,
   height = "h-[43px]",
   radius = "rounded-2xl ",
-  buttonStyle
+  buttonStyle ="selected-button"
 }) => {
   const { pending } = useFormStatus();
 
@@ -21,7 +21,7 @@ const LoginButton: FC<ILoginButtonProp> = ({
       dir="rtl"
       className={` ${
         pending ? "opacity-60" : ""
-      } flex-center gap-4 selected-button ${height} ${radius} cursor-pointer ${width} ${buttonStyle}`}
+      } flex-center gap-4  ${height} ${radius} cursor-pointer ${width} ${buttonStyle}`}
       type={type}
       disabled={pending}
     >
