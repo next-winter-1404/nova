@@ -1,5 +1,5 @@
 import axios, { AxiosResponse, AxiosError, InternalAxiosRequestConfig } from "axios";
-import { getClientCookie, setClientCookie } from "../../helper/cookies/clientCookie/clientSideCookie"; // ← تغییر
+import { getClientCookie, setClientCookie } from "../../helper/cookies/clientCookie/clientSideCookie"; 
 import { RefreshTokenClient } from "../../helper/refreshToken/ClientRefreshToken";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL; 
@@ -10,10 +10,9 @@ const instance = axios.create({
 
 let isRefreshing = false;
 
-const onSuccess = <T>(response: AxiosResponse<T>): T => {
-  return response.data;
+const onSuccess = (response:any) => {
+  return response;
 };
-
 const onError = async (error: AxiosError): Promise<never> => {
   const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
   
@@ -60,7 +59,7 @@ instance.interceptors.response.use(onSuccess, onError);
 
 instance.interceptors.request.use(
   (config) => {
-    const token = getClientCookie("serverAccessToken"); 
+    const token = getClientCookie("ServerAccessToken"); 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

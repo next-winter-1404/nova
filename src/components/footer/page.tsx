@@ -157,9 +157,7 @@ const Footer = () => {
                 type='submit'
                 buttonText='ارسال پیام'
                 width='w-full'
-                buttonStyle={{
-                  backgroundColor:"[#232323]"
-                }}
+                buttonStyle={{background :"[#232323]"}}
               />
               </form>
               <div className='hidden md:block'>

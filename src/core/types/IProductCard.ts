@@ -1,5 +1,5 @@
-export interface IHouse {
-  id?: number|string;
+export interface IProductCard {
+    id?: number;
   title?: string | null;
   address?: string | null;
   photos?: string[] | null;
@@ -24,9 +24,7 @@ export interface IHouse {
   bookings?: number;
   favoriteId?: number | null;
   isFavorite?: boolean;
+  seeMore? : boolean;
+  offer:string,
+  buttonText:string,
 }
-
-export interface IHousesResponse {
-    houses?: IHouse[];
-    totalCount?: number;
-  }

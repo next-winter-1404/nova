@@ -3,6 +3,7 @@ import React, { FC } from 'react'
 import CardContainer from '../card/page'
 import leftArrow from "@/src/assets/icons/leftArrow.svg"
 import Star from "@/src/assets/icons/Star.svg"
+import imagePlaceHolder from "@/src/assets/images/imagePlaceHolder (2).png"
 import { IHouse } from '@/src/core/types/IHouse'
 
 const InnerAmusementCard : FC<IHouse> = ({
@@ -20,7 +21,7 @@ const InnerAmusementCard : FC<IHouse> = ({
                 cavity="round"
                 labelContent={<div className='w-[67px] h-[30px] mt-[9px] ml-[5px] flex items-center  text-dark-800 justify-center gap-1 bg-white-pure rounded-[8px] z-20 '><Image src={Star} alt='star'/> {rate}</div>}
                 labelSize="md"
-                mainContent={<div className='w-[274px] h-[156px] bg-dark-600 rounded-2xl'>{photos}</div>                    
+                mainContent={<div className='w-[274px] h-[156px] bg-dark-600 rounded-2xl'>{photos || <Image src={imagePlaceHolder} alt='imagePlaceHolder' className='w-full h-full rounded-2xl'/>}</div>                    
                 }                            
                 labelBackground="bg-dark-700 "
                 mainExtraStyle="bg-dark-700 p-6" 

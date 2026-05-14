@@ -1,13 +1,18 @@
-import React from "react";
+"use client"
 import StarRatingContainer from "./starRatingcontainer";
 import Input from "../common/input/Input";
 import LoginButton from "../login/button/LoginButton";
 import Image from "next/image";
 import UserComments from "./userComments";
 import line from "@/src/assets/images/divideLine.svg";
+import { getHousesComment } from "@/src/utils/sevices/api/comments/reserveHouseDetailComment/getComment";
+import { FC } from "react";
+import { IComment } from "@/src/core/types/IComment";
 
-
-const CommentSection = () => {
+export interface ICommentsProps {
+  comments: IComment[];
+}
+const CommentSection:FC<ICommentsProps> = ({comments}) => {
   return (
     <div className="flex flex-col gap-8 justify-center">
       <div className="flex justify-end gap-10">
@@ -52,7 +57,9 @@ const CommentSection = () => {
         />
       </div>
       <Image alt="icon" src={line} />
-      <UserComments />
+   
+        <UserComments comments={comments}/>
+     
     </div>
   );
 };

@@ -1,18 +1,30 @@
 "use server"
-import axios from "axios"
 import ListingType from "./ListingType";
 import SearchWrapper from "./SearchWrapper";
-// import { getAllLocation } from '@/src/utils/sevices/api/locations/getAllLocations/getAllLocation';
+import { cacheLife } from "next/cache";
+import { getAllLocation } from '@/src/utils/sevices/api/locations/getAllLocations/getAllLocation';
+
 
 
 const SearchContainer = async() => {
-  // const location = await getAllLocation();
-  // console.log(location )
+  'use cache'
+  cacheLife('hours')
+  const location = await getAllLocation();
+  const data = location.data
+
+  const citiesOptions = Array.isArray(data) 
+    ? data.map((item) => ({
+        value: String(item.id),
+        label: item.areaName || `مکان ${item.id}`,
+      }))
+    : [];
+
+
+  // console.log(data)
   return (
-    <form className='flex flex-col gap-4 w-[86%] h-30'>
-      <ListingType />
-          <SearchWrapper />
-    </form>
+    <div className='w-full'>
+      <SearchWrapper cityOptions={citiesOptions}/>
+    </div>
   )
 }
 
