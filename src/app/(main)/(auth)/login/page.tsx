@@ -21,7 +21,7 @@ const LoginPage = () => {
     if (!state?.message) return;
     if (state.success) {
       toast.success(state.message);
-      router.push("/dashboard");
+      router.push("/dashboard"); 
     } else {
       toast.error(state.message);
     }

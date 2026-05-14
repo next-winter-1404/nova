@@ -25,6 +25,6 @@ export interface IProductCard {
   favoriteId?: number | null;
   isFavorite?: boolean;
   seeMore? : boolean;
-  offer:string,
-  buttonText:string,
+  offer?:string,
+  buttonText?:string,
 }
