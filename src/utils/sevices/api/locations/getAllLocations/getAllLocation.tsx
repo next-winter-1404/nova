@@ -10,6 +10,5 @@ export const getAllLocation = async() => {
     );
     
     cacheLife('hours')
-    console.log(res)
     return res.data
 }

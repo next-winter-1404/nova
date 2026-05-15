@@ -1,7 +1,7 @@
 "use client";
-import StarRatingContainer from "./starRatingcontainer";
-import Input from "../common/input/Input";
-import LoginButton from "../login/button/LoginButton";
+import StarRatingContainer from "../starRatingcontainer";
+import Input from "../../common/input/Input";
+import LoginButton from "../../login/button/LoginButton";
 import Image from "next/image";
 import UserComments from "./userComments";
 import { FC, useActionState, useEffect, useState } from "react";

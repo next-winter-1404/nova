@@ -8,6 +8,7 @@ import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
 import { IHouse } from "@/src/core/types/IHouse";
 import BottomNavbarFilter from "@/src/components/reserveHouse/bottomNavbarFilter";
 
+export const revalidate = 30
 const HouseReservePage = async ({
   searchParams,
 }: {

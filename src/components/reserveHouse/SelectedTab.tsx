@@ -8,8 +8,9 @@ import { FC, ReactNode, useState } from "react";
 interface IPropertyTab {
   options: ITab[];
   twClassname?: string;
+  buttonWidth?:string;
 }
-const SelectedTab: FC<IPropertyTab> = ({ options, twClassname }) => {
+const SelectedTab: FC<IPropertyTab> = ({ options, twClassname, buttonWidth }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 ;
@@ -31,7 +32,7 @@ const SelectedTab: FC<IPropertyTab> = ({ options, twClassname }) => {
       {options.map((op) => (
         <div
           key={op.value}
-          className={`min-w-[140px] h-full  rounded-xl flex-center ${
+          className={`${buttonWidth} h-full  rounded-xl flex-center ${
             selectedTab === op.value
               ? "bg-primary-accent-green "
               : "bg-dark-700 text-gray-300"

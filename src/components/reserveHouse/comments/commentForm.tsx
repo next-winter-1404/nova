@@ -1,9 +1,9 @@
 "use client"
 import React, { useActionState, useEffect, useState,FC } from 'react'
 import toast from 'react-hot-toast';
-import StarRatingContainer from './starRatingcontainer';
-import Input from '../common/input/Input';
-import LoginButton from '../login/button/LoginButton';
+import StarRatingContainer from '../starRatingcontainer';
+import Input from '../../common/input/Input';
+import LoginButton from '../../login/button/LoginButton';
 import Image from 'next/image';
 import line from "@/src/assets/images/divideLine.svg";
 import { sendComment } from '@/src/utils/sevices/api/comments/reserveHouseDetailComment/postcomment';

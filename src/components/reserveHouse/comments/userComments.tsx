@@ -3,13 +3,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import CardContainer from "../common/card/page";
-import Button from "../common/button/page";
+import CardContainer from "../../common/card/page";
+import Button from "../../common/button/page";
 import { FaStar } from "react-icons/fa";
 import { FiChevronLeft } from "react-icons/fi";
 import { FC } from "react";
 import { ICommentsProps } from "./commentSection";
-import { Modal } from "../common/modal";
+import { Modal } from "../../common/modal";
 import line from "@/src/assets/icons/replyLine.svg";
 import Image from "next/image";
 import { FaCalendarAlt } from "react-icons/fa";
@@ -63,7 +63,7 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
                             <Modal
                               contentClassName="bg-dark-900"
                               mainContent={
-                                <div className="flex flex-col gap-5 text-white" dir="rtl">
+                                <div className="flex flex-col gap-5 text-white overflow-y-auto max-h-[500px]" dir="rtl">
                                   پاسخ ها برای این نظر :
                                   {replies.map((reply) => (
                                     <div key={reply.id}>

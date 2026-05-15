@@ -5,6 +5,7 @@ import instance from "@/src/utils/sevices/interseptor";
 import { z } from "zod";
 import { ILoginUser } from "@/src/core/types/IRegister";
 import { setClientCookie } from "@/src/utils/helper/cookies/clientCookie/clientSideCookie";
+import Jwt_decode from "@/src/utils/helper/jwtToken/Jwt_decode";
 
 const LoginSchema = z.object({
   email: z.string().email("فرمت ایمیل صحیح نیست"),
@@ -50,13 +51,33 @@ export const Login = async (prevState: any, formData: FormData) => {
     });
 
     const dataResponse = res.data || res;
+    const decoded: any = Jwt_decode(dataResponse.accessToken);
+    const userInfo = {
+      id: decoded?.id,
+      email: decoded?.email,
+      role: decoded?.role,
+      name: decoded?.name,
+      profilePicture: decoded?.profilePicture,
+    };
 
     if (dataResponse.accessToken) {
       await setServerSideCookie("ServerAccessToken", dataResponse.accessToken);
       await setServerSideCookie("refreshToken", dataResponse.refreshToken);
+      await setServerSideCookie("userId", userInfo.id.toString());
+      await setServerSideCookie("userRole", userInfo.role);
+      await setServerSideCookie("userName", userInfo.name);
+      await setServerSideCookie("userEmail", userInfo.email);
+
       setClientCookie("accessToken", dataResponse.accessToken);
       setClientCookie("refreshToken", dataResponse.refreshToken);
+      setClientCookie("userId", userInfo.id.toString());
+      setClientCookie("userRole", userInfo.role);
+      setClientCookie("userName", userInfo.name);
+      setClientCookie("userEmail", userInfo.email);
 
+      if (userInfo.profilePicture) {
+        setClientCookie("userProfilePicture", userInfo.profilePicture);
+      }
       return {
         success: true,
         message: "ورود موفقیت‌آمیز بود",

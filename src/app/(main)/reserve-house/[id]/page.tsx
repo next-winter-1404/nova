@@ -19,8 +19,8 @@ import {
 import { FiCopy } from "react-icons/fi";
 import AboutHouseContainer from "@/src/components/reserveHouse/aboutHouseContainer";
 import HouseItemsComponent from "@/src/components/reserveHouse/houseItemsComponent";
-import SimilarHouses from "@/src/components/reserveHouse/SimilarHousesNavbar";
-import CommentSection from "@/src/components/reserveHouse/commentSection";
+import SimilarHouses from "@/src/components/reserveHouse/similarHouse/SimilarHousesNavbar";
+import CommentSection from "@/src/components/reserveHouse/comments/commentSection";
 import { FC } from "react";
 import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail";
 import { notFound } from "next/navigation";
@@ -32,7 +32,7 @@ interface IProps {
   params: Promise<{ id: number }>;
   searchParams: Promise<{ tab?: string }>;
 }
-
+export const revalidate = 30
 const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   const { id } = await params;
   const house = await getHousesDetail(id);

@@ -86,7 +86,7 @@ const CategorySection = () => {
                     width="w-[200px]"
                     labelExtraStyle={{ height: "48px" }}
                     curveColor="var(--color-dark-860 )"
-                    mainExtraStyle="group-hover:bg-primary-accent-green bg-dark-860"
+                    mainExtraStyle="group-hover:bg-primary-accent-green bg-dark-860 p-6"
                   />
                 </SwiperSlide>
               ))}

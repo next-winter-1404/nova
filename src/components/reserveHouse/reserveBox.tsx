@@ -3,8 +3,8 @@ import React, { FC, useEffect, useState } from "react";
 import InfoCardContainer from "./InfoCardContainer";
 import Image from "next/image";
 import DatePickerComponent from "../common/datePicker";
-import DaysCounter from "./daysCounter";
-import PassengerCounter from "./counter";
+import DaysCounter from "./similarHouse/conters/daysCounter";
+import PassengerCounter from "./similarHouse/conters/counter";
 import Button from "../common/button/page";
 import OldPriceComponent from "../common/productCard/OldPrice";
 import LoginButton from "../login/button/LoginButton";
@@ -14,17 +14,36 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useDebounce } from "use-debounce";
 import { calculateDaysBetween } from "@/src/utils/hooks/countDays";
 import { IHouse } from "@/src/core/types/IHouse";
+import toast from "react-hot-toast";
 
-const ReserveBox:FC<IHouse> = ({price}) => {
+const ReserveBox: FC<IHouse> = ({ price }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const [checkInDate, setCheckInDate] = useState<string>("");
   const [checkOutDate, setCheckOutDate] = useState<string>("");
   const [days, setDays] = useState<number>(0);
-  const [passengers, setPassengers] = useState<number>(1); 
+  const [passengers, setPassengers] = useState<number>(1);
   const [debouncedCheckIn] = useDebounce(checkInDate, 500);
   const [debouncedCheckOut] = useDebounce(checkOutDate, 500);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const checkAuth = async (): Promise<boolean> => {
+    try {
+      const response = await fetch("/api/auth/check");
+      const data = await response.json();
+      console.log("Auth check response:", data); 
+      setIsAuthenticated(data.isAuthenticated);
+      return data.isAuthenticated;
+    } catch (error) {
+      console.log("Error checking auth:", error);
+      return false;
+    } 
+  };
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     if (checkInDate && checkOutDate) {
@@ -53,9 +72,17 @@ const ReserveBox:FC<IHouse> = ({price}) => {
     router.replace(`?${queryParams.toString()}`, { scroll: false });
   }, [debouncedCheckIn, debouncedCheckOut]);
 
-  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSearchSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const isAuth = await checkAuth();
+    
+    if (!isAuth) {
+      sessionStorage.setItem("redirectAfterLogin", window.location.pathname);
+      toast.error("ابتدا وارد حساب کاربری شوید");
+      router.push("/login");
+      return;
+    }
     const queryParams = new URLSearchParams();
 
     if (checkInDate) queryParams.append("checkInDate", checkInDate);
@@ -73,7 +100,10 @@ const ReserveBox:FC<IHouse> = ({price}) => {
       icon={<Image alt="icon" src={building} className="w-5 h-5" />}
       labelText="رزرو خونه برای :"
     >
-      <form onSubmit={handleSearchSubmit} className="relative flex flex-col w-full gap-6">
+      <form
+        onSubmit={handleSearchSubmit}
+        className="relative flex flex-col w-full gap-6"
+      >
         <DatePickerComponent
           paramKey="checkInDate"
           placeholder="تاریخ ورود را وارد کنید"
@@ -86,10 +116,10 @@ const ReserveBox:FC<IHouse> = ({price}) => {
           value={checkOutDate}
           onChange={setCheckOutDate}
         />
-        
+
         <DaysCounter days={days} />
-        
-        <PassengerCounter  />
+
+        <PassengerCounter />
 
         <div className="border-t-2 border-b-2 border-gray-550 w-[92%] flex flex-col items-center gap-6 pb-6">
           <div
@@ -100,20 +130,20 @@ const ReserveBox:FC<IHouse> = ({price}) => {
             <span>قیمت رزرو :</span>
           </div>
           <div className="flex justify-between w-full" dir="rtl">
-            <span className="text-gray-300 text-16-bold">
-              ★ {days} شب  
-            </span>
+            <span className="text-gray-300 text-16-bold">★ {days} شب</span>
             <div className="flex gap-2 text-16-bold text-white">
               <span>{totalPrice}</span>
-            <span>تومان</span>
-
+              <span>تومان</span>
             </div>
           </div>
         </div>
 
         <div className="w-full px-2 flex flex-col justify-start gap-4">
           <div className="flex gap-4 w-full">
-            <Button text={"15%"} buttonStyle={{ height: 25, width: 40, borderRadius: 8 }} />
+            <Button
+              text={"15%"}
+              buttonStyle={{ height: 25, width: 40, borderRadius: 8 }}
+            />
             <OldPriceComponent oldPrice="25.000.000" />
           </div>
           <div className="text-primary-accent-green font-semibold text-[24px] flex gap-2">

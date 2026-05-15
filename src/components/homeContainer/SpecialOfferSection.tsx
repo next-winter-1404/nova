@@ -12,12 +12,23 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
-import useSWR from 'swr'
+import useSWR from "swr";
+import instance from "@/src/utils/sevices/interseptor";
+import { IHouse } from "@/src/core/types/IHouse";
+import { IProductCard } from "@/src/core/types/IProductCard";
 
 const SpecialOfferSection = () => {
-   const {data,error,isLoading} = useSWR("houses",getHouses) 
+ const { data, error, isLoading } = useSWR("/api/houses", async (url) => {
+  const res = await instance.get(url);
+  return res;   // ← because res is already the data object
+});
+  const houses = data?.houses ?? [];
+  console.log("my-houses", data?.houses);
 
-   const houses = Array.isArray(data) ? data.houses : []
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!houses.length) return <div>No houses found</div>;
+
   return (
     <div className="relative padding-section">
       <CardContainer
@@ -35,7 +46,7 @@ const SpecialOfferSection = () => {
           />
         }
         labelExtraStyle={{ padding: "24px", height: "50px" }}
-        mainExtraStyle="bg-dark-860"
+        mainExtraStyle="bg-dark-860 p-6"
         curveColor="var(--color-dark-860)"
         labelSize="lg"
         width="w-full"
@@ -94,7 +105,7 @@ const SpecialOfferSection = () => {
                 </h3>
               </div>
             </div>
-            
+
             <Container>
               <div className="w-full overflow-hidden flex-center gap-8">
                 <Swiper
@@ -112,22 +123,24 @@ const SpecialOfferSection = () => {
                   }}
                   className="my-house-swiper"
                 >
-                    {houses.map((item) => (
-                <SwiperSlide key={item.id}>
-                    <ProductCard
-                      seeMore
-                      offer="15"
-                      title={item.title}
-                      rooms={item.rooms}
-                      location={item.address}
-                      price={item.discounted_price}
-                      rate={item.rate}
-                      oldPrice={item.price}
-                      buttonText="قیمت خرید :"
-                    />
-                  </SwiperSlide>
-            ))}
-                  
+                  {houses.map((item:IProductCard) => (
+                    <SwiperSlide key={item.id}>
+                      <ProductCard
+                        seeMore
+                        offer="15"
+                        title={item.title}
+                        rooms={item.rooms}
+                        location={item.address}
+                        discounted_price={item.discounted_price}
+                        rate={item.rate}
+                        price={item.price}
+                        buttonText="قیمت خرید :"
+                        bathrooms={item.bathrooms}
+                        capacity={item.capacity}
+                        photos={item.photos}
+                      />
+                    </SwiperSlide>
+                  ))}
                 </Swiper>
               </div>
             </Container>
