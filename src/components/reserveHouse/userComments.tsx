@@ -13,7 +13,9 @@ import { Modal } from "../common/modal";
 import line from "@/src/assets/icons/replyLine.svg";
 import Image from "next/image";
 import { FaCalendarAlt } from "react-icons/fa";
-const UserComments: FC<ICommentsProps> = ({ comments }) => {
+import { useRouter } from "next/navigation";
+const UserComments: FC<ICommentsProps> = ({ comments,houseId }) => {
+  const router =useRouter()
   const getReply = (commentId: number | string) => {
     return comments.filter((comment) => comment.parent_comment_id == commentId);
   };
@@ -136,6 +138,7 @@ const UserComments: FC<ICommentsProps> = ({ comments }) => {
                           }}
                           text={"ثبت پاسخ"}
                           icon={<FiChevronLeft />}
+                          onClick={() => router.push(`?tab=comment&replyTo=${comment.id}`)}
                         />
                         <div className=" w-full flex  items-center  justify-end gap-4">
                           <div className="h-full md:w-[180px] md:gap-2.5 gap-1.5 flex flex-col justify-center items-end text-[12px] md:text-[16px]">
