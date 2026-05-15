@@ -26,8 +26,7 @@ import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail"
 import { notFound } from "next/navigation";
 import ReserveBox from "@/src/components/reserveHouse/reserveBox";
 import { getHousesComment } from "@/src/utils/sevices/api/comments/reserveHouseDetailComment/getComment";
-import { IComment, ICommentResponse } from "@/src/core/types/IComment";
-import { AxiosResponse } from "axios";
+
 interface IProps {
   params: Promise<{ id: number }>;
   searchParams: Promise<{ tab?: string }>;
@@ -190,7 +189,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
             {renderContent()}
           </section>
 
-        <ReserveBox price={house.price}/>
+        <ReserveBox price={house.price} id={house.id}/>
         </section>
         <SimilarHouses />
       </div>

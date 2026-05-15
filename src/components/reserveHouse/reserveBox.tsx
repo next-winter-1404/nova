@@ -16,7 +16,7 @@ import { calculateDaysBetween } from "@/src/utils/hooks/countDays";
 import { IHouse } from "@/src/core/types/IHouse";
 import toast from "react-hot-toast";
 
-const ReserveBox: FC<IHouse> = ({ price }) => {
+const ReserveBox: FC<IHouse> = ({ price ,id}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -68,7 +68,9 @@ const ReserveBox: FC<IHouse> = ({ price }) => {
     } else {
       queryParams.delete("checkOutDate");
     }
-
+if (id) {
+  queryParams.set("houseId", id.toString());
+}
     router.replace(`?${queryParams.toString()}`, { scroll: false });
   }, [debouncedCheckIn, debouncedCheckOut]);
 
@@ -89,6 +91,7 @@ const ReserveBox: FC<IHouse> = ({ price }) => {
     if (checkOutDate) queryParams.append("checkOutDate", checkOutDate);
     if (days) queryParams.append("days", days.toString());
     if (passengers) queryParams.append("passengers", passengers.toString());
+    if (id) queryParams.append("houseId", id.toString());
 
     router.push(`/processreserve/travelerinfo?${queryParams.toString()}`);
   };
