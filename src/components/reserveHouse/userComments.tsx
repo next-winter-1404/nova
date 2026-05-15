@@ -14,8 +14,8 @@ import line from "@/src/assets/icons/replyLine.svg";
 import Image from "next/image";
 import { FaCalendarAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-const UserComments: FC<ICommentsProps> = ({ comments,houseId }) => {
-  const router =useRouter()
+const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
+  const router = useRouter();
   const getReply = (commentId: number | string) => {
     return comments.filter((comment) => comment.parent_comment_id == commentId);
   };
@@ -56,74 +56,56 @@ const UserComments: FC<ICommentsProps> = ({ comments,houseId }) => {
                         <h2 className="text-32-semibold">{comment.title}</h2>
                         <p>{comment.caption}</p>
                       </div>
-                      {replies.length > 0 && (
-                        <div className="flex-col flex gap-6 items-end">
-                          <div className="w-full  flex-center gap-6">
-                            <Image alt="icon" src={line} />
-                            <Modal
-                              contentClassName="bg-dark-900"
-                              mainContent={
-                                <div
-                                  className="flex flex-col gap-5 text-white"
-                                  dir="rtl"
-                                >
-                                  پاسخ ها برای این نظر :
-                                  {replies.map((reply) => (
-                                    <div key={reply.id}>
-                                      <div className="flex items-start gap-3 bg-dark-800 p-3 rounded-2xl">
-                                        <div className="w-10 h-10 bg-dark-600 rounded-3xl"></div>
-                                        <div className="flex flex-col gap-4">
-                                          <h1 className="mt-2 font-bold text-[18px]">
-                                            {`${reply.user?.firstName || ""} ${
-                                              reply.user?.lastName || ""
-                                            }` || "کاربر ناشناس"}
-                                          </h1>
-                                          <div className="flex flex-col gap-1">
-                                            <h2 className="font-semibold">
-                                              {reply.title}
-                                            </h2>
-                                            <p>{reply.caption}</p>
-                                          </div>
+                      {replies.length > 0 ? (
+                        <div className="w-full flex-center gap-6">
+                          <Image alt="icon" src={line} />
+                          <Modal
+                            contentClassName="bg-dark-900"
+                            mainContent={
+                              <div
+                                className="flex flex-col gap-5 text-white"
+                                dir="rtl"
+                              >
+                                پاسخ ها برای این نظر :
+                                {replies.map((reply) => (
+                                  <div key={reply.id}>
+                                    <div className="flex items-start gap-3 bg-dark-800 p-3 rounded-2xl">
+                                      <div className="w-10 h-10 bg-dark-600 rounded-3xl"></div>
+                                      <div className="flex flex-col gap-4">
+                                        <h1 className="mt-2 font-bold text-[18px]">
+                                          {`${reply.user?.firstName || ""} ${
+                                            reply.user?.lastName || ""
+                                          }`.trim() || "کاربر ناشناس"}
+                                        </h1>
+                                        <div className="flex flex-col gap-1">
+                                          <h2 className="font-semibold">
+                                            {reply.title}
+                                          </h2>
+                                          <p>{reply.caption}</p>
                                         </div>
                                       </div>
                                     </div>
-                                  ))}
-                                </div>
-                              }
-                              modalBtn={
-                                <Button
-                                  width="w-[112px] "
-                                  buttonStyle={{
-                                    background: "var(--color-blue-purple-500)",
-                                    borderRadius: 16,
-                                    cursor: "pointer",
-                                  }}
-                                  text={`(${replies.length})  پاسخ کاربران `}
-                                />
-                              }
-                            />
-                          </div>
-                          <div className="flex-center gap-4">
-                            <div className="flex-center gap-2 text-gray-300">
-                              <span className="text-[13px] ">
-                                {replies[0].created_at?.slice(0, 10)}
-                              </span>
-                              <FaCalendarAlt className="w-3 h-3" />
-                            </div>
-                            <div className="w-0.5 h-4 bg-white" />
-                            <h2 className="text-white">
-                              {" "}
-                              {`${replies[0].user?.firstName || ""} ${
-                                replies[0].user?.lastName || ""
-                              }` || "کاربر ناشناس"}
-                            </h2>
-                          </div>
-                          <div className="flex flex-col gap-3 text-white">
-                            <h2 className="font-semibold">
-                              {replies[0].title}
-                            </h2>
-                            <p>{replies[0].caption}</p>
-                          </div>
+                                  </div>
+                                ))}
+                              </div>
+                            }
+                            modalBtn={
+                              <Button
+                                width="w-[112px]"
+                                buttonStyle={{
+                                  background: "var(--color-blue-purple-500)",
+                                  borderRadius: 16,
+                                  cursor: "pointer",
+                                }}
+                                text={`(${replies.length}) پاسخ کاربران`}
+                              />
+                            }
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-full flex-center gap-6 text-gray-400">
+                          <Image alt="icon" src={line} />
+                          <span className="text-lg">پاسخی وجود ندارد</span>
                         </div>
                       )}
                       <div className="w-full p-4 md:h-[80px] h-[50px] rounded-3xl flex items-center bg-dark-600 justify-between  md:gap-4 gap-2">
@@ -138,7 +120,9 @@ const UserComments: FC<ICommentsProps> = ({ comments,houseId }) => {
                           }}
                           text={"ثبت پاسخ"}
                           icon={<FiChevronLeft />}
-                          onClick={() => router.push(`?tab=comment&replyTo=${comment.id}`)}
+                          onClick={() =>
+                            router.push(`?tab=comment&replyTo=${comment.id}`)
+                          }
                         />
                         <div className=" w-full flex  items-center  justify-end gap-4">
                           <div className="h-full md:w-[180px] md:gap-2.5 gap-1.5 flex flex-col justify-center items-end text-[12px] md:text-[16px]">

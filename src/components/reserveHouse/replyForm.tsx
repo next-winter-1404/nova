@@ -55,10 +55,11 @@ const ReplyForm: FC<IReplyCommentsProps> = ({ parentId,houseId }) => {
           InputHeight="h-[50px]"
           borderColor="border-white"
           labelTextSize="text-white"
-          tagBgStyle={{ background: "var(--color-dark-900)" }}
+          tagBgStyle={{ background:"var(--color-dark-900)" }}
           textColor="text-white"
           parentWidth="w-full"
           value={parentComment?.caption ?? ""}
+          readOnly
         />
       </div>
       <div className="flex-center gap-8 w-full">

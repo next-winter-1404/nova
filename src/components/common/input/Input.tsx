@@ -1,5 +1,6 @@
 import { IInputProp } from "@/src/core/types/IInputProp";
 import React, { FC } from "react";
+
 const Input: FC<IInputProp> = ({
   parentWidth,
   htmlFor,
@@ -18,7 +19,9 @@ const Input: FC<IInputProp> = ({
   labelTextSize,
   textSize,
   labelTextColor,
-  dir="ltr"
+  dir = "ltr",
+  readOnly = false,  
+  disabled = false,  
 }) => {
   return (
     <div className={`${parentWidth} relative`} dir={dir}>
@@ -36,11 +39,14 @@ const Input: FC<IInputProp> = ({
         value={value}
         id={id}
         onChange={onChange}
-        className={` w-full border focus:outline-none ${borderColor} ${textSize} rounded-2xl  ${textColor} px-6 ${InputHeight}`}
+        readOnly={readOnly}
+        disabled={disabled}
+        className={`w-full border focus:outline-none ${borderColor} ${textSize} rounded-2xl ${textColor} px-6 ${InputHeight} ${
+          readOnly || disabled ? " cursor-not-allowed" : ""
+        }`}
         placeholder={placeHolder}
         defaultValue={defaultValue}
-        
-    />
+      />
     </div>
   );
 };
