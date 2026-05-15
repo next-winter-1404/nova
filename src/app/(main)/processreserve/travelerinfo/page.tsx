@@ -5,11 +5,7 @@ import whiteStar from "@/src/assets/icons/whiteStar.svg"
 import Location from "@/src/assets/icons/Location.svg"
 import CalendarTime from "@/src/assets/icons/calendarclock.svg"
 import greenhotel from "@/src/assets/icons/greenhotel.svg"
-import usersAlt from "@/src/assets/icons/usersAlt.svg"
 import timepast from "@/src/assets/icons/timepast.svg"
-import arrowUp from "@/src/assets/icons/arrowUp.svg"
-import arrowDown from "@/src/assets/icons/arrowDown.svg"
-import useradd from "@/src/assets/icons/useradd.svg"
 import users2 from "@/src/assets/icons/users2.svg"
 import checkCircle from "@/src/assets/icons/checkCircle.svg"
 import ticket from "@/src/assets/icons/ticket.svg"
@@ -18,17 +14,48 @@ import Image from 'next/image'
 import Button from '@/src/components/common/button/page'
 import Input from '@/src/components/common/input/Input'
 import UseStepNavigation from '../navigation'
+import PassengerSection from './passengerSection/page'
+import toast from 'react-hot-toast'
+import { postTravelerInfo } from '@/src/utils/sevices/api/processReserve/postTravelerInfo'
 
 
 const Traveler = () => {
     const searchParams = useSearchParams();
     const currentStep = searchParams.get('step') || 'travelerinfo'
-    const [isOpen, setIsOpen] = useState(true);
-    const toggleShow = async () => {
-      setIsOpen ((prev) => (!prev));
-    };
+    const [passengers, setPassengers] = useState([])
+    const [sharedEmail, setSharedEmail] = useState('')
+    const [sharedMobile, setSharedMobile] = useState('')
+    const handlePassengerChange = (newPassengers) => {
+      setPassengers(newPassengers)
+    }
     const {goToNext} = UseStepNavigation();
     
+    const handleSubmit = async () => {
+      // const validPassengers = passengers.filter(p => p.firstName.trim() ! === '');
+      // if (validPassengers.length === 0){
+      //   toast("لطفا مشخصات مسافران را وارد کنید !")
+      //   return
+      // }
+      if (!sharedMobile) {
+        toast("شماره موبایل را وارد کنید")
+      }
+      if (!sharedEmail) {
+        toast("ایمیل را وارد کنید")
+        return
+      }
+      try{
+        const peylod = {
+          traveler_details : passengers,
+          sharedEmail : sharedEmail,
+          sharedMobile :sharedMobile
+        };
+        const response = await postTravelerInfo(peylod);
+      }
+      catch (error){
+      console.log(error)
+    } 
+  }
+
   return (
     <div className='flex flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
         <div className='flex items-center justify-center md:w-11/12 w-[340px] md:h-[142px] h-[400px] bg-dark-700 rounded-3xl '>
@@ -66,95 +93,8 @@ const Traveler = () => {
             </div>
           </div>
         </div>
-        <div className='md:w-11/12 w-[340px] flex flex-col items-center justify-center md:h-[250px] h-[570px] bg-dark-700 rounded-3xl gap-5'>
-          <div className='w-22/23 h-[44px] rounded-2xl bg-gray-250 flex justify-center items-center gap-3 md:gap-6'>
-            <div className='md:w-[1417px] items-center flex md:justify-between'>
-              <div className='md:w-[160px] w-[140px] h-[21px] flex md:gap-3 gap-2 items-center md:text-[16px] text-[12px] text-white-pure'><Image src={usersAlt} alt='usersAlt'/>مشخصات مسافران </div>
-              <Button text={"انتخاب مسافران سابق"} icon={<Image src={timepast} alt='timepast'/>} textStyle={{fontSize:"15px", color:"#8CFF45"}} buttonStyle={{height:"20px", width:"170px", background:"#F550"}}/>
-            </div>        
-          </div>
-          <div className='w-22/23 flex flex-col items-center md:h-[100px] h-[400px] border-b-3 border-gray-300 border-dashed'>
-            <div className='flex md:gap-5 w-full flex-col justify-end items-center relative h-[370px] md:h-[75px]'>
-            <Button buttonStyle={{width :"16px", height:"10px", backgroundColor:"transparent", position:"absolute", left:"35px", top:"0px"}} onClick={toggleShow} icon= {isOpen ? <Image src={arrowUp} alt='arrowUp'/> : <Image src={arrowDown} alt='arrowDown'/>}/>            
-            {isOpen && (
-            <form className='md:w-[1410px] md:h-[60px] h-[350px] flex md:flex-row flex-col justify-between items-center'>              
-              <Input
-                labelText='نام شما :'
-                parentWidth='w-[250px]'
-                InputHeight={'h-[50px]'}
-                labelTextSize='text-[13px]'
-                textSize='md:text-[16px] text-[12px]'
-                borderColor='border-gray-300'
-                textColor='text-gray-300'
-                labelTextColor='text-gray-300'
-                id={'name'}
-                placeHolder='وارد کنید ...'
-                type='text'
-                htmlFor={'name'}
-              />
-              <Input
-                labelText='نام خانوادگی :'
-                parentWidth='w-[250px]'
-                InputHeight={'h-[50px]'}
-                labelTextSize='text-[13px]'
-                textSize='md:text-[16px] text-[12px]'
-                borderColor='border-gray-300'
-                textColor='text-gray-300'
-                labelTextColor='text-gray-300'
-                id={'family'}
-                placeHolder='وارد کنید ...'
-                type='text'
-                htmlFor={'family'}
-              />
-              <Input
-                labelText=' کد ملی:'
-                parentWidth='w-[250px]'
-                InputHeight={'h-[50px]'}
-                labelTextSize='text-[13px]'
-                textSize='md:text-[16px] text-[12px]'
-                borderColor='border-gray-300'
-                textColor='text-gray-300'
-                labelTextColor='text-gray-300'
-                id={'national'}
-                placeHolder='وارد کنید ...'
-                type='text'
-                htmlFor={'national'}
-              />
-              <Input
-                labelText=' کد ملی:'
-                parentWidth='w-[250px]'
-                InputHeight={'h-[50px]'}
-                labelTextSize='text-[13px]'
-                textSize='md:text-[16px] text-[12px]'
-                borderColor='border-gray-300'
-                textColor='text-gray-300'
-                labelTextColor='text-gray-300'
-                id={'national'}
-                placeHolder='وارد کنید ...'
-                type='text'
-                htmlFor={'national'}
-              />
-              <Input
-                labelText=' کد ملی:'
-                parentWidth='w-[250px]'
-                InputHeight={'h-[50px]'}
-                labelTextSize='text-[13px]'
-                textSize='md:text-[16px] text-[12px]'
-                borderColor='border-gray-300'
-                textColor='text-gray-300'
-                labelTextColor='text-gray-300'
-                id={'national'}
-                placeHolder='وارد کنید ...'
-                type='text'
-                htmlFor={'national'}
-              />
-            </form>
-            )}
-            </div>
-          </div>
-          <div className='md:w-[1410px] flex flex-col items-end justify-center h-[50px]'> 
-          <Button text={"افزودن مسافر"} icon={<Image src={useradd} alt='useradd'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"142px"}}/>
-          </div>
+        <div className='md:w-11/12 w-[340px] flex flex-col items-center justify-center p-3 bg-dark-700 rounded-3xl gap-5'>
+          <PassengerSection onPassengersChange={handlePassengerChange}/>
         </div>
         <div className='md:w-11/12 w-[340px] flex flex-col items-center justify-center md:h-[166px] h-[300px] bg-dark-700 rounded-3xl gap-5'>
           <div className='w-22/23 h-[44px] rounded-2xl bg-gray-250 flex justify-center items-center gap-4 md:gap-6'>
@@ -168,8 +108,9 @@ const Traveler = () => {
             </div>        
           </div>
           <div className='md:w-[1410px] md:justify-between flex md:flex-row flex-col items-center h-[200px] md:h-[70px] '>                   
-            <form className='md:h-[50px] h-[180px] flex md:flex-row flex-col gap-5 items-center'>              
+            <form className='md:h-[50px] h-[180px] flex md:flex-row flex-col gap-5 items-center' >               
               <Input
+                tagBgStyle={{background :"var(--color-dark-700)"}}
                 labelText='شماره تلفن :'
                 parentWidth='w-[250px]'
                 InputHeight={'h-[50px]'}
@@ -182,8 +123,11 @@ const Traveler = () => {
                 placeHolder='وارد کنید ...'
                 type='text'
                 htmlFor={'name'}
+                value={sharedMobile}
+                onChange={(e) => setSharedMobile(e.target.value)}
               />
               <Input
+                tagBgStyle={{background :"var(--color-dark-700)"}}
                 labelText='ایمیل :'
                 parentWidth='w-[250px]'
                 InputHeight={'h-[50px]'}
@@ -196,9 +140,14 @@ const Traveler = () => {
                 placeHolder='وارد کنید ...'
                 type='text'
                 htmlFor={'family'}
+                value={sharedEmail}
+                onChange={(e) => setSharedEmail(e.target.value)}
               />
             </form>            
-            <Button text={"ثبت اطلاعات"} icon={<Image src={checkCircle} alt='checkCircle'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"142px"}}/>          
+            <Button text={"ثبت اطلاعات"} 
+              icon={<Image src={checkCircle} alt='checkCircle'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"142px"}}
+              onClick={handleSubmit}
+            />          
           </div>          
         </div>
         <div className='md:h-[84px] h-[74px] w-[340px] md:w-11/12 flex items-center justify-center border-3 border-dashed rounded-4xl border-gray-300'>
@@ -217,5 +166,6 @@ const Traveler = () => {
     </div>
   )
 }
+
 
 export default Traveler
