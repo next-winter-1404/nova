@@ -1,14 +1,14 @@
 "use server"
 import ListingType from "./ListingType";
 import SearchWrapper from "./SearchWrapper";
-import { cacheLife } from "next/cache";
+// import { cacheLife } from "next/cache";
 import { getAllLocation } from '@/src/utils/sevices/api/locations/getAllLocations/getAllLocation';
 
 
 
 const SearchContainer = async() => {
-  'use cache'
-  cacheLife('hours')
+  // 'use cache'
+  // cacheLife('hours')
   const location = await getAllLocation();
   const data = location.data
 

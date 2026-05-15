@@ -185,7 +185,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
         </div>
         <section className="flex flex-row-reverse justify-between  w-full items-start">
           <section className=" w-[1000px] flex flex-col gap-8">
-            <SelectedTab options={tabs} twClassname="w-full" />
+            <SelectedTab options={tabs} twClassname="w-full" buttonWidth="p-4"/>
 
             {renderContent()}
           </section>

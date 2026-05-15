@@ -5,6 +5,7 @@ import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
 import { IHousesResponse } from "@/src/core/types/IHouse";
 import SimilarHouseItems from "./SimilarHouseItems";
 import { FC } from "react";
+import Link from "next/link";
 
 export const revalidate = 60
 const SimilarHouses: FC<IHousesResponse> = async () => {
@@ -19,7 +20,7 @@ const SimilarHouses: FC<IHousesResponse> = async () => {
           <span className="cursor-pointer">مشاهده همه</span>
         </div>
         <div className="flex-center text-white gap-4">
-          <span>اگهی های مشابه</span>
+          <Link href={"/reserve-house"}>اگهی های مشابه</Link>
           <Image alt="icon" src={building} className="w-4 h-4" />
         </div>
       </div>
