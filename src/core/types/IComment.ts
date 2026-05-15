@@ -3,7 +3,11 @@ export interface ICommentUser {
     lastName?: string;
     profilePicture?: string | null;
   }
-  
+  export interface ICommentHouse {
+    id: number;
+    title?: string | null;
+    address?: string | null;
+  }
   export interface IComment {
     id: number|string;
     house_id?: number;
@@ -14,6 +18,7 @@ export interface ICommentUser {
     parent_comment_id?: number | null;
     user?: ICommentUser;
     parent_comment?: IComment | null;
+    house?: ICommentHouse;
   }
   
   export interface ICommentResponse {

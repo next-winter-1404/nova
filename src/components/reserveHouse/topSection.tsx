@@ -1,6 +1,5 @@
 "use client";
 import Button from "@/src/components/common/button/page";
-import DropMenu from "@/src/components/common/dropMenu/DropMenu";
 import Input from "@/src/components/common/input/Input";
 import { ChangeEvent, useEffect, useState } from "react";
 import megaPhone from "@/src/assets/icons/megaphone.svg";

@@ -19,20 +19,19 @@ import {
 import { FiCopy } from "react-icons/fi";
 import AboutHouseContainer from "@/src/components/reserveHouse/aboutHouseContainer";
 import HouseItemsComponent from "@/src/components/reserveHouse/houseItemsComponent";
-import SimilarHouses from "@/src/components/reserveHouse/SimilarHousesNavbar";
-import CommentSection from "@/src/components/reserveHouse/commentSection";
+import SimilarHouses from "@/src/components/reserveHouse/similarHouse/SimilarHousesNavbar";
+import CommentSection from "@/src/components/reserveHouse/comments/commentSection";
 import { FC } from "react";
 import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail";
 import { notFound } from "next/navigation";
 import ReserveBox from "@/src/components/reserveHouse/reserveBox";
 import { getHousesComment } from "@/src/utils/sevices/api/comments/reserveHouseDetailComment/getComment";
-import { IComment, ICommentResponse } from "@/src/core/types/IComment";
-import { AxiosResponse } from "axios";
+
 interface IProps {
   params: Promise<{ id: number }>;
   searchParams: Promise<{ tab?: string }>;
 }
-
+export const revalidate = 30
 const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   const { id } = await params;
   const house = await getHousesDetail(id);
@@ -50,15 +49,15 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   const items: BreadcrumbItem[] = [
     {
       href: "/reserve-house",
-      label: "رزرو هتل",
+      label: "رزرو ملک",
     },
     {
       href: "/reserve-house",
 
-      label: `رزرو هتل ${house.location}`,
+      label: `رزرو  ${house.location}`,
     },
     {
-      label: `رزرو هتل ${house.title}`,
+      label: `رزرو  ${house.title}`,
     },
   ];
   const tabs: ITab[] = [
@@ -89,7 +88,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
           />
         );
       case "comment":
-        return <CommentSection comments={comments}/>;
+        return <CommentSection houseId={house.id} comments={comments}/>;
       case "facilities":
         return (
           <HouseItemsComponent
@@ -176,21 +175,21 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
                 ))}
           </div>
           <Image
-            alt="icon"
+            alt="house picture"
             src={house?.photos?.[0] || deaf}
-            width={"1100"}
+            width={1100}
             height={420}
-            className="md:w-full  lg:max-w-[1100px] lg:h-[420px] rounded-[40px]"
+            className="md:w-full  lg:max-w-[1100px] lg:h-[420px] rounded-[40px] border border-dark-800"
           />
         </div>
         <section className="flex flex-row-reverse justify-between  w-full items-start">
           <section className=" w-[1000px] flex flex-col gap-8">
-            <SelectedTab options={tabs} twClassname="w-full" />
+            <SelectedTab options={tabs} twClassname="w-full" buttonWidth="p-4"/>
 
             {renderContent()}
           </section>
 
-        <ReserveBox price={house.price}/>
+        <ReserveBox price={house.price} id={house.id}/>
         </section>
         <SimilarHouses />
       </div>
