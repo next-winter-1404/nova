@@ -17,7 +17,6 @@ export interface ICommentsProps {
   houseId?: string | number | undefined;
 }
 
-// CommentSection.tsx
 const CommentSection: FC<ICommentsProps> = ({ comments, houseId }) => {
   const searchParams = useSearchParams();
   const replyTo = searchParams.get("replyTo");

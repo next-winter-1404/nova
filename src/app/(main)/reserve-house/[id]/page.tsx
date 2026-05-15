@@ -50,15 +50,15 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   const items: BreadcrumbItem[] = [
     {
       href: "/reserve-house",
-      label: "رزرو هتل",
+      label: "رزرو ملک",
     },
     {
       href: "/reserve-house",
 
-      label: `رزرو هتل ${house.location}`,
+      label: `رزرو  ${house.location}`,
     },
     {
-      label: `رزرو هتل ${house.title}`,
+      label: `رزرو  ${house.title}`,
     },
   ];
   const tabs: ITab[] = [

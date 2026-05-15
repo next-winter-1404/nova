@@ -24,10 +24,6 @@ const ReplyForm: FC<IReplyCommentsProps> = ({ parentId,houseId }) => {
     staleTime: 5 * 1000 * 60,
     refetchOnWindowFocus: false,
   });
-  
- 
-  console.log("parentId:", parentId);
-  console.log("parentComment:", parentComment);
   const [state, formAction] = useActionState(sendReplyComment, {
     success: false,
     message: "",
