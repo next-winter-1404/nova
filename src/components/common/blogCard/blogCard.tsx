@@ -49,7 +49,7 @@ const BlogCard = ({ created_at, estimated_reading_time, caption, title }: IBlogs
       >
         <div className="flex items-center gap-1 text-gray-300">
           <FaCalendarAlt className="w-4 h-4 mb-1" />
-          <span>{created_at}</span>
+          <span>{created_at?.slice(0,10)}</span>
         </div>
         <span className="sm:text-[20px] text-[18px] text-white truncate ">
           {title}
