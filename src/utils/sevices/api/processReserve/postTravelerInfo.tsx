@@ -1,3 +1,4 @@
+'use server'
 import React from "react";
 import instance from "../../interseptor";
 import { AxiosResponse } from "axios";

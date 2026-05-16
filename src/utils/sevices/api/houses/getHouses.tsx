@@ -1,6 +1,6 @@
 "use server"
 import React from "react";
-import instance from "@/src/utils/sevices/interseptor/index";
+import instance from "../../interseptor";
 import { IHousesResponse } from "@/src/core/types/IHouse";
 
 export const getHouses = async (apiParams = {}): Promise<IHousesResponse> => {

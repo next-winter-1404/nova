@@ -14,8 +14,6 @@ import megaphone from "@/src/assets/icons/megaphone.svg"
 import star25 from "@/src/assets/icons/Star25.svg"
 import badgepercent from "@/src/assets/icons/badgepercent.svg" 
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
-import { getClientCookie } from '@/src/utils/helper/cookies/clientCookie/clientSideCookie';
-import { getBookingsById } from '@/src/utils/sevices/api/processReserve/getTravelerInfo';
 import { ITraveler } from '@/src/core/types/IPassengerInfo';
 
 

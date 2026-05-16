@@ -5,7 +5,7 @@ import AcceptInfoData from './acceptinfodata/page'
 
 const AcceptInfo = async() => {
     const id = getServerSideCookie("BookingId")
-    const data = await getBookingsById(id)
+    const data = await getBookingsById(Number(id))
   return (
     <AcceptInfoData data = {data} />
   )
