@@ -10,6 +10,7 @@ import timepast from "@/src/assets/icons/timepast.svg"
 import { IPassengerInfo } from '@/src/core/types/IPassengerInfo'
 import toast from 'react-hot-toast'
 import SimpleDropdown from '@/src/components/common/dropDown'
+import DatePickerComponent from '@/src/components/common/datePicker'
 
 const STORAGE_KEY = "past_passengers";
 
@@ -17,6 +18,7 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
     const [passengers, setPassengers ] = useState([
         { firstName: '', lastName: '', birthDay: '', nationalId : '', gender : ''}
     ]);
+    const [birthday, setBirthday] = useState("");
 
     const [savedPassengers, setSavedPassengers] = useState<IPassengerInfo[]>([]);
     const [showModal, setShowModal] = useState(false)
@@ -164,9 +166,17 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                         value={p.nationalId}
                         onChange={(e) => handleChange(index, "nationalId" , e.target.value)}
                     />
-                    <Input
+                    <div className='w-[250px]'>
+                    <DatePickerComponent
+                        paramKey="birthday"
+                        placeholder="تاریخ تولد را وارد کنید"
+                        value={p.birthDay}
+                        onChange={(e) => setBirthday(e.target.value)}                         
+                        />
+                    </div>
+                    {/* <Input
                         tagBgStyle={{background :"var(--color-dark-700)"}}
-                        labelText='تاریخ تولد :'
+                        labelText='تاریخ  :'
                         parentWidth='w-[250px]'
                         InputHeight={'h-[50px]'}
                         labelTextSize='text-[13px]'
@@ -180,7 +190,7 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                         htmlFor={'national'}
                         onChange={(e) => handleChange(index, "birthDay" , e.target.value)}
                         value={p.birthDay}
-                    />
+                    /> */}
                     </form>
                 
                 </div>
