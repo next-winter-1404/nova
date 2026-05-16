@@ -11,7 +11,10 @@ import Button from "../button/page";
 import { IHouse } from "@/src/core/types/IHouse";
 import imgPlaceholder from "@/src/assets/images/imagePlaceHolder (2).png"
 import Link from "next/link";
-const RowProductCard: FC<IHouse> = ({
+interface RowProductCardProps extends IHouse {
+  href: string;
+}
+const RowProductCard: FC<RowProductCardProps> = ({
   price,
   rate,
   address,
@@ -19,7 +22,7 @@ const RowProductCard: FC<IHouse> = ({
   bathrooms,
   rooms,
   parking,
-  id
+  href
 }) => {
   return (
     <div className="flex">
@@ -30,7 +33,7 @@ const RowProductCard: FC<IHouse> = ({
             <span>{price}</span>
           </span>
         )}
-        <Link href={`/reserve-house/${id}`}>
+        <Link href={href}>
           <Button
             text={"مشاهده ملک"}
             backgroundColor="8cff45"
@@ -57,7 +60,7 @@ const RowProductCard: FC<IHouse> = ({
                 style={{ display: "flex", alignItems: "center", gap: "4px" }}
                 className=""
               >
-                {rate}
+                {rate||0}
                 <FaStar className="w-4 h-4" />
               </span>
             </span>

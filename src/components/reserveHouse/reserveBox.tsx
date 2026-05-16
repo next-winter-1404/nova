@@ -89,10 +89,8 @@ if (id) {
 
     if (checkInDate) queryParams.append("checkInDate", checkInDate);
     if (checkOutDate) queryParams.append("checkOutDate", checkOutDate);
-    if (days) queryParams.append("days", days.toString());
     if (passengers) queryParams.append("passengers", passengers.toString());
     if (id) queryParams.append("houseId", id.toString());
-
     router.push(`/processreserve/travelerinfo?${queryParams.toString()}`);
   };
   const priceNumber = Number(price) || 0;
