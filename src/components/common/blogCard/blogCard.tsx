@@ -1,13 +1,6 @@
 import Image from "next/image";
-import React from "react";
 import CardContainer from "../card/page";
-import Location from "@/src/assets/icons/Location.svg";
-import bed from "@/src/assets/icons/bed.svg";
-import houseTree from "@/src/assets/icons/houseTree.svg";
-import car from "@/src/assets/icons/car.svg";
-import bathroom from "@/src/assets/icons/bathroom.svg";
 import leftArrow from "@/src/assets/icons/leftArrow.svg";
-import Star from "@/src/assets/icons/Star.svg";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaRegClock } from "react-icons/fa";
 import { IBlogs } from "@/src/core/types/IBogs";

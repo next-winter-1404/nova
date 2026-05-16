@@ -15,8 +15,9 @@ import { useDebounce } from "use-debounce";
 import { calculateDaysBetween } from "@/src/utils/hooks/countDays";
 import { IHouse } from "@/src/core/types/IHouse";
 import toast from "react-hot-toast";
+import { computingDiscount } from "@/src/utils/helper/computingDiscount";
 
-const ReserveBox: FC<IHouse> = ({ price ,id}) => {
+const ReserveBox: FC<IHouse> = ({ price, id, discounted_price }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -32,13 +33,13 @@ const ReserveBox: FC<IHouse> = ({ price ,id}) => {
     try {
       const response = await fetch("/api/auth/check");
       const data = await response.json();
-      console.log("Auth check response:", data); 
+      console.log("Auth check response:", data);
       setIsAuthenticated(data.isAuthenticated);
       return data.isAuthenticated;
     } catch (error) {
       console.log("Error checking auth:", error);
       return false;
-    } 
+    }
   };
 
   useEffect(() => {
@@ -68,17 +69,17 @@ const ReserveBox: FC<IHouse> = ({ price ,id}) => {
     } else {
       queryParams.delete("checkOutDate");
     }
-if (id) {
-  queryParams.set("houseId", id.toString());
-}
+    if (id) {
+      queryParams.set("houseId", id.toString());
+    }
     router.replace(`?${queryParams.toString()}`, { scroll: false });
   }, [debouncedCheckIn, debouncedCheckOut]);
 
-  const handleSearchSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+  const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const isAuth = await checkAuth();
-    
+
     if (!isAuth) {
       sessionStorage.setItem("redirectAfterLogin", window.location.pathname);
       toast.error("ابتدا وارد حساب کاربری شوید");
@@ -93,9 +94,10 @@ if (id) {
     if (id) queryParams.append("houseId", id.toString());
     router.push(`/processreserve/travelerinfo?${queryParams.toString()}`);
   };
-  const priceNumber = Number(price) || 0;
+  const priceNumber = Number(discounted_price || price) || 0;
   const totalPrice = days > 0 ? priceNumber * days : priceNumber;
-
+  const discountPercent = computingDiscount({discounted_price, price});
+  const roundDiscountPercent = Math.round(discountPercent)
   return (
     <InfoCardContainer
       icon={<Image alt="icon" src={building} className="w-5 h-5" />}
@@ -142,14 +144,14 @@ if (id) {
         <div className="w-full px-2 flex flex-col justify-start gap-4">
           <div className="flex gap-4 w-full">
             <Button
-              text={"15%"}
+              text={`${roundDiscountPercent} %`} 
               buttonStyle={{ height: 25, width: 40, borderRadius: 8 }}
             />
-            <OldPriceComponent oldPrice="25.000.000" />
+            <OldPriceComponent oldPrice={price || ""} />
           </div>
           <div className="text-primary-accent-green font-semibold text-[24px] flex gap-2">
             <i>تومان</i>
-            <span>{price}</span>
+            <span>{discounted_price || price}</span>
           </div>
         </div>
 

@@ -15,7 +15,7 @@ const BlogPage = async () => {
   const blogLength= blogs?.length
   return (
     <div className="flex w-full justify-center p-3 ">
-      <div className="mt-25 lg:w-[1376px] w-[80%] flex items-end flex-col gap-6">
+      <div className="mt-25 xl:w-[1376px] lg:w-[1090px]  w-[80%] flex items-end flex-col gap-6">
         <Breadcrumb items={items} />
         <div className="flex flex-col gap-6" dir="rtl">
           <div className="flex items-center gap-2">
