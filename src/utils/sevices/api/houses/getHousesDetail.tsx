@@ -1,3 +1,4 @@
+"use server"
 import { IHouse } from "@/src/core/types/IHouse";
 import instance from "../../interseptor";
 
