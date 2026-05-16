@@ -9,12 +9,25 @@ import Location from "@/src/assets/icons/Location.svg";
 import { FiPhoneCall } from "react-icons/fi";
 import { FiCalendar } from "react-icons/fi";
 import dolor from "@/public/icons/grayDollor.svg";
+import Vector from "@/public/icons/Vector.svg";
 import moneyCheck from "@/public/icons/money-check-edit1.svg";
 import comment from "@/public/icons/commentwhite.svg";
 import InfoCardContainer from "@/src/components/reserveHouse/InfoCardContainer";
 import Button from "@/src/components/common/button/page";
-import { FaStar } from "react-icons/fa";
 import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail";
+import {
+  FaRegCommentDots,
+  FaRegSave,
+  FaRegFileAlt,
+  FaStar,
+} from "react-icons/fa";
+import { BsChevronLeft } from "react-icons/bs";
+import { ITab } from "@/src/core/types/ITab";
+import SelectedTab from "@/src/components/reserveHouse/SelectedTab";
+import MortgageTabContent from "@/src/components/mortgageAndRentPageContainer/MortgageTabContent";
+import { getHousesComment } from "@/src/utils/sevices/api/comments/reserveHouseDetailComment/getComment";
+import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
+import SliderSection from "@/src/components/mortgageAndRentPageContainer/SliderSection";
 
 interface IProps {
   params: Promise<{ id: number }>;
@@ -22,7 +35,7 @@ interface IProps {
 }
 
 export const revalidate = 30;
-const SingleHousePage = async ({ searchParams, params }: IProps) => {
+const SingleHousePage = async ({ params }: IProps) => {
   const { id } = await params;
   const getHouseInfo = await getHousesDetail(id);
   const tags = Array.isArray(getHouseInfo?.tags)
@@ -30,6 +43,13 @@ const SingleHousePage = async ({ searchParams, params }: IProps) => {
     : typeof getHouseInfo?.tags === "string"
       ? getHouseInfo.tags.split(",")
       : [];
+
+  const commentsData = await getHousesComment(id);
+  const comments = commentsData?.comments || [];
+
+  const getAllHouse = await getHouses();
+  const result = getAllHouse?.houses || [];
+  
 
   const items: BreadcrumbItem[] = [
     {
@@ -48,6 +68,29 @@ const SingleHousePage = async ({ searchParams, params }: IProps) => {
       label: `خونه 400 متری درسا در${"تهران"}`,
     },
   ];
+  const tabs: ITab[] = [
+    {
+      value: "comment",
+      label: "نظرات کاربران",
+      icon: <FaRegCommentDots className="w-4 h-4" />,
+    },
+    {
+      value: "address",
+      label: "موقعیت ملک",
+      icon: <Image src={Location} alt="Location" className="w-4 h-4" />,
+    },
+    {
+      value: "facilities",
+      label: " امکانات ملک",
+      icon: <FaRegSave className="w-4 h-4" />,
+    },
+
+    {
+      value: "about",
+      label: "توضیحات ملک",
+      icon: <FaRegFileAlt className="w-4 h-4" />,
+    },
+  ];
   return (
     <div className="padding-section flex-col-center sm:mt-24 mt-15">
       <div className="flex-col-center sm:gap-6 gap-3">
@@ -55,7 +98,7 @@ const SingleHousePage = async ({ searchParams, params }: IProps) => {
           items={items}
           twClassname="w-full flex-center justify-start"
         />
-        <div className="flex-center justify gap-5 bg-amber-200">
+        <div className="flex-center justify gap-7">
           <div className="flex flex-1">
             <InfoCardContainer icon={<FiPhoneCall />} labelText="اطلاعات تماس">
               <div className="w-full flex-col-center gap-8">
@@ -191,7 +234,39 @@ const SingleHousePage = async ({ searchParams, params }: IProps) => {
       </div>
 
       <Container>
-        <div className="w-full shadow-000-8">TODO:IMPLEMENT TABS</div>
+        <div className="w-full shadow-000-8">
+          <SelectedTab options={tabs} twClassname="w-full" buttonWidth="p-4" />
+        </div>
+        <div className="w-full py-6">
+          <MortgageTabContent
+            caption={getHouseInfo.caption}
+            bathrooms={getHouseInfo.bathrooms}
+            capacity={getHouseInfo.capacity}
+            parking={getHouseInfo.parking}
+            rooms={getHouseInfo.rooms}
+            yard_type={getHouseInfo.yard_type}
+            address={getHouseInfo.address}
+            comments={comments}
+            id={getHouseInfo.id}
+          />
+        </div>
+        <div className="flex-center justify-between w-full bg-dark-700 rounded-xl px-4 py-3 shadow-000-8">
+          <span>
+            <span className="flex-center gap-2 text-primary-accent-green ">
+              <BsChevronLeft />
+              <i className="sm:text-[16px] text-[10px]">مشاهده همه</i>
+            </span>
+          </span>
+          <span className="flex-center gap-2">
+            <i className="sm:text-[16px] text-[10px] text-white-pure ">
+              آگهی های مشابه
+            </i>
+            <span className="pb-1">
+              <Image src={Vector} alt="Vector" />
+            </span>
+          </span>
+        </div>
+        <SliderSection cardData={result}/>
       </Container>
     </div>
   );
