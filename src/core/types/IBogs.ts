@@ -1,5 +1,5 @@
 export interface IBlogs {
-    id?: number;
+    id: number;
     title?: string;
     caption?: string;
     estimated_reading_time?: string;
