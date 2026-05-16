@@ -1,6 +1,6 @@
 "use server";
 
-import { getServerSideCookie } from "../serverCookie/serverSideCookie";
+import { getServerSideCookie } from "../cookies/serverCookie/serverSideCookie";
 
 export const getVerificationCode = async () => {
   try {

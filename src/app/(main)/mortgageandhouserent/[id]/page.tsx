@@ -5,6 +5,7 @@ import {
   BreadcrumbItem,
 } from "@/src/components/common/breadCrumbs";
 import HousePicture from "@/src/assets/images/singleHouse.png";
+import Location from "@/src/assets/icons/Location.svg";
 import { FiPhoneCall } from "react-icons/fi";
 import { FiCalendar } from "react-icons/fi";
 import dolor from "@/public/icons/grayDollor.svg";
@@ -13,11 +14,23 @@ import comment from "@/public/icons/commentwhite.svg";
 import InfoCardContainer from "@/src/components/reserveHouse/InfoCardContainer";
 import Button from "@/src/components/common/button/page";
 import { FaStar } from "react-icons/fa";
-import { getHousesById } from "@/src/utils/sevices/api/houses/getHousesById";
+import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail";
 
-const SingleHousePage = async () => {
-  const getHouseInfo =  await getHousesById();
-  
+interface IProps {
+  params: Promise<{ id: number }>;
+  searchParams: Promise<{ tab?: string }>;
+}
+
+export const revalidate = 30;
+const SingleHousePage = async ({ searchParams, params }: IProps) => {
+  const { id } = await params;
+  const getHouseInfo = await getHousesDetail(id);
+  const tags = Array.isArray(getHouseInfo?.tags)
+    ? getHouseInfo.tags
+    : typeof getHouseInfo?.tags === "string"
+      ? getHouseInfo.tags.split(",")
+      : [];
+
   const items: BreadcrumbItem[] = [
     {
       href: "/reserve-house",
@@ -51,10 +64,10 @@ const SingleHousePage = async () => {
                     <span className="w-12 h-12 rounded-2xl bg-gray-200"></span>
                     <span className="flex-col-center">
                       <span className="text-16-medium text-white">
-                        محمد رضا ساداتی
+                        {getHouseInfo?.sellerName}
                       </span>
                       <span className="flex-center gap-2 text-gray-300">
-                        <p>12 مرداد - 1401 / 12:33</p>
+                        <p>{getHouseInfo?.last_updated}</p>
                         <FiCalendar />
                       </span>
                     </span>
@@ -63,7 +76,7 @@ const SingleHousePage = async () => {
                     <div className="w-full flex-center justify-between">
                       <div className="flex-center gap-0.5 text-16-medium text-primary-accent-green">
                         <span>ت</span>
-                        <span>40000000</span>
+                        <span>{getHouseInfo?.discounted_price}</span>
                       </div>
                       <div className="flex-center gap-2 text-16-medium text-gray-300">
                         <span>: قیمت رهن از</span>
@@ -73,7 +86,7 @@ const SingleHousePage = async () => {
                     <div className="w-full flex-center justify-between">
                       <div className="flex-center gap-0.5 text-16-medium text-primary-accent-green">
                         <span>ت</span>
-                        <span>40000000</span>
+                        <span>{getHouseInfo?.price}</span>
                       </div>
                       <div className="flex-center gap-2 text-16-medium text-gray-300">
                         <span>: قیمت اجاره از</span>
@@ -147,24 +160,39 @@ const SingleHousePage = async () => {
                 style={{ display: "flex", alignItems: "center", gap: "4px" }}
                 className=""
               >
-                4.5
+                {getHouseInfo?.rate}
                 <FaStar className="w-4 h-4" />
               </span>
             </span>
-             <i className="h-[21px] w-0.5 bg-gray-300"></i>
+            <i className="h-[21px] w-0.5 bg-gray-300"></i>
             <div className="flex-center gap-4">
-              <div className="text-gray-300 text-[16px] bg-dark-700 border border-gray-200 rounded-xl p-8-16">
-                hkdshkh
-              </div>
+              {tags?.map((tag) => {
+                return (
+                  <div
+                    key={tag}
+                    className="text-gray-300 text-[16px] bg-dark-700 border border-gray-200 rounded-xl p-8-16"
+                  >
+                    {tag}#
+                  </div>
+                );
+              })}
             </div>
-           
-            
           </div>
+        </div>
+        <span className="w-full text-right text-semibold-28 text-white-pure">
+          {getHouseInfo?.title}
+        </span>
+        <div className="w-full flex justify-end gap-1.5">
+          <h2 className="text-[16px] text-gray-300 text-right  whitespace-nowrap">
+            {getHouseInfo?.address || "ادرسی وجود ندارد"}
+          </h2>
+          <Image src={Location} alt="Location" className="w-4 h-4" />
         </div>
       </div>
 
-      {/* <Container>
-      </Container> */}
+      <Container>
+        <div className="w-full shadow-000-8">TODO:IMPLEMENT TABS</div>
+      </Container>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import Input from "../common/input/Input";
+import Input from "../../../common/input/Input";
 
 const PassengerCounter = () => {
   const searchParams = useSearchParams();
@@ -12,9 +12,15 @@ const PassengerCounter = () => {
 
   useEffect(() => {
     const param = new URLSearchParams(searchParams.toString());
-    param.set("passengerCount", count.toString());
+    if (count > 0) {
+      param.set("passengerCount", count.toString());
+    } else {
+      param.delete("passengerCount");
+    }
     router.replace(`?${param.toString()}`, { scroll: false });
-  }, [count, router]);
+  }, [count]);
+
+
   const addCount = () => {
     setCount((prev) => prev + 1);
   };

@@ -1,11 +1,11 @@
 "use server";
 
-import {
-  setServerSideCookie,
-} from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import { setServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import instance from "@/src/utils/sevices/interseptor";
 import { z } from "zod";
 import { ILoginUser } from "@/src/core/types/IRegister";
+import { setClientCookie } from "@/src/utils/helper/cookies/clientCookie/clientSideCookie";
+import Jwt_decode from "@/src/utils/helper/jwtToken/Jwt_decode";
 
 const LoginSchema = z.object({
   email: z.string().email("فرمت ایمیل صحیح نیست"),
@@ -16,8 +16,8 @@ const LoginSchema = z.object({
 });
 
 export interface LoginResponse {
-  message?: string;  
-  user?: ILoginUser; 
+  message?: string;
+  user?: ILoginUser;
   accessToken?: string;
   refreshToken?: string;
 }
@@ -31,12 +31,12 @@ export interface LoginResult {
 export const Login = async (prevState: any, formData: FormData) => {
   const email = formData.get("email");
   const password = formData.get("password");
-  
+
   const validation = LoginSchema.safeParse({
     email: email?.toString(),
     password: password?.toString(),
   });
-  
+
   if (!validation.success) {
     return {
       success: false,
@@ -51,14 +51,35 @@ export const Login = async (prevState: any, formData: FormData) => {
     });
 
     const dataResponse = res.data || res;
-  
+    const decoded: any = Jwt_decode(dataResponse.accessToken);
+    const userInfo = {
+      id: decoded?.id,
+      email: decoded?.email,
+      role: decoded?.role,
+      name: decoded?.name,
+      profilePicture: decoded?.profilePicture,
+    };
+
     if (dataResponse.accessToken) {
-      await setServerSideCookie("serverAccessToken", dataResponse.accessToken);
+      await setServerSideCookie("ServerAccessToken", dataResponse.accessToken);
       await setServerSideCookie("refreshToken", dataResponse.refreshToken);
-      
-      
+      await setServerSideCookie("userId", userInfo.id.toString());
+      await setServerSideCookie("userRole", userInfo.role);
+      await setServerSideCookie("userName", userInfo.name);
+      await setServerSideCookie("userEmail", userInfo.email);
+
+      setClientCookie("accessToken", dataResponse.accessToken);
+      setClientCookie("refreshToken", dataResponse.refreshToken);
+      setClientCookie("userId", userInfo.id.toString());
+      setClientCookie("userRole", userInfo.role);
+      setClientCookie("userName", userInfo.name);
+      setClientCookie("userEmail", userInfo.email);
+
+      if (userInfo.profilePicture) {
+        setClientCookie("userProfilePicture", userInfo.profilePicture);
+      }
       return {
-        success: true,  
+        success: true,
         message: "ورود موفقیت‌آمیز بود",
         data: dataResponse,
       };
@@ -68,11 +89,10 @@ export const Login = async (prevState: any, formData: FormData) => {
         message: dataResponse.message || "خطا در ورود - توکن دریافت نشد",
       };
     }
-    
   } catch (error: any) {
     console.error("Error message:", error.message);
     console.error("Error response data:", error.response?.data);
-    
+
     return {
       success: false,
       message: error.response?.data?.message || error.message || "خطا در ورود",

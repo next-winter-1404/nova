@@ -28,7 +28,7 @@ const SimpleDropdown: FC<IDropDownProps> = ({
   }, [city]);
 
   const handleCitySelect = (cityValue: string) => {
-    console.log("selected city value:", cityValue);
+    // console.log("selected city value:", cityValue);
 
     setSelectedValue(cityValue);
 

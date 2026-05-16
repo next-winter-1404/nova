@@ -5,16 +5,15 @@ import Image from "next/image";
 import arrowRight from "@/public/icons/Group34.svg";
 import Button from "../common/button/page";
 import { BsChevronLeft } from "react-icons/bs";
-import ProductCard from "../common/productCard/ProductCard";
 import SelectedTab from "../reserveHouse/SelectedTab";
 import { ITab } from "@/src/core/types/ITab";
-import RentStateSlider from "./RentStateSlider";
-import MortgageStateSlider from "./MortgageStateSlider";
+import MortgageAndRentTab from "./MortgageAndRentTab";
+import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
 
 
-const DepositAndRentSection = async ({ searchParams }: {searchParams:Promise<{tab?:string}>}) => {
-  const params = await searchParams
-//   const activeTab = params.tab || "rent";
+const DepositAndRentSection = async () => {
+  const getAllHouse = await getHouses()
+  const result = getAllHouse?.houses || []
   const tabs: ITab[] = [
     {
       value: "Mortgage",
@@ -26,19 +25,10 @@ const DepositAndRentSection = async ({ searchParams }: {searchParams:Promise<{ta
     },
   ];
 
-//   const renderContent = () => {
-//     switch (activeTab) {
-//       case "rent":
-//         return <RentStateSlider />;
-//       case "Mortgage":
-//         return <MortgageStateSlider />;
-//     }
-//   };
-
   return (
-    <div className="relative padding-section">
+    <div className="w-full relative padding-section">
       <BlureLightCircle bgColor="#8CFF4552" />
-      <Container>
+      
         <div className="w-full flex flex-col items-end gap-12">
           <div className="w-full flex flex-col items-end gap-6 justify-start">
             <span className="flex-center justify-end gap-4">
@@ -83,13 +73,13 @@ const DepositAndRentSection = async ({ searchParams }: {searchParams:Promise<{ta
               </span>
             </div>
             <Container>
-              <div className="w-full overflow-hidden flex-center gap-8">
-                {/* {renderContent()} */}
+              <div className="w-full overflow-hidden flex-center gap-8 justify-end">
+                <MortgageAndRentTab cardData={result}/>
               </div>
             </Container>
           </div>
         </div>
-      </Container>
+     
     </div>
   );
 };

@@ -14,7 +14,7 @@ export default function Home() {
       <CategorySection />
       <SpecialOfferSection />
       <MostPopulerDestinationSection />
-      <DepositAndRentSection />
+      <DepositAndRentSection/>
       <Landing></Landing>
     </div>
     </Suspense>

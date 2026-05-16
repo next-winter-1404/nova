@@ -32,19 +32,20 @@ const RowProductCard: FC<IProductCard> = ({
         )}
         <Link href={href}>
           <Button
-          text={"مشاهده ملک"}
-          backgroundColor="8cff45"
-          icon={<Image src={leftArrow} alt="icon" />}
-          buttonStyle={{
-            background: "transparent",
-            width: "130px",
-            color: "var(--color-primary-accent-green)",
-            fontSize: "16px",
-            fontWeight: "600",
-            border: "1px solid var(--color-primary-accent-green) ",
-            padding: "12px 16px",
-          }}
-        />
+            text={"مشاهده ملک"}
+            backgroundColor="8cff45"
+            icon={<Image src={leftArrow} alt="icon" />}
+            buttonStyle={{
+              background: "transparent",
+              width: "130px",
+              color: "var(--color-primary-accent-green)",
+              fontSize: "16px",
+              fontWeight: "600",
+              border: "1px solid var(--color-primary-accent-green)",
+              padding: "12px 16px",
+              cursor: "pointer",
+            }}
+          />
         </Link>
       </div>
       <div className="flex flex-2 gap-4">
@@ -56,7 +57,7 @@ const RowProductCard: FC<IProductCard> = ({
                 style={{ display: "flex", alignItems: "center", gap: "4px" }}
                 className=""
               >
-                {rate}
+                {rate||0}
                 <FaStar className="w-4 h-4" />
               </span>
             </span>

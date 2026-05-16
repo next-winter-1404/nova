@@ -11,7 +11,7 @@ import Button from "@/src/components/common/button/page";
 import { useRouter } from "next/navigation"; 
 import { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { getNumberVerificationCode } from "@/src/utils/helper/cookies/getVrificationCode/getVrificationCode";
+import { getNumberVerificationCode } from "@/src/utils/helper/getVrificationCode/getVrificationCode";
 import { verifyNumber } from "@/src/utils/sevices/api/auth/phoneRegister/verifyNumber";
 import Timer from "@/src/utils/hooks/timer";
 const VerifyPhoneNumber = () => { 

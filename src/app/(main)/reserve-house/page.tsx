@@ -8,18 +8,13 @@ import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
 import { IHouse } from "@/src/core/types/IHouse";
 import BottomNavbarFilter from "@/src/components/reserveHouse/bottomNavbarFilter";
 
+export const revalidate = 30
 const HouseReservePage = async ({
   searchParams,
 }: {
-  searchParams: Promise<{
-    minPrice?: string;
-    maxPrice?: string;
-    propertyType?: string;
-    sort?: string;
-    address?: string;
-    search?: string;
-  }>;
+  searchParams: Promise<IFilters>;
 }) => {
+  
   const params = await searchParams;
   const minRent = params.minPrice;
   const maxRent = params.maxPrice;
@@ -27,16 +22,16 @@ const HouseReservePage = async ({
   const sort = params.sort;
   const location = params.address;
   const search = params.search;
-
-  const  result : any = await getHouses({
-    minRent,
-    maxRent,
-    propertyType,
-    search,
-    location,
-    sort,
-    transactionType: "rental", //just rental house will show on this page
-  });
+  const filters :IFilters= {
+    transactionType: "reservation",
+  };
+  if (minRent) filters.minRent = minRent;
+  if (maxRent) filters.maxRent = maxRent;
+  if (propertyType) filters.propertyType = propertyType;
+  if (sort) filters.sort = sort;
+  if (location) filters.location = location;
+  if (search) filters.search = search;
+  const  result  = await getHouses(filters);
   const houses = result?.houses || [];
   const totalCount = result?.totalCount || 0;
 
@@ -46,7 +41,7 @@ const HouseReservePage = async ({
       label: "رزرو هتل",
     },
     {
-      label: `رزرو هتل ${"رشت"}`,
+      label: `رزرو هتل ${location || ""}`,
     },
   ];
   return (
@@ -55,7 +50,8 @@ const HouseReservePage = async ({
         <Breadcrumb items={items} twClassname="mt-14  " />
         <TopReserveHouseSection totalCount={totalCount}/>
         <div className="bg-dark-800 flex  mt-6 p-6  w-full rounded-[40px] ">
-          <div className="w-[40%] rounded-[40px] h-[1032px] bg-dark-900"></div>
+          <div className="w-[40%] rounded-[40px] h-[1032px] bg-dark-900">
+          </div>
 
           <div className="w-[60%] flex flex-col gap-6 items-center ">
             <BottomNavbarFilter />
@@ -75,6 +71,7 @@ const HouseReservePage = async ({
                       title={house.title}
                       rate={house.rate}
                       rooms={house.rooms}
+                      href={`reserve-house/${house.id}`}
                     />
                     <div className="w-[100%] border-2 border-[#4E4E4E]" />
                   </div>

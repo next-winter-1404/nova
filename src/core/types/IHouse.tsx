@@ -1,5 +1,5 @@
 export interface IHouse {
-  id?: number;
+  id?: number|string;
   title?: string | null;
   address?: string | null;
   photos?: string[] | null;

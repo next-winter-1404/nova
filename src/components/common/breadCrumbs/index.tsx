@@ -28,10 +28,13 @@ export const Breadcrumb = ({
         <span>خانه</span>
       </Link>
       {items.map((item) => (
-        <div key={item.label} className="flex items-center">
+        <div key={`${item.label} ${item.href}`} className="flex items-center">
           <RiArrowDropLeftLine size={25} className="text-gray " />
           {item.href ? (
-            <Link href={item.href} className="hover:scale-105 duration-200 hover:text-primary-">
+            <Link
+              href={item.href}
+              className="hover:scale-105 duration-200 hover:text-primary-"
+            >
               {item.label}
             </Link>
           ) : (
