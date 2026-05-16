@@ -1,5 +1,5 @@
 import React from "react";
-import instance from "@/src/utils/sevices/interseptor/index";
+import instance from "@/src/utils/sevices/interseptor";
 import { ITraveler } from "@/src/core/types/IPassengerInfo";
 
 export const getBookingsById = async(id: number): Promise<ITraveler> => {
