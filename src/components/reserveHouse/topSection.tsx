@@ -66,6 +66,8 @@ const TopReserveHouseSection = ({
           parentWidth="lg:w-[223px]"
           value={address}
           onChange={handleAddress}
+          dir="rtl"
+
         />
 
         <SimpleDropdown
@@ -84,10 +86,12 @@ const TopReserveHouseSection = ({
           tagBgStyle={{ background: "var(--color-dark-800)", color: "white" }}
           borderColor="border-white border"
           textColor="text-white"
-          placeHolder="نام هتل مورد نظر..."
+          placeHolder="نام ملک مورد نظر..."
           parentWidth="lg:w-[619px]"
           value={search}
           onChange={handleSearch}
+          dir="rtl"
+
         />
       </div>
 

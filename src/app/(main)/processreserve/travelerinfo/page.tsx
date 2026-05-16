@@ -91,6 +91,8 @@ const Traveler = () => {
                 placeHolder='وارد کنید ...'
                 type='text'
                 htmlFor={'name'}
+              dir="rtl"
+
               />
               <Input
                 labelText='نام خانوادگی :'
@@ -105,6 +107,8 @@ const Traveler = () => {
                 placeHolder='وارد کنید ...'
                 type='text'
                 htmlFor={'family'}
+              dir="rtl"
+
               />
               <Input
                 labelText=' کد ملی:'
@@ -119,6 +123,8 @@ const Traveler = () => {
                 placeHolder='وارد کنید ...'
                 type='text'
                 htmlFor={'national'}
+              dir="rtl"
+
               />
               <Input
                 labelText=' کد ملی:'
@@ -133,6 +139,8 @@ const Traveler = () => {
                 placeHolder='وارد کنید ...'
                 type='text'
                 htmlFor={'national'}
+              dir="rtl"
+
               />
               <Input
                 labelText=' کد ملی:'
@@ -147,6 +155,8 @@ const Traveler = () => {
                 placeHolder='وارد کنید ...'
                 type='text'
                 htmlFor={'national'}
+              dir="rtl"
+
               />
             </form>
             )}

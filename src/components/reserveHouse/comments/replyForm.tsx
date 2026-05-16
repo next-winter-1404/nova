@@ -56,6 +56,8 @@ const ReplyForm: FC<IReplyCommentsProps> = ({ parentId,houseId }) => {
           parentWidth="w-full"
           value={parentComment?.caption ?? ""}
           readOnly
+          dir="rtl"
+
         />
       </div>
       <div className="flex-center gap-8 w-full">
@@ -76,6 +78,8 @@ const ReplyForm: FC<IReplyCommentsProps> = ({ parentId,houseId }) => {
           textColor="text-white"
           parentWidth="w-full"
           name="caption"
+          dir="rtl"
+
         />
         <Input
           labelText="عنوان پاسخ"
@@ -86,6 +90,8 @@ const ReplyForm: FC<IReplyCommentsProps> = ({ parentId,houseId }) => {
           textColor="text-white"
           parentWidth="w-full"
           name="title"
+          dir="rtl"
+
         />
       </div>
       <Image alt="icon" src={line} />

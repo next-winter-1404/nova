@@ -40,6 +40,8 @@ const CommentForm:FC<IProp> = ({houseId}) => {
         textColor="text-white"
         parentWidth="w-full"
         name="title"
+        dir="rtl"
+
       />
     </div>
     <div className="flex-center gap-8 w-full">

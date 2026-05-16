@@ -1,9 +1,3 @@
-import { Breadcrumb } from "@/src/components/common/breadCrumbs";
-import Button from "@/src/components/common/button/page";
-import Container from "@/src/components/common/Container";
-import Input from "@/src/components/common/input/Input";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { BsChevronDown } from "react-icons/bs";
 
 import RowProductCard from "@/src/components/common/productCard/RowProductCard";
 import CardContainer from "@/src/components/common/card/page";

@@ -55,6 +55,7 @@ const RegisterWithPhone = () => {
             borderColor="border-white "
             tagBgStyle={{ background: "var(--color-dark-900)", color: "white" }}
             textColor="text-white"
+            dir="rtl"
           />
         }
       />
