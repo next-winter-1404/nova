@@ -1,18 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 import { BsChevronLeft } from "react-icons/bs";
 import Container from "../common/Container";
-
 import HeroBackground from "../../assets/images/HeroSectionBackground.jpg"
 import building from "../../assets/images/building.png"
 import DeltaTextGradient from "../../assets/images/Delta.png"
-import FramShape from "../../assets/images/Frame.png"
 import Divider from "@/src/components/common/Divider";
 import SearchContainer from "../common/search/SearchContainer";
 import AvatarGroup from "../common/AvatarGroup";
-import Button from "../common/button/page";
+
 
 
 const HeroSection = () => {

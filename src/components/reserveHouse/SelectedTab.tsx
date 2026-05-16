@@ -1,9 +1,9 @@
 "use client";
 
 import { ITab } from "@/src/core/types/ITab";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { FC, ReactNode, useState } from "react";
+import { FC, useState } from "react";
 
 interface IPropertyTab {
   options: ITab[];
