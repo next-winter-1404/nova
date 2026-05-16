@@ -8,13 +8,10 @@ import car from "@/src/assets/icons/car.svg";
 import bathroom from "@/src/assets/icons/bathroom.svg";
 import leftArrow from "@/src/assets/icons/leftArrow.svg";
 import Button from "../button/page";
-import { IHouse } from "@/src/core/types/IHouse";
 import imgPlaceholder from "@/src/assets/images/imagePlaceHolder (2).png"
+import { IProductCard } from "@/src/core/types/IProductCard";
 import Link from "next/link";
-interface RowProductCardProps extends IHouse {
-  href: string;
-}
-const RowProductCard: FC<RowProductCardProps> = ({
+const RowProductCard: FC<IProductCard> = ({
   price,
   rate,
   address,
@@ -25,7 +22,7 @@ const RowProductCard: FC<RowProductCardProps> = ({
   href
 }) => {
   return (
-    <div className="flex">
+    <div className="flex gap-15">
       <div className="flex flex-col justify-end flex-1 gap-4 whitespace-nowrap">
         {price && (
           <span className="flex-center gap-2 px-3 py-1.5 whitespace-nowrap text-semibold-28 text-primary-accent-green">
@@ -66,7 +63,7 @@ const RowProductCard: FC<RowProductCardProps> = ({
             </span>
           </div>
           <span className="flex justify-end text-20-medium whitespace-nowrap">
-            {title || "عنوانی وجود ندارد"}
+            {title ? <Link href={href}>{title}</Link> : "عنوانی وجود ندارد"}
           </span>
           <div className="flex flex-col items-end gap-5">
             <div className="flex justify-start gap-1.5">

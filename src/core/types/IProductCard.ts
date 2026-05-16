@@ -1,5 +1,5 @@
 export interface IProductCard {
-    id?: number;
+  id?: number;
   title?: string | null;
   address?: string | null;
   photos?: string[] | null;
@@ -24,7 +24,8 @@ export interface IProductCard {
   bookings?: number;
   favoriteId?: number | null;
   isFavorite?: boolean;
-  seeMore? : boolean;
-  offer?:string,
-  buttonText?:string,
+  seeMore?: boolean;
+  offer?: string;
+  buttonText?: string;
+  href?: string;
 }

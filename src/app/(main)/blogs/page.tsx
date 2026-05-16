@@ -5,7 +5,9 @@ import Image from "next/image";
 import { getBlogs } from "@/src/utils/sevices/api/blogs/getBlogs";
 import BlogCategories from "@/src/components/blogs/categories";
 import { getCategory } from "@/src/utils/sevices/api/category/getCategory";
+import SimilarNavbarItem from "@/src/components/reserveHouse/similarHouse/navbarItem";
 
+export const revalidate = 30
 const BlogPage = async () => {
   const items = [{ label: "مقالات" }];
   const result = await getBlogs();
@@ -73,6 +75,7 @@ const BlogPage = async () => {
             />
           ))}
         </div>
+            
       </div>
     </div>
   );

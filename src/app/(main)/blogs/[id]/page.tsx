@@ -8,6 +8,12 @@ import { FaCalendarAlt } from "react-icons/fa";
 import placeHolder from "@/src/assets/images/imagePlaceHolder (2).png";
 import userPlaceHolder from "@/src/assets/images/userPlaceHolder.jpg";
 import { getBlogsDetail } from "@/src/utils/sevices/api/blogs/getBlogDetail";
+import SimilarNavbarItem from "@/src/components/reserveHouse/similarHouse/navbarItem";
+import SimilarBlogItems from "@/src/components/blogs/similarBlogs/similarBlogs";
+import { getBlogs } from "@/src/utils/sevices/api/blogs/getBlogs";
+
+export const revalidate = 30
+
 interface IBlogDetailProp {
   params: {
     id: string;
@@ -16,6 +22,8 @@ interface IBlogDetailProp {
 const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
   const { id } = await params;
   const BlogDetail = await getBlogsDetail(Number(id));
+  const result = await getBlogs();
+  const data = result?.data || [];
   const items = [
     { label: "مقالات", href: "/blog " },
     { label: `${BlogDetail?.title}` },
@@ -68,8 +76,8 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
                 </div>
               </div>
             </div>
-            <div className="md:flex flex-col w-1/2 hidden" dir="rtl">
-              <h2 className="lg:text-32-semibold text-[18px] text-white">{BlogDetail?.title}</h2>
+            <div className="md:flex flex-col w-1/2 hidden gap-4" dir="rtl">
+              <h2 className="lg:text-[32px] text-[18px] text-white font-semibold">{BlogDetail?.title}</h2>
               <p className="text-white">
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
                 استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
@@ -88,7 +96,14 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
               <h2 className="text-semibold-24">{BlogDetail?.title}</h2>
               <p className="text-white">{BlogDetail?.caption}</p>
             </div>
+          
           </section>
+          <div className="flex flex-col w-full gap-4 mb-30 mt-10 ">
+     <SimilarNavbarItem href="/blogs" similarTitle="وبلاگ های مشابه"/>
+      <div className="flex w-full mt-10">
+        <SimilarBlogItems data={data} />
+      </div>
+    </div>
         </div>
       </div>
     </div>

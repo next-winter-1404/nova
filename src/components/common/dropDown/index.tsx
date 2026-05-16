@@ -54,18 +54,18 @@ const SimpleDropdown: FC<IDropDownProps> = ({
           dir="rtl"
         >
           <span>{showSelected()}</span>
-          <span className={`absolute -top-3 p-0.5 px-2 right-3.5 ${tagBg}`}>
+          <span className={`absolute -top-3.5 p-0.5 px-2 right-3.5 ${tagBg}`}>
             {labelText}:
           </span>
         </button>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className="DropdownMenuContent w-full p-4 rounded-xl z-100 bg-dark-800 text-white cursor-pointer">
+        <DropdownMenu.Content className="DropdownMenuContent p-4 rounded-xl z-100 gap-2 bg-dark-800 text-white cursor-pointer">
           {options.map((op) => (
             <DropdownMenu.Item
               key={op.value}
-              className="DropdownMenuItem"
+              className="text-right p-3 rounded-2xl w-[300px] hover:bg-dark-900"
               onSelect={() => handleCitySelect(op.value)}
             >
               {op.label}
@@ -75,7 +75,6 @@ const SimpleDropdown: FC<IDropDownProps> = ({
             </DropdownMenu.Item>
           ))}
 
-          <DropdownMenu.Arrow className="fill-white" />
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>

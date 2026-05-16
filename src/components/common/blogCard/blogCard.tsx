@@ -42,7 +42,7 @@ const BlogCard = ({
         />
 
         <div
-          className="flex-col-center gap-3 h-[156px] md:w-full  sm:w-[400px]  "
+          className="flex-col items-end gap-3 h-[156px] md:w-full  sm:w-[400px]  "
           dir="rtl"
         >
           <div className="flex items-center gap-1 text-gray-300">
