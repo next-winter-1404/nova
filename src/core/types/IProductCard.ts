@@ -27,4 +27,5 @@ export interface IProductCard {
   seeMore? : boolean;
   offer?:string,
   buttonText?:string,
+  href?:string,
 }

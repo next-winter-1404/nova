@@ -42,7 +42,7 @@ const Navbar = () => {
                   <NavbarTab key={item.labelName} label={item.labelName} href={item.href} />
                 )
               })}
-              <NavbarTab label="رهن و اجاره" href="#" icon={<BsChevronDown className="w-3 h-3"/>}/>
+              <NavbarTab label="رهن و اجاره" href="/mortgageandhouserent" icon={<BsChevronDown className="w-3 h-3"/>}/>
               <NavbarTab label="رزرو سریع" href="/reserve-house" icon={<BsChevronDown className="w-3 h-3"/>}/>
            
               <Divider color="#4A4A4A" width="3" height="20"/>

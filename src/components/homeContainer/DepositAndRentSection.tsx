@@ -1,10 +1,5 @@
-"use client";
 import BlureLightCircle from "../common/BlureLightCircle";
 import Container from "../common/Container";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
 
 import Image from "next/image";
 import arrowRight from "@/public/icons/Group34.svg";
@@ -13,18 +8,33 @@ import { BsChevronLeft } from "react-icons/bs";
 import ProductCard from "../common/productCard/ProductCard";
 import SelectedTab from "../reserveHouse/SelectedTab";
 import { ITab } from "@/src/core/types/ITab";
+import RentStateSlider from "./RentStateSlider";
+import MortgageStateSlider from "./MortgageStateSlider";
 
-const DepositAndRentSection = () => {
+
+const DepositAndRentSection = async ({ searchParams }: {searchParams:Promise<{tab?:string}>}) => {
+  const params = await searchParams
+//   const activeTab = params.tab || "rent";
   const tabs: ITab[] = [
     {
       value: "Mortgage",
       label: "رهن خونه",
     },
     {
-      value: "about",
+      value: "rent",
       label: "اجاره ملک",
     },
   ];
+
+//   const renderContent = () => {
+//     switch (activeTab) {
+//       case "rent":
+//         return <RentStateSlider />;
+//       case "Mortgage":
+//         return <MortgageStateSlider />;
+//     }
+//   };
+
   return (
     <div className="relative padding-section">
       <BlureLightCircle bgColor="#8CFF4552" />
@@ -61,7 +71,11 @@ const DepositAndRentSection = () => {
                 }}
               />
               <span className="flex-center flex-nowrap gap-6">
-                <SelectedTab options={tabs} twClassname="w-[200px] h-[36px]" buttonWidth="w-[94px]"/>
+                <SelectedTab
+                  options={tabs}
+                  twClassname="w-[200px] h-[44px]"
+                  buttonWidth="w-[94px]"
+                />
                 <i className="h-4 w-0.5 bg-gray-300"></i>
                 <h3 className="flex-center justify-end text-32-medium">
                   رهن و اجاره ملک در دلتا
@@ -70,91 +84,7 @@ const DepositAndRentSection = () => {
             </div>
             <Container>
               <div className="w-full overflow-hidden flex-center gap-8">
-                <Swiper
-                  modules={[Navigation, Autoplay, Pagination]}
-                  spaceBetween={20}
-                  slidesPerView={4}
-                  autoplay={{ delay: 3000, disableOnInteraction: false }}
-                  breakpoints={{
-                    390: { slidesPerView: 1 },
-                    640: { slidesPerView: 2 },
-                    1024: { slidesPerView: 4 },
-                  }}
-                  pagination={{
-                    clickable: true,
-                  }}
-                  className="my-house-swiper"
-                >
-                  <SwiperSlide>
-                    <ProductCard
-                      seeMore
-                      title="آپارتمان لوکس زعفرانیه"
-                      capacityAndRoom="2 خوابه ، 2 حمامه ، ظرفیت 6 نفر"
-                      location="گیلان ، رشت"
-                      price="50000"
-                      rate="4.5"
-                      oldPrice="2500000"
-                      stayingLength="6 شب"
-                      buttonText="قیمت خرید :"
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <ProductCard
-                      seeMore
-                      mode="col"
-                      title="آپارتمان لوکس زعفرانیه"
-                      capacityAndRoom="2 خوابه ، 2 حمامه ، ظرفیت 6 نفر"
-                      location="گیلان ، رشت"
-                      price="50000"
-                      rate="4.5"
-                      oldPrice="2500000"
-                      stayingLength="6 شب"
-                      buttonText="قیمت خرید :"
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <ProductCard
-                      seeMore
-                      mode="col"
-                      title="آپارتمان لوکس زعفرانیه"
-                      capacityAndRoom="2 خوابه ، 2 حمامه ، ظرفیت 6 نفر"
-                      location="گیلان ، رشت"
-                      price="50000"
-                      rate="4.5"
-                      oldPrice="2500000"
-                      stayingLength="6 شب"
-                      buttonText="قیمت خرید :"
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <ProductCard
-                      seeMore
-                      mode="col"
-                      title="آپارتمان لوکس زعفرانیه"
-                      capacityAndRoom="2 خوابه ، 2 حمامه ، ظرفیت 6 نفر"
-                      location="گیلان ، رشت"
-                      price="50000"
-                      rate="4.5"
-                      oldPrice="2500000"
-                      stayingLength="6 شب"
-                      buttonText="قیمت خرید :"
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <ProductCard
-                      seeMore
-                      mode="col"
-                      title="آپارتمان لوکس زعفرانیه"
-                      capacityAndRoom="2 خوابه ، 2 حمامه ، ظرفیت 6 نفر"
-                      location="گیلان ، رشت"
-                      price="50000"
-                      rate="4.5"
-                      oldPrice="2500000"
-                      stayingLength="6 شب"
-                      buttonText="قیمت خرید :"
-                    />
-                  </SwiperSlide>
-                </Swiper>
+                {/* {renderContent()} */}
               </div>
             </Container>
           </div>

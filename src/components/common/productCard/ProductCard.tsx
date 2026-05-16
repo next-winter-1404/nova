@@ -1,5 +1,4 @@
 import CardContainer from "@/src/components/common/card/page";
-
 import Image from "next/image";
 import Location from "@/src/assets/icons/Location.svg";
 import bed from "@/src/assets/icons/bed.svg";

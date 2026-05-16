@@ -105,7 +105,6 @@ const SpecialOfferSection = () => {
                 </h3>
               </div>
             </div>
-
             <Container>
               <div className="w-full overflow-hidden flex-center gap-8">
                 <Swiper
