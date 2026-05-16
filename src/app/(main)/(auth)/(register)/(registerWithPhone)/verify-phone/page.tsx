@@ -60,6 +60,7 @@ const VerifyPhoneNumber = () => {
               textColor="text-white"
               value={numberVerificationCode} 
               onChange={(e) => setNumberVerificationCode(e.target.value)} 
+              dir="rtl"
             />
            <Timer/>
           </div>

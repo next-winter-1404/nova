@@ -132,6 +132,7 @@ const Footer = () => {
                       value={formData.title}
                       onChange={handleChange}
                       name='title'
+                      dir='rtl'
                     />            
                     {/* <Input
                       labelText={'شماره یا ایمیل :'} 

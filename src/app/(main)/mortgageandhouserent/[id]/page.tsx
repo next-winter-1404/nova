@@ -1,0 +1,200 @@
+import Image from "next/image";
+import Container from "@/src/components/common/Container";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+} from "@/src/components/common/breadCrumbs";
+import HousePicture from "@/src/assets/images/singleHouse.png";
+import Location from "@/src/assets/icons/Location.svg";
+import { FiPhoneCall } from "react-icons/fi";
+import { FiCalendar } from "react-icons/fi";
+import dolor from "@/public/icons/grayDollor.svg";
+import moneyCheck from "@/public/icons/money-check-edit1.svg";
+import comment from "@/public/icons/commentwhite.svg";
+import InfoCardContainer from "@/src/components/reserveHouse/InfoCardContainer";
+import Button from "@/src/components/common/button/page";
+import { FaStar } from "react-icons/fa";
+import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail";
+
+interface IProps {
+  params: Promise<{ id: number }>;
+  searchParams: Promise<{ tab?: string }>;
+}
+
+export const revalidate = 30;
+const SingleHousePage = async ({ searchParams, params }: IProps) => {
+  const { id } = await params;
+  const getHouseInfo = await getHousesDetail(id);
+  const tags = Array.isArray(getHouseInfo?.tags)
+    ? getHouseInfo.tags
+    : typeof getHouseInfo?.tags === "string"
+      ? getHouseInfo.tags.split(",")
+      : [];
+
+  const items: BreadcrumbItem[] = [
+    {
+      href: "/reserve-house",
+      label: "رهن و اجاره",
+    },
+    {
+      href: "/reserve-house",
+      label: "رهن و اجاره آپارتمان",
+    },
+    {
+      href: "/reserve-house",
+      label: "رهن و اجاره آپارتمان رشت",
+    },
+    {
+      label: `خونه 400 متری درسا در${"تهران"}`,
+    },
+  ];
+  return (
+    <div className="padding-section flex-col-center sm:mt-24 mt-15">
+      <div className="flex-col-center sm:gap-6 gap-3">
+        <Breadcrumb
+          items={items}
+          twClassname="w-full flex-center justify-start"
+        />
+        <div className="flex-center justify gap-5 bg-amber-200">
+          <div className="flex flex-1">
+            <InfoCardContainer icon={<FiPhoneCall />} labelText="اطلاعات تماس">
+              <div className="w-full flex-col-center gap-8">
+                <div className="relative flex flex-col w-full gap-6">
+                  <div className="flex-col-center gap-3">
+                    <span className="w-12 h-12 rounded-2xl bg-gray-200"></span>
+                    <span className="flex-col-center">
+                      <span className="text-16-medium text-white">
+                        {getHouseInfo?.sellerName}
+                      </span>
+                      <span className="flex-center gap-2 text-gray-300">
+                        <p>{getHouseInfo?.last_updated}</p>
+                        <FiCalendar />
+                      </span>
+                    </span>
+                  </div>
+                  <div className="flex-col-center gap-4">
+                    <div className="w-full flex-center justify-between">
+                      <div className="flex-center gap-0.5 text-16-medium text-primary-accent-green">
+                        <span>ت</span>
+                        <span>{getHouseInfo?.discounted_price}</span>
+                      </div>
+                      <div className="flex-center gap-2 text-16-medium text-gray-300">
+                        <span>: قیمت رهن از</span>
+                        <Image alt="icon" src={dolor} className="w-4 h-4" />
+                      </div>
+                    </div>
+                    <div className="w-full flex-center justify-between">
+                      <div className="flex-center gap-0.5 text-16-medium text-primary-accent-green">
+                        <span>ت</span>
+                        <span>{getHouseInfo?.price}</span>
+                      </div>
+                      <div className="flex-center gap-2 text-16-medium text-gray-300">
+                        <span>: قیمت اجاره از</span>
+                        <Image
+                          alt="icon"
+                          src={moneyCheck}
+                          className="w-4 h-4"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full flex-col-center gap-4">
+                  <Button
+                    text="تماس با 0933****9"
+                    icon={<FiPhoneCall />}
+                    buttonStyle={{
+                      background: "var(--color-primary-accent-green)",
+                      width: "100%",
+                      fontSize: "13px",
+                      color: "var(--color-dark-800)",
+                      borderRadius: "10px",
+                    }}
+                  />
+                  <Button
+                    text="گفتگو با فروشنده"
+                    icon={
+                      <Image alt="icon" src={comment} className="w-4 h-4" />
+                    }
+                    buttonStyle={{
+                      background: "transparent",
+                      width: "100%",
+                      fontSize: "13px",
+                      color: "var(--color-white-pure)",
+                      border: "1px solid var(--color-white-pure)",
+                      borderRadius: "10px",
+                    }}
+                  />
+                </div>
+              </div>
+            </InfoCardContainer>
+          </div>
+          <div className="flex-col-center gap-2.5 max-w-[350px] rounded rounded-[32px]">
+            <div className="rounded rounded-[32px]">
+              <Image src={HousePicture} className="h-[172px]" alt="home pic" />
+            </div>
+            <div className="relative flex-center h-[172px] w-full">
+              <div
+                style={{
+                  background: `url(${HousePicture.src})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "100%",
+                }}
+                className="relative min-h-[172px] w-full bg-contain bg-center  brightness-60"
+              ></div>
+              <span className="absolute text-semibold-24 z-1 whitespace-nowrap">
+                {" "}
+                +12 عکس دیگر{" "}
+              </span>
+            </div>
+          </div>
+          <div className="flex flex-2 rounded rounded-[32px] shadow-000-8">
+            <Image src={HousePicture} alt="home pic" />
+          </div>
+        </div>
+        <div className="flex-center justify-end  gap-4 w-full">
+          <div className="flex-center gap-4">
+            <span className="w-[82px] flex-center gap-1 px-3 py-1.5 whitespace-nowrap text-white bg-blue-purple-500 rounded-lg">
+              ستاره
+              <span
+                style={{ display: "flex", alignItems: "center", gap: "4px" }}
+                className=""
+              >
+                {getHouseInfo?.rate}
+                <FaStar className="w-4 h-4" />
+              </span>
+            </span>
+            <i className="h-[21px] w-0.5 bg-gray-300"></i>
+            <div className="flex-center gap-4">
+              {tags?.map((tag) => {
+                return (
+                  <div
+                    key={tag}
+                    className="text-gray-300 text-[16px] bg-dark-700 border border-gray-200 rounded-xl p-8-16"
+                  >
+                    {tag}#
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+        <span className="w-full text-right text-semibold-28 text-white-pure">
+          {getHouseInfo?.title}
+        </span>
+        <div className="w-full flex justify-end gap-1.5">
+          <h2 className="text-[16px] text-gray-300 text-right  whitespace-nowrap">
+            {getHouseInfo?.address || "ادرسی وجود ندارد"}
+          </h2>
+          <Image src={Location} alt="Location" className="w-4 h-4" />
+        </div>
+      </div>
+
+      <Container>
+        <div className="w-full shadow-000-8">TODO:IMPLEMENT TABS</div>
+      </Container>
+    </div>
+  );
+};
+
+export default SingleHousePage;

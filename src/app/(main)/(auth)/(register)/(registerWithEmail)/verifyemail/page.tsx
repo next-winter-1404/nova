@@ -62,6 +62,7 @@ const VerifyEmailPage = () => {
               textColor="text-white"
               value={verificationCode} 
               onChange={(e) => setVerificationCode(e.target.value)} 
+              dir="rtl"
             />
            <Timer/>
           </div>

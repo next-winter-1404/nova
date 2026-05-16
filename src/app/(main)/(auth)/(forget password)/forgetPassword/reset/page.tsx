@@ -48,6 +48,7 @@ const ForgetPassWordReset = () => {
               tagBgStyle={{ background: "var(--color-dark-900)" }}
               labelTextSize="text-white"
               textColor="text-white"
+              dir="rtl"
             />
             <Input
               InputHeight={"h-[43px]"}
@@ -61,6 +62,7 @@ const ForgetPassWordReset = () => {
               tagBgStyle={{ background: "var(--color-dark-900)" }}
               labelTextSize="text-white"
               textColor="text-white"
+              dir="rtl"
             />
           </>
         }

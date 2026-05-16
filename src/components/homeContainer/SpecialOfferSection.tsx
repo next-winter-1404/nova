@@ -1,4 +1,3 @@
-"use client";
 import CardContainer from "@/src/components/common/card/page";
 import Button from "../common/button/page";
 import { MdAccessTime } from "react-icons/md";
@@ -6,28 +5,13 @@ import Image from "next/image";
 import arrowRight from "@/public/icons/Group34.svg";
 import { BsChevronLeft } from "react-icons/bs";
 import Container from "../common/Container";
-import ProductCard from "@/src/components/common/productCard/ProductCard";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
 import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
-import useSWR from "swr";
-import instance from "@/src/utils/sevices/interseptor";
-import { IHouse } from "@/src/core/types/IHouse";
-import { IProductCard } from "@/src/core/types/IProductCard";
+import SpecialOfferSlider from "./SpecialOfferSlider";
 
-const SpecialOfferSection = () => {
- const { data, error, isLoading } = useSWR("/api/houses", async (url) => {
-  const res = await instance.get(url);
-  return res;   // ← because res is already the data object
-});
-  const houses = data?.houses ?? [];
-  console.log("my-houses", data?.houses);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  if (!houses.length) return <div>No houses found</div>;
+const SpecialOfferSection = async () => {
+ const result = await getHouses();
+ const houses = result?.houses || [];
 
   return (
     <div className="relative padding-section">
@@ -42,7 +26,7 @@ const SpecialOfferSection = () => {
                 <MdAccessTime />
               </span>
             }
-            buttonStyle={{ padding: "12px 24px" }}
+            buttonStyle={{ padding: "12px 24px",whiteSpace:"nowrap" }}
           />
         }
         labelExtraStyle={{ padding: "24px", height: "50px" }}
@@ -105,43 +89,9 @@ const SpecialOfferSection = () => {
                 </h3>
               </div>
             </div>
-
             <Container>
               <div className="w-full overflow-hidden flex-center gap-8">
-                <Swiper
-                  modules={[Navigation, Autoplay, Pagination]}
-                  spaceBetween={20}
-                  slidesPerView={4}
-                  autoplay={{ delay: 3000, disableOnInteraction: false }}
-                  breakpoints={{
-                    390: { slidesPerView: 1 },
-                    640: { slidesPerView: 2 },
-                    1024: { slidesPerView: 4 },
-                  }}
-                  pagination={{
-                    clickable: true,
-                  }}
-                  className="my-house-swiper"
-                >
-                  {houses.map((item:IProductCard) => (
-                    <SwiperSlide key={item.id}>
-                      <ProductCard
-                        seeMore
-                        offer="15"
-                        title={item.title}
-                        rooms={item.rooms}
-                        location={item.address}
-                        discounted_price={item.discounted_price}
-                        rate={item.rate}
-                        price={item.price}
-                        buttonText="قیمت خرید :"
-                        bathrooms={item.bathrooms}
-                        capacity={item.capacity}
-                        photos={item.photos}
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                <SpecialOfferSlider houses={houses}/>
               </div>
             </Container>
           </div>

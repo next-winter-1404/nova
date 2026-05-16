@@ -1,5 +1,4 @@
 import CardContainer from "@/src/components/common/card/page";
-
 import Image from "next/image";
 import Location from "@/src/assets/icons/Location.svg";
 import bed from "@/src/assets/icons/bed.svg";
@@ -11,6 +10,7 @@ import Star from "@/src/assets/icons/Star.svg";
 import OldPriceComponent from "./OldPrice";
 import { IProductCard } from "@/src/core/types/IProductCard";
 import { computingDiscount } from "@/src/utils/helper/computingDiscount";
+import Link from "next/link";
 
 const ProductCard = ({
   title,
@@ -32,6 +32,7 @@ const ProductCard = ({
   seeMore,
   offer,
   buttonText,
+  href
 }: IProductCard) => {
   const discountPercent = computingDiscount({ discounted_price, price });
   const roundDiscountPercent  = Math.round(discountPercent)
@@ -66,7 +67,7 @@ const ProductCard = ({
 
       <div className="flex-col-center gap-3">
         <span
-          className={`flex ${offer ? "justify-between" : "justify-end"} items-center`}
+          className={`w-full flex ${discounted_price !== null ? "justify-between" : "justify-end"} items-center`}
         >
           {discountPercent && (
             <span className="text-16-semibold px-3 py-1.5 sm:w-14 w-12 text-center rounded-xl bg-tomato-red whitespace-nowrap">
@@ -74,17 +75,17 @@ const ProductCard = ({
             </span>
           )}
           <span className="sm:text-[20px] text-[18px] flex justify-end">
-            {title}
+            {title && href ? <Link href={href}>{title}</Link> : title || "عنوانی وجود ندارد"}
           </span>
         </span>
 
         {capacity && (
           <>
-            <div className="flex justify-end gap-3">
-              <h2 className="text-[16px] text-gray-300">{address}</h2>
+            <div className="w-full flex justify-end gap-3">
+              <h2 className="text-[16px] text-gray-300">{address || "ادرسی وجود ندارد"}</h2>
               <Image src={Location} alt="Location" />
             </div>
-            <div className=" h-[16px] flex items-center justify-end text-gray-300 gap-1 whitespace-nowrap">
+            <div className="w-full h-[16px] flex items-center justify-end text-gray-300 gap-1 whitespace-nowrap">
               <div className=" w-[30px] text-[13px] justify-center flex gap-2.5">
                 حیاط
                 <Image src={houseTree} alt="houseTree" />

@@ -56,7 +56,7 @@ const HouseReservePage = async ({
           <div className="w-[60%] flex flex-col gap-6 items-center ">
             <BottomNavbarFilter />
             <div className="w-[90%] border-2 border-[#4E4E4E]" />
-            <div className="flex flex-col gap-12 p-6 items-center max-h-[911px] overflow-auto  w-[90%]">
+            <div className="flex flex-col gap-12 p-8 items-center max-h-[911px] overflow-y-auto overflow-x-hidden  w-[95%]">
               {houses.length > 0 ? (
                 houses.map((house: IHouse) => (
                   <div
@@ -71,7 +71,7 @@ const HouseReservePage = async ({
                       title={house.title}
                       rate={house.rate}
                       rooms={house.rooms}
-                      id={house.id}
+                      href={`reserve-house/${house.id}`}
                     />
                     <div className="w-[100%] border-2 border-[#4E4E4E]" />
                   </div>

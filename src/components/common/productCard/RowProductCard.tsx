@@ -8,10 +8,10 @@ import car from "@/src/assets/icons/car.svg";
 import bathroom from "@/src/assets/icons/bathroom.svg";
 import leftArrow from "@/src/assets/icons/leftArrow.svg";
 import Button from "../button/page";
-import { IHouse } from "@/src/core/types/IHouse";
 import imgPlaceholder from "@/src/assets/images/imagePlaceHolder (2).png"
+import { IProductCard } from "@/src/core/types/IProductCard";
 import Link from "next/link";
-const RowProductCard: FC<IHouse> = ({
+const RowProductCard: FC<IProductCard> = ({
   price,
   rate,
   address,
@@ -19,10 +19,10 @@ const RowProductCard: FC<IHouse> = ({
   bathrooms,
   rooms,
   parking,
-  id
+  href
 }) => {
   return (
-    <div className="flex">
+    <div className="flex gap-15">
       <div className="flex flex-col justify-end flex-1 gap-4 whitespace-nowrap">
         {price && (
           <span className="flex-center gap-2 px-3 py-1.5 whitespace-nowrap text-semibold-28 text-primary-accent-green">
@@ -30,7 +30,7 @@ const RowProductCard: FC<IHouse> = ({
             <span>{price}</span>
           </span>
         )}
-        <Link href={`/reserve-house/${id}`}>
+        <Link href={href}>
           <Button
             text={"مشاهده ملک"}
             backgroundColor="8cff45"
@@ -57,13 +57,13 @@ const RowProductCard: FC<IHouse> = ({
                 style={{ display: "flex", alignItems: "center", gap: "4px" }}
                 className=""
               >
-                {rate}
+                {rate||0}
                 <FaStar className="w-4 h-4" />
               </span>
             </span>
           </div>
           <span className="flex justify-end text-20-medium whitespace-nowrap">
-            {title || "عنوانی وجود ندارد"}
+            {title ? <Link href={href}>{title}</Link> : "عنوانی وجود ندارد"}
           </span>
           <div className="flex flex-col items-end gap-5">
             <div className="flex justify-start gap-1.5">

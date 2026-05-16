@@ -53,6 +53,7 @@ const LoginPage = () => {
               textColor="text-gray-300"
               borderColor="text-white-pure"
               labelTextSize="text-13-regular"
+              dir="rtl"
             />
             <div className="flex flex-col gap-4 w-1/2">
               <Input
@@ -67,6 +68,8 @@ const LoginPage = () => {
                 textColor="text-gray-300"
                 borderColor="text-white"
                 labelTextSize="text-13-regular"
+              dir="rtl"
+
               />
               <div className="flex gap-3">
                 <span
