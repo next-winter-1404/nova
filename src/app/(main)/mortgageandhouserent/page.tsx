@@ -10,22 +10,12 @@ import CardContainer from "@/src/components/common/card/page";
 import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
 import { IProductCard } from "@/src/core/types/IProductCard";
 import FilterSection from "@/src/components/mortgageAndRentPageContainer/FilterSection";
+import { IMortgagePageFilter } from './../../../core/types/IMortgagePageFilter';
 
 const MortgageAndHouseRent = async ({
   searchParams,
 }: {
-  searchParams: Promise<{
-    minPrice?: string;
-    maxPrice?: string;
-    propertyType?: string;
-    sort?: string;
-    address?: string;
-    search?: string;
-    transactionType?:string;
-    minRent?:number;
-    maxRent?:number;
-
-  }>;
+  searchParams: Promise<IMortgagePageFilter>;
 }) => {
   const params = await searchParams;
   const minRent = params.minPrice;
@@ -34,6 +24,18 @@ const MortgageAndHouseRent = async ({
   const sort = params.sort;
   const location = params.address;
   const search = params.search;
+  const transactionType = params.transactionType;
+  const minMortgage = params.minMortgage;
+  const maxMortgage = params.maxMortgage;
+  const minArea = params.minArea;
+  const maxArea = params.maxArea;
+  const order = params.order;
+
+  const filter:IMortgagePageFilter = {
+    transactionType:"mortgrage"
+  }
+  if(minRent) filter.minRent = minRent;
+  if(maxRent) filter.maxRent = maxRent;
 
   const result: any = await getHouses({
     minRent,
@@ -42,7 +44,13 @@ const MortgageAndHouseRent = async ({
     search,
     location,
     sort,
-    transactionType: "mortgage" , //just rental house will show on this page
+    transactionType,
+    minMortgage,
+    maxMortgage,
+    minArea,
+    maxArea,
+    order
+
   });
 
   const houses = result?.houses || [];
@@ -50,49 +58,50 @@ const MortgageAndHouseRent = async ({
   // const mortgageAndRentHouses = houses.filter(
   //   (state) => state.transaction_type === "mortgage" || state.transaction_type === "rent"
   // );
-  
 
   return (
     <div className="w-full flex-col-center gap-49 bg-dark-900 mt-28 w-full ">
       {/* <Breadcrumb items={{}} /> */}
       <div className="w-full padding-section flex-col-center gap-10">
-        <FilterSection totalCount={totalCount}/>
+        <FilterSection totalCount={totalCount} />
         <div className="w-full sm:flex-center justify-end flex-wrap gap-6">
-          {houses.length > 0 ? 
-           houses.map((item:IProductCard) => [
-            <div className="group" key={item.id}>
-              <CardContainer
-                parentExtraStyle={{ width: "740px" }}
-                curveColor="#393939"
-                cavity="round"
-                labelContent={
-                  <div className="w-[67px] h-[10px] flex items-center  text-dark-800 justify-center gap-1 ">
-                    {/* <Image src={Star} alt='star'/>  */}
-                    {/* {rate} */}
-                  </div>
-                }
-                labelSize="lg"
-                mainContent={
-                  <div className="mx-auto flex flex-col items-center">
-                    <RowProductCard
-                      title={item.title}
-                      address={item.address}
-                      price={item.price}
-                      rooms={item.rooms}
-                      parking={item.parking}
-                      bathrooms={item.bathrooms}
-                      rate={item.rate}
-                      href={`/mortgageandhouserent/${item.id}`}
-                    />
-                  </div>
-                }
-                labelBackground="bg-[#393939]"
-                labelExtraStyle={{ minHeight: "10px" }}
-                mainExtraStyle="p-6 bg-dark-700"
-              />
-            </div>,
-          ]):
-          <i className="text-[56px] text-white">! اطلاعاتی یافت نشد</i>}
+          {houses.length > 0 ? (
+            houses.map((item: IProductCard) => [
+              <div className="group" key={item.id}>
+                <CardContainer
+                  parentExtraStyle={{ width: "740px" }}
+                  curveColor="#393939"
+                  cavity="round"
+                  labelContent={
+                    <div className="w-[67px] h-[10px] flex items-center  text-dark-800 justify-center gap-1 ">
+                      {/* <Image src={Star} alt='star'/>  */}
+                      {/* {rate} */}
+                    </div>
+                  }
+                  labelSize="lg"
+                  mainContent={
+                    <div className="mx-auto flex flex-col items-center">
+                      <RowProductCard
+                        title={item.title}
+                        address={item.address}
+                        price={item.price}
+                        rooms={item.rooms}
+                        parking={item.parking}
+                        bathrooms={item.bathrooms}
+                        rate={item.rate}
+                        href={`/mortgageandhouserent/${item.id}`}
+                      />
+                    </div>
+                  }
+                  labelBackground="bg-[#393939]"
+                  labelExtraStyle={{ minHeight: "10px" }}
+                  mainExtraStyle="p-6 bg-dark-700"
+                />
+              </div>,
+            ])
+          ) : (
+            <i className="text-[56px] text-white">! اطلاعاتی یافت نشد</i>
+          )}
         </div>
       </div>
     </div>
