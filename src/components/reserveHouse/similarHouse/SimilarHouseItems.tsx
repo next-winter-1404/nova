@@ -23,7 +23,7 @@ const SimilarHouseItems:FC<IHousesResponse> = ({houses}) => {
             pagination={{
               clickable: true,
             }}
-            className="w-full flex gap-4 justify-start "
+            className="w-full flex-center gap-4"
           >
             {houses?.map((house) => (
               <SwiperSlide >

@@ -41,7 +41,9 @@ const MortgageTabContent = ({address,bathrooms,caption,parking,rooms,yard_type,c
                 </div>
             )
         case "comment":
-            return <CommentSection houseId={id} comments={comments}/>
+            return <div className="w-full ">
+              <CommentSection houseId={id} comments={comments}/>
+            </div>
     }
   }
   

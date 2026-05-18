@@ -60,7 +60,7 @@ const BottomNavbarFilter = () => {
 
   
   return (
-    <div className="flex justify-evenly items-center gap-4 w-[90%]">
+    <div className="lg:flex justify-evenly items-center gap-4 w-[90%] hidden">
       <Input
         labelText=":حداکثر قیمت"
         tagBgStyle={{ background: "var(--color-dark-800)" }}

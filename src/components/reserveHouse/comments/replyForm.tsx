@@ -40,7 +40,7 @@ const ReplyForm: FC<IReplyCommentsProps> = ({ parentId,houseId }) => {
   return (
     
     <form action={formAction} className="flex flex-col gap-8 justify-center">
-      <div className="flex justify-end gap-10">
+      <div className="flex justify-end gap-10 flex-col md:flex-row">
         <StarRatingContainer onChange={setRatingReply} initialRating={ratingReply} />
 
         <input type="hidden" name="rating" value={ratingReply} />
@@ -60,12 +60,12 @@ const ReplyForm: FC<IReplyCommentsProps> = ({ parentId,houseId }) => {
 
         />
       </div>
-      <div className="flex-center gap-8 w-full">
+      <div className="flex-center gap-8 w-full flex-col-reverse md:flex-row">
         <LoginButton
           buttonText="ارسال"
           loadingText="در حال ارسال پیام"
           type="submit"
-          width="w-[53%] "
+          width="md:w-[53%] w-full "
           height="h-9"
           radius="rounded-[10px]"
         />

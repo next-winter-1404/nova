@@ -50,15 +50,17 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
                   }
                   labelSize="lg"
                   mainContent={
-                    <div className="w-full md:h-full lg:max-w-[480px] p-4 py-8 flex flex-col items-center justify-between gap-1 text-right">
-                      <div className="w-full flex flex-col gap-1 md:text-[20px] text-[14px]  text-white-pure">
+                    <div className=" w-[90%] md:w-full md:h-full h-[90%] lg:max-w-[480px] md:p-4 py-8 flex flex-col items-center justify-between gap-1 text-right">
+                      <div className=" w-full flex flex-col gap-1 md:text-[20px] text-[14px]  text-white-pure">
                         <h2 className="text-32-semibold">{comment.title}</h2>
                         <p>{comment.caption}</p>
                       </div>
                       
-                      <div className="flex-col flex gap-4 items-end w-full">
-                        <div className="w-full flex-center gap-6">
-                          <Image alt="icon" src={line} />
+                      <div className="flex-col flex gap-4 items-end w-full ">
+                        <div className="w-full flex-center gap-6 ">
+                          <div className="w-full">
+                          <Image alt="icon" src={line}/>
+                          </div>
                           {replies.length > 0 ? (
                             <Modal
                               contentClassName="bg-dark-900"
@@ -98,7 +100,7 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
                               }
                             />
                           ) : (
-                            <span className="text-gray-400 text-sm">پاسخی وجود ندارد</span>
+                            <span className="text-gray-400 text-sm md:text-2xl whitespace-nowrap">پاسخی وجود ندارد</span>
                           )}
                         </div>
 
@@ -159,9 +161,9 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
                   }
                   labelBackground="bg-dark-700"
                   curveColor="#393939"
-                  mainExtraStyle="bg-dark-700 h-[480px]"
+                  mainExtraStyle="bg-dark-700 md:h-[480px] h-[380px]"
                   labelExtraStyle={{ height: "40px" }}
-                  width="md:w-[480px] w-[380px]"
+                  width="md:w-[480px] w-full"
                 />
               </SwiperSlide>
             );
