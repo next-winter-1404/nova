@@ -20,7 +20,7 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
   const getReply = (commentId: number | string) => {
     return comments.filter((comment) => comment.parent_comment_id == commentId);
   };
-  
+
   return (
     <div className="w-full overflow-hidden flex-center gap-8">
       <Swiper
@@ -55,17 +55,20 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
                         <h2 className="text-32-semibold">{comment.title}</h2>
                         <p>{comment.caption}</p>
                       </div>
-                      
+
                       <div className="flex-col flex gap-4 items-end w-full ">
                         <div className="w-full flex-center gap-6 ">
                           <div className="w-full">
-                          <Image alt="icon" src={line}/>
+                            <Image alt="icon" src={line} />
                           </div>
                           {replies.length > 0 ? (
                             <Modal
                               contentClassName="bg-dark-900"
                               mainContent={
-                                <div className="flex flex-col gap-5 text-white overflow-y-auto max-h-[500px]" dir="rtl">
+                                <div
+                                  className="flex flex-col gap-5 text-white overflow-y-auto max-h-[500px]"
+                                  dir="rtl"
+                                >
                                   پاسخ ها برای این نظر :
                                   {replies.map((reply) => (
                                     <div key={reply.id}>
@@ -78,7 +81,9 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
                                             }`.trim() || "کاربر ناشناس"}
                                           </h1>
                                           <div className="flex flex-col gap-1">
-                                            <h2 className="font-semibold">{reply.title}</h2>
+                                            <h2 className="font-semibold">
+                                              {reply.title}
+                                            </h2>
                                             <p>{reply.caption}</p>
                                           </div>
                                         </div>
@@ -100,7 +105,9 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
                               }
                             />
                           ) : (
-                            <span className="text-gray-400 text-sm md:text-2xl whitespace-nowrap">پاسخی وجود ندارد</span>
+                            <span className="text-gray-400 text-sm md:text-2xl whitespace-nowrap">
+                              پاسخی وجود ندارد
+                            </span>
                           )}
                         </div>
 
@@ -121,7 +128,9 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
                               </h2>
                             </div>
                             <div className="flex flex-col gap-2 text-white">
-                              <h2 className="font-semibold">{replies[0].title}</h2>
+                              <h2 className="font-semibold">
+                                {replies[0].title}
+                              </h2>
                               <p>{replies[0].caption}</p>
                             </div>
                           </div>
@@ -137,11 +146,15 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
                             background: "transparent",
                             border: "1px solid white",
                             borderRadius: 12,
-                            cursor:"pointer"
+                            cursor: "pointer",
                           }}
                           text={"ثبت پاسخ"}
                           icon={<FiChevronLeft />}
-                          onClick={() => router.push(`?tab=comment&replyTo=${comment.id}`,{scroll:false})}
+                          onClick={() =>
+                            router.push(`?tab=comment&replyTo=${comment.id}`, {
+                              scroll: false,
+                            })
+                          }
                         />
                         <div className="w-full flex items-center justify-end gap-4">
                           <div className="h-full md:w-[180px] md:gap-2.5 gap-1.5 flex flex-col justify-center items-end text-[12px] md:text-[16px]">
