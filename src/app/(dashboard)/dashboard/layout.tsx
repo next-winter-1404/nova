@@ -4,11 +4,7 @@ import { FiChevronDown } from "react-icons/fi";
 import { HiOutlineBell } from "react-icons/hi";
 import { TbHome } from "react-icons/tb";
 import { HiOutlineBars3 } from "react-icons/hi2";
-import { TbLogout } from "react-icons/tb";
-import {
-  deleteServerSideCookie,
-  getServerSideCookie,
-} from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { FC, ReactNode } from "react";
 
 import {
@@ -21,9 +17,10 @@ import {
   TbKeyFilled,
 } from "react-icons/tb";
 import { FaCommentDots } from "react-icons/fa";
-import DashboardMenuItem from "@/src/components/dashboard/menuItems";
-import { logout } from "@/src/components/dashboard/logout/logout";
+import DashboardMenuItem from "@/src/components/dashboard/menu/menuItems";
 import LogoutButton from "@/src/components/common/logoutButton/logOutButton";
+import BuyerWallet from "@/src/components/dashboard/wallet/buyerWallet";
+import SellerNewComments from "@/src/components/dashboard/newComments/newComments";
 interface IProp {
   children: ReactNode;
 }
@@ -87,10 +84,13 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
         <aside className="w-[300px] p-5  h-[95vh] bg-dark-700 rounded-xl flex-col ">
           <div className="w-full justify-between items-center flex  text-white">
             <h1 className="text-[32px] font-extrabold ">دلتا</h1>
-            <LogoutButton/>
+            <LogoutButton />
           </div>
-          <div className="w-full text-white mt-10">
-            <DashboardMenuItem items={menuItems} />
+          <div className="w-full flex-col flex justify-between  h-[90%]">
+            <div className="w-full text-white mt-10">
+              <DashboardMenuItem items={menuItems} />
+            </div>
+            {role == "buyer" ? <BuyerWallet /> : <SellerNewComments />}
           </div>
         </aside>
 
