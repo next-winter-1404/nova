@@ -5,7 +5,10 @@ import { HiOutlineBell } from "react-icons/hi";
 import { TbHome } from "react-icons/tb";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { TbLogout } from "react-icons/tb";
-import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import {
+  deleteServerSideCookie,
+  getServerSideCookie,
+} from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { FC, ReactNode } from "react";
 
 import {
@@ -19,6 +22,8 @@ import {
 } from "react-icons/tb";
 import { FaCommentDots } from "react-icons/fa";
 import DashboardMenuItem from "@/src/components/dashboard/menuItems";
+import { logout } from "@/src/components/dashboard/logout/logout";
+import LogoutButton from "@/src/components/common/logoutButton/logOutButton";
 interface IProp {
   children: ReactNode;
 }
@@ -82,11 +87,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
         <aside className="w-[300px] p-5  h-[95vh] bg-dark-700 rounded-xl flex-col ">
           <div className="w-full justify-between items-center flex  text-white">
             <h1 className="text-[32px] font-extrabold ">دلتا</h1>
-            <TbLogout className="w-6 h-6" />
+            <LogoutButton/>
           </div>
-        <div className="w-full text-white mt-10">
-       <DashboardMenuItem items={menuItems} />
-        </div>
+          <div className="w-full text-white mt-10">
+            <DashboardMenuItem items={menuItems} />
+          </div>
         </aside>
 
         <div className="flex flex-col w-full">
