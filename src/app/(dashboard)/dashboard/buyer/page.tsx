@@ -3,11 +3,15 @@ import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import ProgressBar from "@/src/components/common/progressBar/ProgressBar";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import { getBookings } from "@/src/utils/sevices/api/processReserve/getbooking";
 import { TbPinFilled, TbHeartFilled } from "react-icons/tb";
 import { TbDots } from "react-icons/tb";
 const BuyerDashboardPage = async () => {
   const role = await getServerSideCookie("userRole");
   const items = ["نام اقامتگاه", "تاریخ رزرو", "قیمت", "وضعیت"];
+  const result = await getBookings();
+  const booking = result?.data;
+
   return (
     <div className="flex flex-col gap-5">
       <div className="flex gap-4 justify-between w-full ">
@@ -77,21 +81,25 @@ const BuyerDashboardPage = async () => {
       >
         <div className="flex flex-col w-full  ">
           <ItemNavbar colsNumber={4} items={items} />
-         <div className="flex text-white">
-         <div className="grid grid-cols-4  w-[90%] gap-20">
-            <div className="flex gap-4">
-              <div className="w-[107px] h-[72px] rounded-xl bg-gray-600"></div>
-              <div>هتل سراوان رانین رشت</div>
-            </div>
-            <div>12 مرداد - 1401 / 12:33</div>
-            <div className="flex gap-1" dir="rtl">
-              <span>180000000</span>
-              <span>تومان</span>
-            </div>
-            <div className="bg-primary-accent-green w-[90px] h-[22px] rounded-4xl"></div>
+          <div className="flex text-white mt-5 items-center">
+            {booking?.map((item) => (
+              <div key={item.id} className="grid grid-cols-4  w-[90%] gap-20 items-center">
+                <div className="flex gap-4 items-center">
+                  <div className="w-[107px] h-[72px] rounded-xl bg-gray-600"></div>
+                  <div>{item.house?.title||"عنوانی وجود ندارد"}</div>
+                </div>
+                <div className=" text-center">{item.created_at?.slice(0,10)||"--"}</div>
+                <div className="flex-center gap-1 text-center " dir="rtl">
+                  <span>{item.house?.price||"  --"}</span>
+                  <span>تومان</span>
+                </div>
+                <div className="bg-primary-accent-green w-[90px] h-[22px] rounded-4xl text-center">
+                  {item.status}
+                </div>
+              </div>
+            ))}
+            <TbDots className="w-6 h-6 " />
           </div>
-            <TbDots className="w-6 h-6 "/>
-         </div>
         </div>
       </DashboardContentContainer>
     </div>

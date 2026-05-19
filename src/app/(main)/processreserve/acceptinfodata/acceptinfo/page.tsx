@@ -1,6 +1,6 @@
 'use client'
 import {useSearchParams } from 'next/navigation';
-import UseStepNavigation from '../navigation';
+import UseStepNavigation from '../../navigation';
 import Button from '@/src/components/common/button/page';
 import Image from 'next/image';
 import Input from '@/src/components/common/input/Input';
@@ -14,13 +14,40 @@ import megaphone from "@/src/assets/icons/megaphone.svg"
 import star25 from "@/src/assets/icons/Star25.svg"
 import badgepercent from "@/src/assets/icons/badgepercent.svg" 
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
+import { useEffect, useState } from 'react';
+import GetAgeCategory, { AgeCategory } from '@/src/utils/helper/ageHelper/page';
 
 
-const AcceptInfo = () => {
+
+const AcceptInfo = ({data}: any ) => {
+  console.log("get api :", data)
     const searchParams = useSearchParams();
     const currentStep = searchParams.get('step') || 'acceptinfo'
     const {goToNext, goToPrev} = UseStepNavigation();
-        
+    console.log("data in component :", data)
+  if (!data) {
+    return (
+      <div className="p-8 text-center text-red-600 bg-red-50 rounded-lg border border-red-200">
+        <h3 className="text-xl font-bold mb-2"> اطلاعات مسافر پیدا نشد!</h3>
+      </div>
+    );
+  }
+
+  const bookingsData = data.booking || data;
+  const travelers = bookingsData.traveler_details || [];
+  
+  console.log(" لیست مسافران:", travelers);
+
+  if (travelers.length === 0) {
+    return (
+      <div className="p-8 text-center text-yellow-600 bg-yellow-50 rounded-lg border border-yellow-200">
+        <h3 className="text-xl font-bold mb-2"> هیچ مسافری یافت نشد!</h3>
+      </div>
+    );
+  }
+  const category: AgeCategory = GetAgeCategory(travelers.birthDate);
+
+
       return (
         <div className='flex flex-col items-center md:gap-[36px] gap-[30px] w-[1683px] md:h-[1150px]' dir='rtl'>           
             <div className='md:w-11/12 w-[340px] flex flex-col items-center justify-center md:h-[185px] h-[730px] bg-dark-700 rounded-3xl md:gap-6 gap-3 relative'>
@@ -31,26 +58,31 @@ const AcceptInfo = () => {
                 </div>        
               </div>
               <div className='hidden md:block absolute top-[130px] w-22/23 border border-gray-150'></div>
-              <div className='w-22/23 flex md:flex-row flex-col items-center justify-between h-[650px] md:h-[100px] md:gap-5'>
-                <div className='flex flex-col items-center w-[74px] text-[16px] md:gap-[40px] gap-3'>
+              
+                <div className='w-22/23 flex md:flex-row flex-col items-center justify-between h-[650px] md:h-[100px] md:gap-5' >           
+                {/* {data.booking.traveler_details?.map((traveler: any, index: number) => { */}
+                  
+                       
+                  
+                <div className='flex flex-col items-center w-[74px] text-[16px] md:gap-[40px] gap-3 '>
                   <h2 className='text-gray-300'>بازه سنی</h2>
-                  <h2 className='text-white-pure'> بزرگسال</h2>
+                  <h2 className='text-white-pure'> {category}</h2>
                 </div>
                 <div className='flex flex-col items-center w-[149px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'> نام و نام خانوادگی</h2>
-                  <h2 className='text-white-pure'> محمد رضا ساداتی</h2>
+                  <h2 className='text-white-pure'> {travelers.firstName} {travelers.lastName}</h2>
                 </div>
                 <div className='flex flex-col items-center w-[70px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>جنسیت</h2>
-                  <h2 className='text-white-pure'> مرد</h2>
+                  <h2 className='text-white-pure'> {travelers.gender}</h2>
                 </div>
                 <div className='flex flex-col items-center w-[217px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>کدملی / شماره یا پاسپورت</h2>
-                  <h2 className='text-primary-accent-green'> 09229167194</h2>
+                  <h2 className='text-primary-accent-green'> {travelers.nationalId}</h2>
                 </div>
                 <div className='flex flex-col items-center w-[100px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>تاریخ تولد</h2>
-                  <h2 className='text-white-pure'> 1350 / 5 / 12</h2>
+                  <h2 className='text-white-pure'>{travelers.birthDate} </h2>
                 </div>
                 <div className='flex items-center flex-col w-[60px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>خدمات</h2>
@@ -64,27 +96,13 @@ const AcceptInfo = () => {
                   <h2 className='text-gray-300'>قیمت</h2>
                   <h2 className='text-white-pure'> 1.520.000 ت</h2>
                 </div>
-                {/* <div className='h-[25px] w-full flex justify-between text-[20px] text-gray-300 items-center'>
-                  <h2 className='w-[74px]'>بازه سنی</h2>
-                  <h2 className='w-[149px]'> نام و نام خانوادگی</h2>
-                  <h2 className='w-[62px]'> جنسیت</h2>
-                  <h2 className='w-[217px]'> کدملی / شماره یا پاسپورت </h2>
-                  <h2 className='w-[80px]'> تاریخ تولد</h2>
-                  <h2 className='w-[58px]'> خدمات</h2>
-                  <h2 className='w-[100px]'> مبلغ خدمات</h2>
-                  <h2 className='w-[60px]'> قیمت </h2>
-                </div> */}                
-                {/* <div className='h-[25px] w-full flex justify-between text-[20px] text-white-pure items-center'>
-                  <h2 className='w-[74px]'> بزرگسال</h2>
-                  <h2 className='w-[149px]'> محمد رضا ساداتی </h2>
-                  <h2 className='w-[62px]'> مرد</h2>
-                  <h2 className='w-[217px]'> 09229167194 </h2>
-                  <h2 className='w-[80px]'> 1350 / 5 / 12 </h2>
-                  <h2 className='w-[58px]'> -</h2>
-                  <h2 className='w-[100px]'> -</h2>
-                  <h2 className='w-[110px]'> 1.520.000 ت </h2>
-                </div> */}
+                
               </div>
+              
+                
+              
+              
+              
             </div>
             <div className='md:w-11/12 w-[340px] flex flex-col items-center justify-center md:h-[240px] h-[550px] bg-dark-700 rounded-3xl gap-5'>
               <div className=' w-22/23 h-[44px] rounded-2xl bg-gray-250 flex justify-center items-center gap-6'>
@@ -116,12 +134,12 @@ const AcceptInfo = () => {
                 <div className='md:w-[230px] w-[150px] md:h-[15px] md:flex-row flex-col items-center md:gap-2 gap-0.5 border-l border-gray-150 flex text-[12px] md:text-[16px]'>
                 <div className='hidden md:block'><Image src={star25} alt='star25'/></div>
                 <h2 className='text-white-pure'>شماره تماس : </h2>
-                  <h2 className='text-primary-accent-green'>09229167194</h2>
+                  <h2 className='text-primary-accent-green'>{data.booking?.sharedMobile}</h2>
                 </div> 
                 <div className='md:w-[230px] w-[150px] md:h-[15px] md:flex-row flex-col items-center md:gap-2 gap-0.5 flex text-[12px] md:text-[16px]'>
                   <div className='hidden md:block'><Image src={star25} alt='star25'/></div>
                   <h2 className='text-white-pure'>ایمیل : </h2>
-                  <h2 className='text-primary-accent-green'>Example@gmail.com</h2>
+                  <h2 className='text-primary-accent-green'>{data.booking?.sharedEmail}</h2>
                 </div>                  
               </div>          
             </div>
