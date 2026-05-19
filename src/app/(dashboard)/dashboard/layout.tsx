@@ -78,7 +78,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
   return (
     <>
       <div
-        className="flex justify-between  w-full pt-5 px-5 h-full gap-5"
+        className="flex  w-full pt-5 px-5 h-full gap-5 "
         dir="rtl"
       >
         <aside className="w-[300px] p-5  h-[95vh] bg-dark-700 rounded-xl flex-col ">
@@ -94,7 +94,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
           </div>
         </aside>
 
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full xl:w-[1113px] 2xl:w-[2000px]">
           <div className="flex justify-between p-5 items-center  h-[66px] bg-dark-700 rounded-xl">
             <div className="font-extrabold text-white text-[20px]">
               <HiOutlineBars3 className="md:hidden" />
