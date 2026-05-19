@@ -4,6 +4,7 @@ import DashboardContentContainer from "@/src/components/common/dashboardcontentc
 import ProgressBar from "@/src/components/common/progressBar/ProgressBar";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { TbPinFilled, TbHeartFilled } from "react-icons/tb";
+import { TbDots } from "react-icons/tb";
 const BuyerDashboardPage = async () => {
   const role = await getServerSideCookie("userRole");
   const items = ["نام اقامتگاه", "تاریخ رزرو", "قیمت", "وضعیت"];
@@ -74,8 +75,23 @@ const BuyerDashboardPage = async () => {
         role={role}
         title="رزرو های اخیر"
       >
-        <div className="flex flex-col">
-          <ItemNavbar items={items} />
+        <div className="flex flex-col w-full  ">
+          <ItemNavbar colsNumber={4} items={items} />
+         <div className="flex text-white">
+         <div className="grid grid-cols-4  w-[90%] gap-20">
+            <div className="flex gap-4">
+              <div className="w-[107px] h-[72px] rounded-xl bg-gray-600"></div>
+              <div>هتل سراوان رانین رشت</div>
+            </div>
+            <div>12 مرداد - 1401 / 12:33</div>
+            <div className="flex gap-1" dir="rtl">
+              <span>180000000</span>
+              <span>تومان</span>
+            </div>
+            <div className="bg-primary-accent-green w-[90px] h-[22px] rounded-4xl"></div>
+          </div>
+            <TbDots className="w-6 h-6 "/>
+         </div>
         </div>
       </DashboardContentContainer>
     </div>
