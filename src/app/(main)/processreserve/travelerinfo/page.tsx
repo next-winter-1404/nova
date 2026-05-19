@@ -28,7 +28,6 @@ const Traveler = () => {
     const checkInDate = searchParams.get("checkInDate")
     const checkOutDate = searchParams.get("checkOutDate")
     const houseId = searchParams.get("houseId")
-    const houseDetail = getHousesDetail(Number(houseId))
     const currentStep = searchParams.get('step') || 'travelerinfo'
     const [passengers, setPassengers] = useState([])
     const [sharedEmail, setSharedEmail] = useState('')
@@ -38,27 +37,45 @@ const Traveler = () => {
     }
     const {goToNext} = UseStepNavigation();
     console.log("houseId: ", houseId)
-    console.log("house detail :", houseDetail)
+    const reservedDates = [checkInDate, checkOutDate]
     const handleSubmit = async () => {
-      // const validPassengers = passengers.filter(p => p.firstName.trim() ! === '');
-      // if (validPassengers.length === 0){
-      //   toast("لطفا مشخصات مسافران را وارد کنید !")
-      //   return
-      // }
-      if (!sharedMobile) {
+      if (!houseId || !checkInDate || !checkOutDate)
+      if (passengers.length === 0){
+        toast("لطفا حداقل یک مسافر اضافه کنید !")
+        return;
+      }
+      const hasInValidPassengers = passengers.some ( p => 
+        !p.firstName || p.firstName.trim() === "" ||
+        !p.lastName || p.lastName.trim() === "" ||
+        !p.nationalId || p.nationalId.trim() === ""
+      )
+      if (hasInValidPassengers) {
+        toast("لطفا مشخصات را کامل وارد کنید !")
+      }
+      if (!sharedMobile || sharedMobile.trim() === 0) {
         toast("شماره موبایل را وارد کنید")
       }
-      if (!sharedEmail) {
+      if (!sharedEmail || sharedEmail.trim() === 0) {
         toast("ایمیل را وارد کنید")
         return
       }
       try{
         const peylod = {
-          traveler_details : passengers,
-          sharedEmail : sharedEmail,
-          sharedMobile :sharedMobile
+          houseId : houseId,
+          reservedDates : reservedDates,
+          traveler_details : passengers.map(p => ({
+            firstName : p.firstName?.trim(),
+            lastName : p.lastName?.trim(),
+            nationalId : p.nationalId?.trim(),
+            gender : p.gender,
+            birthDate : p.birthDate
+          })),
+          sharedEmail : sharedEmail?.trim(),
+          sharedMobile :sharedMobile?.trim()
         };
+        console.log("API :", JSON.stringify(peylod, null, 2));
         const response = await postTravelerInfo(peylod);
+        toast.success("اطلاعات با موفقیت ثبت شد")
       }
       catch (error){
       console.log(error)

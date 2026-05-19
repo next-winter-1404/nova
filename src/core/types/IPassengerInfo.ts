@@ -3,7 +3,7 @@ export interface IPassengerInfo {
     lastName : string
     nationalId : string
     gender : string
-    birthDay : string
+    birthDate : string
 }
 export interface ITraveler{
     traveler_details? : IPassengerInfo[]
@@ -16,5 +16,5 @@ export interface ITraveler{
     lastName? : string
     nationalId? : string
     gender? : string
-    birthDay? : string
+    birthDate? : string
 }

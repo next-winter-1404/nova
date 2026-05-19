@@ -1,32 +1,28 @@
 import Button from '@/src/components/common/button/page'
 import Input from '@/src/components/common/input/Input'
 import Image from 'next/image'
-import React, { FC, useEffect, useState } from 'react'
-import arrowUp from "@/src/assets/icons/arrowUp.svg"
-import arrowDown from "@/src/assets/icons/arrowDown.svg"
+import React, { useEffect, useState } from 'react'
 import useradd from "@/src/assets/icons/useradd.svg"
 import usersAlt from "@/src/assets/icons/usersAlt.svg"
 import timepast from "@/src/assets/icons/timepast.svg"
 import { IPassengerInfo } from '@/src/core/types/IPassengerInfo'
 import toast from 'react-hot-toast'
-import SimpleDropdown from '@/src/components/common/dropDown'
-import DatePickerComponent from '@/src/components/common/datePicker'
 
 const STORAGE_KEY = "past_passengers";
 
 const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : IPassengerInfo[]) => void}) => {
     const [passengers, setPassengers ] = useState([
-        { firstName: '', lastName: '', birthDay: '', nationalId : '', gender : ''}
+        { firstName: '', lastName: '', birthDate: '', nationalId : '', gender : ''}
     ]);
-    const [birthday, setBirthday] = useState("");
+    // const [birthday, setBirthday] = useState("");
 
     const [savedPassengers, setSavedPassengers] = useState<IPassengerInfo[]>([]);
     const [showModal, setShowModal] = useState(false)
 
-    const SelectGender = [
-        {value : "male", label : "مرد"},
-        {value : "female", label : "زن"}
-    ]
+    // const SelectGender = [
+    //     {value : "male", label : "مرد"},
+    //     {value : "female", label : "زن"}
+    // ]
     useEffect (() => {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved){
@@ -43,7 +39,7 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
     },[passengers,onPassengersChange])
 
     const addPassengers = () => {
-        setPassengers([...passengers, {firstName:"", lastName:"", birthDay:"", gender:"" , nationalId:""}])
+        setPassengers([...passengers, {firstName:"", lastName:"", birthDate:"", gender:"" , nationalId:""}])
     }
 
     const handleChange = (index : number, field: keyof IPassengerInfo, value: string) => {
@@ -69,10 +65,10 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
         }
         setShowModal(false)
     }
-    const [isOpen, setIsOpen] = useState(true);
-    const toggleShow = async () => {
-        setIsOpen ((prev) => (!prev));
-    };
+    // const [isOpen, setIsOpen] = useState(true);
+    // const toggleShow = async () => {
+    //     setIsOpen ((prev) => (!prev));
+    // };
   return (
     <>
         <div className='w-22/23 h-[44px] rounded-2xl bg-gray-250 flex justify-center items-center gap-3 md:gap-6'>
@@ -100,10 +96,10 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                         borderColor='border-gray-300'
                         textColor='text-gray-300'
                         labelTextColor='text-gray-300'
-                        id={'name'}
+                        id={'firstName'}
                         placeHolder='وارد کنید...'
                         type='text'
-                        htmlFor={'name'}
+                        htmlFor={'firstName'}
                         tagBgStyle={{background :"var(--color-dark-700)"}}
                         value={p.firstName}
                         onChange={(e) => handleChange(index, "firstName" , e.target.value)}
@@ -118,37 +114,31 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                         borderColor='border-gray-300'
                         textColor='text-gray-300'
                         labelTextColor='text-gray-300'
-                        id={'family'}
+                        id={'lastName'}
                         placeHolder='وارد کنید ...'
                         type='text'
-                        htmlFor={'family'}
+                        htmlFor={'lastName'}
                         value={p.lastName}
                         onChange={(e) => handleChange(index, "lastName" , e.target.value)}
                     />
-                    <SimpleDropdown
+                    {/* <SimpleDropdown
                         options={SelectGender}
                         labelText=' :جنسیت'
                         triggerClassName='w-[250px] md:text-[16px] text-[12px] h-[50px] text-gray-300 border-gray-300'
                         placeholder='وارد کنید'
                         paramKey='gender'
                         tagBg='bg-dark-700'
-                    />
-                    {/* <Input
-                        tagBgStyle={{background :"var(--color-dark-700)"}}
-                        labelText=''
-                        parentWidth=''
-                        InputHeight={''}
-                        labelTextSize='text-[13px]'
-                        textSize=''
-                        borderColor=''
-                        textColor=''
-                        labelTextColor='text-gray-300'
-                        id={'national'}
-                        placeHolder='وارد کنید ...'
-                        type='text'
-                        htmlFor={'national'}
-                        value={p.gender}
                     /> */}
+                    <select
+                        className ='text-gray-300 w-[250px] h-[50px] md:text-[16px] text-[12px] border rounded-2xl border-gray-300'
+                        value={p.gender}
+                        onChange={(e) => handleChange(index, "gender", e.target.value)}
+                    >
+                        <option value=""> جنسیت انتخاب کنید </option>
+                        <option value="male">مرد</option>
+                        <option value="female">زن</option>
+                    </select>
+                    
                     <Input
                         tagBgStyle={{background :"var(--color-dark-700)"}}
                         labelText=' کد ملی:'
@@ -159,22 +149,22 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                         borderColor='border-gray-300'
                         textColor='text-gray-300'
                         labelTextColor='text-gray-300'
-                        id={'national'}
+                        id={'nationalId'}
                         placeHolder='وارد کنید ...'
                         type='text'
-                        htmlFor={'national'}
+                        htmlFor={'nationalId'}
                         value={p.nationalId}
                         onChange={(e) => handleChange(index, "nationalId" , e.target.value)}
                     />
-                    <div className='w-[250px]'>
+                    {/* <div className='w-[250px]'>
                     <DatePickerComponent
                         paramKey="birthday"
                         placeholder="تاریخ تولد را وارد کنید"
-                        value={p.birthDay}
-                        onChange={(e) => setBirthday(e.target.value)}                         
+                        value={p.birthDate}
+                        // onChange={(e) => setBirthday(e.target.value)}                         
                         />
-                    </div>
-                    {/* <Input
+                    </div> */}
+                    <Input
                         tagBgStyle={{background :"var(--color-dark-700)"}}
                         labelText='تاریخ  :'
                         parentWidth='w-[250px]'
@@ -184,13 +174,13 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                         borderColor='border-gray-300'
                         textColor='text-gray-300'
                         labelTextColor='text-gray-300'
-                        id={'national'}
+                        id={'birthDate'}
                         placeHolder='وارد کنید ...'
                         type='text'
-                        htmlFor={'national'}
-                        onChange={(e) => handleChange(index, "birthDay" , e.target.value)}
-                        value={p.birthDay}
-                    /> */}
+                        htmlFor={'birthDate'}
+                        onChange={(e) => handleChange(index, "birthDate" , e.target.value)}
+                        value={p.birthDate}
+                    />
                     </form>
                 
                 </div>

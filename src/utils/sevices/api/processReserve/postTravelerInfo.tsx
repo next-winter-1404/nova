@@ -11,5 +11,5 @@ export const postTravelerInfo = async (apiParams = {}): Promise<AxiosResponse<IP
   if (dataResponse.id) {
     await setServerSideCookie("BookingId", dataResponse.id);
   }
-  return response.data;
+  return dataResponse;
 };

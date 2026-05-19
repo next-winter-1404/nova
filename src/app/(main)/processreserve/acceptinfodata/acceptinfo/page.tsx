@@ -14,13 +14,39 @@ import megaphone from "@/src/assets/icons/megaphone.svg"
 import star25 from "@/src/assets/icons/Star25.svg"
 import badgepercent from "@/src/assets/icons/badgepercent.svg" 
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
-import { ITraveler } from '@/src/core/types/IPassengerInfo';
+import { useEffect, useState } from 'react';
+import GetAgeCategory, { AgeCategory } from '@/src/utils/helper/ageHelper/page';
 
 
-const AcceptInfoData = ({data}) => {
+
+const AcceptInfo = ({data}: any ) => {
+  console.log("get api :", data)
     const searchParams = useSearchParams();
     const currentStep = searchParams.get('step') || 'acceptinfo'
     const {goToNext, goToPrev} = UseStepNavigation();
+    console.log("data in component :", data)
+  if (!data) {
+    return (
+      <div className="p-8 text-center text-red-600 bg-red-50 rounded-lg border border-red-200">
+        <h3 className="text-xl font-bold mb-2"> اطلاعات مسافر پیدا نشد!</h3>
+      </div>
+    );
+  }
+
+  const bookingsData = data.booking || data;
+  const travelers = bookingsData.traveler_details || [];
+  
+  console.log(" لیست مسافران:", travelers);
+
+  if (travelers.length === 0) {
+    return (
+      <div className="p-8 text-center text-yellow-600 bg-yellow-50 rounded-lg border border-yellow-200">
+        <h3 className="text-xl font-bold mb-2"> هیچ مسافری یافت نشد!</h3>
+      </div>
+    );
+  }
+  const category: AgeCategory = GetAgeCategory(travelers.birthDate);
+
 
       return (
         <div className='flex flex-col items-center md:gap-[36px] gap-[30px] w-[1683px] md:h-[1150px]' dir='rtl'>           
@@ -32,27 +58,31 @@ const AcceptInfoData = ({data}) => {
                 </div>        
               </div>
               <div className='hidden md:block absolute top-[130px] w-22/23 border border-gray-150'></div>
-              {data.map((traveler: ITraveler) => (
-                <div className='w-22/23 flex md:flex-row flex-col items-center justify-between h-[650px] md:h-[100px] md:gap-5' key={traveler.id}>
-                <div className='flex flex-col items-center w-[74px] text-[16px] md:gap-[40px] gap-3'>
+              
+                <div className='w-22/23 flex md:flex-row flex-col items-center justify-between h-[650px] md:h-[100px] md:gap-5' >           
+                {/* {data.booking.traveler_details?.map((traveler: any, index: number) => { */}
+                  
+                       
+                  
+                <div className='flex flex-col items-center w-[74px] text-[16px] md:gap-[40px] gap-3 '>
                   <h2 className='text-gray-300'>بازه سنی</h2>
-                  <h2 className='text-white-pure'> بزرگسال</h2>
+                  <h2 className='text-white-pure'> {category}</h2>
                 </div>
                 <div className='flex flex-col items-center w-[149px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'> نام و نام خانوادگی</h2>
-                  <h2 className='text-white-pure'> {traveler.firstName}</h2>
+                  <h2 className='text-white-pure'> {travelers.firstName} {travelers.lastName}</h2>
                 </div>
                 <div className='flex flex-col items-center w-[70px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>جنسیت</h2>
-                  <h2 className='text-white-pure'> {traveler.gender}</h2>
+                  <h2 className='text-white-pure'> {travelers.gender}</h2>
                 </div>
                 <div className='flex flex-col items-center w-[217px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>کدملی / شماره یا پاسپورت</h2>
-                  <h2 className='text-primary-accent-green'> {traveler.sharedMobile}</h2>
+                  <h2 className='text-primary-accent-green'> {travelers.nationalId}</h2>
                 </div>
                 <div className='flex flex-col items-center w-[100px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>تاریخ تولد</h2>
-                  <h2 className='text-white-pure'>{traveler.birthDay} </h2>
+                  <h2 className='text-white-pure'>{travelers.birthDate} </h2>
                 </div>
                 <div className='flex items-center flex-col w-[60px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>خدمات</h2>
@@ -66,8 +96,12 @@ const AcceptInfoData = ({data}) => {
                   <h2 className='text-gray-300'>قیمت</h2>
                   <h2 className='text-white-pure'> 1.520.000 ت</h2>
                 </div>
+                
               </div>
-              ))}
+              
+                
+              
+              
               
             </div>
             <div className='md:w-11/12 w-[340px] flex flex-col items-center justify-center md:h-[240px] h-[550px] bg-dark-700 rounded-3xl gap-5'>
@@ -100,12 +134,12 @@ const AcceptInfoData = ({data}) => {
                 <div className='md:w-[230px] w-[150px] md:h-[15px] md:flex-row flex-col items-center md:gap-2 gap-0.5 border-l border-gray-150 flex text-[12px] md:text-[16px]'>
                 <div className='hidden md:block'><Image src={star25} alt='star25'/></div>
                 <h2 className='text-white-pure'>شماره تماس : </h2>
-                  <h2 className='text-primary-accent-green'>{data.sharedMobile}</h2>
+                  <h2 className='text-primary-accent-green'>{data.booking?.sharedMobile}</h2>
                 </div> 
                 <div className='md:w-[230px] w-[150px] md:h-[15px] md:flex-row flex-col items-center md:gap-2 gap-0.5 flex text-[12px] md:text-[16px]'>
                   <div className='hidden md:block'><Image src={star25} alt='star25'/></div>
                   <h2 className='text-white-pure'>ایمیل : </h2>
-                  <h2 className='text-primary-accent-green'>{data.sharedEmail}</h2>
+                  <h2 className='text-primary-accent-green'>{data.booking?.sharedEmail}</h2>
                 </div>                  
               </div>          
             </div>
@@ -163,4 +197,4 @@ const AcceptInfoData = ({data}) => {
       )
 }
 
-export default AcceptInfoData
+export default AcceptInfo
