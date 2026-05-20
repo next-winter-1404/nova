@@ -2,8 +2,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function proxy(request: NextRequest) {
-  // console.log("🟢🟢🟢🟢🟢🟢🟢 working")
-  // console.log("Path:", request.nextUrl.pathname);
   const serverAccessToken = request.cookies.get("ServerAccessToken")?.value;
   const path = request.nextUrl.pathname;
   const role = request.cookies.get("userRole")?.value;
