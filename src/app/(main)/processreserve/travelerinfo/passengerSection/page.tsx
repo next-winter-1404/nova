@@ -88,6 +88,7 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                 {/* <Button buttonStyle={{width :"16px", height:"10px", backgroundColor:"transparent", position:"absolute", left:"35px", top:"0px"}} onClick={toggleShow} icon= {isOpen ? <Image src={arrowUp} alt='arrowUp'/> : <Image src={arrowDown} alt='arrowDown'/>}/>                             */}
                     <form className='md:w-[1410px] md:h-[60px] h-[350px] flex md:flex-row flex-col justify-between items-center'>              
                     <Input
+                        dir='rtl'
                         labelText='نام شما :'
                         parentWidth='w-[250px]'
                         InputHeight={'h-[50px]'}
@@ -105,6 +106,7 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                         onChange={(e) => handleChange(index, "firstName" , e.target.value)}
                     />
                     <Input
+                        dir='rtl'
                         tagBgStyle={{background :"var(--color-dark-700)"}}
                         labelText='نام خانوادگی :'
                         parentWidth='w-[250px]'
@@ -139,7 +141,8 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                         <option value="female">زن</option>
                     </select>
                     
-                    <Input
+                    <Input 
+                        dir='rtl'
                         tagBgStyle={{background :"var(--color-dark-700)"}}
                         labelText=' کد ملی:'
                         parentWidth='w-[250px]'
@@ -165,6 +168,7 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                         />
                     </div> */}
                     <Input
+                        dir='rtl'
                         tagBgStyle={{background :"var(--color-dark-700)"}}
                         labelText='تاریخ  :'
                         parentWidth='w-[250px]'

@@ -39,7 +39,7 @@ const Traveler = () => {
     console.log("houseId: ", houseId)
     const reservedDates = [checkInDate, checkOutDate]
     const handleSubmit = async () => {
-      if (!houseId || !checkInDate || !checkOutDate)
+      // if (!houseId || !checkInDate || !checkOutDate)
       if (passengers.length === 0){
         toast("لطفا حداقل یک مسافر اضافه کنید !")
         return;
@@ -149,6 +149,7 @@ const Traveler = () => {
             <form className='md:h-[50px] h-[180px] flex md:flex-row flex-col gap-5 items-center' >               
               <Input
                 tagBgStyle={{background :"var(--color-dark-700)"}}
+                dir='rtl'
                 labelText='شماره تلفن :'
                 parentWidth='w-[250px]'
                 InputHeight={'h-[50px]'}
@@ -165,6 +166,7 @@ const Traveler = () => {
                 onChange={(e) => setSharedMobile(e.target.value)}
               />
               <Input
+                dir='rtl'
                 tagBgStyle={{background :"var(--color-dark-700)"}}
                 labelText='ایمیل :'
                 parentWidth='w-[250px]'
@@ -196,7 +198,7 @@ const Traveler = () => {
               <div className='md:w-[300px] h-[30px] md:gap-3 gap-2 flex items-center md:text-[24px] text-[18px] text-white-pure' dir='rtl'>
                 <Image src={ticket} alt='ticket'/> 
                 <div className='flex md:flex-row flex-col md:gap-0.5'>
-                  <h2 > قیمت بلیط :</h2> <h2 className='text-primary-accent-green'> 1.500.000ت </h2>
+                  <h2 > قیمت بلیط :</h2> <h2 className='text-primary-accent-green'> {housedetail?.price} </h2>
                 </div>
               </div>
             </div>
