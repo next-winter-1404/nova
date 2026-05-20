@@ -51,6 +51,7 @@ const BuyerDashboardPage = async () => {
       </div>
       <div className="grid grid-cols-2 gap-5 2xl:gap-20">
         <DashboardContentContainer
+          seemore
           twParentClassName=""
           href="reserve-management"
           navigateText="مشاهده همه"
@@ -60,6 +61,7 @@ const BuyerDashboardPage = async () => {
           <ReserveChart />
         </DashboardContentContainer>
         <DashboardContentContainer
+          seemore
           twParentClassName=""
           href="profile"
           navigateText="ویرایش"
@@ -81,6 +83,7 @@ const BuyerDashboardPage = async () => {
         </DashboardContentContainer>
       </div>
       <DashboardContentContainer
+        seemore
         href="reserve-management"
         navigateText="مشاهده همه"
         role={role}
