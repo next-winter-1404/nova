@@ -9,7 +9,6 @@ import React, { useEffect, useState } from 'react'
 const Payment = () => {
     const router = useRouter();
     const searchParams = useSearchParams();  
-    const currentStep = searchParams.get('step') || 'payment'
     const bookingId = searchParams.get("bookingId")
     const amount = searchParams.get("amount")
 
@@ -68,8 +67,10 @@ const Payment = () => {
                 return;
             }   
         setLoading(true);    
-        try {    
-            router.push(`/processreserve/ticket?bookingId=${bookingId}&amount=${amount}`);    
+        try {   
+            const currentStep = searchParams.get('step') || "payment";
+            const nextStep = 'ticket';
+            router.push(`/processreserve/ticket?bookingId=${bookingId}&amount=${amount}&step=${nextStep}`);    
         } catch (err: any) {
             setError('خطا در پردازش نهایی. لطفاً دوباره تلاش کنید.');
             setLoading(false);
