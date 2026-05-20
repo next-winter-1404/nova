@@ -25,12 +25,17 @@ export const RefreshTokenClient = async () => {
     }
     throw new Error("رفرش توکن منقضی شده");
   }
+  if (response.status === 401) {
+    if (typeof window !== "undefined") {
+      window.location.href = "/login";
+    }
+    throw new Error("رفرش توکن منقضی شده");
+  }
 
   if (!response.ok || !dataResponse.accessToken) {
     throw new Error("خطا در دریافت توکن");
   }
 
-  // ذخیره در کوکی کلاینت
   setClientCookie("accessToken", dataResponse.accessToken);
   
   return dataResponse.accessToken;

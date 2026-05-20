@@ -25,7 +25,6 @@ import Star18 from "@/src/assets/images/Star 18.svg"
 import Star19 from "@/src/assets/images/Star 19.svg"
 import Star20 from "@/src/assets/images/Star 20.svg"
 import { useRouter } from 'next/navigation'
-import { getServerSideCookie } from '@/src/utils/helper/cookies/serverCookie/serverSideCookie'
 import toast from 'react-hot-toast'
 import { postCommentsLand } from '@/src/utils/sevices/api/contactus/postCommentLand'
 import LoginButton from '../login/button/LoginButton'

@@ -3,6 +3,7 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 import { getServerSideCookie } from "../../helper/cookies/serverCookie/serverSideCookie";
 import { ServerRefreshToken } from "../../helper/refreshToken/ServerRefreshToken";
+import { redirect } from "next/navigation";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -54,7 +55,7 @@ const onError = async (error: AxiosError): Promise<never> => {
 
         if (!refreshResult.success || !refreshResult.accessToken) {
           isRefreshing = false;
-          return Promise.reject(error);
+          throw new Error("refresh token failed");
         }
 
         const newToken = refreshResult.accessToken;
@@ -65,7 +66,7 @@ const onError = async (error: AxiosError): Promise<never> => {
         return instance(originalRequest) as never;
       } catch (refreshError) {
         isRefreshing = false;
-        return Promise.reject(refreshError);
+        redirect("/login");
       }
     }
   }

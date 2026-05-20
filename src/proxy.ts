@@ -2,7 +2,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function proxy(request: NextRequest) {
-  console.log("🟢 PROXY EXECUTED - Path:", request.nextUrl.pathname);
   const serverAccessToken = request.cookies.get("ServerAccessToken")?.value;
   const path = request.nextUrl.pathname;
   const role = request.cookies.get("userRole")?.value;
@@ -23,6 +22,7 @@ export function proxy(request: NextRequest) {
   if (!serverAccessToken && isProtectedPath) {
     return NextResponse.redirect(new URL("/signup", request.url));
   }
+  
   // redirect user buy their role
   if (path == "/dashboard" || path == "/dashboard/") {
     if (role == "buyer") {
