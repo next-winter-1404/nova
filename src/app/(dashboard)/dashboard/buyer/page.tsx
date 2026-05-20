@@ -58,7 +58,7 @@ const BuyerDashboardPage = async () => {
           role={role}
           title="نمودار رزرو های شما"
         >
-          <ReserveChart />
+          <ReserveChart data={booking} />
         </DashboardContentContainer>
         <DashboardContentContainer
           seemore
@@ -76,7 +76,7 @@ const BuyerDashboardPage = async () => {
                 تکمیل شده باشد.
               </p>
             </div>
-            <div className="w-[125px] h-[125px]">
+            <div className="w-[30%] ">
               <ProgressBar additionalPercentage={user?.additionalPercentage} />
             </div>
           </div>
@@ -93,29 +93,40 @@ const BuyerDashboardPage = async () => {
           <ItemNavbar colsNumber={4} items={items} />
           <div className="flex text-white mt-5 items-center">
             {booking?.length > 0 ? (
-              booking?.map((item) => (
-                <div
-                  key={item.id}
-                  className="grid grid-cols-4  w-[90%] gap-20 items-center"
-                >
-                  <div className="flex gap-4 items-center">
-                    <div className="w-[107px] h-[72px] rounded-xl bg-gray-600"></div>
-                    <div>{item.house?.title || "عنوانی وجود ندارد"}</div>
-                  </div>
-                  <div className=" text-center">
-                    {item.created_at?.slice(0, 10) || "--"}
-                  </div>
-                  <div className="flex-center gap-1 text-center " dir="rtl">
-                    <span>{item.house?.price || "  --"}</span>
-                    <span>تومان</span>
-                  </div>
-                  <StatusLabel status={item.status} />
-                </div>
-              ))
+              <div className="w-full flex flex-col gap-5">
+                <>
+                  {booking?.map((item) => (
+                    <div className="flex justify-between w-full items-center">
+                      <div
+                        key={item.id}
+                        className="grid grid-cols-4  w-[90%] gap-20 items-center"
+                      >
+                        <div className="flex gap-4 items-center  ">
+                          <div className="w-[100px] h-[72px] rounded-xl bg-gray-600"></div>
+                          <div className="whitespace-nowrap">
+                            {item.house?.title || "عنوانی وجود ندارد"}
+                          </div>
+                        </div>
+                        <div className=" text-center">
+                          {item.created_at?.slice(0, 10) || "--"}
+                        </div>
+                        <div
+                          className="flex-center gap-1 text-center "
+                          dir="rtl"
+                        >
+                          <span>{item.house?.price || "  --"}</span>
+                          <span>تومان</span>
+                        </div>
+                        <StatusLabel status={item.status} />
+                      </div>
+                      <TbDots className="w-6 h-6 cursor-pointer" />
+                    </div>
+                  ))}
+                </>
+              </div>
             ) : (
               <div className="text-4xl text-gray-300">رزوری وجود ندارد</div>
             )}
-            <TbDots className="w-6 h-6 " />
           </div>
         </div>
       </DashboardContentContainer>
