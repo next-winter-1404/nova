@@ -21,7 +21,7 @@ const AmusementCard : FC<AmusementCardProp> = ({houses}) => {
             <p>در حال بارگذاری</p>
         )
     }
-  return (
+  return (    
     <CardContainer
         cavity='sharp'
         labelContent={<div className='h-[35px]'></div>}

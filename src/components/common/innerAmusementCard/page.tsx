@@ -27,7 +27,7 @@ const InnerAmusementCard : FC<IHouse> = ({
                 mainExtraStyle="bg-dark-700 p-6" 
                 
                 labelExtraStyle={{height:'45px'}}
-                width='w-[306px]'
+                width='w-[316px]'
             />
             <div className='h-[30px] items-center flex'>
                 <h2 className='text-[15px] text-gray-300' > ( 11.000 نفر بازدید کننده )</h2>

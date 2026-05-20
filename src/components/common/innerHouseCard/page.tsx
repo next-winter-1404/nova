@@ -37,6 +37,7 @@ const InnerHouseCard : FC<IHouse> = ({
             labelBackground="bg-dark-700"
             labelExtraStyle={{height:'50px'}}
             mainExtraStyle="bg-dark-700 p-6"
+            width='329px'
         />
         <span className='text-[20px]'>
             {title || "عنوانی وجود ندارد"}

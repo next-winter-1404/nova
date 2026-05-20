@@ -4,10 +4,10 @@ import BuyHouse from './buyhouse/page'
 import UserComment from './usercomment/page'
 const Landing = () => {
   return (
-    <div> <AboutUs></AboutUs>
+    <> <AboutUs></AboutUs>
     <BuyHouse/>
     <UserComment></UserComment>
-    </div>
+    </>
   )
 }
 

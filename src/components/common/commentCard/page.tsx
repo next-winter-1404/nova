@@ -32,7 +32,7 @@ const CommentCard = () => {
                     curveColor='#393939'
                     mainExtraStyle="bg-dark-700 p-6"
                     labelExtraStyle={{height:'40px'}}
-                    width='md:w-[678px] w-[380px]'
+                    width='md:w-[728px] w-[380px]'
                 /> 
         </>
     )
