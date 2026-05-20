@@ -95,12 +95,12 @@ const BuyerDashboardPage = async () => {
             {booking?.length > 0 ? (
               <div className="w-full flex flex-col gap-5">
                 <>
-                  {booking?.map((item) => (
-                    <div className="flex justify-between w-full items-center">
-                      <div
-                        key={item.id}
-                        className="grid grid-cols-4  w-[90%] gap-20 items-center"
-                      >
+                  {booking?.slice(0, 6).map((item) => (
+                    <div
+                      className="flex justify-between w-full items-center"
+                      key={item.id}
+                    >
+                      <div className="grid grid-cols-4  w-[90%] gap-20 items-center">
                         <div className="flex gap-4 items-center  ">
                           <div className="w-[100px] h-[72px] rounded-xl bg-gray-600"></div>
                           <div className="whitespace-nowrap">
