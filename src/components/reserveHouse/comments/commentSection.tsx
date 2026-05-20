@@ -20,7 +20,6 @@ export interface ICommentsProps {
 const CommentSection: FC<ICommentsProps> = ({ comments, houseId }) => {
   const searchParams = useSearchParams();
   const replyTo = searchParams.get("replyTo");
-  console.log("replyTo from URL:", replyTo);
   return (
     <>
       {replyTo ? (

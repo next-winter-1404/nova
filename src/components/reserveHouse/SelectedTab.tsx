@@ -1,9 +1,9 @@
 "use client";
 
 import { ITab } from "@/src/core/types/ITab";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { FC, ReactNode, useState } from "react";
+import { FC, useState } from "react";
 
 interface IPropertyTab {
   options: ITab[];
@@ -27,12 +27,12 @@ const SelectedTab: FC<IPropertyTab> = ({ options, twClassname, buttonWidth }) =>
   };
   return (
     <div
-      className={`  bg-dark-700 rounded-2xl h-[52px] mt-4 flex justify-end gap-6 p-1 ${twClassname}`}
+      className={`  bg-dark-700 rounded-2xl h-[52px] mt-4 flex justify-end lg:gap-6 gap-2 p-1 ${twClassname}`}
     >
       {options.map((op) => (
         <div
           key={op.value}
-          className={`${buttonWidth} h-full  rounded-xl flex-center ${
+          className={`${buttonWidth} h-full  text-[13px] md:text-[18px] whitespace-nowrap rounded-xl flex-center ${
             selectedTab === op.value
               ? "bg-primary-accent-green "
               : "bg-dark-700 text-gray-300"

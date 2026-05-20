@@ -26,7 +26,7 @@ const CommentForm:FC<IProp> = ({houseId}) => {
   }, [state]);
   return (
     <form action={formAction} className="flex flex-col gap-8 justify-center">
-    <div className="flex justify-end gap-10">
+    <div className="flex justify-end gap-10 flex-col md:flex-row">
       <StarRatingContainer onChange={setRating} initialRating={rating} />
 
       <input type="hidden" name="rating" value={rating} />
@@ -44,12 +44,12 @@ const CommentForm:FC<IProp> = ({houseId}) => {
 
       />
     </div>
-    <div className="flex-center gap-8 w-full">
+    <div className="flex-center gap-8 w-full flex-col-reverse md:flex-row">
       <LoginButton
         buttonText="ارسال"
         loadingText="در حال ارسال پیام"
         type="submit"
-        width="w-[26%] "
+        width="md:w-[26%] w-full "
         height="h-9"
         radius="rounded-[10px]"
       />

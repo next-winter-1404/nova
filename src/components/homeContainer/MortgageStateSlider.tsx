@@ -20,7 +20,7 @@ const MortgageStateSlider = () => {
       pagination={{
         clickable: true,
       }}
-      className="my-house-swiper"
+      className="flex-center border"
     >
       <SwiperSlide>
         <ProductCard

@@ -59,6 +59,7 @@ const SearchWrapper = ({ cityOptions }: SearchWrapperProps) => {
             placeholder="... تاریخ خروج را وارد کنید"
             value={checkOutDate}
             onChange={setCheckOutDate}
+            labelText="تاریخ خروج"
           />
         </div>
         <div className="flex-1 w-full">
@@ -67,6 +68,7 @@ const SearchWrapper = ({ cityOptions }: SearchWrapperProps) => {
             placeholder="... تاریخ ورود را وارد کنید"
             value={checkInDate}
             onChange={setCheckInDate}
+            labelText="تاریخ ورورد"
           />
         </div>
         <div className="flex-2 w-full">
@@ -76,6 +78,7 @@ const SearchWrapper = ({ cityOptions }: SearchWrapperProps) => {
             options={cityOptions}
             city={city}
             setCity={setCity}
+            labelText="ادرس"
           />
         </div>
       </div>

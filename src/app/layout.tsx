@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "./Providers";
-import Navbar from "@/src/components/common/Navbar";
-import Footer from "../components/footer/page";
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,16 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={` h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-        <Providers>
-          <Navbar />
-          {children}
-          <Footer/>
-        </Providers>
+    <html lang="en" className={` h-full antialiased`}>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

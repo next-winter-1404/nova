@@ -1,8 +1,6 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import RentStateSlider from "./RentStateSlider";
-import MortgageStateSlider from "./MortgageStateSlider";
 import { IHouse } from "@/src/core/types/IHouse";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";

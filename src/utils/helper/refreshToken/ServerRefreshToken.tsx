@@ -9,7 +9,6 @@ export const ServerRefreshToken = async () => {
     const refreshToken = await getServerSideCookie("refreshToken"); 
     
     if (!refreshToken) {
-      // console.log("refresh token does not exist");
       return {
         success: false,
         message: "رفرش توکن یافت نشد",
@@ -29,24 +28,16 @@ export const ServerRefreshToken = async () => {
 
     if (response.ok && dataResponse.accessToken) {
       await setServerSideCookie("ServerAccessToken", dataResponse.accessToken);
-
       return {
         success: true,
         message: "موفقیت‌آمیز بود",
         accessToken: dataResponse.accessToken,
       };
-    } else if (response.status === 403) {
-      
-      return {
-        success: false,
-        accessToken: null,
-        message: "رفرش توکن منقضی شده، لطفاً دوباره وارد شوید",
-      };
     } else {
       return {
         success: false,
         accessToken: null,
-        message: dataResponse.message || "خطا - توکن دریافت نشد",
+        message: "رفرش توکن منقضی شده",
       };
     }
   } catch (error: any) {
