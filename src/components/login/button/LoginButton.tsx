@@ -12,7 +12,8 @@ const LoginButton: FC<ILoginButtonProp> = ({
   loadingText,
   height = "h-[43px]",
   radius = "rounded-2xl ",
-  buttonStyle ="selected-button"
+  buttonStyle ="selected-button",
+  noIcon=false
 }) => {
   const { pending } = useFormStatus();
 
@@ -27,7 +28,7 @@ const LoginButton: FC<ILoginButtonProp> = ({
     >
       {pending ? <span>{loadingText}</span> : <span>{buttonText}</span>}
 
-      <Image src={leftSmallArrow} alt="arrow" />
+      <Image src={leftSmallArrow} alt="arrow" className={`${!noIcon?"":"hidden"}`} />
     </button>
   );
 };
