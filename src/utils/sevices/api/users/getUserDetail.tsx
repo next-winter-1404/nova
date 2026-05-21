@@ -1,4 +1,5 @@
 "use server";
+import { IUserResponse } from "@/src/core/types/IUser";
 import instance from "../../interseptor";
 
 export const getUsersDetail = async (

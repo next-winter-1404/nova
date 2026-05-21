@@ -6,7 +6,7 @@ import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import ReserveChart from "@/src/components/dashboard/chart/ReserveChart";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { getBookings } from "@/src/utils/sevices/api/processReserve/getbooking";
-import { getUsersDetail } from "@/src/utils/sevices/api/users/getUsers";
+import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
 import { TbPinFilled, TbHeartFilled } from "react-icons/tb";
 import { TbDots } from "react-icons/tb";
 const BuyerDashboardPage = async () => {
