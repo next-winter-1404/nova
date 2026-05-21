@@ -21,13 +21,18 @@ import DashboardMenuItem from "@/src/components/dashboard/menu/menuItems";
 import LogoutButton from "@/src/components/common/logoutButton/logOutButton";
 import BuyerWallet from "@/src/components/dashboard/wallet/buyerWallet";
 import SellerNewComments from "@/src/components/dashboard/newComments/newComments";
+import Image from "next/image";
+import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
+import userPlaceholder from "@/src/assets/images/userPlaceHolder.jpg";
 interface IProp {
   children: ReactNode;
 }
 const DashboardLayout: FC<IProp> = async ({ children }) => {
   const role = await getServerSideCookie("userRole");
   const userName = await getServerSideCookie("userName");
-
+  const userId = await getServerSideCookie("userId");
+  const res = await getUsersDetail(Number(userId));
+  const userDetail = res?.user;
   const commonItems = [
     {
       label: "داشبورد",
@@ -77,10 +82,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
     role === "seller" ? [...commonItems, ...sellerItems] : commonItems;
   return (
     <>
-      <div
-        className="flex  w-full pt-5 px-5 h-full gap-5 "
-        dir="rtl"
-      >
+      <div className="flex  w-full pt-5 px-5 h-full gap-5 " dir="rtl">
         <aside className="w-[300px] p-5  h-[95vh] bg-dark-700 rounded-xl flex-col ">
           <div className="w-full justify-between items-center flex  text-white">
             <h1 className="text-[32px] font-extrabold ">دلتا</h1>
@@ -124,7 +126,15 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
               />
 
               <div className="flex gap-2  w-[150px] justify-start items-center cursor-pointer">
-                <div className="w-[37px] h-[37px] bg-[#D9D9D9] rounded-lg"></div>
+                <div className="border border-[#D9D9D9] rounded-lg">
+                  <Image
+                    alt="prof"
+                    src={userDetail?.profilePicture || userPlaceholder}
+                    width={37}
+                    height={37}
+                    className="rounded-lg "
+                  />
+                </div>
                 <div className="fle flex-col" dir="rtl">
                   <h2 className="text-[14px] text-white">{userName}</h2>
                   <span className="text-[12px] text-gray-500">{role}</span>
