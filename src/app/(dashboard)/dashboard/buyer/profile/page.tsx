@@ -5,6 +5,8 @@ import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
 import Image from "next/image";
 import { TbCamera, TbCircleX } from "react-icons/tb";
 import userDefault from "@/src/assets/images/userPlaceHolder.jpg";
+import { Modal } from "@/src/components/common/modal";
+import ChoosePicture from "@/src/components/dashboard/choosePic/ChoosePicture";
 const BuyerInformationPage = async () => {
   const userId = await getServerSideCookie("userId");
   const result = await getUsersDetail(Number(userId));
@@ -20,13 +22,31 @@ const BuyerInformationPage = async () => {
           <Image
             width={125}
             height={125}
-            className="rounded-full"
+            className="rounded-full border border-gray-300"
             src={userDetail?.profilePicture || userDefault}
             alt="user profile"
           />
-          <div className="w-5 h-5 cursor-pointer bg-primary-accent-green flex-center p-0.5 absolute top-2 right-1 rounded-full shadow-[-1px_1px_1px_2px_#393939]">
-            <TbCamera />
-          </div>
+          <Modal
+            contentClassName="bg-dark-900   flex-center"
+            mainContent={
+              <div className="flex-col flex-center gap-10  w-full">
+                <Image
+                  width={125}
+                  height={125}
+                  className="rounded-full border border-gray-300 "
+                  src={userDetail?.profilePicture || userDefault}
+                  alt="user profile"
+                />
+               <ChoosePicture/>
+              </div>
+            }
+            modalBtn={
+              <div className="w-5 h-5 cursor-pointer bg-primary-accent-green flex-center p-0.5 absolute top-2 right-1 rounded-full shadow-[-1px_1px_1px_2px_#393939]">
+                <TbCamera />
+              </div>
+            }
+          />
+
           <div className="w-5 h-5 cursor-pointer bg-[#FF5555] flex-center p-0.5 absolute bottom-4 right-1 rounded-full shadow-[-2px_-1px_1px_2px_#393939]">
             <TbCircleX />
           </div>
