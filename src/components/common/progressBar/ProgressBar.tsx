@@ -8,7 +8,7 @@ interface IProp{
 const ProgressBar:FC<IProp> = ({additionalPercentage}) => {
   return (
     <Flat
-  progress={40}
+  progress={additionalPercentage}
 //   text="تکمیل پروفایل"
   showValue={false}
   sx={{
