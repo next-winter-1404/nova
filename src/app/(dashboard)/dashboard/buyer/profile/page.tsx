@@ -1,11 +1,10 @@
 import UserChangePasswordForm from "@/src/components/dashboard/userChangePassword/UserChangePasswordForm";
-import UserInfoActionButton from "@/src/components/dashboard/userInfoActionButton/UserInfoActionButton";
 import UserInfoForm from "@/src/components/dashboard/userInfoForm/UserInfoForm";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
 import Image from "next/image";
 import { TbCamera, TbCircleX } from "react-icons/tb";
-import userDefault from "@/src/assets/images/userPlaceHolder.jpg"
+import userDefault from "@/src/assets/images/userPlaceHolder.jpg";
 const BuyerInformationPage = async () => {
   const userId = await getServerSideCookie("userId");
   const result = await getUsersDetail(Number(userId));
@@ -18,7 +17,13 @@ const BuyerInformationPage = async () => {
           <span>میتوانید عکس نمایه خود را تغییر دهید</span>
         </div>
         <div className="  relative">
-          <Image width={125} height={125} className="rounded-full" src={userDetail?.profilePicture||userDefault} alt="user profile"/>
+          <Image
+            width={125}
+            height={125}
+            className="rounded-full"
+            src={userDetail?.profilePicture || userDefault}
+            alt="user profile"
+          />
           <div className="w-5 h-5 cursor-pointer bg-primary-accent-green flex-center p-0.5 absolute top-2 right-1 rounded-full shadow-[-1px_1px_1px_2px_#393939]">
             <TbCamera />
           </div>
@@ -37,13 +42,7 @@ const BuyerInformationPage = async () => {
       />
       <div className="h-px bg-gray-300 w-full" />
 
-      <div className="flex  gap-4  w-full lg:w-[60%] justify-between ">
-        <UserInfoActionButton
-          title="امنیت"
-          explanation="میتوانید در این بخش رمز خود را تغییر دهید"
-        />
-        <UserChangePasswordForm />
-      </div>
+      <UserChangePasswordForm />
     </div>
   );
 };
