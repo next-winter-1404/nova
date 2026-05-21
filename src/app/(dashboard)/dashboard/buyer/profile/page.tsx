@@ -1,8 +1,15 @@
 import UserChangePasswordForm from "@/src/components/dashboard/userChangePassword/UserChangePasswordForm";
 import UserInfoActionButton from "@/src/components/dashboard/userInfoActionButton/UserInfoActionButton";
 import UserInfoForm from "@/src/components/dashboard/userInfoForm/UserInfoForm";
+import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
+import Image from "next/image";
 import { TbCamera, TbCircleX } from "react-icons/tb";
-const BuyerInformationPage = () => {
+import userDefault from "@/src/assets/images/userPlaceHolder.jpg"
+const BuyerInformationPage = async () => {
+  const userId = await getServerSideCookie("userId");
+  const result = await getUsersDetail(Number(userId));
+  const userDetail = result?.user;
   return (
     <div className="bg-dark-700 rounded-xl p-5 flex-col flex gap-10">
       <div className="flex  lg:w-1/2 w-full justify-between">
@@ -10,25 +17,32 @@ const BuyerInformationPage = () => {
           <h1 className="text-[20px] font-black ">عکس نمایه شما</h1>
           <span>میتوانید عکس نمایه خود را تغییر دهید</span>
         </div>
-        <div className="w-30 h-30 bg-gray-300 rounded-full relative">
-          <div className="w-5 h-5 bg-primary-accent-green flex-center p-0.5 absolute top-2 right-1 rounded-full shadow-[-1px_1px_1px_2px_#393939]">
+        <div className="  relative">
+          <Image width={125} height={125} className="rounded-full" src={userDetail?.profilePicture||userDefault} alt="user profile"/>
+          <div className="w-5 h-5 cursor-pointer bg-primary-accent-green flex-center p-0.5 absolute top-2 right-1 rounded-full shadow-[-1px_1px_1px_2px_#393939]">
             <TbCamera />
           </div>
-          <div className="w-5 h-5 bg-[#FF5555] flex-center p-0.5 absolute bottom-4 right-1 rounded-full shadow-[-2px_-1px_1px_2px_#393939]">
+          <div className="w-5 h-5 cursor-pointer bg-[#FF5555] flex-center p-0.5 absolute bottom-4 right-1 rounded-full shadow-[-2px_-1px_1px_2px_#393939]">
             <TbCircleX />
           </div>
         </div>
       </div>
       <div className="h-px bg-gray-300 w-full" />
-      <div className="flex  gap-4  w-full lg:w-[60%] justify-between ">
-      <UserInfoActionButton title="اطلاعات فردی" explanation="میتوانید اطلاعات فردی خود را تغییر دهید"/>
-        <UserInfoForm/>
-      </div>
+
+      <UserInfoForm
+        email={userDetail?.email}
+        firstName={userDetail?.firstName}
+        lastName={userDetail?.lastName}
+        phoneNumber={userDetail?.phoneNumber}
+      />
       <div className="h-px bg-gray-300 w-full" />
 
       <div className="flex  gap-4  w-full lg:w-[60%] justify-between ">
-      <UserInfoActionButton title="امنیت" explanation="میتوانید در این بخش رمز خود را تغییر دهید"/>
-        <UserChangePasswordForm/>
+        <UserInfoActionButton
+          title="امنیت"
+          explanation="میتوانید در این بخش رمز خود را تغییر دهید"
+        />
+        <UserChangePasswordForm />
       </div>
     </div>
   );

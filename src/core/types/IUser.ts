@@ -1,4 +1,4 @@
-interface IUser {
+export interface IUser {
     id?: number;
     role?: string;
     email?: string;
@@ -17,7 +17,7 @@ interface IUser {
     updated_at?: string;
   }
   
-  interface IUserResponse {
+  export interface IUserResponse {
     user?: IUser;
     additionalPercentage?: number;
   }
