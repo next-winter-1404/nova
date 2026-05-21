@@ -21,7 +21,7 @@ const BuyerDashboardPage = async () => {
     <div className="flex flex-col gap-5">
       <div className="flex gap-4 justify-between w-full ">
         <DashboardInformation
-          amount={5}
+          amount={booking?.length}
           cardText="تعداد کل رزرو ها"
           role={role}
           href="reserve-management"

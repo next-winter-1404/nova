@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useActionState, useEffect } from "react";
 import Input from "../../common/input/Input";
 import UserInfoActionButton from "../userInfoActionButton/UserInfoActionButton";
