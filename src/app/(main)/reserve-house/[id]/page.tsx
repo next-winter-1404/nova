@@ -139,7 +139,11 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
                 }
                 tooltipText="کپی کردن"
               />
-              <AddToFavorite houseId={Number(house?.id)} isFavorite ={house.isFavorite} favoriteId={Number(house.favoriteId)} />
+              <AddToFavorite
+                houseId={Number(house?.id)}
+                isFavorite={house.isFavorite}
+                favoriteId={Number(house.favoriteId)}
+              />
             </div>
           </div>
         </div>
