@@ -20,7 +20,6 @@ interface IStatus {
 }
 
 const StatusLabel: FC<IStatus> = ({ status }) => {
-  console.log("booking status", status);
   
   const getStatusStyle = (status?: string) => {
     switch (status) {

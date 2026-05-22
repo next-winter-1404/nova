@@ -104,7 +104,7 @@ const BuyerReservePage: FC<IProps> = async ({ searchParams }) => {
                         <StatusLabel status={item.status} />
                         <StatusLabel status={item.status} />
                       </div>
-                     {/* <ReservationItem item={item}/> */}
+                     <ReservationItem item={item}/>
                     </div>
                   ))}
                 </>
