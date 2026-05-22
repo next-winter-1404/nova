@@ -5,7 +5,6 @@ import {
 import Button from "@/src/components/common/button/page";
 import HouseMainInformation from "@/src/components/common/houseMainInformation";
 import ToolTip from "@/src/components/common/tooltip";
-import share from "@/src/assets/icons/share-square.svg";
 import Image from "next/image";
 import deaf from "@/src/assets/images/imagePlaceHolder (2).png";
 import { ITab } from "@/src/core/types/ITab";
@@ -16,7 +15,7 @@ import {
   FaRegFileAlt,
   FaStar,
 } from "react-icons/fa";
-import { FiCopy } from "react-icons/fi";
+import { FiCopy, FiHeart } from "react-icons/fi";
 import AboutHouseContainer from "@/src/components/reserveHouse/aboutHouseContainer";
 import HouseItemsComponent from "@/src/components/reserveHouse/houseItemsComponent";
 import SimilarHouses from "@/src/components/reserveHouse/similarHouse/SimilarHousesNavbar";
@@ -27,6 +26,7 @@ import { notFound } from "next/navigation";
 import ReserveBox from "@/src/components/reserveHouse/reserveBox";
 import { getHousesComment } from "@/src/utils/sevices/api/comments/reserveHouseDetailComment/getComment";
 import { Modal } from "@/src/components/common/modal";
+import AddToFavorite from "@/src/components/reserveHouse/addToFavorite/AddToFavorite";
 
 interface IProps {
   params: Promise<{ id: number }>;
@@ -139,14 +139,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
                 }
                 tooltipText="کپی کردن"
               />
-              <ToolTip
-                mainContent={
-                  <div className="flex-center w-10 h-10 bg-dark-700 rounded-xl hover:bg-primary-accent-green">
-                    <Image className="w-4 h-4" alt="icon" src={share} />
-                  </div>
-                }
-                tooltipText="اشتراک گذاری"
-              />
+              <AddToFavorite houseId={Number(house?.id)} isFavorite ={house.isFavorite} favoriteId={Number(house.favoriteId)} />
             </div>
           </div>
         </div>

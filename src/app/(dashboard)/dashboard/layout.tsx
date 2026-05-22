@@ -29,7 +29,6 @@ interface IProp {
 }
 const DashboardLayout: FC<IProp> = async ({ children }) => {
   const role = await getServerSideCookie("userRole");
-  const userName = await getServerSideCookie("userName");
   const userId = await getServerSideCookie("userId");
   const res = await getUsersDetail(Number(userId));
   const userDetail = res?.user;
@@ -136,7 +135,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
                   />
                 </div>
                 <div className="fle flex-col" dir="rtl">
-                  <h2 className="text-[14px] text-white">{userName}</h2>
+                  <h2 className="text-[14px] text-white">{userDetail?.fullName}</h2>
                   <span className="text-[12px] text-gray-500">{role}</span>
                 </div>
               </div>
