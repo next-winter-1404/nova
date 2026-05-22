@@ -50,10 +50,7 @@ const HouseReservePage = async ({
         <Breadcrumb items={items} twClassname="mt-14  " />
         <TopReserveHouseSection totalCount={totalCount} />
         <div className="bg-dark-800 flex justify-between  mt-6 p-1 lg:p-6  w-full rounded-[40px] ">
-          <div className="xl:w-[40%] lg:w-[35%] lg:block rounded-[40px] h-[1032px] bg-dark-900  hidden">
-          
-          </div>
-
+          <div className="xl:w-[40%] lg:w-[35%] lg:block rounded-[40px] h-[1032px] bg-dark-900  hidden"></div>
           <div className="lg:w-[65%]  xl:w-[60%] w-full flex flex-col gap-6 items-center ">
             <BottomNavbarFilter />
             <div className="w-[90%] border-2 border-[#4E4E4E] lg:block hidden " />

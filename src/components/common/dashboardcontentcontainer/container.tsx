@@ -12,6 +12,7 @@ interface IProp {
   children?: ReactNode;
   topSectionContent?: ReactNode;
   seemore?: boolean;
+  twTopContent?: string;
 }
 const DashboardContentContainer: FC<IProp> = ({
   role,
@@ -22,6 +23,7 @@ const DashboardContentContainer: FC<IProp> = ({
   twParentClassName,
   seemore = false,
   topSectionContent,
+  twTopContent
 }) => {
   return (
     <div
@@ -43,7 +45,7 @@ const DashboardContentContainer: FC<IProp> = ({
             </Link>
           </div>
         ) : (
-          <div>{topSectionContent}</div>
+          <div className={`${twTopContent}`}>{topSectionContent}</div>
         )}
       </div>
       <div className="text-gray-300 w-full h-px border border-dashed"></div>
