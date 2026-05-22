@@ -1,14 +1,25 @@
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import SimpleDropdown from "@/src/components/common/dropDown";
-import ReservationItem from "@/src/components/dashboard/ReservationItem/ReservationItem";
 import FavoriteFunctions from "@/src/components/dashboard/favoriteFunctionMenuItem/FavoriteFunctions";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { getFavoriteForUser } from "@/src/utils/sevices/api/favorites/getFavorites";
-import React from "react";
+import React, { FC } from "react";
 import { TbDots } from "react-icons/tb";
-
-const BuyerFavoritePage = async () => {
+interface IProps {
+  searchParams: Promise<IFilters>;
+}
+interface IFilters {
+  order?: string;
+  sort?: string;
+}
+const BuyerFavoritePage: FC<IProps> = async ({ searchParams }) => {
+  const params = await searchParams;
+  const order = params.order;
+  const sort = params.sort;
+  const filters: IFilters = {};
+  if (order) filters.order = order;
+  if (sort) filters.sort = sort;
   const items = ["نام", "قیمت ", "ادرس"];
   const sortItem = [
     { value: "ASC", label: "صعودی" },
@@ -19,13 +30,12 @@ const BuyerFavoritePage = async () => {
     { value: "updated_at", label: " آخرین ویرایش" },
   ];
   const userId = await getServerSideCookie("userId");
-  const result = await getFavoriteForUser(Number(userId));
+  const result = await getFavoriteForUser(Number(userId),filters);
   const favoritesList = result?.data || [];
-  console.log("favoritesList", favoritesList);
   return (
     <DashboardContentContainer
       twTopContent="w-1/2"
-      title="لیست رزرو های شما"
+      title="لیست علاقه مندی های شما"
       topSectionContent={
         <div className="flex gap-4  w-full py-2">
           <SimpleDropdown
@@ -77,7 +87,9 @@ const BuyerFavoritePage = async () => {
             </div>
           ))
         ) : (
-          <p className="w-full text-center text-4xl text-gray-300">داده ای وجود ندارد</p>
+          <p className="w-full text-center text-4xl text-gray-300">
+            داده ای وجود ندارد
+          </p>
         )}
       </div>
     </DashboardContentContainer>
