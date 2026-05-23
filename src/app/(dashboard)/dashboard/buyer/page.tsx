@@ -28,15 +28,15 @@ const BuyerDashboardPage = async () => {
           icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
         />
         <DashboardInformation
-          amount={5}
+          amount={booking.filter((b) => b.status === "confirmed").length}
           cardText="رزرو های فعال"
           role={role}
           href="reserve-management"
           icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
         />
         <DashboardInformation
-          amount={5}
-          cardText="رزرو های پرداخت نشده"
+          amount={booking.filter((b) => b.status === "pending").length}
+          cardText="رزرو های در حال انتظار"
           role={role}
           href="reserve-management"
           icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
