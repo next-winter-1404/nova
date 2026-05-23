@@ -6,5 +6,6 @@ export interface IModalProps {
     modalDescription?: ReactNode;
     modalTitle?: ReactNode;
     closeBtn?: ReactNode;
-    contentClassName?:string
+    contentClassName?:string;
+    width?:string;
   }

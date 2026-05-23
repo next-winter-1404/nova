@@ -1,5 +1,5 @@
 'use client'
-import {useSearchParams } from 'next/navigation';
+import {useRouter, useSearchParams } from 'next/navigation';
 import UseStepNavigation from '../../navigation';
 import Button from '@/src/components/common/button/page';
 import Image from 'next/image';
@@ -16,14 +16,23 @@ import badgepercent from "@/src/assets/icons/badgepercent.svg"
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
 import { useEffect, useState } from 'react';
 import GetAgeCategory, { AgeCategory } from '@/src/utils/helper/ageHelper/page';
+import { getHousesDetail } from '@/src/utils/sevices/api/houses/getHousesDetail';
+import { useQuery } from '@tanstack/react-query';
+import { steps } from '../../steps';
 
 
 
-const AcceptInfo = ({data}: any ) => {
+const AcceptInfo = ({data , bookingId}: {data:any, bookingId : number} ) => {
+  const router = useRouter();
   console.log("get api :", data)
     const searchParams = useSearchParams();
     const currentStep = searchParams.get('step') || 'acceptinfo'
     const {goToNext, goToPrev} = UseStepNavigation();
+    const houseId = data.booking?.houseId
+    const {data : houseDetails} =useQuery({
+      queryKey : ["houseDetails", houseId],
+      queryFn : () => getHousesDetail(Number(houseId)),
+    })
     console.log("data in component :", data)
   if (!data) {
     return (
@@ -32,9 +41,23 @@ const AcceptInfo = ({data}: any ) => {
       </div>
     );
   }
+  console.log("houseid", houseId)
+  console.log("housedetail:", houseDetails)
+  const amount = houseDetails?.price
 
+  const handleGoToNextWithParams = () => {
+    const currentIndex = steps.findIndex(s => s.id === 'acceptinfodata');
+    if (currentIndex < steps.length - 1) {
+      const nextStep = steps[currentIndex + 1];
+    const params = new URLSearchParams({
+      bookingId : bookingId.toString(),
+      amount : amount.toString(),
+    })
+    router.push(`/processreserve/${nextStep.id}?step=${nextStep.id}&${params.toString()}`)
+  }
+}
   const bookingsData = data.booking || data;
-  const travelers = bookingsData.traveler_details || [];
+  const travelers = bookingsData?.traveler_details || [];
   
   console.log(" لیست مسافران:", travelers);
 
@@ -60,9 +83,7 @@ const AcceptInfo = ({data}: any ) => {
               <div className='hidden md:block absolute top-[130px] w-22/23 border border-gray-150'></div>
               
                 <div className='w-22/23 flex md:flex-row flex-col items-center justify-between h-[650px] md:h-[100px] md:gap-5' >           
-                {/* {data.booking.traveler_details?.map((traveler: any, index: number) => { */}
-                  
-                       
+                {/* {travelers.map((traveler: any, index: number) => { */}                                         
                   
                 <div className='flex flex-col items-center w-[74px] text-[16px] md:gap-[40px] gap-3 '>
                   <h2 className='text-gray-300'>بازه سنی</h2>
@@ -70,19 +91,19 @@ const AcceptInfo = ({data}: any ) => {
                 </div>
                 <div className='flex flex-col items-center w-[149px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'> نام و نام خانوادگی</h2>
-                  <h2 className='text-white-pure'> {travelers.firstName} {travelers.lastName}</h2>
+                  <h2 className='text-white-pure'> {travelers[0].firstName || "نامشخص"} {travelers[0].lastName}</h2>
                 </div>
                 <div className='flex flex-col items-center w-[70px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>جنسیت</h2>
-                  <h2 className='text-white-pure'> {travelers.gender}</h2>
+                  <h2 className='text-white-pure'> {travelers[0].gender === "male" ? "مرد" : "زن"}</h2>
                 </div>
                 <div className='flex flex-col items-center w-[217px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>کدملی / شماره یا پاسپورت</h2>
-                  <h2 className='text-primary-accent-green'> {travelers.nationalId}</h2>
+                  <h2 className='text-primary-accent-green'> {travelers[0].nationalId}</h2>
                 </div>
                 <div className='flex flex-col items-center w-[100px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>تاریخ تولد</h2>
-                  <h2 className='text-white-pure'>{travelers.birthDate} </h2>
+                  <h2 className='text-white-pure'>{travelers[0].birthDate} </h2>
                 </div>
                 <div className='flex items-center flex-col w-[60px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>خدمات</h2>
@@ -94,15 +115,10 @@ const AcceptInfo = ({data}: any ) => {
                 </div>
                 <div className='flex flex-col items-center w-[100px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>قیمت</h2>
-                  <h2 className='text-white-pure'> 1.520.000 ت</h2>
+                  <h2 className='text-white-pure'> {amount} ت</h2>
                 </div>
                 
               </div>
-              
-                
-              
-              
-              
             </div>
             <div className='md:w-11/12 w-[340px] flex flex-col items-center justify-center md:h-[240px] h-[550px] bg-dark-700 rounded-3xl gap-5'>
               <div className=' w-22/23 h-[44px] rounded-2xl bg-gray-250 flex justify-center items-center gap-6'>
@@ -154,6 +170,8 @@ const AcceptInfo = ({data}: any ) => {
               <div className='md:w-[1410px] md:flex-row flex-col md:gap-6 gap-3 flex items-center h-[100px] md:h-[70px] '>                   
                 <form className='h-[50px] flex gap-5 items-center'>              
                   <Input
+                    dir='rtl'
+                    tagBgStyle={{background :"var(--color-dark-700)"}}
                     labelText='کد تخفیف :'
                     parentWidth='md:w-[296px] w-[250px]'
                     InputHeight={'h-[50px]'}
@@ -176,7 +194,7 @@ const AcceptInfo = ({data}: any ) => {
                   <div className='md:w-[300px] h-[30px] md:gap-3 gap-2 flex justify-center items-center md:text-[24px] text-[18px] text-white-pure'>
                       <Image src={ticket} alt='ticket'/> 
                       <div className='flex gap-0.5'>
-                        <h2 > قیمت بلیط : </h2> <h2 className='text-primary-accent-green'> 1.500.000ت </h2>
+                        <h2 > قیمت بلیط : </h2> <h2 className='text-primary-accent-green'> {amount}ت </h2>
                       </div>
                   </div>
                   <div className='flex gap-4'>
@@ -188,7 +206,7 @@ const AcceptInfo = ({data}: any ) => {
                     <Button 
                       text={"پرداخت آنلاین"} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen' style={{marginBottom:"-2px", width:"8px"}}/>} 
                       textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"136px", direction:"ltr"}}
-                      onClick={() => goToNext(currentStep)}
+                      onClick={handleGoToNextWithParams}
                     />  
                   </div>                                                      
                 </div>

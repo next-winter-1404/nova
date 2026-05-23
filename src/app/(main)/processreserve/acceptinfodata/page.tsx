@@ -8,7 +8,7 @@ const AcceptInfoData = async () => {
     const id = await getServerSideCookie("BookingId");
     const BookingId = Number(id);
     const data = await getBookingsById(BookingId);
-    return <AcceptInfo data={data} />; 
+    return <AcceptInfo data={data} bookingId ={BookingId}/>; 
     
 };
 export default AcceptInfoData;

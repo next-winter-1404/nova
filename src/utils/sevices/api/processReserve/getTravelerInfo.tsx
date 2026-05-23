@@ -7,9 +7,5 @@ import { setServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/ser
 export const getBookingsById = async(id: number): Promise<ITraveler> => {
   const response = await instance.get(`/api/bookings/${id}`);
   console.log("BookingsById response:", response);
-  // const dataResponse = response.data || response;
-  // if (dataResponse.id) {
-  //   await setServerSideCookie("BookingId", dataResponse.id);
-  // }
   return response.data;
 };

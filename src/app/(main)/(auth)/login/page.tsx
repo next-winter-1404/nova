@@ -21,7 +21,7 @@ const LoginPage = () => {
     if (!state?.message) return;
     if (state.success) {
       toast.success(state.message);
-      router.push("/dashboard"); 
+      router.push("/dashboard");
     } else {
       toast.error(state.message);
     }
@@ -68,8 +68,7 @@ const LoginPage = () => {
                 textColor="text-gray-300"
                 borderColor="text-white"
                 labelTextSize="text-13-regular"
-              dir="rtl"
-
+                dir="rtl"
               />
               <div className="flex gap-3">
                 <span

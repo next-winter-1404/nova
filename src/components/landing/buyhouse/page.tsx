@@ -8,7 +8,7 @@ import AmusementCardData from '../amusmentCardData/page'
 const BuyHouse = () => {
     return (
         <div className='bg-dark-850 md:w-full w-[390px] md:h-[1600px] h-[1350px] md:items-center  rounded-bl-[64px] rounded-br-[64px] flex-col  justify-center flex overflow-hidden'>
-            <div className=' md:w-[1440px] w-[390px] items-center md:gap-12 gap-7 flex flex-col text-right'>
+            <div className=' md:w-11/12 w-[390px] items-center md:gap-12 gap-7 flex flex-col text-right'>
                 <div className='md:w-full w-[389px] flex gap-6 flex-col'>
                     <div className='flex justify-end gap-4'>
                         <Image src={LeftTriangle} alt='.'/>
@@ -24,7 +24,7 @@ const BuyHouse = () => {
                 </div>
                 <HouseData/>             
             </div>  
-            <div className='md:mt-28 mt-20 w-[390px] md:w-[1440px] md:h-[551px]'>
+            <div className='md:mt-28 mt-20 w-[390px] md:w-11/12 md:h-[551px]'>
                 <AmusementCardData/>
             </div>
         </div>
