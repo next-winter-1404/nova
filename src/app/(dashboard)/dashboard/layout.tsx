@@ -78,8 +78,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
     },
   ];
 
-  const menuItems =
-    role === "seller" ? [...commonItems, ...sellerItems] : commonItems;
+  const menuItems = role === "seller"  ? [...commonItems, ...sellerItems] : commonItems;
   return (
     <>
       <div className="flex  w-full pt-5 px-5 h-full gap-5 " dir="rtl">

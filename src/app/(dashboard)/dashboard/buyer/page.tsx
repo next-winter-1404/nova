@@ -5,6 +5,7 @@ import ProgressBar from "@/src/components/common/progressBar/ProgressBar";
 import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import ReserveChart from "@/src/components/dashboard/chart/ReserveChart";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import { getFavoriteForUser } from "@/src/utils/sevices/api/favorites/getFavorites";
 import { getBookings } from "@/src/utils/sevices/api/processReserve/getbooking";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
 import { TbPinFilled, TbHeartFilled } from "react-icons/tb";
@@ -16,6 +17,8 @@ const BuyerDashboardPage = async () => {
   const result = await getBookings();
   const booking = result?.data || [];
   const user = await getUsersDetail(Number(userId));
+  const favorites = await getFavoriteForUser(Number(userId));
+
 
   return (
     <div className="flex flex-col gap-5">
@@ -42,7 +45,7 @@ const BuyerDashboardPage = async () => {
           icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
         />
         <DashboardInformation
-          amount={5}
+          amount={favorites?.data.length}
           cardText="علاقه مندی ها"
           role={role}
           href="favorites"
@@ -125,7 +128,7 @@ const BuyerDashboardPage = async () => {
                 </>
               </div>
             ) : (
-              <div className="text-4xl text-gray-300">رزوری وجود ندارد</div>
+              <div className="text-4xl text-gray-300 text-center w-full">رزوری وجود ندارد</div>
             )}
           </div>
         </div>
