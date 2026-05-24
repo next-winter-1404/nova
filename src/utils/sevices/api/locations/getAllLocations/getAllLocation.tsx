@@ -5,8 +5,8 @@ import axios from "axios"
 
 export const getAllLocation = async() => {
     // 'use cache'
-    const res = await axios.get(
-        "http://next.genzuni.website/api/locations"
+    const res = await instance.get(
+        "/api/locations"
     );
     
     // cacheLife('hours')

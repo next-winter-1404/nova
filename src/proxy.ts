@@ -5,16 +5,11 @@ export function proxy(request: NextRequest) {
   const serverAccessToken = request.cookies.get("ServerAccessToken")?.value;
   const path = request.nextUrl.pathname;
   const role = request.cookies.get("userRole")?.value;
-  const needRedirect = request.cookies.get("redirectToLogin")?.value;
   const authPages = ["/signup", "/verifyemail", "/final-step"];
   const isAuthPage = authPages.includes(path);
   // if user was loged in allow user to continue
   
-  if (needRedirect === "true") {
-    const response = NextResponse.redirect(new URL("/login", request.url));
-    response.cookies.delete("redirectToLogin");
-    return response;
-  }
+  
   if (isAuthPage) {
     return NextResponse.next();
   }
