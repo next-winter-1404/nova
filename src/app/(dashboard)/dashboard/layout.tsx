@@ -27,6 +27,7 @@ import userPlaceholder from "@/src/assets/images/userPlaceHolder.jpg";
 interface IProp {
   children: ReactNode;
 }
+export const revalidate = 10
 const DashboardLayout: FC<IProp> = async ({ children }) => {
   const role = await getServerSideCookie("userRole");
   const userId = await getServerSideCookie("userId");
@@ -77,12 +78,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
     },
   ];
 
-  const menuItems =
-    role === "seller" ? [...commonItems, ...sellerItems] : commonItems;
+  const menuItems = role === "seller"  ? [...commonItems, ...sellerItems] : commonItems;
   return (
     <>
       <div className="flex  w-full pt-5 px-5 h-full gap-5 " dir="rtl">
-        <aside className="w-[300px] p-5  h-[95vh] bg-dark-700 rounded-xl flex-col ">
+        <aside className="w-[300px]  p-5  h-[95vh] bg-dark-700 rounded-xl flex-col ">
           <div className="w-full justify-between items-center flex  text-white">
             <h1 className="text-[32px] font-extrabold ">دلتا</h1>
             <LogoutButton />
@@ -95,7 +95,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
           </div>
         </aside>
 
-        <div className="flex flex-col w-full xl:w-[1113px] 2xl:w-[2000px]">
+        <div className="flex flex-col w-full xl:w-[1113px] 2xl:w-[1400px]">
           <div className="flex justify-between p-5 items-center  h-[66px] bg-dark-700 rounded-xl">
             <div className="font-extrabold text-white text-[20px]">
               <HiOutlineBars3 className="md:hidden" />
@@ -135,7 +135,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
                   />
                 </div>
                 <div className="fle flex-col" dir="rtl">
-                  <h2 className="text-[14px] text-white">{userDetail?.fullName}</h2>
+                  <h2 className="text-[14px] text-white">{`${userDetail?.firstName} ${userDetail?.lastName}`}</h2>
                   <span className="text-[12px] text-gray-500">{role}</span>
                 </div>
               </div>

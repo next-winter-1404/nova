@@ -1,14 +1,10 @@
-import Button from "@/src/components/common/button/page";
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import SimpleDropdown from "@/src/components/common/dropDown";
-import Input from "@/src/components/common/input/Input";
-import { Modal } from "@/src/components/common/modal";
 import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import ReservationItem from "@/src/components/dashboard/ReservationItem/ReservationItem";
 import { getBookings } from "@/src/utils/sevices/api/processReserve/getbooking";
-import React, { FC } from "react";
-import { TbDots } from "react-icons/tb";
+import{ FC } from "react";
 interface IProps {
   searchParams: Promise<IFilters>;
 }
