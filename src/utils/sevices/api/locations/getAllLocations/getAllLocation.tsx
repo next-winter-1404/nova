@@ -1,14 +1,8 @@
-"use server"
+"use server";
 import instance from "@/src/utils/sevices/interseptor";
-import axios from "axios"
-// import { cacheLife } from "next/cache";
 
-export const getAllLocation = async() => {
-    // 'use cache'
-    const res = await instance.get(
-        "/api/locations"
-    );
-    
-    // cacheLife('hours')
-    return res.data
-}
+export const getAllLocation = async () => {
+  const res = await instance.get("/api/locations");
+
+  return res.data;
+};
