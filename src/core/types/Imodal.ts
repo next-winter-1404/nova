@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
-
 export interface IModalProps {
-    modalBtn: ReactNode;
-    mainContent: ReactNode;
-    modalDescription?: ReactNode;
-    modalTitle?: ReactNode;
-    closeBtn?: ReactNode;
-    contentClassName?:string;
-    width?:string;
-  }
+  modalBtn?: React.ReactNode;
+  mainContent: React.ReactNode;
+  modalTitle?: string;
+  modalDescription?: string;
+  closeBtn?: React.ReactNode;
+  contentClassName?: string;
+  width?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}

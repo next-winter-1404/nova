@@ -52,11 +52,11 @@ const DropMenu: FC<IDropMenuProps> = ({
               <DropdownMenu.Item
               dir="rtl"
                 className={`
-                  flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all
+                  flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all outline-none
                   ${
                     item.disabled
                       ? "opacity-50 cursor-not-allowed"
-                      : "hover:bg-dark-700"
+                      : "hover:bg-dark-600"
                   }
                   ${itemClassName}
                 `}

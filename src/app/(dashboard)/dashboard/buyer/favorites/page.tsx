@@ -82,7 +82,6 @@ const BuyerFavoritePage: FC<IProps> = async ({ searchParams }) => {
                 </div>
                 <p>{item.house.address || "ادرسی وجود ندارد"}</p>
               </div>
-              <TbDots className="w-6 h-6 cursor-pointer text-gray-400 hover:text-primary-accent-green transition" />
               <FavoriteFunctions favoriteId={item.id} houseId={item.house_id} />
             </div>
           ))
