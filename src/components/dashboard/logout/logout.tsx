@@ -1,4 +1,3 @@
-// src/actions/logout.ts
 "use server";
 
 import { deleteServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";

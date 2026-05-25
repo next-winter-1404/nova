@@ -2,12 +2,12 @@ import ToolTip from "@/src/components/common/tooltip";
 import Link from "next/link";
 import { FiChevronDown } from "react-icons/fi";
 import { HiOutlineBell } from "react-icons/hi";
-import { TbHome } from "react-icons/tb";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { FC, ReactNode } from "react";
 
 import {
+  TbHome,
   TbHomeFilled,
   TbBellFilled,
   TbUserFilled,
@@ -15,6 +15,7 @@ import {
   TbHeartFilled,
   TbReceiptDollar,
   TbKeyFilled,
+  TbLogout,
 } from "react-icons/tb";
 import { FaCommentDots } from "react-icons/fa";
 import DashboardMenuItem from "@/src/components/dashboard/menu/menuItems";
@@ -24,10 +25,14 @@ import SellerNewComments from "@/src/components/dashboard/newComments/newComment
 import Image from "next/image";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
 import userPlaceholder from "@/src/assets/images/userPlaceHolder.jpg";
+import DropMenu from "@/src/components/common/dropMenu/DropMenu";
+import ProfileInfo from "@/src/components/dashboard/profileInfo/ProfileInfo";
+
 interface IProp {
   children: ReactNode;
 }
-export const revalidate = 10
+export const revalidate = 10;
+
 const DashboardLayout: FC<IProp> = async ({ children }) => {
   const role = await getServerSideCookie("userRole");
   const userId = await getServerSideCookie("userId");
@@ -78,7 +83,29 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
     },
   ];
 
-  const menuItems = role === "seller"  ? [...commonItems, ...sellerItems] : commonItems;
+  const menuItems =
+    role === "seller" ? [...commonItems, ...sellerItems] : commonItems;
+
+  const profileItems = [
+    {
+      label: (
+        <ProfileInfo
+          name={`${userDetail?.firstName} ${userDetail?.lastName}`}
+          phone={userDetail?.phoneNumber}
+          profilePicture={userDetail?.profilePicture}
+        />
+      ),
+    },
+    {
+      label: "موجودی قابل برداشت",
+      icon: <TbCirclePlusFilled className="w-4 h-4 text-white" />,
+    },
+   
+    {
+      label: "خروج",
+      icon: <TbLogout className="w-4 h-4 text-white" />,
+    },
+  ];
   return (
     <>
       <div className="flex  w-full pt-5 px-5 h-full gap-5 " dir="rtl">
@@ -139,7 +166,17 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
                   <span className="text-[12px] text-gray-500">{role}</span>
                 </div>
               </div>
-              <FiChevronDown className="text-gray-500 " strokeWidth={2} />
+              <DropMenu
+                trigger={
+                  <FiChevronDown
+                    className="text-gray-500   cursor-pointer"
+                    strokeWidth={2}
+                  />
+                }
+                items={profileItems}
+                side="bottom"
+                align="end"
+              />
             </div>
           </div>
           <div className="mt-5 ">{children}</div>

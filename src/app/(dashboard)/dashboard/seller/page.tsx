@@ -128,10 +128,10 @@ const SellerPage = async () => {
                 <>
                   {booking?.slice(0, 6).map((item) => (
                     <div
-                      className="flex justify-between w-full items-center"
+                      className="flex justify-between w-full items-center rounded-xl hover:bg-[#D9D9D929]"
                       key={item.id}
                     >
-                      <div className="grid grid-cols-4  w-[90%] gap-20 items-center">
+                      <div className="grid grid-cols-4  w-[90%] gap-20 items-center ">
                         <div className="flex gap-4 items-center  ">
                           <div className="w-[100px] h-[72px] rounded-xl bg-gray-600"></div>
                           <div className="whitespace-nowrap">
@@ -150,7 +150,7 @@ const SellerPage = async () => {
                         </div>
                         <StatusLabel status={item.status} />
                       </div>
-                      <TbDots className="w-6 h-6 cursor-pointer" />
+                      <TbDots className="w-6 h-6 cursor-pointer  hover:bg-dark-700 rounded-lg" />
                     </div>
                   ))}
                 </>
