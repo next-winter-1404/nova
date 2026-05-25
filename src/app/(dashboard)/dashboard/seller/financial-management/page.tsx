@@ -1,11 +1,15 @@
 import DashboardContentContainer from '@/src/components/common/dashboardcontentcontainer/container'
+import DashboardInformation from '@/src/components/common/dashboardInformation/dashboardInformation'
 import ItemNavbar from '@/src/components/common/dashboardItemNavbar/ItemNavbar'
 import SimpleDropdown from '@/src/components/common/dropDown'
 import PaginationClient from '@/src/components/common/pagination/page'
 import StatusLabel from '@/src/components/common/statusLabel/StatusLabel'
+import { getServerSideCookie } from '@/src/utils/helper/cookies/serverCookie/serverSideCookie'
 import { getSellerPayment } from '@/src/utils/sevices/api/sellerPayment/page'
+import { getSellerPaymentCard } from '@/src/utils/sevices/api/sellerPaymentCard/page'
 import React, { FC} from 'react'
-const items = ["تاریخ" ,"مبلغ","وضعیت پرداخت","بابت ",]
+import { TbPinFilled } from 'react-icons/tb'
+const items = ["تاریخ" ,"مبلغ","بابت ","وضعیت پرداخت"]
 
 interface IProps {
   searchParams: Promise<IFilter>;
@@ -19,7 +23,6 @@ interface IFilter {
 
 const SellerPaymentPage : FC<IProps> = async({ searchParams }) => {    
   const params = await searchParams;
-  
   const status = params.status;
   const orders = params.orders;
   const filter : IFilter = {};
@@ -39,8 +42,39 @@ const SellerPaymentPage : FC<IProps> = async({ searchParams }) => {
     { value: "ASC", label: "صعودی" },
     { value: "DESC", label: "نزولی" },
   ];
+
+  const report = await getSellerPaymentCard();
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col gap-5'>
+      {/* <div className="flex gap-4 justify-between w-full ">
+        <DashboardInformation
+          amount={report}
+          cardText="تعداد کل رزرو ها"
+          role={role}
+          
+        />
+        <DashboardInformation
+          amount={booking.filter((b) => b.status === "confirmed").length}
+          cardText="رزرو های فعال"
+          role={role}
+          href="reserve-management"
+          icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+        />
+        <DashboardInformation
+          amount={booking.filter((b) => b.status === "pending").length}
+          cardText="رزرو های در حال انتظار"
+          role={role}
+          href="reserve-management"
+          icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+        />
+        <DashboardInformation
+          amount={favorites?.data.length}
+          cardText="علاقه مندی ها"
+          role={role}
+          href="favorites"
+          icon={<TbHeartFilled className="w-[26px] h-[26px] text-white" />}
+        />
+      </div> */}
       <DashboardContentContainer
       twTopContent='w-1/2'
       title='لیست تراکنش های شما'
@@ -87,10 +121,10 @@ const SellerPaymentPage : FC<IProps> = async({ searchParams }) => {
                       <span>{item.amount || "--"}</span>
                       <span>تومان</span>
                     </div>
-                    <div className="text-center mr-[140px]">
+                    <div className="text-center mr-[100px]">
                       {item.description} 
                     </div>
-                    <div className=' mr-[140px] flex-center'>
+                    <div className='mr-[175px] text-center'>
                       <StatusLabel status={item.status} />
                     </div>
                   </div>

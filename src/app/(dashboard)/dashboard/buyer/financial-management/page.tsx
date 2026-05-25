@@ -6,7 +6,7 @@ import Pagination from '@/src/components/common/pagination/page'
 import StatusLabel from '@/src/components/common/statusLabel/StatusLabel'
 import { getBuyerPayment } from '@/src/utils/sevices/api/buyerPayment/getBuyerPayment'
 import React, { FC, Suspense } from 'react'
-const items = ["تاریخ" ,"مبلغ","وضعیت پرداخت","بابت ",]
+const items = ["تاریخ" ,"مبلغ","بابت ","وضعیت پرداخت"]
 
 interface IProps {
   searchParams: Promise<IFilter>;
@@ -89,10 +89,10 @@ const BuyerPaymentPage : FC<IProps> = async({ searchParams }) => {
                       <span>{item.amount || "  --"}</span>
                       <span>تومان</span>
                     </div>
-                    <div className="text-center mr-[140px]">
+                    <div className="text-center mr-[100px]">
                       {item.description} 
                     </div>
-                    <div className=' mr-[140px] flex-center'>
+                    <div className='mr-[175px] text-center'>
                       <StatusLabel status={item.status} />
                     </div>
                   </div>
