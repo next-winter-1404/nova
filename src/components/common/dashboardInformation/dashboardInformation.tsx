@@ -8,14 +8,26 @@ interface IProp {
   amount?: number | string;
   cardText?: string;
   href?: string;
-  icon?:ReactNode
+  twContentClassName?: string;
+  icon?: ReactNode;
+  content?: ReactNode;
+  seeMore?: boolean;
 }
-const DashboardInformation: FC<IProp> = ({ role, cardText, amount, href ,icon}) => {
+const DashboardInformation: FC<IProp> = ({
+  role,
+  cardText,
+  amount,
+  href,
+  icon,
+  seeMore,
+  content,
+  twContentClassName
+}) => {
   return (
     <div className="w-[264px] h-[130px] rounded-[12px] bg-dark-600 flex-col flex gap-1">
       <div dir="rtl" className="flex-center w-full gap-3">
         <div className="w-[50px] h-[60px] bg-dark-900 rounded-b-xl flex-center">
-            {icon}
+          {icon}
         </div>
         <div className="flex flex-col gap-1 w-[65%] text-white">
           <h2>{amount}</h2>
@@ -26,13 +38,16 @@ const DashboardInformation: FC<IProp> = ({ role, cardText, amount, href ,icon}) 
         {"-------------------------------------------"}
       </div>
 
-      <Link
-        href={`${role}/${href}`}
-        className="w-full flex justify-between px-5 items-center cursor-pointer"
-      >
-        <span className="text-gray-400">مشاهده</span>
-        <Image alt="icon" src={grayTriangle} />
-      </Link>
+      {seeMore && (
+        <Link
+          href={`${role}/${href}`}
+          className="w-full flex justify-between px-5 items-center cursor-pointer"
+        >
+          <span className="text-gray-400">مشاهده</span>
+          <Image alt="icon" src={grayTriangle} />
+        </Link>
+      )}
+      <div className={twContentClassName}>{content}</div>
     </div>
   );
 };

@@ -20,6 +20,7 @@ const SellerPage = async () => {
   const booking = res?.data || [];
   const user = await getUsersDetail(Number(userId));
   const favorites = await getFavoriteForUser(Number(userId));
+ 
   return (
     <div className="flex flex-col gap-5 ">
       <div className="flex gap-4 justify-between w-full ">
@@ -29,6 +30,7 @@ const SellerPage = async () => {
           role={role}
           href="estate-management"
           icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+          seeMore
         />
         <DashboardInformation
           amount={booking.filter((b) => b.status === "confirmed").length}
@@ -36,6 +38,8 @@ const SellerPage = async () => {
           role={role}
           href="reserve-management"
           icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+          seeMore
+
         />
         <DashboardInformation
           amount={booking.filter((b) => b.status === "pending").length}
@@ -43,6 +47,8 @@ const SellerPage = async () => {
           role={role}
           href="reserve-management"
           icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+          seeMore
+
         />
         <DashboardInformation
           amount={favorites?.data.length}
@@ -50,6 +56,8 @@ const SellerPage = async () => {
           role={role}
           href="favorites"
           icon={<TbHeartFilled className="w-[26px] h-[26px] text-white" />}
+          seeMore
+
         />
       </div>
       <div className="grid grid-cols-2 gap-5 2xl:gap-20">

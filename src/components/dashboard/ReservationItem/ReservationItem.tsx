@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from "react";
-import { TbDots } from "react-icons/tb";
+import React, { use, useState } from "react";
+import { TbCreditCard , TbDots } from "react-icons/tb";
 import { Modal } from "../../common/modal";
 import { IBooking } from "@/src/core/types/IBooking";
 import { useQuery } from "@tanstack/react-query";
@@ -9,6 +9,9 @@ import { IHouse } from "@/src/core/types/IHouse";
 import ProductCard from "../../common/productCard/ProductCard";
 import Button from "../../common/button/page";
 import ItemNavbar from "../../common/dashboardItemNavbar/ItemNavbar";
+import DropMenu from "../../common/dropMenu/DropMenu";
+import { FiChevronDown } from "react-icons/fi";
+import { FiAlertCircle } from "react-icons/fi";
 interface IReservationItemProps {
   item: IBooking;
 }
@@ -16,6 +19,7 @@ const ReservationItem = ({ item }: IReservationItemProps) => {
   const [selected, setSelected] = useState<number | null | string | undefined>(
     null
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: houseDetail } = useQuery<IHouse | null>({
     queryKey: ["houseDetail", selected],
     queryFn: () => getHousesDetail(Number(selected)),
@@ -29,17 +33,40 @@ const ReservationItem = ({ item }: IReservationItemProps) => {
     if (typeof tags === "string") return [tags];
     return [];
   };
-const navbarItem =["نام","کد ملی","جنسیت","تاریخ تولد"]
+  const navbarItem = ["نام", "کد ملی", "جنسیت", "تاریخ تولد"];
   const tagsArray = getTagsArray(houseDetail?.tags);
+  const handleOpenModal = () => {
+    setSelected(item?.houseId || null);
+    setIsModalOpen(true);
+  };
+  const menuItems = [
+    {
+      label: "جزییات",
+      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      onClick: () => handleOpenModal(),
+    },
+
+    {
+      label: "پرداخت",
+      icon: <TbCreditCard  className="mt-px text-white" />,
+    },
+  ];
+
   return (
     <>
+      <DropMenu
+        trigger={
+          <TbDots className="w-6 h-6 cursor-pointer text-gray-400 hover:text-primary-accent-green transition" />
+        }
+        items={menuItems}
+        side="bottom"
+        align="end"
+      />
       <Modal
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
         modalBtn={
           <div>
-            <TbDots
-              onClick={() => setSelected(item?.houseId || null)}
-              className="w-6 h-6 cursor-pointer text-gray-400 hover:text-primary-accent-green transition"
-            />
           </div>
         }
         contentClassName=" bg-dark-900"
@@ -64,28 +91,42 @@ const navbarItem =["نام","کد ملی","جنسیت","تاریخ تولد"]
                 </div>
               </div>
               <div className="flex gap-4">
-               <Modal modalBtn={ <Button
-                  text={"لیست مسافرها"}
-                  buttonStyle={{
-                    background: "var(--color-primary-accent-green)",
-                    color: "black",
-                    cursor: "pointer",
-                  }}
-                />}
-                contentClassName="bg-dark-800"
-                mainContent={<div>
-                    {item.traveler_details?.map((traveler)=>(
-                       <div className="flex flex-col gap-5" dir="rtl">
-                        <ItemNavbar colsNumber={4} items={navbarItem} twClassName="whitespace-nowrap"/>
-                        <div className="grid grid-cols-4 gap-4 text-white">
-                            <span>{`${traveler.firstName} ${traveler.lastName}`||"نام کاربر"}</span>
-                            <span>{traveler.nationalId||"----"}</span>
-                            <span className="text-center">{traveler.gender||"--"}</span>
-                            <span>{traveler.birthDate||"----"}</span>
+                <Modal
+                  modalBtn={
+                    <Button
+                      text={"لیست مسافرها"}
+                      buttonStyle={{
+                        background: "var(--color-primary-accent-green)",
+                        color: "black",
+                        cursor: "pointer",
+                      }}
+                    />
+                  }
+                  contentClassName="bg-dark-800"
+                  mainContent={
+                    <div>
+                      {item.traveler_details?.map((traveler) => (
+                        <div className="flex flex-col gap-5" dir="rtl" key={`${traveler.firstName} - ${traveler.nationalId}`}>
+                          <ItemNavbar
+                            colsNumber={4}
+                            items={navbarItem}
+                            twClassName="whitespace-nowrap"
+                          />
+                          <div className="grid grid-cols-4 gap-4 text-white">
+                            <span>
+                              {`${traveler.firstName} ${traveler.lastName}` ||
+                                "نام کاربر"}
+                            </span>
+                            <span>{traveler.nationalId || "----"}</span>
+                            <span className="text-center">
+                              {traveler.gender || "--"}
+                            </span>
+                            <span>{traveler.birthDate || "----"}</span>
+                          </div>
                         </div>
-                       </div>
-                    ))}
-                </div>}
+                      ))}
+                    </div>
+                  }
                 />
                 <Button
                   text={"رزرو ها"}

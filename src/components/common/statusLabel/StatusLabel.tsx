@@ -13,6 +13,7 @@ export enum BookingStatus {
   ERROR = "error",
   CANCELLED = "cancelled",
   CONFIRMED = "confirmed",
+  COMPLETED = "completed",
 }
 
 interface IStatus {
@@ -27,6 +28,7 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
         return "bg-[#FAC100] text-black";
       case BookingStatus.SUCCESS:
       case BookingStatus.CONFIRMED:
+      case BookingStatus.COMPLETED:
         return "bg-green-500 text-black";
       case BookingStatus.ERROR:
       case BookingStatus.CANCELLED:
