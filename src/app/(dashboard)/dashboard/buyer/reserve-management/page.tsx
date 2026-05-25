@@ -1,29 +1,35 @@
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import SimpleDropdown from "@/src/components/common/dropDown";
-import DropMenu from "@/src/components/common/dropMenu/DropMenu";
+import PaginationClient from "@/src/components/common/pagination/page";
 import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import ReservationItem from "@/src/components/dashboard/ReservationItem/ReservationItem";
 import { getBookings } from "@/src/utils/sevices/api/processReserve/getbooking";
-import{ FC } from "react";
-import { FiChevronDown } from "react-icons/fi";
+import { FC } from "react";
 interface IProps {
   searchParams: Promise<IFilters>;
 }
 interface IFilters {
   order?: string;
   sort?: string;
+  page?: string | number;
+  limit?: string | number;
 }
 const BuyerReservePage: FC<IProps> = async ({ searchParams }) => {
+  const limit = 5;
   const params = await searchParams;
   const order = params.order;
   const sort = params.sort;
+  const currentPage = Number(params.page) || 1;
   const filters: IFilters = {};
   if (order) filters.order = order;
   if (sort) filters.sort = sort;
+  if (currentPage) filters.page = currentPage;
+  if (limit) filters.limit = limit;
   const result = await getBookings(filters);
   const booking = result?.data || [];
-  
+  const totalPages = Math.ceil(Number(result.totalCount) / limit);
+
   const items = [
     "نام اقامتگاه",
     "تاریخ رزرو",
@@ -42,7 +48,7 @@ const BuyerReservePage: FC<IProps> = async ({ searchParams }) => {
     { value: "check_in_date", label: "تاریخ ورود" },
     { value: "check_out_date", label: "تاریخ خروج" },
   ];
- 
+
   return (
     <div>
       <DashboardContentContainer
@@ -69,50 +75,56 @@ const BuyerReservePage: FC<IProps> = async ({ searchParams }) => {
           </div>
         }
       >
-        <div className="flex flex-col gap-5 w-full">
-          <ItemNavbar colsNumber={6} items={items} />
-          <div className="flex text-white mt-5 items-center">
-            {booking?.length > 0 ? (
-              <div className="w-full flex flex-col gap-5">
-                <>
-                  {booking?.map((item) => (
-                    <div
-                      className="flex justify-between w-full items-center"
-                      key={item.id}
-                    >
-                      <div className="grid grid-cols-6 w-full  items-center">
-                        <div className="flex gap-4 items-center w-[300px] ">
-                          <div className="w-[100px] h-[72px] rounded-xl bg-gray-600"></div>
-                          <div className="whitespace-nowrap">
-                            {item.house?.title || "عنوانی وجود ندارد"}
+        <div className="flex flex-col items-end">
+          <div className="flex flex-col gap-5 w-full">
+            <ItemNavbar colsNumber={6} items={items} />
+            <div className="flex text-white mt-5 items-center">
+              {booking?.length > 0 ? (
+                <div className="w-full flex flex-col gap-5">
+                  <>
+                    {booking?.map((item) => (
+                      <div
+                        className="flex justify-between w-full items-center"
+                        key={item.id}
+                      >
+                        <div className="grid grid-cols-6 w-full  items-center">
+                          <div className="flex gap-4 items-center w-[300px] ">
+                            <div className="w-[100px] h-[72px] rounded-xl bg-gray-600"></div>
+                            <div className="whitespace-nowrap">
+                              {item.house?.title || "عنوانی وجود ندارد"}
+                            </div>
                           </div>
+                          <div className=" text-center">
+                            {item.created_at?.slice(0, 10) || "--"}
+                          </div>
+                          <div
+                            className="flex-center gap-1 text-center "
+                            dir="rtl"
+                          >
+                            <span>{item.house?.price || "  --"}</span>
+                            <span>تومان</span>
+                          </div>
+                          <span className="text-center ml-5">
+                            {item.traveler_details?.length} نفر
+                          </span>
+                          <StatusLabel status={item.status} />
+                          <StatusLabel status={item.status} />
                         </div>
-                        <div className=" text-center">
-                          {item.created_at?.slice(0, 10) || "--"}
-                        </div>
-                        <div
-                          className="flex-center gap-1 text-center "
-                          dir="rtl"
-                        >
-                          <span>{item.house?.price || "  --"}</span>
-                          <span>تومان</span>
-                        </div>
-                        <span className="text-center ml-5">
-                          {item.traveler_details?.length} نفر
-                        </span>
-                        <StatusLabel status={item.status} />
-                        <StatusLabel status={item.status} />
+
+                        <ReservationItem item={item} />
                       </div>
-                   
-                     <ReservationItem item={item}/>
-                    </div>
-                  ))}
-                </>
-              </div>
-            ) : (
-              <div className="text-4xl text-gray-300">رزوری وجود ندارد</div>
-            )}
+                    ))}
+                  </>
+                </div>
+              ) : (
+                <div className="text-4xl text-gray-300">رزوری وجود ندارد</div>
+              )}
+            </div>
           </div>
+          <PaginationClient
+            totalPages={totalPages}
+            totalCount={Number(result.totalCount)}
+          />
         </div>
       </DashboardContentContainer>
     </div>

@@ -18,7 +18,7 @@ const BuyerDashboardPage = async () => {
   const booking = result?.data || [];
   const user = await getUsersDetail(Number(userId));
   const favorites = await getFavoriteForUser(Number(userId));
-
+ 
 
   return (
     <div className="flex flex-col gap-5">
