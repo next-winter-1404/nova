@@ -10,13 +10,13 @@
 
   /* dark colors */
   --color-dark-900: #232323;
-  --color-dark-900-transparent-64: #232323A3;
+  --color-dark-900-transparent-64: #232323a3;
   --color-dark-860: #2e2e2e;
   --color-dark-850: #2d2d2d;
   --color-dark-800: #363636;
-  --color-dark-800-transparent-20: rgb(54 54 54 / 0.2);
+  --color-dark-800-transparent-20: #36363633;
   --color-dark-700: #393939;
-  --color-dark-700-transparent-81: rgb(57 57 57 / 0.81);
+  --color-dark-700-transparent-81: #393939cf;
   --color-dark-650: #404040;
   --color-dark-620: #4e4e4e;
   --color-dark-600: #444444;
@@ -55,6 +55,9 @@
   --color-tomato-red: #ff5555;
   --color-tomato-red-transparent-20: rgb(255 85 85 / 0.2);
 
+  /* Fonts */
+  --font-vazir: "Vazirmatn", sans-serif;
+
   /* shadows */
 
   --inset-shadow-fff-16: inset -2 2px 12px rgb(255 255 255 / 0.16);
@@ -62,9 +65,9 @@
   --inset-shadow-fff-4: inset -1 -1px 8px rgb(255 255 255 / 0.04);
   --inset-shadow-fff-24: inset 2 2px 10px rgb(255 255 255 / 0.24);
   --inset-shadow-000-4: inset -1 -1px 6px rgb(0 0 0 / 0.04);
-  --shadow-3xl: 0 8px 6px rgb(54 54 54 / 0.2); 
-  --shadow-000-16: 0 12px 24px rgb(0 0 0 / 0.16); 
-  --shadow-000-8: 0 12px 32px rgb(0 0 0 / 0.08); 
+  --shadow-3xl: 0 8px 6px rgb(54 54 54 / 0.2);
+  --shadow-000-16: 0 12px 24px rgb(0 0 0 / 0.16);
+  --shadow-000-8: 0 12px 32px rgb(0 0 0 / 0.08);
   --shadow-3xl: 0 8px 6px rgb(54 54 54 / 0.2);
   --shadow-000-16: 0 12px 24px rgb(0 0 0 / 0.16);
   --shadow-primary-accent-green-transparent-20: 0 4px 12px rgb(0 0 0 / 0.16);
@@ -72,12 +75,83 @@
   --shadow-curve-sharp: 10px 10px 0;
 }
 
+[data-theme="light"] {
+  /* Black colors (unchanged) */
+  --color-black-transparent-16: rgb(0 0 0 / 0.16);
+  --color-black-transparent-12: rgb(0 0 0 / 0.12);
+  --color-black-transparent-8: rgb(0 0 0 / 0.08);
+  --color-black-transparent-6: rgb(0 0 0 / 0.06);
+  --color-black-transparent-4: rgb(0 0 0 / 0.04);
+
+  /* Light blue-gray backgrounds */
+  --color-dark-900: #ececec;
+  --color-dark-900-transparent-64: #f4f7fca3;
+  --color-dark-860: #D9D9D9;
+  --color-dark-850: #e8edf3;
+  --color-dark-800: #dfe5ed;
+  --color-dark-800-transparent-20: #dfe5ed33;
+  --color-dark-700: rgb(204, 205, 206);
+  --color-dark-700-transparent-81: #d0d9e3cf;
+  --color-dark-650: #b8c3d0;
+  --color-dark-620: #a2b0bf;
+  --color-dark-600: rgb(156, 162, 168);
+  --color-unSelectedButton: #eef2f8;
+  --color-selectedButtonText: #1a2c3e;
+
+  /* Gray colors — cool, slightly blue */
+  --color-gray-500: #5c6f87;
+  --color-gray-450: #4e5e73;
+  --color-gray-400: #3f4d60;
+  --color-gray-300: #2e3a48;
+  --color-gray-200: #cbd5e1;
+  --color-gray-250: #b4c0cd;
+  --color-gray-150: #e2e8f0;
+  --color-gray-550: #3f4d60;
+
+  /* White / black transparent overlays */
+  --color-white-pure: #000000;
+  --color-white-transparent-20: rgb(0 0 0 / 0.15);
+  --color-white-transparent-16: rgb(0 0 0 / 0.12);
+  --color-white-transparent-12: rgb(0 0 0 / 0.08);
+
+  /* Purple-blue — more saturated to pop */
+  --color-blue-purple-500: #6d5cff;
+  --color-blue-transparent-40: rgb(109 92 255 / 0.35);
+  --color-blue-transparent-20: rgb(109 92 255 / 0.15);
+
+  /* Green — fresh, cool-toned */
+  --color-primary-accent-green: rgb(96, 211, 25);
+  --color-primary-accent-green-transparent-64: rgb(140 255 68 / 0.64);
+  --color-primary-accent-green-transparent-20: rgb(140 255 68 / 0.2);
+  --color-primary-accent-green-transparent-12: rgb(140 255 68 / 0.12);
+  --color-primary-accent-green-transparent-8: rgb(140 255 68 / 0.08);
+
+  /* Red — crisp, clean */
+  --color-tomato-red: #ff5555;
+  --color-tomato-red-transparent-20: rgb(255 85 85 / 0.2);
+
+  /* Shadows — soft, using cool black undertones */
+  --inset-shadow-fff-16: inset -2px 2px 12px rgb(0 0 0 / 0.05);
+  --inset-shadow-fff-8: inset 2px 2px 16px rgb(0 0 0 / 0.02);
+  --inset-shadow-fff-4: inset -1px -1px 8px rgb(0 0 0 / 0.01);
+  --inset-shadow-fff-24: inset 2px 2px 10px rgb(0 0 0 / 0.08);
+  --inset-shadow-000-4: inset -1px -1px 6px rgb(255 255 255 / 0.7);
+  --shadow-3xl: 0 8px 6px rgb(0 0 0 / 0.05);
+  --shadow-000-16: 0 12px 24px rgb(0 0 0 / 0.08);
+  --shadow-000-8: 0 12px 32px rgb(0 0 0 / 0.04);
+  --shadow-primary-accent-green-transparent-20: 0 4px 12px rgb(0 0 0 / 0.06);
+  --shadow-curve-round: 5px 4px 0 #dfe5ed;
+  --shadow-curve-sharp: 10px 10px 0 #cbd5e1;
+}
+
 .Container {
   @apply mx-auto container flex flex-col items-center sm:px-6 py-20 px-4;
 }
 .selected-button {
-  box-shadow: inset -1px -1px 8px 0px #0000000a,
-    inset 2px 2px 12px 0px #ffffff33, 0px 8px 12px 0px #8cff4529;
+  box-shadow:
+    inset -1px -1px 8px 0px #0000000a,
+    inset 2px 2px 12px 0px #ffffff33,
+    0px 8px 12px 0px #8cff4529;
   color: var(--color-selectedButtonText);
   background: var(--color-primary-accent-green);
 }
@@ -95,46 +169,46 @@
 
 /* Text styles */
 .text-32-semibold {
-  @apply font-semibold sm:text-[32px] text-[16px] whitespace-nowrap text-white-pure;
+  @apply font-vazir font-semibold sm:text-[32px] text-[16px] whitespace-nowrap text-white-pure;
 }
 
 .text-32-medium {
-  @apply font-medium sm:text-[32px] text-[20px] whitespace-nowrap text-white-pure;
+  @apply font-vazir font-vazir font-medium sm:text-[32px] text-[20px] whitespace-nowrap text-white-pure;
 }
 
 .text-semibold-28 {
-  @apply font-semibold sm:text-[20px] text-[18px];
+  @apply font-vazir font-vazir font-semibold sm:text-[20px] text-[18px];
 }
 
 .text-semibold-24 {
-  @apply font-semibold  sm:text-[24px] text-[16px] text-white-pure;
+  @apply font-vazir font-semibold  sm:text-[24px] text-[16px] text-white-pure;
 }
 .text-semibold-20 {
-  @apply font-semibold  sm:text-[20px] text-[16px] text-white-pure;
+  @apply font-vazir font-semibold  sm:text-[20px] text-[16px] text-white-pure;
 }
 
-/* .text-20-regular {
-  @apply font-normal text-[20px] whitespace-nowrap text-white-pure;
-} */
+.text-20-regular {
+  @apply font-vazir font-normal text-[20px] whitespace-nowrap text-white-pure;
+}
 
 .text-20-medium {
-  @apply sm:text-[20px] text-[12px] text-white-pure;
+  @apply font-vazir sm:text-[20px] text-[12px] text-white-pure;
 }
 
 .text-16-bold {
-  @apply font-bold text-[16px] whitespace-nowrap;
+  @apply font-vazir font-bold text-[16px] whitespace-nowrap;
 }
 .text-16-semibold {
-  @apply font-semibold text-[16px] whitespace-nowrap;
+  @apply font-vazir font-semibold text-[16px] whitespace-nowrap;
 }
 
 .text-16-medium {
-  @apply font-medium sm:text-[16px] text-[10px] whitespace-nowrap;
+  @apply font-vazir font-medium sm:text-[16px] text-[10px] whitespace-nowrap;
 }
 
-/* .text-13-regular {
-  @apply font-normal text-[13px] whitespace-nowrap text-white-pure;
-} */
+.text-13-regular {
+  @apply font-vazir font-normal text-[13px] whitespace-nowrap text-white-pure;
+}
 
 body {
   background: #232323;
@@ -240,7 +314,7 @@ header {
 }
 
 .dropMenu {
-  @apply  relative flex-center justify-between text-white-pure border border-white-pure rounded-2xl;
+  @apply relative flex-center justify-between text-white-pure border border-gray-300 rounded-2xl;
 }
 
 .serach-button {
@@ -250,3 +324,71 @@ header {
   @apply font-normal text-[13px] whitespace-nowrap text-white-pure;
 }
 
+/* ================= Mode Changer ================= */
+
+.sun {
+  font-size: 2rem;
+  color: var(--color-white-pure);
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0.5));
+  transition: 1s ease;
+  transition-delay: 0.8s;
+}
+
+#modeChanger:checked ~ .moon {
+  transition-delay: 0.8s;
+  transform: scale(1) rotate(360deg);
+}
+
+.moon {
+  position: absolute;
+  font-size: 2rem;
+  color: var(--color-white-pure);
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0.5));
+  transform: scale(0);
+  transition: 1s ease;
+}
+
+#modeChanger:checked ~ .sun {
+  transition-delay: 0s;
+  transform: rotate(360deg) scale(0);
+}
+
+.animateBg {
+  position: fixed;
+  width: 200%;
+  height: 200vh;
+  background: rgb(136, 81, 81);
+  z-index: -100;
+  clip-path: circle(0% at 50% 50%);
+  transition: 1.5s ease-out;
+}
+
+#modeChanger:checked ~ .animateBg {
+  clip-path: circle(150% at 50% 50%);
+}
+
+.moveItRight {
+  @apply flex justify-end;
+}
+
+@keyframes softBlinkMove {
+  0% {
+    opacity: 0.8;
+    transform: translate(0px, 0px);
+    filter: blur(120px);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(3px, -2px);
+    filter: blur(100px);
+  }
+  100% {
+    opacity: 0.8;
+    transform: translate(0px, 0px);
+    filter: blur(120px);
+  }
+}
+
+.animate-soft-blink-move {
+  animation: softBlinkMove 4s ease-in-out infinite;
+}
