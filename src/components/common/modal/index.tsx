@@ -33,7 +33,7 @@ export const Modal: FC<IModalProps> = ({
         <Dialog.Content
           className={`${contentClassName} ${width} z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg max-h-[85vh] p-6 focus:outline-none`}
         >
-          <Dialog.Title className="text-lg font-semibold text-gray-900">
+          <Dialog.Title className="text-lg font-semibold " dir="rtl">
             {modalTitle}
           </Dialog.Title>
           <Dialog.Description className="text-sm text-gray-500 mt-1.5">

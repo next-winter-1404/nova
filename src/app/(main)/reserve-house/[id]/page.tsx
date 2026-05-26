@@ -85,7 +85,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
         return (
           <AboutHouseContainer
             caption={house?.caption}
-            title={house?.caption}
+            title={house?.title}
           />
         );
       case "comment":

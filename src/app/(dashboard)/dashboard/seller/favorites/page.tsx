@@ -9,7 +9,7 @@ import { FC } from "react";
 interface IProps {
   searchParams: Promise<IFilters>;
 }
-interface IFilters {
+ interface IFilters {
   order?: string;
   sort?: string;
   page?: string | number;
