@@ -16,6 +16,8 @@ import {
   TbReceiptDollar,
   TbKeyFilled,
   TbLogout,
+  TbUsers,
+  TbChartPie,
 } from "react-icons/tb";
 import { FaCommentDots } from "react-icons/fa";
 import DashboardMenuItem from "@/src/components/dashboard/menu/menuItems";
@@ -82,9 +84,23 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       icon: <FaCommentDots className="w-5 h-5" />,
     },
   ];
+  const adminItems = [
+    {
+      label: "مدیریت کاربران",
+      href: `/dashboard/${role}/users-management`,
+      icon: <TbUsers className="w-6 h-6" />,
+    },
+   
+  ];
+ 
+  
+  let menuItems = [...commonItems];
 
-  const menuItems =
-    role === "seller" ? [...commonItems, ...sellerItems] : commonItems;
+  if (role === "seller") {
+    menuItems = [...menuItems, ...sellerItems];
+  } else if (role === "admin") {
+    menuItems = [...menuItems, ...adminItems];
+  }
 
   const profileItems = [
     {

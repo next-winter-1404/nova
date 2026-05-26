@@ -167,7 +167,6 @@ const SellerCommentManagementPage: FC<IProp> = async ({ searchParams }) => {
                         </div>
                       }
                     />
-                    <TbBell className="w-5 h-5 text-gray-500 cursor-pointer" />
                   </div>
                 ))
               ) : (
