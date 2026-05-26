@@ -39,13 +39,14 @@ const ProductCard = ({
 
 
   return (
-    <div className="group  text-white-pure flex flex-col gap-4">
+    <div className="group max-w-76.5  text-white-pure flex flex-col gap-4 font-vazir">
       {seeMore && (
         <div className="group-hover:bg-primary-accent-green w-[45px] absolute flex justify-center rounded-[8px] h-[22px] bg-dark-700">
           <Image src={leftArrow} alt="leftArrow" />
         </div>
       )}
       <CardContainer
+      // parentExtraStyle={{width:"300px"}}
         curveColor="#393939"
         cavity="round"
         labelContent={
@@ -67,48 +68,48 @@ const ProductCard = ({
 
       <div className="flex-col-center gap-3">
         <span
-          className={`w-full flex ${discounted_price !== null ? "justify-between" : "justify-end"} items-center`}
+          className={`w-full ${discounted_price ? " flex items-center justify-between" : "justify-end"} `}
         >
-          {discountPercent && (
+          {discounted_price ? (
             <span className="text-16-semibold px-3 py-1.5 sm:w-14 w-12 text-center rounded-xl bg-tomato-red whitespace-nowrap">
               %{roundDiscountPercent}
             </span>
-          )}
-          <span className="sm:text-[20px] text-[18px] flex justify-end">
+          ): ""}
+          <span className="flex justify-end text-20-regular">
             {title && href ? <Link href={href}>{title}</Link> : title || "عنوانی وجود ندارد"}
           </span>
         </span>
 
-        {capacity && (
+        {bathroom && (
           <>
             <div className="w-full flex justify-end gap-3">
               <h2 className="text-[16px] text-gray-300">{address || "ادرسی وجود ندارد"}</h2>
               <Image src={Location} alt="Location" />
             </div>
             <div className="w-full h-[16px] flex items-center justify-end text-gray-300 gap-1 whitespace-nowrap">
-              <div className=" w-[30px] text-[13px] justify-center flex gap-2.5">
+              <div className=" w-[30px] justify-center flex gap-2.5 text-13-regular">
                 حیاط
                 <Image src={houseTree} alt="houseTree" />
               </div>
-              <div className="border-l border-gray-300 w-[85px] text-[13px] justify-center flex gap-2.5 ">
+              <div className="border-l border-gray-300 w-[85px] text-13-regular justify-center flex gap-2.5 ">
                 <span>{bathrooms || "--"}</span>
                 <span>حمام</span> <Image src={bathroom} alt="bathroom" />
               </div>
-              <div className="border-l border-gray-300 w-[91px] text-[13px] justify-center flex gap-2.5">
+              <div className="border-l border-gray-300 w-[91px] text-13-regular justify-center flex gap-2.5">
                 <span>{parking || "--"}</span>
                 <span>پارکینگ</span>
                 <Image src={car} alt="car" />
               </div>
-              <div className="border-l border-gray-300 w-[77px] text-[13px] justify-end flex gap-2.5">
+              <div className="border-l border-gray-300 w-[77px] text-13-regular justify-end flex gap-2.5">
                 <span>{rooms || "--"}</span>
                 <span>خوابه</span>
                 <Image src={bed} alt="bed" />
               </div>
             </div>
             <div className="w-full h-[36px] group-hover:bg-primary-accent-green bg-dark-600 text-white-pure group-hover:text-dark-800 rounded-[12px] flex items-center justify-between pl-3 pr-3">
-              <h2 className="text-[16px]"> {discounted_price} </h2>
-              <h2 className="text-gray-300 text-[16px]">
-                {offer ? (
+              <h2 className="text-16-medium"> {price} </h2>
+              <h2 className="text-gray-300 text-16-medium">
+                {discounted_price ? (
                   <OldPriceComponent oldPrice={price} />
                 ) : (
                   <span>{buttonText}</span>

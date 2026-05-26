@@ -1,10 +1,11 @@
 interface BlureLightCircleProps {
     bgColor:string;
+    position:string;
 }
 
-const BlureLightCircle = ({bgColor}: BlureLightCircleProps) => {
+const BlureLightCircle = ({bgColor,position}: BlureLightCircleProps) => {
   return (
-    <div style={{ backgroundColor: bgColor }} className='absolute top-5 -left-8 w-54.5 h-54.5 blur-[95px] bg-[${bgColor}] rounded-full'></div>
+    <div  className={`absolute ${position} w-54.5 h-54.5 blur-[120px] ${bgColor} rounded-full animate-soft-blink-move`}></div>
   )
 }
 

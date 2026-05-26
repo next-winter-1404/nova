@@ -2,13 +2,14 @@
 import Image from "next/image"
 import Link from "next/link"
 
-import LoginButton from '../auth/LoginButton'
+// import LoginButton from '@/src/components/auth/LoginButton'
 import { FiMenu } from 'react-icons/fi';
 import { BsChevronDown } from "react-icons/bs";
 
 import {Menu, MenuWrapper, MenuItems, MenuItem, MenuButton} from "@/src/components/common/menu"
 import NavbarTab from "./navbar/NavbarTab";
 import Divider from "./Divider";
+import NavLoginButton from "../auth/NavLoginButton";
 
 const navigation = [
   { labelName: 'تماس با ما', href: '/contactus', current: false },
@@ -24,12 +25,12 @@ const Navbar = () => {
           <div>
             <span>
               <Link href="/login">
-                <LoginButton>
+                <NavLoginButton>
                   <span>
                     <p>ورود / ثبت نام</p>
                     <Image src='/icons/user1.svg' alt='user' width={16} height={16}/>
                   </span>
-                </LoginButton>
+                </NavLoginButton>
               </Link>
            </span>
           </div>
@@ -66,7 +67,7 @@ const Navbar = () => {
                     <MenuItem key={item.labelName} {...item} />
                   ))}
                 </MenuItems>
-              </MenuWrapper>
+              </MenuWrapper> 
             </Menu>
           </span>
 

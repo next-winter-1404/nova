@@ -6,8 +6,8 @@ export interface IMortgagePageFilter {
     address?: string;
     search?: string;
     transactionType?: string;
-    minRent?: number;
-    maxRent?: number;
+    minRent?: string;
+    maxRent?: string;
     minMortgage?: number;
     maxMortgage?: number;
     minArea?: number;

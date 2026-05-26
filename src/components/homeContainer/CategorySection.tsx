@@ -26,14 +26,14 @@ const stateCategories = [
 
 const CategorySection = () => {
   return (
-    <div className="relative padding-section">
-      <BlureLightCircle bgColor="#8CFF4552" />
+    <div className="w-full relative padding-section">
+      <BlureLightCircle position="sm:-left-8 top-5" bgColor="bg-primary-accent-green" />
       <Container>
-        <div className="w-full flex flex-col items-center gap-14">
+        <div className="padding-section sm:max-w-[1000px] max-w-[400px] flex flex-col justify-center items-center gap-14">
           <div className="flex flex-col items-center gap-6">
             <GreenSectionTitle title="دسته بندی املاک دلتا" />
             <h2 className="text-32-medium">! هر ملکی بخوای اینجا پیدا میشه</h2>
-            <p className="text-[16px] text-center text-white">
+            <p className="text-16-medium text-center text-white-pure">
               با کلیک به روی هر دسته بندی می توانید تمام آگهی مربوط آن را مشاهده
               کنید و به ملک مورد علاقه خود برسید
             </p>
@@ -52,7 +52,7 @@ const CategorySection = () => {
               pagination={{
                 clickable: true,
               }}
-              className="my-house-swiper"
+              className="my-house-swiper w-full moveItRight"
             >
               {stateCategories.map((category) => (
                 <SwiperSlide className="group" key={category.label}>
@@ -72,13 +72,13 @@ const CategorySection = () => {
                     labelSize="md"
                     mainContent={
                       <span className="flex-center justify-between gap-3 whitespace-nowrap">
-                        <span className="text-white-pure group-hover:text-dark-700  sm:text-[20px] text-[16px]">
+                        <span className="text-white-pure group-hover:text-dark-700  text-20-regular">
                           ✦
                         </span>
-                        <p className="text-white-pure text-[20px] group-hover:text-dark-700">
+                        <p className="text-white-pure text-20-regular group-hover:text-dark-700">
                           {category.label}
                         </p>
-                        <span className=" text-white-pure group-hover:text-dark-700 sm:text-[20px] text-[16px]">
+                        <span className=" text-white-pure group-hover:text-dark-700 text-20-regular">
                           ✦
                         </span>
                       </span>

@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import HouseItemsComponent from "../reserveHouse/houseItemsComponent";
 import CommentSection from "../reserveHouse/comments/commentSection";
 import { IComment } from "@/src/core/types/IComment";
+import NeshanMapParent from "./NeshanMapParent";
 
 interface MortgageTabContentProps {
   comments: IComment[];
@@ -56,7 +57,7 @@ const MortgageTabContent = ({
               {address}
             </div>
             <p className="h-[324px] flex-center flex-1 rounded-[48px] bg-dark-800">
-              TODO:IMPLEMENTING MAP
+              <NeshanMapParent id={id} />
             </p>
           </div>
         );

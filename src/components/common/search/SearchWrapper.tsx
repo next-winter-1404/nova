@@ -72,10 +72,13 @@ const SearchWrapper = ({ cityOptions }: SearchWrapperProps) => {
         <div className="flex-2 w-full">
           <SimpleDropdown
             paramKey="address"
-            placeholder="... استان ، شهر ، اقامتگاه"
+            placeholder="استان ، شهر ، اقامتگاه ..."
             options={cityOptions}
             city={city}
             setCity={setCity}
+            labelText="انتخاب مقصد"
+            tagBg="bg-dark-800"
+            
           />
         </div>
       </div>
