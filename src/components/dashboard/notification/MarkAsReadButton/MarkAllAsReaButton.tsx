@@ -32,7 +32,7 @@ const MarkAllAsReaButton = () => {
         }}
       >
         <LoginButton
-          width="p-2"
+          width="p-2 text-[10px] md:text-[16px]"
           buttonText="علامت گذاری همه به عنوان خوانده شده "
           loadingText="علامت گذاری به عنوان خوانده شده"
           noIcon

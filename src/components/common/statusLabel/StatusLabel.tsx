@@ -45,6 +45,7 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
       case BookingStatus.SUCCESS:
         return "موفق";
       case BookingStatus.CONFIRMED:
+      case BookingStatus.COMPLETED:
         return "تایید شده";
       case BookingStatus.ERROR:
         return "خطا";
@@ -55,7 +56,6 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
     }
   };
 
-  // تابع تعیین آیکون بر اساس وضعیت با استفاده از react-icons/fa
   const getStatusIcon = (status?: string) => {
     switch (status) {
       case BookingStatus.PENDING:
@@ -63,6 +63,7 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
       case BookingStatus.SUCCESS:
         return <FaCheckCircle className="w-3 h-3 ml-1" />;
       case BookingStatus.CONFIRMED:
+      case BookingStatus.COMPLETED:
         return <FaRegCheckCircle className="w-3 h-3 ml-1" />;
       case BookingStatus.ERROR:
         return <FaTimesCircle className="w-3 h-3 ml-1" />;
@@ -77,7 +78,7 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
     <div
       className={`${getStatusStyle(
         status
-      )} w-[90px] h-[22px] rounded-4xl text-center text-sm flex items-center justify-center gap-1`}
+      )} md:w-[90px] w-[50px] md:h-[22px] text-[10px] rounded-4xl text-center whitespace-nowrap md:text-[14px] flex items-center justify-center p-px gap-px md:gap-1`}
     >
       {getStatusIcon(status)}
       {getPersianText(status)}

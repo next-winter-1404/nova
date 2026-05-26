@@ -20,15 +20,13 @@ import {
   TbChartPie,
 } from "react-icons/tb";
 import { FaCommentDots } from "react-icons/fa";
-import DashboardMenuItem from "@/src/components/dashboard/menu/menuItems";
-import LogoutButton from "@/src/components/common/logoutButton/logOutButton";
-import BuyerWallet from "@/src/components/dashboard/wallet/buyerWallet";
-import SellerNewComments from "@/src/components/dashboard/newComments/newComments";
 import Image from "next/image";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
 import userPlaceholder from "@/src/assets/images/userPlaceHolder.jpg";
 import DropMenu from "@/src/components/common/dropMenu/DropMenu";
 import ProfileInfo from "@/src/components/dashboard/profileInfo/ProfileInfo";
+import AsideMenu from "@/src/components/dashboard/menu/asideMenu/AsideMenu";
+import MenuController from "@/src/components/dashboard/menu/menuController/menuController";
 
 interface IProp {
   children: ReactNode;
@@ -122,27 +120,19 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       icon: <TbLogout className="w-4 h-4 text-white" />,
     },
   ];
+
   return (
     <>
-      <div className="flex  w-full pt-5 px-5 h-full gap-5 " dir="rtl">
-        <aside className="w-[300px]  p-5  h-[95vh] bg-dark-700 rounded-xl flex-col ">
-          <div className="w-full justify-between items-center flex  text-white">
-            <h1 className="text-[32px] font-extrabold ">دلتا</h1>
-            <LogoutButton />
-          </div>
-          <div className="w-full flex-col flex justify-between  h-[90%]">
-            <div className="w-full text-white mt-10">
-              <DashboardMenuItem items={menuItems} />
-            </div>
-            {role == "buyer" ? <BuyerWallet /> : <SellerNewComments />}
-          </div>
-        </aside>
+      <div className="flex w-full pt-5 px-5 h-full gap-5" dir="rtl">
+        <div className="hidden lg:block">
+          <AsideMenu role={role} menuItems={menuItems}  isOpen={true}/>
+        </div>
 
         <div className="flex flex-col w-full xl:w-[1113px] 2xl:w-[1400px]">
-          <div className="flex justify-between p-5 items-center  h-[66px] bg-dark-700 rounded-xl">
-            <div className="font-extrabold text-white text-[20px]">
-              <HiOutlineBars3 className="md:hidden" />
-              <h2 className="hidden md:block">داشبورد</h2>
+          <div className="flex justify-between p-5 items-center h-[66px] bg-dark-700 rounded-xl">
+            <div className="font-extrabold text-white text-[20px] flex items-center gap-2">
+              <MenuController role={role} menuItems={menuItems} />
+              <h2 className="hidden lg:block">داشبورد</h2>
             </div>
 
             <div className="flex gap-4 items-center">
@@ -167,17 +157,17 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
                 twClassname="z-100 bg-gray-550"
               />
 
-              <div className="flex gap-2  w-[150px] justify-start items-center cursor-pointer">
+              <div className="flex gap-2 w-[150px] justify-start items-center cursor-pointer">
                 <div className="border border-[#D9D9D9] rounded-lg">
                   <Image
                     alt="prof"
                     src={userDetail?.profilePicture || userPlaceholder}
                     width={37}
                     height={37}
-                    className="rounded-lg "
+                    className="rounded-lg"
                   />
                 </div>
-                <div className="fle flex-col" dir="rtl">
+                <div className="flex flex-col" dir="rtl">
                   <h2 className="text-[14px] text-white">{`${userDetail?.firstName} ${userDetail?.lastName}`}</h2>
                   <span className="text-[12px] text-gray-500">{role}</span>
                 </div>
@@ -185,7 +175,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
               <DropMenu
                 trigger={
                   <FiChevronDown
-                    className="text-gray-500   cursor-pointer"
+                    className="text-gray-500 cursor-pointer"
                     strokeWidth={2}
                   />
                 }
@@ -195,7 +185,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
               />
             </div>
           </div>
-          <div className="mt-5 ">{children}</div>
+          <div className="mt-5">{children}</div>
         </div>
       </div>
     </>

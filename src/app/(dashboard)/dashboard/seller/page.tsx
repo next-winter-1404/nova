@@ -23,7 +23,7 @@ const SellerPage = async () => {
  
   return (
     <div className="flex flex-col gap-5 ">
-      <div className="flex gap-4 justify-between w-full ">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4  w-full ">
         <DashboardInformation
           amount={houses?.length}
           cardText="تعداد کل املاک"
@@ -60,7 +60,7 @@ const SellerPage = async () => {
 
         />
       </div>
-      <div className="grid grid-cols-2 gap-5 2xl:gap-20">
+      <div className="grid lg:grid-cols-2 gap-5 2xl:gap-20">
         <DashboardContentContainer
           seemore
           twParentClassName=""
@@ -73,9 +73,9 @@ const SellerPage = async () => {
             <div className="flex justify-between w-full">
               <div className="flex-center gap-2">
                 <span className="bg-primary-accent-green rounded-full w-4 h-4"></span>
-                <p className="text-white text-[20px] font-semibold">در امد ماه جاری</p>
+                <p className="text-white md:text-[20px] text-[13px] whitespace-nowrap font-semibold">در امد ماه جاری</p>
               </div>
-              <div className="rounded-xl bg-primary-accent-green w-[219px] p-2" dir="rtl">
+              <div className="rounded-xl bg-primary-accent-green md:w-[219px] p-2" dir="rtl">
                 <div className="flex gap-2 w-full">
                   <p>1500000000000000</p>
                   <span>تومان</span>
@@ -86,9 +86,9 @@ const SellerPage = async () => {
             <div className="flex justify-between w-full">
               <div className="flex-center gap-2">
                 <span className="bg-gray-300 rounded-full w-4 h-4"></span>
-                <p className="text-white text-[20px] font-semibold">در امد کل</p>
+                <p className="text-white md:text-[20px] text-[13px] whitespace-nowrap font-semibold">در امد کل</p>
               </div>
-              <div className="rounded-xl bg-gray-300 w-[219px] p-2" dir="rtl">
+              <div className="rounded-xl bg-gray-300 md:w-[219px] p-2" dir="rtl">
                 <div className="flex gap-2 w-full">
                   <p>1500000000000000</p>
                   <span>تومان</span>
@@ -139,10 +139,10 @@ const SellerPage = async () => {
                       className="flex justify-between w-full items-center rounded-xl hover:bg-[#D9D9D929]"
                       key={item.id}
                     >
-                      <div className="grid grid-cols-4  w-[90%] gap-20 items-center ">
+                      <div className="grid grid-cols-4 text-[10px]  w-[90%] gap-2 md:gap-20 items-center ">
                         <div className="flex gap-4 items-center  ">
-                          <div className="w-[100px] h-[72px] rounded-xl bg-gray-600"></div>
-                          <div className="whitespace-nowrap">
+                          <div className="w-[100px] h-[72px] rounded-xl bg-gray-600 hidden lg:block"></div>
+                          <div className="md:whitespace-nowrap ">
                             {item.house?.title || "عنوانی وجود ندارد"}
                           </div>
                         </div>
@@ -158,7 +158,7 @@ const SellerPage = async () => {
                         </div>
                         <StatusLabel status={item.status} />
                       </div>
-                      <TbDots className="w-6 h-6 cursor-pointer  hover:bg-dark-700 rounded-lg" />
+                      <TbDots className="w-6 h-6 cursor-pointer  hover:bg-dark-700 rounded-lg hidden md:block" />
                     </div>
                   ))}
                 </>

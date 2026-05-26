@@ -4,8 +4,8 @@ import { removeFromFavorites } from "@/src/utils/sevices/api/favorites/deleteFav
 import { useRouter } from "next/navigation";
 import { FC, useState } from "react";
 import toast from "react-hot-toast";
-import { TbCreditCard, TbDots } from "react-icons/tb";
-import DropMenu from "../../common/dropMenu/DropMenu";
+import {  TbDots, TbDotsVertical } from "react-icons/tb";
+import DropMenu from "../../../common/dropMenu/DropMenu";
 import { FiAlertCircle } from "react-icons/fi";
 import { FaRegCircleXmark } from "react-icons/fa6";
 interface IProps {
@@ -49,7 +49,10 @@ const FavoriteFunctions: FC<IProps> = ({ favoriteId, houseId }) => {
     <div>
       <DropMenu
         trigger={
-          <TbDots className="w-6 h-6 cursor-pointer text-gray-400 hover:text-primary-accent-green transition" />
+          <div>
+            <TbDots className="w-6 h-6 cursor-pointer text-gray-400 hover:text-primary-accent-green transition hidden md:block" />
+            <TbDotsVertical className="w-5 h-5 cursor-pointer text-gray-400 hover:text-primary-accent-green transition md:hidden" />
+          </div>
         }
         items={menuItems}
         side="bottom"
