@@ -57,7 +57,7 @@ const MortgageTabContent = ({
               {address}
             </div>
             <p className="h-[324px] flex-center flex-1 rounded-[48px] bg-dark-800">
-              <NeshanMapParent id={id} />
+              {/* <NeshanMapParent id={id} /> */}
             </p>
           </div>
         );
