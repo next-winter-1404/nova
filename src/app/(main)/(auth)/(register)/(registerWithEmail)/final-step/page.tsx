@@ -15,7 +15,7 @@ const SetPasswordAndPhonePage = () => {
   });
 
   useEffect(() => {
-  
+    if (!state?.message) return;
     if (state.success) {
       toast.success(state.message);
       router.push("/dashboard");
@@ -48,6 +48,7 @@ const SetPasswordAndPhonePage = () => {
               tagBgStyle={{ background: "var(--color-dark-900)" }}
               labelTextSize="text-white"
               textColor="text-white"
+              dir="rtl"
             />
             <div className="flex flex-col gap-4 w-1/2">
               <Input
@@ -62,6 +63,7 @@ const SetPasswordAndPhonePage = () => {
                 tagBgStyle={{ background: "var(--color-dark-900)" }}
                 labelTextSize="text-white"
                 textColor="text-white"
+                dir="rtl"
               />
             </div>
           </div>

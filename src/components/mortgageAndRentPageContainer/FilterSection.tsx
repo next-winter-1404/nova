@@ -329,6 +329,8 @@ const FilterSection = ({ totalCount }: FilterSectionProps) => {
             placeHolder="... نام هتل مورد نظر"
             value={search}
             onChange={handleSearch}
+            dir="rtl"
+
           />
         </div>
         <div className="hidden sm:flex flex-1">

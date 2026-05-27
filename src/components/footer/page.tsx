@@ -25,7 +25,6 @@ import Star18 from "@/src/assets/images/Star 18.svg"
 import Star19 from "@/src/assets/images/Star 19.svg"
 import Star20 from "@/src/assets/images/Star 20.svg"
 import { useRouter } from 'next/navigation'
-import { getServerSideCookie } from '@/src/utils/helper/cookies/serverCookie/serverSideCookie'
 import toast from 'react-hot-toast'
 import { postCommentsLand } from '@/src/utils/sevices/api/contactus/postCommentLand'
 import LoginButton from '../login/button/LoginButton'
@@ -110,13 +109,13 @@ const Footer = () => {
             curveColor='var(--color-primary-accent-green)'
             labelBackground='bg-primary-accent-green'
             mainContent={<div className='h-[1100px] items-center md:gap-[66px] gap-4 md:w-full w-[340px] flex flex-col' dir='rtl'>
-              <div className='md:h-[145px] md:w-full h-[200px] w-[330px] md:gap-6 gap-3 flex-col flex'>                
+              <div className='md:h-[145px] md:w-full h-[130px] w-[330px] md:gap-6 gap-3 flex-col flex'>                
                   <div className='flex w-[160px] h-5 md:text-[16px] text-[12px] text-selectedButtonText md:gap-4 gap-2'>همیشه کنارتیم <Image src={leftBlackTriangle} alt='leftBlackTriangle'/></div>      
                   <h2 className='md:text-[32px] text-[20px] text-selectedButtonText'>24 ساعت روز و 7 روز هفته در اختیار شماییم !</h2>        
                   <h2 className='text-selectedButtonText md:text-[20px] text-[16px] w-[300px] md:w-full'>تیم دلتا با ارائه بهترین نیرو های خدماتی و سرویس های املاکی سعی دارد تا بتواند در تمام لحظات کنار شما باشد .</h2>  
               </div> 
               <div className='flex md:w-full items-center w-[330px] relative'>
-              <form className='md:h-[345px] h-[290px] md:w-[620px] w-[330px] flex flex-col items-center  md:gap-[42px] gap-8' onSubmit={handleSubmit}> 
+              <form className='md:h-[345px] h-[315px] md:w-[620px] w-[330px] flex flex-col items-center md:gap-[42px] gap-6'  onSubmit={handleSubmit}> 
                 <div className='flex md:w-full w-[330px] h-[59px] gap-6'>     
                   <Input
                       labelText={':عنوان'} 
@@ -133,6 +132,7 @@ const Footer = () => {
                       value={formData.title}
                       onChange={handleChange}
                       name='title'
+                      dir='rtl'
                     />            
                     {/* <Input
                       labelText={'شماره یا ایمیل :'} 
@@ -164,14 +164,14 @@ const Footer = () => {
                       onChange={handleChange}
                     />
                 </div>
-              <LoginButton
-                type='submit'
-                buttonText='ارسال پیام'
-                width='w-full'
-                buttonStyle="bg-dark-800 text-white"
-                loadingText='درحال ارسال پیام'
-                
-              />
+                <LoginButton
+                  type='submit'
+                  buttonText='ارسال پیام'
+                  width='w-full'
+                  buttonStyle="bg-dark-800 text-white"
+                  loadingText='درحال ارسال پیام'
+                  
+                />
               </form>
               <div className='hidden md:block'>
                 <div className='absolute top-[-174px] left-[21px]'>
@@ -185,9 +185,9 @@ const Footer = () => {
                 <div className='absolute left-[300px] top-[-200px]'><Image src={Star20} alt='Star20'/></div>
               </div>
               </div>              
-              <div className='w-full md:h-[460px] h-[560px] justify-center rounded-[56px] bg-dark-900 flex flex-col items-center' >
-                <div className='border-b border-amber-50 md:h-[360px] h-[550px] flex flex-col w-11/12 gap-8 md:gap-6'>
-                  <span className='md:text-[32px] text-[26px] text-white-pure'>پلتفرم دلتا</span>
+              <div className='w-full md:h-[460px] h-[570px] justify-center rounded-[56px] bg-dark-900 flex flex-col items-center' >
+                <div className='border-b border-amber-50 md:h-[360px] h-[550px] flex flex-col w-11/12 gap-6'>
+                  <span className='md:text-[32px] mr-3 mt-3 text-[26px] text-white-pure'>پلتفرم دلتا</span>
                   <div className='w-full md:h-[180px] h-[340px] flex md:flex-row flex-col md:gap-0 gap-2.5 text-white-pure text-[12px] md:text-[16px]'>
                     <div className=' h-[200px] flex md:w-3/5 md:gap-14 gap-5'>
                     <h2 className='w-3/5 md:leading-9 leading-6'>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت ..</h2>

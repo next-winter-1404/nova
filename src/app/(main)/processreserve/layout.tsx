@@ -27,7 +27,7 @@ const Layout = ({children} : IProps) => {
   return ( 
     <div className='bg-dark-900 w-full'>
         <div className='flex flex-col w-full justify-center items-center mt-[172px] ' dir='rtl'>
-            <div className='md:w-11/12 w-[340px] h-[68px] border-amber-50 rounded-3xl flex items-center justify-center bg-dark-700'>
+            <div className='md:w-11/12 w-[340px] h-[68px] rounded-3xl flex items-center justify-center bg-dark-700'>
                 <div className='w-22/23 h-[45px] flex items-center justify-between relative'>
                     <div className='flex md:gap-4 gap-1.5 items-center'>
                         <div className ='md:w-9 w-5 md:h-9 h-5 rounded-full bg-primary-accent-green flex items-center justify-center'>

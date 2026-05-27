@@ -5,7 +5,6 @@ import {
 import Button from "@/src/components/common/button/page";
 import HouseMainInformation from "@/src/components/common/houseMainInformation";
 import ToolTip from "@/src/components/common/tooltip";
-import share from "@/src/assets/icons/share-square.svg";
 import Image from "next/image";
 import deaf from "@/src/assets/images/imagePlaceHolder (2).png";
 import { ITab } from "@/src/core/types/ITab";
@@ -16,7 +15,7 @@ import {
   FaRegFileAlt,
   FaStar,
 } from "react-icons/fa";
-import { FiCopy } from "react-icons/fi";
+import { FiCopy, FiHeart } from "react-icons/fi";
 import AboutHouseContainer from "@/src/components/reserveHouse/aboutHouseContainer";
 import HouseItemsComponent from "@/src/components/reserveHouse/houseItemsComponent";
 import SimilarHouses from "@/src/components/reserveHouse/similarHouse/SimilarHousesNavbar";
@@ -26,20 +25,22 @@ import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail"
 import { notFound } from "next/navigation";
 import ReserveBox from "@/src/components/reserveHouse/reserveBox";
 import { getHousesComment } from "@/src/utils/sevices/api/comments/reserveHouseDetailComment/getComment";
+import { Modal } from "@/src/components/common/modal";
+import AddToFavorite from "@/src/components/reserveHouse/addToFavorite/AddToFavorite";
 
 interface IProps {
   params: Promise<{ id: number }>;
   searchParams: Promise<{ tab?: string }>;
 }
-export const revalidate = 30
+export const revalidate = 30;
 const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   const { id } = await params;
   const house = await getHousesDetail(id);
   const param = await searchParams;
   const activeTab = param.tab || "about";
-//get comments
-  const commentsData = await getHousesComment(id)  ;
-  const comments = commentsData?.comments || []
+  //get comments
+  const commentsData = await getHousesComment(id);
+  const comments = commentsData?.comments || [];
 
   // console.log("comments:", comments);
 
@@ -84,11 +85,11 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
         return (
           <AboutHouseContainer
             caption={house?.caption}
-            title={house?.caption}
+            title={house?.title}
           />
         );
       case "comment":
-        return <CommentSection houseId={house.id} comments={comments}/>;
+        return <CommentSection houseId={house.id} comments={comments} />;
       case "facilities":
         return (
           <HouseItemsComponent
@@ -109,8 +110,8 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
     }
   };
   return (
-    <div className="flex-center bg-dark-900">
-      <div className="flex items-end flex-col gap-6 w-4/5 lg:w-[1375px] mt-17 ">
+    <div className="flex-center bg-dark-900 w-full">
+      <div className="flex items-end flex-col gap-6 w-4/5 xl:w-[1340px]  2xl:w-[1444px]  lg:w-[95%]  lg:px-8 mt-17 ">
         <Breadcrumb items={items} twClassname="lg:mt-14 mt-6" />
         <div className="flex  flex-col gap-8 md:gap-4 lg:flex-row-reverse lg:items-end justify-between  w-full mt-4 p-4">
           <HouseMainInformation
@@ -138,13 +139,10 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
                 }
                 tooltipText="کپی کردن"
               />
-              <ToolTip
-                mainContent={
-                  <div className="flex-center w-10 h-10 bg-dark-700 rounded-xl hover:bg-primary-accent-green">
-                    <Image className="w-4 h-4" alt="icon" src={share} />
-                  </div>
-                }
-                tooltipText="اشتراک گذاری"
+              <AddToFavorite
+                houseId={Number(house?.id)}
+                isFavorite={house.isFavorite}
+                favoriteId={Number(house.favoriteId)}
               />
             </div>
           </div>
@@ -170,7 +168,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
               : [...Array(8)].map((_, index) => (
                   <div
                     key={index}
-                    className="w-24 h-24 bg-dark-700 rounded-4xl cursor-pointer hover:border-primary-accent-green hover:border"
+                    className=" hidden lg:block w-24 h-24 bg-dark-700 rounded-4xl cursor-pointer hover:border-primary-accent-green hover:border"
                   />
                 ))}
           </div>
@@ -179,17 +177,50 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
             src={house?.photos?.[0] || deaf}
             width={1100}
             height={420}
-            className="md:w-full  lg:max-w-[1100px] lg:h-[420px] rounded-[40px] border border-dark-800"
+            className="md:w-full lg:w-[80%] xl:max-w-[1100px] lg:h-[420px] rounded-[40px] border border-dark-800"
           />
         </div>
-        <section className="flex flex-row-reverse justify-between  w-full items-start">
-          <section className=" w-[1000px] flex flex-col gap-8">
-            <SelectedTab options={tabs} twClassname="w-full" buttonWidth="p-4"/>
+        <section className=" relative flex flex-row-reverse justify-between gap-4 w-full items-start">
+          <section className=" lg:w-[1000px] flex flex-col w-full gap-8">
+            <SelectedTab
+              options={tabs}
+              twClassname="w-full"
+              buttonWidth="p-2 md:p-4"
+            />
 
             {renderContent()}
           </section>
-
-        <ReserveBox price={house.price} id={house.id}/>
+          <div className="hidden lg:block">
+            <ReserveBox
+              price={house.price}
+              id={house.id}
+              discounted_price={house.discounted_price}
+            />
+          </div>
+          <div className="block lg:hidden fixed z-10 bottom-5 right-5">
+            <Modal
+              contentClassName="bg-dark-900 block lg:hidden h-fit"
+              modalBtn={
+                <Button
+                  text={"همین حالا رزرو کن"}
+                  buttonStyle={{
+                    background: "var(--color-primary-accent-green)",
+                    color: "black",
+                    width: 100,
+                    height: 50,
+                    cursor: "pointer",
+                  }}
+                />
+              }
+              mainContent={
+                <ReserveBox
+                  price={house.price}
+                  id={house.id}
+                  discounted_price={house.discounted_price}
+                />
+              }
+            />
+          </div>
         </section>
         <SimilarHouses />
       </div>

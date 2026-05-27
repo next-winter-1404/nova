@@ -35,7 +35,7 @@ const HouseCard: FC<HouseCardProps> = ({houses}) => {
 }
       `}
     </style> 
-    <div className ='md:w-[1440px] w-[380px] flex h-[495px] items-center justify-between overflow-hidden'>     
+    <div className ='md:w-full w-[380px] flex h-[495px] items-center justify-between overflow-hidden'>     
       <Swiper
         modules={[Navigation, Autoplay,Pagination]}
         spaceBetween={20}

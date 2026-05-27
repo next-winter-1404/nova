@@ -1,62 +1,77 @@
-'use client'
+"use client";
+
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { Calendar, CalendarProvider, TimePicker } from "@iprg/zaman";
-import { useState } from "react";
-import { BsChevronDown } from "react-icons/bs";
+import { FC, ReactNode } from "react";
 
-
-interface Option {
-    value: string;
-    label: string;
+export interface IMenuItem {
+  label?: string | ReactNode;
+  icon?: ReactNode;
+  onClick?: () => void;
+  disabled?: boolean;
+  divider?: boolean;
 }
 
-interface DropMenuProps {
-    options: Option[];
-    value?: string;
-    onChange?: (value:string) => void 
-    placeholder?: string;
-    dropDownLabel?: string
+interface IDropMenuProps {
+  trigger: ReactNode;
+  items: IMenuItem[];
+  side?: "top" | "right" | "bottom" | "left";
+  align?: "start" | "center" | "end";
+  sideOffset?: number;
+  alignOffset?: number;
+  contentClassName?: string;
+  itemClassName?: string;
 }
 
+const DropMenu: FC<IDropMenuProps> = ({
+  trigger,
+  items,
+  side = "bottom",
+  align = "end",
+  sideOffset = 5,
+  alignOffset = 0,
+  contentClassName = "",
+  itemClassName = "",
+}) => {
+  return (
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger asChild>{trigger}</DropdownMenu.Trigger>
 
-const DropMenu = ({options, onChange, value, placeholder="... انتخاب کنید ", dropDownLabel} : DropMenuProps) => {
-    const [calendarValue, setCalendarValue] = useState(new Date())
-    return (
-      <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
-        <button className="IconButton dropMenu p-5 w-full" aria-label="Customise options">
-           <BsChevronDown className="w-3 h-3"/>
-           <i>{placeholder}</i> 
-        </button>
-      </DropdownMenu.Trigger>
-
-      <DropdownMenu.Portal> 
-        <DropdownMenu.Content className="DropdownMenuContent w-full p-4 rounded rounded-xl z-100 bg-dark-800" sideOffset={5}>
-          
-          <DropdownMenu.Item className="DropdownMenuItem" onSelect={() => console.log("New Tab")}>
-           <div className="RightSlot">
-             <CalendarProvider>
-              <Calendar
-                defaultValue={calendarValue}
-                onChange={(e) => setCalendarValue(new Date(e.value))}
-              />
-            </CalendarProvider>
+      <DropdownMenu.Portal>
+        <DropdownMenu.Content
+          className={`bg-dark-800 rounded-xl p-2  shadow-lg z-50 ${contentClassName}`}
+          side={side}
+          align={align}
+          sideOffset={sideOffset}
+          alignOffset={alignOffset}
+        >
+          {items.map((item, index) => (
+            <div key={index}>
+              {item.divider && index !== 0 && (
+                <DropdownMenu.Separator className="h-px bg-gray-600 my-1" />
+              )}
+              <DropdownMenu.Item
+              dir="rtl"
+                className={`
+                  flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all outline-none
+                  ${
+                    item.disabled
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:bg-dark-600"
+                  }
+                  ${itemClassName}
+                `}
+                onClick={item.onClick}
+                disabled={item.disabled}
+              >
+                {item.icon && <span className="w-5 h-5">{item.icon}</span>}
+                <div className="text-white text-sm">{item.label}</div>
+              </DropdownMenu.Item>
             </div>
-          </DropdownMenu.Item>
-          <DropdownMenu.Item className="DropdownMenuItem" onSelect={() => console.log("New Window")}>
-            New Window <div className="RightSlot">⌘+N</div>
-          </DropdownMenu.Item>
-          <DropdownMenu.Item className="DropdownMenuItem" disabled>
-            New Private Window <div className="RightSlot">⇧+⌘+N</div>
-          </DropdownMenu.Item>
-
-          <DropdownMenu.Separator className="DropdownMenuSeparator" />
-
+          ))}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
-        
-  )
-}
+  );
+};
 
 export default DropMenu;
