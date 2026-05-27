@@ -39,9 +39,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
           <Providers>
-            <Navbar />
             {children}
-            <Footer />
           </Providers>
         </ThemeProvider>
       </body>

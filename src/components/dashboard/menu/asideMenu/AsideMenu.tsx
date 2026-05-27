@@ -37,7 +37,7 @@ const AsideMenu = ({ role, menuItems, isOpen, onClose }: IAsideMenuProps) => {
 
       <aside
         className={`
-           z-50 w-[280px]   bg-dark-700 p-5 flex-col gap-5 justify-between 
+           z-50 w-[280px]   bg-dark-700 p-5 flex-col flex gap-5 justify-between 
           transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0 fixed top-0 right-0 h-screen" : "h-[95vh] flex translate-x-full"}
           lg:relative lg:translate-x-0 rounded-xl lg:z-auto 
