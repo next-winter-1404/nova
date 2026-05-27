@@ -2,10 +2,8 @@ import ToolTip from "@/src/components/common/tooltip";
 import Link from "next/link";
 import { FiChevronDown } from "react-icons/fi";
 import { HiOutlineBell } from "react-icons/hi";
-import { HiOutlineBars3 } from "react-icons/hi2";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { FC, ReactNode } from "react";
-
 import {
   TbHome,
   TbHomeFilled,
