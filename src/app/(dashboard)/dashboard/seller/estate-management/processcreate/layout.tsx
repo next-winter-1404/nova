@@ -1,41 +1,52 @@
-'use client'
-import { useSearchParams } from 'next/navigation'
-import React, {ReactNode } from 'react'
-import hotel  from '@/src/assets/icons/hotel.svg'
-import Image from 'next/image';
-import payment  from '@/src/assets/icons/payment.svg'
-import accept  from '@/src/assets/icons/accept.svg'
-import usersAlt  from '@/src/assets/icons/usersAlt.svg'
-import ticketBill  from '@/src/assets/icons/ticeitbill.svg'
-import { steps } from './steps';
-
+"use client"
+import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
+import Image from "next/image";
+import Link from "next/link";
+import blueTriangle from "@/src/assets/icons/blueTringle.svg"
+import { steps } from "./steps";
+import { ReactNode } from "react";
+import { useSearchParams } from "next/navigation";
+import Info from "@/src/assets/icons/Info.svg"
+import Location from "@/src/assets/icons/Location.svg"
+import Photos from "@/src/assets/icons/photos.svg"
+import Facility from "@/src/assets/icons/facility.svg"
+import Stroke from "@/src/assets/icons/Stroke.svg"
 
 interface IProps  {
     children : ReactNode;
 }
 const stepIcons =[
-    usersAlt,
-    accept,
-    payment,
-    ticketBill,   
+    Info,
+    Location,
+    Facility,
+    Photos,
+    Stroke
 ];
-const Layout = ({children} : IProps) => {
+
+ const Layout =   ({children} : IProps) =>  {
     const searchParams = useSearchParams();
-    const currentStep = searchParams.get('step') ||"travelerinfo";
+    const currentStep = searchParams.get('step') ||"firstinfo";
 
     const currentIndex = steps.findIndex(s => s.id === currentStep)
-  return ( 
-    <div className='bg-dark-900 w-full'>
-        <div className='flex flex-col w-full justify-center items-center mt-[172px] ' dir='rtl'>
+    return(
+        <div>
+        <DashboardContentContainer
+            title=" ساخت آگهی ملک جدید"
+            twTopContent="w-1/"
+            topSectionContent={
+            <div className="flex gap-4 w-1/2">
+                <Link href={"/dashboard/seller/estate-management"}>
+                    <button className='w-[153px] flex items-center justify-center gap-2 text-[#0059FF] text-[16px]'>
+                        لیست املاک من 
+                        <Image src={blueTriangle} alt='blueTriangle'/>
+                    </button>
+                </Link>
+            </div>
+            }
+        >
+         <div className='flex flex-col w-full justify-center items-center  ' dir='rtl'>
             <div className='md:w-11/12 w-[340px] h-[68px] rounded-3xl flex items-center justify-center bg-dark-700'>
-                <div className='w-22/23 h-[45px] flex items-center justify-between relative'>
-                    <div className='flex md:gap-4 gap-1.5 items-center'>
-                        <div className ='md:w-9 w-5 md:h-9 h-5 rounded-full bg-primary-accent-green flex items-center justify-center'>
-                            {<Image src={hotel} alt='hotel'/>}
-                        </div>
-                        <span className='text-[12px] md:text-[20px] text-primary-accent-green'>انتخاب هتل</span>
-                    </div>
-                    <div className='hidden md:block border-b-3 w-[112px] border-dashed border-primary-accent-green'></div>    
+                <div className='w-22/23 h-[45px] flex items-center justify-between relative'>  
                     {steps.map((step, index) => {
                         const isCompleted = currentIndex > index ;
                         const isActive = currentIndex === index;
@@ -66,9 +77,10 @@ const Layout = ({children} : IProps) => {
             <main>
                 {children}
             </main>
+        </div>   
+        </DashboardContentContainer> 
         </div>
-    </div>
-  )
+    )
 }
 
 export default Layout
