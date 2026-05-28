@@ -46,35 +46,28 @@ const SellerPaymentPage : FC<IProps> = async({ searchParams }) => {
   const report = await getSellerPaymentCard();
   return (
     <div className='flex flex-col gap-5'>
-      {/* <div className="flex gap-4 justify-between w-full ">
+      <div className="flex gap-4 justify-between w-full ">
         <DashboardInformation
-          amount={report}
-          cardText="تعداد کل رزرو ها"
-          role={role}
-          
-        />
-        <DashboardInformation
-          amount={booking.filter((b) => b.status === "confirmed").length}
-          cardText="رزرو های فعال"
-          role={role}
-          href="reserve-management"
+          cardText="درآمد ماه جاری"
+          content = {<div className='flex gap-1.5 text-white-pure items-center justify-center'>{report.totalCurrentMonthAmount} <h2>تومان</h2></div>}
           icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
         />
         <DashboardInformation
-          amount={booking.filter((b) => b.status === "pending").length}
-          cardText="رزرو های در حال انتظار"
-          role={role}
-          href="reserve-management"
+          cardText=" درآمد ماه قبل"
+          content = {<div className='flex gap-1.5 text-white-pure items-center justify-center'>{report.totalPerviousMonthAmount} <h2>تومان</h2></div>}
           icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
         />
         <DashboardInformation
-          amount={favorites?.data.length}
-          cardText="علاقه مندی ها"
-          role={role}
-          href="favorites"
-          icon={<TbHeartFilled className="w-[26px] h-[26px] text-white" />}
+          cardText=" درآمد کل"
+          content = {<div className='flex gap-1.5 text-white-pure items-center justify-center'>{report.totalAmount} <h2>تومان</h2></div>}
+          icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
         />
-      </div> */}
+        <DashboardInformation
+          cardText="تعداد کل پرداخت ها"
+          content = {<div className='flex gap-1.5 text-white-pure items-center justify-center'>{report.totalPayments} <h2>تومان</h2></div>}
+          icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+        />
+      </div>
       <DashboardContentContainer
       twTopContent='w-1/2'
       title='لیست تراکنش های شما'

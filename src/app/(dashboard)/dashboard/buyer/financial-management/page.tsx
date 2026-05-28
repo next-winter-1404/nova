@@ -20,17 +20,18 @@ interface IFilter {
 
 const BuyerPaymentPage : FC<IProps> = async({ searchParams }) => {    
   const params = await searchParams;
-  
   const status = params.status;
   const orders = params.orders;
+  const limit = 5;
+  const currentPage = Number(params.page) || 1;
   const filter : IFilter = {};
   if (status) filter.status = status;
   if (orders) filter.orders = orders;
-  filter.page = params.page ? parseInt(params.page, 10) : 1;
-  filter.limit = params.limit ? parseInt(params.limit, 10) : 10;
+  if (currentPage )filter.page = currentPage 
+  if (limit) filter.limit = limit
   
   const paymentList = await getBuyerPayment(filter);
-  const totalPages = Math.ceil(paymentList.totalCount / filter.limit);
+  const totalPages = Math.ceil(Number(paymentList.totalCount) / limit);
   const result = paymentList?.payments || []
   const payStatus = [
     {value : "completed", label : "تایید شده"},
@@ -45,7 +46,7 @@ const BuyerPaymentPage : FC<IProps> = async({ searchParams }) => {
     <div className='flex flex-col'>
       <DashboardContentContainer
       twTopContent='w-1/2'
-      title='لیست تراکنش های شما'
+      title='لیست تراکنش های مشتریان'
       topSectionContent = {
         <div className='w-full flex py-2 gap-4'>
           <SimpleDropdown
@@ -67,51 +68,51 @@ const BuyerPaymentPage : FC<IProps> = async({ searchParams }) => {
         </div>
       }
     >
-      <div className="flex flex-col gap-5 w-full">
-        <ItemNavbar colsNumber={4} items={items} />
-        <div className="flex text-white mt-5 items-center">
-          {result?.length > 0 ? (
-            <div className="w-full flex flex-col gap-5">
-              <>
-                {result?.map((item) => (
-                  <div
-                    className="flex justify-between w-full items-center"
-                    key={item.id}
-                  >
-                  <div className ="grid grid-cols-5 w-full h-[50px] items-center">
-                    <div className="flex-center whitespace-nowrap">
-                      {item.createdAt || "- -"}
-                    </div>                              
+      <div className="flex flex-col items-end">
+        <div className="flex flex-col gap-5 w-full">
+          <ItemNavbar colsNumber={4} items={items} />
+          <div className="flex text-white mt-5 items-center">
+            {result?.length > 0 ? (
+              <div className="w-full flex flex-col gap-5">
+                <>
+                  {result?.map((item) => (
                     <div
-                      className="flex-center gap-1 text-center "
-                      dir="rtl"
+                      className="flex justify-between w-full items-center"
+                      key={item.id}
                     >
-                      <span>{item.amount || "  --"}</span>
-                      <span>تومان</span>
-                    </div>
-                    <div className="text-center mr-[100px]">
-                      {item.description} 
-                    </div>
-                    <div className='mr-[175px] text-center'>
-                      <StatusLabel status={item.status} />
+                    <div className ="grid grid-cols-5 w-full h-[50px] items-center">
+                      <div className="flex-center whitespace-nowrap">
+                        {item.createdAt || "- -"}
+                      </div>                              
+                      <div
+                        className="flex-center gap-1 text-center "
+                        dir="rtl"
+                      >
+                        <span>{item.amount || "  --"}</span>
+                        <span>تومان</span>
+                      </div>
+                      <div className="text-center mr-[100px]">
+                        {item.description} 
+                      </div>
+                      <div className='mr-[175px] text-center'>
+                        <StatusLabel status={item.status} />
+                      </div>
                     </div>
                   </div>
+                  ))}
+                </>
                 </div>
-                ))}
-              </>
-              </div>
-            ) : (
-              <div className="text-4xl text-gray-300">رزوری وجود ندارد</div>
-            )}
-          </div>
+              ) : (
+                <div className="text-4xl text-gray-300">رزوری وجود ندارد</div>
+              )}
+            </div>
+            <PaginationClient 
+              totalPages={totalPages} 
+              totalCount={Number(paymentList.totalCount)} 
+            />
         </div>
-        
+      </div>
     </DashboardContentContainer>
-    
-    <PaginationClient 
-      totalPages={totalPages} 
-      totalCount={paymentList.totalCount} 
-    />
     </div>
     
   )
