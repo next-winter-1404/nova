@@ -26,7 +26,7 @@ const UserName = ({ userId }: UserNameProps) => {
   }, [userId]);
 
   if (loading) return <span className="text-gray-400">در حال بارگذاری...</span>;
-  return <span>{name}</span>;
+  return <span className="mr-3 text-center">{name}</span>;
 };
 
 export default UserName;
