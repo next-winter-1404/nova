@@ -86,6 +86,12 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       href: `/dashboard/${role}/users-management`,
       icon: <TbUsers className="w-6 h-6" />,
     },
+    {
+      label: "مدیریت نظرات",
+      href: `/dashboard/${role}/comments-management`,
+      icon: <FaCommentDots className="w-5 h-5" />,
+    },
+   
    
   ];
  

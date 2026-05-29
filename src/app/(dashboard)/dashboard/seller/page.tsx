@@ -62,6 +62,7 @@ const SellerPage = async () => {
       </div>
       <div className="grid lg:grid-cols-2 gap-5 2xl:gap-20">
         <DashboardContentContainer
+        isIcon
           seemore
           twParentClassName=""
           href="reserve-management"
@@ -100,6 +101,7 @@ const SellerPage = async () => {
           </div>
         </DashboardContentContainer>
         <DashboardContentContainer
+        isIcon
           seemore
           twParentClassName=""
           href="profile"
@@ -122,6 +124,7 @@ const SellerPage = async () => {
         </DashboardContentContainer>
       </div>
       <DashboardContentContainer
+      isIcon
         seemore
         href="reserve-management"
         navigateText="مشاهده همه"
