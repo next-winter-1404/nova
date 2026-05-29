@@ -1,11 +1,8 @@
-import React from 'react'
+import FavoritePage from '@/src/components/dashboard/favorite/favoritePage/favoritePage'
 
-const AdminFavoritesPage = () => {
+const AdminFavoritesPage = async({ searchParams }: { searchParams: Promise<any> }) => {
   return (
-    <div>
-      AdminFavoritesPage
-AdminFavoritesPage
-    </div>
+    <FavoritePage searchParams={searchParams}/>
   )
 }
 

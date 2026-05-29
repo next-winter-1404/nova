@@ -28,10 +28,15 @@ const BookingManagementClient: FC<IProp> = ({ allBookings, items }) => {
       title="مدیریت رزرو ها"
       topSectionContent={
         <Input
+          parentWidth=" w-[200px] md:w-full"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeHolder="جستجو..."
           dir="rtl"
+          InputHeight="md:h-[50px]"
+          borderColor="border border-white placeholder-gray-300"
+          tagBgStyle={{ background: "var(--color-dark-600)", color: "white" }}
+          labelText="جستجو"
         />
       }
     >
