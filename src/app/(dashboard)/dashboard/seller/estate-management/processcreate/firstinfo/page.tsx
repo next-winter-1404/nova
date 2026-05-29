@@ -9,11 +9,11 @@ import arrowLeftGreen from "@/src/assets/icons/arrowLeftGreen.svg"
 
 
 const FirstInfo = () => {
-      const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
   const currentStep = searchParams.get('step') || 'firstinfo'
   const {goToNext} = UseStepNavigation();
   return (
-    <div className='w-[1200px] flex flex-col items-center md:gap-[36px] gap-[26px] border' dir='rtl'>
+    <div className='w-[1200px] flex flex-col items-center md:gap-[36px] gap-[26px]' dir='rtl'>
       <form className='w-full flex flex-col gap-9'>
         <div className='flex justify-between w-full' >               
               <Input
@@ -65,10 +65,10 @@ const FirstInfo = () => {
                 borderColor='border-gray-300'
                 textColor='text-gray-300'
                 labelTextColor='text-gray-300'
-                id={'tittle'}
+                id={'type'}
                 placeHolder='انتخاب کنید'
                 type='text'
-                htmlFor={'tittle'}
+                htmlFor={'type'}
                 // value={sharedMobile}
                 // onChange={(e) => setSharedMobile(e.target.value)}
               />
@@ -83,10 +83,10 @@ const FirstInfo = () => {
                 borderColor='border-gray-300'
                 textColor='text-gray-300'
                 labelTextColor='text-gray-300'
-                id={'cap'}
+                id={'price'}
                 placeHolder='وارد کنید ...'
                 type='text'
-                htmlFor={'cap'}
+                htmlFor={'price'}
                 // value={sharedEmail}
                 // onChange={(e) => setSharedEmail(e.target.value)}
               />
@@ -95,7 +95,7 @@ const FirstInfo = () => {
               <Input
                 tagBgStyle={{background :"var(--color-dark-600)"}}
                 dir='rtl'
-                labelText='نوع معامله:'
+                labelText='نوع ملک:'
                 parentWidth='w-[535px]'
                 InputHeight={'h-[60px]'}
                 labelTextSize='text-[18px]'
@@ -103,37 +103,19 @@ const FirstInfo = () => {
                 borderColor='border-gray-300'
                 textColor='text-gray-300'
                 labelTextColor='text-gray-300'
-                id={'tittle'}
+                id={'growType'}
                 placeHolder='انتخاب کنید'
                 type='text'
-                htmlFor={'tittle'}
+                htmlFor={'growType'}
                 // value={sharedMobile}
                 // onChange={(e) => setSharedMobile(e.target.value)}
               />
-              <Input
-                dir='rtl'
-                tagBgStyle={{background :"var(--color-dark-600)"}}
-                labelText='قیمت:'
-                parentWidth='w-[535px]'
-                InputHeight={'h-[60px]'}
-                labelTextSize='text-[18px]'
-                textSize='md:text-[16px] text-[12px]'
-                borderColor='border-gray-300'
-                textColor='text-gray-300'
-                labelTextColor='text-gray-300'
-                id={'cap'}
-                placeHolder='وارد کنید ...'
-                type='text'
-                htmlFor={'cap'}
-                // value={sharedEmail}
-                // onChange={(e) => setSharedEmail(e.target.value)}
-              />
         </div>
         <div className='flex justify-between w-full' >               
               <Input
                 tagBgStyle={{background :"var(--color-dark-600)"}}
                 dir='rtl'
-                labelText='توضیحات  ملک:'
+                labelText='توضیحات ملک:'
                 parentWidth='w-full'
                 InputHeight={'h-[200px]'}
                 labelTextSize='text-[18px]'
@@ -141,10 +123,10 @@ const FirstInfo = () => {
                 borderColor='border-gray-300'
                 textColor='text-gray-300'
                 labelTextColor='text-gray-300'
-                id={'tittle'}
+                id={'describe'}
                 placeHolder='انتخاب کنید'
                 type='text'
-                htmlFor={'tittle'}
+                htmlFor={'describe'}
                 // value={sharedMobile}
                 // onChange={(e) => setSharedMobile(e.target.value)}
               />

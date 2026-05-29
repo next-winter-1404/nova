@@ -44,7 +44,7 @@ const stepIcons =[
             </div>
             }
         >
-         <div className='flex flex-col w-full justify-center items-center  ' dir='rtl'>
+        <div className='flex flex-col w-full justify-center items-center  ' dir='rtl'>
             <div className='md:w-11/12 w-[340px] h-[68px] rounded-3xl flex items-center justify-center bg-dark-700'>
                 <div className='w-22/23 h-[45px] flex items-center justify-between relative'>  
                     {steps.map((step, index) => {

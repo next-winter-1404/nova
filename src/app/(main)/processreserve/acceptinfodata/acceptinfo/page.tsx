@@ -14,7 +14,6 @@ import megaphone from "@/src/assets/icons/megaphone.svg"
 import star25 from "@/src/assets/icons/Star25.svg"
 import badgepercent from "@/src/assets/icons/badgepercent.svg" 
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
-import { useEffect, useState } from 'react';
 import GetAgeCategory, { AgeCategory } from '@/src/utils/helper/ageHelper/page';
 import { getHousesDetail } from '@/src/utils/sevices/api/houses/getHousesDetail';
 import { useQuery } from '@tanstack/react-query';
@@ -27,7 +26,7 @@ const AcceptInfo = ({data , bookingId}: {data:any, bookingId : number} ) => {
   console.log("get api :", data)
     const searchParams = useSearchParams();
     const currentStep = searchParams.get('step') || 'acceptinfo'
-    const {goToNext, goToPrev} = UseStepNavigation();
+    const { goToPrev} = UseStepNavigation();
     const houseId = data.booking?.houseId
     const {data : houseDetails} =useQuery({
       queryKey : ["houseDetails", houseId],
