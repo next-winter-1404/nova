@@ -1,5 +1,5 @@
 import DashboardInformation from "@/src/components/common/dashboardInformation/dashboardInformation";
-import { getDashbordSummery } from "@/src/utils/sevices/api/admin/getDashbordSummery";
+import { getDashbordSummery } from "@/src/utils/sevices/api/admin/users/getDashbordSummery";
 import { TbPinFilled, TbHeartFilled } from "react-icons/tb";
 
 const AdminPage = async () => {

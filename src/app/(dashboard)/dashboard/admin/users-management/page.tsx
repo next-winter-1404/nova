@@ -1,15 +1,22 @@
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
-import { getAllusers } from "@/src/utils/sevices/api/admin/getAllusers/getAllusers";
+import UserManegmentActionMenu from "@/src/components/common/userManegmentActionMenu/UserManegmentActionMenu";
+import { getAllusers } from "@/src/utils/sevices/api/admin/users/getAllusers/getAllusers";
 import Image from "next/image";
 import { FaUser } from "react-icons/fa";
 import { PiImageBrokenDuotone } from "react-icons/pi";
-import { TiThMenuOutline } from "react-icons/ti";
-const items = [" پروفایل", "نام کاربر", "ایمیل", "تاریخ ورود", "آخرین آپدیت " ,"عملیات"];
+const items = [
+  " پروفایل",
+  "نام کاربر",
+  "ایمیل",
+  "تاریخ ورود",
+  "آخرین آپدیت ",
+  "عملیات",
+];
 
 const UserManegment = async () => {
   const allUser = await getAllusers();
-  console.log("allUser::::",allUser)
+  console.log("allUser::::", allUser);
   return (
     <div className="padding-section flex-col-center gap-5">
       <div className="w-full flex items-center justify-start">
@@ -23,7 +30,7 @@ const UserManegment = async () => {
         <div className="w-full flex-col-center">
           <ItemNavbar colsNumber={6} items={items} />
         </div>
-        <div className="flex text-white mt-5 items-center">
+        <div className="flex text-white-pure mt-5 items-center">
           {allUser?.data?.length > 0 ? (
             <div className="w-full flex flex-col gap-5">
               <>
@@ -34,9 +41,16 @@ const UserManegment = async () => {
                   >
                     <div className="flex-center justify-between w-full h-[50px] items-center">
                       <div className="flex-center rounded-full  mr-[140px]">
-                        { item.profile !== null ? (<Image src={item.profilePicture} alt="user profile" />) : (<PiImageBrokenDuotone />)}
+                        {item.profile !== null ? (
+                          <Image src={item.profilePicture} alt="user profile" />
+                        ) : (
+                          <PiImageBrokenDuotone />
+                        )}
                       </div>
-                      <div className="max-w-[150px] overflow-ellipsis flex-center" dir="rtl">
+                      <div
+                        className="max-w-[150px] overflow-ellipsis flex-center"
+                        dir="rtl"
+                      >
                         <span>{item.fullName || "  --"}</span>
                       </div>
                       <div className="max-w-[150px] overflow-ellipsis text-center">
@@ -48,8 +62,8 @@ const UserManegment = async () => {
                       <div className="text-center  ">
                         {item.updatedAt.split("T")[0]}
                       </div>
-                      <div className=" ml-[140px] flex-center">
-                        <TiThMenuOutline />
+                      <div className=" ml-[140px] flex-center ">
+                        <UserManegmentActionMenu />
                       </div>
                     </div>
                   </div>
