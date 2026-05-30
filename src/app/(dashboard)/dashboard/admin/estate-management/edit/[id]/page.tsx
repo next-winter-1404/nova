@@ -1,4 +1,5 @@
 import EditHouseComponent from "@/src/components/dashboard/editHouseCompoenent/EditHouseCompoenent";
+import { EditHouse } from "@/src/utils/sevices/api/admin/houses/editHouse/editHouse";
 import { getCategory } from "@/src/utils/sevices/api/category/getCategory";
 import { FC } from "react";
 
@@ -17,11 +18,12 @@ const EditPageDetail: FC<IProps> = async ({ params }) => {
   const categories = result.data || [];
   console.log("categories", categories);
   const categoriesItems = categories.map((cat) => ({
-    value: cat.id?.toString(),
+    value: cat.name,
     label: cat.name,
   }));
   return (
     <EditHouseComponent
+    editAction={EditHouse}
       transactionItem={transactionItem}
       categoriesItems={categoriesItems}
       houseId ={id}
