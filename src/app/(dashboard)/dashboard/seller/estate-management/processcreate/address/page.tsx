@@ -17,24 +17,24 @@ const Address = () => {
     <>
       <div className='w-[1200px] flex flex-col md:gap-[36px] gap-[26px]' dir='rtl'>
         <div className='flex justify-between w-full' >               
-                <Input
-                  tagBgStyle={{background :"var(--color-dark-600)"}}
-                  dir='rtl'
-                  labelText='نشانی ملک:'
-                  parentWidth='w-full'
-                  InputHeight={'h-[80px]'}
-                  labelTextSize='text-[18px]'
-                  textSize='md:text-[16px] text-[12px]'
-                  borderColor='border-gray-300'
-                  textColor='text-gray-300'
-                  labelTextColor='text-gray-300'
-                  id={'address'}
-                  placeHolder='وارد کنید'
-                  type='text'
-                  htmlFor={'address'}
-                  // value={sharedMobile}
-                  // onChange={(e) => setSharedMobile(e.target.value)}
-                />
+            <Input
+              tagBgStyle={{background :"var(--color-dark-600)"}}
+              dir='rtl'
+              labelText='نشانی ملک:'
+              parentWidth='w-full'
+              InputHeight={'h-[80px]'}
+              labelTextSize='text-[18px]'
+              textSize='md:text-[16px] text-[12px]'
+              borderColor='border-gray-300'
+              textColor='text-gray-300'
+              labelTextColor='text-gray-300'
+              id={'address'}
+              placeHolder='وارد کنید ...'
+              type='text'
+              htmlFor={'address'}
+              // value={sharedMobile}
+              // onChange={(e) => setSharedMobile(e.target.value)}
+            />
           </div>
           <div className='w-[389px] text-gray-300 text-[20px]'>
             <h2 >

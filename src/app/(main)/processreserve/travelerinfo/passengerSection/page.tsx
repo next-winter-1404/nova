@@ -81,7 +81,7 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                 />
             </div>        
         </div>
-        <div className='w-22/23 flex flex-col items-center p-2 border-b-3 border-gray-300 border-dashed'>
+        <div className='w-22/23 relative flex flex-col items-center p-2 border-b-3 border-gray-300 border-dashed'>
             {passengers.map((p,index) => (
                 <div className='flex md:gap-5 w-full flex-col justify-end items-center relative ' key={index}>
                     <h3 className='text-gray-300'>مسافر شماره {index + 1}</h3>
@@ -123,20 +123,16 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                         value={p.lastName}
                         onChange={(e) => handleChange(index, "lastName" , e.target.value)}
                     />
-                    {/* <SimpleDropdown
-                        options={SelectGender}
-                        labelText=' :جنسیت'
-                        triggerClassName='w-[250px] md:text-[16px] text-[12px] h-[50px] text-gray-300 border-gray-300'
-                        placeholder='وارد کنید'
-                        paramKey='gender'
-                        tagBg='bg-dark-700'
-                    /> */}
+                    <label className={"absolute text-[18px] -top-3 text-gray-300  bg-dark-600 right-5 h-5 p-2 flex-center whitespace-nowrap"}
+                    >
+                        جنسیت:
+                    </label>
                     <select
-                        className ='text-gray-300 w-[250px] h-[50px] md:text-[16px] text-[12px] border rounded-2xl border-gray-300'
+                        className ='text-gray-300 w-[250px] h-[50px] md:text-[16px] text-[12px] pr-3 border rounded-2xl border-gray-300'
                         value={p.gender}
                         onChange={(e) => handleChange(index, "gender", e.target.value)}
                     >
-                        <option value=""> جنسیت انتخاب کنید </option>
+                        <option value=""> انتخاب کنید </option>
                         <option value="male">مرد</option>
                         <option value="female">زن</option>
                     </select>

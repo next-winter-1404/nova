@@ -53,63 +53,58 @@ const FirstInfo = () => {
                 // onChange={(e) => setSharedEmail(e.target.value)}
               />
         </div> 
-        <div className='flex justify-between w-full' >               
-              <Input
-                tagBgStyle={{background :"var(--color-dark-600)"}}
-                dir='rtl'
-                labelText='نوع معامله:'
-                parentWidth='w-[535px]'
-                InputHeight={'h-[60px]'}
-                labelTextSize='text-[18px]'
-                textSize='md:text-[16px] text-[12px]'
-                borderColor='border-gray-300'
-                textColor='text-gray-300'
-                labelTextColor='text-gray-300'
-                id={'type'}
-                placeHolder='انتخاب کنید'
-                type='text'
-                htmlFor={'type'}
-                // value={sharedMobile}
-                // onChange={(e) => setSharedMobile(e.target.value)}
-              />
-              <Input
-                dir='rtl'
-                tagBgStyle={{background :"var(--color-dark-600)"}}
-                labelText='قیمت:'
-                parentWidth='w-[535px]'
-                InputHeight={'h-[60px]'}
-                labelTextSize='text-[18px]'
-                textSize='md:text-[16px] text-[12px]'
-                borderColor='border-gray-300'
-                textColor='text-gray-300'
-                labelTextColor='text-gray-300'
-                id={'price'}
-                placeHolder='وارد کنید ...'
-                type='text'
-                htmlFor={'price'}
-                // value={sharedEmail}
-                // onChange={(e) => setSharedEmail(e.target.value)}
-              />
+        <div className='flex relative justify-between w-full' >
+          <label className={"absolute text-[18px] -top-3 text-gray-300  bg-dark-600 right-5 h-5 p-2 flex-center whitespace-nowrap"}
+          >
+            نوع معامله :
+          </label>
+          <select
+            className ='text-gray-300 w-[535px] pr-3 h-[60px] md:text-[16px] text-[12px] border rounded-2xl border-gray-300'         
+          >
+            <option value="">انتخاب کنید</option>
+            <option value="rental">اجاره</option>
+            <option value="mortgage">رهن</option>
+            <option value="reservation">رزرو</option>
+            <option value="direct purchase">خرید مستقیم</option>
+          </select>
+          <Input
+            dir='rtl'
+            tagBgStyle={{background :"var(--color-dark-600)"}}
+            labelText='قیمت:'
+            parentWidth='w-[535px]'
+            InputHeight={'h-[60px]'}
+            labelTextSize='text-[18px]'
+            textSize='md:text-[16px] text-[12px]'
+            borderColor='border-gray-300'
+            textColor='text-gray-300'
+            labelTextColor='text-gray-300'
+            id={'price'}
+            placeHolder='وارد کنید ...'
+            type='text'
+            htmlFor={'price'}
+            // value={sharedEmail}
+            // onChange={(e) => setSharedEmail(e.target.value)}
+          />
         </div>
         <div className='flex justify-between w-full' >               
-              <Input
-                tagBgStyle={{background :"var(--color-dark-600)"}}
-                dir='rtl'
-                labelText='نوع ملک:'
-                parentWidth='w-[535px]'
-                InputHeight={'h-[60px]'}
-                labelTextSize='text-[18px]'
-                textSize='md:text-[16px] text-[12px]'
-                borderColor='border-gray-300'
-                textColor='text-gray-300'
-                labelTextColor='text-gray-300'
-                id={'growType'}
-                placeHolder='انتخاب کنید'
-                type='text'
-                htmlFor={'growType'}
-                // value={sharedMobile}
-                // onChange={(e) => setSharedMobile(e.target.value)}
-              />
+          <Input
+            tagBgStyle={{background :"var(--color-dark-600)"}}
+            dir='rtl'
+            labelText='نوع ملک:'
+            parentWidth='w-[535px]'
+            InputHeight={'h-[60px]'}
+            labelTextSize='text-[18px]'
+            textSize='md:text-[16px] text-[12px]'
+            borderColor='border-gray-300'
+            textColor='text-gray-300'
+            labelTextColor='text-gray-300'
+            id={'growType'}
+            placeHolder='وارد کنید ...'
+            type='text'
+            htmlFor={'growType'}
+            // value={sharedMobile}
+            // onChange={(e) => setSharedMobile(e.target.value)}
+          />
         </div>
         <div className='flex justify-between w-full' >               
               <Input
@@ -124,7 +119,7 @@ const FirstInfo = () => {
                 textColor='text-gray-300'
                 labelTextColor='text-gray-300'
                 id={'describe'}
-                placeHolder='انتخاب کنید'
+                placeHolder='وارد کنید ...'
                 type='text'
                 htmlFor={'describe'}
                 // value={sharedMobile}

@@ -16,80 +16,80 @@ const Facility = () => {
     <div className='w-[1200px] flex flex-col md:gap-[36px] gap-[26px]' dir='rtl'>
       <form className='w-full flex flex-col gap-9'>
         <div className='flex justify-between w-full' >               
-              <Input
-                tagBgStyle={{background :"var(--color-dark-600)"}}
-                dir='rtl'
-                labelText='تعداد اتاق:'
-                parentWidth='w-[535px]'
-                InputHeight={'h-[60px]'}
-                labelTextSize='text-[18px]'
-                textSize='md:text-[16px] text-[12px]'
-                borderColor='border-gray-300'
-                textColor='text-gray-300'
-                labelTextColor='text-gray-300'
-                id={'room'}
-                placeHolder='وارد کنید ...'
-                type='text'
-                htmlFor={'room'}
-                // value={sharedMobile}
-                // onChange={(e) => setSharedMobile(e.target.value)}
-              />
-              <Input
-                dir='rtl'
-                tagBgStyle={{background :"var(--color-dark-600)"}}
-                labelText='تعداد حمام:'
-                parentWidth='w-[535px]'
-                InputHeight={'h-[60px]'}
-                labelTextSize='text-[18px]'
-                textSize='md:text-[16px] text-[12px]'
-                borderColor='border-gray-300'
-                textColor='text-gray-300'
-                labelTextColor='text-gray-300'
-                id={'bathroom'}
-                placeHolder='وارد کنید ...'
-                type='text'
-                htmlFor={'bathroom'}
-                // value={sharedEmail}
-                // onChange={(e) => setSharedEmail(e.target.value)}
-              />
+          <Input
+            tagBgStyle={{background :"var(--color-dark-600)"}}
+            dir='rtl'
+            labelText='تعداد اتاق:'
+            parentWidth='w-[535px]'
+            InputHeight={'h-[60px]'}
+            labelTextSize='text-[18px]'
+            textSize='md:text-[16px] text-[12px]'
+            borderColor='border-gray-300'
+            textColor='text-gray-300'
+            labelTextColor='text-gray-300'
+            id={'room'}
+            placeHolder='وارد کنید ...'
+            type='text'
+            htmlFor={'room'}
+            // value={sharedMobile}
+            // onChange={(e) => setSharedMobile(e.target.value)}
+          />
+          <Input
+            dir='rtl'
+            tagBgStyle={{background :"var(--color-dark-600)"}}
+            labelText='تعداد حمام:'
+            parentWidth='w-[535px]'
+            InputHeight={'h-[60px]'}
+            labelTextSize='text-[18px]'
+            textSize='md:text-[16px] text-[12px]'
+            borderColor='border-gray-300'
+            textColor='text-gray-300'
+            labelTextColor='text-gray-300'
+            id={'bathroom'}
+            placeHolder='وارد کنید ...'
+            type='text'
+            htmlFor={'bathroom'}
+            // value={sharedEmail}
+            // onChange={(e) => setSharedEmail(e.target.value)}
+          />
         </div> 
         <div className='flex justify-between w-full' >               
-              <Input
-                tagBgStyle={{background :"var(--color-dark-600)"}}
-                dir='rtl'
-                labelText='تعداد پارکینگ:'
-                parentWidth='w-[535px]'
-                InputHeight={'h-[60px]'}
-                labelTextSize='text-[18px]'
-                textSize='md:text-[16px] text-[12px]'
-                borderColor='border-gray-300'
-                textColor='text-gray-300'
-                labelTextColor='text-gray-300'
-                id={'parking'}
-                placeHolder='وارد کنید ...'
-                type='text'
-                htmlFor={'parking'}
-                // value={sharedMobile}
-                // onChange={(e) => setSharedMobile(e.target.value)}
-              />
-              <Input
-                dir='rtl'
-                tagBgStyle={{background :"var(--color-dark-600)"}}
-                labelText='نوع حیاط:'
-                parentWidth='w-[535px]'
-                InputHeight={'h-[60px]'}
-                labelTextSize='text-[18px]'
-                textSize='md:text-[16px] text-[12px]'
-                borderColor='border-gray-300'
-                textColor='text-gray-300'
-                labelTextColor='text-gray-300'
-                id={'yard'}
-                placeHolder='وارد کنید ...'
-                type='text'
-                htmlFor={'yard'}
-                // value={sharedEmail}
-                // onChange={(e) => setSharedEmail(e.target.value)}
-              />
+          <Input
+            tagBgStyle={{background :"var(--color-dark-600)"}}
+            dir='rtl'
+            labelText='تعداد پارکینگ:'
+            parentWidth='w-[535px]'
+            InputHeight={'h-[60px]'}
+            labelTextSize='text-[18px]'
+            textSize='md:text-[16px] text-[12px]'
+            borderColor='border-gray-300'
+            textColor='text-gray-300'
+            labelTextColor='text-gray-300'
+            id={'parking'}
+            placeHolder='وارد کنید ...'
+            type='text'
+            htmlFor={'parking'}
+            // value={sharedMobile}
+            // onChange={(e) => setSharedMobile(e.target.value)}
+          />
+          <Input
+            dir='rtl'
+            tagBgStyle={{background :"var(--color-dark-600)"}}
+            labelText='نوع حیاط:'
+            parentWidth='w-[535px]'
+            InputHeight={'h-[60px]'}
+            labelTextSize='text-[18px]'
+            textSize='md:text-[16px] text-[12px]'
+            borderColor='border-gray-300'
+            textColor='text-gray-300'
+            labelTextColor='text-gray-300'
+            id={'yard'}
+            placeHolder='وارد کنید ...'
+            type='text'
+            htmlFor={'yard'}
+            // value={sharedEmail}
+            // onChange={(e) => setSharedEmail(e.target.value)}
+          />
         </div>
       </form>
       <div className='flex gap-4' dir='ltr'>            
