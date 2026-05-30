@@ -12,20 +12,20 @@ import { TbEdit, TbTrash } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import AlertComponent from "../../common/alert/alert";
+import { deleteHouses } from "@/src/utils/sevices/api/admin/houses/deleteHouses/deleteHouses";
 interface IProp {
   houseId: number;
 }
 const EstateItems: FC<IProp> = ({ houseId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
-  const [selectedHouse, setSelectedHouse] = useState<number>();
   const router = useRouter();
-  //   api callings
 
+  //   api calling
   const { data: houseDetail, isLoading } = useQuery<IHouse | null>({
-    queryKey: ["housesDetail", selectedHouse],
-    queryFn: () => getHousesDetail(Number(selectedHouse)),
-    enabled: !!selectedHouse,
+    queryKey: ["housesDetail", houseId],
+    queryFn: () => getHousesDetail(Number(houseId)),
+    enabled: !!houseId,
     staleTime: 5 * 1000 * 60,
     refetchOnWindowFocus: false,
   });
@@ -43,37 +43,34 @@ const EstateItems: FC<IProp> = ({ houseId }) => {
 //     }
 //   };
 
-//   const handleDeletePayment = async () => {
-//     try {
-//       // await deletePayment(paymentId);
-//       toast.success("پرداخت با موفقیت حذف شد ");
-//       router.refresh();
-//     } catch (error) {
-//       toast.error("خطا در حذف پرداخت ");
-//       console.error(error);
-//     }
-//   };
-  const handleDetail = () => {
-    setSelectedHouse(houseId);
-    setIsModalOpen(true);
+  const handleDeleteHouse = async () => {
+    try {
+      await deleteHouses(houseId);
+      toast.success("ملک با موفقیت حذف شد ");
+      router.refresh();
+    } catch (error) {
+      toast.error("خطا در حذف ملک ");
+      console.error(error);
+    }
   };
+ 
   // drop down items with their functions
   const menuItems = [
     {
       label: "جزییات",
       icon: <FiAlertCircle className="w-4 h-4 text-white" />,
-      onClick: () => handleDetail(),
+      onClick: () => setIsModalOpen(true),
     },
 
     {
       label: "ویرایش",
       icon: <TbEdit className="mt-px text-white" />,
-      onClick: () => handleDetail(),
+    //   onClick: () => handleDetail(),
     },
     {
       label: "حذف",
       icon: <TbTrash className="mt-px text-white" />,
-    //   onClick: () => handleDeletePayment(),
+      onClick: () => setIsAlertModalOpen(true),
     },
   ];
 
@@ -92,7 +89,7 @@ const EstateItems: FC<IProp> = ({ houseId }) => {
         side="right"
         align="end"
       />
-      {/* booking information modal (house,user,dates) */}
+      {/* house details */}
       <Modal
         contentClassName=" bg-dark-900"
         mainContent={
@@ -107,8 +104,6 @@ const EstateItems: FC<IProp> = ({ houseId }) => {
                   address={houseDetail?.address}
                   bathrooms={houseDetail?.bathrooms}
                   buttonText="قیمت"
-                  capacity={houseDetail?.capacity}
-                  caption={houseDetail?.caption}
                   discounted_price={houseDetail?.discounted_price}
                   href={`/reserve-house/${houseId}`}
                   parking={houseDetail?.parking}
@@ -126,14 +121,13 @@ const EstateItems: FC<IProp> = ({ houseId }) => {
         open={isModalOpen}
       />
 
-      {/* travelers detail modal */}
 
       <AlertComponent
         acceptButtonText="بله"
         alertText="ایا از انتخاب خود مطمعن هستید؟"
         isModalOpen={isAlertModalOpen}
         setIsModalOpen={setIsAlertModalOpen}
-        // onClickFunction={updatePayment}
+        onClickFunction={handleDeleteHouse}
       />
     </div>
   );

@@ -1,18 +1,16 @@
 "use server";
 
-import { IBooking } from "@/src/core/types/IBooking";
 import instance from "@/src/utils/sevices/interseptor";
 
-export interface IDeleteBookingResponse {
+export interface IDeleteHouseResponse {
   message: string;
 }
 
-export const deleteBooking = async (
+export const deleteHouses = async (
   id: number
-): Promise<IDeleteBookingResponse> => {
+): Promise<IDeleteHouseResponse> => {
   try {
-    const response = await instance.delete(`/api/admin/bookings/${id}`);
-
+    const response = await instance.delete(`/api/admin/houses/${id}`);
     return response.data;
   } catch (error: any) {
     throw new Error(
