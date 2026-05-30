@@ -15,8 +15,9 @@ import AlertComponent from "../../common/alert/alert";
 import { deleteHouses } from "@/src/utils/sevices/api/admin/houses/deleteHouses/deleteHouses";
 interface IProp {
   houseId: number;
+  role?: string;
 }
-const EstateItems: FC<IProp> = ({ houseId }) => {
+const EstateItems: FC<IProp> = ({ houseId,role }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const router = useRouter();
@@ -30,18 +31,6 @@ const EstateItems: FC<IProp> = ({ houseId }) => {
     refetchOnWindowFocus: false,
   });
 
-  //   edit and delete reservation function
-//   const updatePayment = async () => {
-//     try {
-//       //   await editPayment(paymentId!, updateValue);
-//       toast.success(" با موفقیت ویرایش شد ");
-//       setIsAlertModalOpen(false);
-//       router.refresh();
-//     } catch (error) {
-//       toast.error("خطا در ویرایش  ");
-//       console.error(error);
-//     }
-//   };
 
   const handleDeleteHouse = async () => {
     try {
@@ -53,7 +42,7 @@ const EstateItems: FC<IProp> = ({ houseId }) => {
       console.error(error);
     }
   };
- 
+
   // drop down items with their functions
   const menuItems = [
     {
@@ -65,7 +54,7 @@ const EstateItems: FC<IProp> = ({ houseId }) => {
     {
       label: "ویرایش",
       icon: <TbEdit className="mt-px text-white" />,
-    //   onClick: () => handleDetail(),
+      onClick: () => router.push(`/dashboard/${role}/estate-management/edit/${houseId}`),
     },
     {
       label: "حذف",
@@ -73,8 +62,6 @@ const EstateItems: FC<IProp> = ({ houseId }) => {
       onClick: () => setIsAlertModalOpen(true),
     },
   ];
-
-  const navbarItem = ["تاریخ تولد", " جنسیت", "کدملی", " نام"];
 
   return (
     <div>
@@ -120,7 +107,6 @@ const EstateItems: FC<IProp> = ({ houseId }) => {
         onOpenChange={setIsModalOpen}
         open={isModalOpen}
       />
-
 
       <AlertComponent
         acceptButtonText="بله"

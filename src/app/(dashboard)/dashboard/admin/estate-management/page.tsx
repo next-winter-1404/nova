@@ -2,14 +2,14 @@ import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import ToolTip from "@/src/components/common/tooltip";
 import EstateItems from "@/src/components/dashboard/estateItems/EstateItems";
+import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { getAllHouses } from "@/src/utils/sevices/api/admin/houses/getAllHouses/getAllHouses";
-import React from "react";
 
 const EstateManagementPage = async () => {
   const navItems = ["نام", "ادرس", "قیمت", "نوع ملک", "ظرفبت"];
   const result = await getAllHouses();
   const houses = result.data || [];
-
+const role = await getServerSideCookie("userRole")
   return (
     <DashboardContentContainer title={`لیست املاک ( ${result.totalCount})`}>
       <div className="flex flex-col gap-5">
@@ -39,7 +39,7 @@ const EstateManagementPage = async () => {
                   <span>{house.transaction_type || "--"}</span>
                   <span className="lg:-mr-8">{house.capacity || "--"}</span>
                 </div>
-                <EstateItems houseId={Number(house.id)} />
+                <EstateItems houseId={Number(house.id)} role={role}/>
               </div>
             ))
           ) : (
