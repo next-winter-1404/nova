@@ -87,12 +87,15 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       icon: <TbUsers className="w-6 h-6" />,
     },
     {
+      label: "مدیریت املاک",
+      href: `/dashboard/${role}/estate-management`,
+      icon: <TbKeyFilled className="w-5 h-5" />,
+    },
+    {
       label: "مدیریت نظرات",
       href: `/dashboard/${role}/comments-management`,
       icon: <FaCommentDots className="w-5 h-5" />,
     },
-   
-   
   ];
  
   

@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import { 
+import {
   FaCheckCircle,
   FaClock,
   FaTimesCircle,
   FaBan,
-  FaRegCheckCircle
+  FaRegCheckCircle,
 } from "react-icons/fa";
 
 export enum BookingStatus {
@@ -14,6 +14,7 @@ export enum BookingStatus {
   CANCELLED = "cancelled",
   CONFIRMED = "confirmed",
   COMPLETED = "completed",
+  FAILED = "failed",
 }
 
 interface IStatus {
@@ -21,7 +22,6 @@ interface IStatus {
 }
 
 const StatusLabel: FC<IStatus> = ({ status }) => {
-  
   const getStatusStyle = (status?: string) => {
     switch (status) {
       case BookingStatus.PENDING:
@@ -32,7 +32,8 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
         return "bg-green-500 text-black";
       case BookingStatus.ERROR:
       case BookingStatus.CANCELLED:
-        return "bg-[#FF989A] text-black";
+      case BookingStatus.FAILED:
+        return "bg-red-400 text-black";
       default:
         return "bg-gray-500 text-black";
     }
@@ -50,6 +51,7 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
       case BookingStatus.ERROR:
         return "خطا";
       case BookingStatus.CANCELLED:
+      case BookingStatus.FAILED:
         return "لغو شده";
       default:
         return status || "نامشخص";
@@ -68,6 +70,7 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
       case BookingStatus.ERROR:
         return <FaTimesCircle className="w-3 h-3 ml-1" />;
       case BookingStatus.CANCELLED:
+      case BookingStatus.FAILED:
         return <FaBan className="w-3 h-3 ml-1" />;
       default:
         return null;
