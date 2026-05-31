@@ -21,10 +21,6 @@ const Photos = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    saveToLocalStorage(houseData);
-  }, [houseData]);
-
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const newPhotos = Array.from(e.target.files);
@@ -45,24 +41,7 @@ const Photos = () => {
     setHouseData(prev => ({ ...prev, photos: updatedPhotos }));
   };
 
-  const handleNext = async() => {
-    try {
-         
-          const result = await postHouses({
-            ...houseData,
-          });
-    
-          console.log('آگهی با موفقیت ثبت شد:', result);
-          alert('آگهی شما ثبت شد!');
-          
-          setHouseData({ title: '', price: '' }); 
-    
-        } catch (err: any) {
-          console.error('خطا در ثبت آگهی:', err);
-          setErrors(err.response?.data?.message || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.');
-        } finally {
-          setLoading(false);
-        }
+  const handleNext = () => {    
     const newErrors: { [key: string]: string } = {};
 
     if (!houseData.photos || houseData.photos.length === 0) {
@@ -74,6 +53,7 @@ const Photos = () => {
       return;
     }
 
+    saveToLocalStorage(houseData);
     goToNext('photos');
   };
 
@@ -105,13 +85,17 @@ const Photos = () => {
           </div> 
           {houseData.photos && houseData.photos.length > 0 && (
         <div className="grid grid-cols-2 gap-2 mt-4">
-          {houseData.photos.map((photo: File, index: number) => (
-          <div key={index} className="relative w-[189px] h-[189px] rounded-[18px] overflow-hidden border border-gray-200 shadow-sm">           
-            <img
-              src={URL.createObjectURL(photo)}
-              alt={`preview-${index}`}
-              className="w-full h-full object-cover"
-            />            
+          {houseData.photos?.map((photo: File, index: number) => (
+  <div key={index} className="relative">
+    {photo instanceof File || photo instanceof Blob ? (
+      <img 
+        src={URL.createObjectURL(photo)} 
+        alt="Preview" 
+        className="w-24 h-24 object-cover rounded"
+      />
+    ) : (
+      <span>عکس نامعتبر</span>
+    )}            
             <button
               onClick={() => removePhoto(index)}
               className="absolute top-1 right-1 bg-black/50 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-500 transition text-xs"
@@ -123,8 +107,7 @@ const Photos = () => {
         </div>
       )}
         </div>
-      </form>
-      <div className='flex gap-4' dir='ltr'>            
+        <div className='flex gap-4' dir='ltr'>            
             <Button 
               text={"مرحله بعد"} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen' style={{marginBottom:"-2px", width:"8px"}}/>} 
               textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"136px", direction:"ltr"}}
@@ -136,6 +119,8 @@ const Photos = () => {
               onClick={() => goToPrev(currentStep)}
             /> 
       </div>
+      </form>
+      
     </div>
   )
 }

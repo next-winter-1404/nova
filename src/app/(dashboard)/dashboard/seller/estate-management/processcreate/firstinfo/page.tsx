@@ -39,24 +39,7 @@ const FirstInfo = () => {
     }
   };
 
-  const handleNext = async() => {
-    try {
-     
-      const result = await postHouses({
-        ...houseData,
-      });
-
-      console.log('آگهی با موفقیت ثبت شد:', result);
-      alert('آگهی شما ثبت شد!');
-      
-      setHouseData({ title: '', price: '' }); 
-
-    } catch (err: any) {
-      console.error('خطا در ثبت آگهی:', err);
-      setErrors(err.response?.data?.message || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.');
-    } finally {
-      setLoading(false);
-    }
+  const handleNext = () => {
     const newErrors: { [key: string]: string } = {};
 
     if (!houseData.title?.trim()) newErrors.title = 'عنوان الزامی است';
@@ -71,7 +54,7 @@ const FirstInfo = () => {
       setErrors(newErrors);
       return; 
     }
-
+    saveToLocalStorage(houseData);
     
     goToNext('firstinfo'); 
   };

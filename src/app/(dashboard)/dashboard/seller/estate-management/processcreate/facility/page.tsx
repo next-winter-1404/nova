@@ -34,24 +34,7 @@ const Facility = () => {
     }
   };
   
-    const handleNext =async () => {
-      try {
-           
-            const result = await postHouses({
-              ...houseData,
-            });
-      
-            console.log('آگهی با موفقیت ثبت شد:', result);
-            alert('آگهی شما ثبت شد!');
-            
-            setHouseData({ title: '', price: '' }); 
-      
-          } catch (err: any) {
-            console.error('خطا در ثبت آگهی:', err);
-            setErrors(err.response?.data?.message || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.');
-          } finally {
-            setLoading(false);
-          }
+    const handleNext = () => {
       const newErrors: { [key: string]: string } = {};
       if (!houseData.rooms?.trim()) newErrors.rooms = 'تعداد اتاق الزامی است';
       if (!houseData.bathrooms?.trim()) newErrors.bathrooms = 'تعداد حمام الزامی است';
@@ -60,7 +43,8 @@ const Facility = () => {
       if (Object.keys(newErrors).length > 0) {
         setErrors(newErrors);
         return; 
-      }     
+      }  
+      saveToLocalStorage(houseData);
       goToNext('facility'); 
     };
   return (

@@ -20,15 +20,17 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import toast from 'react-hot-toast'
+import { postHouses } from '@/src/utils/sevices/api/houses/postHouses'
+import { getHouses } from '@/src/utils/sevices/api/houses/getHouses'
 
 const STORAGE_KEY = 'houseFormData';
 const FinalAccept = () => {
   const searchParams = useSearchParams();
-    const currentStep = searchParams.get('step') || 'finalaccept'
-    const {goToPrev} = UseStepNavigation();
-
-    const [houseData, setHouseData] = useState<Partial<HouseFormData>>(loadFromLocalStorage());
+  const currentStep = searchParams.get('step') || 'finalaccept'
+  const {goToPrev} = UseStepNavigation();
+  const [houseData, setHouseData] = useState<Partial<HouseFormData>>(loadFromLocalStorage());
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [estateList, setEstateList] = useState<any[]>([]);
 
   // const handlePrev = () => {
   //   goToPrev('');
@@ -38,37 +40,64 @@ const FinalAccept = () => {
     setIsSubmitting(true);
 
     try {
+      const savedData = houseData;
+  
+      if (!savedData || Object.keys(savedData).length === 0) {
+        toast.error('اطلاعات آگهی یافت نشد. لطفاً مراحل را از اول پر کنید.');
+        return;
+      }
+  
       const formDataToSend = new FormData();
-      
-      Object.keys(houseData).forEach(key => {
+  
+      Object.keys(savedData).forEach(key => {
         if (key !== 'photos') {
-          formDataToSend.append(key, houseData[key] as string);
+          formDataToSend.append(key, String(savedData[key]));
         }
       });
-
-      if (houseData.photos) {
-        houseData.photos.forEach((photo: File) => {
+      if (savedData.photos && Array.isArray(savedData.photos)) {
+        savedData.photos.forEach((photo: File | Blob) => {
           formDataToSend.append('photos', photo);
         });
       }
+  
+      
+      const result = await postHouses(formDataToSend);
+      console.log("result :" ,result)
+      if (result && result.data) {
+        setHouseData({
+          title: '',
+          description : '',
+          price: '',
+          transaction_type: 'rental',
+          categories: 'apartment',
+          photos: [],
+          address: '',
+          capacity : '',
+          yard_type: 'none',
+          rooms : '',
+          bathrooms : '',
+          parking : '',
 
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
+        });;
+      }
       toast.success('آگهی شما با موفقیت ثبت شد!');
       
       clearLocalStorage();
+
+      const updatedList = await getHouses();
+        setEstateList(updatedList.houses);
       
-      setTimeout(() => {
-        window.location.href = '/dashboard/seller/estate-management';
-      }, 1500);
-
-    } catch (error) {
-
-      toast.error('خطایی رخ داد. لطفاً دوباره تلاش کنید.');
+      // setTimeout(() => {
+      //   window.location.href = '/dashboard/seller/estate-management';
+      // }, 1500);
+  
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.');
       console.error(error);
     } finally {
       setIsSubmitting(false);
     }
+  
   };
   return (
     <div className='w-[1200px] flex flex-col md:gap-[36px] gap-[26px]' dir='rtl'>
