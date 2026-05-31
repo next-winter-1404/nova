@@ -9,8 +9,7 @@ import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail"
 import { IHouse } from "@/src/core/types/IHouse";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import LoginButton from "../../login/button/LoginButton";
-import { useRouter, useSearchParams } from "next/navigation";
-import { EditHouse } from "@/src/utils/sevices/api/admin/houses/editHouse/editHouse";
+import { useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 interface IProp {
   transactionItem: IOption[];
@@ -41,18 +40,18 @@ const EditHouseComponent: FC<IProp> = ({
     const [state, formAction] = useActionState(editAction.bind(null, houseId),
     {
       success: false,
-      message: "",
+  
     }
   )
     useEffect(() => {
-      if (!state?.message) return;
+      if (!state) return;
       if (state.success) {
-        toast.success(state.message);
+        toast.success("اپدیت موفقیت امیز بود");
         queryClient.invalidateQueries({
           queryKey: ["HouseDetail", houseId],
         });
       } else {
-        toast.error(state.message);
+        toast.error("خطایی در ویرایش ملک رخ داد");
       }
     }, [state]);
   
