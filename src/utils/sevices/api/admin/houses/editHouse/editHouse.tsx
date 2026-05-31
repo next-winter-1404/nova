@@ -30,7 +30,7 @@ export async function EditHouse(
 
     return {
       success: true,
-      message: response.data.message,
+      message:"با موفقیت اپدیت شد",
     };
   } catch (error: any) {
     return {

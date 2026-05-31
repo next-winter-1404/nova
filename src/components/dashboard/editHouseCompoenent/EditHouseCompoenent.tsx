@@ -40,20 +40,22 @@ const EditHouseComponent: FC<IProp> = ({
     const [state, formAction] = useActionState(editAction.bind(null, houseId),
     {
       success: false,
-  
+      message:""
     }
   )
-    useEffect(() => {
-      if (!state) return;
-      if (state.success) {
-        toast.success("اپدیت موفقیت امیز بود");
-        queryClient.invalidateQueries({
-          queryKey: ["HouseDetail", houseId],
-        });
-      } else {
-        toast.error("خطایی در ویرایش ملک رخ داد");
-      }
-    }, [state]);
+  useEffect(() => {
+    if (!state.message) return;
+  
+    if (state.success) {
+      toast.success(state.message);
+  
+      queryClient.invalidateQueries({
+        queryKey: ["HouseDetail", houseId],
+      });
+    } else {
+      toast.error(state.message);
+    }
+  }, [state, houseId, queryClient]);
   
   const transactionType =
     searchParams.get("transaction_type") ?? houseDetail?.transaction_type ?? "";
