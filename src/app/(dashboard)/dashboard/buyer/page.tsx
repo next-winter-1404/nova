@@ -67,10 +67,12 @@ const BuyerDashboardPage = async () => {
           navigateText="مشاهده همه"
           role={role}
           title="نمودار رزرو های شما"
+          isIcon
         >
           <ReserveChart data={booking} />
         </DashboardContentContainer>
         <DashboardContentContainer
+        isIcon
           seemore
           twParentClassName=""
           href="profile"
@@ -93,6 +95,7 @@ const BuyerDashboardPage = async () => {
         </DashboardContentContainer>
       </div>
       <DashboardContentContainer
+      isIcon
         seemore
         href="reserve-management"
         navigateText="مشاهده همه"

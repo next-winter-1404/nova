@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 const MostPopulerDestinationSection = () => {
   return (
     <div className="relative padding-section">
-      <BlureLightCircle bgColor="#8CFF4552" />
+      <BlureLightCircle position="top-5" bgColor="#8CFF4552" />
       <Container>
         <div className="flex flex-col items-center gap-14">
           <div className="flex flex-col items-center gap-6">
@@ -20,7 +20,7 @@ const MostPopulerDestinationSection = () => {
             <h2 className="text-32-medium">
               اجاره ویلا در محبوب ترین مقاصد این ماه
             </h2>
-            <p className="text-[16px] text-center text-white">
+            <p className="text-16-medium text-center text-white">
               ! در اینجا می توانید محبوب ترین مقصد هارا از بین انتخاب کاربران
               مشاهده کنید و آن ها بررسی کنید
             </p>

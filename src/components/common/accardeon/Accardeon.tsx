@@ -17,7 +17,7 @@ const AccordionComponent: FC<IAccordion> = ({
   twContentClassName,
 }) => {
   return (
-    <Accordion.Root type="single" collapsible>
+    <Accordion.Root type="single" collapsible className="w-full">
       <Accordion.Item value="item-1">
         <Accordion.Header>
           <Accordion.Trigger

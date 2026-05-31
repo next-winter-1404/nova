@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { IHouse } from "@/src/core/types/IHouse";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
+// import "swiper/css";
 import "swiper/css/pagination";
 import ProductCard from "../common/productCard/ProductCard";
 import Container from "../common/Container";
@@ -86,10 +86,10 @@ const MortgageAndRentTab = ({ cardData }: MortgageAndRentTabProps) => {
                 pagination={{
                   clickable: true,
                 }}
-                className="w-full flex justify-end "
+                className="w-full flex justify-end"
               >
                 {getMortgageHouses.map((item: IHouse) => (
-                  <SwiperSlide key={item.id}>
+                  <SwiperSlide className="" key={item.id}>
                     <ProductCard
                       seeMore
                       offer="15"

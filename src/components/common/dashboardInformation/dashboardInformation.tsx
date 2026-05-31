@@ -24,7 +24,7 @@ const DashboardInformation: FC<IProp> = ({
   twContentClassName
 }) => {
   return (
-    <div className="w-[264px] h-[130px] rounded-[12px] bg-dark-600 flex-col flex gap-1">
+    <div className="lg:max-w-[364px] h-[130px]  rounded-[12px] bg-dark-600 flex-col flex gap-1">
       <div dir="rtl" className="flex-center w-full gap-3">
         <div className="w-[50px] h-[60px] bg-dark-900 rounded-b-xl flex-center">
           {icon}
@@ -34,7 +34,7 @@ const DashboardInformation: FC<IProp> = ({
           <h2>{cardText}</h2>
         </div>
       </div>
-      <div className="text-gray-500 text-center">
+      <div className="text-gray-500 text-center whitespace-nowrap overflow-hidden">
         {"-------------------------------------------"}
       </div>
 

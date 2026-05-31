@@ -1,6 +1,6 @@
 "use client";
 import React, { use, useState } from "react";
-import { TbCreditCard , TbDots } from "react-icons/tb";
+import { TbCreditCard, TbDots, TbDotsVertical } from "react-icons/tb";
 import { Modal } from "../../common/modal";
 import { IBooking } from "@/src/core/types/IBooking";
 import { useQuery } from "@tanstack/react-query";
@@ -10,7 +10,6 @@ import ProductCard from "../../common/productCard/ProductCard";
 import Button from "../../common/button/page";
 import ItemNavbar from "../../common/dashboardItemNavbar/ItemNavbar";
 import DropMenu from "../../common/dropMenu/DropMenu";
-import { FiChevronDown } from "react-icons/fi";
 import { FiAlertCircle } from "react-icons/fi";
 interface IReservationItemProps {
   item: IBooking;
@@ -48,7 +47,7 @@ const ReservationItem = ({ item }: IReservationItemProps) => {
 
     {
       label: "پرداخت",
-      icon: <TbCreditCard  className="mt-px text-white" />,
+      icon: <TbCreditCard className="mt-px text-white" />,
     },
   ];
 
@@ -56,7 +55,10 @@ const ReservationItem = ({ item }: IReservationItemProps) => {
     <>
       <DropMenu
         trigger={
-          <TbDots className="w-6 h-6 cursor-pointer text-gray-400 hover:text-primary-accent-green transition" />
+          <div>
+            <TbDots className="w-6 h-6 cursor-pointer text-gray-400 hover:text-primary-accent-green transition hidden md:block" />
+            <TbDotsVertical className="w-5 h-5 cursor-pointer text-gray-400 hover:text-primary-accent-green transition md:hidden" />
+          </div>
         }
         items={menuItems}
         side="bottom"
@@ -65,10 +67,7 @@ const ReservationItem = ({ item }: IReservationItemProps) => {
       <Modal
         open={isModalOpen}
         onOpenChange={setIsModalOpen}
-        modalBtn={
-          <div>
-          </div>
-        }
+        modalBtn={<div></div>}
         contentClassName=" bg-dark-900"
         width="w-[55%]"
         mainContent={
@@ -106,7 +105,11 @@ const ReservationItem = ({ item }: IReservationItemProps) => {
                   mainContent={
                     <div>
                       {item.traveler_details?.map((traveler) => (
-                        <div className="flex flex-col gap-5" dir="rtl" key={`${traveler.firstName} - ${traveler.nationalId}`}>
+                        <div
+                          className="flex flex-col gap-5"
+                          dir="rtl"
+                          key={`${traveler.firstName} - ${traveler.nationalId}`}
+                        >
                           <ItemNavbar
                             colsNumber={4}
                             items={navbarItem}

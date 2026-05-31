@@ -15,7 +15,8 @@ import AvatarGroup from "../common/AvatarGroup";
 const HeroSection = () => {
 
   return (
-    <div style={{ background: `url(${HeroBackground.src})`, backgroundRepeat:"no-repeat", backgroundSize:"100%" }} className="relative min-h-screen w-full bg-cover bg-center flex-center">
+    <>
+    <div style={{ background: `url(${HeroBackground.src})`, backgroundRepeat:"no-repeat", backgroundSize:"100%" }} className="relative font-vazir min-h-screen w-full bg-cover bg-center flex-center">
      <div className="w-[90%] absolute z-5 ">
         <Container>
           <div className="md:w-full flex lg:flex-row flex-col-reverse items-end lg:items-center justify-between gap-4 relative sm:top-15 -top-8">
@@ -77,9 +78,10 @@ const HeroSection = () => {
      <div className="flex sm:justify-center justify-end z-1">
       <Image src={building} alt="pic" className="w-2/3 md:w-1/2 lg:w-[440px]"/>
      </div>
-     <div className="absolute md:bottom-0 z-2 h-80 w-full bg-gradient-to-t from-[#232323] to-[#23232300]"></div>
+     <div className="absolute md:bottom-0 z-2 h-80 w-full bg-gradient-to-t from-dark-900 to-[#23232300]"></div>
     
     </div>
+    </>
 
   );
 }

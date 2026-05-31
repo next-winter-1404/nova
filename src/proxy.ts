@@ -32,6 +32,9 @@ export function proxy(request: NextRequest) {
     if (role == "seller") {
       return NextResponse.redirect(new URL("/dashboard/seller", request.url));
     }
+    if (role == "admin") {
+      return NextResponse.redirect(new URL("/dashboard/admin", request.url));
+    }
     return NextResponse.redirect(new URL("/signup", request.url));
   }
   // prevent user to access to a other role dashboard
@@ -40,6 +43,9 @@ export function proxy(request: NextRequest) {
   }
 
   if (path.startsWith("/dashboard/seller") && role !== "seller") {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+  if (path.startsWith("/dashboard/admin") && role !== "admin") {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 

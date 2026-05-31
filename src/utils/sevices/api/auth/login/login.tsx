@@ -67,7 +67,6 @@ export const Login = async (prevState: any, formData: FormData) => {
       await setServerSideCookie("userRole", userInfo.role);
       await setServerSideCookie("userName", userInfo.name);
       await setServerSideCookie("userEmail", userInfo.email);
-
       setClientCookie("accessToken", dataResponse.accessToken);
       setClientCookie("refreshToken", dataResponse.refreshToken);
       setClientCookie("userId", userInfo.id.toString());

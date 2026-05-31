@@ -12,6 +12,7 @@ interface IProp {
   children?: ReactNode;
   topSectionContent?: ReactNode;
   seemore?: boolean;
+  isIcon?: boolean;
   twTopContent?: string;
 }
 const DashboardContentContainer: FC<IProp> = ({
@@ -23,7 +24,8 @@ const DashboardContentContainer: FC<IProp> = ({
   twParentClassName,
   seemore = false,
   topSectionContent,
-  twTopContent
+  twTopContent,
+  isIcon
 }) => {
   return (
     <div
@@ -31,8 +33,11 @@ const DashboardContentContainer: FC<IProp> = ({
     >
       <div dir="rtl" className="flex justify-between  w-full p-3 ">
         <div className="flex gap-2  items-center">
+          {isIcon&&
           <TbBookmarkFilled className="w-[26px] h-[26px] text-white" />
-          <h2 className="text-[20px] text-white">{title}</h2>
+
+          }
+          <h2 className="md:text-[20px] whitespace-nowrap text-white">{title}</h2>
         </div>
         {seemore ? (
           <div >
@@ -49,7 +54,7 @@ const DashboardContentContainer: FC<IProp> = ({
         )}
       </div>
       <div className="text-gray-300 w-full h-px border border-dashed"></div>
-      <div className="w-full p-5">{children}</div>
+      <div className="w-full lg:p-5 py-5">{children}</div>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 "use server"
-import React from "react";
 import { IHousesResponse } from "@/src/core/types/IHouse";
 import instance from "../../../interseptor";
 

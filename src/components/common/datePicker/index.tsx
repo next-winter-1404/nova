@@ -17,7 +17,6 @@ const DatePickerComponent = ({paramKey,placeholder,labelText,onChange,value}:ITi
       setCalendarValue(new Date(value));
     }
   },[value])
-  console.log("this is value: ", value)
 
   const handleChange = (e:any) => {
     const selectedDate = new Date(e.value);
@@ -27,7 +26,6 @@ const DatePickerComponent = ({paramKey,placeholder,labelText,onChange,value}:ITi
     params.set(paramKey,selectedDate.toISOString())
 
     onChange?.(selectedDate.toISOString());
-    console.log("selectedDate is: ", selectedDate)
   }
 
   return (
@@ -38,7 +36,7 @@ const DatePickerComponent = ({paramKey,placeholder,labelText,onChange,value}:ITi
           aria-label="Customise options"
         >
           <BsChevronDown className="w-3 h-3" />
-          <i>{placeholder}</i>
+          <i className="text-gray-300">{placeholder}</i>
         </button>
       </DropdownMenu.Trigger>
 
