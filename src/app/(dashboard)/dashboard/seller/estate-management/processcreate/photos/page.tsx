@@ -74,7 +74,7 @@ const Photos = () => {
         <h2>با قرار دادن عکس شانس دیده شدن ملک‌تان را ۵ برابر کنید.</h2>
       </div>
       <form>
-        <div className="flex flex-wrap gap-4 justify-center"> 
+        <div className="flex items-center flex-wrap gap-4 justify-center"> 
           <div>     
             <label className="w-[189px] h-[189px] border-3 border-dashed border-primary-accent-green rounded-[18px] flex flex-col items-center justify-center gap-3 cursor-pointer hover:bg-gray-200 transition group">
               <Image src={Plus} alt='Plus'/>

@@ -24,15 +24,15 @@ import toast from 'react-hot-toast'
 const STORAGE_KEY = 'houseFormData';
 const FinalAccept = () => {
   const searchParams = useSearchParams();
-    const currentStep = searchParams.get('step') || 'photos'
+    const currentStep = searchParams.get('step') || 'finalaccept'
     const {goToPrev} = UseStepNavigation();
 
     const [houseData, setHouseData] = useState<Partial<HouseFormData>>(loadFromLocalStorage());
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handlePrev = () => {
-    goToPrev('step-3');
-  };
+  // const handlePrev = () => {
+  //   goToPrev('');
+  // };
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
@@ -72,59 +72,66 @@ const FinalAccept = () => {
   };
   return (
     <div className='w-[1200px] flex flex-col md:gap-[36px] gap-[26px]' dir='rtl'>
-      <div className='flex items-center justify-center'>
-        <div className='rounded-3xl border border-[#8888884D] flex flex-col items-center justify-center w-[1170] md:gap-[36px] gap-[26px]'>
-          <div className='w-full h-[230px] flex border'>
-            <div className='w-[465px] h-full'>({houseData.photos?.length || 0})
-            {houseData.photos && houseData.photos.length > 0 ? (
-          <div className="relative w-full h-64 rounded-lg overflow-hidden bg-gray-200">
-            <Swiper
-              modules={[Pagination]}
-              spaceBetween={10}
-              slidesPerView={1}              
-              pagination={{ clickable: true }}
-              className="w-full h-full"
-            >
-              {houseData.photos.map((photo: File, index: number) => (
-                <SwiperSlide key={index}>
-                  <img
-                    src={URL.createObjectURL(photo)}
-                    alt={`final-${index}`}
-                    className="w-full h-full object-cover"
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        ) : (
-          <Image src={imagePlaceHolder} alt='imagePlaceHolder'/>
-        )}
+        <div className='rounded-3xl h-[420px] border border-[#8888884D] flex flex-col items-center justify-center w-[1170] '>
+          <div className='flex w-[1140px] flex-col md:gap-[20px] gap-[16px]'>
+            <div className='w-full h-[230px] gap-6 flex'>
+              <div className='w-[465px] h-full'>
+                {houseData.photos && houseData.photos.length > 0 ? (
+                  <div className="relative w-full h-[226px] rounded-lg overflow-hidden bg-gray-200">
+                    <Swiper
+                      modules={[ Pagination]}
+                      spaceBetween={10}
+                      slidesPerView={1}
+                      navigation
+                      pagination={{ clickable: true }}
+                      className="w-full h-full"
+                    >
+                  {houseData.photos.map((photo: any, index: number) => {
+                    if (!photo || !(photo instanceof File)) {
+                      return null;
+                    }
 
+                  return (
+                    <SwiperSlide key={index}>
+                      <img
+                        src={URL.createObjectURL(photo)}
+                        alt={`final-${index}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper>
             </div>
-            <div className='w-[490px] h-full flex flex-col'>
-              <span className='text-[24px] text-white-pure'>{houseData.title}</span>
-              <h2 className='text-[15px] text-gray-300'>{houseData.description}</h2>
+          ) : (
+            <p className="text-gray-500 text-sm text-center py-4">تصویری آپلود نشده است.</p>
+          )}
+
+              </div>
+              <div className='w-[490px] gap-5 h-full flex flex-col'>
+                <span className='text-[26px] text-white-pure'>{houseData.title}</span>
+                <h2 className='text-[20px] text-gray-300'>{houseData.description}</h2>
+              </div>
             </div>
-          </div>
-          <div className='w-full flex border gap-5 text-gray-300 text-[20px]'>
-            <div className='w-[465px] flex flex-col gap-5'>
-              <h2 className='flex gap-4'> <Image src={Location} alt='Location'/>{houseData.address}</h2>
-              <h2 className='flex gap-4'> <Image src={Masconi} alt='Masconi'/>{houseData.categories === 'apartment' ? "اپارتمان" : houseData.categories === 'villa' ? 'ویلا' : houseData.categories === 'land' ? 'زمین' : houseData.categories === 'commercial'? 'تجاری' : "خانه"}</h2>
-              <h2 className='flex gap-4'> <Image src={Transaction} alt='Transaction'/>{houseData.transaction_type === "rental" ? "اجاره" : houseData.transaction_type === "mortgage" ? "رهن" : houseData.transaction_type === "reservation" ? "رزرو" : "خرید مستقیم"}</h2>            
-            </div>
-            <div className='w-[465px] flex flex-col gap-5'>
-              <h2 className='flex gap-4'> <Image src={Yard} alt='Yard'/>{houseData.yard_type === 'garden' ? 'حیاط' : houseData.yard_type === 'terrace' ? 'تراس' : "بدون حیاط"}</h2>           
-              <h2 className='flex gap-4'> <Image src={House} alt='House'/>
-                خوابه {houseData.rooms} ,
-                پارکینگ {houseData.parking},
-                حمامه{houseData.bathrooms} ,
-                نفر{houseData.capacity} ظرفیت 
-              </h2>
-              <h2 className='flex gap-4 text-[24px] text-primary-accent-green'> <Image src={Price} alt='Price'/> تومان {houseData.price}</h2>
+            <div className='w-full flex gap-5 text-gray-300 text-[20px]'>
+              <div className='w-[465px] flex flex-col gap-5'>
+                <h2 className='flex gap-4'> <Image src={Location} alt='Location'/>{houseData.address}</h2>
+                <h2 className='flex gap-4'> <Image src={Masconi} alt='Masconi'/>{houseData.categories === 'apartment' ? "اپارتمان" : houseData.categories === 'villa' ? 'ویلا' : houseData.categories === 'land' ? 'زمین' : houseData.categories === 'commercial'? 'تجاری' : "خانه"}</h2>
+                <h2 className='flex gap-4'> <Image src={Transaction} alt='Transaction'/>{houseData.transaction_type === "rental" ? "اجاره" : houseData.transaction_type === "mortgage" ? "رهن" : houseData.transaction_type === "reservation" ? "رزرو" : "خرید مستقیم"}</h2>            
+              </div>
+              <div className='w-[465px] flex flex-col gap-5'>
+                <h2 className='flex gap-4'> <Image src={Yard} alt='Yard'/>{houseData.yard_type === 'garden' ? 'حیاط' : houseData.yard_type === 'terrace' ? 'تراس' : "بدون حیاط"}</h2>           
+                <h2 className='flex gap-4'> <Image src={House} alt='House'/>
+                  خوابه {houseData.rooms} ,
+                  پارکینگ {houseData.parking},
+                  حمامه{houseData.bathrooms} ,
+                  نفر{houseData.capacity} ظرفیت 
+                </h2>
+                <h2 className='flex gap-4 text-[24px] text-primary-accent-green'> <Image src={Price} alt='Price'/> تومان {houseData.price}</h2>
+              </div>
             </div>
           </div>
         </div>
-      </div>      
       <div className='flex gap-4' dir='ltr'>            
             <Button 
               text={"ثبت آگهی"} icon={<Image src={AcceptIcon} alt='AcceptIcon' style={{marginBottom:"-2px", width:"18px"}}/>} 

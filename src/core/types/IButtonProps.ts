@@ -13,6 +13,7 @@ export interface IButtonProps{
     borderRadius ? : string;
     buttonStyle ? : React.CSSProperties;
     className ? : string
+    type ? : "button"|"submit"|"reset"
 }
 
 export interface ILoginButtonProp{

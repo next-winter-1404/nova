@@ -51,6 +51,7 @@ const Facility = () => {
           <div>            
             <Input
               tagBgStyle={{background :"var(--color-dark-600)"}}
+              name='rooms'
               dir='rtl'
               labelText='تعداد اتاق:'
               parentWidth={`w-[535px] ${errors.rooms ? 'border-red-500' : ''}`}
@@ -60,10 +61,10 @@ const Facility = () => {
               borderColor='border-gray-300'
               textColor='text-gray-300'
               labelTextColor='text-gray-300'
-              id={'room'}
+              id={'rooms'}
               placeHolder='وارد کنید ...'
-              type='text'
-              htmlFor={'room'}
+              type='number'
+              htmlFor={'rooms'}
               value={houseData.rooms || ''}
               onChange={handleChange}
             />
@@ -72,6 +73,7 @@ const Facility = () => {
           <div>
             <Input
               dir='rtl'
+              name='bathrooms'
               tagBgStyle={{background :"var(--color-dark-600)"}}
               labelText='تعداد حمام:'
               parentWidth={`w-[535px] ${errors.bathrooms ? 'border-red-500' : ''}`}
@@ -81,10 +83,10 @@ const Facility = () => {
               borderColor='border-gray-300'
               textColor='text-gray-300'
               labelTextColor='text-gray-300'
-              id={'bathroom'}
+              id={'bathrooms'}
               placeHolder='وارد کنید ...'
-              type='text'
-              htmlFor={'bathroom'}
+              type='number'
+              htmlFor={'bathrooms'}
               value={houseData.bathrooms || ''}
               onChange={handleChange}
               
@@ -97,6 +99,7 @@ const Facility = () => {
             <Input
               tagBgStyle={{background :"var(--color-dark-600)"}}
               dir='rtl'
+              name='parking'
               labelText='تعداد پارکینگ:'
               parentWidth={`w-[535px] ${errors.parking ? 'border-red-500' : ''}`}
               InputHeight={'h-[60px]'}
@@ -107,7 +110,7 @@ const Facility = () => {
               labelTextColor='text-gray-300'
               id={'parking'}
               placeHolder='وارد کنید ...'
-              type='text'
+              type='number'
               htmlFor={'parking'}
               value={houseData.parking || ''}
               onChange={handleChange}
@@ -117,7 +120,7 @@ const Facility = () => {
           <div>
             <label className={"absolute text-[18px] -top-3 text-gray-300  bg-dark-600 right-5 h-5 p-2 flex-center whitespace-nowrap"}
             >
-              نوع معامله :
+              نوع حیاط :
             </label>
             <select
               className ={`text-gray-300 w-[535px] pr-3 h-[60px] md:text-[16px] text-[12px] border rounded-2xl border-gray-300 ${errors.yard_type ? 'border-red-500' : ''}`}    

@@ -50,6 +50,7 @@ const Address = () => {
       <div className='w-[1200px] flex flex-col md:gap-[36px] gap-[26px]' dir='rtl'>
         <div className='flex justify-between w-full' >               
             <Input
+              name='address'
               tagBgStyle={{background :"var(--color-dark-600)"}}
               dir='rtl'
               labelText='نشانی ملک:'

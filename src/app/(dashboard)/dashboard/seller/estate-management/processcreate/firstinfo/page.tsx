@@ -8,15 +8,16 @@ import Image from 'next/image';
 import arrowLeftGreen from "@/src/assets/icons/arrowLeftGreen.svg"
 import { loadFromLocalStorage, saveToLocalStorage } from '@/src/utils/helper/storage/storage';
 import { HouseFormData } from '../validation';
+import { postHouses } from '@/src/utils/sevices/api/houses/postHouses';
 
-const STORAGE_KEY = 'houseFormData';
 
 const FirstInfo = () => {
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   // const currentStep = searchParams.get('step') || 'firstinfo'
   const {goToNext} = UseStepNavigation();
   const [houseData, setHouseData] = useState<Partial<HouseFormData>>(loadFromLocalStorage());
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     saveToLocalStorage(houseData);
@@ -25,7 +26,13 @@ const FirstInfo = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     
-    setHouseData(prev => ({ ...prev, [name]: value }));
+    let newValue = value;
+
+    if (['price', 'rooms', 'bathrooms', 'parking', 'capacity'].includes(name)) {
+      newValue = value.replace(/[^0-9.,]/g, ''); 
+    }
+
+    setHouseData(prev => ({ ...prev, [name]: newValue }));
     
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -33,6 +40,23 @@ const FirstInfo = () => {
   };
 
   const handleNext = () => {
+    try {
+     
+      const result = await postHouses({
+        ...houseData,
+      });
+
+      console.log('آگهی با موفقیت ثبت شد:', result);
+      alert('آگهی شما ثبت شد!');
+      
+      setHouseData({ title: '', price: '' }); 
+
+    } catch (err: any) {
+      console.error('خطا در ثبت آگهی:', err);
+      setErrors(err.response?.data?.message || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.');
+    } finally {
+      setLoading(false);
+    }
     const newErrors: { [key: string]: string } = {};
 
     if (!houseData.title?.trim()) newErrors.title = 'عنوان الزامی است';
@@ -58,6 +82,7 @@ const FirstInfo = () => {
         <div className='flex justify-between w-full' >   
           <div>          
             <Input
+              name='title'
               tagBgStyle={{background :"var(--color-dark-600)"}}
               dir='rtl'
               labelText='نام ملک :'
@@ -79,6 +104,7 @@ const FirstInfo = () => {
           </div>  
           <div>
             <Input
+              name='capacity'
               dir='rtl'
               tagBgStyle={{background :"var(--color-dark-600)"}}
               labelText='ظرفیت(نفر) :'
@@ -89,10 +115,10 @@ const FirstInfo = () => {
               borderColor='border-gray-300'
               textColor='text-gray-300'
               labelTextColor='text-gray-300'
-              id={'cap'}
+              id={'capacity'}
               placeHolder='وارد کنید ...'
               type='text'
-              htmlFor={'cap'}
+              htmlFor={'capacity'}
               value={houseData.capacity || ''}
               onChange={handleChange}
             />
@@ -121,6 +147,7 @@ const FirstInfo = () => {
           </div>
           <div>
             <Input
+              name='price'
               dir='rtl'
               tagBgStyle={{background :"var(--color-dark-600)"}}
               labelText='قیمت:'
@@ -133,7 +160,7 @@ const FirstInfo = () => {
               labelTextColor='text-gray-300'
               id={'price'}
               placeHolder='وارد کنید ...'
-              type='text'
+              type='number'
               htmlFor={'price'}
               value={houseData.price || ''}
               onChange={handleChange}
@@ -142,7 +169,7 @@ const FirstInfo = () => {
           </div>
         </div>
         <div className='flex justify-between w-full relative' >  
-          <div>
+          <div className='flex flex-col gap-1.5'>
             <label className={"absolute text-[18px] -top-3 text-gray-300  bg-dark-600 right-5 h-5 p-2 flex-center whitespace-nowrap"}
             >
               نوع ملک :
@@ -151,6 +178,7 @@ const FirstInfo = () => {
               className ={`text-gray-300 w-[535px] pr-3 h-[60px] md:text-[16px] text-[12px] border rounded-2xl border-gray-300 ${errors.categories ? 'border-red-500' : ''}`}       
               value={houseData.categories || ''}
               onChange={handleChange}
+              name='categories'
             >
               <option value="">انتخاب کنید</option>
               <option value="apartment">آپارتمان</option>
@@ -164,20 +192,21 @@ const FirstInfo = () => {
         </div>
         <div className='flex justify-between w-full' >               
           <Input
+            name='description'
             tagBgStyle={{background :"var(--color-dark-600)"}}
             dir='rtl'
             labelText='توضیحات ملک:'
-            parentWidth={`w-[535px] ${errors.description ? 'border-red-500' : ''}`}
+            parentWidth={`w-full ${errors.description ? 'border-red-500' : ''}`}
             InputHeight={'h-[200px]'}
             labelTextSize='text-[18px]'
             textSize='md:text-[16px] text-[12px]'
             borderColor='border-gray-300'
             textColor='text-gray-300'
             labelTextColor='text-gray-300'
-            id={'describe'}
+            id={'description'}
             placeHolder='وارد کنید ...'
             type='text'
-            htmlFor={'describe'}
+            htmlFor={'description'}
             value={houseData.description || ''}
             onChange={handleChange}
           />
@@ -185,6 +214,7 @@ const FirstInfo = () => {
         </div>
         <div className='w-full' dir='ltr'>
           <Button text={"مرحله بعد "} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"165px"}}
+            type='button'
             onClick={handleNext}
           /> 
         </div>

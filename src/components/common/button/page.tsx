@@ -30,7 +30,8 @@ const Button: FC<IButtonProps> = ({
     height,
     color,
     buttonStyle,
-    className = ""
+    className = "",
+    type
 }) => {
     const baseStyles: React.CSSProperties = {
         backgroundColor : "#FF5555",
@@ -61,6 +62,7 @@ const Button: FC<IButtonProps> = ({
         style={finalButtonStyles}
         onClick={onClick}
         disabled ={disabled}
+        type={type || 'button'}
     >
         {icon && <span>{icon}</span>} 
         {text && <span style={textStyle}>{text}</span>}
