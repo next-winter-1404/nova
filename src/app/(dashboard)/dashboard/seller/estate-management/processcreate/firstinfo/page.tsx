@@ -39,7 +39,7 @@ const FirstInfo = () => {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async() => {
     try {
      
       const result = await postHouses({
