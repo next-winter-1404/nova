@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import PaginationClient from "@/src/components/common/pagination/page";
-import SellerHouse from "@/src/components/dashboard/sellerHouse/SellerHouse";
-import { TbEye, TbBell, TbEdit } from "react-icons/tb";
+import { TbEye } from "react-icons/tb";
 import Image from "next/image";
 import userPlaceHolder from "@/src/assets/images/userPlaceHolder.jpg";
 import SimpleDropdown from "@/src/components/common/dropDown";
@@ -14,6 +13,7 @@ import { IOption } from "@/src/core/types/TDropDown";
 import { IHouse } from "@/src/core/types/IHouse";
 import { IComment, ICommentResponse } from "@/src/core/types/IComment";
 import CommentITemsManagement from "../commentItemsManagement/commentItemsManagement";
+import SellerHouse from "../sellerHouse/SellerHouse";
 interface IProp {
   orderItems: IOption[];
   sortItems: IOption[];
@@ -30,7 +30,7 @@ const DashboardCommentManagement: FC<IProp> = ({
   comments,
   res,
   modalHouse,
-  isAdmin=false,
+  isAdmin = false,
 }) => {
   return (
     <DashboardContentContainer
@@ -40,7 +40,7 @@ const DashboardCommentManagement: FC<IProp> = ({
           <Modal
             contentClassName="bg-dark-900 text-white text-right"
             modalTitle="لیست املاک شما:"
-            width="w-[60%] overflow-y-auto h-[550px]"
+            width="lg:w-[60%] overflow-y-auto h-[550px]"
             mainContent={<SellerHouse modalHouse={modalHouse} />}
             modalBtn={
               <Button
@@ -59,15 +59,15 @@ const DashboardCommentManagement: FC<IProp> = ({
             paramKey="order"
             placeholder="ترتیب نمایش"
             tagBg="bg-dark-600"
-            triggerClassName="h-[50px] w-[155px]"
+            triggerClassName="h-[50px] md:w-[155px] w-[100px] text-[13px]"
             labelText="ترتیب نمایش"
           />
           <SimpleDropdown
             options={sortItems}
             paramKey="sort"
-            placeholder="مرتب سازی بر اساس"
+            placeholder="مرتب سازی"
             tagBg="bg-dark-600"
-            triggerClassName="h-[50px] w-[155px]"
+            triggerClassName="h-[50px] md:w-[155px] w-[100px] text-[13px] "
             labelText="مرتب سازی"
           />
         </div>
@@ -84,7 +84,7 @@ const DashboardCommentManagement: FC<IProp> = ({
             {comments.length > 0 ? (
               comments.map((comment) => (
                 <div className="w-full flex justify-between" key={comment.id}>
-                  <div className=" grid grid-cols-3 w-[90%] text-white">
+                  <div className=" grid grid-cols-3 md:w-[90%]  w-full text-[13px] md:text-base text-white">
                     <div className="flex items-center gap-3   ">
                       <Image
                         src={comment.user?.profilePicture || userPlaceHolder}
@@ -98,8 +98,8 @@ const DashboardCommentManagement: FC<IProp> = ({
                           "نام کاربر"}
                       </p>
                     </div>
-                    <p className=" px-15">{comment.title || "بدون عنوان"}</p>
-                    <p className=" text-center ml-8">
+                    <p className=" md:px-15  mr-5 md:mr-0">{comment.title || "بدون عنوان"}</p>
+                    <p className="  md:ml-8   md:text-center">
                       {comment.created_at?.slice(0, 10) || "--"}
                     </p>
                   </div>

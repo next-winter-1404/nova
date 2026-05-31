@@ -1,14 +1,15 @@
 "use client";
 import React, { FC } from "react";
 import { useRouter } from "next/navigation";
-import RowProductCard from "../../common/productCard/RowProductCard";
 import { IHouse } from "@/src/core/types/IHouse";
+import RowProductCard from "../../common/productCard/RowProductCard";
 
 interface IProp {
   modalHouse: IHouse[];
 }
 
 const SellerHouse: FC<IProp> = ({ modalHouse }) => {
+
   const router = useRouter();
 
   const handleSelectHouse = (houseId: number) => {
@@ -17,6 +18,7 @@ const SellerHouse: FC<IProp> = ({ modalHouse }) => {
 
   return (
     <div>
+      
       {modalHouse.length > 0 ? (
         modalHouse.map((house) => (
           <div
@@ -24,7 +26,7 @@ const SellerHouse: FC<IProp> = ({ modalHouse }) => {
             className="hover:bg-dark-600 p-5 rounded-xl cursor-pointer"
             onClick={() => handleSelectHouse(Number(house.id))}
           >
-            <RowProductCard
+            <RowProductCard 
               address={house.address}
               price={house.price}
               discounted_price={house.discounted_price}

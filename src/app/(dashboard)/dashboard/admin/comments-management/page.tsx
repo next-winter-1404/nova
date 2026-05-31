@@ -1,10 +1,7 @@
 import DashboardCommentManagement from "@/src/components/dashboard/dashboardcommentManagement/DashboardCommentManagement";
-import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { getAllComment } from "@/src/utils/sevices/api/comments/getAllComments/getAllComments";
 import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
-import { getSellerComment } from "@/src/utils/sevices/api/seller/comments/getAllComments";
 
-import { getSellerHouses } from "@/src/utils/sevices/api/seller/houses/getHouses";
 import { FC } from "react";
 
 interface IProp {
@@ -19,8 +16,8 @@ interface IFilters {
   houseId?: string | number;
 }
 const AdminCommentManagementPage: FC<IProp> = async ({ searchParams }) => {
+  
   const limit = 5;
-  const userId = await getServerSideCookie("userId");
   const params = await searchParams;
   const order = params.order;
   const sort = params.sort;
@@ -36,10 +33,10 @@ const AdminCommentManagementPage: FC<IProp> = async ({ searchParams }) => {
 
   const res = await getAllComment( filters);
   const comments = res.comments || [];
-  const result = await getHouses();
-  const allHouses = result.houses || [];
+  const result = await getHouses()
+  const allHouses = result.houses||[]
   const items = ["نام کاربر", "عنوان نظر", "تاریخ"];
-
+// console.log("all houses-----",allHouses)
   const orderItems = [
     { value: "DESC", label: "نزولی" },
     { value: "ASC", label: "صعودی" },
