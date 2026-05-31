@@ -3,16 +3,48 @@ import Button from '@/src/components/common/button/page'
 import Input from '@/src/components/common/input/Input'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import React from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import UseStepNavigation from '../navigation'
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
 import arrowLeftGreen from "@/src/assets/icons/arrowLeftGreen.svg"
+import { loadFromLocalStorage, saveToLocalStorage } from '@/src/utils/helper/storage/storage'
+import { HouseFormData } from '../validation'
 
+const STORAGE_KEY = 'houseFormData';
 
 const Address = () => {
   const searchParams = useSearchParams();
   const currentStep = searchParams.get('step') || 'address'
   const {goToNext, goToPrev} = UseStepNavigation();
+  const [houseData, setHouseData] = useState<Partial<HouseFormData>>(loadFromLocalStorage());
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  
+    useEffect(() => {
+      saveToLocalStorage(houseData);
+    }, [houseData]);
+  
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      
+      setHouseData(prev => ({ ...prev, [name]: value }));
+      
+      if (errors[name]) {
+        setErrors(prev => ({ ...prev, [name]: '' }));
+      }
+    };
+  
+    const handleNext = () => {
+      const newErrors: { [key: string]: string } = {};
+      
+      if (!houseData.address) newErrors.address = ' ادرس الزامی است';
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        return; 
+      }
+      
+      goToNext('address'); 
+    };
+  
   return (
     <>
       <div className='w-[1200px] flex flex-col md:gap-[36px] gap-[26px]' dir='rtl'>
@@ -32,9 +64,10 @@ const Address = () => {
               placeHolder='وارد کنید ...'
               type='text'
               htmlFor={'address'}
-              // value={sharedMobile}
-              // onChange={(e) => setSharedMobile(e.target.value)}
+              value={houseData.address || ''}
+              onChange={handleChange}
             />
+            {errors.address && <span className="text-red-500 text-xs">{errors.address}</span>}
           </div>
           <div className='w-[389px] text-gray-300 text-[20px]'>
             <h2 >
@@ -51,7 +84,7 @@ const Address = () => {
             <Button 
               text={"مرحله بعد"} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen' style={{marginBottom:"-2px", width:"8px"}}/>} 
               textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"136px", direction:"ltr"}}
-              onClick={() => goToNext(currentStep)}
+              onClick={handleNext}
             /> 
             <Button
               text={"مرحله قبل"} icon={<Image src={rightArrow} alt='rightArrow' style={{marginBottom:"-2px", width:"8px"}}/>}

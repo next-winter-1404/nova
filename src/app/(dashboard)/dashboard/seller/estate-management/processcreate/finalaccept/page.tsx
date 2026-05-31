@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import Location from "@/src/assets/icons/marker 1.svg"
 import House from "@/src/assets/icons/house-building(1).svg"
 import Transaction from "@/src/assets/icons/transaction.svg"
@@ -10,34 +10,117 @@ import AcceptIcon from "@/src/assets/icons/AcceptIcon.svg"
 import Image from 'next/image'
 import Button from '@/src/components/common/button/page'
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
+import imagePlaceHolder from "@/src/assets/images/imagePlaceHolder (2).png"
 import { useSearchParams } from 'next/navigation'
 import UseStepNavigation from '../navigation'
+import { clearLocalStorage, loadFromLocalStorage } from '@/src/utils/helper/storage/storage'
+import { HouseFormData } from '../validation'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import toast from 'react-hot-toast'
 
+const STORAGE_KEY = 'houseFormData';
 const FinalAccept = () => {
   const searchParams = useSearchParams();
     const currentStep = searchParams.get('step') || 'photos'
     const {goToPrev} = UseStepNavigation();
+
+    const [houseData, setHouseData] = useState<Partial<HouseFormData>>(loadFromLocalStorage());
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handlePrev = () => {
+    goToPrev('step-3');
+  };
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+
+    try {
+      const formDataToSend = new FormData();
+      
+      Object.keys(houseData).forEach(key => {
+        if (key !== 'photos') {
+          formDataToSend.append(key, houseData[key] as string);
+        }
+      });
+
+      if (houseData.photos) {
+        houseData.photos.forEach((photo: File) => {
+          formDataToSend.append('photos', photo);
+        });
+      }
+
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      toast.success('آگهی شما با موفقیت ثبت شد!');
+      
+      clearLocalStorage();
+      
+      setTimeout(() => {
+        window.location.href = '/dashboard/seller/estate-management';
+      }, 1500);
+
+    } catch (error) {
+
+      toast.error('خطایی رخ داد. لطفاً دوباره تلاش کنید.');
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className='w-[1200px] flex flex-col md:gap-[36px] gap-[26px]' dir='rtl'>
       <div className='flex items-center justify-center'>
         <div className='rounded-3xl border border-[#8888884D] flex flex-col items-center justify-center w-[1170] md:gap-[36px] gap-[26px]'>
           <div className='w-full h-[230px] flex border'>
-            <div className='w-[465px] h-full'>image</div>
+            <div className='w-[465px] h-full'>({houseData.photos?.length || 0})
+            {houseData.photos && houseData.photos.length > 0 ? (
+          <div className="relative w-full h-64 rounded-lg overflow-hidden bg-gray-200">
+            <Swiper
+              modules={[Pagination]}
+              spaceBetween={10}
+              slidesPerView={1}              
+              pagination={{ clickable: true }}
+              className="w-full h-full"
+            >
+              {houseData.photos.map((photo: File, index: number) => (
+                <SwiperSlide key={index}>
+                  <img
+                    src={URL.createObjectURL(photo)}
+                    alt={`final-${index}`}
+                    className="w-full h-full object-cover"
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        ) : (
+          <Image src={imagePlaceHolder} alt='imagePlaceHolder'/>
+        )}
+
+            </div>
             <div className='w-[490px] h-full flex flex-col'>
-              <span className='text-[24px] text-white-pure'></span>
-              <h2 className='text-[15px] text-gray-300'></h2>
+              <span className='text-[24px] text-white-pure'>{houseData.title}</span>
+              <h2 className='text-[15px] text-gray-300'>{houseData.description}</h2>
             </div>
           </div>
           <div className='w-full flex border gap-5 text-gray-300 text-[20px]'>
             <div className='w-[465px] flex flex-col gap-5'>
-              <h2 className='flex gap-4'> <Image src={Location} alt='Location'/></h2>
-              <h2 className='flex gap-4'> <Image src={Masconi} alt='Masconi'/></h2>
-              <h2 className='flex gap-4'> <Image src={Transaction} alt='Transaction'/></h2>            
+              <h2 className='flex gap-4'> <Image src={Location} alt='Location'/>{houseData.address}</h2>
+              <h2 className='flex gap-4'> <Image src={Masconi} alt='Masconi'/>{houseData.categories === 'apartment' ? "اپارتمان" : houseData.categories === 'villa' ? 'ویلا' : houseData.categories === 'land' ? 'زمین' : houseData.categories === 'commercial'? 'تجاری' : "خانه"}</h2>
+              <h2 className='flex gap-4'> <Image src={Transaction} alt='Transaction'/>{houseData.transaction_type === "rental" ? "اجاره" : houseData.transaction_type === "mortgage" ? "رهن" : houseData.transaction_type === "reservation" ? "رزرو" : "خرید مستقیم"}</h2>            
             </div>
             <div className='w-[465px] flex flex-col gap-5'>
-              <h2 className='flex gap-4'> <Image src={Yard} alt='Yard'/></h2>           
-              <h2 className='flex gap-4'> <Image src={House} alt='House'/></h2>
-              <h2 className='flex gap-4 text-[24px] text-primary-accent-green'> <Image src={Price} alt='Price'/> تومان</h2>
+              <h2 className='flex gap-4'> <Image src={Yard} alt='Yard'/>{houseData.yard_type === 'garden' ? 'حیاط' : houseData.yard_type === 'terrace' ? 'تراس' : "بدون حیاط"}</h2>           
+              <h2 className='flex gap-4'> <Image src={House} alt='House'/>
+                خوابه {houseData.rooms} ,
+                پارکینگ {houseData.parking},
+                حمامه{houseData.bathrooms} ,
+                نفر{houseData.capacity} ظرفیت 
+              </h2>
+              <h2 className='flex gap-4 text-[24px] text-primary-accent-green'> <Image src={Price} alt='Price'/> تومان {houseData.price}</h2>
             </div>
           </div>
         </div>
@@ -46,7 +129,9 @@ const FinalAccept = () => {
             <Button 
               text={"ثبت آگهی"} icon={<Image src={AcceptIcon} alt='AcceptIcon' style={{marginBottom:"-2px", width:"18px"}}/>} 
               textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"136px", direction:"ltr"}}
-              // onClick={() => goToNext(currentStep)}
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              //  {isSubmitting ? 'در حال ثبت...' : 'ثبت آگهی'}
             /> 
             <Button
               text={"مرحله قبل"} icon={<Image src={rightArrow} alt='rightArrow' style={{marginBottom:"-2px", width:"8px"}}/>}

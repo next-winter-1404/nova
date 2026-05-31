@@ -2,36 +2,69 @@
 import Button from '@/src/components/common/button/page'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation';
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import UseStepNavigation from '../navigation';
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
 import arrowLeftGreen from "@/src/assets/icons/arrowLeftGreen.svg"
 import Plus from "@/src/assets/icons/plus.svg"
+import { loadFromLocalStorage, saveToLocalStorage } from '@/src/utils/helper/storage/storage';
+import { HouseFormData } from '../validation';
 
-interface IPhotoUpload {
-  onPhotosChange: (photos: File[]) => void;
-}
+const STORAGE_KEY = 'houseFormData';
 
-const Photos = ({ onPhotosChange }: IPhotoUpload) => {
+const Photos = () => {
   const searchParams = useSearchParams();
   const currentStep = searchParams.get('step') || 'photos'
   const {goToNext, goToPrev} = UseStepNavigation();
-  const [photos, setPhotos] = useState<File[]>([]);
+  const [houseData, setHouseData] = useState<Partial<HouseFormData>>(loadFromLocalStorage());
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
+  // ✅ ذخیره خودکار در لوکال استورج هر بار که تغییر می‌کنه
+  useEffect(() => {
+    saveToLocalStorage(houseData);
+  }, [houseData]);
+
+  // مدیریت آپلود فایل
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
+      // تبدیل فایل‌ها به آرایه و اضافه کردن به آرایه قبلی عکس‌ها
       const newPhotos = Array.from(e.target.files);
-      const updatedPhotos = [...photos, ...newPhotos];
-      setPhotos(updatedPhotos);
-      onPhotosChange(updatedPhotos);
+      
+      setHouseData(prev => ({
+        ...prev,
+        photos: [...(prev.photos || []), ...newPhotos]
+      }));
+
+      if (errors.photos) {
+        setErrors(prev => ({ ...prev, photos: '' }));
+      }
     }
   };
 
-  const handleRemovePhoto = (index: number) => {
-    const updatedPhotos = photos.filter((_, i) => i !== index);
-    setPhotos(updatedPhotos);
-    onPhotosChange(updatedPhotos);
+  // حذف یک عکس خاص
+  const removePhoto = (index: number) => {
+    const updatedPhotos = houseData.photos?.filter((_, i) => i !== index);
+    setHouseData(prev => ({ ...prev, photos: updatedPhotos }));
   };
+
+  // ✅ رفتن به مرحله بعد (نهایی)
+  const handleNext = () => {
+    const newErrors: { [key: string]: string } = {};
+
+    if (!houseData.photos || houseData.photos.length === 0) {
+      newErrors.photos = 'لطفاً حداقل یک عکس آپلود کنید';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    // داده‌ها الان توی لوکال استورج هستن (شامل مرحله ۱ و ۲)
+    // برو مرحله بعد
+    goToNext('photos'); // آیدی مرحله فعلی
+  };
+
 
   return (
     <div className='w-[1200px] flex flex-col md:gap-[36px] gap-[26px]' dir='rtl'>
@@ -40,22 +73,27 @@ const Photos = ({ onPhotosChange }: IPhotoUpload) => {
         <h2 className='text-primary-accent-green'>یک تصویر بهتر از هزار کلمه</h2>
         <h2>با قرار دادن عکس شانس دیده شدن ملک‌تان را ۵ برابر کنید.</h2>
       </div>
-      <div>
-        <div className="flex flex-wrap gap-4 justify-center">       
-        <label className="w-[189px] h-[189px] border-3 border-dashed border-primary-accent-green rounded-[18px] flex flex-col items-center justify-center gap-3 cursor-pointer hover:bg-gray-200 transition group">
-          <Image src={Plus} alt='Plus'/>
-          <span className="text-primary-accent-green text-[16px]">
-            افزودن عکس
-          </span>
-          <input
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={handleFileChange}
-            className="hidden"
-          />
-        </label>
-        {photos.map((photo, index) => (
+      <form>
+        <div className="flex flex-wrap gap-4 justify-center"> 
+          <div>     
+            <label className="w-[189px] h-[189px] border-3 border-dashed border-primary-accent-green rounded-[18px] flex flex-col items-center justify-center gap-3 cursor-pointer hover:bg-gray-200 transition group">
+              <Image src={Plus} alt='Plus'/>
+              <span className="text-primary-accent-green text-[16px]">
+                افزودن عکس
+              </span>
+              <input
+                type="file"
+                multiple
+                accept="image/*"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+            </label>
+            {errors.photos && <span className="text-red-500 text-xs block mt-2">{errors.photos}</span>}
+          </div> 
+          {houseData.photos && houseData.photos.length > 0 && (
+        <div className="grid grid-cols-2 gap-2 mt-4">
+          {houseData.photos.map((photo: File, index: number) => (
           <div key={index} className="relative w-[189px] h-[189px] rounded-[18px] overflow-hidden border border-gray-200 shadow-sm">           
             <img
               src={URL.createObjectURL(photo)}
@@ -63,7 +101,7 @@ const Photos = ({ onPhotosChange }: IPhotoUpload) => {
               className="w-full h-full object-cover"
             />            
             <button
-              onClick={() => handleRemovePhoto(index)}
+              onClick={() => removePhoto(index)}
               className="absolute top-1 right-1 bg-black/50 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-500 transition text-xs"
             >
               ✕ 
@@ -71,12 +109,14 @@ const Photos = ({ onPhotosChange }: IPhotoUpload) => {
           </div>
         ))}
         </div>
-      </div>
+      )}
+        </div>
+      </form>
       <div className='flex gap-4' dir='ltr'>            
             <Button 
               text={"مرحله بعد"} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen' style={{marginBottom:"-2px", width:"8px"}}/>} 
               textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"136px", direction:"ltr"}}
-              onClick={() => goToNext(currentStep)}
+              onClick={handleNext}
             /> 
             <Button
               text={"مرحله قبل"} icon={<Image src={rightArrow} alt='rightArrow' style={{marginBottom:"-2px", width:"8px"}}/>}
