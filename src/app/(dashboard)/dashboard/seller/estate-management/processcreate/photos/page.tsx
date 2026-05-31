@@ -9,6 +9,7 @@ import arrowLeftGreen from "@/src/assets/icons/arrowLeftGreen.svg"
 import Plus from "@/src/assets/icons/plus.svg"
 import { loadFromLocalStorage, saveToLocalStorage } from '@/src/utils/helper/storage/storage';
 import { HouseFormData } from '../validation';
+import { postHouses } from '@/src/utils/sevices/api/houses/postHouses';
 
 const STORAGE_KEY = 'houseFormData';
 
@@ -44,7 +45,7 @@ const Photos = () => {
     setHouseData(prev => ({ ...prev, photos: updatedPhotos }));
   };
 
-  const handleNext = () => {
+  const handleNext = async() => {
     try {
          
           const result = await postHouses({
