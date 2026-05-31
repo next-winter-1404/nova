@@ -155,10 +155,10 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
               <div className="w-px h-8 bg-[#9C9C9C] hidden md:block" />
               <ToolTip
                 mainContent={
-                  <div className=" relative hidden md:block">
+                  <Link href={`/dashboard/${role}/notification`} className=" relative hidden md:block">
                     <HiOutlineBell className="w-6 h-6 text-white cursor-pointer" />
                     <div className="w-[7px] h-[7px] rounded-xl bg-red-500 absolute top-0.5 right-1" />
-                  </div>
+                  </Link>
                 }
                 tooltipText="اعلان ها"
                 twClassname="z-100 bg-gray-550"

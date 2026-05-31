@@ -1,11 +1,8 @@
-import React from 'react'
+import NotificationPage from '@/src/components/dashboard/notification/notificationPage/notificationPage'
 
-const AdminNotificationPage = () => {
+const AdminNotificationPage = async({ searchParams }: { searchParams: Promise<any> }) => {
   return (
-    <div>
-      AdminNotificationPage
-AdminNotificationPage
-    </div>
+    <NotificationPage searchParams={searchParams}/>
   )
 }
 
