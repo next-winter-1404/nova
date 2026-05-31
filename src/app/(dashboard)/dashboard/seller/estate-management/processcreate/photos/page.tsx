@@ -18,16 +18,14 @@ const Photos = () => {
   const {goToNext, goToPrev} = UseStepNavigation();
   const [houseData, setHouseData] = useState<Partial<HouseFormData>>(loadFromLocalStorage());
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [loading, setLoading] = useState(false);
 
-  // ✅ ذخیره خودکار در لوکال استورج هر بار که تغییر می‌کنه
   useEffect(() => {
     saveToLocalStorage(houseData);
   }, [houseData]);
 
-  // مدیریت آپلود فایل
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      // تبدیل فایل‌ها به آرایه و اضافه کردن به آرایه قبلی عکس‌ها
       const newPhotos = Array.from(e.target.files);
       
       setHouseData(prev => ({
@@ -41,14 +39,29 @@ const Photos = () => {
     }
   };
 
-  // حذف یک عکس خاص
   const removePhoto = (index: number) => {
     const updatedPhotos = houseData.photos?.filter((_, i) => i !== index);
     setHouseData(prev => ({ ...prev, photos: updatedPhotos }));
   };
 
-  // ✅ رفتن به مرحله بعد (نهایی)
   const handleNext = () => {
+    try {
+         
+          const result = await postHouses({
+            ...houseData,
+          });
+    
+          console.log('آگهی با موفقیت ثبت شد:', result);
+          alert('آگهی شما ثبت شد!');
+          
+          setHouseData({ title: '', price: '' }); 
+    
+        } catch (err: any) {
+          console.error('خطا در ثبت آگهی:', err);
+          setErrors(err.response?.data?.message || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.');
+        } finally {
+          setLoading(false);
+        }
     const newErrors: { [key: string]: string } = {};
 
     if (!houseData.photos || houseData.photos.length === 0) {
@@ -60,9 +73,7 @@ const Photos = () => {
       return;
     }
 
-    // داده‌ها الان توی لوکال استورج هستن (شامل مرحله ۱ و ۲)
-    // برو مرحله بعد
-    goToNext('photos'); // آیدی مرحله فعلی
+    goToNext('photos');
   };
 
 

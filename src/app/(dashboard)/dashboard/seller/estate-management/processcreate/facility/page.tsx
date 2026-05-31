@@ -17,6 +17,7 @@ const Facility = () => {
   const {goToNext, goToPrev} = UseStepNavigation();
   const [houseData, setHouseData] = useState<Partial<HouseFormData>>(loadFromLocalStorage());
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [loading, setLoading] = useState(false);
   
   useEffect(() => {
     saveToLocalStorage(houseData);
@@ -33,6 +34,23 @@ const Facility = () => {
   };
   
     const handleNext = () => {
+      try {
+           
+            const result = await postHouses({
+              ...houseData,
+            });
+      
+            console.log('آگهی با موفقیت ثبت شد:', result);
+            alert('آگهی شما ثبت شد!');
+            
+            setHouseData({ title: '', price: '' }); 
+      
+          } catch (err: any) {
+            console.error('خطا در ثبت آگهی:', err);
+            setErrors(err.response?.data?.message || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.');
+          } finally {
+            setLoading(false);
+          }
       const newErrors: { [key: string]: string } = {};
       if (!houseData.rooms?.trim()) newErrors.rooms = 'تعداد اتاق الزامی است';
       if (!houseData.bathrooms?.trim()) newErrors.bathrooms = 'تعداد حمام الزامی است';
