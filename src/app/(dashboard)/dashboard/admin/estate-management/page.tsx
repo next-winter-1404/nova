@@ -3,13 +3,14 @@ import DashboardContentContainer from "@/src/components/common/dashboardcontentc
 import ToolTip from "@/src/components/common/tooltip";
 import EstateItems from "@/src/components/dashboard/estateItems/EstateItems";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import { deleteHouses } from "@/src/utils/sevices/api/admin/houses/deleteHouses/deleteHouses";
 import { getAllHouses } from "@/src/utils/sevices/api/admin/houses/getAllHouses/getAllHouses";
 
 const EstateManagementPage = async () => {
   const navItems = ["نام", "ادرس", "قیمت", "نوع ملک", "ظرفبت"];
   const result = await getAllHouses();
   const houses = result.data || [];
-const role = await getServerSideCookie("userRole")
+  const role = await getServerSideCookie("userRole");
   return (
     <DashboardContentContainer title={`لیست املاک ( ${result.totalCount})`}>
       <div className="flex flex-col gap-5">
@@ -39,7 +40,11 @@ const role = await getServerSideCookie("userRole")
                   <span>{house.transaction_type || "--"}</span>
                   <span className="lg:-mr-8">{house.capacity || "--"}</span>
                 </div>
-                <EstateItems houseId={Number(house.id)} role={role}/>
+                <EstateItems
+                  houseId={Number(house.id)}
+                  role={role}
+                  deleteFunction={deleteHouses}
+                />
               </div>
             ))
           ) : (
