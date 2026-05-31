@@ -5,10 +5,10 @@ import RowProductCard from "../../common/productCard/RowProductCard";
 import { IHouse } from "@/src/core/types/IHouse";
 
 interface IProp {
-  sellerHouses: IHouse[];
+  modalHouse: IHouse[];
 }
 
-const SellerHouse: FC<IProp> = ({ sellerHouses }) => {
+const SellerHouse: FC<IProp> = ({ modalHouse }) => {
   const router = useRouter();
 
   const handleSelectHouse = (houseId: number) => {
@@ -17,8 +17,8 @@ const SellerHouse: FC<IProp> = ({ sellerHouses }) => {
 
   return (
     <div>
-      {sellerHouses.length > 0 ? (
-        sellerHouses.map((house) => (
+      {modalHouse.length > 0 ? (
+        modalHouse.map((house) => (
           <div
             key={house.id}
             className="hover:bg-dark-600 p-5 rounded-xl cursor-pointer"
