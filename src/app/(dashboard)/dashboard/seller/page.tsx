@@ -8,7 +8,6 @@ import { getFavoriteForUser } from "@/src/utils/sevices/api/favorites/getFavorit
 import { getBookings } from "@/src/utils/sevices/api/processReserve/getbooking";
 import { getSellerHouses } from "@/src/utils/sevices/api/seller/houses/getHouses";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
-import React from "react";
 import { TbDots, TbHeartFilled, TbPinFilled } from "react-icons/tb";
 const SellerPage = async () => {
   const role = await getServerSideCookie("userRole");
