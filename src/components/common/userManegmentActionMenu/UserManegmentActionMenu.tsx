@@ -1,23 +1,44 @@
 "use client";
 import { useState } from "react";
-import { CiMenuKebab } from "react-icons/ci";
+import { GoBell } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { TiDeleteOutline } from "react-icons/ti";
 import { FaUserPlus } from "react-icons/fa";
 import DropMenu from "../dropMenu/DropMenu";
 import { Modal } from "../modal";
+import Input from "../input/Input";
+import EditFormModal from "./EditFormModal";
+import { TbDots, TbDotsVertical } from "react-icons/tb";
 
-const UserManegmentActionMenu = () => {
+interface UserId {
+  id: number;
+}
+
+const UserManegmentActionMenu = ({ id }: UserId) => {
+  const [selectedUser, setSelectedUser] = useState<IAdminUserEdit | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [formData, setFormData] = useState<IAdminUserEdit>({
+    email: "",
+    password: "",
+    fullName: "",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    emailVerified: "",
+    profilePicture: "",
+  });
 
-  const handleEdit = () => {};
+  const openEditModal = () => {
+    setIsEditModalOpen(!isEditModalOpen);
+  };
+
   const handleDelete = () => {};
   const handleRole = () => {};
   const droMItems = [
     {
       label: " ویرایش",
       icon: <MdEdit className="w-4 h-4 text-white" />,
-      onClick: () => handleEdit(),
+      onClick: () => openEditModal(),
     },
     {
       label: " حذف",
@@ -29,27 +50,32 @@ const UserManegmentActionMenu = () => {
       icon: <FaUserPlus className="w-4 h-4 text-white" />,
       onClick: () => handleRole(),
     },
+    {
+      label: "اعلان",
+      icon: <GoBell className="w-4 h-4 text-white" />,
+      onClick: () => handleRole(),
+    },
   ];
 
   return (
     <>
       <DropMenu
         trigger={
-          <div className=" flex-center text-white-pure">
-            <CiMenuKebab />
+          <div>
+            <TbDots className="w-6 h-6 cursor-pointer text-gray-400 hover:text-primary-accent-green transition hidden md:block" />
+            <TbDotsVertical className="w-5 h-5 cursor-pointer text-gray-400 hover:text-primary-accent-green transition md:hidden" />
           </div>
         }
         items={droMItems}
         align="end"
         side="right"
       />
-      <Modal
-        open={isEditModalOpen}
-        onOpenChange={setIsEditModalOpen}
-        modalBtn={<div></div>}
-        contentClassName=" bg-dark-900"
-        width="w-[55%]"
-        mainContent={<div className="flex justify-between">fdsfdsfdsf</div>}
+      <EditFormModal
+        isEditModalOpen={isEditModalOpen}
+        setIsEditModalOpen={setIsEditModalOpen}
+        formData={formData}
+        setFormData={setFormData}
+        userId={id}
       />
     </>
   );
