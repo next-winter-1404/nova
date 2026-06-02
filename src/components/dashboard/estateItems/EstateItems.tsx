@@ -16,8 +16,9 @@ import { deleteHouses } from "@/src/utils/sevices/api/admin/houses/deleteHouses/
 interface IProp {
   houseId: number;
   role?: string;
+  deleteFunction?: any;
 }
-const EstateItems: FC<IProp> = ({ houseId,role }) => {
+const EstateItems: FC<IProp> = ({ houseId,role,deleteFunction }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const router = useRouter();
@@ -34,7 +35,7 @@ const EstateItems: FC<IProp> = ({ houseId,role }) => {
 
   const handleDeleteHouse = async () => {
     try {
-      await deleteHouses(houseId);
+      await deleteFunction(houseId);
       toast.success("ملک با موفقیت حذف شد ");
       router.refresh();
     } catch (error) {

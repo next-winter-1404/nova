@@ -9,7 +9,7 @@ export async function EditHouse(
 ) {
   try {
     const response = await instance.put(
-      `/api/admin/houses/${id}`,
+      `/api/houses/${id}`,
       {
         title: String(formData.get("title")),
         address: String(formData.get("address")),
@@ -30,7 +30,7 @@ export async function EditHouse(
 
     return {
       success: true,
-      message: response.data.message,
+      message:"با موفقیت اپدیت شد",
     };
   } catch (error: any) {
     return {

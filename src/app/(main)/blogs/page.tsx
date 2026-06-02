@@ -49,7 +49,7 @@ const BlogPage = async () => {
           ))}
         </div>
         <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-6 mt-10 w-full">
-          {blogs?.slice(3, 6).map((blog) => (
+          {blogs?.slice(4, 6).map((blog) => (
             <BlogCard
               key={blog.id}
               id={blog?.id}
