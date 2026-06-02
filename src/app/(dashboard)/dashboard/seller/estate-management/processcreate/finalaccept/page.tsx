@@ -140,9 +140,9 @@ const FinalAccept = () => {
               <div className='w-[465px] flex flex-col gap-5'>
                 <h2 className='flex gap-4'> <Image src={Yard} alt='Yard'/>{houseData.yard_type === 'garden' ? 'حیاط' : houseData.yard_type === 'terrace' ? 'تراس' : "بدون حیاط"}</h2>           
                 <h2 className='flex gap-4'> <Image src={House} alt='House'/>
-                  خوابه {houseData.rooms} ,
-                  پارکینگ {houseData.parking},
-                  حمامه{houseData.bathrooms} ,
+                  {houseData.rooms} خوابه  ,
+                  {houseData.parking} پارکینگ ,
+                  {houseData.bathrooms} حمامه ,
                   نفر{houseData.capacity} ظرفیت 
                 </h2>
                 <h2 className='flex gap-4 text-[24px] text-primary-accent-green'> <Image src={Price} alt='Price'/> تومان {houseData.price}</h2>

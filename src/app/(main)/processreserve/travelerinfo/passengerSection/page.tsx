@@ -14,15 +14,9 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
     const [passengers, setPassengers ] = useState([
         { firstName: '', lastName: '', birthDate: '', nationalId : '', gender : ''}
     ]);
-    // const [birthday, setBirthday] = useState("");
 
     const [savedPassengers, setSavedPassengers] = useState<IPassengerInfo[]>([]);
     const [showModal, setShowModal] = useState(false)
-
-    // const SelectGender = [
-    //     {value : "male", label : "مرد"},
-    //     {value : "female", label : "زن"}
-    // ]
     useEffect (() => {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved){
@@ -86,101 +80,93 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                 <div className='flex md:gap-5 w-full flex-col justify-end items-center relative ' key={index}>
                     <h3 className='text-gray-300'>مسافر شماره {index + 1}</h3>
                 {/* <Button buttonStyle={{width :"16px", height:"10px", backgroundColor:"transparent", position:"absolute", left:"35px", top:"0px"}} onClick={toggleShow} icon= {isOpen ? <Image src={arrowUp} alt='arrowUp'/> : <Image src={arrowDown} alt='arrowDown'/>}/>                             */}
-                    <form className='md:w-[1410px] md:h-[60px] h-[350px] flex md:flex-row flex-col justify-between items-center'>              
-                    <Input
-                        dir='rtl'
-                        labelText='نام شما :'
-                        parentWidth='w-[250px]'
-                        InputHeight={'h-[50px]'}
-                        labelTextSize='text-[13px]'
-                        textSize='md:text-[16px] text-[12px]'
-                        borderColor='border-gray-300'
-                        textColor='text-gray-300'
-                        labelTextColor='text-gray-300'
-                        id={'firstName'}
-                        placeHolder='وارد کنید...'
-                        type='text'
-                        htmlFor={'firstName'}
-                        tagBgStyle={{background :"var(--color-dark-700)"}}
-                        value={p.firstName}
-                        onChange={(e) => handleChange(index, "firstName" , e.target.value)}
-                    />
-                    <Input
-                        dir='rtl'
-                        tagBgStyle={{background :"var(--color-dark-700)"}}
-                        labelText='نام خانوادگی :'
-                        parentWidth='w-[250px]'
-                        InputHeight={'h-[50px]'}
-                        labelTextSize='text-[13px]'
-                        textSize='md:text-[16px] text-[12px]'
-                        borderColor='border-gray-300'
-                        textColor='text-gray-300'
-                        labelTextColor='text-gray-300'
-                        id={'lastName'}
-                        placeHolder='وارد کنید ...'
-                        type='text'
-                        htmlFor={'lastName'}
-                        value={p.lastName}
-                        onChange={(e) => handleChange(index, "lastName" , e.target.value)}
-                    />
-                    <label className={"absolute text-[18px] -top-3 text-gray-300  bg-dark-600 right-5 h-5 p-2 flex-center whitespace-nowrap"}
-                    >
-                        جنسیت:
-                    </label>
-                    <select
-                        className ='text-gray-300 w-[250px] h-[50px] md:text-[16px] text-[12px] pr-3 border rounded-2xl border-gray-300'
-                        value={p.gender}
-                        onChange={(e) => handleChange(index, "gender", e.target.value)}
-                    >
-                        <option value=""> انتخاب کنید </option>
-                        <option value="male">مرد</option>
-                        <option value="female">زن</option>
-                    </select>
-                    
-                    <Input 
-                        dir='rtl'
-                        tagBgStyle={{background :"var(--color-dark-700)"}}
-                        labelText=' کد ملی:'
-                        parentWidth='w-[250px]'
-                        InputHeight={'h-[50px]'}
-                        labelTextSize='text-[13px]'
-                        textSize='md:text-[16px] text-[12px]'
-                        borderColor='border-gray-300'
-                        textColor='text-gray-300'
-                        labelTextColor='text-gray-300'
-                        id={'nationalId'}
-                        placeHolder='وارد کنید ...'
-                        type='text'
-                        htmlFor={'nationalId'}
-                        value={p.nationalId}
-                        onChange={(e) => handleChange(index, "nationalId" , e.target.value)}
-                    />
-                    {/* <div className='w-[250px]'>
-                    <DatePickerComponent
-                        paramKey="birthday"
-                        placeholder="تاریخ تولد را وارد کنید"
-                        value={p.birthDate}
-                        // onChange={(e) => setBirthday(e.target.value)}                         
+                    <form className='md:w-[1410px] relative md:h-[60px] h-[350px] flex md:flex-row flex-col justify-between items-center'>              
+                        <Input
+                            dir='rtl'
+                            labelText='نام شما :'
+                            parentWidth='w-[250px]'
+                            InputHeight={'h-[50px]'}
+                            labelTextSize='text-[13px]'
+                            textSize='md:text-[16px] text-[12px]'
+                            borderColor='border-gray-300'
+                            textColor='text-gray-300'
+                            labelTextColor='text-gray-300'
+                            id={'firstName'}
+                            placeHolder='وارد کنید...'
+                            type='text'
+                            htmlFor={'firstName'}
+                            tagBgStyle={{background :"var(--color-dark-700)"}}
+                            value={p.firstName}
+                            onChange={(e) => handleChange(index, "firstName" , e.target.value)}
                         />
-                    </div> */}
-                    <Input
-                        dir='rtl'
-                        tagBgStyle={{background :"var(--color-dark-700)"}}
-                        labelText='تاریخ  :'
-                        parentWidth='w-[250px]'
-                        InputHeight={'h-[50px]'}
-                        labelTextSize='text-[13px]'
-                        textSize='md:text-[16px] text-[12px]'
-                        borderColor='border-gray-300'
-                        textColor='text-gray-300'
-                        labelTextColor='text-gray-300'
-                        id={'birthDate'}
-                        placeHolder='وارد کنید ...'
-                        type='text'
-                        htmlFor={'birthDate'}
-                        onChange={(e) => handleChange(index, "birthDate" , e.target.value)}
-                        value={p.birthDate}
-                    />
+                        <Input
+                            dir='rtl'
+                            tagBgStyle={{background :"var(--color-dark-700)"}}
+                            labelText='نام خانوادگی :'
+                            parentWidth='w-[250px]'
+                            InputHeight={'h-[50px]'}
+                            labelTextSize='text-[13px]'
+                            textSize='md:text-[16px] text-[12px]'
+                            borderColor='border-gray-300'
+                            textColor='text-gray-300'
+                            labelTextColor='text-gray-300'
+                            id={'lastName'}
+                            placeHolder='وارد کنید ...'
+                            type='text'
+                            htmlFor={'lastName'}
+                            value={p.lastName}
+                            onChange={(e) => handleChange(index, "lastName" , e.target.value)}
+                        />
+                        <label className={"absolute text-[18px] -top-3 text-gray-300  bg-dark-600 right-5 h-5 p-2 flex-center whitespace-nowrap"}
+                        >
+                            جنسیت:
+                        </label>
+                        <select
+                            className ='text-gray-300 w-[250px] h-[50px] md:text-[16px] text-[12px] pr-3 border rounded-2xl border-gray-300'
+                            value={p.gender}
+                            onChange={(e) => handleChange(index, "gender", e.target.value)}
+                        >
+                            <option value=""> انتخاب کنید </option>
+                            <option value="male">مرد</option>
+                            <option value="female">زن</option>
+                        </select>
+                    
+                        <Input 
+                            dir='rtl'
+                            tagBgStyle={{background :"var(--color-dark-700)"}}
+                            labelText=' کد ملی:'
+                            parentWidth='w-[250px]'
+                            InputHeight={'h-[50px]'}
+                            labelTextSize='text-[13px]'
+                            textSize='md:text-[16px] text-[12px]'
+                            borderColor='border-gray-300'
+                            textColor='text-gray-300'
+                            labelTextColor='text-gray-300'
+                            id={'nationalId'}
+                            placeHolder='وارد کنید ...'
+                            type='text'
+                            htmlFor={'nationalId'}
+                            value={p.nationalId}
+                            onChange={(e) => handleChange(index, "nationalId" , e.target.value)}
+                        />
+                        <Input
+                            dir='rtl'
+                            tagBgStyle={{background :"var(--color-dark-700)"}}
+                            labelText='تاریخ  :'
+                            parentWidth='w-[250px]'
+                            InputHeight={'h-[50px]'}
+                            labelTextSize='text-[13px]'
+                            textSize='md:text-[16px] text-[12px]'
+                            borderColor='border-gray-300'
+                            textColor='text-gray-300'
+                            labelTextColor='text-gray-300'
+                            id={'birthDate'}
+                            placeHolder='وارد کنید ...'
+                            type='text'
+                            htmlFor={'birthDate'}
+                            onChange={(e) => handleChange(index, "birthDate" , e.target.value)}
+                            value={p.birthDate}
+                        />
                     </form>
                 
                 </div>
