@@ -87,7 +87,7 @@ const EstateItems: FC<IProp> = ({ houseId,role,deleteFunction }) => {
                 در حال بارگزاری....
               </div>
             ) : (
-              <div>
+              <div className="flex justify-center">
                 <ProductCard
                   address={houseDetail?.address}
                   bathrooms={houseDetail?.bathrooms}

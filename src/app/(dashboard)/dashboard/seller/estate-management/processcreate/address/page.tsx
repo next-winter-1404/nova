@@ -76,7 +76,7 @@ const Address = () => {
               value={houseData.address ?? ''}
               onChange={handleChange}
             />
-            {errors.address && <span className="text-red-500 text-xs">{errors.address}</span>}
+            {errors.address && <span className="text-red-500 text-[15px]">{errors.address}</span>}
           </div>
           <div className='w-[389px] text-gray-300 text-[20px]'>
             <h2 >

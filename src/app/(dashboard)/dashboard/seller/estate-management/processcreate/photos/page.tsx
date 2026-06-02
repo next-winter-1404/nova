@@ -91,7 +91,7 @@ const Photos = () => {
                 className="hidden"
               />
             </label>
-            {errors.photos && <span className="text-red-500 text-xs block mt-2">{errors.photos}</span>}
+            {errors.photos && <span className="text-red-500 text-[15px] block mt-2">{errors.photos}</span>}
           </div> 
           {photos.length > 0 && (
             <div className="grid grid-cols-2 gap-2">

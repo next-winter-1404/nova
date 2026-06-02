@@ -78,7 +78,7 @@ const Facility = () => {
     <div className='w-[1200px] flex flex-col md:gap-[36px] gap-[26px]' dir='rtl'>
       <div className='w-full flex flex-col gap-9' >
         <div className='flex justify-between w-full ' >  
-          <div>            
+          <div className='flex flex-col gap-1.5'>            
             <Input
               tagBgStyle={{background :"var(--color-dark-600)"}}
               name='rooms'
@@ -98,9 +98,9 @@ const Facility = () => {
               value={houseData.rooms ?? ''}
               onChange={handleChange}
             />
-            {errors.rooms && <span className="text-red-500 text-xs">{errors.rooms}</span>}
+            {errors.rooms && <span className="text-red-500 text-[15px]">{errors.rooms}</span>}
           </div> 
-          <div>
+          <div className='flex flex-col gap-1.5'>
             <Input
               dir='rtl'
               name='bathrooms'
@@ -120,11 +120,11 @@ const Facility = () => {
               value={houseData.bathrooms ?? ''}
               onChange={handleChange}
             />
-            {errors.bathrooms && <span className="text-red-500 text-xs">{errors.bathrooms}</span>}
+            {errors.bathrooms && <span className="text-red-500 text-[15px]">{errors.bathrooms}</span>}
           </div>
         </div> 
         <div className='flex justify-between w-full' >  
-          <div>        
+          <div className='flex flex-col gap-1.5'>        
             <Input
               tagBgStyle={{background :"var(--color-dark-600)"}}
               dir='rtl'
@@ -144,9 +144,9 @@ const Facility = () => {
               value={houseData.parking ?? ''}
               onChange={handleChange}
             />
-            {errors.parking && <span className="text-red-500 text-xs">{errors.parking}</span>}
+            {errors.parking && <span className="text-red-500 text-[15px]">{errors.parking}</span>}
           </div>  
-          <div className='relative'>
+          <div className='relative flex flex-col gap-1.5'>
             <label className={"absolute text-[18px] -top-3 text-gray-300  bg-dark-600 right-5 h-5 p-2 flex-center whitespace-nowrap"}
             >
               نوع حیاط :
@@ -162,7 +162,7 @@ const Facility = () => {
               <option value="terrace">تراس</option>
               <option value="none">بدون حیاط</option>
             </select>
-            {errors.yard_type && <span className="text-red-500 text-xs">{errors.yard_type}</span>}
+            {errors.yard_type && <span className="text-red-500 text-[15px]">{errors.yard_type}</span>}
           </div>
         </div>
         

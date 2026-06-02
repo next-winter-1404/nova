@@ -93,7 +93,7 @@ const FirstInfo = () => {
               value={houseData.title || ''}
               onChange={handleChange}
             />
-            {errors.title && <span className="text-red-500 text-xs">{errors.title}</span>}
+            {errors.title && <span className="text-red-500 text-[15px]">{errors.title}</span>}
           </div>  
           <div>
             <Input
@@ -115,7 +115,7 @@ const FirstInfo = () => {
               value={houseData.capacity ?? ''}
               onChange={handleChange}
             />
-            {errors.capacity && <span className="text-red-500 text-xs">{errors.capacity}</span>}
+            {errors.capacity && <span className="text-red-500 text-[15px]">{errors.capacity}</span>}
           </div>
         </div> 
         <div className='flex relative justify-between w-full' >
@@ -136,7 +136,7 @@ const FirstInfo = () => {
               <option value="reservation">رزرو</option>
               <option value="direct purchase">خرید مستقیم</option>
             </select>
-            {errors.transaction_type && <span className="text-red-500 text-xs">{errors.transaction_type}</span>}
+            {errors.transaction_type && <span className="text-red-500 text-[15px]">{errors.transaction_type}</span>}
           </div>
           <div>
             <Input
@@ -157,7 +157,7 @@ const FirstInfo = () => {
               value={houseData.price || ''}
               onChange={handleChange}
             />
-            {errors.price && <span className="text-red-500 text-xs">{errors.price}</span>}
+            {errors.price && <span className="text-red-500 text-[15px]">{errors.price}</span>}
           </div>
         </div>
         <div className='flex justify-between w-full relative' >  
@@ -179,7 +179,7 @@ const FirstInfo = () => {
               <option value="land">زمین</option>
               <option value="commercial">تجاری</option>
             </select>
-            {errors.categories && <span className="text-red-500 text-xs">{errors.categories}</span>}
+            {errors.categories && <span className="text-red-500 text-[15px]">{errors.categories}</span>}
           </div>
         </div>
         <div className='flex flex-col gap-1.5 justify-between w-full' >               
@@ -202,7 +202,7 @@ const FirstInfo = () => {
             value={houseData.caption || ''}
             onChange={handleChange}
           />
-          {errors.caption && <span className="text-red-500 text-xs">{errors.caption}</span>}
+          {errors.caption && <span className="text-red-500 text-[15px]">{errors.caption}</span>}
         </div>
         
       </form>
