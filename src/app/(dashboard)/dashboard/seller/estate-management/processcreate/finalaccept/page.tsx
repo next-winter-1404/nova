@@ -10,94 +10,90 @@ import AcceptIcon from "@/src/assets/icons/AcceptIcon.svg"
 import Image from 'next/image'
 import Button from '@/src/components/common/button/page'
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
-import imagePlaceHolder from "@/src/assets/images/imagePlaceHolder (2).png"
-import { useSearchParams } from 'next/navigation'
-import UseStepNavigation from '../navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
+import useStepNavigation from '../navigation'
 import { clearLocalStorage, loadFromLocalStorage } from '@/src/utils/helper/storage/storage'
-import { HouseFormData } from '../validation'
+import {HouseFormDraft, houseFormSchema } from '../validation'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import toast from 'react-hot-toast'
 import { postHouses } from '@/src/utils/sevices/api/houses/postHouses'
-import { getHouses } from '@/src/utils/sevices/api/houses/getHouses'
+import { useHouse } from '@/src/context/page'
+import { getClientCookie } from '@/src/utils/helper/cookies/clientCookie/clientSideCookie'
 
-const STORAGE_KEY = 'houseFormData';
 const FinalAccept = () => {
   const searchParams = useSearchParams();
   const currentStep = searchParams.get('step') || 'finalaccept'
-  const {goToPrev} = UseStepNavigation();
-  const [houseData, setHouseData] = useState<Partial<HouseFormData>>(loadFromLocalStorage());
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [estateList, setEstateList] = useState<any[]>([]);
+  const router = useRouter();
+  const {goToPrev} = useStepNavigation();
+  const [houseData] =
+  useState<Partial<HouseFormDraft>>(
+    loadFromLocalStorage()
+  );
 
-  // const handlePrev = () => {
-  //   goToPrev('');
-  // };
+  const { photos, setPhotos } = useHouse();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const sellerName = getClientCookie('userName')
 
   const handleSubmit = async () => {
-    setIsSubmitting(true);
+    const validationData = {
+      ...houseData,
+      capacity: Number(houseData.capacity),
+      rooms: Number(houseData.rooms),
+      bathrooms: Number(houseData.bathrooms),
+      parking: Number(houseData.parking),
+      photos,
+    };
 
-    try {
-      const savedData = houseData;
+    console.log(
+      "VALIDATION DATA",
+      JSON.stringify(validationData, null, 2)
+    );
   
-      if (!savedData || Object.keys(savedData).length === 0) {
-        toast.error('اطلاعات آگهی یافت نشد. لطفاً مراحل را از اول پر کنید.');
+    const validation =
+      houseFormSchema.safeParse(validationData);
+  
+      if (!validation.success) {
+        console.log(
+          JSON.stringify(
+            validation.error.format(),
+            null,
+            2
+          )
+        );
+      
         return;
       }
   
-      const formDataToSend = new FormData();
+    setIsSubmitting(true);
   
-      Object.keys(savedData).forEach(key => {
-        if (key !== 'photos') {
-          formDataToSend.append(key, String(savedData[key]));
-        }
+    try {
+      const { photos, ...payload } = validationData;
+      
+      const result = await postHouses({
+        ...payload,
+        sellerName,
       });
-      if (savedData.photos && Array.isArray(savedData.photos)) {
-        savedData.photos.forEach((photo: File | Blob) => {
-          formDataToSend.append('photos', photo);
-        });
-      }
   
-      
-      const result = await postHouses(formDataToSend);
-      console.log("result :" ,result)
-      if (result && result.data) {
-        setHouseData({
-          title: '',
-          description : '',
-          price: '',
-          transaction_type: 'rental',
-          categories: 'apartment',
-          photos: [],
-          address: '',
-          capacity : '',
-          yard_type: 'none',
-          rooms : '',
-          bathrooms : '',
-          parking : '',
-
-        });;
+      if (result) {
+        clearLocalStorage();
+        setPhotos([]);
+        toast.success("آگهی با موفقیت ثبت شد");
+        router.push("/dashboard/seller/estate-management");
       }
-      toast.success('آگهی شما با موفقیت ثبت شد!');
-      
-      clearLocalStorage();
-
-      const updatedList = await getHouses();
-        setEstateList(updatedList.houses);
-      
-      // setTimeout(() => {
-      //   window.location.href = '/dashboard/seller/estate-management';
-      // }, 1500);
-  
     } catch (error: any) {
-      toast.error(error.response?.data?.message || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.');
-      console.error(error);
+      console.log(error);
+  
+      toast.error(
+        error?.response?.data?.message ||
+        "خطایی رخ داد"
+      );
     } finally {
       setIsSubmitting(false);
     }
-  
   };
   return (
     <div className='w-[1200px] flex flex-col md:gap-[36px] gap-[26px]' dir='rtl'>
@@ -105,31 +101,24 @@ const FinalAccept = () => {
           <div className='flex w-[1140px] flex-col md:gap-[20px] gap-[16px]'>
             <div className='w-full h-[230px] gap-6 flex'>
               <div className='w-[465px] h-full'>
-                {houseData.photos && houseData.photos.length > 0 ? (
+                {photos.length > 0 ? (
                   <div className="relative w-full h-[226px] rounded-lg overflow-hidden bg-gray-200">
                     <Swiper
                       modules={[ Pagination]}
                       spaceBetween={10}
                       slidesPerView={1}
-                      navigation
                       pagination={{ clickable: true }}
                       className="w-full h-full"
                     >
-                  {houseData.photos.map((photo: any, index: number) => {
-                    if (!photo || !(photo instanceof File)) {
-                      return null;
-                    }
-
-                  return (
+                  {photos.map((photo, index) => (
                     <SwiperSlide key={index}>
                       <img
                         src={URL.createObjectURL(photo)}
-                        alt={`final-${index}`}
+                        alt={`photo-${index}`}
                         className="w-full h-full object-cover"
                       />
                     </SwiperSlide>
-                  );
-                })}
+                  ))}
               </Swiper>
             </div>
           ) : (
@@ -139,7 +128,7 @@ const FinalAccept = () => {
               </div>
               <div className='w-[490px] gap-5 h-full flex flex-col'>
                 <span className='text-[26px] text-white-pure'>{houseData.title}</span>
-                <h2 className='text-[20px] text-gray-300'>{houseData.description}</h2>
+                <h2 className='text-[20px] text-gray-300'>{houseData.caption}</h2>
               </div>
             </div>
             <div className='w-full flex gap-5 text-gray-300 text-[20px]'>
@@ -166,8 +155,9 @@ const FinalAccept = () => {
               text={"ثبت آگهی"} icon={<Image src={AcceptIcon} alt='AcceptIcon' style={{marginBottom:"-2px", width:"18px"}}/>} 
               textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"136px", direction:"ltr"}}
               onClick={handleSubmit}
-              disabled={isSubmitting}
+              // disabled={isSubmitting}
               //  {isSubmitting ? 'در حال ثبت...' : 'ثبت آگهی'}
+              type='button'
             /> 
             <Button
               text={"مرحله قبل"} icon={<Image src={rightArrow} alt='rightArrow' style={{marginBottom:"-2px", width:"8px"}}/>}

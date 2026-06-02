@@ -22,7 +22,7 @@ interface IFilters {
 }
 
 const SellerEstatesPage : FC<IProps> = async() => {
-  const role = getServerSideCookie('userRole')
+  const role = await getServerSideCookie('userRole')
   const result = await getSellerHouses();
   const house = result?.houses || []
 

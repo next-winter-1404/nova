@@ -14,7 +14,7 @@ import imagePlaceHolder from "@/src/assets/images/imagePlaceHolder (2).png"
 import Image from 'next/image'
 import Button from '@/src/components/common/button/page'
 import Input from '@/src/components/common/input/Input'
-import UseStepNavigation from '../navigation'
+import useStepNavigation from '../navigation'
 import PassengerSection from './passengerSection/page'
 import toast from 'react-hot-toast'
 import { postTravelerInfo } from '@/src/utils/sevices/api/processReserve/postTravelerInfo'
@@ -35,7 +35,7 @@ const Traveler = () => {
     const handlePassengerChange = (newPassengers) => {
       setPassengers(newPassengers)
     }
-    const {goToNext} = UseStepNavigation();
+    const {goToNext} = useStepNavigation();
     console.log("houseId: ", houseId)
     const reservedDates = [checkInDate, checkOutDate]
     const handleSubmit = async () => {

@@ -5,7 +5,6 @@ import Button from '@/src/components/common/button/page'
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
 import arrowLeftGreen from "@/src/assets/icons/arrowLeftGreen.svg"
 import { useRouter, useSearchParams } from 'next/navigation'
-import UseStepNavigation from '../navigation'
 import React from 'react'
 
 const Ticket = () => {

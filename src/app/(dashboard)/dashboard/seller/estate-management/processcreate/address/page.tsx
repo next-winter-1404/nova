@@ -3,27 +3,23 @@ import Button from '@/src/components/common/button/page'
 import Input from '@/src/components/common/input/Input'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import UseStepNavigation from '../navigation'
+import React, { ChangeEvent, useState } from 'react'
+import useStepNavigation from '../navigation'
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
 import arrowLeftGreen from "@/src/assets/icons/arrowLeftGreen.svg"
 import { loadFromLocalStorage, saveToLocalStorage } from '@/src/utils/helper/storage/storage'
-import { HouseFormData } from '../validation'
-import { postHouses } from '@/src/utils/sevices/api/houses/postHouses'
+import { HouseFormData, secondStepSchema } from '../validation'
 
-const STORAGE_KEY = 'houseFormData';
 
 const Address = () => {
   const searchParams = useSearchParams();
   const currentStep = searchParams.get('step') || 'address'
-  const {goToNext, goToPrev} = UseStepNavigation();
-  const [houseData, setHouseData] = useState<Partial<HouseFormData>>(loadFromLocalStorage());
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [loading, setLoading] = useState(false);
-  
-    useEffect(() => {
-      saveToLocalStorage(houseData);
-    }, [houseData]);
+  const {goToNext, goToPrev} = useStepNavigation();
+  const [houseData, setHouseData] =
+  useState<Partial<HouseFormData>>(
+    () => loadFromLocalStorage()
+  );
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});  
   
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
       const { name, value } = e.target;
@@ -35,22 +31,32 @@ const Address = () => {
       }
     };
   
-    const handleNext = async() => {
-      const newErrors: { [key: string]: string } = {};
-      
-      if (!houseData.address) newErrors.address = ' ادرس الزامی است';
-      if (Object.keys(newErrors).length > 0) {
-        setErrors(newErrors);
-        return; 
+    const handleNext = () => {
+      const result = secondStepSchema.safeParse(houseData);
+    
+      if (!result.success) {
+        const fieldErrors =
+          result.error.flatten().fieldErrors;
+    
+        setErrors({
+          address: fieldErrors.address?.[0] || "",
+        });
+    
+        return;
       }
-      saveToLocalStorage(houseData);
-      goToNext('address'); 
+    
+      saveToLocalStorage({
+        ...loadFromLocalStorage(),
+        ...houseData,
+      });
+    
+      goToNext("address");
     };
   
   return (
     <>
       <div className='w-[1200px] flex flex-col md:gap-[36px] gap-[26px]' dir='rtl'>
-        <div className='flex justify-between w-full' >               
+        <div className='flex flex-col gap-1.5 justify-between w-full' >               
             <Input
               name='address'
               tagBgStyle={{background :"var(--color-dark-600)"}}
@@ -67,7 +73,7 @@ const Address = () => {
               placeHolder='وارد کنید ...'
               type='text'
               htmlFor={'address'}
-              value={houseData.address || ''}
+              value={houseData.address ?? ''}
               onChange={handleChange}
             />
             {errors.address && <span className="text-red-500 text-xs">{errors.address}</span>}
@@ -88,6 +94,7 @@ const Address = () => {
               text={"مرحله بعد"} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen' style={{marginBottom:"-2px", width:"8px"}}/>} 
               textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"136px", direction:"ltr"}}
               onClick={handleNext}
+              type="button"
             /> 
             <Button
               text={"مرحله قبل"} icon={<Image src={rightArrow} alt='rightArrow' style={{marginBottom:"-2px", width:"8px"}}/>}

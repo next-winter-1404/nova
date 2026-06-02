@@ -1,62 +1,97 @@
 
-import { z } from 'zod';
+import { z } from "zod";
 
-export const transaction_type = z.enum(['rental', 'mortgage', 'reservation','direct purchase']);
-export const categories = z.enum(['apartment', 'villa', 'land', 'house', 'commercial']); 
-export const yard_type = z.enum(['garden', 'terrace', 'none']);
+export const transaction_type = z.enum([
+    "rental",
+    "mortgage",
+    "reservation",
+    "direct purchase",
+]);
 
+export const categories = z.enum([
+    "apartment",
+    "villa",
+    "land",
+    "house",
+    "commercial",
+]);
+
+export const yard_type = z.enum([
+    "garden",
+    "terrace",
+    "none",
+]);
 
 export const houseFormSchema = z.object({
     title: z.string()
-        .min(5, 'نام ملک باید حداقل ۵ کاراکتر باشد')
-        .max(100, 'نام خیلی طولانی است'),
+        .min(5, "نام ملک باید حداقل 5 کاراکتر باشد")
+        .max(100),
 
     price: z.string()
-        .min(1, 'قیمت الزامی است')
-        .refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
-        message: 'قیمت باید یک عدد مثبت باشد',
-    }),
+        .min(1)
+        .refine(
+        val => !isNaN(Number(val)) && Number(val) > 0,
+        { message: "قیمت باید عدد مثبت باشد" }
+        ),
 
-    transaction_type: transaction_type, 
+    transaction_type,
+    categories,
 
-    categories: categories, 
+    capacity: z.coerce.number()
+        .min(1, "ظرفیت الزامی است"),
 
+    rooms: z.coerce.number()
+        .min(0),
 
-    capacity: z.string()
-        .refine((val) => !val || !isNaN(Number(val)), {
-        message: 'ظرفیت باید عدد باشد',
-        }),
+    bathrooms: z.coerce.number()
+        .min(0),
 
-    rooms: z.string()
-        .min(1, 'تعداد اتاق الزامی است')
-        .refine((val) => !isNaN(Number(val)) && Number(val) >= 0, {
-        message: 'تعداد اتاق باید عدد باشد',
-        }),
+    parking: z.coerce.number()
+        .min(0),
 
-    bathrooms: z.string()
-        .min(1, 'تعداد حمام الزامی است')
-        .refine((val) => !isNaN(Number(val)) && Number(val) >= 0, {
-        message: 'تعداد حمام باید عدد باشد',
-        }),
+    yard_type,
 
-    parking: z.string()
-        .min(1, 'تعداد پارکینگ الزامی است')
-        .refine((val) => !isNaN(Number(val)) && Number(val) >= 0, {
-        message: 'تعداد پارکینگ باید عدد باشد',
-        }),
-
-    yard_type: yard_type,
-
-    description: z.string()
-        .min(10, 'توضیحات باید حداقل ۱۰ کاراکتر باشد')
-        .max(2000, 'توضیحات خیلی طولانی است'),
+    caption: z.string()
+        .min(10, "توضیحات باید حداقل 10 کاراکتر باشد"),
 
     address: z.string()
-        .min(5, 'آدرس باید حداقل ۵ کاراکتر باشد'),
+        .min(5, "ادرس باید حداقل 5 کاراکتر باشد"),
 
     photos: z.array(z.instanceof(File))
-        .min(1, 'لطفاً حداقل یک عکس انتخاب کنید')
-        .max(10, 'حداکثر می‌توانید ۱۰ عکس آپلود کنید'),
+        .min(1, "لطفاً حداقل یک عکس انتخاب کنید")
+        .max(10, "حداکثر می‌توانید 10 عکس آپلود کنید"),
 });
 
-export type HouseFormData = z.infer<typeof houseFormSchema>;
+export const firstStepSchema =
+    houseFormSchema.pick({
+        title: true,
+        price: true,
+        transaction_type: true,
+        categories: true,
+        capacity: true,
+        caption: true,
+    });
+
+export const secondStepSchema =
+houseFormSchema.pick({
+    address: true,
+    });
+
+export const thirdStepSchema =
+houseFormSchema.pick({
+    rooms: true,
+    bathrooms: true,
+    parking: true,
+    yard_type: true,
+})
+
+export const forthStepSchema =
+    houseFormSchema.pick({
+        photos: true,
+    });
+
+export type HouseFormData =
+z.infer<typeof houseFormSchema>;
+  
+export type HouseFormDraft =
+Partial<HouseFormData>;

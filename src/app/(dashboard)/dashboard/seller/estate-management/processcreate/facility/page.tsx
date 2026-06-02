@@ -3,54 +3,81 @@ import Button from '@/src/components/common/button/page'
 import Input from '@/src/components/common/input/Input'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import UseStepNavigation from '../navigation'
+import React, { ChangeEvent, useState } from 'react'
+import useStepNavigation from '../navigation'
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
 import arrowLeftGreen from "@/src/assets/icons/arrowLeftGreen.svg"
 import { loadFromLocalStorage, saveToLocalStorage } from '@/src/utils/helper/storage/storage'
-import { HouseFormData } from '../validation'
-import { postHouses } from '@/src/utils/sevices/api/houses/postHouses'
+import { HouseFormDraft, thirdStepSchema } from '../validation'
 
-const STORAGE_KEY = 'houseFormData';
 const Facility = () => {
   const searchParams = useSearchParams();
   const currentStep = searchParams.get('step') || 'facility'
-  const {goToNext, goToPrev} = UseStepNavigation();
-  const [houseData, setHouseData] = useState<Partial<HouseFormData>>(loadFromLocalStorage());
+  const {goToNext, goToPrev} = useStepNavigation();
+  const [houseData, setHouseData] =
+  useState<HouseFormDraft>(
+    () => loadFromLocalStorage()
+  );
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [loading, setLoading] = useState(false);
-  
-  useEffect(() => {
-    saveToLocalStorage(houseData);
-  }, [houseData]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: ChangeEvent<
+      HTMLInputElement |
+      HTMLSelectElement |
+      HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = e.target;
-    
-    setHouseData(prev => ({ ...prev, [name]: value }));
-    
+  
+    const numericFields = [
+      "rooms",
+      "bathrooms",
+      "parking",
+    ];
+  
+    setHouseData(prev => ({
+      ...prev,
+      [name]: numericFields.includes(name)
+        ? Number(value)
+        : value,
+    }));
+  
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors(prev => ({
+        ...prev,
+        [name]: "",
+      }));
     }
   };
   
-    const handleNext = () => {
-      const newErrors: { [key: string]: string } = {};
-      if (!houseData.rooms?.trim()) newErrors.rooms = 'تعداد اتاق الزامی است';
-      if (!houseData.bathrooms?.trim()) newErrors.bathrooms = 'تعداد حمام الزامی است';
-      if (!houseData.parking?.trim()) newErrors.parking = 'تعداد پارکینگ الزامی است';
-      if (!houseData.yard_type) newErrors.yardType = 'نوع حیاط را انتخاب کنید';
-      if (Object.keys(newErrors).length > 0) {
-        setErrors(newErrors);
-        return; 
-      }  
-      saveToLocalStorage(houseData);
-      goToNext('facility'); 
-    };
+  const handleNext = () => {
+    const result = thirdStepSchema.safeParse(houseData);
+  
+    if (!result.success) {
+      const fieldErrors =
+        result.error.flatten().fieldErrors;
+  
+      setErrors({
+        rooms: fieldErrors.rooms?.[0] || "",
+        bathrooms: fieldErrors.bathrooms?.[0] || "",
+        parking: fieldErrors.parking?.[0] || "",
+        yard_type: fieldErrors.yard_type?.[0] || "",
+      });
+  
+      return;
+    }
+  
+    saveToLocalStorage({
+      ...loadFromLocalStorage(),
+      ...houseData,
+    });
+  
+    goToNext("facility");
+  };
   return (
     <div className='w-[1200px] flex flex-col md:gap-[36px] gap-[26px]' dir='rtl'>
-      <form className='w-full flex flex-col gap-9'>
-        <div className='flex justify-between w-full' >  
+      <div className='w-full flex flex-col gap-9' >
+        <div className='flex justify-between w-full ' >  
           <div>            
             <Input
               tagBgStyle={{background :"var(--color-dark-600)"}}
@@ -68,7 +95,7 @@ const Facility = () => {
               placeHolder='وارد کنید ...'
               type='number'
               htmlFor={'rooms'}
-              value={houseData.rooms || ''}
+              value={houseData.rooms ?? ''}
               onChange={handleChange}
             />
             {errors.rooms && <span className="text-red-500 text-xs">{errors.rooms}</span>}
@@ -90,9 +117,8 @@ const Facility = () => {
               placeHolder='وارد کنید ...'
               type='number'
               htmlFor={'bathrooms'}
-              value={houseData.bathrooms || ''}
+              value={houseData.bathrooms ?? ''}
               onChange={handleChange}
-              
             />
             {errors.bathrooms && <span className="text-red-500 text-xs">{errors.bathrooms}</span>}
           </div>
@@ -115,12 +141,12 @@ const Facility = () => {
               placeHolder='وارد کنید ...'
               type='number'
               htmlFor={'parking'}
-              value={houseData.parking || ''}
+              value={houseData.parking ?? ''}
               onChange={handleChange}
             />
             {errors.parking && <span className="text-red-500 text-xs">{errors.parking}</span>}
           </div>  
-          <div>
+          <div className='relative'>
             <label className={"absolute text-[18px] -top-3 text-gray-300  bg-dark-600 right-5 h-5 p-2 flex-center whitespace-nowrap"}
             >
               نوع حیاط :
@@ -131,7 +157,7 @@ const Facility = () => {
               onChange={handleChange}
               name='yard_type'
             >
-              <option value="">انتخاب کنید</option>
+              <option value="" disabled>انتخاب کنید</option>
               <option value="garden">حیاط</option>
               <option value="terrace">تراس</option>
               <option value="none">بدون حیاط</option>
@@ -139,12 +165,14 @@ const Facility = () => {
             {errors.yard_type && <span className="text-red-500 text-xs">{errors.yard_type}</span>}
           </div>
         </div>
-      </form>
+        
+      </div>
       <div className='flex gap-4' dir='ltr'>            
             <Button 
               text={"مرحله بعد"} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen' style={{marginBottom:"-2px", width:"8px"}}/>} 
               textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"136px", direction:"ltr"}}
               onClick={handleNext}
+              type='button'
             /> 
             <Button
               text={"مرحله قبل"} icon={<Image src={rightArrow} alt='rightArrow' style={{marginBottom:"-2px", width:"8px"}}/>}

@@ -1,67 +1,77 @@
 'use client'
 import Button from '@/src/components/common/button/page'
 import Input from '@/src/components/common/input/Input'
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import UseStepNavigation from '../navigation';
-import { useSearchParams } from 'next/navigation';
+import React, { ChangeEvent, useState } from 'react'
+import useStepNavigation from '../navigation';
 import Image from 'next/image';
 import arrowLeftGreen from "@/src/assets/icons/arrowLeftGreen.svg"
 import { loadFromLocalStorage, saveToLocalStorage } from '@/src/utils/helper/storage/storage';
-import { HouseFormData } from '../validation';
-import { postHouses } from '@/src/utils/sevices/api/houses/postHouses';
+import {HouseFormDraft, houseFormSchema } from '../validation';
 
 
 const FirstInfo = () => {
-  // const searchParams = useSearchParams();
-  // const currentStep = searchParams.get('step') || 'firstinfo'
-  const {goToNext} = UseStepNavigation();
-  const [houseData, setHouseData] = useState<Partial<HouseFormData>>(loadFromLocalStorage());
+  const {goToNext} = useStepNavigation();
+  const [houseData, setHouseData] =
+  useState<HouseFormDraft>(
+    () => loadFromLocalStorage()
+  );
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    saveToLocalStorage(houseData);
-  }, [houseData]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    
-    let newValue = value;
 
-    if (['price', 'rooms', 'bathrooms', 'parking', 'capacity'].includes(name)) {
-      newValue = value.replace(/[^0-9.,]/g, ''); 
-    }
-
-    setHouseData(prev => ({ ...prev, [name]: newValue }));
-    
+    setHouseData(prev => ({
+      ...prev,
+      [name]:
+        name === "capacity"
+          ? Number(value)
+          : value,
+    }));
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
   const handleNext = () => {
-    const newErrors: { [key: string]: string } = {};
-
-    if (!houseData.title?.trim()) newErrors.title = 'عنوان الزامی است';
-    if (!houseData.price?.trim()) newErrors.price = 'قیمت الزامی است';
-    else if (isNaN(Number(houseData.price))) newErrors.price = 'قیمت باید عدد باشد';
-    
-    if (!houseData.transaction_type) newErrors.transactionType = 'نوع معامله را انتخاب کنید';
-    if (!houseData.capacity) newErrors.capacity = ' ظرفیت الزامی است';
-    if (!houseData.categories) newErrors.categories = 'نوع ملک را انتخاب کنید';   
-    if (!houseData.description) newErrors.description = 'توضیح الزامی است';
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return; 
+    const result = houseFormSchema
+      .pick({
+        title: true,
+        capacity: true,
+        price: true,
+        transaction_type: true,
+        categories: true,
+        caption: true,
+      })
+      .safeParse(houseData);
+  
+    if (!result.success) {
+      const fieldErrors =
+        result.error.flatten().fieldErrors;
+  
+      setErrors({
+        title: fieldErrors.title?.[0] || "",
+        capacity: fieldErrors.capacity?.[0] || "",
+        price: fieldErrors.price?.[0] || "",
+        transaction_type:
+          fieldErrors.transaction_type?.[0] || "",
+        categories:
+          fieldErrors.categories?.[0] || "",
+        caption:
+          fieldErrors.caption?.[0] || "",
+      });
+  
+      return;
     }
+  
+    setErrors({});
+  
     saveToLocalStorage(houseData);
-    
-    goToNext('firstinfo'); 
+    goToNext("firstinfo");
   };
 
   return (
     <div className='w-[1200px] flex flex-col items-center md:gap-[36px] gap-[26px]' dir='rtl'>
-      <form className='w-full flex flex-col gap-9'>
+      <form className='w-full flex flex-col gap-9' >
         <div className='flex justify-between w-full' >   
           <div>          
             <Input
@@ -102,14 +112,14 @@ const FirstInfo = () => {
               placeHolder='وارد کنید ...'
               type='text'
               htmlFor={'capacity'}
-              value={houseData.capacity || ''}
+              value={houseData.capacity ?? ''}
               onChange={handleChange}
             />
             {errors.capacity && <span className="text-red-500 text-xs">{errors.capacity}</span>}
           </div>
         </div> 
         <div className='flex relative justify-between w-full' >
-          <div>
+          <div className='flex flex-col gap-1.5'>
             <label className={"absolute text-[18px] -top-3 text-gray-300  bg-dark-600 right-5 h-5 p-2 flex-center whitespace-nowrap"}
             >
               نوع معامله :
@@ -120,7 +130,7 @@ const FirstInfo = () => {
               onChange={handleChange}
               name='transaction_type'
             >
-              <option value="">انتخاب کنید</option>
+              <option value="" disabled>انتخاب کنید</option>
               <option value="rental">اجاره</option>
               <option value="mortgage">رهن</option>
               <option value="reservation">رزرو</option>
@@ -143,7 +153,6 @@ const FirstInfo = () => {
               labelTextColor='text-gray-300'
               id={'price'}
               placeHolder='وارد کنید ...'
-              type='number'
               htmlFor={'price'}
               value={houseData.price || ''}
               onChange={handleChange}
@@ -163,7 +172,7 @@ const FirstInfo = () => {
               onChange={handleChange}
               name='categories'
             >
-              <option value="">انتخاب کنید</option>
+              <option value="" disabled>انتخاب کنید</option>
               <option value="apartment">آپارتمان</option>
               <option value="villa">ویلا</option>
               <option value="house">خانه</option>
@@ -173,35 +182,36 @@ const FirstInfo = () => {
             {errors.categories && <span className="text-red-500 text-xs">{errors.categories}</span>}
           </div>
         </div>
-        <div className='flex justify-between w-full' >               
+        <div className='flex flex-col gap-1.5 justify-between w-full' >               
           <Input
-            name='description'
+            name='caption'
             tagBgStyle={{background :"var(--color-dark-600)"}}
             dir='rtl'
             labelText='توضیحات ملک:'
-            parentWidth={`w-full ${errors.description ? 'border-red-500' : ''}`}
+            parentWidth={`w-full ${errors.caption ? 'border-red-500' : ''}`}
             InputHeight={'h-[200px]'}
             labelTextSize='text-[18px]'
             textSize='md:text-[16px] text-[12px]'
             borderColor='border-gray-300'
             textColor='text-gray-300'
             labelTextColor='text-gray-300'
-            id={'description'}
+            id={'caption'}
             placeHolder='وارد کنید ...'
             type='text'
-            htmlFor={'description'}
-            value={houseData.description || ''}
+            htmlFor={'caption'}
+            value={houseData.caption || ''}
             onChange={handleChange}
           />
-          {errors.description && <span className="text-red-500 text-xs">{errors.description}</span>}
+          {errors.caption && <span className="text-red-500 text-xs">{errors.caption}</span>}
         </div>
-        <div className='w-full' dir='ltr'>
+        
+      </form>
+      <div className='w-full' dir='ltr'>
           <Button text={"مرحله بعد "} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"165px"}}
             type='button'
             onClick={handleNext}
           /> 
         </div>
-      </form>
     </div>
   )
 }

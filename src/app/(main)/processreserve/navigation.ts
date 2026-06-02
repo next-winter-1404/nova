@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import { steps } from './steps';
 
-const UseStepNavigation = () => {
+const useStepNavigation = () => {
     const router = useRouter();
     const goToNext = (currentStepId : string) => {
         const currentIndex = steps.findIndex(s => s.id === currentStepId);
@@ -24,4 +24,4 @@ const UseStepNavigation = () => {
   return {goToNext, goToPrev};
 }
 
-export default UseStepNavigation
+export default useStepNavigation

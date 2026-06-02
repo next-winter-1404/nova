@@ -1,6 +1,6 @@
 'use client'
 import {useRouter, useSearchParams } from 'next/navigation';
-import UseStepNavigation from '../../navigation';
+import useStepNavigation from '../../navigation';
 import Button from '@/src/components/common/button/page';
 import Image from 'next/image';
 import Input from '@/src/components/common/input/Input';
@@ -26,7 +26,7 @@ const AcceptInfo = ({data , bookingId}: {data:any, bookingId : number} ) => {
   console.log("get api :", data)
     const searchParams = useSearchParams();
     const currentStep = searchParams.get('step') || 'acceptinfo'
-    const { goToPrev} = UseStepNavigation();
+    const { goToPrev} = useStepNavigation();
     const houseId = data.booking?.houseId
     const {data : houseDetails} =useQuery({
       queryKey : ["houseDetails", houseId],

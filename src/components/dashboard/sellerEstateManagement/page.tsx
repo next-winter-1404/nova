@@ -2,7 +2,6 @@
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import Input from "@/src/components/common/input/Input";
-import ReservationItem from "@/src/components/dashboard/ReservationItem/ReservationItem";
 import Image from "next/image";
 import React, { FC, useState } from "react";
 import Add from "@/src/assets/icons/Add.svg";
@@ -10,11 +9,12 @@ import Link from "next/link";
 import { IHouse } from "@/src/core/types/IHouse";
 import useSearch from "@/src/utils/hooks/searchHook";
 import EstateItems from "../estateItems/EstateItems";
+import { SellerDeleteHouses } from "@/src/utils/sevices/api/seller/houses/deleteHouse/deleteHouse";
 
 interface IProps {
   items: string[];
   house: IHouse[];
-  role : string;
+  role? : string;
 }
 const SellerEstateManagement: FC<IProps> = ({ items, house, role }) => {
     const [search, setSearch] = useState("");
@@ -69,7 +69,7 @@ const SellerEstateManagement: FC<IProps> = ({ items, house, role }) => {
                                         <span>تومان</span>
                                     </div>
                                     <div className="ml-[105px] text-center">
-                                        {item?.location || "--"}
+                                        {item?.address || "--"}
                                     </div>
 
                                     <div className=" text-center ml-[195px]">
@@ -80,7 +80,7 @@ const SellerEstateManagement: FC<IProps> = ({ items, house, role }) => {
                                     </div>
                                     </div>
 
-                                    <EstateItems houseId={Number(item.id)} role={role}/>
+                                    <EstateItems houseId={Number(item.id)} role={role} deleteFunction={SellerDeleteHouses}/>
                                 </div>
                                 ))}
                             </>
