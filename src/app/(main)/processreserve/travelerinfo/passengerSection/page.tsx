@@ -1,3 +1,4 @@
+'use client'
 import Button from '@/src/components/common/button/page'
 import Input from '@/src/components/common/input/Input'
 import Image from 'next/image'
@@ -11,11 +12,21 @@ import toast from 'react-hot-toast'
 const STORAGE_KEY = "past_passengers";
 
 const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : IPassengerInfo[]) => void}) => {
-    const [passengers, setPassengers ] = useState([
-        { firstName: '', lastName: '', birthDate: '', nationalId : '', gender : ''}
-    ]);
+    const [passengers, setPassengers] = useState<IPassengerInfo[]>([]);
 
     const [savedPassengers, setSavedPassengers] = useState<IPassengerInfo[]>([]);
+    const addPassengers = () => {
+        setPassengers(prev => [
+            ...prev,
+            {
+                firstName: "",
+                lastName: "",
+                birthDate: "",
+                gender: "",
+                nationalId: ""
+            }
+        ]);
+    };
     const [showModal, setShowModal] = useState(false)
     useEffect (() => {
         const saved = localStorage.getItem(STORAGE_KEY);
@@ -32,14 +43,16 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
         onPassengersChange(passengers);
     },[passengers,onPassengersChange])
 
-    const addPassengers = () => {
-        setPassengers([...passengers, {firstName:"", lastName:"", birthDate:"", gender:"" , nationalId:""}])
-    }
+    
 
     const handleChange = (index : number, field: keyof IPassengerInfo, value: string) => {
-        const updated = [...passengers];
-        updated[index][field] = value;
-        setPassengers(updated)
+        setPassengers(prev =>
+                prev.map((passenger, i) =>
+                i === index
+                    ? { ...passenger, [field]: value }
+                    : passenger
+                )
+            );
     }
 
     const openPassengerList = () => {
@@ -86,7 +99,7 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                             labelText='نام شما :'
                             parentWidth='w-[250px]'
                             InputHeight={'h-[50px]'}
-                            labelTextSize='text-[13px]'
+                            labelTextSize='text-[16px]'
                             textSize='md:text-[16px] text-[12px]'
                             borderColor='border-gray-300'
                             textColor='text-gray-300'
@@ -105,7 +118,7 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                             labelText='نام خانوادگی :'
                             parentWidth='w-[250px]'
                             InputHeight={'h-[50px]'}
-                            labelTextSize='text-[13px]'
+                            labelTextSize='text-[16px]'
                             textSize='md:text-[16px] text-[12px]'
                             borderColor='border-gray-300'
                             textColor='text-gray-300'
@@ -117,7 +130,7 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                             value={p.lastName}
                             onChange={(e) => handleChange(index, "lastName" , e.target.value)}
                         />
-                        <label className={"absolute text-[18px] -top-3 text-gray-300  bg-dark-600 right-5 h-5 p-2 flex-center whitespace-nowrap"}
+                        <label className={"absolute text-[18px] -top-2 text-gray-300  bg-dark-700 right-[600px] h-5 p-2 flex-center whitespace-nowrap"}
                         >
                             جنسیت:
                         </label>
@@ -137,7 +150,7 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                             labelText=' کد ملی:'
                             parentWidth='w-[250px]'
                             InputHeight={'h-[50px]'}
-                            labelTextSize='text-[13px]'
+                            labelTextSize='text-[16px]'
                             textSize='md:text-[16px] text-[12px]'
                             borderColor='border-gray-300'
                             textColor='text-gray-300'
@@ -155,7 +168,7 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                             labelText='تاریخ  :'
                             parentWidth='w-[250px]'
                             InputHeight={'h-[50px]'}
-                            labelTextSize='text-[13px]'
+                            labelTextSize='text-[16px]'
                             textSize='md:text-[16px] text-[12px]'
                             borderColor='border-gray-300'
                             textColor='text-gray-300'
