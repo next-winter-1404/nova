@@ -15,7 +15,6 @@ interface IProp {
 
 }
 const BlogItemsManagement: FC<IProp> = ({ blogId}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const router = useRouter();
 
@@ -23,10 +22,10 @@ const BlogItemsManagement: FC<IProp> = ({ blogId}) => {
   const handleDeleteBlog = async () => {
     try {
       await adminDeleteBlog(blogId);
-      toast.success("ملک با موفقیت حذف شد ");
+      toast.success("مقاله با موفقیت حذف شد ");
       router.refresh();
     } catch (error) {
-      toast.error("خطا در حذف ملک ");
+      toast.error("خطا در حذف مقاله ");
       console.error(error);
     }
   };

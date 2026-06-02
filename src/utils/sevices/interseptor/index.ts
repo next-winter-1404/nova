@@ -1,4 +1,3 @@
-"use server";
 
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 import { getServerSideCookie } from "../../helper/cookies/serverCookie/serverSideCookie";

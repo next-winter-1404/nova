@@ -38,7 +38,7 @@ const UserName = ({ userId }: UserNameProps) => {
         height={50}
         className="rounded-lg border border-gray-300"
       />
-      <span className="mr-3 text-center ">{name}</span>
+      <span className="mr-3 text-center ">{name||"نام کاربر"}</span>
     </div>
   );
 };

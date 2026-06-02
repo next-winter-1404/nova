@@ -1,16 +1,11 @@
-import Button from "@/src/components/common/button/page";
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
-import Input from "@/src/components/common/input/Input";
-import { Modal } from "@/src/components/common/modal";
 import ToolTip from "@/src/components/common/tooltip";
 import AdminEstateManagement from "@/src/components/dashboard/adminEstateManagementFilters.tsx/adminEstateManagementFilters";
 import EstateItems from "@/src/components/dashboard/estateItems/EstateItems";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { deleteHouses } from "@/src/utils/sevices/api/admin/houses/deleteHouses/deleteHouses";
-import { getAllHouses } from "@/src/utils/sevices/api/admin/houses/getAllHouses/getAllHouses";
 import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
-import { FaFilter } from "react-icons/fa";
 
 const EstateManagementPage = async ({
   searchParams,
