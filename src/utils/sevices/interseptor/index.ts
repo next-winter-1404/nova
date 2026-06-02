@@ -54,7 +54,6 @@ const onError = async (error: AxiosError): Promise<never> => {
       try {
         const refreshResult = await ServerRefreshToken();
 
-        console.log("Refresh Result:", JSON.stringify(refreshResult, null, 2));
 
         if (!refreshResult.success || !refreshResult.accessToken) {
           isRefreshing = false;

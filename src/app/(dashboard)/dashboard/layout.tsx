@@ -25,7 +25,7 @@ import DropMenu from "@/src/components/common/dropMenu/DropMenu";
 import ProfileInfo from "@/src/components/dashboard/profileInfo/ProfileInfo";
 import AsideMenu from "@/src/components/dashboard/menu/asideMenu/AsideMenu";
 import MenuController from "@/src/components/dashboard/menu/menuController/menuController";
-
+import { PiReadCvLogoFill } from "react-icons/pi";
 interface IProp {
   children: ReactNode;
 }
@@ -96,6 +96,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       href: `/dashboard/${role}/comments-management`,
       icon: <FaCommentDots className="w-5 h-5" />,
     },
+    {
+      label: "مدیریت وبلاگ ها",
+      href: `/dashboard/${role}/blog-management`,
+      icon: <PiReadCvLogoFill className="w-5 h-5" />,
+    },
   ];
  
   
@@ -155,10 +160,10 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
               <div className="w-px h-8 bg-[#9C9C9C] hidden md:block" />
               <ToolTip
                 mainContent={
-                  <div className=" relative hidden md:block">
+                  <Link href={`/dashboard/${role}/notification`} className=" relative hidden md:block">
                     <HiOutlineBell className="w-6 h-6 text-white cursor-pointer" />
                     <div className="w-[7px] h-[7px] rounded-xl bg-red-500 absolute top-0.5 right-1" />
-                  </div>
+                  </Link>
                 }
                 tooltipText="اعلان ها"
                 twClassname="z-100 bg-gray-550"
