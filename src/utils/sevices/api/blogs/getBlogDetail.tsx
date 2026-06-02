@@ -1,3 +1,4 @@
+"use server"
 import instance from "../../interseptor";
 import { IBlogs } from "@/src/core/types/IBogs";
 

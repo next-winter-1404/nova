@@ -34,7 +34,6 @@ const EstateManagementPage = async ({
   if (location) filters.location = location;
   if (search) filters.search = search;
   const result = await getHouses(filters);
-  const totalCount = result?.totalCount || 0;
   const houses = result?.houses || [];
   return (
     <DashboardContentContainer

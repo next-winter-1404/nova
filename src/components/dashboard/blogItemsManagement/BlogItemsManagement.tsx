@@ -8,6 +8,8 @@ import ProductCard from "../../common/productCard/ProductCard";
 import { TbEdit, TbTrash } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import AlertComponent from "../../common/alert/alert";
+import { adminDeleteBlog } from "@/src/utils/sevices/api/blogs/deleteBlog";
+import toast from "react-hot-toast";
 interface IProp {
   blogId: number;
 
@@ -18,18 +20,16 @@ const BlogItemsManagement: FC<IProp> = ({ blogId}) => {
   const router = useRouter();
 
   //   api calling
-
-
-//   const handleDeleteHouse = async () => {
-//     try {
-//       await deleteFunction(houseId);
-//       toast.success("ملک با موفقیت حذف شد ");
-//       router.refresh();
-//     } catch (error) {
-//       toast.error("خطا در حذف ملک ");
-//       console.error(error);
-//     }
-//   };
+  const handleDeleteBlog = async () => {
+    try {
+      await adminDeleteBlog(blogId);
+      toast.success("ملک با موفقیت حذف شد ");
+      router.refresh();
+    } catch (error) {
+      toast.error("خطا در حذف ملک ");
+      console.error(error);
+    }
+  };
 
   // drop down items with their functions
   const menuItems = [
@@ -70,7 +70,7 @@ const BlogItemsManagement: FC<IProp> = ({ blogId}) => {
         alertText="ایا از انتخاب خود مطمعن هستید؟"
         isModalOpen={isAlertModalOpen}
         setIsModalOpen={setIsAlertModalOpen}
-        // onClickFunction={handleDeleteHouse}
+        onClickFunction={handleDeleteBlog}
       />
     </div>
   );
