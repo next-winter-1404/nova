@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${vazir.variable} h-full antialiased`} >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col " suppressHydrationWarning>
         <ThemeProvider>
           <Providers>
             {children}

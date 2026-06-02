@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 
 interface StarRateProps {
@@ -15,6 +15,10 @@ export default function StarRate({
 }: StarRateProps) {
   const [rating, setRating] = useState(initialRateNumber);
 
+  useEffect(() => {
+    setRating(initialRateNumber);
+  }, [initialRateNumber]);
+  
   const handleClick = (star: number) => {
     setRating(star);
     if (onRate) {

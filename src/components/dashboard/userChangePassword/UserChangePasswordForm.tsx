@@ -22,7 +22,7 @@ const UserChangePasswordForm = () => {
   return (
     <form
       action={formAction}
-      className="flex  gap-4  w-full lg:w-[60%] justify-between "
+      className="flex flex-col md:flex-row  gap-4 w-full lg:w-[80%] xl:w-[60%]  items-center md:justify-between"
     >
       <UserInfoActionButton
         title="امنیت"

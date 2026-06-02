@@ -29,12 +29,12 @@ const UserInfoForm: FC<IUser> = ({
   }, [state, router]);
 
   return (
-    <form action={formAction} className="flex gap-4 w-full lg:w-[60%] justify-between">
+    <form action={formAction} className="flex flex-col md:flex-row  gap-4 w-full lg:w-[80%] xl:w-[60%]  items-center md:justify-between">
       <UserInfoActionButton
         title="اطلاعات فردی"
         explanation="میتوانید اطلاعات فردی خود را تغییر دهید"
       />
-      <div  className="flex flex-col gap-4 w-[394px]">
+      <div  className="flex flex-col gap-4 w-[394px] ">
         <Input
           borderColor="border-gray-300"
           dir="rtl"

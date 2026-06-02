@@ -30,3 +30,7 @@ export interface IHousesResponse {
     houses?: IHouse[];
     totalCount?: number;
   }
+export interface IHousesAdminResponse {
+    data?: IHouse[];
+    totalCount?: number;
+  }

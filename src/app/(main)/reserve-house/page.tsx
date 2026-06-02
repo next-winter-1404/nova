@@ -32,8 +32,8 @@ const HouseReservePage = async ({
   if (location) filters.location = location;
   if (search) filters.search = search;
   const result = await getHouses(filters);
-  const houses = result?.houses || [];
   const totalCount = result?.totalCount || 0;
+  const houses = result?.houses || [];
 
   const items: BreadcrumbItem[] = [
     {

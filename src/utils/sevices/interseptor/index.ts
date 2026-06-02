@@ -1,4 +1,4 @@
-"use server";
+// "use server";
 
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 import { getServerSideCookie } from "../../helper/cookies/serverCookie/serverSideCookie";
@@ -26,23 +26,24 @@ function addSubscriber(callback: (token: string) => void) {
 const onSuccess = (response: any) => response;
 
 const onError = async (error: AxiosError): Promise<never> => {
-  const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
+  const originalRequest = error.config as InternalAxiosRequestConfig & {
+    _retry?: boolean;
+  };
 
   if (error.response) {
     const status = error.response.status;
-
     if (status >= 404 && status < 500 && status !== 401) {
-      console.log("Client Error!! :", `${status} ${error.response.statusText}`);
+      console.log("Client Error:", `${status} ${error.response.statusText}`);
     } else if (status >= 500) {
       console.error("Server Error:", `${status} ${error.response.statusText}`);
     } else if (status === 401 && originalRequest && !originalRequest._retry) {
-      console.error("Unauthorized - Token might be expired");
       originalRequest._retry = true;
 
       if (isRefreshing) {
         return new Promise((resolve) => {
           addSubscriber((token: string) => {
             originalRequest.headers.Authorization = `Bearer ${token}`;
+
             resolve(instance(originalRequest));
           });
         }) as never;
@@ -53,34 +54,44 @@ const onError = async (error: AxiosError): Promise<never> => {
       try {
         const refreshResult = await ServerRefreshToken();
 
+        console.log("Refresh Result:", JSON.stringify(refreshResult, null, 2));
+
         if (!refreshResult.success || !refreshResult.accessToken) {
           isRefreshing = false;
-          throw new Error("refresh token failed");
         }
 
         const newToken = refreshResult.accessToken;
+
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
+
         onRefreshed(newToken);
+
         isRefreshing = false;
 
         return instance(originalRequest) as never;
       } catch (refreshError) {
+        console.error("Refresh Error:", refreshError);
+
         isRefreshing = false;
+
         redirect("/login");
       }
     }
   }
 
-  console.error(error);
   return Promise.reject(error);
 };
 
 instance.interceptors.request.use(
- async  (config) => {
-    const token =await getServerSideCookie("ServerAccessToken");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+  async (config) => {
+    if (!config.headers?.Authorization) {
+      const token = await getServerSideCookie("ServerAccessToken");
+
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
     }
+
     return config;
   },
   (error) => Promise.reject(error)

@@ -1,4 +1,5 @@
 "use client";
+import AlertComponent from "@/src/components/common/alert/alert";
 import LoginButton from "@/src/components/login/button/LoginButton";
 import { markAllAsRead } from "@/src/utils/sevices/api/notification/markAsread";
 import { useRouter } from "next/navigation";
@@ -7,6 +8,8 @@ import toast from "react-hot-toast";
 
 const MarkAllAsReaButton = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const router = useRouter();
 
   const handleMarkAllAsRead = async () => {
@@ -28,16 +31,23 @@ const MarkAllAsReaButton = () => {
     <>
       <div
         onClick={() => {
-          handleMarkAllAsRead()
+          setIsModalOpen(true);
         }}
       >
         <LoginButton
-          width="p-2"
+          width="p-2 text-[10px] md:text-[16px]"
           buttonText="علامت گذاری همه به عنوان خوانده شده "
           loadingText="علامت گذاری به عنوان خوانده شده"
           noIcon
         />
       </div>
+      <AlertComponent
+        acceptButtonText="موافقت"
+        alertText="آیا مطمئن هستید که میخواهید همه مطالب سایت را به عنوان خوانده شده علامت بزنید؟"
+        isModalOpen={isModalOpen}
+        onClickFunction={handleMarkAllAsRead}
+        setIsModalOpen={setIsModalOpen}
+      />
     </>
   );
 };

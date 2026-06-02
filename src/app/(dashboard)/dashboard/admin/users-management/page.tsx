@@ -7,6 +7,7 @@ import { getAllusers } from "@/src/utils/sevices/api/admin/users/getAllusers/get
 import Image from "next/image";
 import { FaUser } from "react-icons/fa";
 import { PiImageBrokenDuotone } from "react-icons/pi";
+import UserManegmentSearch from '@/src/components/dashboard/userManegmentSearch/userManegmentSearch';
 const items = [
   " پروفایل",
   "نام کاربر",
@@ -18,21 +19,11 @@ const items = [
 
 const UserManegment = async () => {
   const allUser = await getAllusers();
-  console.log("allUser::::", allUser);
-  
 
   return (
-    // <div className="padding-section flex-col-center gap-5 bg-amber-950">
-    //   <div className="w-full flex items-center justify-start bg-amber-500">
-    //     <span className="flex-center gap-2 text-20-regular text-white-pure">
-    //       <FaUser />
-    //       <i>لیست کاربران</i>
-    //     </span>
-    //   </div>
-    //   <div className="w-full h-[1px] bg-white"></div>
-      
-    // </div>
-    <DashboardContentContainer title="لیست کاربران">
+    <DashboardContentContainer title="لیست کاربران" topSectionContent={
+       <UserManegmentSearch/>
+      }>
       <div>
         <div className="w-full flex-col-center">
           <ItemNavbar colsNumber={6} items={items} />
@@ -77,7 +68,7 @@ const UserManegment = async () => {
                         {item.updatedAt.split("T")[0]}
                       </div>
                       <div className=" ml-[140px] flex-center ">
-                        <UserManegmentActionMenu id={item.id}/>
+                        <UserManegmentActionMenu user={item}/>
                       </div>
                     </div>
                   </div>

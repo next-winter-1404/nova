@@ -87,9 +87,9 @@ const SellerReservePage: FC<IProps> = async ({ searchParams }) => {
                         className="flex justify-between w-full items-center"
                         key={item.id}
                       >
-                        <div className="grid grid-cols-6 w-full  items-center">
-                          <div className="flex gap-4 items-center w-[300px] ">
-                            <div className="w-[100px] h-[72px] rounded-xl bg-gray-600"></div>
+                        <div className="grid grid-cols-6 w-full  items-center md:text-[16px] text-[10px]">
+                          <div className="flex gap-4 items-center xl:max-w-[300px] ">
+                            <div className="w-[100px] h-[72px] rounded-xl hidden md:block bg-gray-600"></div>
                             <div className="whitespace-nowrap">
                               {item.house?.title || "عنوانی وجود ندارد"}
                             </div>

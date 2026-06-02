@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import { 
+import {
   FaCheckCircle,
   FaClock,
   FaTimesCircle,
   FaBan,
-  FaRegCheckCircle
+  FaRegCheckCircle,
 } from "react-icons/fa";
 
 export enum BookingStatus {
@@ -14,6 +14,7 @@ export enum BookingStatus {
   CANCELLED = "cancelled",
   CONFIRMED = "confirmed",
   COMPLETED = "completed",
+  FAILED = "failed",
 }
 
 interface IStatus {
@@ -21,7 +22,6 @@ interface IStatus {
 }
 
 const StatusLabel: FC<IStatus> = ({ status }) => {
-  
   const getStatusStyle = (status?: string) => {
     switch (status) {
       case BookingStatus.PENDING:
@@ -32,7 +32,8 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
         return "bg-green-500 text-black";
       case BookingStatus.ERROR:
       case BookingStatus.CANCELLED:
-        return "bg-[#FF989A] text-black";
+      case BookingStatus.FAILED:
+        return "bg-red-400 text-black";
       default:
         return "bg-gray-500 text-black";
     }
@@ -45,17 +46,18 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
       case BookingStatus.SUCCESS:
         return "موفق";
       case BookingStatus.CONFIRMED:
+      case BookingStatus.COMPLETED:
         return "تایید شده";
       case BookingStatus.ERROR:
         return "خطا";
       case BookingStatus.CANCELLED:
+      case BookingStatus.FAILED:
         return "لغو شده";
       default:
         return status || "نامشخص";
     }
   };
 
-  // تابع تعیین آیکون بر اساس وضعیت با استفاده از react-icons/fa
   const getStatusIcon = (status?: string) => {
     switch (status) {
       case BookingStatus.PENDING:
@@ -63,10 +65,12 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
       case BookingStatus.SUCCESS:
         return <FaCheckCircle className="w-3 h-3 ml-1" />;
       case BookingStatus.CONFIRMED:
+      case BookingStatus.COMPLETED:
         return <FaRegCheckCircle className="w-3 h-3 ml-1" />;
       case BookingStatus.ERROR:
         return <FaTimesCircle className="w-3 h-3 ml-1" />;
       case BookingStatus.CANCELLED:
+      case BookingStatus.FAILED:
         return <FaBan className="w-3 h-3 ml-1" />;
       default:
         return null;
@@ -77,7 +81,7 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
     <div
       className={`${getStatusStyle(
         status
-      )} w-[90px] h-[22px] rounded-4xl text-center text-sm flex items-center justify-center gap-1`}
+      )} md:w-[90px] w-[50px] md:h-[22px] text-[10px] rounded-4xl text-center whitespace-nowrap md:text-[14px] flex items-center justify-center p-px gap-px md:gap-1`}
     >
       {getStatusIcon(status)}
       {getPersianText(status)}
