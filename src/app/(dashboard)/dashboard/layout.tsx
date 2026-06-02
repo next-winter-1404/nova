@@ -25,7 +25,7 @@ import DropMenu from "@/src/components/common/dropMenu/DropMenu";
 import ProfileInfo from "@/src/components/dashboard/profileInfo/ProfileInfo";
 import AsideMenu from "@/src/components/dashboard/menu/asideMenu/AsideMenu";
 import MenuController from "@/src/components/dashboard/menu/menuController/menuController";
-
+import { PiReadCvLogoFill } from "react-icons/pi";
 interface IProp {
   children: ReactNode;
 }
@@ -95,6 +95,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       label: "مدیریت نظرات",
       href: `/dashboard/${role}/comments-management`,
       icon: <FaCommentDots className="w-5 h-5" />,
+    },
+    {
+      label: "مدیریت وبلاگ ها",
+      href: `/dashboard/${role}/blog-management`,
+      icon: <PiReadCvLogoFill className="w-5 h-5" />,
     },
   ];
  

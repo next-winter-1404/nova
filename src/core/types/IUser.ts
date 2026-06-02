@@ -16,6 +16,12 @@ export interface IUser {
     resetCodeExpires?: string | null;
     updated_at?: string;
   }
+  export interface IUserPublic {
+    id?: number;
+    role?: string;
+    profilePicture?: string;
+    name?: string;
+  }
   
   export interface IUserResponse {
     user?: IUser;

@@ -11,6 +11,7 @@ import { getBlogsDetail } from "@/src/utils/sevices/api/blogs/getBlogDetail";
 import SimilarNavbarItem from "@/src/components/reserveHouse/similarHouse/navbarItem";
 import SimilarBlogItems from "@/src/components/blogs/similarBlogs/similarBlogs";
 import { getBlogs } from "@/src/utils/sevices/api/blogs/getBlogs";
+import { getUserPublicProfile } from "@/src/utils/sevices/api/users/getUserPublicProfile";
 
 export const revalidate = 30
 
@@ -28,7 +29,8 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
     { label: "مقالات", href: "/blog " },
     { label: `${BlogDetail?.title}` },
   ];
-
+  const user = await getUserPublicProfile(Number(BlogDetail?.author_id))
+console.log("users",user)
   return (
     <div className="w-full flex-center">
       <div className="mt-25 xl:w-[1376px] lg:w-[1090px]  w-[80%] flex items-end flex-col lg:gap-6 gap-10 ">
@@ -39,8 +41,10 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
               <div className="max-w-100 rounded-[28px] bg-dark-860 flex justify-between p-4  items-center relative">
                 <Image
                   alt="user photo"
-                  src={userPlaceHolder}
-                  className="rounded-[60px] w-[74px] h-[74px]  absolute -top-9 -right-8 shadow-[-6px_6px_0px_-1px__#232323]"
+                  src={user?.user.profilePicture||userPlaceHolder}
+                  width={74}
+                  height={74}
+                  className="rounded-[60px]  absolute -top-9 -right-8 shadow-[-6px_6px_0px_-1px__#232323] border border-dark-600"
                 />
 
                 <div className="flex  flex-col gap-2">
@@ -63,7 +67,9 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
                 </div>
                 <div>
                   <div className="flex flex-col mr-8 gap-3 " dir="rtl">
-                    <h2 className="text-xl text-white">نویسنده</h2>
+                    <h2 className="text-xl text-white">
+                      {user?.user.name||"نویسنده"}
+                    </h2>
                     <div className="flex items-center gap-1 text-gray-300">
                       <FaCalendarAlt className="w-4 h-4 mb-1" />
                       <div className="flex gap-2">
@@ -78,11 +84,7 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
             </div>
             <div className="md:flex flex-col w-1/2 hidden gap-4" dir="rtl">
               <h2 className="lg:text-[32px] text-[18px] text-white font-semibold">{BlogDetail?.title}</h2>
-              <p className="text-white">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
-                در ستون و سطرآنچنان که لازم است .
-              </p>
+             
             </div>
           </div>
           <section className="flex flex-col gap-8">
