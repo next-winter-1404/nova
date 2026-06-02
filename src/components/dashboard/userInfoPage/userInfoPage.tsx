@@ -7,7 +7,7 @@ import { TbCamera, TbCircleX } from "react-icons/tb";
 import userDefault from "@/src/assets/images/userPlaceHolder.jpg";
 import { Modal } from "@/src/components/common/modal";
 import ChoosePicture from "@/src/components/dashboard/choosePic/ChoosePicture";
-const UserInfoPage = async() => {
+const UserInfoPage = async() => { 
     const userId = await getServerSideCookie("userId");
   const result = await getUsersDetail(Number(userId));
   const userDetail = result?.user;
