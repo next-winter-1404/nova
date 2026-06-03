@@ -3,6 +3,7 @@ import {HeroSection, CategorySection, SpecialOfferSection, MostPopulerDestinatio
 import Landing from "@/src/components/landing/page";
 import Footer from "@/src/components/footer/page";
 import { Suspense } from "react";
+import ScrollButton from "@/src/components/common/scrollButton/ScrollButton";
 export default function Home() {
   function Loading() {
   return <h2>🌀 Loading...</h2>;
