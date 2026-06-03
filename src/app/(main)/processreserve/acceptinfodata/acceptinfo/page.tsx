@@ -67,11 +67,11 @@ const AcceptInfo = ({data , bookingId}: {data:any, bookingId : number} ) => {
       </div>
     );
   }
-  const category: AgeCategory = GetAgeCategory(travelers.birthDate);
+  const category: AgeCategory = GetAgeCategory(travelers[0]?.birthDate)
 
 
       return (
-        <div className='flex flex-col items-center md:gap-[36px] gap-[30px] w-[1683px] md:h-[1150px]' dir='rtl'>           
+        <div className='flex flex-col mt-[130px] items-center md:gap-[36px] gap-[30px] w-[1683px] md:h-[1150px]' dir='rtl'>           
             <div className='md:w-11/12 w-[340px] flex flex-col items-center justify-center md:h-[185px] h-[730px] bg-dark-700 rounded-3xl md:gap-6 gap-3 relative'>
               <div className=' w-22/23 h-[44px] rounded-2xl bg-gray-250 flex justify-center items-center gap-3 md:gap-6'>
                 <div className='md:w-[1417px] w-[300px] items-center flex md:justify-between'>
