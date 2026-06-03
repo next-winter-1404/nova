@@ -393,4 +393,8 @@ header {
   animation: softBlinkMove 4s ease-in-out infinite;
 }
 
-
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}

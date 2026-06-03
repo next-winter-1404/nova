@@ -14,7 +14,7 @@ import NavLoginButton from "../auth/NavLoginButton";
 const navigation = [
   { labelName: 'تماس با ما', href: '/contactus', current: false },
   { labelName: 'مقالات ما', href: '/blogs', current: false },
-  { labelName: 'درباره دلتا', href: '/aboutus', current: false },
+  { labelName: 'درباره دلتا', href: '#aboutus', current: false },
 ]
 
 const Navbar = () => {
