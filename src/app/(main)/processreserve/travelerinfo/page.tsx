@@ -48,41 +48,37 @@ const Traveler = () => {
         toast.error("لطفا حداقل یک مسافر اضافه کنید")
         return;
       }
-      
-      console.log("Passengers:", passengers);
 
-passengers.forEach((p, index) => {
-  console.log(`Passenger ${index}`, {
-    firstName: p.firstName,
-    lastName: p.lastName,
-    nationalId: p.nationalId,
-    nationalIdLength: p.nationalId?.length,
-    gender: p.gender,
-    birthDate: p.birthDate,
-  });
-});
+      passengers.forEach((p, index) => {
+        console.log(`Passenger ${index}`, {
+          firstName: p.firstName,
+          lastName: p.lastName,
+          nationalId: p.nationalId,
+          nationalIdLength: p.nationalId?.length,
+          gender: p.gender,
+          birthDate: p.birthDate,
+        });
+      });
+    console.log("Passengers:", passengers);
 
-console.log("Passengers:", passengers);
+    const hasInvalidPassengers = passengers.some((p, index) => {
+      console.log(`Passenger ${index}`, {
+        firstName: p.firstName,
+        lastName: p.lastName,
+        nationalId: p.nationalId,
+        gender: p.gender,
+        birthDate: p.birthDate,
+      });
 
-const hasInvalidPassengers = passengers.some((p, index) => {
-  console.log(`Passenger ${index}`, {
-    firstName: p.firstName,
-    lastName: p.lastName,
-    nationalId: p.nationalId,
-    gender: p.gender,
-    birthDate: p.birthDate,
-  });
+    const invalid =
+      !p.firstName?.trim() ||
+      !p.lastName?.trim() ||
+      !p.nationalId?.trim() ||
+      !p.gender ||
+      !p.birthDate;
 
-  const invalid =
-    !p.firstName?.trim() ||
-    !p.lastName?.trim() ||
-    !p.nationalId?.trim() ||
-    !p.gender ||
-    !p.birthDate;
-
-  console.log("invalid =", invalid);
-
-  return invalid;
+    console.log("invalid =", invalid);
+    return invalid;
 });
       
       if (hasInvalidPassengers) {
@@ -113,16 +109,16 @@ const hasInvalidPassengers = passengers.some((p, index) => {
           sharedEmail : sharedEmail?.trim(),
           sharedMobile :sharedMobile?.trim()
         };
-        console.log("Submitting...");
         const response = await postTravelerInfo(payload);
-
-setBookingId(response.data.id);
-        console.log("API Response:", response);
+        const bookingId = response.data.id;
+        router.push(
+          `/processreserve/acceptinfodata?bookingId=${bookingId}`
+        );
         toast.success("اطلاعات با موفقیت ثبت شد")
       }
-      catch (error){
-      console.log(error)
-    } 
+      catch (error) {
+        console.error("FULL ERROR:", error);
+      }
   }
 
   const handleNavigate = () => {
@@ -228,17 +224,18 @@ setBookingId(response.data.id);
                 onChange={(e) => setSharedEmail(e.target.value)}
               />
             </form>            
-            <Button text={"ثبت اطلاعات"} 
+            {/* <Button text={"ثبت اطلاعات"} 
               icon={<Image src={checkCircle} alt='checkCircle'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"142px"}}
               onClick={handleSubmit}
-            />          
+            />           */}
           </div>          
         </div>
         <div className='md:h-[84px] h-[74px] w-[340px] md:w-11/12 flex items-center justify-center border-3 border-dashed rounded-4xl border-gray-300'>
             <div className='h-9 md:w-[1410px] flex md:justify-between gap-6 md:gap-0' dir='ltr'>
             <Button text={"تایید و ادامه فرایند"} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"165px"}}
-              onClick={() => goToNext(currentStep)}
-              disabled={!bookingId}
+              onClick={handleSubmit}
+              // disabled={!bookingId}
+              type='button'
             />          
               <div className='md:w-[300px] h-[30px] md:gap-3 gap-2 flex items-center md:text-[24px] text-[18px] text-white-pure' dir='rtl'>
                 <Image src={ticket} alt='ticket'/> 
