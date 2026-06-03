@@ -1,15 +1,23 @@
-'use server'
 import React from "react";
 import instance from "../../interseptor";
 import { AxiosResponse } from "axios";
 import { IPassengerInfo } from "@/src/core/types/IPassengerInfo";
-import { setServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import { getClientCookie, setClientCookie } from "@/src/utils/helper/cookies/clientCookie/clientSideCookie";
 
 export const postTravelerInfo = async (apiParams = {}): Promise<AxiosResponse<IPassengerInfo>> => {
   const response = await instance.post("/api/bookings", apiParams);
   const dataResponse = response.data || response;
-  if (dataResponse.id) {
-    await setServerSideCookie("BookingId", dataResponse.id);
-  }
-  return dataResponse;
+  // if (dataResponse.id) {
+  //   await setClientCookie(
+  //     "BookingId",
+  //     String(dataResponse.id)
+  //   );
+    
+  //   console.log(
+  //     "COOKIE AFTER SET:",
+  //     getClientCookie("BookingId")
+  //   );
+  // }
+  console.log("dataResponse: ",dataResponse);
+  return response;
 };

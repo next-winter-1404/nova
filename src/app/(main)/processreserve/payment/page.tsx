@@ -14,7 +14,8 @@ const Payment = () => {
 
     const [cardNumber, setCardNumber] = useState("");
     const [cvv2, setCvv2] = useState('');
-    const [expiryDate, setExpiryDate] = useState('');
+    const [year, setYear] = useState('');
+    const [month, setMonth] = useState('');
     const [dynamicPassword, setDynamicPassword] = useState('');
 
     const [loading, setLoading] = useState(false);
@@ -35,7 +36,12 @@ const Payment = () => {
                 description : 'پرداخت رزرو هتل',
                 bookingId : Number(bookingId)
             };
-            const response = await postPayment(payload)
+            try {
+                const response = await postPayment(payload);
+            }
+            catch (error: any) {
+            console.log(error.response);
+            }
             setIsPaymentInitiated(true);
         }catch(error){
             console.error(error)
@@ -52,7 +58,7 @@ const Payment = () => {
     const validateForm = () => {
     if (cardNumber.replace(/\s/g, '').length !== 16) return 'شماره کارت باید ۱۶ رقم باشد.';
     if (cvv2.length < 4 || cvv2.length > 5) return 'CVV2 باید بین ۴ تا ۵ رقم باشد.';
-    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryDate)) return 'تاریخ انقضا باید به فرمت MM/YY باشد.';
+    if (!year || !month) return 'تاریخ انقضا الزامی است.';
     if (dynamicPassword.length !== 5 || !/^\d+$/.test(dynamicPassword)) return 'رمز پویا باید ۵ رقم باشد.';
     return true;
     };
@@ -77,7 +83,7 @@ const Payment = () => {
         }
     };
     return(
-        <div className='flex flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
+        <div className='flex mt-[130px] flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
             <div className="bg-dark-600 rounded-2xl shadow-xl w-2/5 overflow-hidden">
                 <div className="bg-primary-accent-green p-6 text-center text-white">
                     <h2 className="text-2xl font-bold mb-2">پرداخت امن</h2>
@@ -100,10 +106,10 @@ const Payment = () => {
                             value={cardNumber}
                             onChange={handleCardNumberChange}
                             placeHolder="XXXX XXXX XXXX XXXX"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"                           
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg outline-none"                           
                         />
                     </div>
-                    <div className="flex gap-4">
+                    <div className="flex gap-5">
                         <div className="flex-1">
                             <Input
                                 dir='rtl'
@@ -119,14 +125,14 @@ const Payment = () => {
                                 value={cvv2}
                                 onChange={(e) => setCvv2(e.target.value.replace(/\D/g, '').slice(0, 5))}
                                 placeHolder = 'CVV2'
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg outline-none"
                             />
                         </div>
-                        <div className="flex-1">
+                        <div className="flex w-2/5 gap-2.5">
                             <Input
                                 dir='rtl'
                                 tagBgStyle={{background: "var(--color-dark-600)"}}
-                                labelText='تاریخ انقضا'
+                                labelText='ماه :'
                                 InputHeight={'h-[50px]'}
                                 labelTextSize='text-[16px]'
                                 textSize='md:text-[16px] text-[12px]'
@@ -134,10 +140,28 @@ const Payment = () => {
                                 textColor='text-gray-300'
                                 labelTextColor='text-gray-300'
                                 type="text"
-                                value={expiryDate}
-                                onChange={(e) => setExpiryDate(e.target.value)}
-                                placeHolder="YY/MM"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                value={month}
+                                onChange={(e) => setMonth(e.target.value)}
+                                name='month'
+                                placeHolder="MM"
+                                className="w-1/2 px-4 py-3 border border-gray-300 rounded-lg outline-none"
+                            />
+                            <Input
+                                dir='rtl'
+                                tagBgStyle={{background: "var(--color-dark-600)"}}
+                                labelText='سال'
+                                InputHeight={'h-[50px]'}
+                                labelTextSize='text-[16px]'
+                                textSize='md:text-[16px] text-[12px]'
+                                borderColor='border-gray-300'
+                                textColor='text-gray-300'
+                                labelTextColor='text-gray-300'
+                                type="text"
+                                value={year}
+                                name='year'
+                                onChange={(e) => setYear(e.target.value)}
+                                placeHolder="YY"
+                                className="w-1/2 px-4 py-3 border border-gray-300 rounded-lg outline-none"
                             />
                         </div>
                     </div>
@@ -156,7 +180,7 @@ const Payment = () => {
                             value={dynamicPassword}
                             onChange={(e) => setDynamicPassword(e.target.value.replace(/\D/g, '').slice(0, 5))}
                             placeHolder="۵ رقم"
-                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg outline-none"
                         />
                     </div>
                     {error && (

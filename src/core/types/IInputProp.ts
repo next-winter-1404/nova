@@ -21,4 +21,5 @@ export interface IInputProp {
   dir?: string;
   readOnly?: boolean; 
   disabled?: boolean;  
+  className ? : string;
 }
