@@ -223,7 +223,7 @@ const FilterSection = ({ totalCount }: FilterSectionProps) => {
                     />
                   </div>
                   <div className="h-[24px] w-[2px] bg-[#AAAAAA]"></div>
-                  <div >
+                  <div>
                     <Input
                       labelText="حداقل اجاره"
                       InputHeight="h-[50px]"
@@ -330,7 +330,6 @@ const FilterSection = ({ totalCount }: FilterSectionProps) => {
             value={search}
             onChange={handleSearch}
             dir="rtl"
-
           />
         </div>
         <div className="hidden sm:flex flex-1">
