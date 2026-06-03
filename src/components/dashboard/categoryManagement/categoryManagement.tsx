@@ -2,12 +2,7 @@
 import { FC, useActionState, useEffect, useState } from "react";
 import DropMenu from "../../common/dropMenu/DropMenu";
 import { TbDots, TbDotsVertical } from "react-icons/tb";
-import { FiAlertCircle } from "react-icons/fi";
 import { Modal } from "../../common/modal";
-import { useQuery } from "@tanstack/react-query";
-import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail";
-import { IHouse } from "@/src/core/types/IHouse";
-import ProductCard from "../../common/productCard/ProductCard";
 import { TbEdit, TbTrash } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -21,11 +16,11 @@ interface IProp {
   categoryId?: number;
 }
 const CategoryItems: FC<IProp> = ({ categoryName, categoryId }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const router = useRouter();
 
+//   edit category api call
   const [state, formAction] = useActionState(
     editCategory.bind(null, Number(categoryId)),
     {
@@ -33,6 +28,7 @@ const CategoryItems: FC<IProp> = ({ categoryName, categoryId }) => {
       message: "",
     }
   );
+//   edit category status
   useEffect(() => {
     if (!state.message) return;
 
@@ -45,6 +41,7 @@ const CategoryItems: FC<IProp> = ({ categoryName, categoryId }) => {
     }
   }, [state]);
 
+//   delete category comment
   const handleDeleteHouse = async () => {
     try {
       await adminDeleteCategory(Number(categoryId));

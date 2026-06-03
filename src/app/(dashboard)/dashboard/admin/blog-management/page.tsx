@@ -98,7 +98,7 @@ const AdminBlogManagementPage: FC<IProps> = async ({ searchParams }) => {
         <div className="flex justify-between w-full items-center">
           <Link
             href={"/dashboard/admin/blog-management/create"}
-            className="cursor-pointer bg-primary-accent-green w-[200px] h-[50px] rounded-lg flex-center"
+            className="cursor-pointer bg-primary-accent-green w-[150px] h-[43px] rounded-[16px] flex-center"
           >
             ساحت وبلاگ +
           </Link>
