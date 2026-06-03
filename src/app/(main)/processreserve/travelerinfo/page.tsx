@@ -1,6 +1,6 @@
 'use client'
 import { useRouter, useSearchParams } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import whiteStar from "@/src/assets/icons/whiteStar.svg"
 import Location from "@/src/assets/icons/Location.svg"
 import CalendarTime from "@/src/assets/icons/calendarclock.svg"
@@ -20,6 +20,7 @@ import toast from 'react-hot-toast'
 import { postTravelerInfo } from '@/src/utils/sevices/api/processReserve/postTravelerInfo'
 import { getHousesDetail } from '@/src/utils/sevices/api/houses/getHousesDetail'
 import { useQuery } from '@tanstack/react-query'
+import { IPassengerInfo } from '@/src/core/types/IPassengerInfo'
 
 
 const Traveler = () => {
@@ -29,38 +30,73 @@ const Traveler = () => {
     const checkOutDate = searchParams.get("checkOutDate")
     const houseId = searchParams.get("houseId")
     const currentStep = searchParams.get('step') || 'travelerinfo'
-    const [passengers, setPassengers] = useState([])
+    const [passengers, setPassengers] = useState<IPassengerInfo[]>([]);
     const [sharedEmail, setSharedEmail] = useState('')
     const [sharedMobile, setSharedMobile] = useState('')
-    const handlePassengerChange = (newPassengers) => {
-      setPassengers(newPassengers)
-    }
+    const [bookingId, setBookingId] = useState<number | null>(null);
+    const handlePassengerChange = useCallback(
+      (newPassengers: IPassengerInfo[]) => {
+        setPassengers(newPassengers);
+      },
+      []
+    );
     const {goToNext} = useStepNavigation();
     console.log("houseId: ", houseId)
     const reservedDates = [checkInDate, checkOutDate]
     const handleSubmit = async () => {
-      // if (!houseId || !checkInDate || !checkOutDate)
-      if (passengers.length === 0){
-        toast("لطفا حداقل یک مسافر اضافه کنید !")
+      if (passengers.length === 0) {
+        toast.error("لطفا حداقل یک مسافر اضافه کنید")
         return;
       }
-      const hasInValidPassengers = passengers.some ( p => 
-        !p.firstName || p.firstName.trim() === "" ||
-        !p.lastName || p.lastName.trim() === "" ||
-        !p.nationalId || p.nationalId.trim() === ""
-      )
-      if (hasInValidPassengers) {
-        toast("لطفا مشخصات را کامل وارد کنید !")
+
+      passengers.forEach((p, index) => {
+        console.log(`Passenger ${index}`, {
+          firstName: p.firstName,
+          lastName: p.lastName,
+          nationalId: p.nationalId,
+          nationalIdLength: p.nationalId?.length,
+          gender: p.gender,
+          birthDate: p.birthDate,
+        });
+      });
+    console.log("Passengers:", passengers);
+
+    const hasInvalidPassengers = passengers.some((p, index) => {
+      console.log(`Passenger ${index}`, {
+        firstName: p.firstName,
+        lastName: p.lastName,
+        nationalId: p.nationalId,
+        gender: p.gender,
+        birthDate: p.birthDate,
+      });
+
+    const invalid =
+      !p.firstName?.trim() ||
+      !p.lastName?.trim() ||
+      !p.nationalId?.trim() ||
+      !p.gender ||
+      !p.birthDate;
+
+    console.log("invalid =", invalid);
+    return invalid;
+});
+      
+      if (hasInvalidPassengers) {
+        toast.error("لطفا مشخصات مسافر را کامل وارد کنید")
+        return;
       }
-      if (!sharedMobile || sharedMobile.trim() === 0) {
-        toast("شماره موبایل را وارد کنید")
+      
+      if (!sharedMobile?.trim()) {
+        toast.error("شماره موبایل را وارد کنید")
+        return;
       }
-      if (!sharedEmail || sharedEmail.trim() === 0) {
-        toast("ایمیل را وارد کنید")
-        return
+      
+      if (!sharedEmail?.trim()) {
+        toast.error("ایمیل را وارد کنید")
+        return;
       }
       try{
-        const peylod = {
+        const payload = {
           houseId : houseId,
           reservedDates : reservedDates,
           traveler_details : passengers.map(p => ({
@@ -73,13 +109,16 @@ const Traveler = () => {
           sharedEmail : sharedEmail?.trim(),
           sharedMobile :sharedMobile?.trim()
         };
-        console.log("API :", JSON.stringify(peylod, null, 2));
-        const response = await postTravelerInfo(peylod);
+        const response = await postTravelerInfo(payload);
+        const bookingId = response.data.id;
+        router.push(
+          `/processreserve/acceptinfodata?bookingId=${bookingId}`
+        );
         toast.success("اطلاعات با موفقیت ثبت شد")
       }
-      catch (error){
-      console.log(error)
-    } 
+      catch (error) {
+        console.error("FULL ERROR:", error);
+      }
   }
 
   const handleNavigate = () => {
@@ -89,10 +128,11 @@ const Traveler = () => {
   const {data : housedetail} =useQuery({
     queryKey : ["houseDetail", houseId],
     queryFn : () => getHousesDetail(Number(houseId)),
+    enabled: !!houseId,
   })
 
   return (
-    <div className='flex flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
+    <div className='flex mt-[130px] flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
         <div className='flex items-center justify-center md:w-11/12 w-[340px] md:h-[142px] h-[400px] bg-dark-700 rounded-3xl '>
           <div className='w-22/23 flex md:flex-row flex-col'>
             <div className ='md:w-[630px] md:h-[110px] h-[120px] items-center md:border-l md:border-gray-200 flex gap-2 md:gap-4'>
@@ -153,7 +193,7 @@ const Traveler = () => {
                 labelText='شماره تلفن :'
                 parentWidth='w-[250px]'
                 InputHeight={'h-[50px]'}
-                labelTextSize='text-[13px]'
+                labelTextSize='text-[16px]'
                 textSize='md:text-[16px] text-[12px]'
                 borderColor='border-gray-300'
                 textColor='text-gray-300'
@@ -171,7 +211,7 @@ const Traveler = () => {
                 labelText='ایمیل :'
                 parentWidth='w-[250px]'
                 InputHeight={'h-[50px]'}
-                labelTextSize='text-[13px]'
+                labelTextSize='text-[16px]'
                 textSize='md:text-[16px] text-[12px]'
                 borderColor='border-gray-300'
                 textColor='text-gray-300'
@@ -184,16 +224,18 @@ const Traveler = () => {
                 onChange={(e) => setSharedEmail(e.target.value)}
               />
             </form>            
-            <Button text={"ثبت اطلاعات"} 
+            {/* <Button text={"ثبت اطلاعات"} 
               icon={<Image src={checkCircle} alt='checkCircle'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"142px"}}
               onClick={handleSubmit}
-            />          
+            />           */}
           </div>          
         </div>
         <div className='md:h-[84px] h-[74px] w-[340px] md:w-11/12 flex items-center justify-center border-3 border-dashed rounded-4xl border-gray-300'>
             <div className='h-9 md:w-[1410px] flex md:justify-between gap-6 md:gap-0' dir='ltr'>
             <Button text={"تایید و ادامه فرایند"} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"165px"}}
-              onClick={() => goToNext(currentStep)}
+              onClick={handleSubmit}
+              // disabled={!bookingId}
+              type='button'
             />          
               <div className='md:w-[300px] h-[30px] md:gap-3 gap-2 flex items-center md:text-[24px] text-[18px] text-white-pure' dir='rtl'>
                 <Image src={ticket} alt='ticket'/> 
