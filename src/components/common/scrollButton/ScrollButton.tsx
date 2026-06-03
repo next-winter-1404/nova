@@ -35,7 +35,7 @@ const ScrollButton = () => {
           borderRadius: 12,
           cursor: "pointer",
           background: "var(--color-dark-900-transparent-64)",
-          border: " 1px solid var(--color-dark-650)",
+          border: " 1px solid var(--color-dark-600)",
           backdropFilter: " blur(10px)",
         }}
         icon={<FaChevronUp className="text-white" size={20} />}
