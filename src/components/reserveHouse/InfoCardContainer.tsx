@@ -1,4 +1,3 @@
-
 import {FC, ReactNode} from 'react'
 interface IInfoCard{
   children:ReactNode,

@@ -7,7 +7,7 @@ interface IProp {
 const UserInfoActionButton: FC<IProp> = ({ title, explanation }) => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col text-white gap-2">
+      <div className="flex flex-col text-white-pure gap-2">
         <h1 className="font-black text-[20px]">{title}</h1>
         <p>{explanation}</p>
       </div>
