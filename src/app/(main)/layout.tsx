@@ -8,10 +8,10 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div className="font-vazir">
       <Navbar />
       {children}
       <Footer />
-    </>
+    </div>
   );
 }

@@ -140,7 +140,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
 
   return (
     <>
-      <div className="flex w-full pt-5 px-5 h-full gap-5" dir="rtl">
+      <div className="flex w-full pt-5 px-5 h-full gap-5 font-vazir" dir="rtl">
         <div className="hidden lg:block">
           <AsideMenu role={role} menuItems={menuItems}  isOpen={true}/>
         </div>
