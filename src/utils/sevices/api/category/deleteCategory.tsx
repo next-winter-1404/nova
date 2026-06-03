@@ -12,7 +12,7 @@ export const adminDeleteCategory = async (
     return response.data;
   } catch (error: any) {
     throw new Error(
-      error.response?.data?.message || "خطایی رخ داد لطفا دوباره تلاش کنید"
+      error.message || "خطایی رخ داد لطفا دوباره تلاش کنید"
     );
   }
 };

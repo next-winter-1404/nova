@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useActionState, useEffect, useState } from "react";
 import DropMenu from "../../common/dropMenu/DropMenu";
 import { TbDots, TbDotsVertical } from "react-icons/tb";
 import { FiAlertCircle } from "react-icons/fi";
@@ -14,20 +14,36 @@ import toast from "react-hot-toast";
 import AlertComponent from "../../common/alert/alert";
 import Input from "../../common/input/Input";
 import { adminDeleteCategory } from "@/src/utils/sevices/api/category/deleteCategory";
+import LoginButton from "../../login/button/LoginButton";
+import { editCategory } from "@/src/utils/sevices/api/category/editCategory";
 interface IProp {
-
   categoryName?: string;
   categoryId?: number;
-  
 }
-const CategoryItems: FC<IProp> = ({ categoryName,categoryId }) => {
+const CategoryItems: FC<IProp> = ({ categoryName, categoryId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const router = useRouter();
 
- 
+  const [state, formAction] = useActionState(
+    editCategory.bind(null, Number(categoryId)),
+    {
+      success: false,
+      message: "",
+    }
+  );
+  useEffect(() => {
+    if (!state.message) return;
 
+    if (state.success) {
+      toast.success(state.message);
+      router.refresh();
+      setIsEditModalOpen(false)
+    } else {
+      toast.error(state.message);
+    }
+  }, [state]);
 
   const handleDeleteHouse = async () => {
     try {
@@ -42,12 +58,10 @@ const CategoryItems: FC<IProp> = ({ categoryName,categoryId }) => {
 
   // drop down items with their functions
   const menuItems = [
-  
-
     {
       label: "ویرایش",
       icon: <TbEdit className="mt-px text-white" />,
-      onClick: () =>setIsEditModalOpen(true) ,
+      onClick: () => setIsEditModalOpen(true),
     },
     {
       label: "حذف",
@@ -71,8 +85,25 @@ const CategoryItems: FC<IProp> = ({ categoryName,categoryId }) => {
       />
       <Modal
         contentClassName=" bg-dark-900"
+        
         mainContent={
-        <Input InputHeight="h-[50px] text-white" defaultValue={categoryName}/>
+          <form action={formAction} className="flex-col-center gap-5 w-full ">
+            <Input
+            parentWidth="w-full"
+              InputHeight="h-[50px] text-white "
+              labelText="عنوان"
+              defaultValue={categoryName}
+              name="name"
+              tagBgStyle={{background:"var(--color-dark-900)",color:"white"}}
+              dir="rtl"
+            />
+            <LoginButton
+              loadingText="درحال ویرایش..."
+              buttonText="اعمال تغییرات"
+              width="w-full"
+              noIcon
+            />
+          </form>
         }
         onOpenChange={setIsEditModalOpen}
         open={isEditModalOpen}
