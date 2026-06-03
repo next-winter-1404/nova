@@ -15,7 +15,7 @@ import {
   TbKeyFilled,
   TbLogout,
   TbUsers,
-  TbChartPie,
+  TbCategoryFilled
 } from "react-icons/tb";
 import { FaCommentDots } from "react-icons/fa";
 import Image from "next/image";
@@ -100,6 +100,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       label: "مدیریت وبلاگ ها",
       href: `/dashboard/${role}/blog-management`,
       icon: <PiReadCvLogoFill className="w-5 h-5" />,
+    },
+    {
+      label: "مدیریت دسته بندی ها",
+      href: `/dashboard/${role}/category-management`,
+      icon: <TbCategoryFilled className="w-5 h-5" />,
     },
   ];
  

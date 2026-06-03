@@ -12,49 +12,42 @@ import { TbEdit, TbTrash } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import AlertComponent from "../../common/alert/alert";
+import Input from "../../common/input/Input";
+import { adminDeleteCategory } from "@/src/utils/sevices/api/category/deleteCategory";
 interface IProp {
-  houseId: number;
-  role?: string;
-  deleteFunction?: any;
+
+  categoryName?: string;
+  categoryId?: number;
+  
 }
-const EstateItems: FC<IProp> = ({ houseId,role,deleteFunction }) => {
+const CategoryItems: FC<IProp> = ({ categoryName,categoryId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const router = useRouter();
 
-  //   api calling
-  const { data: houseDetail, isLoading } = useQuery<IHouse | null>({
-    queryKey: ["housesDetail", houseId],
-    queryFn: () => getHousesDetail(Number(houseId)),
-    enabled: !!houseId,
-    staleTime: 5 * 1000 * 60,
-    refetchOnWindowFocus: false,
-  });
+ 
 
 
   const handleDeleteHouse = async () => {
     try {
-      await deleteFunction(houseId);
-      toast.success("ملک با موفقیت حذف شد ");
+      await adminDeleteCategory(Number(categoryId));
+      toast.success("دسته بندی با موفقیت حذف شد ");
       router.refresh();
     } catch (error) {
-      toast.error("خطا در حذف ملک ");
+      toast.error("خطا در حذف دسته بندی ");
       console.error(error);
     }
   };
 
   // drop down items with their functions
   const menuItems = [
-    {
-      label: "جزییات",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
-      onClick: () => setIsModalOpen(true),
-    },
+  
 
     {
       label: "ویرایش",
       icon: <TbEdit className="mt-px text-white" />,
-      onClick: () => router.push(`/dashboard/${role}/estate-management/edit/${houseId}`),
+      onClick: () =>setIsEditModalOpen(true) ,
     },
     {
       label: "حذف",
@@ -76,36 +69,13 @@ const EstateItems: FC<IProp> = ({ houseId,role,deleteFunction }) => {
         side="right"
         align="end"
       />
-      {/* house details */}
       <Modal
         contentClassName=" bg-dark-900"
         mainContent={
-          <div>
-            {isLoading ? (
-              <div className="w-full text-gray-300 text-3xl text-center">
-                در حال بارگزاری....
-              </div>
-            ) : (
-              <div className="flex justify-center">
-                <ProductCard
-                  address={houseDetail?.address}
-                  bathrooms={houseDetail?.bathrooms}
-                  buttonText="قیمت"
-                  discounted_price={houseDetail?.discounted_price}
-                  href={`/reserve-house/${houseId}`}
-                  parking={houseDetail?.parking}
-                  price={houseDetail?.price}
-                  rate={houseDetail?.rate}
-                  rooms={houseDetail?.rooms}
-                  photos={houseDetail?.photos}
-                  title={houseDetail?.title}
-                />
-              </div>
-            )}
-          </div>
+        <Input InputHeight="h-[50px] text-white" defaultValue={categoryName}/>
         }
-        onOpenChange={setIsModalOpen}
-        open={isModalOpen}
+        onOpenChange={setIsEditModalOpen}
+        open={isEditModalOpen}
       />
 
       <AlertComponent
@@ -119,4 +89,4 @@ const EstateItems: FC<IProp> = ({ houseId,role,deleteFunction }) => {
   );
 };
 
-export default EstateItems;
+export default CategoryItems;
