@@ -30,8 +30,13 @@ const ScrollButton = () => {
       <Button
         buttonStyle={{
           display: visible ? "flex" : "none",
-          height: 48,
-          width: 48,
+          width: 52,
+          height: 52,
+          borderRadius: 12,
+          cursor: "pointer",
+          background: "var(--color-dark-900-transparent-64)",
+          border: " 1px solid var(--color-dark-650)",
+          backdropFilter: " blur(10px)",
         }}
         icon={<FaChevronUp className="text-white" size={20} />}
         className="w-[48px] h-[48px] bg-dark-purple cursor-pointer transition-all"

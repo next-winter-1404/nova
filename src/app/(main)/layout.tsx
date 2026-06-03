@@ -11,7 +11,6 @@ export default function MainLayout({
   return (
     <div className="font-vazir">
       <Navbar />
-
       {children}
       <Footer />
     <ScrollButton/>
