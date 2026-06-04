@@ -83,7 +83,7 @@ const Payment = () => {
         }
     };
     return(
-        <div className='flex mt-[130px] flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
+        <div className='flex mt-[20px] flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
             <div className="bg-dark-600 rounded-2xl shadow-xl w-2/5 overflow-hidden">
                 <div className="bg-primary-accent-green p-6 text-center text-white">
                     <h2 className="text-2xl font-bold mb-2">پرداخت امن</h2>

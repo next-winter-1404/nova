@@ -12,9 +12,9 @@ const AcceptInfoData = async ({
   
     const bookingId = Number(params.bookingId);
 const data = await getBookingsById(bookingId);
-console.log("PARAM BOOKING ID:", bookingId);
-console.log("PARAMS =", params);
-console.log("BOOKING DATA:", data);
+console.log("Parm Booking Id:", bookingId);
+console.log("Params =", params);
+console.log("Booking Data:", data);
     return <AcceptInfo data={data} bookingId ={bookingId}/>; 
     
 };

@@ -132,7 +132,7 @@ const Traveler = () => {
   })
 
   return (
-    <div className='flex mt-[130px] flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
+    <div className='flex mt-[20px] flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
         <div className='flex items-center justify-center md:w-11/12 w-[340px] md:h-[142px] h-[400px] bg-dark-700 rounded-3xl '>
           <div className='w-22/23 flex md:flex-row flex-col'>
             <div className ='md:w-[630px] md:h-[110px] h-[120px] items-center md:border-l md:border-gray-200 flex gap-2 md:gap-4'>
@@ -147,11 +147,11 @@ const Traveler = () => {
               </div>
             </div>
             <div className ='md:w-[470px] flex flex-col gap-4 items-center justify-center h-[110px] md:border-l md:border-gray-200'>
-              <div className='md:w-[350px] h-[21px] flex md:text-[16px] text-[12px] gap-0.5 items-center'>
-                <h2 className='flex gap-3 text-gray-300 '><Image src={CalendarTime} alt='CalendarTime'/> تاریخ ورود :</h2>
+              <div className='h-[21px] flex md:text-[18px] text-[12px] gap-0.5 md:gap-4 items-center'>
+                <h2 className='flex gap-3 text-gray-300'><Image src={CalendarTime} alt='CalendarTime'/> تاریخ ورود :</h2>
                 <h2 className='text-primary-accent-green'> {checkInDate}</h2>
               </div>
-              <div className='md:w-[350px] h-[21px] flex md:text-[16px] text-[12px] gap-0.5 items-center'>
+              <div className ='h-[21px] flex md:text-[18px] text-[12px] gap-0.5 md:gap-4 items-center'>
                 <h2 className='flex gap-3 text-gray-300 '><Image src={CalendarTime} alt='CalendarTime'/> تاریخ خروج :</h2>
                 <h2 className='text-primary-accent-green'> {checkOutDate}</h2>
               </div>
