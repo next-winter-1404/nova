@@ -81,9 +81,6 @@ const Footer = () => {
     }
   };
 
-
-
-
   const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = e.target;
     setFormData((prev) => ({
@@ -92,8 +89,6 @@ const Footer = () => {
     }));
   };
   
-
- 
 
   return (
     <div className='h-[1310px] bg-dark-900 relative w-full flex justify-center items-center '>

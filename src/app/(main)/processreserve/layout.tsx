@@ -8,6 +8,9 @@ import User from "@/src/assets/icons/usersAlt.svg"
 import Accept from "@/src/assets/icons/accept.svg"
 import Payment from "@/src/assets/icons/payment.svg"
 import Ticket from "@/src/assets/icons/ticeitbill.svg"
+import { Breadcrumb, BreadcrumbItem } from "@/src/components/common/breadCrumbs";
+import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail";
+import { useQuery } from "@tanstack/react-query";
 
 interface IProps  {
     children : ReactNode;
@@ -22,11 +25,34 @@ const stepIcons =[
  const Layout =   ({children} : IProps) =>  {
     const searchParams = useSearchParams();
     const currentStep = searchParams.get('step') ||"travelerinfo";
+    const houseId = searchParams.get("houseId")
 
     const currentIndex = steps.findIndex(s => s.id === currentStep)
+    const {data} =useQuery({
+        queryKey : ["housedata", houseId],
+        queryFn : () => getHousesDetail(Number(houseId)),
+        enabled: !!houseId,
+      })
+    const items: BreadcrumbItem[] = [
+        {
+            href: "/reserve-house",
+            label: "رزرو هتل",
+        },
+        {
+            href: "/reserve-house",
+    
+            label: `رزرو  ${data?.location}`,
+        },
+        {
+            label: `رزرو  ${data?.title}`,
+        },
+    ];
     return(
-            <div>
-            <div className='flex flex-col w-full justify-center items-center mt-[180px] ' dir='rtl'>
+        <div>
+            <div className='flex flex-col w-full gap-6 justify-center items-center mt-[160px] ' dir='rtl'>
+                <div className="w-11/12" >
+                    <Breadcrumb items={items}/>
+                </div>
                 <div className='md:w-11/12 w-[340px] h-[68px] rounded-3xl flex items-center justify-center bg-dark-700'>
                     <div className='w-20/23 h-[45px] flex items-center justify-between relative'> 
                         <div className='flex items-center gap-1.5 md:gap-4'>
@@ -70,7 +96,7 @@ const stepIcons =[
                     {children}
                 </main>
             </div>   
-            </div>
+        </div>
     )
 }
 
