@@ -11,10 +11,10 @@ const AcceptInfoData = async ({
     const params = await searchParams;
   
     const bookingId = Number(params.bookingId);
-const data = await getBookingsById(bookingId);
-console.log("Parm Booking Id:", bookingId);
-console.log("Params =", params);
-console.log("Booking Data:", data);
+    const data = await getBookingsById(bookingId);
+    console.log("Parm Booking Id:", bookingId);
+    console.log("Params =", params);
+    console.log("Booking Data:", data);
     return <AcceptInfo data={data} bookingId ={bookingId}/>; 
     
 };

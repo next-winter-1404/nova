@@ -21,7 +21,7 @@ const stepIcons =[
 
  const Layout =   ({children} : IProps) =>  {
     const searchParams = useSearchParams();
-    const currentStep = searchParams.get('step') ||"travelinfo";
+    const currentStep = searchParams.get('step') ||"travelerinfo";
 
     const currentIndex = steps.findIndex(s => s.id === currentStep)
     return(
