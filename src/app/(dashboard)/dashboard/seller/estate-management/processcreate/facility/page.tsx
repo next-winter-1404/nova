@@ -152,7 +152,7 @@ const Facility = () => {
               نوع حیاط :
             </label>
             <select
-              className ={`text-gray-300 w-[535px] pr-3 h-[60px] md:text-[16px] text-[12px] border rounded-2xl border-gray-300 ${errors.yard_type ? 'border-red-500' : ''}`}    
+              className ={`text-gray-300 w-[535px] bg-dark-600 pr-3 h-[60px] md:text-[16px] text-[12px] border rounded-2xl border-gray-300 ${errors.yard_type ? 'border-red-500' : ''}`}    
               value={houseData.yard_type || ''}
               onChange={handleChange}
               name='yard_type'
