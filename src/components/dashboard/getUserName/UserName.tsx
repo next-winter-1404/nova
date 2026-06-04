@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
 import Image from "next/image";
 import userPlaceHolder from "@/src/assets/images/userPlaceHolder.jpg";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 interface UserNameProps {
   userId: number;
 }
@@ -31,14 +32,15 @@ const UserName = ({ userId }: UserNameProps) => {
   if (loading) return <span className="text-gray-400">در حال بارگذاری...</span>;
   return (
     <div className="flex gap-1 items-center py-1">
-      <Image
+      <ImageFallback
+        fallbackSrc={userPlaceHolder}
         alt="prof"
         src={pic || userPlaceHolder}
         width={50}
         height={50}
         className="rounded-lg border border-gray-300"
       />
-      <span className="mr-3 text-center ">{name||"نام کاربر"}</span>
+      <span className="mr-3 text-center ">{name || "نام کاربر"}</span>
     </div>
   );
 };

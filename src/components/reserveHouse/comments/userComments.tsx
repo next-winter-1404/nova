@@ -14,6 +14,8 @@ import line from "@/src/assets/icons/replyLine.svg";
 import Image from "next/image";
 import { FaCalendarAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import userPlaceHolder from "@/src/assets/images/userPlaceHolder.jpg";
 
 const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
   const router = useRouter();
@@ -74,7 +76,17 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
                                     {replies.map((reply) => (
                                       <div key={reply.id}>
                                         <div className="flex items-start gap-3 bg-dark-800 p-3 rounded-2xl">
-                                          <div className="w-10 h-10 bg-dark-600 rounded-3xl"></div>
+                                          <ImageFallback
+                                            src={
+                                              reply.user?.profilePicture ||
+                                              userPlaceHolder
+                                            }
+                                            fallbackSrc={userPlaceHolder}
+                                            width={40}
+                                            height={40}
+                                            className="rounded-3xl"
+                                            alt="prof"
+                                          />
                                           <div className="flex flex-col gap-4">
                                             <h1 className="mt-2 font-bold text-[18px]">
                                               {`${
@@ -174,7 +186,16 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
                                 {comment.created_at?.slice(0, 10)}
                               </h2>
                             </div>
-                            <div className="md:w-[57px] w-[50px] h-[50px] rounded-2xl bg-[#D9D9D9]"></div>
+                            <ImageFallback
+                              alt="prof"
+                              src={
+                                comment.user?.profilePicture || userPlaceHolder
+                              }
+                              fallbackSrc={userPlaceHolder}
+                              width={40}
+                              height={50}
+                              className=" md:w-[57px] rounded-xl "
+                            />
                           </div>
                         </div>
                       </div>

@@ -1,12 +1,14 @@
 "use client";
-import { useActionState, useEffect, useRef } from "react";
-import LoginButton from "../../login/button/LoginButton";
+
+import { useActionState, useEffect, useRef, useTransition } from "react";
 import toast from "react-hot-toast";
 import Button from "../../common/button/page";
 import { uploadProfilePicture } from "@/src/utils/sevices/api/users/uploadPicture";
 
 const ChoosePicture = ({ onSuccess }: { onSuccess?: () => void }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isPending, startTransition] = useTransition();
+
   const [state, formAction] = useActionState(uploadProfilePicture, {
     success: false,
     message: "",
@@ -14,6 +16,7 @@ const ChoosePicture = ({ onSuccess }: { onSuccess?: () => void }) => {
 
   useEffect(() => {
     if (!state?.message) return;
+
     if (state.success) {
       toast.success(state.message);
       onSuccess?.();
@@ -34,18 +37,14 @@ const ChoosePicture = ({ onSuccess }: { onSuccess?: () => void }) => {
 
     const formData = new FormData();
     formData.append("picture", file);
-    formAction(formData);
+
+    startTransition(() => {
+      formAction(formData);
+    });
   };
 
-//   const handleCancel = () => {
-//     if (fileInputRef.current) {
-//       fileInputRef.current.value = "";
-//     }
-//     onSuccess?.();
-//   };
-
   return (
-    <form action={formAction} className="flex gap-5">
+    <div className="flex gap-5">
       <div className="relative">
         <input
           type="file"
@@ -54,27 +53,27 @@ const ChoosePicture = ({ onSuccess }: { onSuccess?: () => void }) => {
           accept="image/*"
           className="hidden"
           id="fileInput"
-          onChange={handleFileChange} 
+          onChange={handleFileChange}
         />
+
         <label
           htmlFor="fileInput"
-          className="w-[87px] h-10 bg-primary-accent-green rounded-xl outline-none text-center cursor-pointer flex items-center justify-center"
+          className="w-[87px] h-10 bg-primary-accent-green rounded-xl flex items-center justify-center cursor-pointer"
         >
           انتخاب فایل
         </label>
       </div>
+
       <Button
         text={"انصراف"}
         buttonStyle={{
           background: "transparent",
           border: "1px solid white",
           padding: 12,
-          textAlign: "center",
           color: "white",
         }}
-        // onClick={handleCancel}
       />
-    </form>
+    </div>
   );
 };
 

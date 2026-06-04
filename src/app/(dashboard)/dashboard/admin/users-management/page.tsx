@@ -6,8 +6,10 @@ import { IAdminAllUsers } from "@/src/core/types/IAdminGetAllUser";
 import { getAllusers } from "@/src/utils/sevices/api/admin/users/getAllusers/getAllusers";
 import Image from "next/image";
 import { FaUser } from "react-icons/fa";
+import usePlaceHolder from "@/src/assets/images/userPlaceHolder.jpg";
 import { PiImageBrokenDuotone } from "react-icons/pi";
-import UserManegmentSearch from '@/src/components/dashboard/userManegmentSearch/userManegmentSearch';
+import UserManegmentSearch from "@/src/components/dashboard/userManegmentSearch/userManegmentSearch";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 const items = [
   " پروفایل",
   "نام کاربر",
@@ -21,9 +23,10 @@ const UserManegment = async () => {
   const allUser = await getAllusers();
 
   return (
-    <DashboardContentContainer title="لیست کاربران" topSectionContent={
-       <UserManegmentSearch/>
-      }>
+    <DashboardContentContainer
+      title="لیست کاربران"
+      topSectionContent={<UserManegmentSearch />}
+    >
       <div>
         <div className="w-full flex-col-center">
           <ItemNavbar colsNumber={6} items={items} />
@@ -32,25 +35,21 @@ const UserManegment = async () => {
           {allUser?.data?.length > 0 ? (
             <div className="w-full flex flex-col gap-5">
               <>
-                {allUser?.data?.map((item:IAdminAllUsers) => (
+                {allUser?.data?.map((item: IAdminAllUsers) => (
                   <div
                     className="flex justify-between w-full items-center"
                     key={item.id}
                   >
                     <div className="flex-center justify-between w-full h-[50px] items-center">
                       <div className="flex-center rounded-full  mr-[140px]">
-                       {item.profilePicture ? (
-                          <Image
-                            src={item.profilePicture}
-                            alt="user profile"
-                            width={40}
-                            height={40}
-                          />
-                        ) : (
-                          <span>
-                            <PiImageBrokenDuotone />
-                          </span>
-                        )}
+                        <ImageFallback
+                          fallbackSrc={usePlaceHolder}
+                          src={item.profilePicture || usePlaceHolder}
+                          alt="user profile"
+                          width={40}
+                          height={40}
+                          className="rounded-lg"
+                        />
                       </div>
                       <div
                         className="max-w-[150px] overflow-ellipsis flex-center"
@@ -68,7 +67,7 @@ const UserManegment = async () => {
                         {item.updatedAt.split("T")[0]}
                       </div>
                       <div className=" ml-[140px] flex-center ">
-                        <UserManegmentActionMenu user={item}/>
+                        <UserManegmentActionMenu user={item} />
                       </div>
                     </div>
                   </div>
