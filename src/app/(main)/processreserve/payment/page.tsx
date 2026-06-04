@@ -10,7 +10,7 @@ const Payment = () => {
     const router = useRouter();
     const searchParams = useSearchParams();  
     const bookingId = searchParams.get("bookingId")
-    const amount = searchParams.get("amount")
+    const totalPrice = searchParams.get("totalPrice")
 
     const [cardNumber, setCardNumber] = useState("");
     const [cvv2, setCvv2] = useState('');
@@ -24,14 +24,14 @@ const Payment = () => {
 
     useEffect(() => {
         initPayment();
-    },[bookingId,amount])
+    },[bookingId,totalPrice])
 
     const initPayment = async () => {
         setLoading(true)
         setError(null)
         try{
             const payload = {
-                amount : Number(amount),
+                amount : Number(totalPrice),
                 callbackUrl : `${window.location.origin}/processreserve/ticket/`,
                 description : 'پرداخت رزرو هتل',
                 bookingId : Number(bookingId)
@@ -76,7 +76,7 @@ const Payment = () => {
         try {   
             const currentStep = searchParams.get('step') || "payment";
             const nextStep = 'ticket';
-            router.push(`/processreserve/ticket?bookingId=${bookingId}&amount=${amount}&step=${nextStep}`);    
+            router.push(`/processreserve/ticket?bookingId=${bookingId}&amount=${totalPrice}&step=${nextStep}`);    
         } catch (err: any) {
             setError('خطا در پردازش نهایی. لطفاً دوباره تلاش کنید.');
             setLoading(false);
@@ -87,7 +87,7 @@ const Payment = () => {
             <div className="bg-dark-600 rounded-2xl shadow-xl w-2/5 overflow-hidden">
                 <div className="bg-primary-accent-green p-6 text-center text-white">
                     <h2 className="text-2xl font-bold mb-2">پرداخت امن</h2>
-                    <p className="text-gray-600">مبلغ: {Number(amount).toLocaleString()} تومان</p>
+                    <p className="text-gray-600">مبلغ: {Number(totalPrice).toLocaleString()} تومان</p>
                 </div>
 
                 <form onSubmit={handleFinalPayment} className="p-6 space-y-12" >

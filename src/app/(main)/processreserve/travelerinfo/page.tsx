@@ -7,14 +7,12 @@ import CalendarTime from "@/src/assets/icons/calendarclock.svg"
 import greenhotel from "@/src/assets/icons/greenhotel.svg"
 import timepast from "@/src/assets/icons/timepast.svg"
 import users2 from "@/src/assets/icons/users2.svg"
-import checkCircle from "@/src/assets/icons/checkCircle.svg"
 import ticket from "@/src/assets/icons/ticket.svg"
 import arrowLeftGreen from "@/src/assets/icons/arrowLeftGreen.svg"
 import imagePlaceHolder from "@/src/assets/images/imagePlaceHolder (2).png"
 import Image from 'next/image'
 import Button from '@/src/components/common/button/page'
 import Input from '@/src/components/common/input/Input'
-import useStepNavigation from '../navigation'
 import PassengerSection from './passengerSection/page'
 import toast from 'react-hot-toast'
 import { postTravelerInfo } from '@/src/utils/sevices/api/processReserve/postTravelerInfo'
@@ -32,18 +30,15 @@ const Traveler = () => {
     const checkOutDate = searchParams.get("checkOutDate")
     const totalPrice = searchParams.get("totalPrice")
     const houseId = searchParams.get("houseId")
-    const currentStep = searchParams.get('step') || 'travelerinfo'
     const [passengers, setPassengers] = useState<IPassengerInfo[]>([]);
     const [sharedEmail, setSharedEmail] = useState('')
     const [sharedMobile, setSharedMobile] = useState('')
-    const [bookingId, setBookingId] = useState<number | null>(null);
     const handlePassengerChange = useCallback(
       (newPassengers: IPassengerInfo[]) => {
         setPassengers(newPassengers);
       },
       []
     );
-    const {goToNext} = useStepNavigation();
     console.log("houseId: ", houseId)
     const reservedDates = [checkInDate, checkOutDate]
     const handleSubmit = async () => {
@@ -114,15 +109,17 @@ const Traveler = () => {
         };
         const response = await postTravelerInfo(payload);
         const bookingId = response.data.id;
+        const params = new URLSearchParams({
+          totalPrice : totalPrice.toString(),
+        })
         router.push(
-          `/processreserve/acceptinfodata?bookingId=${bookingId}&step=acceptinfodata`
+          `/processreserve/acceptinfodata?bookingId=${bookingId}&step=acceptinfodata&${params.toString()}`
         );
         toast.success("اطلاعات با موفقیت ثبت شد")
       }
       catch (error) {
         console.error("FULL ERROR:", error);
       }
-      // goToNext('travel')
   }
 
   const handleNavigate = () => {
@@ -235,17 +232,12 @@ const Traveler = () => {
                 onChange={(e) => setSharedEmail(e.target.value)}
               />
             </form>            
-            {/* <Button text={"ثبت اطلاعات"} 
-              icon={<Image src={checkCircle} alt='checkCircle'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"142px"}}
-              onClick={handleSubmit}
-            />           */}
           </div>          
         </div>
         <div className='md:h-[84px] h-[74px] w-[340px] md:w-11/12 flex items-center justify-center border-3 border-dashed rounded-4xl border-gray-300'>
             <div className='h-9 md:w-[1410px] flex md:justify-between gap-6 md:gap-0' dir='ltr'>
             <Button text={"تایید و ادامه فرایند"} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"165px"}}
               onClick={handleSubmit}
-              // disabled={!bookingId}
               type='button'
             />          
               <div className='md:w-[300px] h-[30px] md:gap-3 gap-2 flex items-center md:text-[24px] text-[18px] text-white-pure' dir='rtl'>

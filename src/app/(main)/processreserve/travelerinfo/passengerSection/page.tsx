@@ -135,11 +135,11 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                             جنسیت:
                         </label>
                         <select
-                            className ='text-gray-300 w-[250px] h-[50px] md:text-[16px] text-[12px] pr-3 border rounded-2xl border-gray-300'
+                            className ='text-gray-300 w-[250px] h-[50px] md:text-[16px] text-[12px] pr-3 bg-dark-700 border rounded-2xl border-gray-300'
                             value={p.gender}
                             onChange={(e) => handleChange(index, "gender", e.target.value)}
                         >
-                            <option value=""> انتخاب کنید </option>
+                            <option value="" disabled> انتخاب کنید </option>
                             <option value="male">مرد</option>
                             <option value="female">زن</option>
                         </select>

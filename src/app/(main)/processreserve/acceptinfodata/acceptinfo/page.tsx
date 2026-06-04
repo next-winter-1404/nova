@@ -28,6 +28,7 @@ const AcceptInfo = ({data , bookingId}: {data:any, bookingId : number} ) => {
     const currentStep = searchParams.get('step') || 'acceptinfo'
     const { goToPrev} = useStepNavigation();
     const houseId = data.booking?.houseId
+    const totalPrice = searchParams.get("totalPrice")
     const {data : houseDetails} =useQuery({
       queryKey : ["houseDetails", houseId],
       queryFn : () => getHousesDetail(Number(houseId)),
@@ -50,7 +51,7 @@ const AcceptInfo = ({data , bookingId}: {data:any, bookingId : number} ) => {
       const nextStep = steps[currentIndex + 1];
     const params = new URLSearchParams({
       bookingId : bookingId.toString(),
-      amount : amount.toString(),
+      totalPrice : totalPrice.toString(),
     })
     router.push(`/processreserve/${nextStep.id}?step=${nextStep.id}&${params.toString()}`)
   }
@@ -114,7 +115,7 @@ const AcceptInfo = ({data , bookingId}: {data:any, bookingId : number} ) => {
                 </div>
                 <div className='flex flex-col items-center w-[100px] text-[16px] md:gap-[40px] gap-3'>
                   <h2 className='text-gray-300'>قیمت</h2>
-                  <h2 className='text-white-pure'> {amount} ت</h2>
+                  <h2 className='text-white-pure'> {totalPrice} ت</h2>
                 </div>
                 
               </div>
@@ -193,7 +194,7 @@ const AcceptInfo = ({data , bookingId}: {data:any, bookingId : number} ) => {
                   <div className='md:w-[300px] h-[30px] md:gap-3 gap-2 flex justify-center items-center md:text-[24px] text-[18px] text-white-pure'>
                       <Image src={ticket} alt='ticket'/> 
                       <div className='flex gap-0.5'>
-                        <h2 > قیمت بلیط : </h2> <h2 className='text-primary-accent-green'> {amount}ت </h2>
+                        <h2 > قیمت بلیط : </h2> <h2 className='text-primary-accent-green'> {totalPrice}ت </h2>
                       </div>
                   </div>
                   <div className='flex gap-4'>
