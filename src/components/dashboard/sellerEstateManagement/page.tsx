@@ -10,6 +10,7 @@ import { IHouse } from "@/src/core/types/IHouse";
 import useSearch from "@/src/utils/hooks/searchHook";
 import EstateItems from "../estateItems/EstateItems";
 import { SellerDeleteHouses } from "@/src/utils/sevices/api/seller/houses/deleteHouse/deleteHouse";
+import { FaStar } from "react-icons/fa";
 
 interface IProps {
   items: string[];
@@ -72,10 +73,23 @@ const SellerEstateManagement: FC<IProps> = ({ items, house, role }) => {
                                         {item?.address || "--"}
                                     </div>
 
-                                    <div className=" text-center ml-[195px]">
-                                        {item?.rate || "--"}
+                                    <div className=" text-center flex gap-1 mr-[25px]">
+                                        {item?.rate ? (   
+                                            <>
+                                                {Array.from({length: 5}).map((_, index) => (
+                                                    <FaStar 
+                                                        key={index}
+                                                        fill = {index < Number(item?.rate) ? "#FFD700" : "none"}
+                                                    />
+                                                ))}
+                                            </>
+                                        ) : (
+                                            <span className="text-primary-accent-green">
+                                                جدید
+                                            </span>
+                                            )}
                                     </div>
-                                    <div className=" ml-[265px]">
+                                    <div className=" mr-[5px]">
                                         {item?.capacity || "--"}
                                     </div>
                                     </div>
