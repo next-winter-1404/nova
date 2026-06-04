@@ -12,7 +12,6 @@ import { TbEdit, TbTrash } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import AlertComponent from "../../common/alert/alert";
-import { deleteHouses } from "@/src/utils/sevices/api/admin/houses/deleteHouses/deleteHouses";
 interface IProp {
   houseId: number;
   role?: string;

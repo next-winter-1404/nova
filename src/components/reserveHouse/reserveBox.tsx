@@ -33,7 +33,6 @@ const ReserveBox: FC<IHouse> = ({ price, id, discounted_price }) => {
     try {
       const response = await fetch("/api/auth/check");
       const data = await response.json();
-      console.log("Auth check response:", data);
       setIsAuthenticated(data.isAuthenticated);
       return data.isAuthenticated;
     } catch (error) {
@@ -92,6 +91,7 @@ const ReserveBox: FC<IHouse> = ({ price, id, discounted_price }) => {
     if (checkOutDate) queryParams.append("checkOutDate", checkOutDate);
     if (passengers) queryParams.append("passengers", passengers.toString());
     if (id) queryParams.append("houseId", id.toString());
+    queryParams.append("totalPrice", totalPrice.toString());
     router.push(`/processreserve/travelerinfo?${queryParams.toString()}`);
   };
   const priceNumber = Number(discounted_price || price) || 0;
