@@ -34,9 +34,7 @@ export const uploadProfilePicture = async (
 
     const dataResponse = res.data;
 
-    if (res.status === 200 && dataResponse.profilePictureUrl) {
-      //   await setServerSideCookie("userProfilePicture", dataResponse.profilePictureUrl);
-
+    if (res.status === 200 && dataResponse) {
       return {
         success: true,
         message: "عکس پروفایل با موفقیت آپلود شد",
@@ -67,7 +65,7 @@ export const uploadProfilePicture = async (
 
     return {
       success: false,
-      message: error.response?.data?.message || "خطا در آپلود عکس",
+      message: error.message || "خطا در آپلود عکس",
     };
   }
 };

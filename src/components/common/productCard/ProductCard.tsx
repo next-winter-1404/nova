@@ -11,7 +11,8 @@ import OldPriceComponent from "./OldPrice";
 import { IProductCard } from "@/src/core/types/IProductCard";
 import { computingDiscount } from "@/src/utils/helper/computingDiscount";
 import Link from "next/link";
-
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import imagePalaceHolder from "@/src/assets/images/imagePlaceHolder (2).png";
 const ProductCard = ({
   title,
   address,
@@ -32,11 +33,10 @@ const ProductCard = ({
   seeMore,
   offer,
   buttonText,
-  href
+  href,
 }: IProductCard) => {
   const discountPercent = computingDiscount({ discounted_price, price });
-  const roundDiscountPercent  = Math.round(discountPercent)
-
+  const roundDiscountPercent = Math.round(discountPercent);
 
   return (
     <div className="group max-w-76.5  text-white-pure flex flex-col gap-4 font-vazir">
@@ -46,7 +46,7 @@ const ProductCard = ({
         </div>
       )}
       <CardContainer
-      // parentExtraStyle={{width:"300px"}}
+        // parentExtraStyle={{width:"300px"}}
         curveColor="#393939"
         cavity="round"
         labelContent={
@@ -57,9 +57,16 @@ const ProductCard = ({
         }
         labelSize="md"
         mainContent={
-          <div
-            className={`w-[297px] h-[156px] ${photos ? <Image src={photos[0]} alt="state image" /> : " bg-dark-600 "} rounded-2xl`}
-          ></div>
+          <div>
+            <ImageFallback
+              fallbackSrc={imagePalaceHolder}
+              src={photos?.[0] || imagePalaceHolder}
+              alt="state image"
+              width={297}
+              height={156}
+              className="rounded-2xl"
+            />
+          </div>
         }
         labelBackground="group-hover:bg-[#8cff45] bg-[#393939]"
         labelExtraStyle={{ minHeight: "25px" }}
@@ -68,22 +75,34 @@ const ProductCard = ({
 
       <div className="flex-col-center gap-3">
         <span
-          className={`w-full ${discounted_price ? " flex items-center justify-between" : "justify-end"} `}
+          className={`w-full ${
+            discounted_price
+              ? " flex items-center justify-between"
+              : "justify-end"
+          } `}
         >
           {discounted_price ? (
             <span className="text-16-semibold px-3 py-1.5 sm:w-14 w-12 text-center rounded-xl bg-tomato-red whitespace-nowrap">
               %{roundDiscountPercent}
             </span>
-          ): ""}
+          ) : (
+            ""
+          )}
           <span className="flex justify-end text-20-regular">
-            {title && href ? <Link href={href}>{title}</Link> : title || "عنوانی وجود ندارد"}
+            {title && href ? (
+              <Link href={href}>{title}</Link>
+            ) : (
+              title || "عنوانی وجود ندارد"
+            )}
           </span>
         </span>
 
         {bathroom && (
           <>
             <div className="w-full flex justify-end gap-3">
-              <h2 className="text-[16px] text-gray-300">{address || "ادرسی وجود ندارد"}</h2>
+              <h2 className="text-[16px] text-gray-300">
+                {address || "ادرسی وجود ندارد"}
+              </h2>
               <Image src={Location} alt="Location" />
             </div>
             <div className="w-full h-[16px] flex items-center justify-end text-gray-300 gap-1 whitespace-nowrap">

@@ -22,7 +22,7 @@ const BuyerDashboardPage = async () => {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex gap-4 justify-between w-full ">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4  w-full ">
         <DashboardInformation
           amount={booking?.length}
           cardText="تعداد کل رزرو ها"
@@ -59,7 +59,7 @@ const BuyerDashboardPage = async () => {
 
         />
       </div>
-      <div className="grid grid-cols-2 gap-5 2xl:gap-20">
+      <div className="grid lg:grid-cols-2 gap-5 2xl:gap-4">
         <DashboardContentContainer
           seemore
           twParentClassName=""

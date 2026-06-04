@@ -14,6 +14,7 @@ import { IHouse } from "@/src/core/types/IHouse";
 import { IComment, ICommentResponse } from "@/src/core/types/IComment";
 import CommentITemsManagement from "../commentItemsManagement/commentItemsManagement";
 import SellerHouse from "../sellerHouse/SellerHouse";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 interface IProp {
   orderItems: IOption[];
   sortItems: IOption[];
@@ -98,7 +99,9 @@ const DashboardCommentManagement: FC<IProp> = ({
                           "نام کاربر"}
                       </p>
                     </div>
-                    <p className=" md:px-15  mr-5 md:mr-0">{comment.title || "بدون عنوان"}</p>
+                    <p className=" md:px-15  mr-5 md:mr-0">
+                      {comment.title || "بدون عنوان"}
+                    </p>
                     <p className="  md:ml-8   md:text-center">
                       {comment.created_at?.slice(0, 10) || "--"}
                     </p>
@@ -114,7 +117,8 @@ const DashboardCommentManagement: FC<IProp> = ({
                       mainContent={
                         <div className="flex flex-col gap-8 " dir="rtl">
                           <div className="flex gap-3 items-center">
-                            <Image
+                            <ImageFallback
+                              fallbackSrc={userPlaceHolder}
                               src={
                                 comment.user?.profilePicture || userPlaceHolder
                               }

@@ -13,7 +13,7 @@ import Image from "next/image";
 
 const AboutUs = () => {
   return (
-    <div className="flex flex-col w-full items-center md:gap-6 gap-4 h-[1200px] md:h-[800px] bg-dark-900 rounded-br-[64px] rounded-bl-[64px] text-white-pure">
+    <div id="aboutus" className="flex flex-col w-full items-center md:gap-6 gap-4 h-[1200px] md:h-[800px] bg-dark-900 rounded-br-[64px] rounded-bl-[64px] text-white-pure">
       <Triangle text="درباره ما" />
       <span className=" md:text-[32px] text-[28px]">!دلتا رو بیشتر بشناس </span>
       <h2 className="md:text-[16px] md:mr-0 mr-3 text-[12px] text-right">
