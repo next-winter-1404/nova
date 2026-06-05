@@ -1,6 +1,6 @@
 "use client";
-import React, { use, useState } from "react";
-import { TbCreditCard, TbDots, TbDotsVertical } from "react-icons/tb";
+import { useActionState, useEffect, useState } from "react";
+import {TbDots, TbDotsVertical,TbTool  } from "react-icons/tb";
 import { Modal } from "../../common/modal";
 import { IBooking } from "@/src/core/types/IBooking";
 import { useQuery } from "@tanstack/react-query";
@@ -11,18 +11,24 @@ import Button from "../../common/button/page";
 import ItemNavbar from "../../common/dashboardItemNavbar/ItemNavbar";
 import DropMenu from "../../common/dropMenu/DropMenu";
 import { FiAlertCircle } from "react-icons/fi";
+import LoginButton from "../../login/button/LoginButton";
+import { sendMaintenanceRequest } from "@/src/utils/sevices/api/maintenanceRequests/sendMaintenanceRequest";
+import toast from "react-hot-toast";
 interface IReservationItemProps {
-  item: IBooking;
+  houseId: number;
+  item?: IBooking;
 }
-const ReservationItem = ({ item }: IReservationItemProps) => {
+const ReservationItem = ({ houseId, item }: IReservationItemProps) => {
   const [selected, setSelected] = useState<number | null | string | undefined>(
     null
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMaintenanceModalOpen, setIsMaintenanceModalOpen] = useState(false);
+
   const { data: houseDetail } = useQuery<IHouse | null>({
-    queryKey: ["houseDetail", selected],
-    queryFn: () => getHousesDetail(Number(selected)),
-    enabled: selected !== null,
+    queryKey: ["houseDetail", houseId],
+    queryFn: () => getHousesDetail(Number(houseId)),
+    enabled: houseId !== null,
     staleTime: 5 * 1000 * 60,
     refetchOnWindowFocus: false,
   });
@@ -32,22 +38,49 @@ const ReservationItem = ({ item }: IReservationItemProps) => {
     if (typeof tags === "string") return [tags];
     return [];
   };
+  // send report function
+  const [state, formAction] = useActionState(
+    async (prevState: any, formData: FormData) => {
+      if (!houseId) {
+        return {
+          success: false,
+          message: "خانه انتخاب نشده است",
+        };
+      }
+
+      return sendMaintenanceRequest(Number(houseId), prevState, formData);
+    },
+    {
+      success: false,
+      message: "",
+    }
+  );
+  // send report state
+  useEffect(() => {
+    if (!state.message) return;
+
+    if (state.success) {
+      toast.success(state.message);
+    } else {
+      toast.error(state.message);
+    }
+  }, [state]);
+
   const navbarItem = ["نام", "کد ملی", "جنسیت", "تاریخ تولد"];
   const tagsArray = getTagsArray(houseDetail?.tags);
-  const handleOpenModal = () => {
-    setSelected(item?.houseId || null);
-    setIsModalOpen(true);
-  };
+
+  // menu items with their functions
   const menuItems = [
     {
       label: "جزییات",
       icon: <FiAlertCircle className="w-4 h-4 text-white" />,
-      onClick: () => handleOpenModal(),
+      onClick: () => setIsModalOpen(true),
     },
 
     {
-      label: "پرداخت",
-      icon: <TbCreditCard className="mt-px text-white" />,
+      label: "گزارش خرابی",
+      icon: <TbTool  className="mt-px text-white" />,
+      onClick: () => setIsMaintenanceModalOpen(true),
     },
   ];
 
@@ -64,6 +97,31 @@ const ReservationItem = ({ item }: IReservationItemProps) => {
         side="bottom"
         align="end"
       />
+      {/* send report modal */}
+      <Modal
+        contentClassName="bg-dark-900 text-white"
+        mainContent={
+          <form action={formAction} className="flex flex-col gap-5">
+            <textarea
+              className="w-full min-h-[200px] p-2 border border-gray-300"
+              dir="rtl"
+              name="description"
+            />
+            <LoginButton
+              buttonText="ارسال گزارش"
+              loadingText="درحال ارسال ..."
+              noIcon
+              width="w-full"
+              type="submit"
+            />
+          </form>
+        }
+        modalTitle="گزارش خرابی"
+        modalDescription="در صورت مشاهده هرگونه مشکل یا خرابی در ملک، لطفاً جزئیات آن را در این بخش ثبت کنید تا توسط مالک بررسی و پیگیری شود."
+        onOpenChange={setIsMaintenanceModalOpen}
+        open={isMaintenanceModalOpen}
+      />
+      {/* house detail */}
       <Modal
         open={isModalOpen}
         onOpenChange={setIsModalOpen}
@@ -73,8 +131,8 @@ const ReservationItem = ({ item }: IReservationItemProps) => {
         mainContent={
           <div className="flex justify-between">
             <div className=" text-white flex flex-col justify-between ">
-              <div className="flex-col flex gap-5 ">
-                <p>{houseDetail?.caption || "توضیحاتی وجود ندارد"}</p>
+              <div className="flex-col flex gap-5 w-[90%]  ">
+                <p dir="rtl">{houseDetail?.caption || "توضیحاتی وجود ندارد"}</p>
                 <div className="flex gap-4" dir="rtl">
                   <span className="text-gray-300">برچسب ها : </span>
                   <div className="flex gap-2 flex-wrap">
@@ -104,7 +162,7 @@ const ReservationItem = ({ item }: IReservationItemProps) => {
                   contentClassName="bg-dark-800"
                   mainContent={
                     <div>
-                      {item.traveler_details?.map((traveler) => (
+                      {item?.traveler_details?.map((traveler) => (
                         <div
                           className="flex flex-col gap-5"
                           dir="rtl"
