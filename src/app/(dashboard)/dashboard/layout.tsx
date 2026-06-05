@@ -54,11 +54,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       href: `/dashboard/${role}/reserve-management`,
       icon: <TbCirclePlusFilled className="w-6 h-6" />,
     },
-    {
-      label: "علاقه‌مندی‌ها",
-      href: `/dashboard/${role}/favorites`,
-      icon: <TbHeartFilled className="w-6 h-6" />,
-    },
+   
     {
       label: "مدیریت مالی",
       href: `/dashboard/${role}/financial-management`,
@@ -70,7 +66,24 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       icon: <TbBellFilled className="w-6 h-6" />,
     },
   ];
+  const buyerItems =[
+    {
+      label: "علاقه‌مندی‌ها",
+      href: `/dashboard/${role}/favorites`,
+      icon: <TbHeartFilled className="w-6 h-6" />,
+    },
+    {
+      label: "قرار های ملاقات من",
+      href: `/dashboard/${role}/user-visitAppointments`,
+      icon: <TbCalendarEvent  className="w-6 h-6" />,
+    },
+  ]
   const sellerItems = [
+    {
+      label: "علاقه‌مندی‌ها",
+      href: `/dashboard/${role}/favorites`,
+      icon: <TbHeartFilled className="w-6 h-6" />,
+    },
     {
       label: "مدیریت املاک",
       href: `/dashboard/${role}/estate-management`,
@@ -121,6 +134,9 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
     menuItems = [...menuItems, ...sellerItems];
   } else if (role === "admin") {
     menuItems = [...menuItems, ...adminItems];
+  
+  } else if (role === "buyer") {
+    menuItems = [...menuItems, ...buyerItems];
   }
 
   const profileItems = [
