@@ -16,6 +16,7 @@ import {
   TbLogout,
   TbUsers,
   TbCategoryFilled,
+  TbCalendarEvent
 } from "react-icons/tb";
 import { FaCommentDots } from "react-icons/fa";
 import Image from "next/image";
@@ -79,6 +80,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       label: "مدیریت نظرات",
       href: `/dashboard/${role}/comments-management`,
       icon: <FaCommentDots className="w-5 h-5" />,
+    },
+    {
+      label: "مدیریت قرار ها",
+      href: `/dashboard/${role}/appointment-management`,
+      icon: <TbCalendarEvent className="w-5 h-5" />,
     },
   ];
   const adminItems = [
