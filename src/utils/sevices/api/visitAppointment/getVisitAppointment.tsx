@@ -1,10 +1,9 @@
+import { IVisit } from "@/src/core/types/IVisit";
 import instance from "../../interseptor"
 
-export const getVisitAppointments = async(houseId:number)=>{
-    try {
+export const getVisitAppointments = async(houseId:number):Promise<IVisit[]>=>{
+
         const response= await instance.get(`/api/visit-appointments/house/${houseId}`)
         return response.data
-    } catch (error) {
-        console.error("خطایی رخ داد",error);
-    }
+   
 }

@@ -1,11 +1,11 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Modal } from "../../common/modal";
 import DatePickerComponent from "../../common/datePicker";
 import Button from "../../common/button/page";
 import { FiPhoneCall } from "react-icons/fi";
 import SimpleDropdown from "../../common/dropDown";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createVisitAppointment } from "@/src/utils/sevices/api/visitAppointment/createvisitAppointment";
 import toast from "react-hot-toast";
 import { TbBadge, TbCalendarCheck, TbPhone } from "react-icons/tb";
@@ -22,13 +22,36 @@ const VisitAppointment: FC<IProps> = ({ houseId, userId, getAppointments }) => {
   const [isMyVisitOpen, setIsMyVisitOpen] = useState(false);
   const [date, setDate] = useState("");
   const searchParams = useSearchParams();
+  const router = useRouter();
+
   const typeOfVisit = searchParams.get("type");
-  console.log("getAppointments", getAppointments);
 
   const myVisits = (getAppointments ?? []).filter(
     (appointment) => appointment.userId === userId
   );
+  const checkAuth = async (): Promise<boolean> => {
+    try {
+      const response = await fetch("/api/auth/check");
+      const data = await response.json();
+      return data.isAuthenticated;
+    } catch (error) {
+      console.log("Error checking auth:", error);
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
   const handleSubmit = async () => {
+    const isAuth = await checkAuth();
+
+    if (!isAuth) {
+      toast.error("ابتدا وارد حساب کاربری شوید");
+      router.push("/login");
+      return;
+    }
     try {
       toast.loading("در حال ثبت قرار...", { id: "visit" });
 
@@ -135,7 +158,10 @@ const VisitAppointment: FC<IProps> = ({ houseId, userId, getAppointments }) => {
         mainContent={
           <div dir="rtl " className="w-full flex flex-col gap-5">
             {myVisits.map((visit) => (
-              <div className="flex flex-col gap-4 p-4 rounded-xl bg-dark-600 w-full" dir="rtl">
+              <div
+                className="flex flex-col gap-4 p-4 rounded-xl bg-dark-600 w-full"
+                dir="rtl"
+              >
                 <div className="flex gap-2 items-center">
                   <div className="flex gap-1 text-gray-300 items-center">
                     <TbCalendarCheck className="w-4 h-4" />

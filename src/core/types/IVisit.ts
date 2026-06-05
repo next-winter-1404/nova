@@ -1,6 +1,6 @@
 export interface IVisit {
     id?: number;
-    houseId: number;
+    houseId?: number;
     userId?: number;
     appointmentTime: string;
     type?: string;
