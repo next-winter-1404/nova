@@ -10,16 +10,8 @@ import { createVisitAppointment } from "@/src/utils/sevices/api/visitAppointment
 import toast from "react-hot-toast";
 import { TbBadge, TbCalendarCheck, TbPhone } from "react-icons/tb";
 import StatusLabel from "../../common/statusLabel/StatusLabel";
-interface IVisit {
-  id?: number;
-  houseId: number;
-  userId?: number;
-  appointmentTime: string;
-  type?: string;
-  status?: string;
-  created_at?: string;
-  updated_at?: string;
-}
+import { IVisit } from "@/src/core/types/IVisit";
+
 interface IProps {
   houseId: number;
   userId?: number;
