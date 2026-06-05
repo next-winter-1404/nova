@@ -1,6 +1,6 @@
 "use client";
 import { useActionState, useEffect, useState } from "react";
-import {TbDots, TbDotsVertical,TbTool  } from "react-icons/tb";
+import { TbDots, TbDotsVertical, TbTool } from "react-icons/tb";
 import { Modal } from "../../common/modal";
 import { IBooking } from "@/src/core/types/IBooking";
 import { useQuery } from "@tanstack/react-query";
@@ -19,9 +19,6 @@ interface IReservationItemProps {
   item?: IBooking;
 }
 const ReservationItem = ({ houseId, item }: IReservationItemProps) => {
-  const [selected, setSelected] = useState<number | null | string | undefined>(
-    null
-  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMaintenanceModalOpen, setIsMaintenanceModalOpen] = useState(false);
 
@@ -79,7 +76,7 @@ const ReservationItem = ({ houseId, item }: IReservationItemProps) => {
 
     {
       label: "گزارش خرابی",
-      icon: <TbTool  className="mt-px text-white" />,
+      icon: <TbTool className="mt-px text-white" />,
       onClick: () => setIsMaintenanceModalOpen(true),
     },
   ];

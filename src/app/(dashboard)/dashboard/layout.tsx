@@ -16,10 +16,10 @@ import {
   TbLogout,
   TbUsers,
   TbCategoryFilled,
-  TbCalendarEvent
+  TbCalendarEvent,
+  TbTool  
 } from "react-icons/tb";
 import { FaCommentDots } from "react-icons/fa";
-import Image from "next/image";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
 import userPlaceholder from "@/src/assets/images/userPlaceHolder.jpg";
 import DropMenu from "@/src/components/common/dropMenu/DropMenu";
@@ -99,6 +99,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       href: `/dashboard/${role}/appointment-management`,
       icon: <TbCalendarEvent className="w-5 h-5" />,
     },
+    {
+      label: "درخواست‌های تعمیر",
+      href: `/dashboard/${role}/maintenance-management`,
+      icon: <TbTool   className="w-5 h-5" />,
+    },
   ];
   const adminItems = [
     {
@@ -125,6 +130,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       label: "مدیریت دسته بندی ها",
       href: `/dashboard/${role}/category-management`,
       icon: <TbCategoryFilled className="w-5 h-5" />,
+    },
+    {
+      label: "درخواست‌های تعمیر",
+      href: `/dashboard/${role}/maintenance-management`,
+      icon: <TbTool   className="w-5 h-5" />,
     },
   ];
 
