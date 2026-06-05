@@ -11,7 +11,7 @@ export enum BookingStatus {
   PENDING = "pending",
   SUCCESS = "success",
   ERROR = "error",
-  CANCELLED = "cancelled",
+  CANCELLED = "canceled",
   CONFIRMED = "confirmed",
   COMPLETED = "completed",
   FAILED = "failed",

@@ -36,7 +36,7 @@ export const Modal: FC<IModalProps> = ({
           <Dialog.Title className="text-lg font-semibold " dir="rtl">
             {modalTitle}
           </Dialog.Title>
-          <Dialog.Description className="text-sm text-gray-500 mt-1.5">
+          <Dialog.Description className="text-sm text-gray-500 mt-1.5"dir="rtl">
             {modalDescription}
           </Dialog.Description>
           <div className="mt-4 mb-6">{mainContent}</div>
