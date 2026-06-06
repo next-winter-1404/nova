@@ -5,8 +5,8 @@ import { TbPinFilled, TbHeartFilled } from "react-icons/tb";
 const AdminPage = async () => {
   const dashboardSummery = await getDashbordSummery();
   return (
-    <div className="padding-section">
-      <div className="flex-center gap-5 ">
+    <div className="padding-section flex-center gap-5">
+      <div className=" grid grid-cols-2 lg:grid-cols-4 gap-4  w-full ">
         <DashboardInformation
           amount={dashboardSummery.totalUsers}
           cardText="تعداد کل کاربران"

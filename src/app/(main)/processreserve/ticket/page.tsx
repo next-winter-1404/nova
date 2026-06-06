@@ -5,19 +5,15 @@ import Button from '@/src/components/common/button/page'
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
 import arrowLeftGreen from "@/src/assets/icons/arrowLeftGreen.svg"
 import { useRouter, useSearchParams } from 'next/navigation'
-import UseStepNavigation from '../navigation'
 import React from 'react'
 
-const Ticket = () => {
-     
-    const searchParams = useSearchParams();  
-    const currentStep = searchParams.get('step') || 'ticket'
+const Ticket = () => { 
     const router = useRouter();
     const handleGoHome = () => {
         router.push("/processreserve")
     }
     return (
-        <div className='flex flex-col items-center gap-[36px] w-[1683px] h-[650px]' dir='rtl'>  
+        <div className='flex flex-col mt-[130px] items-center gap-[36px] w-[1683px] h-[650px]' dir='rtl'>  
             <div className='md:w-[590px] md:h-[700px] w-[400px] h-[600px] flex flex-col items-center md:gap-8 gap-4'>
                 <Image src={checkMarkCorrect} alt='checkMarkCorrect'/>
                 <h2 className='h-[50px] text-white-pure md:text-[40px] text-[25px]' >رزرو بلیط شما با موفقیت انجام شد !</h2>

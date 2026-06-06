@@ -1,6 +1,6 @@
 'use client'
 import {useRouter, useSearchParams } from 'next/navigation';
-import UseStepNavigation from '../../navigation';
+import useStepNavigation from '../../navigation';
 import Button from '@/src/components/common/button/page';
 import Image from 'next/image';
 import Input from '@/src/components/common/input/Input';
@@ -14,7 +14,6 @@ import megaphone from "@/src/assets/icons/megaphone.svg"
 import star25 from "@/src/assets/icons/Star25.svg"
 import badgepercent from "@/src/assets/icons/badgepercent.svg" 
 import rightArrow from "@/src/assets/icons/rightArrow.svg"
-import { useEffect, useState } from 'react';
 import GetAgeCategory, { AgeCategory } from '@/src/utils/helper/ageHelper/page';
 import { getHousesDetail } from '@/src/utils/sevices/api/houses/getHousesDetail';
 import { useQuery } from '@tanstack/react-query';
@@ -27,7 +26,7 @@ const AcceptInfo = ({data , bookingId}: {data:any, bookingId : number} ) => {
   console.log("get api :", data)
     const searchParams = useSearchParams();
     const currentStep = searchParams.get('step') || 'acceptinfo'
-    const {goToNext, goToPrev} = UseStepNavigation();
+    const { goToPrev} = useStepNavigation();
     const houseId = data.booking?.houseId
     const {data : houseDetails} =useQuery({
       queryKey : ["houseDetails", houseId],
@@ -68,11 +67,11 @@ const AcceptInfo = ({data , bookingId}: {data:any, bookingId : number} ) => {
       </div>
     );
   }
-  const category: AgeCategory = GetAgeCategory(travelers.birthDate);
+  const category: AgeCategory = GetAgeCategory(travelers[0]?.birthDate)
 
 
       return (
-        <div className='flex flex-col items-center md:gap-[36px] gap-[30px] w-[1683px] md:h-[1150px]' dir='rtl'>           
+        <div className='flex flex-col mt-[130px] items-center md:gap-[36px] gap-[30px] w-[1683px] md:h-[1150px]' dir='rtl'>           
             <div className='md:w-11/12 w-[340px] flex flex-col items-center justify-center md:h-[185px] h-[730px] bg-dark-700 rounded-3xl md:gap-6 gap-3 relative'>
               <div className=' w-22/23 h-[44px] rounded-2xl bg-gray-250 flex justify-center items-center gap-3 md:gap-6'>
                 <div className='md:w-[1417px] w-[300px] items-center flex md:justify-between'>

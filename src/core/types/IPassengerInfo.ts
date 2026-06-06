@@ -4,6 +4,7 @@ export interface IPassengerInfo {
     nationalId : string
     gender : string
     birthDate : string
+    id? : number
 }
 export interface ITraveler{
     traveler_details? : IPassengerInfo[]

@@ -22,6 +22,7 @@ const Input: FC<IInputProp> = ({
   dir = "ltr",
   readOnly = false,  
   disabled = false,  
+  className
 }) => {
   return (
     <div className={`${parentWidth} relative`} dir={dir}>
@@ -41,7 +42,7 @@ const Input: FC<IInputProp> = ({
         onChange={onChange}
         readOnly={readOnly}
         disabled={disabled}
-        className={`w-full border focus:outline-none ${borderColor} ${textSize} rounded-2xl ${textColor} px-6 ${InputHeight} ${
+        className={`w-full border focus:outline-none ${borderColor} ${textSize} rounded-2xl ${className} ${textColor} px-6 ${InputHeight} ${
           readOnly || disabled ? " cursor-not-allowed" : ""
         }`}
         placeholder={placeHolder}

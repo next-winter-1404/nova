@@ -42,8 +42,6 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   const commentsData = await getHousesComment(id);
   const comments = commentsData?.comments || [];
 
-  // console.log("comments:", comments);
-
   if (!house) {
     return notFound();
   }
