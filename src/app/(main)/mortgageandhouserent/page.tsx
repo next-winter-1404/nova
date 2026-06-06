@@ -86,6 +86,7 @@ const MortgageAndHouseRent = async ({
                   mainContent={
                     <div className="flex-col-center mx-auto ">
                       <RowProductCard
+                        id={item.id}
                         title={item.title}
                         address={item.address}
                         price={item.price}
