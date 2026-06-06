@@ -143,14 +143,13 @@ export default function Compare() {
                 }
                 labelSize="md"
                 mainContent={
-                  <div className="w-[274px] h-[156px] bg-dark-600 rounded-2xl">
+                  <div className="h-[156px] bg-dark-600 rounded-2xl">
                     <ImageFallback
                       fallbackSrc={imgPlaceholder}
                       src={ imgPlaceholder}
                       alt="state image"
-                      width={200}
-                      height={160}
-                      className="rounded-2xl w-fit h-full rounded-xl"
+                      width={274}
+                      className="h-full rounded-xl"
                     />
                   </div>
                 }
