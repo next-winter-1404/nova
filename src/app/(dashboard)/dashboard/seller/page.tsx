@@ -4,6 +4,7 @@ import DashboardContentContainer from "@/src/components/common/dashboardcontentc
 import ProgressBar from "@/src/components/common/progressBar/ProgressBar";
 import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getFavoriteForUser } from "@/src/utils/sevices/api/favorites/getFavorites";
 import { getBookings } from "@/src/utils/sevices/api/processReserve/getbooking";
 import { getSellerFinanceDashboard } from "@/src/utils/sevices/api/seller/dashboard/getSellerFinanceDashboard";
@@ -149,7 +150,7 @@ const SellerPage = async () => {
                           </div>
                         </div>
                         <div className=" text-center">
-                          {item.created_at?.slice(0, 10) || "--"}
+                          {formatDateTime(item.created_at)}
                         </div>
                         <div
                           className="flex-center gap-1 text-center "

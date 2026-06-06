@@ -16,6 +16,7 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 import userPlaceHolder from "@/src/assets/images/userPlaceHolder.jpg";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 
 const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
   const router = useRouter();
@@ -132,7 +133,7 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
                               <div className="flex justify-end gap-2">
                                 <div className="flex-center gap-2 text-gray-300">
                                   <span className="text-[13px]">
-                                    {replies[0].created_at?.slice(0, 10)}
+                                    {formatDateTime(replies[0].created_at)}
                                   </span>
                                   <FaCalendarAlt className="w-3 h-3" />
                                 </div>
@@ -183,7 +184,7 @@ const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
                                 }`.trim() || "کاربر ناشناس"}
                               </h2>
                               <h2 className="text-gray-300 flex gap-2">
-                                {comment.created_at?.slice(0, 10)}
+                                {formatDateTime(comment.created_at)}
                               </h2>
                             </div>
                             <ImageFallback

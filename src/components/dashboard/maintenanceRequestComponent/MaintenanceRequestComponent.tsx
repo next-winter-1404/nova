@@ -5,6 +5,7 @@ import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import UserName from "@/src/components/dashboard/getUserName/UserName";
 import MaintenanceManagement from "@/src/components/dashboard/maintenanceManagement/MaintenanceManagement";
 import { IMaintenanceRequest } from '@/src/core/types/IMaintenance';
+import { formatDateTime } from '@/src/utils/hooks/formDates';
 interface IProp {
     allMaintenance:IMaintenanceRequest[]
 }
@@ -28,7 +29,7 @@ const MaintenanceRequestComponent:FC<IProp> = ({allMaintenance}) => {
                 <UserName userId={Number(maintenance.userId)} />
               </div>
               <p className="truncate text-center">{maintenance.description}</p>
-              <p className="px-8 ">{maintenance.created_at?.slice(0, 10)}</p>
+              <p className="px-8 ">{formatDateTime(maintenance.created_at)}</p>
 
               <div className="-mr-8">
                 <StatusLabel status={maintenance.status} />

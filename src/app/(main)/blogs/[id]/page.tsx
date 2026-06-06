@@ -13,6 +13,7 @@ import SimilarBlogItems from "@/src/components/blogs/similarBlogs/similarBlogs";
 import { getBlogs } from "@/src/utils/sevices/api/blogs/getBlogs";
 import { getUserPublicProfile } from "@/src/utils/sevices/api/users/getUserPublicProfile";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 
 export const revalidate = 30;
 
@@ -75,7 +76,7 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
                     <div className="flex items-center gap-1 text-gray-300">
                       <FaCalendarAlt className="w-4 h-4 mb-1" />
                       <div className="flex gap-2">
-                        <span>{BlogDetail?.created_at?.slice(0, 10)} </span>
+                        <span>{formatDateTime(BlogDetail?.created_at)} </span>
                         <span>-</span>
                         <span>{BlogDetail?.estimated_reading_time}</span>
                       </div>

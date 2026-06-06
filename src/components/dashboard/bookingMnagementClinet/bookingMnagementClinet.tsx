@@ -11,6 +11,7 @@ import StatusLabel from "../../common/statusLabel/StatusLabel";
 import ReserveItemsIcon from "../ReserveItemsIcon/ReserveItemsIcon";
 import useSearch from "@/src/utils/hooks/searchHook";
 import { IBooking } from "@/src/core/types/IBooking";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 interface IProp {
   allBookings: IBooking[];
   items: string[];
@@ -53,7 +54,7 @@ const BookingManagementClient: FC<IProp> = ({ allBookings, items }) => {
                 <div className="grid grid-cols-4 gap-15 md:text-[18px] text-white text-[10px] whitespace-nowrap  w-full">
                   <UserName userId={Number(booking.user_id)} />
                   <p className="md:mr-10 ">
-                    {booking.created_at?.slice(0, 10)}
+                    {formatDateTime(booking.created_at)}
                   </p>
                   <p>
                     {calculateDaysBetween(

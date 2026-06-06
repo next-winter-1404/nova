@@ -11,11 +11,9 @@ import {
   TbClock,
   TbX,
   TbPinFilled,
-  TbHeartFilled,
 } from "react-icons/tb";
 const AdminPage = async () => {
   const dashboardSummery = await getDashbordSummery();
-  console.log("--dashboardSummery", dashboardSummery);
   const usersData = [
     {
       label: "کل کاربران",
