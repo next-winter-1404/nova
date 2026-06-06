@@ -2,14 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import Image from "next/image";
-
 import CardContainer from "@/src/components/common/card/page";
-import imagePlaceHolder from "@/src/assets/images/imagePlaceHolder (2).png";
-
+import imgPlaceholder from "@/src/assets/images/imagePlaceHolder (2).png"
 import { IHouse } from "@/src/core/types/IHouse";
 import { getComparison } from "@/src/utils/sevices/api/comparison/getComparison";
 import { Breadcrumb } from "@/src/components/common/breadCrumbs";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 
 type CompareFieldKey =
   | "price"
@@ -146,10 +144,13 @@ export default function Compare() {
                 labelSize="md"
                 mainContent={
                   <div className="w-[274px] h-[156px] bg-dark-600 rounded-2xl">
-                    <Image
-                      src={imagePlaceHolder}
-                      alt="property"
-                      className="w-full h-full rounded-2xl"
+                    <ImageFallback
+                      fallbackSrc={imgPlaceholder}
+                      src={ imgPlaceholder}
+                      alt="state image"
+                      width={200}
+                      height={160}
+                      className="rounded-2xl w-fit h-full rounded-xl"
                     />
                   </div>
                 }
