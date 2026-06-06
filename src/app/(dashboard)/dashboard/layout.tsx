@@ -77,6 +77,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       href: `/dashboard/${role}/user-visitAppointments`,
       icon: <TbCalendarEvent  className="w-6 h-6" />,
     },
+    {
+      label: "درخواست های من",
+      href: `/dashboard/${role}/user-request`,
+      icon: <TbCalendarEvent  className="w-6 h-6" />,
+    },
   ]
   const sellerItems = [
     {

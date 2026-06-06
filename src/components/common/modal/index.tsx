@@ -29,7 +29,7 @@ export const Modal: FC<IModalProps> = ({
       )}
 
       <Dialog.Portal>
-        <Dialog.Overlay  className="fixed inset-0 bg-black/70 backdrop-blur-sm"/>
+        <Dialog.Overlay  className="fixed inset-0 bg-black/70 backdrop-blur-sm z-10"/>
         <Dialog.Content
           className={`${contentClassName} ${width} font-vazir z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg max-h-[85vh] p-6 focus:outline-none`}
         >
