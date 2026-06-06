@@ -28,4 +28,6 @@ export interface IProductCard {
   offer?: string;
   buttonText?: string;
   href?: string;
+  primaryColor?:string;
+  hoverColor?:string
 }
