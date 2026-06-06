@@ -11,6 +11,14 @@ import { PiImageBrokenDuotone } from "react-icons/pi";
 import UserManegmentSearch from "@/src/components/dashboard/userManegmentSearch/userManegmentSearch";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 import { formatDateTime } from "@/src/utils/hooks/formDates";
+import { Modal } from "@/src/components/common/modal";
+import Button from "@/src/components/common/button/page";
+import { RiBuildingLine } from "react-icons/ri";
+import { getAllSellerRequests } from "@/src/utils/sevices/api/seller/sellerUpgrade/getAllSellerRequests";
+import SimpleDropdown from "@/src/components/common/dropDown";
+import SellerUpgradeRequest from "@/src/components/dashboard/sellerUpgradeList/SellerUpgradeRequest";
+import { FC } from "react";
+import PaginationClient from "@/src/components/common/pagination/page";
 const items = [
   " پروفایل",
   "نام کاربر",
@@ -19,14 +27,38 @@ const items = [
   "آخرین آپدیت ",
   "عملیات",
 ];
+interface IFilters {
+  status?: string;
+  page?: string | number;
+  limit?: string | number;
+}
+interface IProp {
+  searchParams: IFilters;
+}
+const UserManegment: FC<IProp> = async ({ searchParams }) => {
+  const limit = 5;
 
-const UserManegment = async () => {
+  const params = await searchParams;
+  const status = params.status || "";
+  const currentPage = Number(params.page) || 1;
+  const filters: IFilters = {};
+  if (status) filters.status = status;
+  if (currentPage) filters.page = currentPage;
+  if (limit) filters.limit = limit;
   const allUser = await getAllusers();
+  const result = await getAllSellerRequests(filters);
+  const allSellerRequest = result.requests || [];
+  const totalPages = result.totalPages;
 
   return (
     <DashboardContentContainer
       title="لیست کاربران"
-      topSectionContent={<UserManegmentSearch />}
+      topSectionContent={
+        <div className="flex gap-4">
+          <UserManegmentSearch />
+          <SellerUpgradeRequest allSellerRequest={allSellerRequest} totalCount={result.totalCount} totalPages={totalPages}/>
+        </div>
+      }
     >
       <div>
         <div className="w-full flex-col-center">
@@ -74,6 +106,7 @@ const UserManegment = async () => {
                   </div>
                 ))}
               </>
+              
             </div>
           ) : (
             <div className="text-4xl text-gray-300">کاربری وجود ندارد</div>

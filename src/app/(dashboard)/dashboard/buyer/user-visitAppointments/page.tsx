@@ -4,6 +4,7 @@ import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import BuyerVisitManagement from "@/src/components/dashboard/buyerVisitManagement/BuyerVisitManagement";
 import UserName from "@/src/components/dashboard/getUserName/UserName";
 import VisitAppointmentMAnagement from "@/src/components/dashboard/visitAppointmentManagement/VisitAppointmentMAnagement";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getUserVisitAppointments } from "@/src/utils/sevices/api/visitAppointment/userVisitAppointments";
 import React, { FC } from "react";
 import { TbEye } from "react-icons/tb";
@@ -30,14 +31,14 @@ const BuyerVisitAppointmentPage: FC<IProp> = async ({ searchParams }) => {
               
             >
               <p className="text-center">
-                {appointment.appointmentTime.slice(0, 10)}
+                {formatDateTime(appointment.appointmentTime)}
               </p>
 
               <p className="md:px-18 px-4">
                 {appointment.type === "virtual" ? "مجازی" : "حضوری"}
               </p>
 
-              <p className="md:px-10">{appointment.created_at?.slice(0, 10)}</p>
+              <p className="md:px-10">{formatDateTime(appointment.created_at)}</p>
 
               <div className="md:-mr-8">
                 <StatusLabel status={appointment.status} />
