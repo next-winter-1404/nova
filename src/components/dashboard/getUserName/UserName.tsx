@@ -17,10 +17,18 @@ const UserName = ({ userId }: UserNameProps) => {
     const fetchUser = async () => {
       try {
         const user = await getUsersDetail(userId);
-        setName(`${user?.user?.firstName} ${user?.user?.lastName}`);
+    
+        const fullName = [
+          user?.user?.firstName,
+          user?.user?.lastName,
+        ]
+          .filter(Boolean)
+          .join(" ");
+    
+        setName(fullName);
         setPic(user?.user?.profilePicture);
       } catch (error) {
-        setName(`کاربر`);
+        setName("");
       } finally {
         setLoading(false);
       }

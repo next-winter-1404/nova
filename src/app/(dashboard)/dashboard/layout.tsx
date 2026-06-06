@@ -28,6 +28,7 @@ import AsideMenu from "@/src/components/dashboard/menu/asideMenu/AsideMenu";
 import MenuController from "@/src/components/dashboard/menu/menuController/menuController";
 import { PiReadCvLogoFill } from "react-icons/pi";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import { LuClipboardList } from "react-icons/lu";
 interface IProp {
   children: ReactNode;
 }
@@ -80,7 +81,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
     {
       label: "درخواست های من",
       href: `/dashboard/${role}/user-request`,
-      icon: <TbCalendarEvent  className="w-6 h-6" />,
+      icon: <LuClipboardList  className="w-6 h-6" />,
     },
   ]
   const sellerItems = [
