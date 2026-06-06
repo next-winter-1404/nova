@@ -4,8 +4,10 @@ import DashboardContentContainer from "@/src/components/common/dashboardcontentc
 import ProgressBar from "@/src/components/common/progressBar/ProgressBar";
 import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getFavoriteForUser } from "@/src/utils/sevices/api/favorites/getFavorites";
 import { getBookings } from "@/src/utils/sevices/api/processReserve/getbooking";
+import { getSellerFinanceDashboard } from "@/src/utils/sevices/api/seller/dashboard/getSellerFinanceDashboard";
 import { getSellerHouses } from "@/src/utils/sevices/api/seller/houses/getHouses";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
 import { TbDots, TbHeartFilled, TbPinFilled } from "react-icons/tb";
@@ -19,7 +21,7 @@ const SellerPage = async () => {
   const booking = res?.data || [];
   const user = await getUsersDetail(Number(userId));
   const favorites = await getFavoriteForUser(Number(userId));
- 
+ const SellerFinanceDashboard = await getSellerFinanceDashboard()
   return (
     <div className="flex flex-col gap-5 ">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4  w-full ">
@@ -32,8 +34,8 @@ const SellerPage = async () => {
           seeMore
         />
         <DashboardInformation
-          amount={booking.filter((b) => b.status === "confirmed").length}
-          cardText="رزرو های فعال"
+          amount={SellerFinanceDashboard.totalBookings}
+          cardText="تعداد رزرو ها"
           role={role}
           href="reserve-management"
           icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
@@ -41,8 +43,8 @@ const SellerPage = async () => {
 
         />
         <DashboardInformation
-          amount={booking.filter((b) => b.status === "pending").length}
-          cardText="رزرو های در حال انتظار"
+          amount={SellerFinanceDashboard.totalPayments}
+          cardText="تعداد پرداختی ها"
           role={role}
           href="reserve-management"
           icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
@@ -59,7 +61,7 @@ const SellerPage = async () => {
 
         />
       </div>
-      <div className="grid lg:grid-cols-2 gap-5 2xl:gap-20">
+      <div className="grid lg:grid-cols-2 gap-5 ">
         <DashboardContentContainer
         isIcon
           seemore
@@ -77,7 +79,7 @@ const SellerPage = async () => {
               </div>
               <div className="rounded-xl bg-primary-accent-green md:w-[219px] p-2" dir="rtl">
                 <div className="flex gap-2 w-full">
-                  <p>1500000000000000</p>
+                  <p>{SellerFinanceDashboard.totalCurrentMonthAmount}</p>
                   <span>تومان</span>
                 </div>
               </div>
@@ -90,13 +92,12 @@ const SellerPage = async () => {
               </div>
               <div className="rounded-xl bg-gray-300 md:w-[219px] p-2" dir="rtl">
                 <div className="flex gap-2 w-full">
-                  <p>1500000000000000</p>
+                  <p>{SellerFinanceDashboard.totalAmount}</p>
                   <span>تومان</span>
                 </div>
               </div>
 
             </div>
-            <div></div>
           </div>
         </DashboardContentContainer>
         <DashboardContentContainer
@@ -149,7 +150,7 @@ const SellerPage = async () => {
                           </div>
                         </div>
                         <div className=" text-center">
-                          {item.created_at?.slice(0, 10) || "--"}
+                          {formatDateTime(item.created_at)}
                         </div>
                         <div
                           className="flex-center gap-1 text-center "
@@ -166,7 +167,7 @@ const SellerPage = async () => {
                 </>
               </div>
             ) : (
-              <div className="text-4xl text-gray-300">رزوری وجود ندارد</div>
+              <div className="text-3xl text-center w-full text-gray-300">رزروی وجود ندارد</div>
             )}
           </div>
         </div>

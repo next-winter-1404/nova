@@ -15,6 +15,7 @@ import LoginButton from "../../login/button/LoginButton";
 import { adminEditComment } from "@/src/utils/sevices/api/admin/comments/editComments/editComments";
 import { adminDeleteComment } from "@/src/utils/sevices/api/admin/comments/deleteComments/deleteComments";
 import AlertComponent from "../../common/alert/alert";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 
 interface IProp {
   comment: IComment;
@@ -133,7 +134,8 @@ const CommentITemsManagement: FC<IProp> = ({ comment }) => {
         mainContent={
           <form action={formAction} className="flex flex-col gap-8 " dir="rtl">
             <div className="flex gap-3 items-center">
-              <Image
+              <ImageFallback
+                fallbackSrc={userPlaceHolder}
                 src={comment.user?.profilePicture || userPlaceHolder}
                 alt="prof"
                 width={37}

@@ -4,6 +4,7 @@ import SimpleDropdown from "@/src/components/common/dropDown";
 import PaginationClient from "@/src/components/common/pagination/page";
 import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import ReservationItem from "@/src/components/dashboard/ReservationItem/ReservationItem";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getBookings } from "@/src/utils/sevices/api/processReserve/getbooking";
 import { FC } from "react";
 interface IProps {
@@ -35,8 +36,7 @@ const SellerReservePage: FC<IProps> = async ({ searchParams }) => {
     "تاریخ رزرو",
     "قیمت کل",
     "تعداد مسافر",
-    "وضعیت رزو",
-    "وضعیت پرداخت",
+    "وضعیت رزرو",
   ];
   const sortItem = [
     { value: "ASC", label: "صعودی" },
@@ -77,7 +77,7 @@ const SellerReservePage: FC<IProps> = async ({ searchParams }) => {
       >
         <div className="flex flex-col items-end">
           <div className="flex flex-col gap-5 w-full">
-            <ItemNavbar colsNumber={6} items={items} />
+            <ItemNavbar colsNumber={5} items={items} />
             <div className="flex text-white mt-5 items-center">
               {booking?.length > 0 ? (
                 <div className="w-full flex flex-col gap-5">
@@ -87,7 +87,7 @@ const SellerReservePage: FC<IProps> = async ({ searchParams }) => {
                         className="flex justify-between w-full items-center"
                         key={item.id}
                       >
-                        <div className="grid grid-cols-6 w-full  items-center md:text-[16px] text-[10px]">
+                        <div className="grid grid-cols-5 w-full  items-center md:text-[16px] text-[10px]">
                           <div className="flex gap-4 items-center xl:max-w-[300px] ">
                             <div className="w-[100px] h-[72px] rounded-xl hidden md:block bg-gray-600"></div>
                             <div className="whitespace-nowrap">
@@ -95,7 +95,7 @@ const SellerReservePage: FC<IProps> = async ({ searchParams }) => {
                             </div>
                           </div>
                           <div className=" text-center">
-                            {item.created_at?.slice(0, 10) || "--"}
+                            {formatDateTime(item.created_at)}
                           </div>
                           <div
                             className="flex-center gap-1 text-center "
@@ -104,14 +104,16 @@ const SellerReservePage: FC<IProps> = async ({ searchParams }) => {
                             <span>{item.house?.price || "  --"}</span>
                             <span>تومان</span>
                           </div>
-                          <span className="text-center ml-5">
+                          <span className="text-center ml-10">
                             {item.traveler_details?.length} نفر
                           </span>
                           <StatusLabel status={item.status} />
-                          <StatusLabel status={item.status} />
                         </div>
 
-                        <ReservationItem item={item} />
+                        <ReservationItem
+                          houseId={Number(item.houseId)}
+                          item={item}
+                        />
                       </div>
                     ))}
                   </>

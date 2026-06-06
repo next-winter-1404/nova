@@ -6,6 +6,7 @@ import { getBlogs } from "@/src/utils/sevices/api/blogs/getBlogs";
 import BlogCategories from "@/src/components/blogs/categories";
 import { getCategory } from "@/src/utils/sevices/api/category/getCategory";
 import SimilarNavbarItem from "@/src/components/reserveHouse/similarHouse/navbarItem";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 
 export const revalidate = 30
 const BlogPage = async () => {
@@ -42,7 +43,7 @@ const BlogPage = async () => {
               key={blog.id}
               id={blog?.id}
               caption={blog.caption}
-              created_at={blog.created_at}
+              created_at={formatDateTime(blog.created_at)}
               estimated_reading_time={blog.estimated_reading_time}
               title={blog.title}
             />
@@ -54,7 +55,7 @@ const BlogPage = async () => {
               key={blog.id}
               id={blog?.id}
               caption={blog.caption}
-              created_at={blog.created_at}
+              created_at={formatDateTime(blog.created_at)}
               estimated_reading_time={blog.estimated_reading_time}
               title={blog.title}
             />
@@ -69,7 +70,7 @@ const BlogPage = async () => {
               key={blog.id}
               id={blog?.id}
               caption={blog.caption}
-              created_at={blog.created_at}
+              created_at={formatDateTime(blog.created_at)}
               estimated_reading_time={blog.estimated_reading_time}
               title={blog.title}
             />

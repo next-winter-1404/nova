@@ -31,6 +31,8 @@ import { Modal } from "@/src/components/common/modal";
 import Chat from "@/src/components/mortgageAndRentPageContainer/Chat";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import HousesPicturesSlider from "@/src/components/mortgageAndRentPageContainer/HousesPicturesSlider";
+import VisitAppointment from "@/src/components/mortgageAndRentPageContainer/VisitAppointment/VisitApointment";
+import { getVisitAppointments } from "@/src/utils/sevices/api/visitAppointment/getVisitAppointment";
 
 interface IProps {
   params: Promise<{ id: number }>;
@@ -44,8 +46,8 @@ const SingleHousePage = async ({ params }: IProps) => {
   const tags = Array.isArray(getHouseInfo?.tags)
     ? getHouseInfo.tags
     : typeof getHouseInfo?.tags === "string"
-      ? getHouseInfo.tags.split(",")
-      : [];
+    ? getHouseInfo.tags.split(",")
+    : [];
 
   const commentsData = await getHousesComment(id);
   const comments = commentsData?.comments || [];
@@ -58,7 +60,7 @@ const SingleHousePage = async ({ params }: IProps) => {
   console.log("isLoggedIn", isLoggedIn);
 
   const userId = await getServerSideCookie("userId");
-
+  const getAppointments = await getVisitAppointments(id);
   const items: BreadcrumbItem[] = [
     {
       href: "/reserve-house",
@@ -70,10 +72,10 @@ const SingleHousePage = async ({ params }: IProps) => {
     },
     {
       href: "/reserve-house",
-      label: "رهن و اجاره آپارتمان رشت",
+      label: `رهن و اجاره ${getHouseInfo?.location}`,
     },
     {
-      label: `خونه 400 متری درسا در${"تهران"}`,
+      label: `${getHouseInfo?.title}`,
     },
   ];
   const tabs: ITab[] = [
@@ -198,22 +200,17 @@ const SingleHousePage = async ({ params }: IProps) => {
                     </div>
                   </div>
                   <div className="w-full flex-col-center gap-4">
-                    <Button
-                      text="تماس با 0933****9"
-                      icon={<FiPhoneCall />}
-                      buttonStyle={{
-                        background: "var(--color-primary-accent-green)",
-                        width: "100%",
-                        fontSize: "13px",
-                        color: "var(--color-dark-800)",
-                        borderRadius: "10px",
-                      }}
+                    <VisitAppointment
+                      houseId={Number(getHouseInfo?.id)}
+                      userId={Number(userId)}
+                      getAppointments={getAppointments}
                     />
+
                     <Modal
                       modalBtn={
-                        <div className="flex-center w-full rounded-[10px] text-16-semibold text-white-pure border boreder-white-pure px-4 py-2">
-                          <i> گفت و گو با فروشنده </i>
-                        </div>
+                        <button className="flex-center w-full rounded-[10px] text-16-semibold text-white-pure border boreder-white-pure px-4 py-2">
+                          گفت و گو با فروشنده
+                        </button>
                       }
                       mainContent={
                         <div className="w-full flex-col-center gap-6">

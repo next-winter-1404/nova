@@ -1,4 +1,4 @@
-interface IFilters {
+export interface IFilters {
     transactionType?: string;
     minRent?: string|number;
     maxRent?: string|number;
@@ -9,5 +9,6 @@ interface IFilters {
     minPrice?: string;
     maxPrice?: string;
     address?: string;
-
+    page?: string | number;
+    limit?: string | number;
   }

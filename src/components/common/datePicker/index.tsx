@@ -128,6 +128,7 @@ const DatePickerComponent = ({
           type="button"
           onClick={openCalendar}
           className="IconButton dropMenu p-5 w-full flex items-center justify-between"
+          dir="rtl"
         >
           <i className="text-gray-300 not-italic">
             {calendarValue

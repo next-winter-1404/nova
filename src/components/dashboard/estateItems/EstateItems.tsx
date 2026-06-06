@@ -12,12 +12,24 @@ import { TbEdit, TbTrash } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import AlertComponent from "../../common/alert/alert";
+import {
+  TbHome,
+  TbMapPin,
+  TbUsers,
+  TbDoor,
+  TbBath,
+  TbCar,
+  TbCash,
+  TbStar,
+  TbPercentage,
+  TbPhoto,
+} from "react-icons/tb";
 interface IProp {
   houseId: number;
   role?: string;
   deleteFunction?: any;
 }
-const EstateItems: FC<IProp> = ({ houseId,role,deleteFunction }) => {
+const EstateItems: FC<IProp> = ({ houseId, role, deleteFunction }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const router = useRouter();
@@ -30,7 +42,6 @@ const EstateItems: FC<IProp> = ({ houseId,role,deleteFunction }) => {
     staleTime: 5 * 1000 * 60,
     refetchOnWindowFocus: false,
   });
-
 
   const handleDeleteHouse = async () => {
     try {
@@ -54,7 +65,8 @@ const EstateItems: FC<IProp> = ({ houseId,role,deleteFunction }) => {
     {
       label: "ویرایش",
       icon: <TbEdit className="mt-px text-white" />,
-      onClick: () => router.push(`/dashboard/${role}/estate-management/edit/${houseId}`),
+      onClick: () =>
+        router.push(`/dashboard/${role}/estate-management/edit/${houseId}`),
     },
     {
       label: "حذف",
@@ -62,7 +74,62 @@ const EstateItems: FC<IProp> = ({ houseId,role,deleteFunction }) => {
       onClick: () => setIsAlertModalOpen(true),
     },
   ];
-
+  const houseInfo = [
+    {
+      label: "عنوان",
+      value: houseDetail?.title,
+      icon: <TbHome className="w-4 h-4 text-gray-300" />,
+    },
+    {
+      label: "آدرس",
+      value: houseDetail?.address,
+      icon: <TbMapPin className="w-4 h-4 text-gray-300" />,
+    },
+    {
+      label: "ظرفیت",
+      value: houseDetail?.capacity,
+      icon: <TbUsers className="w-4 h-4 text-gray-300" />,
+    },
+    {
+      label: "اتاق‌ها",
+      value: houseDetail?.rooms,
+      icon: <TbDoor className="w-4 h-4 text-gray-300" />,
+    },
+    {
+      label: "حمام",
+      value: houseDetail?.bathrooms,
+      icon: <TbBath className="w-4 h-4 text-gray-300" />,
+    },
+    {
+      label: "پارکینگ",
+      value: houseDetail?.parking ? "دارد" : "ندارد",
+      icon: <TbCar className="w-4 h-4 text-gray-300" />,
+    },
+    {
+      label: "قیمت",
+      value: houseDetail?.price
+        ? `${houseDetail.price.toLocaleString()} تومان`
+        : "--",
+      icon: <TbCash className="w-4 h-4 text-gray-300" />,
+    },
+    {
+      label: "امتیاز",
+      value: houseDetail?.rate,
+      icon: <TbStar className="w-4 h-4 text-gray-300" />,
+    },
+    {
+      label: "تخفیف",
+      value: houseDetail?.discounted_price
+        ? `${houseDetail.discounted_price.toLocaleString()} تومان`
+        : "--",
+      icon: <TbPercentage className="w-4 h-4 text-gray-300" />,
+    },
+    {
+      label: "تعداد عکس‌ها",
+      value: houseDetail?.photos?.length || 0,
+      icon: <TbPhoto className="w-4 h-4 text-gray-300" />,
+    },
+  ];
   return (
     <div>
       <DropMenu
@@ -86,20 +153,22 @@ const EstateItems: FC<IProp> = ({ houseId,role,deleteFunction }) => {
                 در حال بارگزاری....
               </div>
             ) : (
-              <div className="flex justify-center">
-                <ProductCard
-                  address={houseDetail?.address}
-                  bathrooms={houseDetail?.bathrooms}
-                  buttonText="قیمت"
-                  discounted_price={houseDetail?.discounted_price}
-                  href={`/reserve-house/${houseId}`}
-                  parking={houseDetail?.parking}
-                  price={houseDetail?.price}
-                  rate={houseDetail?.rate}
-                  rooms={houseDetail?.rooms}
-                  photos={houseDetail?.photos}
-                  title={houseDetail?.title}
-                />
+              <div className="grid grid-cols-2 gap-3 text-white" dir="rtl">
+                {houseInfo.map((item, index) => (
+                  <div
+                    key={index}
+                    className="bg-dark-800 p-3 rounded-xl flex flex-col gap-2"
+                  >
+                    <div className="flex items-center gap-2 text-gray-300">
+                      {item.icon}
+                      <span className="text-sm">{item.label}</span>
+                    </div>
+
+                    <span className="text-white font-medium">
+                      {item.value ?? "--"}
+                    </span>
+                  </div>
+                ))}
               </div>
             )}
           </div>

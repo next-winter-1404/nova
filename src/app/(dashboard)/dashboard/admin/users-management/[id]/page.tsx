@@ -6,6 +6,9 @@ import { TbCamera, TbCircleX } from "react-icons/tb";
 import { FaRegUser } from "react-icons/fa6";
 import UserInfoActionButton from "@/src/components/dashboard/userInfoActionButton/UserInfoActionButton";
 import { userActivities } from "@/src/utils/sevices/api/userActivities/userActivities";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import userPlaceHolder from "@/src/assets/images/userPlaceHolder.jpg";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 
 type UserDetailProps = {
   params: {
@@ -29,17 +32,14 @@ const UserDetail = async ({ params }: UserDetailProps) => {
           </div>
           <div className="  relative">
             <div className="w-30 h-30 rounded-full border border-gray-300 flex-center">
-              {userInfo?.user?.profilePicture ? (
-                <Image
-                  width={125}
-                  height={125}
-                  className=""
-                  src={userInfo?.user?.profilePicture}
-                  alt="user profile"
-                />
-              ) : (
-                <FaRegUser className="w-18 h-18 text-gray-400" />
-              )}
+              <ImageFallback
+                fallbackSrc={userPlaceHolder}
+                width={125}
+                height={125}
+                className="rounded-full"
+                src={userInfo?.user?.profilePicture || userPlaceHolder}
+                alt="user profile"
+              />
             </div>
           </div>
         </div>
@@ -62,9 +62,7 @@ const UserDetail = async ({ params }: UserDetailProps) => {
               </span>
             </div>
             <div className="flex items-center justify-start gap-2">
-              <span className="text-16-medium text-white-pure">
-                نفش  :
-              </span>
+              <span className="text-16-medium text-white-pure">نفش :</span>
               <span className="text-16-medium text-white-pure">
                 {userInfo?.user?.role || "- -"}
               </span>
@@ -85,18 +83,18 @@ const UserDetail = async ({ params }: UserDetailProps) => {
             </div>
             <div className="flex items-center justify-start gap-2">
               <span className="text-16-medium text-white-pure text-right">
-                 تاریخ عضویت:
+                تاریخ عضویت:
               </span>
               <span className="text-16-medium text-white-pure">
-                {userInfo?.user?.created_at?.split("T")[0]}
+                {formatDateTime(userInfo?.user?.created_at)}
               </span>
             </div>
             <div className="flex items-center justify-start gap-2">
               <span className="text-16-medium text-white-pure text-right">
-                 آخرین بروزرسانی :
+                آخرین بروزرسانی :
               </span>
               <span className="text-16-medium text-white-pure">
-                {userInfo?.user?.updated_at?.split("T")[0]}
+                {formatDateTime(userInfo?.user?.updated_at)}
               </span>
             </div>
           </div>
@@ -129,7 +127,7 @@ const UserDetail = async ({ params }: UserDetailProps) => {
                 {activities.feedbackReceived}
               </span>
             </div>
-             <div className="flex items-center justify-start gap-2">
+            <div className="flex items-center justify-start gap-2">
               <span className="text-16-medium text-white-pure">
                 تعداد املاک ثبت شده:
               </span>

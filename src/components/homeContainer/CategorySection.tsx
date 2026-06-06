@@ -27,7 +27,7 @@ const stateCategories = [
 const CategorySection = () => {
   return (
     <div className="w-full relative padding-section">
-      <BlureLightCircle position="sm:-left-8 top-5" bgColor="bg-primary-accent-green" />
+      <BlureLightCircle position="sm:-left-8 top-5"/>
       <Container>
         <div className="padding-section sm:max-w-[1000px] max-w-[400px] flex flex-col justify-center items-center gap-14">
           <div className="flex flex-col items-center gap-6">

@@ -27,6 +27,7 @@ import ReserveBox from "@/src/components/reserveHouse/reserveBox";
 import { getHousesComment } from "@/src/utils/sevices/api/comments/reserveHouseDetailComment/getComment";
 import { Modal } from "@/src/components/common/modal";
 import AddToFavorite from "@/src/components/reserveHouse/addToFavorite/AddToFavorite";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 
 interface IProps {
   params: Promise<{ id: number }>;
@@ -81,10 +82,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
     switch (activeTab) {
       case "about":
         return (
-          <AboutHouseContainer
-            caption={house?.caption}
-            title={house?.title}
-          />
+          <AboutHouseContainer caption={house?.caption} title={house?.title} />
         );
       case "comment":
         return <CommentSection houseId={house.id} comments={comments} />;
@@ -170,9 +168,10 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
                   />
                 ))}
           </div>
-          <Image
+          <ImageFallback
+            fallbackSrc={deaf}
             alt="house picture"
-            src={house?.photos?.[0] || deaf}
+            src={house?.photos?.[0] ?? deaf}
             width={1100}
             height={420}
             className="md:w-full lg:w-[80%] xl:max-w-[1100px] lg:h-[420px] rounded-[40px] border border-dark-800"

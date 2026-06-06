@@ -14,6 +14,7 @@ import Link from "next/link";
 import CompareButton from "../compareButton/page";
 import CompareBadge from "../compareBadge/page";
 
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 const RowProductCard: FC<IProductCard> = ({
   price,
   rate,
@@ -104,7 +105,14 @@ const RowProductCard: FC<IProductCard> = ({
           </div>
         </div>
         <div className="w-[200px] h-[160px] ">
-          <Image src={imgPlaceholder} alt="image placeholder" className="w-fit h-full rounded-xl"/>
+          <ImageFallback
+              fallbackSrc={imgPlaceholder}
+              src={ imgPlaceholder}
+              alt="state image"
+              width={200}
+              height={160}
+              className="rounded-2xl w-fit h-full rounded-xl"
+            />
         </div>
       </div>
     </div>

@@ -15,10 +15,11 @@ import {
   TbKeyFilled,
   TbLogout,
   TbUsers,
-  TbCategoryFilled
+  TbCategoryFilled,
+  TbCalendarEvent,
+  TbTool  
 } from "react-icons/tb";
 import { FaCommentDots } from "react-icons/fa";
-import Image from "next/image";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
 import userPlaceholder from "@/src/assets/images/userPlaceHolder.jpg";
 import DropMenu from "@/src/components/common/dropMenu/DropMenu";
@@ -26,6 +27,8 @@ import ProfileInfo from "@/src/components/dashboard/profileInfo/ProfileInfo";
 import AsideMenu from "@/src/components/dashboard/menu/asideMenu/AsideMenu";
 import MenuController from "@/src/components/dashboard/menu/menuController/menuController";
 import { PiReadCvLogoFill } from "react-icons/pi";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import { LuClipboardList } from "react-icons/lu";
 interface IProp {
   children: ReactNode;
 }
@@ -52,11 +55,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       href: `/dashboard/${role}/reserve-management`,
       icon: <TbCirclePlusFilled className="w-6 h-6" />,
     },
-    {
-      label: "علاقه‌مندی‌ها",
-      href: `/dashboard/${role}/favorites`,
-      icon: <TbHeartFilled className="w-6 h-6" />,
-    },
+   
     {
       label: "مدیریت مالی",
       href: `/dashboard/${role}/financial-management`,
@@ -68,7 +67,29 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       icon: <TbBellFilled className="w-6 h-6" />,
     },
   ];
+  const buyerItems =[
+    {
+      label: "علاقه‌مندی‌ها",
+      href: `/dashboard/${role}/favorites`,
+      icon: <TbHeartFilled className="w-6 h-6" />,
+    },
+    {
+      label: "قرار های ملاقات من",
+      href: `/dashboard/${role}/user-visitAppointments`,
+      icon: <TbCalendarEvent  className="w-6 h-6" />,
+    },
+    {
+      label: "درخواست های من",
+      href: `/dashboard/${role}/user-request`,
+      icon: <LuClipboardList  className="w-6 h-6" />,
+    },
+  ]
   const sellerItems = [
+    {
+      label: "علاقه‌مندی‌ها",
+      href: `/dashboard/${role}/favorites`,
+      icon: <TbHeartFilled className="w-6 h-6" />,
+    },
     {
       label: "مدیریت املاک",
       href: `/dashboard/${role}/estate-management`,
@@ -78,6 +99,16 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       label: "مدیریت نظرات",
       href: `/dashboard/${role}/comments-management`,
       icon: <FaCommentDots className="w-5 h-5" />,
+    },
+    {
+      label: "مدیریت قرار ها",
+      href: `/dashboard/${role}/appointment-management`,
+      icon: <TbCalendarEvent className="w-5 h-5" />,
+    },
+    {
+      label: "درخواست‌های تعمیر",
+      href: `/dashboard/${role}/maintenance-management`,
+      icon: <TbTool   className="w-5 h-5" />,
     },
   ];
   const adminItems = [
@@ -106,15 +137,22 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       href: `/dashboard/${role}/category-management`,
       icon: <TbCategoryFilled className="w-5 h-5" />,
     },
+    {
+      label: "درخواست‌های تعمیر",
+      href: `/dashboard/${role}/maintenance-management`,
+      icon: <TbTool   className="w-5 h-5" />,
+    },
   ];
- 
-  
+
   let menuItems = [...commonItems];
 
   if (role === "seller") {
     menuItems = [...menuItems, ...sellerItems];
   } else if (role === "admin") {
     menuItems = [...menuItems, ...adminItems];
+  
+  } else if (role === "buyer") {
+    menuItems = [...menuItems, ...buyerItems];
   }
 
   const profileItems = [
@@ -131,7 +169,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       label: "موجودی قابل برداشت",
       icon: <TbCirclePlusFilled className="w-4 h-4 text-white" />,
     },
-   
+
     {
       label: "خروج",
       icon: <TbLogout className="w-4 h-4 text-white" />,
@@ -140,9 +178,9 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
 
   return (
     <>
-      <div className="flex w-full pt-5 px-5 h-full gap-5" dir="rtl">
+      <div className="flex w-full pt-5 px-5 h-full gap-5 font-vazir" dir="rtl">
         <div className="hidden lg:block">
-          <AsideMenu role={role} menuItems={menuItems}  isOpen={true}/>
+          <AsideMenu role={role} menuItems={menuItems} isOpen={true} />
         </div>
 
         <div className="flex flex-col w-full xl:w-[1113px] 2xl:w-[1400px]">
@@ -165,7 +203,10 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
               <div className="w-px h-8 bg-[#9C9C9C] hidden md:block" />
               <ToolTip
                 mainContent={
-                  <Link href={`/dashboard/${role}/notification`} className=" relative hidden md:block">
+                  <Link
+                    href={`/dashboard/${role}/notification`}
+                    className=" relative hidden md:block"
+                  >
                     <HiOutlineBell className="w-6 h-6 text-white cursor-pointer" />
                     <div className="w-[7px] h-[7px] rounded-xl bg-red-500 absolute top-0.5 right-1" />
                   </Link>
@@ -176,7 +217,9 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
 
               <div className="flex gap-2 w-[150px] justify-start items-center cursor-pointer">
                 <div className="border border-[#D9D9D9] rounded-lg">
-                  <Image
+                 
+                  <ImageFallback
+                  fallbackSrc={userPlaceholder}
                     alt="prof"
                     src={userDetail?.profilePicture || userPlaceholder}
                     width={37}

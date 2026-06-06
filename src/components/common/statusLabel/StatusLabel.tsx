@@ -10,11 +10,13 @@ import {
 export enum BookingStatus {
   PENDING = "pending",
   SUCCESS = "success",
+  APPROVED = "approved",
   ERROR = "error",
-  CANCELLED = "cancelled",
+  CANCELLED = "canceled",
   CONFIRMED = "confirmed",
   COMPLETED = "completed",
-  FAILED = "failed",
+  FAILED = "failed", 
+  REJECTED = "rejected", 
 }
 
 interface IStatus {
@@ -29,10 +31,12 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
       case BookingStatus.SUCCESS:
       case BookingStatus.CONFIRMED:
       case BookingStatus.COMPLETED:
+      case BookingStatus.APPROVED:
         return "bg-green-500 text-black";
       case BookingStatus.ERROR:
       case BookingStatus.CANCELLED:
       case BookingStatus.FAILED:
+      case BookingStatus.REJECTED:
         return "bg-red-400 text-black";
       default:
         return "bg-gray-500 text-black";
@@ -47,11 +51,13 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
         return "موفق";
       case BookingStatus.CONFIRMED:
       case BookingStatus.COMPLETED:
+      case BookingStatus.APPROVED:
         return "تایید شده";
       case BookingStatus.ERROR:
         return "خطا";
       case BookingStatus.CANCELLED:
       case BookingStatus.FAILED:
+      case BookingStatus.REJECTED:
         return "لغو شده";
       default:
         return status || "نامشخص";
@@ -66,11 +72,13 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
         return <FaCheckCircle className="w-3 h-3 ml-1" />;
       case BookingStatus.CONFIRMED:
       case BookingStatus.COMPLETED:
+      case BookingStatus.APPROVED:
         return <FaRegCheckCircle className="w-3 h-3 ml-1" />;
       case BookingStatus.ERROR:
         return <FaTimesCircle className="w-3 h-3 ml-1" />;
       case BookingStatus.CANCELLED:
       case BookingStatus.FAILED:
+      case BookingStatus.REJECTED:
         return <FaBan className="w-3 h-3 ml-1" />;
       default:
         return null;
