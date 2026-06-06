@@ -11,7 +11,7 @@ const CompareBadge = () => {
     if (compareIds.length < 2 ) return null
     return (
         <button
-        onClick={() => router.push("/compare")}
+        onClick={() => router.push(`/compare?ids=${compareIds.join(",")}`)}
         className="
             fixed
             bottom-6

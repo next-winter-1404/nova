@@ -19,7 +19,7 @@ export const categories = z.enum([
 export const yard_type = z.enum([
     "garden",
     "terrace",
-    "none",
+    "null",
 ]);
 
 export const houseFormSchema = z.object({
