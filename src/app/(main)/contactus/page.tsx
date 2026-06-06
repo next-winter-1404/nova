@@ -25,7 +25,7 @@ const ContactUsPage = () => {
       message: ""
     });
     const items = [
-      { label: "ارتباط با ما", href: "/contactus " },
+      { label: "ارتباط با ما"},
     ];
 
   const checkAuth = async (): Promise<boolean> => {

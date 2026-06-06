@@ -8,6 +8,7 @@ import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
 import { IHouse } from "@/src/core/types/IHouse";
 import BottomNavbarFilter from "@/src/components/reserveHouse/bottomNavbarFilter";
 import ProductCard from "@/src/components/common/productCard/ProductCard";
+import { IFilters } from "@/src/core/types/IFilters";
 
 export const revalidate = 30;
 const HouseReservePage = async ({
@@ -60,6 +61,7 @@ const HouseReservePage = async ({
                   <div key={house.id} className="flex-col-center gap-6  ">
                     <div className="w-full hidden md:block ">
                       <RowProductCard
+                        id={house.id}
                         address={house.address}
                         bathrooms={house.bathrooms}
                         price={house.price}

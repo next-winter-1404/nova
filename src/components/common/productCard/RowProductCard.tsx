@@ -11,6 +11,9 @@ import Button from "../button/page";
 import imgPlaceholder from "@/src/assets/images/imagePlaceHolder (2).png"
 import { IProductCard } from "@/src/core/types/IProductCard";
 import Link from "next/link";
+import CompareButton from "../compareButton/page";
+import CompareBadge from "../compareBadge/page";
+
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 const RowProductCard: FC<IProductCard> = ({
   price,
@@ -20,11 +23,16 @@ const RowProductCard: FC<IProductCard> = ({
   bathrooms,
   rooms,
   parking,
-  href
+  href,
+  id
 }) => {
   return (
     <div className="flex gap-15">
-      <div className="flex flex-col justify-end flex-1 gap-4 whitespace-nowrap">
+      <div className="flex flex-col items-start justify-between flex-1 gap-4 whitespace-nowrap">
+        <div>
+        <CompareButton propertyId={id}/>
+        <CompareBadge/>
+        </div>
         {price && (
           <span className="flex-center gap-2 px-3 py-1.5 whitespace-nowrap text-semibold-28 text-primary-accent-green">
             <i>ت</i>
@@ -62,6 +70,7 @@ const RowProductCard: FC<IProductCard> = ({
                 <FaStar className="w-4 h-4" />
               </span>
             </span>
+
           </div>
           <span className="flex justify-end text-20-medium whitespace-nowrap">
             {title ? <Link href={href}>{title}</Link> : "عنوانی وجود ندارد"}
