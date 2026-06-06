@@ -10,6 +10,7 @@ import usePlaceHolder from "@/src/assets/images/userPlaceHolder.jpg";
 import { PiImageBrokenDuotone } from "react-icons/pi";
 import UserManegmentSearch from "@/src/components/dashboard/userManegmentSearch/userManegmentSearch";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 const items = [
   " پروفایل",
   "نام کاربر",
@@ -61,10 +62,10 @@ const UserManegment = async () => {
                         {item.email}
                       </div>
                       <div className="text-center  ">
-                        {item.createdAt.split("T")[0]}
+                        {formatDateTime(item.created_at)}
                       </div>
                       <div className="text-center  ">
-                        {item.updatedAt.split("T")[0]}
+                        {formatDateTime(item.updated_at)}
                       </div>
                       <div className=" ml-[140px] flex-center ">
                         <UserManegmentActionMenu user={item} />

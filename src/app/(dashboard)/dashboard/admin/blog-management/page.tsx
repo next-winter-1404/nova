@@ -5,6 +5,7 @@ import SimpleDropdown from "@/src/components/common/dropDown";
 import PaginationClient from "@/src/components/common/pagination/page";
 import BlogItemsManagement from "@/src/components/dashboard/blogItemsManagement/BlogItemsManagement";
 import UserName from "@/src/components/dashboard/getUserName/UserName";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getBlogs } from "@/src/utils/sevices/api/blogs/getBlogs";
 import Link from "next/link";
 import { FC } from "react";
@@ -88,7 +89,7 @@ const AdminBlogManagementPage: FC<IProps> = async ({ searchParams }) => {
                   <p className="truncate">
                     {blog.title || "عنوانی وجود ندارد"}
                   </p>
-                  <p>{blog.created_at?.slice(0, 10) || "تاریخی وجود ندارد"}</p>
+                  <p>{formatDateTime(blog.created_at) || "تاریخی وجود ندارد"}</p>
                 </div>
                 <BlogItemsManagement blogId={blog.id} />
               </div>

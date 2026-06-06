@@ -36,6 +36,7 @@ import { FaBan } from "react-icons/fa";
 import AlertComponent from "../../common/alert/alert";
 import { deletePayment } from "@/src/utils/sevices/api/admin/payments/deletePayment/deletePayment";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 interface IProp {
   bookingId?: number;
   userId?: number;
@@ -221,14 +222,14 @@ const FinanceItems: FC<IProp> = ({
                     <TbCalendarClock />
                     <span>تاریخ ایجاد رزرو:</span>
                   </div>
-                  {bookingDetail?.created_at?.slice(0, 10) || "--"}
+                  {formatDateTime(bookingDetail?.created_at)}
                 </div>
                 <div className="flex gap-2 ">
                   <div className="flex gap-1 text-gray-300 items-center ">
                     <TbEdit />
                     <span>اخرین ویرایش:</span>
                   </div>
-                  {bookingDetail?.updated_at?.slice(0, 10) || "--"}
+                  {formatDateTime(bookingDetail?.updated_at)}
                 </div>
                 <Button
                   text={`لیست مسافرین (${

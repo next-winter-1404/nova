@@ -5,6 +5,7 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { FaRegClock } from "react-icons/fa";
 import { IBlogs } from "@/src/core/types/IBogs";
 import Link from "next/link";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 
 const BlogCard = ({
   created_at,
@@ -47,7 +48,7 @@ const BlogCard = ({
         >
           <div className="flex items-center gap-1 text-gray-300">
             <FaCalendarAlt className="w-4 h-4 mb-1" />
-            <span>{created_at?.slice(0, 10)}</span>
+            <span>{formatDateTime(created_at)}</span>
           </div>
           <span className="sm:text-[20px] text-[18px] text-white truncate ">
             {title}

@@ -15,6 +15,7 @@ import { IComment, ICommentResponse } from "@/src/core/types/IComment";
 import CommentITemsManagement from "../commentItemsManagement/commentItemsManagement";
 import SellerHouse from "../sellerHouse/SellerHouse";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 interface IProp {
   orderItems: IOption[];
   sortItems: IOption[];
@@ -103,7 +104,7 @@ const DashboardCommentManagement: FC<IProp> = ({
                       {comment.title || "بدون عنوان"}
                     </p>
                     <p className="  md:ml-8   md:text-center">
-                      {comment.created_at?.slice(0, 10) || "--"}
+                      {formatDateTime(comment.created_at)}
                     </p>
                   </div>
                   {isAdmin ? (

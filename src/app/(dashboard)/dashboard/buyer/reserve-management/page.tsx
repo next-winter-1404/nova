@@ -4,6 +4,7 @@ import SimpleDropdown from "@/src/components/common/dropDown";
 import PaginationClient from "@/src/components/common/pagination/page";
 import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import ReservationItem from "@/src/components/dashboard/ReservationItem/ReservationItem";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getBookings } from "@/src/utils/sevices/api/processReserve/getbooking";
 import { FC } from "react";
 interface IProps {
@@ -94,7 +95,7 @@ const SellerReservePage: FC<IProps> = async ({ searchParams }) => {
                             </div>
                           </div>
                           <div className=" text-center">
-                            {item.created_at?.slice(0, 10) || "--"}
+                            {formatDateTime(item.created_at)}
                           </div>
                           <div
                             className="flex-center gap-1 text-center "

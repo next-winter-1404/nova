@@ -8,6 +8,7 @@ import UserInfoActionButton from "@/src/components/dashboard/userInfoActionButto
 import { userActivities } from "@/src/utils/sevices/api/userActivities/userActivities";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 import userPlaceHolder from "@/src/assets/images/userPlaceHolder.jpg";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 
 type UserDetailProps = {
   params: {
@@ -85,7 +86,7 @@ const UserDetail = async ({ params }: UserDetailProps) => {
                 تاریخ عضویت:
               </span>
               <span className="text-16-medium text-white-pure">
-                {userInfo?.user?.created_at?.split("T")[0]}
+                {formatDateTime(userInfo?.user?.created_at)}
               </span>
             </div>
             <div className="flex items-center justify-start gap-2">
@@ -93,7 +94,7 @@ const UserDetail = async ({ params }: UserDetailProps) => {
                 آخرین بروزرسانی :
               </span>
               <span className="text-16-medium text-white-pure">
-                {userInfo?.user?.updated_at?.split("T")[0]}
+                {formatDateTime(userInfo?.user?.updated_at)}
               </span>
             </div>
           </div>
