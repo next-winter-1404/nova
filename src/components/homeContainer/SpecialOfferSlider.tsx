@@ -30,7 +30,7 @@ const SpecialOfferSlider = ({ houses }: HouseCardInfoProp) => {
       className="my-house-swiper"
     >
       {getHouseWithOffer.map((item: IHouse) => (
-        <SwiperSlide key={item.id}>
+        <SwiperSlide key={item.id} className="group">
           <ProductCard
             seeMore
             offer="15"
@@ -40,7 +40,7 @@ const SpecialOfferSlider = ({ houses }: HouseCardInfoProp) => {
             discounted_price={item.discounted_price}
             rate={item.rate}
             price={item.price}
-            buttonText="قیمت خرید :"
+            buttonText=": قیمت خرید"
             bathrooms={item.bathrooms}
             capacity={item.capacity}
             photos={item.photos}
