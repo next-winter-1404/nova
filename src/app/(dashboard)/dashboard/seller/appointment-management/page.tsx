@@ -9,9 +9,8 @@ import VisitAppointmentMAnagement from "@/src/components/dashboard/visitAppointm
 import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getSellerHouses } from "@/src/utils/sevices/api/seller/houses/getHouses";
 import { getVisitAppointments } from "@/src/utils/sevices/api/visitAppointment/getVisitAppointment";
-import React, { FC } from "react";
+import { FC } from "react";
 import { RiBuildingLine } from "react-icons/ri";
-import { TbDog } from "react-icons/tb";
 interface IProp {
   searchParams: Promise<{ houseId: string }>;
 }

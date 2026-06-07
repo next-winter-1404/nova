@@ -147,6 +147,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       href: `/dashboard/${role}/maintenance-management`,
       icon: <TbTool   className="w-5 h-5" />,
     },
+    {
+      label: "سوالات کاربران",
+      href: `/dashboard/${role}/qa-management`,
+      icon: <FiHelpCircle   className="w-5 h-5" />,
+    },
   ];
 
   let menuItems = [...commonItems];

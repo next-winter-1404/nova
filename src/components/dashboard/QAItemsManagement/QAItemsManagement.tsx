@@ -1,6 +1,6 @@
 "use client";
 import { FC, useState } from "react";
-import { TbEye } from "react-icons/tb";
+import { TbDotsVertical, TbEye } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { Modal } from "../../common/modal";
@@ -72,9 +72,12 @@ const QAItemsManagement: FC<IProp> = ({ questionId, answer }) => {
             </div>
           }
           modalBtn={
-            <div className="bg-primary-accent-green cursor-pointer md:w-[100px] p-3 rounded-xl text-center">
+          <div>
+            <div className="md:block hidden bg-primary-accent-green cursor-pointer md:w-[100px] w-10 h-10 md:p-3 ml-3 text-center rounded-xl  md: text-base text-[13px]">
               پاسخ
             </div>
+            <TbDotsVertical className="w-5 h-5 cursor-pointer text-gray-400 hover:text-primary-accent-green transition md:hidden" />
+</div>
           }
         />
       )}

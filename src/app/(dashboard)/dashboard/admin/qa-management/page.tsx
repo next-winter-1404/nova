@@ -8,18 +8,19 @@ import UserName from "@/src/components/dashboard/getUserName/UserName";
 import SellerHouse from "@/src/components/dashboard/sellerHouse/SellerHouse";
 import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getHouseQA } from "@/src/utils/sevices/api/QA/gettHouseQA";
+import { getAllHouses } from "@/src/utils/sevices/api/admin/houses/getAllHouses/getAllHouses";
 import { getSellerHouses } from "@/src/utils/sevices/api/seller/houses/getHouses";
 import { FC } from "react";
 import { RiBuildingLine } from "react-icons/ri";
 interface IProp {
   searchParams: Promise<{ houseId: string }>;
 }
-const SellerQAManagement: FC<IProp> = async ({ searchParams }) => {
-  const items = ["نام کاربر", "سوال کاربر", "تاریخ ایجاد ", "اخرین ویرایش"];
+const AdminQAManagement: FC<IProp> = async ({ searchParams }) => {
+  const items = ["نام کاربر","پاسخ توسط", "سوال کاربر", "تاریخ ایجاد ", "اخرین ویرایش"];
   const params = await searchParams;
   const houseId = params.houseId;
-  const result = await getSellerHouses();
-  const sellerHouse = result.houses || [];
+  const result = await getAllHouses();
+  const sellerHouse = result.data || [];
 
   const parsedHouseId = Number(houseId);
   const hasValidHouseId = houseId && !isNaN(parsedHouseId);
@@ -33,7 +34,7 @@ const SellerQAManagement: FC<IProp> = async ({ searchParams }) => {
           contentClassName="bg-dark-900 text-white text-right"
           modalTitle="لیست املاک شما:"
           width="lg:w-[60%] overflow-y-auto h-[550px]"
-          mainContent={<SellerHouse modalHouse={sellerHouse} />}
+          mainContent={<SellerHouse modalHouse={sellerHouse.slice(0,6)} />}
           modalBtn={
             <Button
               text={"انتخاب ملک"}
@@ -48,7 +49,7 @@ const SellerQAManagement: FC<IProp> = async ({ searchParams }) => {
       }
     >
       <div className="flex flex-col gap-5">
-        <ItemNavbar colsNumber={4} items={items} />
+        <ItemNavbar colsNumber={5} items={items} />
         {!houseId ? (
           <div className="w-full text-blue-300 text-center text-2xl mt-5">
             هنوز ملکی انتخاب نشده است. برای مشاهده سوالات مربوط به ملک، روی
@@ -60,10 +61,15 @@ const SellerQAManagement: FC<IProp> = async ({ searchParams }) => {
               key={QA.id}
               className="flex justify-between w-full items-center"
             >
-              <div className="grid grid-cols-4 items-center text-white w-full">
-                <div className="px-10">
+              <div className="grid grid-cols-5 items-center text-white w-full text-[13px] md:text-base">
+                <div className="md:px-10">
                   <UserName userId={Number(QA.userId)} />
                 </div>
+                {QA.answeredBy?
+                    (<div className="px-10">
+                    <UserName userId={Number(QA.answeredBy)} />
+                  </div>):(<span className="text-center ">---</span>)
+                }
                 <ToolTip
                   mainContent={
                     <p className="truncate text-center">{QA.question}</p>
@@ -89,4 +95,4 @@ const SellerQAManagement: FC<IProp> = async ({ searchParams }) => {
   );
 };
 
-export default SellerQAManagement;
+export default AdminQAManagement;
