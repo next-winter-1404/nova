@@ -1,6 +1,6 @@
 import ToolTip from "@/src/components/common/tooltip";
 import Link from "next/link";
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown ,FiHelpCircle} from "react-icons/fi";
 import { HiOutlineBell } from "react-icons/hi";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { FC, ReactNode } from "react";
@@ -109,6 +109,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       label: "درخواست‌های تعمیر",
       href: `/dashboard/${role}/maintenance-management`,
       icon: <TbTool   className="w-5 h-5" />,
+    },
+    {
+      label: "سوالات کاربران",
+      href: `/dashboard/${role}/qa-management`,
+      icon: <FiHelpCircle   className="w-5 h-5" />,
     },
   ];
   const adminItems = [
