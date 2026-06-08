@@ -6,7 +6,7 @@ import Link from "next/link";
 import { FiMenu } from "react-icons/fi";
 import { BsChevronDown } from "react-icons/bs";
 import megaphoneIcon from "@/public/icons/megaphone.svg";
-
+import userPlaceHolder from "@/src/assets/images/userPlaceHolder.jpg";
 import {
   Menu,
   MenuWrapper,
@@ -23,6 +23,9 @@ import { Modal } from "./modal";
 import LoginButton from "../login/button/LoginButton";
 import { sendSellerUpgradeRequest } from "@/src/utils/sevices/api/seller/sellerUpgrade/requestSeller";
 import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import { getUserPublicProfile } from "@/src/utils/sevices/api/users/getUserPublicProfile";
+import { getClientCookie } from "@/src/utils/helper/cookies/clientCookie/clientSideCookie";
 const navigation = [
   { labelName: "تماس با ما", href: "/contactus", current: false },
   { labelName: "مقالات ما", href: "/blogs", current: false },
@@ -33,6 +36,11 @@ const Navbar = () => {
   const { scrollYProgress } = useScroll();
   const [visibleShadow, setVisibleShadow] = useState(false);
   const [isAuth, setIsAuth] = useState<boolean | null>(null);
+  const userId = getClientCookie("userId");
+  const { data } = useQuery({
+    queryKey: ["prof"],
+    queryFn: () => getUserPublicProfile(Number(userId)),
+  });
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) setVisibleShadow(true);
@@ -112,8 +120,14 @@ const Navbar = () => {
                 </NavLoginButton>
               </Link> */}
               {isAuth === null ? null : isAuth ? (
-                <Link href={"/dashboard"} className="rounded-full border border-gray-300 p-2">
-                  پروفایل
+                <Link href={"/dashboard"} >
+                  <Image
+                    alt="prof"
+                    src={data?.user.profilePicture || userPlaceHolder}
+                    width={40}
+                    height={40}
+                    className="rounded-full border border-gray-300"
+                  />
                 </Link>
               ) : (
                 <Link href="/login">
