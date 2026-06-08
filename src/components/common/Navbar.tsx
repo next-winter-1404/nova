@@ -32,7 +32,7 @@ const navigation = [
 const Navbar = () => {
   const { scrollYProgress } = useScroll();
   const [visibleShadow, setVisibleShadow] = useState(false);
-
+  const [isAuth, setIsAuth] = useState<boolean | null>(null);
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) setVisibleShadow(true);
@@ -52,14 +52,11 @@ const Navbar = () => {
     }
   };
 
- 
   const [state, formAction] = useActionState(
     async (prevState: any, formData: FormData) => {
-
       const isAuth = await checkAuth();
 
       if (!isAuth) {
-      
         return {
           success: false,
           message: "ابتدا وارد حساب کاربری شوید",
@@ -82,6 +79,15 @@ const Navbar = () => {
       toast.error(state.message);
     }
   }, [state]);
+
+  useEffect(() => {
+    const runCheck = async () => {
+      const result = await checkAuth();
+      setIsAuth(result);
+    };
+
+    runCheck();
+  }, []);
   return (
     <header
       className={`whitespace-nowrap md:w-[96%] md:fixed w-[90%] inset-x-0 mx-auto glass shadow-3xl inset-shadow-fff-16 rounded-2xl   z-50   ${
@@ -92,7 +98,7 @@ const Navbar = () => {
         <div>
           <div>
             <span>
-              <Link href="/login">
+              {/* <Link href="/login">
                 <NavLoginButton>
                   <span>
                     <p>ورود / ثبت نام</p>
@@ -104,7 +110,26 @@ const Navbar = () => {
                     />
                   </span>
                 </NavLoginButton>
-              </Link>
+              </Link> */}
+              {isAuth === null ? null : isAuth ? (
+                <Link href={"/dashboard"} className="rounded-full border border-gray-300 p-2">
+                  پروفایل
+                </Link>
+              ) : (
+                <Link href="/login">
+                  <NavLoginButton>
+                    <span className="flex items-center gap-2">
+                      <p>ورود / ثبت نام</p>
+                      <Image
+                        src="/icons/user1.svg"
+                        alt="user"
+                        width={16}
+                        height={16}
+                      />
+                    </span>
+                  </NavLoginButton>
+                </Link>
+              )}
             </span>
           </div>
 
