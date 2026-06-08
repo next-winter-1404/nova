@@ -79,21 +79,27 @@ const AdminBlogManagementPage: FC<IProps> = async ({ searchParams }) => {
         <div className="flex flex-col gap-5 w-full">
           <ItemNavbar colsNumber={3} items={items} />
           <div className="">
-            {blogs?.map((blog) => (
-              <div
-                key={blog.id}
-                className="flex justify-between w-full items-center"
-              >
-                <div className="grid grid-cols-3 gap-5 text-white w-full md:px-10 items-center">
-                  <UserName userId={Number(blog.author_id)} />
-                  <p className="truncate">
-                    {blog.title || "عنوانی وجود ندارد"}
-                  </p>
-                  <p>{formatDateTime(blog.created_at) || "تاریخی وجود ندارد"}</p>
+            {blogs.length > 0 ? (
+              blogs?.map((blog) => (
+                <div
+                  key={blog.id}
+                  className="flex justify-between w-full items-center"
+                >
+                  <div className="grid grid-cols-3 gap-5 text-white w-full md:px-10 items-center">
+                    <UserName userId={Number(blog.author_id)} />
+                    <p className="truncate">
+                      {blog.title || "عنوانی وجود ندارد"}
+                    </p>
+                    <p>
+                      {formatDateTime(blog.created_at) || "تاریخی وجود ندارد"}
+                    </p>
+                  </div>
+                  <BlogItemsManagement blogId={blog.id} />
                 </div>
-                <BlogItemsManagement blogId={blog.id} />
-              </div>
-            ))}
+              ))
+            ) : (
+              <div className="w-full text-gray-300 text-3xl text-center">وبلاگی وجود ندارد</div>
+            )}
           </div>
         </div>
         <div className="flex justify-between w-full items-center">
