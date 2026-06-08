@@ -80,7 +80,7 @@ const SellerPage = async () => {
               </div>
               <div className="rounded-xl bg-primary-accent-green md:w-[219px] p-2" dir="rtl">
                 <div className="flex gap-2 w-full">
-                  <p>{SellerFinanceDashboard.totalCurrentMonthAmount}</p>
+                  <p>{formatPrice(Number(SellerFinanceDashboard.totalCurrentMonthAmount))}</p>
                   <span>تومان</span>
                 </div>
               </div>
@@ -93,7 +93,7 @@ const SellerPage = async () => {
               </div>
               <div className="rounded-xl bg-gray-300 md:w-[219px] p-2" dir="rtl">
                 <div className="flex gap-2 w-full">
-                  <p>{SellerFinanceDashboard.totalAmount}</p>
+                  <p>{formatPrice(Number(SellerFinanceDashboard.totalAmount))}</p>
                   <span>تومان</span>
                 </div>
               </div>
