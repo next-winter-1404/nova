@@ -33,6 +33,7 @@ import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/ser
 import HousesPicturesSlider from "@/src/components/mortgageAndRentPageContainer/HousesPicturesSlider";
 import VisitAppointment from "@/src/components/mortgageAndRentPageContainer/VisitAppointment/VisitApointment";
 import { getVisitAppointments } from "@/src/utils/sevices/api/visitAppointment/getVisitAppointment";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 
 interface IProps {
   params: Promise<{ id: number }>;
@@ -176,7 +177,7 @@ const SingleHousePage = async ({ params }: IProps) => {
                       <div className="w-full flex-center justify-between">
                         <div className="flex-center gap-0.5 text-16-medium text-primary-accent-green">
                           <span>ت</span>
-                          <span>{getHouseInfo?.discounted_price}</span>
+                          <span>{formatPrice(Number(getHouseInfo?.discounted_price))}</span>
                         </div>
                         <div className="flex-center gap-2 text-16-medium text-gray-300">
                           <span>: قیمت رهن از</span>
@@ -186,7 +187,7 @@ const SingleHousePage = async ({ params }: IProps) => {
                       <div className="w-full flex-center justify-between">
                         <div className="flex-center gap-0.5 text-16-medium text-primary-accent-green">
                           <span>ت</span>
-                          <span>{getHouseInfo?.price}</span>
+                          <span>{formatPrice(Number(getHouseInfo?.price))}</span>
                         </div>
                         <div className="flex-center gap-2 text-16-medium text-gray-300">
                           <span>: قیمت اجاره از</span>

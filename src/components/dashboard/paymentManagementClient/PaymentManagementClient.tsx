@@ -8,6 +8,7 @@ import UserName from "@/src/components/dashboard/getUserName/UserName";
 import { IAllPayments } from "@/src/core/types/IPayment";
 import Input from "../../common/input/Input";
 import useSearch from "@/src/utils/hooks/searchHook";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 
 interface IProp {
   allPayment: IAllPayments[];
@@ -49,7 +50,7 @@ const PaymentManagementClient: FC<IProp> = ({ allPayment, navItems }) => {
               >
                 <div className="grid grid-cols-5 gap-10 lg:text-[18px] md:text-[14px] text-white text-[8px]  w-full">
                   <UserName userId={Number(payment.userId)} />
-                  <span>{payment.amount}</span>
+                  <span>{formatPrice(Number(payment.amount))}</span>
                   <p className="mr-3 sm:mr-0">{payment.description}</p>
                   <p className="">
                     {payment.createdAt?.slice(0, 10) || "تاریخی وجود ندارد"}

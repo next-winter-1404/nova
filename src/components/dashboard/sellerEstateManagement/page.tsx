@@ -11,6 +11,7 @@ import useSearch from "@/src/utils/hooks/searchHook";
 import EstateItems from "../estateItems/EstateItems";
 import { SellerDeleteHouses } from "@/src/utils/sevices/api/seller/houses/deleteHouse/deleteHouse";
 import { FaStar } from "react-icons/fa";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 
 interface IProps {
   items: string[];
@@ -66,7 +67,7 @@ const SellerEstateManagement: FC<IProps> = ({ items, house, role }) => {
                                         </div>
                                     </div>
                                     <div className="flex-center gap-1 " dir="rtl">
-                                        <span>{item?.price || "--"}</span>
+                                        <span>{formatPrice(Number(item?.price)) || "--"}</span>
                                         <span>تومان</span>
                                     </div>
                                     <div className="ml-[105px] text-center">

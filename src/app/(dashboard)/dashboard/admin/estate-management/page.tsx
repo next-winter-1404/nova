@@ -12,6 +12,7 @@ import Link from "next/link";
 import PaginationClient from "@/src/components/common/pagination/page";
 import { IFilters } from "@/src/core/types/IFilters";
 import { getDiscounts } from "@/src/utils/sevices/api/admin/discount/getDiscount";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 
 const EstateManagementPage = async ({
   searchParams,
@@ -89,7 +90,7 @@ const EstateManagementPage = async ({
                       }
                     />
 
-                    <span>{house.price || "--"}</span>
+                    <span>{formatPrice(Number(house.price)) || "--"}</span>
                     <span>{house.transaction_type || "--"}</span>
                     <span className="lg:-mr-8">{house.capacity || "--"}</span>
                   </div>

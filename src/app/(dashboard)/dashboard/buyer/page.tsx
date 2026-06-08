@@ -5,6 +5,7 @@ import ProgressBar from "@/src/components/common/progressBar/ProgressBar";
 import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import ReserveChart from "@/src/components/dashboard/chart/ReserveChart";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 import { getFavoriteForUser } from "@/src/utils/sevices/api/favorites/getFavorites";
 import { getBookings } from "@/src/utils/sevices/api/processReserve/getbooking";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
@@ -127,7 +128,7 @@ const BuyerDashboardPage = async () => {
                           className="flex-center gap-1 text-center "
                           dir="rtl"
                         >
-                          <span>{item.house?.price || "  --"}</span>
+                          <span>{formatPrice(Number(item.house?.price ))|| "  --"}</span>
                           <span>تومان</span>
                         </div>
                         <StatusLabel status={item.status} />

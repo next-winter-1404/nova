@@ -22,6 +22,7 @@ import toast from 'react-hot-toast'
 import { postHouses } from '@/src/utils/sevices/api/houses/postHouses'
 import { useHouse } from '@/src/context/page'
 import { getClientCookie } from '@/src/utils/helper/cookies/clientCookie/clientSideCookie'
+import { formatPrice } from '@/src/utils/hooks/formatPrice'
 
 const FinalAccept = () => {
   const searchParams = useSearchParams();
@@ -145,7 +146,7 @@ const FinalAccept = () => {
                   {houseData.bathrooms} حمامه ,
                   نفر{houseData.capacity} ظرفیت 
                 </h2>
-                <h2 className='flex gap-4 text-[24px] text-primary-accent-green'> <Image src={Price} alt='Price'/> تومان {houseData.price}</h2>
+                <h2 className='flex gap-4 text-[24px] text-primary-accent-green'> <Image src={Price} alt='Price'/> تومان {formatPrice(Number(houseData.price))}</h2>
               </div>
             </div>
           </div>

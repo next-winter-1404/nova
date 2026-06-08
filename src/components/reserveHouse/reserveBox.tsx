@@ -16,6 +16,7 @@ import { calculateDaysBetween } from "@/src/utils/hooks/countDays";
 import { IHouse } from "@/src/core/types/IHouse";
 import toast from "react-hot-toast";
 import { computingDiscount } from "@/src/utils/helper/computingDiscount";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 
 const ReserveBox: FC<IHouse> = ({ price, id, discounted_price }) => {
   const router = useRouter();
@@ -135,7 +136,7 @@ const ReserveBox: FC<IHouse> = ({ price, id, discounted_price }) => {
           <div className="flex justify-between w-full" dir="rtl">
             <span className="text-gray-300 text-16-bold">★ {days} شب</span>
             <div className="flex gap-2 text-16-bold text-white">
-              <span>{totalPrice}</span>
+              <span>{formatPrice(Number(totalPrice))}</span>
               <span>تومان</span>
             </div>
           </div>
@@ -159,7 +160,7 @@ const ReserveBox: FC<IHouse> = ({ price, id, discounted_price }) => {
           </div>
           <div className="text-primary-accent-green font-semibold text-[24px] flex gap-2">
             <i>تومان</i>
-            <span>{discounted_price || price}</span>
+            <span>{formatPrice(Number(discounted_price)) || formatPrice(Number(price))}</span>
           </div>
         </div>
 
