@@ -46,7 +46,7 @@ const AdminContactUSManagement: FC<IProps> = async ({ searchParams }) => {
 
   return (
     <DashboardContentContainer
-      title={`لیست مقالات (${result.totalCount})`}
+      title={`لیست پیام ها (${result.totalCount})`}
       twTopContent="w-1/2"
       topSectionContent={
         <div className="flex gap-4  w-full py-2">
