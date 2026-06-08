@@ -18,10 +18,10 @@ const SocialMediaItemsManagement: FC<IProp> = ({ mediaId}) => {
   const handleDeleteSocial = async () => {
     try {
       await adminDeleteSocial(mediaId);
-      toast.success("مقاله با موفقیت حذف شد ");
+      toast.success("پلتفرم با موفقیت حذف شد ");
       router.refresh();
     } catch (error) {
-      toast.error("خطا در حذف مقاله ");
+      toast.error("خطا در حذف پلتفرم ");
       console.error(error);
     }
   };

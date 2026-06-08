@@ -4,9 +4,11 @@ import toast from "react-hot-toast";
 import LoginButton from "@/src/components/login/button/LoginButton";
 import { PostSocialMedia } from "@/src/utils/sevices/api/socialMedia/postSocialMedia";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 
 const CreateSocialMediaPage= () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
       platform: "",
       url: ""
@@ -21,6 +23,7 @@ const CreateSocialMediaPage= () => {
       })
       toast.success("پلتفرم شما با موفقیت ساخته شد!");
       setFormData({ platform: "", url: "" });
+      router.push("/dashboard/admin/social-media")
     }catch (error: any) {
       console.log(error.response?.data);
       console.log(error.response?.status);
