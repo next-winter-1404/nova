@@ -2,8 +2,6 @@
 import React, { FC, useActionState, useEffect } from "react";
 import SimpleDropdown from "@/src/components/common/dropDown";
 import Input from "@/src/components/common/input/Input";
-import { IOption } from "@/src/core/types/TDropDown";
-import { IBlogs } from "@/src/core/types/IBogs";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import LoginButton from "@/src/components/login/button/LoginButton";
@@ -26,8 +24,7 @@ const CreateBlogPage= () => {
     queryFn: () => getCategory(),
   });
   
-  console.log("error =", error);
-  console.log("loading =", isLoading);
+
   const categoriesItems = categories?.data?.map((cat) => ({
     value: cat.id,
     label: cat.name,
@@ -47,7 +44,6 @@ const CreateBlogPage= () => {
       toast.error(state.message);
     }
   }, [state]);
-console.log("categories---",categories)
   return (
     <form action={formAction} className="flex flex-col gap-10 w-full">
       <input type="hidden" name="category" value={category||""} />

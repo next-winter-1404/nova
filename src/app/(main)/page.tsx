@@ -1,24 +1,30 @@
-
-import {HeroSection, CategorySection, SpecialOfferSection, MostPopulerDestinationSection, DepositAndRentSection} from "@/src/components/homeContainer/index";
+import {
+  HeroSection,
+  CategorySection,
+  SpecialOfferSection,
+  MostPopulerDestinationSection,
+  DepositAndRentSection,
+} from "@/src/components/homeContainer/index";
 import Landing from "@/src/components/landing/page";
-import Footer from "@/src/components/footer/page";
 import { Suspense } from "react";
-import ScrollButton from "@/src/components/common/scrollButton/ScrollButton";
-export default function Home() {
+import Recommendation from "@/src/components/homeContainer/recommendation/Recommendation";
+import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+export default async function Home() {
+  const userId = await getServerSideCookie("userId");
   function Loading() {
-  return <h2>🌀 Loading...</h2>;
-}
-  return ( 
+    return <h2>🌀 Loading...</h2>;
+  }
+  return (
     <Suspense fallback={<Loading />}>
-    <div className="flex-col-center gap-49 bg-dark-900 ">
-      <HeroSection />
-      <CategorySection />
-      <SpecialOfferSection />
-      <MostPopulerDestinationSection />
-      <DepositAndRentSection/>
-      <Landing></Landing>
-    </div>
+      <div className="flex-col-center gap-49 bg-dark-900 ">
+        <HeroSection />
+        <CategorySection />
+        <SpecialOfferSection />
+        {userId && <Recommendation />}
+        <MostPopulerDestinationSection />
+        <DepositAndRentSection />
+        <Landing></Landing>
+      </div>
     </Suspense>
-
   );
 }

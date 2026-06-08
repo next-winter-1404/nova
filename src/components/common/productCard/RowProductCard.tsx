@@ -15,6 +15,7 @@ import CompareButton from "../compareButton/page";
 import CompareBadge from "../compareBadge/page";
 
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 const RowProductCard: FC<IProductCard> = ({
   price,
   rate,
@@ -36,7 +37,7 @@ const RowProductCard: FC<IProductCard> = ({
         {price && (
           <span className="flex-center gap-2 px-3 py-1.5 whitespace-nowrap text-semibold-28 text-primary-accent-green">
             <i>ت</i>
-            <span>{price}</span>
+            <span>{formatPrice(Number(price))}</span>
           </span>
         )}
         <Link href={href}>
