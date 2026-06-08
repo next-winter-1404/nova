@@ -98,15 +98,15 @@ const DiscountItemsManagement: FC<IProp> = ({
       <DropMenu
         trigger={
           <div>
-            <TbDots className="w-6 h-6 hidden md:block cursor-pointer" />
-            <TbDotsVertical className="w-4 h-4 md:hidden cursor-pointer" />
+               <TbDots className="w-6 h-6 cursor-pointer text-gray-400 hover:text-primary-accent-green transition hidden md:block" />
+            <TbDotsVertical className="w-4 h-4 cursor-pointer text-gray-400 hover:text-primary-accent-green transition md:hidden" />
           </div>
         }
         items={menuItems}
         side="right"
         align="end"
       />
-
+{/* detail */}
       <Modal
         contentClassName="bg-dark-900"
         open={isDetailModalOpen}
@@ -130,7 +130,7 @@ const DiscountItemsManagement: FC<IProp> = ({
           </div>
         }
       />
-
+{/* edit modal */}
       <Modal
         open={isEditOpen}
         onOpenChange={setIsEditOpen}
@@ -184,7 +184,6 @@ const DiscountItemsManagement: FC<IProp> = ({
         }
       />
 
-      {/* ================= DELETE ALERT ================= */}
       <AlertComponent
         isModalOpen={isAlertModalOpen}
         setIsModalOpen={setIsAlertModalOpen}

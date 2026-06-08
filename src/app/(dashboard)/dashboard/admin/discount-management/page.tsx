@@ -2,9 +2,11 @@ import Button from "@/src/components/common/button/page";
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import SimpleDropdown from "@/src/components/common/dropDown";
+import { Modal } from "@/src/components/common/modal";
 import PaginationClient from "@/src/components/common/pagination/page";
 import DiscountItemsManagement from "@/src/components/dashboard/DiscountItemsManagement/DiscountItemsManagement";
 import BlogItemsManagement from "@/src/components/dashboard/blogItemsManagement/BlogItemsManagement";
+import CreateDiscountComponent from "@/src/components/dashboard/createDiscountComponent/CreateDiscountComponent";
 import UserName from "@/src/components/dashboard/getUserName/UserName";
 import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getDiscounts } from "@/src/utils/sevices/api/admin/discount/getDiscount";
@@ -85,11 +87,11 @@ const DiscountManagement: FC<IProps> = async ({ searchParams }) => {
                   key={discount.id}
                   className="flex justify-between w-full items-center"
                 >
-                  <div className="grid grid-cols-3 gap-5 text-white w-full md:px-10 items-center">
-                    <p className="truncate">
+                  <div className="grid grid-cols-3 md:gap-18 md:text-[18px] text-white w-full md:px-10 items-center text-[13px]">
+                    <p className="truncate  ">
                       {discount.code || "کدی وجود ندارد"}
                     </p>
-                    <p>
+                    <p className="md:px-6">
                       {formatDateTime(discount.valid_until) ||
                         "تاریخی وجود ندارد"}
                     </p>
@@ -98,10 +100,7 @@ const DiscountManagement: FC<IProps> = async ({ searchParams }) => {
                   <DiscountItemsManagement
                     discountId={Number(discount.id)}
                     discountCode={discount.code || "کدی وجود ندارد"}
-                    validDate={
-                      discount.valid_until ||
-                      "تاریخی وجود ندارد"
-                    }
+                    validDate={discount.valid_until || "تاریخی وجود ندارد"}
                     percentage={discount.discount_percentage || 0}
                   />
                 </div>
@@ -114,13 +113,8 @@ const DiscountManagement: FC<IProps> = async ({ searchParams }) => {
           </div>
         </div>
         <div className="flex justify-between w-full items-center">
-          <Link
-            href={"/dashboard/admin/blog-management/create"}
-            className="cursor-pointer bg-primary-accent-green w-[150px] h-[43px] rounded-[16px] flex-center"
-          >
-            ساحت وبلاگ +
-          </Link>
-
+         <CreateDiscountComponent/>
+         
           <PaginationClient
             totalPages={totalPages}
             totalCount={Number(result?.totalCount)}
