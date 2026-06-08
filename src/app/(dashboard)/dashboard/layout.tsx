@@ -1,6 +1,6 @@
 import ToolTip from "@/src/components/common/tooltip";
 import Link from "next/link";
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown ,FiHelpCircle} from "react-icons/fi";
 import { HiOutlineBell } from "react-icons/hi";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { FC, ReactNode } from "react";
@@ -29,6 +29,7 @@ import MenuController from "@/src/components/dashboard/menu/menuController/menuC
 import { PiReadCvLogoFill } from "react-icons/pi";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 import { LuClipboardList } from "react-icons/lu";
+import { RiDiscountPercentLine } from "react-icons/ri";
 interface IProp {
   children: ReactNode;
 }
@@ -110,6 +111,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       href: `/dashboard/${role}/maintenance-management`,
       icon: <TbTool   className="w-5 h-5" />,
     },
+    {
+      label: "سوالات کاربران",
+      href: `/dashboard/${role}/qa-management`,
+      icon: <FiHelpCircle   className="w-5 h-5" />,
+    },
   ];
   const adminItems = [
     {
@@ -141,6 +147,16 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       label: "درخواست‌های تعمیر",
       href: `/dashboard/${role}/maintenance-management`,
       icon: <TbTool   className="w-5 h-5" />,
+    },
+    {
+      label: "سوالات کاربران",
+      href: `/dashboard/${role}/qa-management`,
+      icon: <FiHelpCircle   className="w-5 h-5" />,
+    },
+    {
+      label: "مدیریت تخفیف ها",
+      href: `/dashboard/${role}/discount-management`,
+      icon: <RiDiscountPercentLine   className="w-5 h-5" />,
     },
   ];
 

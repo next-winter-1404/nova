@@ -15,7 +15,7 @@ import {
   FaRegFileAlt,
   FaStar,
 } from "react-icons/fa";
-import { FiCopy, FiHeart } from "react-icons/fi";
+import { FiCopy, FiHelpCircle } from "react-icons/fi";
 import AboutHouseContainer from "@/src/components/reserveHouse/aboutHouseContainer";
 import HouseItemsComponent from "@/src/components/reserveHouse/houseItemsComponent";
 import SimilarHouses from "@/src/components/reserveHouse/similarHouse/SimilarHousesNavbar";
@@ -28,6 +28,7 @@ import { getHousesComment } from "@/src/utils/sevices/api/comments/reserveHouseD
 import { Modal } from "@/src/components/common/modal";
 import AddToFavorite from "@/src/components/reserveHouse/addToFavorite/AddToFavorite";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import HouseQA from "@/src/components/common/houseQA/HouseQA";
 
 interface IProps {
   params: Promise<{ id: number }>;
@@ -62,6 +63,11 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   ];
   const tabs: ITab[] = [
     {
+      value: "QA",
+      label: "سوالات کاربران",
+      icon: <FiHelpCircle className="w-4 h-4" />,
+    },
+    {
       value: "comment",
       label: "نظرات کاربران",
       icon: <FaRegCommentDots className="w-4 h-4" />,
@@ -80,6 +86,10 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   ];
   const renderContent = () => {
     switch (activeTab) {
+      case "QA":
+        return (
+          <HouseQA houseId={Number(house.id)} />
+        );
       case "about":
         return (
           <AboutHouseContainer caption={house?.caption} title={house?.title} />

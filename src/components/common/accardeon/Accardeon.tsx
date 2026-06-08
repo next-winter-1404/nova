@@ -8,6 +8,7 @@ interface IAccordion {
   twHeaderClassName?: string;
   twContentClassName?: string;
   twTitleClassName?: string;
+  isLine?: boolean;
 }
 const AccordionComponent: FC<IAccordion> = ({
   accordionContent,
@@ -15,6 +16,7 @@ const AccordionComponent: FC<IAccordion> = ({
   twHeaderClassName,
   twTitleClassName,
   twContentClassName,
+  isLine=true
 }) => {
   return (
     <Accordion.Root type="single" collapsible className="w-full">
@@ -25,7 +27,7 @@ const AccordionComponent: FC<IAccordion> = ({
           >
           <div className="w-full flex items-center gap-0.5">
           <span className={`${twTitleClassName}`}> {accordionTitle}</span>
-          <div  className="w-full bg-gray-300 h-px"/>
+          <div  className={`w-full bg-gray-300 h-px ${!isLine?"hidden":""}`}/>
             <ChevronDownIcon className="h-4 w-4 text-white transition-transform duration-300 group-data-[state=open]:rotate-180" />
           </div>
           </Accordion.Trigger>

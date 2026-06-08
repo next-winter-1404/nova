@@ -16,7 +16,7 @@ export default function Error({ error, reset }: IErrorProp) {
   }, [error]);
 
   return (
-    <div className="relative flex items-center justify-center w-screen h-screen overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#1e293b]">
+    <div className="font-vazir relative flex items-center justify-center w-screen h-screen overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#1e293b]">
       <div className="absolute w-[400px] h-[400px] bg-purple-500/20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
       <div className="absolute w-[300px] h-[300px] bg-cyan-500/20 blur-3xl rounded-full bottom-[-100px] right-[-100px]" />
 

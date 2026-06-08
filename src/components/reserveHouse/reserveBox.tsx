@@ -96,8 +96,8 @@ const ReserveBox: FC<IHouse> = ({ price, id, discounted_price }) => {
   };
   const priceNumber = Number(discounted_price || price) || 0;
   const totalPrice = days > 0 ? priceNumber * days : priceNumber;
-  const discountPercent = computingDiscount({discounted_price, price});
-  const roundDiscountPercent = Math.round(discountPercent)
+  const discountPercent = computingDiscount({ discounted_price, price });
+  const roundDiscountPercent = Math.round(discountPercent);
   return (
     <InfoCardContainer
       icon={<Image alt="icon" src={building} className="w-5 h-5" />}
@@ -143,11 +143,19 @@ const ReserveBox: FC<IHouse> = ({ price, id, discounted_price }) => {
 
         <div className="w-full px-2 flex flex-col justify-start gap-4">
           <div className="flex gap-4 w-full">
-            <Button
-              text={`${roundDiscountPercent} %`} 
-              buttonStyle={{ height: 25, width: 40, borderRadius: 8 }}
-            />
-            <OldPriceComponent oldPrice={price || ""} />
+            {discountPercent > 0 && (
+              <Button
+                text={`${roundDiscountPercent} %`}
+                buttonStyle={{
+                  height: 25,
+                  width: 45,
+                  borderRadius: 8,
+                  whiteSpace: "nowrap",
+                  padding: 8,
+                }}
+              />
+            )}
+            {price && <OldPriceComponent oldPrice={price || ""} />}
           </div>
           <div className="text-primary-accent-green font-semibold text-[24px] flex gap-2">
             <i>تومان</i>

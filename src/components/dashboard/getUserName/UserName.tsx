@@ -46,7 +46,7 @@ const UserName = ({ userId }: UserNameProps) => {
         src={pic || userPlaceHolder}
         width={50}
         height={50}
-        className="rounded-lg border border-gray-300"
+        className="rounded-lg border border-gray-300 hidden md:block"
       />
       <span className="mr-3 text-center ">{name || "نام کاربر"}</span>
     </div>
