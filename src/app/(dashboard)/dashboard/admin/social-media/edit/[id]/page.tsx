@@ -1,3 +1,6 @@
+import EditSocialMediaForm from "@/src/components/dashboard/editSocialMediaForm/EditSocialMediaForm";
+import { getSocialMedia } from "@/src/utils/sevices/api/socialMedia/getSocial";
+
 interface IProps {
   params: Promise<{
     id: string;
