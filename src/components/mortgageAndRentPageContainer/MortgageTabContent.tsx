@@ -5,6 +5,7 @@ import HouseItemsComponent from "../reserveHouse/houseItemsComponent";
 import CommentSection from "../reserveHouse/comments/commentSection";
 import { IComment } from "@/src/core/types/IComment";
 import NeshanMapParent from "./NeshanMapParent";
+import HouseQA from "../common/houseQA/HouseQA";
 
 interface MortgageTabContentProps {
   comments: IComment[];

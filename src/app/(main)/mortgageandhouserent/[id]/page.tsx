@@ -6,7 +6,7 @@ import {
 } from "@/src/components/common/breadCrumbs";
 import HousePicture from "@/src/assets/images/singleHouse.png";
 import Location from "@/src/assets/icons/Location.svg";
-import { FiPhoneCall } from "react-icons/fi";
+import { FiHelpCircle, FiPhoneCall } from "react-icons/fi";
 import { FiCalendar } from "react-icons/fi";
 import dolor from "@/public/icons/grayDollor.svg";
 import Vector from "@/public/icons/Vector.svg";

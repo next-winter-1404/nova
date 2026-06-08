@@ -44,9 +44,12 @@ const HouseQA: FC<Props> = async ({ houseId }) => {
         contentClassName="bg-dark-900 text-white"
         modalDescription="سوال شما توسط فروشنده یا پشتیبانی بررسی شده و در کوتاه‌ترین زمان پاسخ داده می‌شود."
         modalBtn={
-          <div className="bg-primary-accent-green text-center text-black rounded-[16px] w-[200px] p-2 self-center">
-            سوالی دارید؟ بپرسید
-          </div>
+          <button
+          type="button"
+          className="bg-primary-accent-green text-black rounded-[16px] w-[200px] p-2"
+        >
+          سوالی دارید؟ بپرسید
+        </button>
         }
         mainContent={
           <div>
