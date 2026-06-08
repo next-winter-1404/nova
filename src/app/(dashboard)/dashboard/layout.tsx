@@ -18,7 +18,8 @@ import {
   TbCategoryFilled,
   TbCalendarEvent,
   TbTool,  
-  TbPhone
+  TbPhone,
+  TbTrendingUp  
 } from "react-icons/tb";
 import { FaCommentDots } from "react-icons/fa";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
@@ -84,6 +85,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       label: "درخواست های من",
       href: `/dashboard/${role}/user-request`,
       icon: <LuClipboardList  className="w-6 h-6" />,
+    },
+    {
+      label: "پیش بینی قیمت",
+      href: `/dashboard/${role}/predict-price`,
+      icon: <TbTrendingUp    className="w-6 h-6" />,
     },
   ]
   const sellerItems = [
