@@ -1,16 +1,13 @@
 "use client";
-import React, { FC, useActionState, useEffect } from "react";
+import React, { useActionState, useEffect } from "react";
 import SimpleDropdown from "@/src/components/common/dropDown";
 import Input from "@/src/components/common/input/Input";
-import { IOption } from "@/src/core/types/TDropDown";
-import { IBlogs } from "@/src/core/types/IBogs";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import LoginButton from "@/src/components/login/button/LoginButton";
 import { CreateBlog } from "@/src/utils/sevices/api/blogs/createBlog";
 import { useQuery } from "@tanstack/react-query";
 import { getCategory } from "@/src/utils/sevices/api/category/getCategory";
-import {  ICategoryResponse } from "@/src/core/types/ICategory";
 
 
 const CreateBlogPage= () => {

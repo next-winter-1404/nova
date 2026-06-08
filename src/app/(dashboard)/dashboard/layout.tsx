@@ -20,6 +20,7 @@ import {
   TbTool  
 } from "react-icons/tb";
 import { FaCommentDots } from "react-icons/fa";
+import { BsGlobe } from "react-icons/bs";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
 import userPlaceholder from "@/src/assets/images/userPlaceHolder.jpg";
 import DropMenu from "@/src/components/common/dropMenu/DropMenu";
@@ -141,6 +142,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       label: "درخواست‌های تعمیر",
       href: `/dashboard/${role}/maintenance-management`,
       icon: <TbTool   className="w-5 h-5" />,
+    },
+    {
+      label: "شبکه  های اجتماعی",
+      href: `/dashboard/${role}/social-media`,
+      icon: <BsGlobe   className="w-5 h-5" />,
     },
   ];
 

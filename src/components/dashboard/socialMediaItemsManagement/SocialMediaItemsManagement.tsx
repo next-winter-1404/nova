@@ -2,24 +2,22 @@
 import { FC, useState } from "react";
 import DropMenu from "../../common/dropMenu/DropMenu";
 import { TbDots, TbDotsVertical } from "react-icons/tb";
-import { FiAlertCircle } from "react-icons/fi";
 import { TbEdit, TbTrash } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import AlertComponent from "../../common/alert/alert";
-import { adminDeleteBlog } from "@/src/utils/sevices/api/blogs/deleteBlog";
 import toast from "react-hot-toast";
+import { adminDeleteSocial } from "@/src/utils/sevices/api/socialMedia/deleteSocial";
 interface IProp {
-  blogId: number;
-
+    mediaId: number;
 }
-const BlogItemsManagement: FC<IProp> = ({ blogId}) => {
+const SocialMediaItemsManagement: FC<IProp> = ({ mediaId}) => {
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const router = useRouter();
 
   //   api calling
-  const handleDeleteBlog = async () => {
+  const handleDeleteSocial = async () => {
     try {
-      await adminDeleteBlog(blogId);
+      await adminDeleteSocial(mediaId);
       toast.success("مقاله با موفقیت حذف شد ");
       router.refresh();
     } catch (error) {
@@ -31,15 +29,9 @@ const BlogItemsManagement: FC<IProp> = ({ blogId}) => {
   // drop down items with their functions
   const menuItems = [
     {
-      label: "جزییات",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
-      onClick: () => router.push(`/blogs/${blogId}`),
-    },
-
-    {
       label: "ویرایش",
       icon: <TbEdit className="mt-px text-white" />,
-      onClick: () => router.push(`/dashboard/admin/blog-management/edit/${blogId}`),
+      onClick: () => router.push(`/dashboard/admin/social-media/edit/${mediaId}`),
     },
     {
       label: "حذف",
@@ -67,10 +59,10 @@ const BlogItemsManagement: FC<IProp> = ({ blogId}) => {
         alertText="ایا از انتخاب خود مطمعن هستید؟"
         isModalOpen={isAlertModalOpen}
         setIsModalOpen={setIsAlertModalOpen}
-        onClickFunction={handleDeleteBlog}
+        onClickFunction={handleDeleteSocial}
       />
     </div>
   );
 };
 
-export default BlogItemsManagement;
+export default SocialMediaItemsManagement;

@@ -1,4 +1,3 @@
-import Button from "@/src/components/common/button/page";
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import SimpleDropdown from "@/src/components/common/dropDown";
@@ -9,7 +8,6 @@ import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getBlogs } from "@/src/utils/sevices/api/blogs/getBlogs";
 import Link from "next/link";
 import { FC } from "react";
-import { TbPlus } from "react-icons/tb";
 interface IProps {
   searchParams: Promise<IFilters>;
 }

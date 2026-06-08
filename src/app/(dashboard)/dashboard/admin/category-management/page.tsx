@@ -1,14 +1,11 @@
-import Button from "@/src/components/common/button/page";
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import SimpleDropdown from "@/src/components/common/dropDown";
-import { Modal } from "@/src/components/common/modal";
 import PaginationClient from "@/src/components/common/pagination/page";
 import CategoryItems from "@/src/components/dashboard/categoryManagement/categoryManagement";
 import CreateCategory from "@/src/components/dashboard/createCategory/createCategory";
 import { getCategory } from "@/src/utils/sevices/api/category/getCategory";
-import React, { FC, Fragment } from "react";
-import { TbDots } from "react-icons/tb";
+import { FC} from "react";
 interface IProps {
   searchParams: Promise<IFilters>;
 }
