@@ -48,7 +48,7 @@ const DiscountManagement: FC<IProps> = async ({ searchParams }) => {
     // { value: "created_at", label: "زمان ایجاد" },
     { value: "code", label: "عنوان" },
   ];
-  const items = [ "عنوان", "تاریخ ایجاد","مقدار تخفیف"];
+  const items = ["عنوان", "تاریخ انفضا", "مقدار تخفیف"];
 
   return (
     <DashboardContentContainer
@@ -93,9 +93,17 @@ const DiscountManagement: FC<IProps> = async ({ searchParams }) => {
                       {formatDateTime(discount.valid_until) ||
                         "تاریخی وجود ندارد"}
                     </p>
-                    <p>{discount.discount_percentage||0}</p>
+                    <p>{discount.discount_percentage || 0}</p>
                   </div>
-                  <DiscountItemsManagement ={blog.id} />
+                  <DiscountItemsManagement
+                    discountId={Number(discount.id)}
+                    discountCode={discount.code || "کدی وجود ندارد"}
+                    validDate={
+                      discount.valid_until ||
+                      "تاریخی وجود ندارد"
+                    }
+                    percentage={discount.discount_percentage || 0}
+                  />
                 </div>
               ))
             ) : (
