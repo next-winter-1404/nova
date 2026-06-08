@@ -17,7 +17,8 @@ import {
   TbUsers,
   TbCategoryFilled,
   TbCalendarEvent,
-  TbTool  
+  TbTool,  
+  TbPhone
 } from "react-icons/tb";
 import { FaCommentDots } from "react-icons/fa";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
@@ -157,6 +158,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       label: "مدیریت تخفیف ها",
       href: `/dashboard/${role}/discount-management`,
       icon: <RiDiscountPercentLine   className="w-5 h-5" />,
+    },
+    {
+      label: "ارتباط با ما",
+      href: `/dashboard/${role}/contact-us-management`,
+      icon: <TbPhone   className="w-5 h-5" />,
     },
   ];
 

@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import DropMenu from "../../common/dropMenu/DropMenu";
 import { TbDots, TbDotsVertical } from "react-icons/tb";
 import { FiAlertCircle } from "react-icons/fi";
@@ -7,7 +7,6 @@ import { Modal } from "../../common/modal";
 import { useQuery } from "@tanstack/react-query";
 import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail";
 import { IHouse } from "@/src/core/types/IHouse";
-import ProductCard from "../../common/productCard/ProductCard";
 import { TbEdit, TbTrash } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -24,17 +23,30 @@ import {
   TbPercentage,
   TbPhoto,
 } from "react-icons/tb";
+import { IDiscount } from "@/src/core/types/IDiscount";
+import { addDiscountToHouse } from "@/src/utils/sevices/api/admin/houses/editHouse/editHouse";
+
 interface IProp {
   houseId: number;
   role?: string;
   deleteFunction?: any;
+  discounts?: IDiscount[];
 }
-const EstateItems: FC<IProp> = ({ houseId, role, deleteFunction }) => {
+
+const EstateItems: FC<IProp> = ({
+  houseId,
+  role,
+  deleteFunction,
+  discounts,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDiscountModalOpen, setIsDiscountModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [selectedDiscount, setSelectedDiscount] = useState<number | null>(null);
+
   const router = useRouter();
 
-  //   api calling
+  // API get house
   const { data: houseDetail, isLoading } = useQuery<IHouse | null>({
     queryKey: ["housesDetail", houseId],
     queryFn: () => getHousesDetail(Number(houseId)),
@@ -50,18 +62,40 @@ const EstateItems: FC<IProp> = ({ houseId, role, deleteFunction }) => {
       router.refresh();
     } catch (error) {
       toast.error("خطا در حذف ملک ");
-      console.error(error);
     }
   };
 
-  // drop down items with their functions
+  const handleAddDiscount = async () => {
+    try {
+      const res = await addDiscountToHouse(
+        houseId,
+        selectedDiscount
+      );
+
+      if (res.success) {
+        toast.success(res.message);
+        router.refresh();
+        setIsDiscountModalOpen(false);
+        setSelectedDiscount(null);
+      } else {
+        toast.error(res.message);
+      }
+    } catch {
+      toast.error("خطا در ارتباط با سرور");
+    }
+  };
+
   const menuItems = [
     {
       label: "جزییات",
       icon: <FiAlertCircle className="w-4 h-4 text-white" />,
       onClick: () => setIsModalOpen(true),
     },
-
+    {
+      label: "افزودن تخفیف به این ملک",
+      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      onClick: () => setIsDiscountModalOpen(true),
+    },
     {
       label: "ویرایش",
       icon: <TbEdit className="mt-px text-white" />,
@@ -74,6 +108,7 @@ const EstateItems: FC<IProp> = ({ houseId, role, deleteFunction }) => {
       onClick: () => setIsAlertModalOpen(true),
     },
   ];
+
   const houseInfo = [
     {
       label: "عنوان",
@@ -130,6 +165,7 @@ const EstateItems: FC<IProp> = ({ houseId, role, deleteFunction }) => {
       icon: <TbPhoto className="w-4 h-4 text-gray-300" />,
     },
   ];
+
   return (
     <div>
       <DropMenu
@@ -143,35 +179,77 @@ const EstateItems: FC<IProp> = ({ houseId, role, deleteFunction }) => {
         side="right"
         align="end"
       />
-      {/* house details */}
-      <Modal
-        contentClassName=" bg-dark-900"
-        mainContent={
-          <div>
-            {isLoading ? (
-              <div className="w-full text-gray-300 text-3xl text-center">
-                در حال بارگزاری....
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 gap-3 text-white" dir="rtl">
-                {houseInfo.map((item, index) => (
-                  <div
-                    key={index}
-                    className="bg-dark-800 p-3 rounded-xl flex flex-col gap-2"
-                  >
-                    <div className="flex items-center gap-2 text-gray-300">
-                      {item.icon}
-                      <span className="text-sm">{item.label}</span>
-                    </div>
 
-                    <span className="text-white font-medium">
-                      {item.value ?? "--"}
-                    </span>
-                  </div>
-                ))}
+      <Modal
+        contentClassName="bg-dark-900"
+        onOpenChange={setIsDiscountModalOpen}
+        open={isDiscountModalOpen}
+        mainContent={
+          <div className="flex flex-col gap-5">
+            {(discounts?.length ?? 0) > 0 ? (
+              discounts?.map((dis) => (
+                <button
+                  key={dis.id}
+                  type="button"
+                  onClick={() => setSelectedDiscount(Number(dis.id))}
+                  className={`p-2 rounded-xl text-white text-right transition ${
+                    selectedDiscount === dis.id
+                      ? "bg-green-600"
+                      : "bg-dark-700 hover:bg-gray-600"
+                  }`}
+                >
+                  {dis.code}
+                </button>
+              ))
+            ) : (
+              <div className="text-center text-3xl text-gray-300 w-full">
+                کد تخفیفی وجود ندارد
               </div>
             )}
+
+            {(discounts?.length ?? 0) > 0 && (
+              <button
+                type="button"
+                disabled={selectedDiscount === null}
+                onClick={handleAddDiscount}
+                className={`py-2 rounded-xl text-white ${
+                  selectedDiscount === null
+                    ? "bg-gray-500 cursor-not-allowed"
+                    : "bg-primary-accent-green "
+                }`}
+              >
+                اعمال تخفیف
+              </button>
+            )}
           </div>
+        }
+      />
+
+      <Modal
+        contentClassName="bg-dark-900"
+        mainContent={
+          isLoading ? (
+            <div className="text-center text-gray-300 text-3xl">
+              در حال بارگزاری....
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-3 text-white" dir="rtl">
+              {houseInfo.map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-dark-800 p-3 rounded-xl flex flex-col gap-2"
+                >
+                  <div className="flex items-center gap-2 text-gray-300">
+                    {item.icon}
+                    <span className="text-sm">{item.label}</span>
+                  </div>
+                  <span className="text-white font-medium">
+                    {item.value ?? "--"}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )
         }
         onOpenChange={setIsModalOpen}
         open={isModalOpen}

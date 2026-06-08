@@ -1,15 +1,10 @@
-import Button from "@/src/components/common/button/page";
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import SimpleDropdown from "@/src/components/common/dropDown";
 import PaginationClient from "@/src/components/common/pagination/page";
-import BlogItemsManagement from "@/src/components/dashboard/blogItemsManagement/BlogItemsManagement";
-import UserName from "@/src/components/dashboard/getUserName/UserName";
-import { formatDateTime } from "@/src/utils/hooks/formDates";
-import { getBlogs } from "@/src/utils/sevices/api/blogs/getBlogs";
-import Link from "next/link";
+import ContactUsItemsManagement from "@/src/components/dashboard/contactUsItemsManagement/ContactUsItemsManagement";
+import { getContactUs } from "@/src/utils/sevices/api/admin/contactUs/getContactUs";
 import { FC } from "react";
-import { TbPlus } from "react-icons/tb";
 interface IProps {
   searchParams: Promise<IFilters>;
 }
@@ -20,8 +15,8 @@ interface IFilters {
   limit?: string | number;
 }
 
-const AdminBlogManagementPage: FC<IProps> = async ({ searchParams }) => {
-  const limit = 5;
+const AdminContactUSManagement: FC<IProps> = async ({ searchParams }) => {
+  const limit = 10;
 
   const params = await searchParams;
   const order = params.order;
@@ -34,8 +29,8 @@ const AdminBlogManagementPage: FC<IProps> = async ({ searchParams }) => {
   if (currentPage) filters.page = currentPage;
   if (limit) filters.limit = limit;
 
-  const result = await getBlogs(filters);
-  const blogs = result.data || [];
+  const result = await getContactUs(filters);
+  const contactUS = result.data || [];
 
   const totalPages = Math.ceil(Number(result?.totalCount) / limit);
 
@@ -44,11 +39,10 @@ const AdminBlogManagementPage: FC<IProps> = async ({ searchParams }) => {
     { value: "DESC", label: "نزولی" },
   ];
   const dropItem = [
-    { value: "created_at", label: "زمان ایجاد" },
+    { value: "message", label: "پیام" },
     { value: "title", label: "عنوان" },
-    // { value: "views", label: "  تعداد بازدید" },
   ];
-  const items = ["نام نویسنده", "عنوان", "تاریخ ایجاد"];
+  const items = ["عنوان", "پیام"];
 
   return (
     <DashboardContentContainer
@@ -77,47 +71,43 @@ const AdminBlogManagementPage: FC<IProps> = async ({ searchParams }) => {
     >
       <div className="flex flex-col items-end gap-5">
         <div className="flex flex-col gap-5 w-full">
-          <ItemNavbar colsNumber={3} items={items} />
+          <ItemNavbar colsNumber={2} items={items} />
           <div className="">
-            {blogs.length > 0 ? (
-              blogs?.map((blog) => (
+            {contactUS.length > 0 ? (
+              contactUS?.map((contact) => (
                 <div
-                  key={blog.id}
+                  key={contact.id}
                   className="flex justify-between w-full items-center"
                 >
-                  <div className="grid grid-cols-3 gap-5 text-white w-full md:px-10 items-center">
-                    <UserName userId={Number(blog.author_id)} />
+                  <div className="grid grid-cols-2 gap-5 text-white w-full md:px-10 items-center pb-3">
                     <p className="truncate">
-                      {blog.title || "عنوانی وجود ندارد"}
+                      {contact.title || "عنوانی وجود ندارد"}
                     </p>
-                    <p>
-                      {formatDateTime(blog.created_at) || "تاریخی وجود ندارد"}
+                    <p className="truncate ">
+                      {contact.message || "پیامی وجود ندارد"}
                     </p>
                   </div>
-                  <BlogItemsManagement blogId={blog.id} />
+                  <ContactUsItemsManagement
+                    contactId={Number(contact.id)}
+                    contactMessage={contact.message || "پیامی وجود ندارد"}
+                    contactTitle={contact.title || "عنوانی وجود ندارد"}
+                  />
                 </div>
               ))
             ) : (
-              <div className="w-full text-gray-300 text-3xl text-center">وبلاگی وجود ندارد</div>
+              <div className="w-full text-gray-300 text-3xl text-center">
+                پیامی وجود ندارد
+              </div>
             )}
           </div>
         </div>
-        <div className="flex justify-between w-full items-center">
-          <Link
-            href={"/dashboard/admin/blog-management/create"}
-            className="cursor-pointer bg-primary-accent-green w-[150px] h-[43px] rounded-[16px] flex-center"
-          >
-            ساحت وبلاگ +
-          </Link>
-
-          <PaginationClient
-            totalPages={totalPages}
-            totalCount={Number(result?.totalCount)}
-          />
-        </div>
+        <PaginationClient
+          totalPages={totalPages}
+          totalCount={Number(result?.totalCount)}
+        />
       </div>
     </DashboardContentContainer>
   );
 };
 
-export default AdminBlogManagementPage;
+export default AdminContactUSManagement;

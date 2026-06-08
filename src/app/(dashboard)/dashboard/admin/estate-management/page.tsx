@@ -11,6 +11,7 @@ import imagePlaceHolder from "@/src/assets/images/imagePlaceHolder (2).png";
 import Link from "next/link";
 import PaginationClient from "@/src/components/common/pagination/page";
 import { IFilters } from "@/src/core/types/IFilters";
+import { getDiscounts } from "@/src/utils/sevices/api/admin/discount/getDiscount";
 
 const EstateManagementPage = async ({
   searchParams,
@@ -41,7 +42,7 @@ const EstateManagementPage = async ({
   const result = await getHouses(filters);
   const houses = result?.houses || [];
   const totalPages = Math.ceil(Number(result?.totalCount) / limit);
-
+  const discounts = await getDiscounts();
   return (
     <DashboardContentContainer
       title={`لیست املاک ( ${result.totalCount})`}
@@ -96,6 +97,7 @@ const EstateManagementPage = async ({
                     houseId={Number(house.id)}
                     role={role}
                     deleteFunction={deleteHouses}
+                    discounts={discounts.data||[]}
                   />
                 </div>
               ))
