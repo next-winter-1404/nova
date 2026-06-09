@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
+import SpinnerComponent from "../components/spinner/Spinner";
+import { Spinner } from "@heroui/react";
 
 const loading = () => {
   return (
-    <div>
-      Loading ............
-    </div>
-  )
-}
+   <SpinnerComponent/>
+  );
+};
 
-export default loading
+export default loading;
