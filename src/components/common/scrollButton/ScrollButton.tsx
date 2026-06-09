@@ -26,7 +26,7 @@ const ScrollButton = () => {
   };
 
   return (
-    <div className="flex gap-4 items-center fixed right-10 bottom-5 z-50">
+    <div className="flex gap-4 items-center fixed right-10 bottom-20 z-50">
       <Button
         buttonStyle={{
           display: visible ? "flex" : "none",
@@ -39,7 +39,7 @@ const ScrollButton = () => {
           backdropFilter: " blur(10px)",
         }}
         icon={<FaChevronUp className="text-white" size={20} />}
-        className="w-[48px] h-[48px] bg-dark-purple cursor-pointer transition-all"
+        className="w-[48px] h-[48px]  cursor-pointer transition-all"
         onClick={scrollToTop}
       />
     </div>
