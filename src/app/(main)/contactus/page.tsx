@@ -11,13 +11,13 @@ import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { postCommentsLand } from '@/src/utils/sevices/api/contactus/postCommentLand'
 import { Breadcrumb } from '@/src/components/common/breadCrumbs'
-
-
-
+import { FaGlobe, FaInstagram, FaLinkedin, FaTelegram, FaWhatsapp } from 'react-icons/fa'
+import { useSocialMedia } from '@/src/utils/hooks/useSocialMedia'
 
 
 const ContactUsPage = () => {
     const router = useRouter();
+    const { socials } = useSocialMedia();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const [formData, setFormData] = useState({
@@ -46,6 +46,14 @@ const ContactUsPage = () => {
   useEffect(() => {
     checkAuth();
   }, []);
+
+  const socialIcons = {
+      instagram: FaInstagram,
+      telegram: FaTelegram,
+      linkedin: FaLinkedin,
+      whatsapp: FaWhatsapp,
+      website: FaGlobe,
+  };
 
 
 const handleSubmit = async (e: React.FormEvent) => {
@@ -80,17 +88,17 @@ const handleSubmit = async (e: React.FormEvent) => {
     }));
   };
   return (
-    <div className=' md:w-full w-[390px] md:h-[850px] h-[350px] md:items-center flex-col justify-center flex' dir='rtl'>
+    <div className=' md:w-full mt-30 w-[390px] md:h-full md:items-center flex-col justify-center flex' dir='rtl'>
       <div className=' md:w-11/12  w-[390px] md:gap-12 gap-7 flex flex-col text-right'>
       <Breadcrumb items={items} />
-        <div className='md:w-full   w-[389px] flex gap-6 flex-col'>
+        <div className='md:w-full  w-[389px] flex gap-6 flex-col'>
           <div className='flex gap-4'>
               <h2 className='text-primary-accent-green md:text-[16px] text-[14px]' >ارتباط با ما</h2>
               <Image src={LeftTriangle} alt='.'/>
           </div>
         </div>
-        <div className='w-full   flex gap-16 h-[400px]'>
-          <div className='w-1/2   gap-9 justify-center flex flex-col'>
+        <div className='w-full flex gap-16'>
+          <div className='w-1/2 gap-9 justify-center flex flex-col'>
             <span className='text-[16px] text-white-pure'>هر ساعت از شبانه روز که باشه تیم پیشتیبانی دلتا پاسخگوی سوالات و انتقادات شما هستند تا در اسرع وقت مشکلتان را حل کنیم !</span>
             <div className='flex flex-col gap-6'>
               <div className='w-[320px] rounded-2xl bg-unSelectedButton justify-center items-center text-gray-300 h-[50px] flex gap-2.5'><Image src={phoneGray} alt='phoneGray'/> 09229167194 - 098541612310</div>
@@ -156,6 +164,34 @@ const handleSubmit = async (e: React.FormEvent) => {
               </div>
             </div>
           </div>
+        </div>
+        <div className=" w-2/5 flex flex-col gap-5">
+            <h3 className="text-white-pure text-[18px] font-bold">
+              شبکه های اجتماعی
+            </h3>
+            <div className="grid grid-cols-3 gap-4">
+              {socials.map((item) => {
+                const Icon =
+                  socialIcons[
+                    item.platform.toLowerCase() as keyof typeof socialIcons
+                  ] || FaGlobe;
+                if (!Icon) return null;
+                console.log(item.platform, Icon);
+                return (
+                  <a
+                    key={item.id}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  > 
+                  <div className='w-[150px] rounded-2xl bg-unSelectedButton justify-center items-center text-gray-300 h-[40px] flex gap-2.5'>
+                    <Icon size={20} />
+                    <span>{item.platform}</span>
+                  </div>
+                  </a>
+                );
+              })}
+            </div>
         </div>
       </div>      
     </div>
