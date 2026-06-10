@@ -11,15 +11,22 @@ export default function ShowPlace({ address }: HouseMapProps) {
   const mapRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
   const LRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const initMap = async () => {
-      if (mapRef.current) return;
+      if (!containerRef.current || mapRef.current) return;
 
       const L = (await import("@neshan-maps-platform/leaflet")).default;
       LRef.current = L;
 
-      mapRef.current = new L.Map("map", {
+      const container = containerRef.current as any;
+
+      if (container._leaflet_id) {
+        container._leaflet_id = null;
+      }
+
+      mapRef.current = new L.Map(container, {
         key: process.env.NEXT_PUBLIC_NESHAN_MAP_KEY!,
         maptype: "dreamy",
         center: [35.699756, 51.338076],
@@ -28,6 +35,16 @@ export default function ShowPlace({ address }: HouseMapProps) {
     };
 
     initMap();
+
+    return () => {
+      if (mapRef.current) {
+        try {
+          mapRef.current.off();
+          mapRef.current.remove();
+        } catch {}
+        mapRef.current = null;
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -36,9 +53,7 @@ export default function ShowPlace({ address }: HouseMapProps) {
 
       try {
         const res = await fetch(
-          `https://api.neshan.org/v1/search?term=${encodeURIComponent(
-            address
-          )}`,
+          `https://api.neshan.org/v1/search?term=${encodeURIComponent(address)}`,
           {
             headers: {
               "Api-Key": process.env.NEXT_PUBLIC_NESHAN_SERVICE_KEY!,
@@ -48,26 +63,16 @@ export default function ShowPlace({ address }: HouseMapProps) {
 
         const data = await res.json();
 
-        console.log("NESHA RESPONSE:", data);
-
-        if (!data?.items?.length) {
-          console.log("❌ NO RESULTS FROM API");
-          return;
-        }
+        if (!data?.items?.length) return;
 
         const item = data.items.find(
           (i: any) => i?.location?.x && i?.location?.y
         );
 
-        if (!item) {
-          console.log("❌ NO VALID LOCATION");
-          return;
-        }
+        if (!item) return;
 
         const lat = item.location.y;
         const lng = item.location.x;
-
-        console.log("📍 COORDS:", lat, lng);
 
         mapRef.current.setView([lat, lng], 14);
 
@@ -79,12 +84,17 @@ export default function ShowPlace({ address }: HouseMapProps) {
           .marker([lat, lng])
           .addTo(mapRef.current);
       } catch (err) {
-        console.log("❌ ERROR:", err);
+        console.log(err);
       }
     };
 
     search();
   }, [address]);
 
-  return <div id="map" className="w-full h-full rounded-[40px]" />;
+  return (
+    <div
+      ref={containerRef}
+      className="w-full h-full rounded-[40px]"
+    />
+  );
 }

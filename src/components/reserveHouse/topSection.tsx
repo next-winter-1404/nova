@@ -76,7 +76,6 @@ const TopReserveHouseSection = ({
           parentWidth="lg:w-[223px] hidden lg:block"
           value={address}
           onChange={handleAddress}
-          defaultValue={address}
           dir="rtl"
         />
 
