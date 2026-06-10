@@ -141,7 +141,7 @@ const Traveler = () => {
         <div className='flex items-center justify-center md:w-11/12 w-[340px] md:h-[142px] h-[400px] bg-dark-700 rounded-3xl '>
           <div className='w-22/23 flex md:flex-row flex-col'>
             <div className ='md:w-[590px] md:h-[110px] h-[120px] items-center md:border-l md:border-gray-200 flex gap-2 md:gap-4'>
-              <div className='md:w-[160px] md:h-full h-[70px] w-[100px] bg-gray-250 rounded-[20px]'>{housedetail?.photos || <Image src={imagePlaceHolder} alt='imagePlaceHolder' className='w-full h-full rounded-2xl'/>}</div>
+              <div className='md:w-[160px] md:h-full h-[70px] w-[100px] bg-gray-250 rounded-[20px]'>{housedetail?.photos?.[0] || <Image src={imagePlaceHolder} alt='imagePlaceHolder' className='w-full h-full rounded-2xl'/>}</div>
               <div className='w-[385px] md:gap-4 gap-2 flex flex-col'>
                 <div className='md:w-[83px] w-[73px] items-center gap-1 justify-center flex md:h-[29px] h-[20px] text-white-pure md:text-[13px] text-[11px] bg-blue-purple-500 rounded-[8px]'><Image src={whiteStar} alt='whiteStar'/> {housedetail?.rate} ستاره</div>
                 <h2 className='md:text-2xl text-[20px] text-white-pure'> {housedetail?.title || "عنوانی وجو ندارد"}</h2>

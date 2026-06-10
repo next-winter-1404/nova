@@ -9,7 +9,6 @@ import { IHouse } from "@/src/core/types/IHouse";
 import BottomNavbarFilter from "@/src/components/reserveHouse/bottomNavbarFilter";
 import ProductCard from "@/src/components/common/productCard/ProductCard";
 import { IFilters } from "@/src/core/types/IFilters";
-import NeshanMap from "@/src/components/common/map/neshanMap";
 
 export const revalidate = 30;
 const HouseReservePage = async ({
@@ -53,7 +52,7 @@ const HouseReservePage = async ({
         <TopReserveHouseSection totalCount={totalCount} />
         <div className="bg-dark-800 flex justify-between  mt-6 p-1 lg:p-6  w-full rounded-[40px] ">
           <div className="xl:w-[40%] lg:w-[35%] lg:block rounded-[40px] h-[1032px] bg-dark-900  hidden">
-            <NeshanMap/>
+            {/* <NeshanMap/> */}
           </div>
           <div className="lg:w-[65%]  xl:w-[60%] w-full flex flex-col gap-6 items-center ">
             <BottomNavbarFilter />
