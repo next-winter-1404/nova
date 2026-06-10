@@ -12,7 +12,7 @@ const AdminPage = async () => {
           cardText="تعداد کل کاربران"
           role="admin"
           href="users-management"
-          icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+          icon={<TbPinFilled className="w-[26px] h-[26px] text-white-pure" />}
           seeMore
         />
         <DashboardInformation
@@ -20,7 +20,7 @@ const AdminPage = async () => {
           cardText="تعداد کل املاک"
           role="admin"
           href="reserve-management"
-          icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+          icon={<TbPinFilled className="w-[26px] h-[26px] text-white-pure" />}
           seeMore
         />
         <DashboardInformation
@@ -28,7 +28,7 @@ const AdminPage = async () => {
           cardText="تعداد کل املاک رزرو شده"
           role="admin"
           href="reserve-management"
-          icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+          icon={<TbPinFilled className="w-[26px] h-[26px] text-white-pure" />}
           seeMore
         />
         <DashboardInformation
@@ -36,7 +36,7 @@ const AdminPage = async () => {
           cardText="میانگین امتیازها"
           role="admin"
           href="reserve-management"
-          icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+          icon={<TbPinFilled className="w-[26px] h-[26px] text-white-pure" />}
           seeMore
         />
       </div>

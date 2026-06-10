@@ -1,24 +1,25 @@
-"use server";
-
 import instance from "@/src/utils/sevices/interseptor";
 
-export interface sendChatData {
-  room: "string";
-  sender: "string";
-  message: "string";
+export interface SendChatData {
+  room: string;
+  getterId: number;
+  message: string;
 }
 
-export const sendChat = async (data: sendChatData) => {
-  const { room, sender, message } = data;
-  
-  if (!room || !sender || !message) {
+export const sendChat = async ({
+  room,
+  getterId,
+  message,
+}: SendChatData) => {
+  if (!room || !getterId || !message.trim()) {
     throw new Error("Missing required fields");
   }
 
   const response = await instance.post("/api/chats/send", {
     room,
-    sender,
+    getterId,
     message,
   });
+
   return response.data;
 };

@@ -8,7 +8,7 @@ import NeshanMapParent from "./NeshanMapParent";
 
 interface MortgageTabContentProps {
   comments: IComment[];
-  id?: number;
+  id: number;
   caption?: string;
   rooms?: number | null;
   parking?: number | null;
@@ -16,6 +16,7 @@ interface MortgageTabContentProps {
   yard_type?: string | null;
   address?: string | null;
   capacity?: number | null;
+  location:string;
 }
 
 const MortgageTabContent = ({
@@ -28,6 +29,7 @@ const MortgageTabContent = ({
   capacity,
   comments,
   id,
+  location
 }: MortgageTabContentProps) => {
   const searchParams = useSearchParams();
   const activeTab = searchParams.get("tab") || "about";
@@ -56,9 +58,9 @@ const MortgageTabContent = ({
             <div className="flex-center justify-end flex-1 sm:text-[16px] text-[10px] text-gray-300 leading-8">
               {address}
             </div>
-            <p className="h-[324px] flex-center flex-1 rounded-[48px] bg-dark-800">
-              {/* <NeshanMapParent id={id} /> */}
-            </p>
+            <div className="h-[324px] flex-center flex-1 rounded-[48px] bg-dark-800">
+              {/* <NeshanMapParent location={location} /> */}
+            </div>
           </div>
         );
       case "comment":

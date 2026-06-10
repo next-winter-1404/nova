@@ -10,7 +10,7 @@ export const Modal: FC<IModalProps> = ({
   modalDescription,
   modalTitle,
   closeBtn,
-  contentClassName = "bg-white",
+  contentClassName = "bg-white-pure",
   width = "w-[90vw] max-w-md",
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
@@ -31,7 +31,7 @@ export const Modal: FC<IModalProps> = ({
       <Dialog.Portal>
         <Dialog.Overlay  className="fixed inset-0 bg-black/70 backdrop-blur-sm"/>
         <Dialog.Content
-          className={`${contentClassName} ${width} z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg max-h-[85vh] p-6 focus:outline-none`}
+          className={`${contentClassName} ${width} z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg max-h-[85vh] overflow-hidden p-6 focus:outline-none`}
         >
           <Dialog.Title className="text-lg font-semibold " dir="rtl">
             {modalTitle}
@@ -39,7 +39,7 @@ export const Modal: FC<IModalProps> = ({
           <Dialog.Description className="text-sm text-gray-500 mt-1.5">
             {modalDescription}
           </Dialog.Description>
-          <div className="mt-4 mb-6">{mainContent}</div>
+          <div className="mt-4 mb-6 bg-dark-600">{mainContent}</div>
           {closeBtn && (
             <div className="flex justify-end cursor-pointer">
               <Dialog.Close asChild>{closeBtn}</Dialog.Close>

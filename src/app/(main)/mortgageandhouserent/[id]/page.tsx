@@ -31,6 +31,7 @@ import { Modal } from "@/src/components/common/modal";
 import Chat from "@/src/components/mortgageAndRentPageContainer/Chat";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import HousesPicturesSlider from "@/src/components/mortgageAndRentPageContainer/HousesPicturesSlider";
+import { getLocationCoordinates } from "@/src/utils/sevices/api/neshan/getLocationCoordinates";
 
 interface IProps {
   params: Promise<{ id: number }>;
@@ -49,13 +50,18 @@ const SingleHousePage = async ({ params }: IProps) => {
 
   const commentsData = await getHousesComment(id);
   const comments = commentsData?.comments || [];
+//   const resultff = await getLocationCoordinates("ساری مازندران");
+// console.log("resultff",resultff);
 
   const getAllHouse = await getHouses();
   const result = getAllHouse?.houses || [];
+  console.log("result", result);
+  if (!getHouseInfo) {
+  return <div>داده بارگذاری نشد</div>;
+}
 
   const token = await getServerSideCookie("ServerAccessToken");
   const isLoggedIn = !!token;
-  console.log("isLoggedIn", isLoggedIn);
 
   const userId = await getServerSideCookie("userId");
 
@@ -116,7 +122,7 @@ const SingleHousePage = async ({ params }: IProps) => {
                 <span className="w-[82px] flex-center gap-1 px-3 py-1.5 whitespace-nowrap text-white bg-blue-purple-500 rounded-lg">
                   ستاره
                   <span
-                    style={{
+                    style={{ 
                       display: "flex",
                       alignItems: "center",
                       gap: "4px",
@@ -218,7 +224,7 @@ const SingleHousePage = async ({ params }: IProps) => {
                       mainContent={
                         <div className="w-full flex-col-center gap-6">
                           {isLoggedIn ? (
-                            <Chat room={getHouseInfo.rooms} senderId={userId} />
+                            <Chat senderId={Number(userId)} sellerId={Number(getHouseInfo?.sellerId)} sellerName={getHouseInfo?.sellerName} />
                           ) : (
                             <div className="text-center text-white p-6">
                               <p>
@@ -324,6 +330,7 @@ const SingleHousePage = async ({ params }: IProps) => {
             address={getHouseInfo.address}
             comments={comments}
             id={getHouseInfo.id}
+            location={getHouseInfo.location}
           />
         </div>
         <div className="flex-center justify-between w-full bg-dark-700 rounded-xl px-4 py-3 shadow-000-8">
