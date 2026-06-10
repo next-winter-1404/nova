@@ -16,11 +16,14 @@ const ImageFallback: React.FC<ImageFallbackProps> = ({
   useEffect(() => {
     setImgSrc(src);
   }, [src]);
-
+  const safeSrc =
+  typeof imgSrc === "string" && imgSrc.trim() !== ""
+    ? imgSrc
+    : fallbackSrc;
   return (
     <Image
       {...rest}
-      src={imgSrc}
+      src={safeSrc}
       onError={() => setImgSrc(fallbackSrc)}
     />
   );

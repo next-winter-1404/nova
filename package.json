@@ -13,6 +13,7 @@
     "@heroui/react": "^3.1.0",
     "@heroui/styles": "^3.1.0",
     "@iprg/zaman": "^1.0.1",
+    "@neshan-maps-platform/leaflet": "^1.0.8",
     "@neshan-maps-platform/mapbox-gl": "^1.1.5",
     "@neshan-maps-platform/mapbox-gl-react": "^1.0.6",
     "@neshan-maps-platform/ol": "^1.0.5",

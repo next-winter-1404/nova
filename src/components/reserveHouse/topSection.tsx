@@ -20,7 +20,9 @@ const TopReserveHouseSection = ({
   const [sort] = useState(searchParams.get("sort") || "");
   const [address, setAddress] = useState(searchParams.get("address") || "");
   const [search, setSearch] = useState(searchParams.get("search") || "");
-
+  useEffect(() => {
+    setAddress(searchParams.get("address") || "");
+  }, [searchParams]);
   const [debounceSort] = useDebounce(sort, 500);
   const [debounceAddress] = useDebounce(address, 500);
   const [debounceSearch] = useDebounce(search, 500);
@@ -74,6 +76,7 @@ const TopReserveHouseSection = ({
           parentWidth="lg:w-[223px] hidden lg:block"
           value={address}
           onChange={handleAddress}
+          defaultValue={address}
           dir="rtl"
         />
 
