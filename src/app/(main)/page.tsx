@@ -27,7 +27,7 @@ export default async function Home() {
         {userId && <Recommendation />}
         <MostPopulerDestinationSection />
         <DepositAndRentSection />
-        <Landing></Landing>
+        {/* <Landing></Landing> */}
       </div>
     </Suspense>
   );

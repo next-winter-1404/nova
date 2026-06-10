@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import HouseItemsComponent from "../reserveHouse/houseItemsComponent";
 import CommentSection from "../reserveHouse/comments/commentSection";
 import { IComment } from "@/src/core/types/IComment";
+import ShowPlace from "../common/map/showPlaceMap";
 
 
 
@@ -59,7 +60,7 @@ const MortgageTabContent = ({
               {address}
             </div>
             <div className="h-[324px] flex-center flex-1 rounded-[48px] bg-dark-800">
-              {/* <ShowPlace address={address||"تهران"}/> */}
+              <ShowPlace address={address||"ساری"}/>
             </div>
           </div>
         );

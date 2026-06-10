@@ -1,84 +1,84 @@
-// "use client";
+"use client";
 
-// import { useEffect } from "react";
-// import "@neshan-maps-platform/leaflet/dist/leaflet.css";
-// import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import "@neshan-maps-platform/leaflet/dist/leaflet.css";
+import { useRouter, useSearchParams } from "next/navigation";
 
-// export default function NeshanMap() {
-//   // const searchParams = useSearchParams();
-//   // const router = useRouter();
+export default function FilterNeshanMap() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-//   useEffect(() => {
-//     let map: any;
-//     let marker: any = null;
+  useEffect(() => {
+    let map: any;
+    let marker: any = null;
 
-//     const initMap = async () => {
-//       const L = (await import("@neshan-maps-platform/leaflet")).default;
+    const initMap = async () => {
+      const L = (await import("@neshan-maps-platform/leaflet")).default;
 
-//       map = new L.Map("map", {
-//         key: process.env.NEXT_PUBLIC_NESHAN_MAP_KEY!,
-//         maptype: "dreamy",
-//         center: [35.699756, 51.338076],
-//         zoom: 14,
-//       });
+      map = new L.Map("map", {
+        key: process.env.NEXT_PUBLIC_NESHAN_MAP_KEY!,
+        maptype: "dreamy",
+        center: [35.699756, 51.338076],
+        zoom: 14,
+      });
 
-//       const getCity = async (lat: number, lng: number) => {
-//         try {
-//           const res = await fetch(
-//             `https://api.neshan.org/v5/reverse?lat=${lat}&lng=${lng}`,
-//             {
-//               headers: {
-//                 "Api-Key": process.env.NEXT_PUBLIC_NESHAN_SERVICE_KEY!,
-//               },
-//             }
-//           );
+      const getCity = async (lat: number, lng: number) => {
+        try {
+          const res = await fetch(
+            `https://api.neshan.org/v5/reverse?lat=${lat}&lng=${lng}`,
+            {
+              headers: {
+                "Api-Key": process.env.NEXT_PUBLIC_NESHAN_SERVICE_KEY!,
+              },
+            }
+          );
 
-//           const data = await res.json();
-//           const city =
-//           data?.city ||
-//           data?.district ||
-//           data?.region ||
-//           data?.formatted_address ||
-//           "unknown";
-        
-//           console.log("🏙️ CITY:", city);
-//           console.log("CITY TYPE:", typeof city);
-//           console.log("CITY VALUE:", city);
-//           // const params = new URLSearchParams(searchParams.toString());
+          const data = await res.json();
 
-//           // params.set("address", cityText);
+          const city =
+            data?.city ||
+            data?.district ||
+            data?.region ||
+            data?.formatted_address ||
+            "unknown";
 
-//           // router.push(`?${params.toString()}`, {
-//           //   scroll: false,
-//           // });
-//           return city;
-//         } catch {
-//           return "error";
-//         }
-//       };
+          console.log("🏙️ CITY:", city);
 
-//       map.on("click", async (e: any) => {
-//         const { lat, lng } = e.latlng;
+          const params = new URLSearchParams(searchParams.toString());
 
-//         if (marker) {
-//           map.removeLayer(marker);
-//         }
+          params.set("address", city);
 
-//         marker = L.marker([lat, lng], {
-//           draggable: true,
-//         }).addTo(map);
+          router.push(`?${params.toString()}`, {
+            scroll: false,
+          });
+          return city;
+        } catch {
+          return "error";
+        }
+      };
 
-//         await getCity(lat, lng);
+      map.on("click", async (e: any) => {
+        const { lat, lng } = e.latlng;
 
-//         marker.on("dragend", async (event: any) => {
-//           const pos = event.target.getLatLng();
-//           await getCity(pos.lat, pos.lng);
-//         });
-//       });
-//     };
+        if (marker) {
+          map.removeLayer(marker);
+        }
 
-//     initMap();
-//   }, []);
+        marker = L.marker([lat, lng], {
+          draggable: true,
+        }).addTo(map);
 
-//   return <div id="map" className="w-full h-full rounded-[40px]" />;
-// }
+        await getCity(lat, lng);
+
+        marker.on("dragend", async (event: any) => {
+          const pos = event.target.getLatLng();
+          await getCity(pos.lat, pos.lng);
+        });
+      });
+    };
+
+    initMap();
+  }, []);
+
+  return <div id="map" className="w-full h-full rounded-[40px]" />;
+}
