@@ -29,13 +29,10 @@ import ProfileInfo from "@/src/components/dashboard/profileInfo/ProfileInfo";
 import AsideMenu from "@/src/components/dashboard/menu/asideMenu/AsideMenu";
 import MenuController from "@/src/components/dashboard/menu/menuController/menuController";
 import { PiReadCvLogoFill } from "react-icons/pi";
-<<<<<<< HEAD
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 import { LuClipboardList } from "react-icons/lu";
 import { RiDiscountPercentLine } from "react-icons/ri";
-=======
 import { FiMessageSquare } from "react-icons/fi";
->>>>>>> b5cc2c961b53d1173cd1cc2378043e00ca84bb84
 interface IProp {
   children: ReactNode;
 }
@@ -215,11 +212,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
 
   return (
     <>
-<<<<<<< HEAD
-      <div className="flex w-full pt-5 px-5 h-full gap-5 font-vazir" dir="rtl">
-=======
-      <div className="flex w-full pt-5 px-5 h-full gap-5 bg-dark-850" dir="rtl">
->>>>>>> b5cc2c961b53d1173cd1cc2378043e00ca84bb84
+      <div className="flex w-full pt-5 px-5 h-full gap-5 font-vazir bg-dark-850" dir="rtl">
         <div className="hidden lg:block">
           <AsideMenu role={role} menuItems={menuItems} isOpen={true} />
         </div>
@@ -244,16 +237,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
               <div className="w-px h-8 bg-[#9C9C9C] hidden md:block" />
               <ToolTip
                 mainContent={
-<<<<<<< HEAD
                   <Link
                     href={`/dashboard/${role}/notification`}
                     className=" relative hidden md:block"
                   >
-                    <HiOutlineBell className="w-6 h-6 text-white cursor-pointer" />
-=======
-                  <Link href={`/dashboard/${role}/notification`} className=" relative hidden md:block">
                     <HiOutlineBell className="w-6 h-6 text-white-pure cursor-pointer" />
->>>>>>> b5cc2c961b53d1173cd1cc2378043e00ca84bb84
                     <div className="w-[7px] h-[7px] rounded-xl bg-red-500 absolute top-0.5 right-1" />
                   </Link>
                 }
