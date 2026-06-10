@@ -56,15 +56,15 @@ const AdminContactUSManagement: FC<IProps> = async ({ searchParams }) => {
             placeholder="ترتیب نمایش"
             labelText="ترتیب نمایش"
             tagBg="bg-dark-600"
-            triggerClassName="w-1/2 h-[50px]"
+            triggerClassName="w-1/2 h-[50px]  text-[10px] md:text-base"
           />
           <SimpleDropdown
             options={dropItem}
             paramKey="sort"
             placeholder="انتخاب کنید"
-            labelText="مرتب کردن بر اساس"
+            labelText="مرتب بر اساس"
             tagBg="bg-dark-600"
-            triggerClassName="w-1/2 h-[50px]"
+            triggerClassName="w-1/2 h-[50px]  text-[10px] md:text-base"
           />
         </div>
       }
@@ -79,8 +79,8 @@ const AdminContactUSManagement: FC<IProps> = async ({ searchParams }) => {
                   key={contact.id}
                   className="flex justify-between w-full items-center"
                 >
-                  <div className="grid grid-cols-2 gap-5 text-white w-full md:px-10 items-center pb-3">
-                    <p className="truncate">
+                  <div className="grid grid-cols-2 gap-5  text-white text-[13px] md:text-base w-full md:px-10 items-center pb-3">
+                    <p className="truncate px-2">
                       {contact.title || "عنوانی وجود ندارد"}
                     </p>
                     <p className="truncate ">

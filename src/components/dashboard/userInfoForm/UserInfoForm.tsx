@@ -34,7 +34,7 @@ const UserInfoForm: FC<IUser> = ({
         title="اطلاعات فردی"
         explanation="میتوانید اطلاعات فردی خود را تغییر دهید"
       />
-      <div  className="flex flex-col gap-4 w-[394px] ">
+      <div  className="flex flex-col gap-4 sm:w-[394px] ">
         <Input
           borderColor="border-gray-300"
           dir="rtl"

@@ -57,12 +57,12 @@ const AsideMenu = ({ role, menuItems, isOpen, onClose }: IAsideMenuProps) => {
             </button>
           )}
 
-          <div className="w-full justify-between items-center flex text-white mt-8 lg:mt-0">
+          <div className="w-full justify-between items-center flex text-white-pure mt-8 lg:mt-0">
             <h1 className="text-[32px] font-extrabold">دلتا</h1>
             <LogoutButton />
           </div>
 
-          <div className="w-full text-white mt-5">
+          <div className="w-full text-white-pure mt-5">
             <DashboardMenuItem items={menuItems} />
           </div>
         </div>
