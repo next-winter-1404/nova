@@ -38,7 +38,7 @@ const DashboardCommentManagement: FC<IProp> = ({
     <DashboardContentContainer
       title={`لیست نظرات کاربران (${res.totalCount})`}
       topSectionContent={
-        <div className="flex gap-4 py-2">
+        <div className="flex gap-4 py-2 flex-col   items-center sm:flex-row">
           <Modal
             contentClassName="bg-dark-900 text-white text-right"
             modalTitle="لیست املاک شما:"
@@ -50,18 +50,20 @@ const DashboardCommentManagement: FC<IProp> = ({
                 buttonStyle={{
                   background: "var(--color-primary-accent-green)",
                   color: "black",
+                  height:52
                 }}
                 icon={<RiBuildingLine className="w-4 h-4" />}
               />
             }
           />
 
+          <div className=" flex w-full  justify-between gap-2">
           <SimpleDropdown
             options={orderItems}
             paramKey="order"
             placeholder="ترتیب نمایش"
             tagBg="bg-dark-600"
-            triggerClassName="h-[50px] md:w-[155px] w-[100px] text-[13px]"
+            triggerClassName="md:h-[50px] h-10  w-full text-[10px] md:text-base"
             labelText="ترتیب نمایش"
           />
           <SimpleDropdown
@@ -69,9 +71,10 @@ const DashboardCommentManagement: FC<IProp> = ({
             paramKey="sort"
             placeholder="مرتب سازی"
             tagBg="bg-dark-600"
-            triggerClassName="h-[50px] md:w-[155px] w-[100px] text-[13px] "
+            triggerClassName="md:h-[50px] h-10  w-full text-[10px] md:text-base "
             labelText="مرتب سازی"
           />
+          </div>
         </div>
       }
     >

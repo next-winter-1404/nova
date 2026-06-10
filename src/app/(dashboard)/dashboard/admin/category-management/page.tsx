@@ -61,15 +61,15 @@ const CategoryManagementPage: FC<IProps> = async ({ searchParams }) => {
             placeholder="ترتیب نمایش"
             labelText="ترتیب نمایش"
             tagBg="bg-dark-600"
-            triggerClassName="w-1/2 h-[50px]"
+            triggerClassName="w-1/2 h-[50px]  text-[10px] md:text-base"
           />
           <SimpleDropdown
             options={dropItem}
             paramKey="sort"
             placeholder="انتخاب کنید"
-            labelText="مرتب کردن بر اساس"
+            labelText="مرتب بر اساس"
             tagBg="bg-dark-600"
-            triggerClassName="w-1/2 h-[50px]"
+            triggerClassName="w-1/2 h-[50px]  text-[10px] md:text-base"
           />
         </div>
       }

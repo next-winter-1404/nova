@@ -24,14 +24,14 @@ const MaintenanceRequestComponent:FC<IProp> = ({allMaintenance}) => {
             key={maintenance.id}
             className="flex justify-between w-full items-center"
           >
-            <div className="grid grid-cols-4 items-center text-white w-full">
+            <div className="grid grid-cols-4 items-center text-white w-full  text-[13px] md:text-base">
               <div className="px-10">
                 <UserName userId={Number(maintenance.userId)} />
               </div>
               <p className="truncate text-center">{maintenance.description}</p>
-              <p className="px-8 ">{formatDateTime(maintenance.created_at)}</p>
+              <p className="px-4 md:px-10">{formatDateTime(maintenance.created_at)}</p>
 
-              <div className="-mr-8">
+              <div className="md:-mr-8">
                 <StatusLabel status={maintenance.status} />
               </div>
             </div>

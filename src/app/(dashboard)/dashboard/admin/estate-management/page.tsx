@@ -109,10 +109,10 @@ const EstateManagementPage = async ({
             )}
           </div>
         </div>
-        <div className="flex justify-between w-full items-center">
+        <div className="flex justify-between w-full items-end ">
           <Link
             href={"/"}
-            className="cursor-pointer bg-primary-accent-green w-[150px] h-[43px] rounded-[16px] flex-center"
+            className="cursor-pointer text-black bg-primary-accent-green w-[150px] h-[43px] rounded-[16px] flex-center"
           >
             ساخت ملک +
           </Link>

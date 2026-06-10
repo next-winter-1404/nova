@@ -29,10 +29,10 @@ const BlogPage = async () => {
             <Image src={LeftTriangle} alt="." className="max-w-none mb-1" />
           </div>
 
-          <span className="text-32-semibold text-white">
+          <span className="text-32-semibold text-white-pure">
             در بالاترین سطح دانش با مقالات دلتا
           </span>
-          <p className="text-white">
+          <p className="text-white-pure">
             در این قسمت می توانید بروز ترین مقالات دنیای ملک و مکان های تفریحی
             را پیدا کنید و از جدید ترین مطالب ما لذت ببرید !
           </p>

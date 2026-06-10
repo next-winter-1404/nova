@@ -28,11 +28,12 @@ const CardContainer: FC<CardContainerProps> = ({
               : "w-5 h-14 -bottom-2  left-[-28px] rotate-41 "
           }  rounded-br-full z-10 absolute 
              `}
-          style={{
-            boxShadow: `${
-              cavity == "round" ? `5px 4px ` : `10px 10px `
-            } ${curveColor}`,
-          }}
+             style={{
+              boxShadow:
+                cavity === "round"
+                  ? `5px 4px 0px 0px ${curveColor}`
+                  : `10px 10px 0px 0px ${curveColor}`,
+            }}
         ></div>
         
         {cavity == "sharp" && (

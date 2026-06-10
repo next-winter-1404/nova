@@ -16,8 +16,8 @@ const BlogCard = ({
 }: IBlogs) => {
   return (
     <Link href={`/blogs/${id}`}>
-      <div className="group  text-white-pure flex flex-col gap-4 ">
-        <div className="group-hover:bg-primary-accent-green w-[45px] absolute flex justify-center rounded-[8px] h-[22px] bg-dark-700">
+      <div className=" text-white-pure flex flex-col gap-4 ">
+        <div className=" w-[45px] absolute flex justify-center rounded-[8px] h-[22px] bg-dark-700">
           <Image src={leftArrow} alt="leftArrow" />
         </div>
 

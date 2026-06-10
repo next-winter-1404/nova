@@ -1,17 +1,11 @@
-import Button from "@/src/components/common/button/page";
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import SimpleDropdown from "@/src/components/common/dropDown";
-import { Modal } from "@/src/components/common/modal";
 import PaginationClient from "@/src/components/common/pagination/page";
 import DiscountItemsManagement from "@/src/components/dashboard/DiscountItemsManagement/DiscountItemsManagement";
-import BlogItemsManagement from "@/src/components/dashboard/blogItemsManagement/BlogItemsManagement";
 import CreateDiscountComponent from "@/src/components/dashboard/createDiscountComponent/CreateDiscountComponent";
-import UserName from "@/src/components/dashboard/getUserName/UserName";
 import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getDiscounts } from "@/src/utils/sevices/api/admin/discount/getDiscount";
-import { getBlogs } from "@/src/utils/sevices/api/blogs/getBlogs";
-import Link from "next/link";
 import { FC } from "react";
 interface IProps {
   searchParams: Promise<IFilters>;

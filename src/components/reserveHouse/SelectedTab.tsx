@@ -39,7 +39,7 @@ const SelectedTab: FC<IPropertyTab> = ({ options, twClassname, buttonWidth }) =>
           }`}
         >
           <button
-            className="w-full cursor-pointer flex-center gap-2"
+            className="w-full cursor-pointer flex-center md:gap-2 gap-px"
             onClick={() => {
               handleSelect(op.value);
             }}

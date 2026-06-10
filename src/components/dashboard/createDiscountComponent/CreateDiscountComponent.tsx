@@ -34,7 +34,7 @@ const CreateDiscountComponent = () => {
   return (
     <>
       <button
-        className="cursor-pointer bg-primary-accent-green w-[150px] h-[43px] rounded-[16px] flex-center"
+        className="cursor-pointer text-black bg-primary-accent-green w-[150px] h-[43px] rounded-[16px] flex-center"
         onClick={() => setIsModalOpen(true)}
       >
         ساخت کد تخفیف +
@@ -51,7 +51,7 @@ const CreateDiscountComponent = () => {
           >
             <div>
               <span>عنوان کد تخفیف:</span>
-              <Input dir="rtl" name="code" InputHeight="h-[50px]" />
+              <Input dir="rtl" name="code" InputHeight="h-[50px] border-white-pure  text-[10px] md:text-base" />
             </div>
 
             <div>
@@ -59,7 +59,8 @@ const CreateDiscountComponent = () => {
               <Input
                 dir="rtl"
                 name="discount_percentage"
-                InputHeight="h-[50px]"
+                InputHeight="h-[50px] border-white-pure  text-[10px] md:text-base"
+                textColor="text-white-pure"
               />
             </div>
 
