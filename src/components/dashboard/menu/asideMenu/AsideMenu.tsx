@@ -42,7 +42,7 @@ const AsideMenu = ({ role, menuItems, isOpen, onClose }: IAsideMenuProps) => {
           ${
             isOpen
               ? "translate-x-0 fixed top-0 right-0 h-screen"
-              : "h-[95vh] flex translate-x-full"
+              : "min-h-[95vh] flex translate-x-full"
           }
           lg:relative lg:translate-x-0 rounded-xl lg:z-auto 
         `}
@@ -62,7 +62,7 @@ const AsideMenu = ({ role, menuItems, isOpen, onClose }: IAsideMenuProps) => {
             <LogoutButton />
           </div>
 
-          <div className="w-full text-white mt-10">
+          <div className="w-full text-white mt-5">
             <DashboardMenuItem items={menuItems} />
           </div>
         </div>

@@ -27,7 +27,7 @@ const DashboardMenuItem = ({ items }:IProps) => {
                 : ""
             }`}
           >
-            <div className={isActive ? "text-dark-900" : "text-white"}>
+            <div className={isActive ? "text-dark-900" : "text-white-pure"}>
               {item.icon}
             </div>
             <span>{item.label}</span>
