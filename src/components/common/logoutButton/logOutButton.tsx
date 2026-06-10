@@ -15,7 +15,7 @@ const LogoutButton = () => {
         className="cursor-pointer bg-transparent border-0 p-0"
         onClick={() => setIsModalOpen(true)} 
       >
-        <TbLogout className="w-6 h-6" />
+        <TbLogout className="w-6 h-6 text-white-pure" />
       </button>
       <AlertComponent
         acceptButtonText="خروج"

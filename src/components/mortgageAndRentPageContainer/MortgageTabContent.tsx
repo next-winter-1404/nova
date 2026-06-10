@@ -10,7 +10,7 @@ import ShowPlace from "../common/map/showPlaceMap";
 
 interface MortgageTabContentProps {
   comments: IComment[];
-  id?: number;
+  id: number;
   caption?: string;
   rooms?: number | null;
   parking?: number | null;
@@ -18,6 +18,7 @@ interface MortgageTabContentProps {
   yard_type?: string | null;
   address?: string | null;
   capacity?: number | null;
+  location:string;
 }
 
 const MortgageTabContent = ({
@@ -30,7 +31,7 @@ const MortgageTabContent = ({
   capacity,
   comments,
   id,
-  
+  location
 }: MortgageTabContentProps) => {
   const searchParams = useSearchParams();
   const activeTab = searchParams.get("tab") || "about";

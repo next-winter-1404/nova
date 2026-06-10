@@ -10,7 +10,7 @@ export const Modal: FC<IModalProps> = ({
   modalDescription,
   modalTitle,
   closeBtn,
-  contentClassName = "bg-white",
+  contentClassName = "bg-white-pure",
   width = "w-[90vw] max-w-md",
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
@@ -39,7 +39,7 @@ export const Modal: FC<IModalProps> = ({
           <Dialog.Description className="text-sm text-gray-500 mt-1.5"dir="rtl">
             {modalDescription}
           </Dialog.Description>
-          <div className="mt-4 mb-6">{mainContent}</div>
+          <div className="mt-4 mb-6 bg-dark-600">{mainContent}</div>
           {closeBtn && (
             <div className="flex justify-end cursor-pointer">
               <Dialog.Close asChild>{closeBtn}</Dialog.Close>

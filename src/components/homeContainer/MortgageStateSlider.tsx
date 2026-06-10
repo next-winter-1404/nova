@@ -12,6 +12,7 @@ const MortgageStateSlider = () => {
       spaceBetween={20}
       slidesPerView={4}
       autoplay={{ delay: 3000, disableOnInteraction: false }}
+      centerInsufficientSlides={true}
       breakpoints={{
         390: { slidesPerView: 1 },
         640: { slidesPerView: 2 },

@@ -1,19 +1,24 @@
-import React from 'react'
-import { getAllLocation } from '@/src/utils/sevices/api/locations/getAllLocations/getAllLocation';
-import { getLocationById } from '@/src/utils/sevices/api/locations/getLocationById/getLocationById';
-import { LocationsResponse } from '@/src/core/types/ILocations';
-import NeshanMap from './NeshanMap';
+"use client";
+import { getLocationById } from "@/src/utils/sevices/api/locations/getLocationById/getLocationById";
+import { useQuery } from "@tanstack/react-query";
+import { MapComponent, MapTypes } from "@neshan-maps-platform/mapbox-gl-react";
 
-const NeshanMapParent = async (id:number) => {
- const getLocation = await getLocationById(id) as LocationsResponse
- const lat  = getLocation.data.map(item => item.lat);
-  const lng  = getLocation.data.map(item => item.lng);
+const NeshanMapParent = ({ location }: { location: string }) => {
+console.log(location);
+
   return (
     <div>
       
-      <NeshanMap lat={lat} lng={lng}/>
-    </div>
-  )
-}
+      <MapComponent
+        options={{
+          mapKey: process.env.NEXT_PUBLIC_MAP_KEY,
+          mapType: MapTypes.neshanRasterNight,
 
-export default NeshanMapParent
+          zoom: 15,
+        }}
+      />
+    </div>
+  );
+};
+
+export default NeshanMapParent;

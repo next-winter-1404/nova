@@ -5,7 +5,7 @@ interface BlureLightCircleProps {
 
 const BlureLightCircle = ({position}: BlureLightCircleProps) => {
   return (
-    <div  className={`absolute ${position} w-[140px] h-[120px] blur-[120px] rounded-full `}>
+    <div  className={`absolute ${position} w-[140px] h-[120px]  rounded-full blikingBlob `}>
       <div className="blob"></div>
     </div>
   )

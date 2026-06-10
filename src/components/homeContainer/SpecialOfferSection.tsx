@@ -8,17 +8,31 @@ import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
 import SpecialOfferSlider from "./SpecialOfferSlider";
 import ContentContainerShape from "../common/shape/ContentContainerShape";
 import BlureLightCircle from "../common/BlureLightCircle";
+import smallLeftArrowWhite from "@/src/assets/icons/smallLeftArrowWhite.svg";
 
 const SpecialOfferSection = async () => {
   const result = await getHouses();
   const houses = result?.houses || [];
 
   return (
-    <div className="relative flex-center items-start padding-section w-full h-186">
-      <BlureLightCircle position="sm:right-8 top-5"/>
-      <ContentContainerShape />
-      <div className="w-344 absolute flex flex-col gap-6 p-8">
-        <div className="w-full flex-center justify-end ">
+    <div className="relative">
+      <BlureLightCircle position="sm:right-8 top-5" />
+       <div className=" flex-center items-start padding-section z-10">
+      
+      <svg
+        viewBox="0 0 1376 744"
+        preserveAspectRatio="none"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full h-[744px] text-dark-700"
+      >
+        <path
+          d="M1118.91 76.3199C1132.93 76.3199 1145.93 68.98 1153.16 56.97C1153.16 56.97 1175.84 19.35 1175.84 19.35C1183.07 7.33997 1196.07 0 1210.09 0C1210.09 0 1336 0 1336 0C1358.09 0 1376 17.91 1376 40C1376 40 1376 704 1376 704C1376 726.09 1358.09 744 1336 744C1336 744 40 744 40 744C17.9086 744 0 726.09 0 704C0 704 0 116.32 0 116.32C0 94.23 17.9086 76.3199 40 76.3199C40 76.3199 1118.91 76.3199 1118.91 76.3199Z"
+          fill="currentColor"
+        />
+      </svg>
+      <div className="md:w-[96%] w-[86%] absolute flex flex-col gap-6 p-4 md:p-8">
+        <div className="w-full hidden sm:flex-center sm:justify-end ">
           <Button
             text="12 : 56 : 17"
             icon={
@@ -30,7 +44,7 @@ const SpecialOfferSection = async () => {
           />
         </div>
         <div className="w-full flex flex-col gap-6 items-end justify-start">
-          <div className="w-full flex flex-col gap-6 items-end justify-start">
+          <div className="w-full flex flex-col gap-6 items-end justify-start sm:mt-0 mt-20">
             <span className="w-full flex-center justify-end gap-4">
               <Image src={arrowRight} alt="icon" width={48} height={16} />
               <p className="text-16-medium text-primary-accent-green">
@@ -46,19 +60,19 @@ const SpecialOfferSection = async () => {
               }}
             >
               <Button
-                text="مشاهده همه"
-                icon={
-                  <span>
-                    <BsChevronLeft className="w-3 h-3" />
-                  </span>
-                }
+                text=" مشاهده همه"
+                width="w-[137px]"
+                height="h-[36px]"
                 buttonStyle={{
-                  height: "36px",
-                  border: "1px solid #fff",
-                  borderRadius: "12px",
-                  background: "#2D2D2D",
-                  padding: "8px 16px",
+                  display: "flex",
+                  justifyItems: "center",
+                  alignItems: "center",
+                  fontSize: "16px",
+                  gap: "20px",
+                  backgroundColor: "dark-700",
+                  border: "2px solid #FFF",
                 }}
+                icon={<Image src={smallLeftArrowWhite} alt="smallLeftArrow" />}
               />
               <h3 className="flex-center justify-end text-32-medium">
                 پیشنهادا ویژه دلتا
@@ -73,6 +87,8 @@ const SpecialOfferSection = async () => {
         </div>
       </div>
     </div>
+    </div>
+   
   );
 };
 
