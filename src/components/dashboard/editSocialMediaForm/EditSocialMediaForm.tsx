@@ -51,7 +51,7 @@ const EditSocialMediaForm = ({
         onSubmit={handleSubmit}
         className="flex flex-col gap-10 w-full"
         >
-            <div className="w-1/4 mt-5">
+            <div className="w-1/2 mt-5">
                 <Input
                     name="platform"
                     InputHeight="md:h-[50px] h-[35px] text-white"
@@ -67,30 +67,25 @@ const EditSocialMediaForm = ({
                     labelText="پلتفرم"
                 />
             </div>
-            <div className="w-1/2">
-                <Input
-                    name="url"
-                    InputHeight="md:h-[50px] h-[35px] text-white"
-                    dir="rtl"
-                    tagBgStyle={{ background: "var(--color-dark-900)", color: "white" }}
-                    value={formData.url}
-                    onChange={(e) =>
-                    setFormData((prev) => ({
-                        ...prev,
-                        url: e.target.value,
-                    }))
-                    }
-                    labelText="لینک"
-                />
-            </div>
-            <div className="w-1/4 ">
+            <Input
+                name="url"
+                InputHeight="md:h-[50px] h-[35px] text-white"
+                dir="rtl"
+                tagBgStyle={{ background: "var(--color-dark-900)", color: "white" }}
+                value={formData.url}
+                onChange={(e) =>
+                setFormData((prev) => ({
+                    ...prev,
+                    url: e.target.value,
+                }))
+                }
+                labelText="لینک"
+            />
             <LoginButton
                 type="submit"
                 buttonText="ذخیره تغییرات"
                 loadingText="در حال ذخیره..."
-                buttonStyle="w-full bg-primary-accent-green"
             />
-            </div>
         </form>
     );
 };

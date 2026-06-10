@@ -19,7 +19,7 @@ import {
   TbCalendarEvent,
   TbTool  
 } from "react-icons/tb";
-import { FaCommentDots } from "react-icons/fa";
+import { FaCommentDots,FaMapMarkerAlt } from "react-icons/fa";
 import { BsGlobe } from "react-icons/bs";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
 import userPlaceholder from "@/src/assets/images/userPlaceHolder.jpg";
@@ -147,6 +147,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       label: "شبکه  های اجتماعی",
       href: `/dashboard/${role}/social-media`,
       icon: <BsGlobe   className="w-5 h-5" />,
+    },
+    {
+      label: " موقعیت ها ",
+      href: `/dashboard/${role}/locations`,
+      icon: <FaMapMarkerAlt   className="w-5 h-5" />,
     },
   ];
 
