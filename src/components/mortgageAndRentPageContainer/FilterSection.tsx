@@ -148,6 +148,7 @@ const FilterSection = ({ totalCount }: FilterSectionProps) => {
 
   const handleMaxArea = (e: ChangeEvent<HTMLInputElement>) =>
     setMaxArea(e.target.value);
+  
 
   return (
     <div className=" w-full flex flex-col items-center gap-15">

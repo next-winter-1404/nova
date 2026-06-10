@@ -63,8 +63,8 @@ const DropMenu: FC<IDropMenuProps> = ({
                 onClick={item.onClick}
                 disabled={item.disabled}
               >
-                {item.icon && <span className="w-5 h-5">{item.icon}</span>}
-                <div className="text-white text-sm">{item.label}</div>
+                {item.icon && <span className="w-5 h-5 text-white-pure">{item.icon}</span>}
+                <div className="text-white-pure text-sm">{item.label}</div>
               </DropdownMenu.Item>
             </div>
           ))}
