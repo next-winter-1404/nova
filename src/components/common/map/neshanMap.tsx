@@ -2,8 +2,12 @@
 
 import { useEffect } from "react";
 import "@neshan-maps-platform/leaflet/dist/leaflet.css";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function NeshanMap() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   useEffect(() => {
     let map: any;
     let marker: any = null;
@@ -39,6 +43,14 @@ export default function NeshanMap() {
             "unknown";
 
           console.log("🏙️ CITY:", city);
+
+          const params = new URLSearchParams(searchParams.toString());
+
+          params.set("address", city);
+
+          router.push(`?${params.toString()}`, {
+            scroll: false,
+          });
           return city;
         } catch {
           return "error";

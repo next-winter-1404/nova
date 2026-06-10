@@ -9,7 +9,6 @@ import { IHouse } from "@/src/core/types/IHouse";
 import BottomNavbarFilter from "@/src/components/reserveHouse/bottomNavbarFilter";
 import ProductCard from "@/src/components/common/productCard/ProductCard";
 import { IFilters } from "@/src/core/types/IFilters";
-import NeshanMapParent from "@/src/components/mortgageAndRentPageContainer/NeshanMapParent";
 import NeshanMap from "@/src/components/common/map/neshanMap";
 
 export const revalidate = 30;
