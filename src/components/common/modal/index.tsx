@@ -39,7 +39,7 @@ export const Modal: FC<IModalProps> = ({
           <Dialog.Description className="text-sm text-gray-500 mt-1.5"dir="rtl">
             {modalDescription}
           </Dialog.Description>
-          <div className="mt-4 mb-6 bg-dark-600">{mainContent}</div>
+          <div className="mt-4 mb-6">{mainContent}</div>
           {closeBtn && (
             <div className="flex justify-end cursor-pointer">
               <Dialog.Close asChild>{closeBtn}</Dialog.Close>

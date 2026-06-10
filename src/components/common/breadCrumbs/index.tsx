@@ -18,7 +18,7 @@ export const Breadcrumb = ({
     <nav
       dir="rtl"
       aria-label="Breadcrumb"
-      className={`flex items-center justify-end w-fit  bg-dark-900 text-sm px-2   text-gray-300 ${twClassname}`}
+      className={`flex items-center justify-end w-fit text-[13px] lg:text-[18px] md:text-base bg-dark-900  px-2   text-gray-300 ${twClassname}`}
     >
       <Link
         href="/"

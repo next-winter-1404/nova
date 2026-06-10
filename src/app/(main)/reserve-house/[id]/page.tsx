@@ -65,23 +65,23 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
     {
       value: "QA",
       label: "سوالات کاربران",
-      icon: <FiHelpCircle className="w-4 h-4" />,
+      icon: <FiHelpCircle className="md:w-4 md:h-4" />,
     },
     {
       value: "comment",
       label: "نظرات کاربران",
-      icon: <FaRegCommentDots className="w-4 h-4" />,
+      icon: <FaRegCommentDots className="md:w-4 md:h-4" />,
     },
     {
       value: "facilities",
       label: " امکانات اقامتگاه",
-      icon: <FaRegSave className="w-4 h-4" />,
+      icon: <FaRegSave className="md:w-4 md:h-4" />,
     },
 
     {
       value: "about",
       label: "درباره ملک",
-      icon: <FaRegFileAlt className="w-4 h-4" />,
+      icon: <FaRegFileAlt className="md:w-4 md:h-4" />,
     },
   ];
   const renderContent = () => {
@@ -117,7 +117,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   };
   return (
     <div className="flex-center bg-dark-900 w-full">
-      <div className="flex items-end flex-col gap-6 w-4/5 xl:w-[1340px]  2xl:w-[1444px]  lg:w-[95%]  lg:px-8 mt-17 ">
+      <div className="flex items-end flex-col gap-6 w-[98%] sm:w-[90%] xl:w-[1340px]  2xl:w-[1444px]  lg:w-[95%]  lg:px-8 mt-17 ">
         <Breadcrumb items={items} twClassname="lg:mt-14 mt-6" />
         <div className="flex  flex-col gap-8 md:gap-4 lg:flex-row-reverse lg:items-end justify-between  w-full mt-4 p-4">
           <HouseMainInformation
@@ -126,7 +126,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
           />
           <div className="flex items-center gap-4 justify-between " dir="rtl">
             <Button
-              text={`${house?.rate} ستاره `}
+              text={`${house?.rate||0} ستاره `}
               icon={<FaStar className="text-white h-4 w-4" />}
               buttonStyle={{
                 background: "var(--color-blue-purple-500)",
@@ -155,7 +155,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
         </div>
 
         <div className="flex gap-15 lg:gap-5 lg:flex-row lg:p-2 lg:justify-between lg:items-start p-4 flex-col-reverse  items-end w-full">
-          <div className="flex gap-3 md:flex md:flex-wrap md:justify-between lg:grid lg:grid-cols-2 lg:w-[228px]">
+          <div className="hidden gap-3 md:flex md:flex-wrap md:justify-between lg:grid lg:grid-cols-2 lg:w-[228px]">
             {house.photos && house.photos.length > 0
               ? house.photos.map((photo, index) => (
                   <div
@@ -188,11 +188,11 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
           />
         </div>
         <section className=" relative flex flex-row-reverse justify-between gap-4 w-full items-start">
-          <section className=" lg:w-[1000px] flex flex-col w-full gap-8">
+          <section className=" lg:w-[1000px] flex flex-col w-full gap-8 ">
             <SelectedTab
               options={tabs}
               twClassname="w-full"
-              buttonWidth="p-2 md:p-4"
+              buttonWidth="p-px md:p-4"
             />
 
             {renderContent()}
@@ -204,7 +204,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
               discounted_price={house.discounted_price}
             />
           </div>
-          <div className="block lg:hidden fixed z-10 bottom-5 right-5">
+          <div className="block lg:hidden fixed z-10 bottom-35 right-5">
             <Modal
               contentClassName="bg-dark-900 block lg:hidden h-fit"
               modalBtn={
