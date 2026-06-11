@@ -35,10 +35,10 @@ const AsideMenu = ({ role, menuItems, isOpen, onClose }: IAsideMenuProps) => {
         />
       )}
 
-      <aside
+      <aside dir="ltr"
         className={`
            z-50 w-[280px]   bg-dark-700 p-5 flex-col flex gap-4 justify-between 
-          transition-transform duration-300 ease-in-out
+          transition-transform duration-300 ease-in-out overflow-y-auto scrollbar
           ${
             isOpen
               ? "translate-x-0 fixed top-0 right-0 h-screen"
@@ -58,8 +58,8 @@ const AsideMenu = ({ role, menuItems, isOpen, onClose }: IAsideMenuProps) => {
           )}
 
           <div className="w-full justify-between items-center flex text-white-pure mt-8 lg:mt-0">
-            <h1 className="text-[32px] font-extrabold">دلتا</h1>
             <LogoutButton />
+            <h1 className="text-[32px] font-extrabold">دلتا</h1>
           </div>
 
           <div className="w-full text-white-pure mt-5">

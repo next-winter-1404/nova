@@ -18,7 +18,7 @@ const DashboardMenuItem = ({ items }:IProps) => {
       {items.map((item, index) => {
         const isActive = pathname === item.href;
         return (
-          <Link
+          <Link dir="rtl"
             key={index}
             href={item.href}
             className={`text-[18px] hover:bg-[rgba(217,217,217,0.33)] rounded-lg p-2 cursor-pointer flex gap-3 items-center ${
