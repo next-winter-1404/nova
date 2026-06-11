@@ -6,7 +6,7 @@ import Link from "next/link";
 import { FiMenu } from "react-icons/fi";
 import { BsChevronDown } from "react-icons/bs";
 import megaphoneIcon from "@/public/icons/megaphone.svg";
-
+import userPlaceHolder from "@/src/assets/images/userPlaceHolder.jpg";
 import {
   Menu,
   MenuWrapper,
@@ -23,6 +23,9 @@ import { Modal } from "./modal";
 import LoginButton from "../login/button/LoginButton";
 import { sendSellerUpgradeRequest } from "@/src/utils/sevices/api/seller/sellerUpgrade/requestSeller";
 import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import { getUserPublicProfile } from "@/src/utils/sevices/api/users/getUserPublicProfile";
+import { getClientCookie } from "@/src/utils/helper/cookies/clientCookie/clientSideCookie";
 const navigation = [
   { labelName: "تماس با ما", href: "/contactus", current: false },
   { labelName: "مقالات ما", href: "/blogs", current: false },
@@ -32,7 +35,12 @@ const navigation = [
 const Navbar = () => {
   const { scrollYProgress } = useScroll();
   const [visibleShadow, setVisibleShadow] = useState(false);
-
+  const [isAuth, setIsAuth] = useState<boolean | null>(null);
+  const userId = getClientCookie("userId");
+  const { data } = useQuery({
+    queryKey: ["prof"],
+    queryFn: () => getUserPublicProfile(Number(userId)),
+  });
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) setVisibleShadow(true);
@@ -52,14 +60,11 @@ const Navbar = () => {
     }
   };
 
- 
   const [state, formAction] = useActionState(
     async (prevState: any, formData: FormData) => {
-
       const isAuth = await checkAuth();
 
       if (!isAuth) {
-      
         return {
           success: false,
           message: "ابتدا وارد حساب کاربری شوید",
@@ -82,6 +87,15 @@ const Navbar = () => {
       toast.error(state.message);
     }
   }, [state]);
+
+  useEffect(() => {
+    const runCheck = async () => {
+      const result = await checkAuth();
+      setIsAuth(result);
+    };
+
+    runCheck();
+  }, []);
   return (
     <header
       className={`whitespace-nowrap md:w-[96%] md:fixed w-[90%] inset-x-0 mx-auto glass shadow-3xl inset-shadow-fff-16 rounded-2xl   z-50   ${
@@ -92,7 +106,7 @@ const Navbar = () => {
         <div>
           <div>
             <span>
-              <Link href="/login">
+              {/* <Link href="/login">
                 <NavLoginButton>
                   <span>
                     <p>ورود / ثبت نام</p>
@@ -104,7 +118,32 @@ const Navbar = () => {
                     />
                   </span>
                 </NavLoginButton>
-              </Link>
+              </Link> */}
+              {isAuth === null ? null : isAuth ? (
+                <Link href={"/dashboard"} >
+                  <Image
+                    alt="prof"
+                    src={data?.user.profilePicture || userPlaceHolder}
+                    width={40}
+                    height={40}
+                    className="rounded-full border border-gray-300"
+                  />
+                </Link>
+              ) : (
+                <Link href="/login">
+                  <NavLoginButton>
+                    <span className="flex items-center gap-2">
+                      <p>ورود / ثبت نام</p>
+                      <Image
+                        src="/icons/user1.svg"
+                        alt="user"
+                        width={16}
+                        height={16}
+                      />
+                    </span>
+                  </NavLoginButton>
+                </Link>
+              )}
             </span>
           </div>
 

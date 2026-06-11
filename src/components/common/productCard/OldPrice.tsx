@@ -1,3 +1,5 @@
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
+
 interface OldPriceProps {
   oldPrice: string | null | undefined;
 }
@@ -8,7 +10,7 @@ const OldPriceComponent = ({ oldPrice }: OldPriceProps) => {
       <i>تومان</i>
       <span className="flex-center gap-1">
         <span className="absolute top-2 -right-1 -rotate-12 w-20 h-0.5 bg-gray-300"></span>
-        {oldPrice}
+        {formatPrice(Number(oldPrice))}
       </span>
     </span>
   );

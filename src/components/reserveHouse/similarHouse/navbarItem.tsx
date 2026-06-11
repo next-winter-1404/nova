@@ -14,7 +14,7 @@ const SimilarNavbarItem:FC<IProp> = ({similarTitle,href}) => {
           <FiChevronLeft className="w-4 h-4" />
           <Link href={href} className="cursor-pointer">مشاهده همه</Link>
         </div>
-        <div className="flex-center text-white gap-4">
+        <div className="flex-center text-white-pure gap-4">
           <span>{similarTitle}</span>
           <Image alt="icon" src={building} className="w-4 h-4" />
         </div>

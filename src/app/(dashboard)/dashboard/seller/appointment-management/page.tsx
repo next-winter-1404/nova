@@ -6,11 +6,11 @@ import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import UserName from "@/src/components/dashboard/getUserName/UserName";
 import SellerHouse from "@/src/components/dashboard/sellerHouse/SellerHouse";
 import VisitAppointmentMAnagement from "@/src/components/dashboard/visitAppointmentManagement/VisitAppointmentMAnagement";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getSellerHouses } from "@/src/utils/sevices/api/seller/houses/getHouses";
 import { getVisitAppointments } from "@/src/utils/sevices/api/visitAppointment/getVisitAppointment";
-import React, { FC } from "react";
+import { FC } from "react";
 import { RiBuildingLine } from "react-icons/ri";
-import { TbDog } from "react-icons/tb";
 interface IProp {
   searchParams: Promise<{ houseId: string }>;
 }
@@ -69,14 +69,14 @@ const SellerVisitAppointmentPage: FC<IProp> = async ({ searchParams }) => {
               </div>
 
               <p className="text-center">
-                {appointment.appointmentTime.slice(0, 10)}
+                {formatDateTime(appointment.appointmentTime)}
               </p>
 
               <p className="px-12">
                 {appointment.type === "virtual" ? "مجازی" : "حضوری"}
               </p>
 
-              <p className="px-5">{appointment.created_at?.slice(0, 10)}</p>
+              <p className="px-5">{formatDateTime(appointment.created_at)}</p>
 
               <div className="-mr-8">
                 <StatusLabel status={appointment.status} />

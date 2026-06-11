@@ -14,6 +14,8 @@ import { IFilters } from "@/src/core/types/IFilters";
 import Image from "next/image";
 import Add from "@/src/assets/icons/Add.svg";
 
+import { getDiscounts } from "@/src/utils/sevices/api/admin/discount/getDiscount";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 
 const EstateManagementPage = async ({
   searchParams,
@@ -44,7 +46,7 @@ const EstateManagementPage = async ({
   const result = await getHouses(filters);
   const houses = result?.houses || [];
   const totalPages = Math.ceil(Number(result?.totalCount) / limit);
-
+  const discounts = await getDiscounts();
   return (
     <DashboardContentContainer
       title={`لیست املاک ( ${result.totalCount})`}
@@ -91,7 +93,7 @@ const EstateManagementPage = async ({
                       }
                     />
 
-                    <span>{house.price || "--"}</span>
+                    <span>{formatPrice(Number(house.price)) || "--"}</span>
                     <span>{house.transaction_type || "--"}</span>
                     <span className="lg:-mr-8">{house.capacity || "--"}</span>
                   </div>
@@ -99,6 +101,7 @@ const EstateManagementPage = async ({
                     houseId={Number(house.id)}
                     role={role}
                     deleteFunction={deleteHouses}
+                    discounts={discounts.data||[]}
                   />
                 </div>
               ))
@@ -110,12 +113,12 @@ const EstateManagementPage = async ({
           </div>
         </div>
         <div className="flex justify-between w-full items-center">
-        <Link href={"/dashboard/admin/estate-management/processcreate"}>
-                <button className="w-[146px] rounded-[12px] h-10 bg-primary-accent-green text-black text-[16px] flex items-center justify-center gap-2">
-                    افرودن ملک
-                    <Image src={Add} alt="Add" />
-                </button>
-                </Link>
+          <Link href={"/dashboard/admin/estate-management/processcreate"}>
+            <button className="w-[146px] rounded-[12px] h-10 bg-primary-accent-green text-black text-[16px] flex items-center justify-center gap-2">
+                افرودن ملک
+                <Image src={Add} alt="Add" />
+            </button>
+          </Link>
 
           <PaginationClient
             totalPages={totalPages}

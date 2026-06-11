@@ -4,6 +4,7 @@ import SimpleDropdown from "@/src/components/common/dropDown";
 import PaginationClient from "@/src/components/common/pagination/page";
 import FavoriteFunctions from "@/src/components/dashboard/favorite/favoriteFunctionMenuItem/FavoriteFunctions";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 import { getFavoriteForUser } from "@/src/utils/sevices/api/favorites/getFavorites";
 import { FC } from "react";
 
@@ -91,7 +92,7 @@ const FavoritePage: FC<IProps> = async ({ searchParams }) => {
                       className="flex items-center justify-start gap-1 mr-4 "
                       dir="rtl"
                     >
-                      <span>{item.house?.price || "  --"}</span>
+                      <span>{formatPrice(Number(item.house?.price ))|| "  --"}</span>
                       <span>تومان</span>
                     </div>
                     <p>{item.house.address || "ادرسی وجود ندارد"}</p>

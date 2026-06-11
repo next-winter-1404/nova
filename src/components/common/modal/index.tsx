@@ -10,7 +10,7 @@ export const Modal: FC<IModalProps> = ({
   modalDescription,
   modalTitle,
   closeBtn,
-  contentClassName = "bg-white",
+  contentClassName = "bg-white-pure",
   width = "w-[90vw] max-w-md",
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,

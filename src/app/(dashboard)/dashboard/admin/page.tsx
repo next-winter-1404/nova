@@ -66,7 +66,7 @@ const AdminPage = async () => {
           cardText="تعداد کل کاربران"
           role="admin"
           href="users-management"
-          icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+          icon={<TbPinFilled className="w-[26px] h-[26px] text-white-pure" />}
           seeMore
         />
         <DashboardInformation
@@ -74,7 +74,7 @@ const AdminPage = async () => {
           cardText="تعداد کل املاک"
           role="admin"
           href="estate-management"
-          icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+          icon={<TbPinFilled className="w-[26px] h-[26px] text-white-pure" />}
           seeMore
         />
         <DashboardInformation
@@ -82,7 +82,7 @@ const AdminPage = async () => {
           cardText="تعداد کل نظرات"
           role="admin"
           href="comments-management"
-          icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+          icon={<TbPinFilled className="w-[26px] h-[26px] text-white-pure" />}
           seeMore
         />
         <DashboardInformation
@@ -90,7 +90,7 @@ const AdminPage = async () => {
           cardText="میانگین امتیازها"
           role="admin"
           href="reserve-management"
-          icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
+          icon={<TbPinFilled className="w-[26px] h-[26px] text-white-pure" />}
           seeMore
         />
       </div>
@@ -108,7 +108,7 @@ const AdminPage = async () => {
                     {item.label || 0}
                   </p>
                 </div>
-                <h2 className="text-xl font-bold">{item.value || 0}</h2>
+                <h2 className="text-xl font-bold text-white-pure">{item.value || 0}</h2>
               </div>
             ))}
           </div>
@@ -127,7 +127,7 @@ const AdminPage = async () => {
                   </p>
                 </div>
 
-                <h2 className="text-xl font-bold">{item.value ?? 0}</h2>
+                <h2 className="text-xl font-bold text-white-pure">{item.value ?? 0}</h2>
               </div>
             ))}
           </div>

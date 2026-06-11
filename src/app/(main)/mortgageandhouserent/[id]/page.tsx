@@ -6,7 +6,7 @@ import {
 } from "@/src/components/common/breadCrumbs";
 import HousePicture from "@/src/assets/images/singleHouse.png";
 import Location from "@/src/assets/icons/Location.svg";
-import { FiPhoneCall } from "react-icons/fi";
+import { FiHelpCircle, FiPhoneCall } from "react-icons/fi";
 import { FiCalendar } from "react-icons/fi";
 import dolor from "@/public/icons/grayDollor.svg";
 import Vector from "@/public/icons/Vector.svg";
@@ -33,6 +33,7 @@ import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/ser
 import HousesPicturesSlider from "@/src/components/mortgageAndRentPageContainer/HousesPicturesSlider";
 import VisitAppointment from "@/src/components/mortgageAndRentPageContainer/VisitAppointment/VisitApointment";
 import { getVisitAppointments } from "@/src/utils/sevices/api/visitAppointment/getVisitAppointment";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 
 interface IProps {
   params: Promise<{ id: number }>;
@@ -51,13 +52,18 @@ const SingleHousePage = async ({ params }: IProps) => {
 
   const commentsData = await getHousesComment(id);
   const comments = commentsData?.comments || [];
+//   const resultff = await getLocationCoordinates("ساری مازندران");
+// console.log("resultff",resultff);
 
   const getAllHouse = await getHouses();
   const result = getAllHouse?.houses || [];
+  console.log("result", result);
+  if (!getHouseInfo) {
+  return <div>داده بارگذاری نشد</div>;
+}
 
   const token = await getServerSideCookie("ServerAccessToken");
   const isLoggedIn = !!token;
-  console.log("isLoggedIn", isLoggedIn);
 
   const userId = await getServerSideCookie("userId");
   const getAppointments = await getVisitAppointments(id);
@@ -118,7 +124,7 @@ const SingleHousePage = async ({ params }: IProps) => {
                 <span className="w-[82px] flex-center gap-1 px-3 py-1.5 whitespace-nowrap text-white bg-blue-purple-500 rounded-lg">
                   ستاره
                   <span
-                    style={{
+                    style={{ 
                       display: "flex",
                       alignItems: "center",
                       gap: "4px",
@@ -176,7 +182,7 @@ const SingleHousePage = async ({ params }: IProps) => {
                       <div className="w-full flex-center justify-between">
                         <div className="flex-center gap-0.5 text-16-medium text-primary-accent-green">
                           <span>ت</span>
-                          <span>{getHouseInfo?.discounted_price}</span>
+                          <span>{formatPrice(Number(getHouseInfo?.discounted_price))}</span>
                         </div>
                         <div className="flex-center gap-2 text-16-medium text-gray-300">
                           <span>: قیمت رهن از</span>
@@ -186,7 +192,7 @@ const SingleHousePage = async ({ params }: IProps) => {
                       <div className="w-full flex-center justify-between">
                         <div className="flex-center gap-0.5 text-16-medium text-primary-accent-green">
                           <span>ت</span>
-                          <span>{getHouseInfo?.price}</span>
+                          <span>{formatPrice(Number(getHouseInfo?.price))}</span>
                         </div>
                         <div className="flex-center gap-2 text-16-medium text-gray-300">
                           <span>: قیمت اجاره از</span>
@@ -215,7 +221,7 @@ const SingleHousePage = async ({ params }: IProps) => {
                       mainContent={
                         <div className="w-full flex-col-center gap-6">
                           {isLoggedIn ? (
-                            <Chat room={getHouseInfo.rooms} senderId={userId} />
+                            <Chat senderId={Number(userId)} sellerId={Number(getHouseInfo?.sellerId)} sellerName={getHouseInfo?.sellerName} />
                           ) : (
                             <div className="text-center text-white p-6">
                               <p>
@@ -321,6 +327,7 @@ const SingleHousePage = async ({ params }: IProps) => {
             address={getHouseInfo.address}
             comments={comments}
             id={getHouseInfo.id}
+            location={getHouseInfo.location}
           />
         </div>
         <div className="flex-center justify-between w-full bg-dark-700 rounded-xl px-4 py-3 shadow-000-8">

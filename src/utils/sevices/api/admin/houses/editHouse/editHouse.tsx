@@ -25,6 +25,7 @@ export async function EditHouse(
           formData.get("transaction_type")
         ),
         category: String(formData.get("category")),
+        discount_id: Number(formData.get("discount_id"))
       }
     );
 
@@ -38,6 +39,29 @@ export async function EditHouse(
       message:
         error.response?.data?.message ||
         "خطایی رخ داد",
+    };
+  }
+}
+
+
+
+export async function addDiscountToHouse(
+  houseId: number,
+  discountId: number | null
+) {
+  try {
+    await instance.put(`/api/houses/${houseId}`, {
+      discount_id: discountId,
+    });
+
+    return {
+      success: true,
+      message: "تخفیف با موفقیت اعمال شد",
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response?.data?.message || "خطا",
     };
   }
 }

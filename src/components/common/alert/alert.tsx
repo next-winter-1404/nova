@@ -18,9 +18,9 @@ const AlertComponent: FC<IAlertProp> = ({ alertText, acceptButtonText,isModalOpe
       <Modal
       open={isModalOpen}
       onOpenChange={setIsModalOpen}
-      contentClassName="w-[540px] h-[338px]  bg-dark-900 text-white rounded-xl"
+      contentClassName="w-[540px] h-[338px]  bg-dark-900 text-white-pure rounded-xl"
         mainContent={
-          <div className=" flex-col-center gap-8   h-full w-full">
+          <div className=" flex-col-center gap-8 bg-dark-900 h-full w-full">
             <Image alt="alert icon" src={alertIcon} />
             <div dir="rtl" className="text-center text-[18px]">{alertText}</div>
             <div className="flex gap-3">

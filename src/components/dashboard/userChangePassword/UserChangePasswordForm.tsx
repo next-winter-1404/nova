@@ -28,7 +28,7 @@ const UserChangePasswordForm = () => {
         title="امنیت"
         explanation="میتوانید در این بخش رمز خود را تغییر دهید"
       />
-      <div className="flex flex-col gap-4 w-[394px] text-white">
+      <div className="flex flex-col gap-4 sm:w-[394px] text-white">
         <Input
           borderColor="border-gray-300"
           dir="rtl"

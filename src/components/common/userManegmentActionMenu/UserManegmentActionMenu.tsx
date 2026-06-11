@@ -19,8 +19,6 @@ import AlertComponent from "../alert/alert";
 import { deleteUser } from "@/src/utils/sevices/api/admin/users/deleteUser/deleteUser";
 import { givingAdminRole } from "@/src/utils/sevices/api/admin/users/role/givingAdminRole";
 import { CgDanger } from "react-icons/cg";
-import InfoCardContainer from "../../reserveHouse/InfoCardContainer";
-import { LuCircleUser } from "react-icons/lu";
 import { useRouter } from "next/navigation";
 import { sendNotifications } from "@/src/utils/helper/sendNotifications";
 
@@ -37,7 +35,6 @@ const UserManegmentActionMenu = ({ user }: IProp) => {
     phoneNumber: user.phoneNumber,
   });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isRoleAlertOpen, setIsRoleAlertOpen] = useState(false);
   const [isNotificationModalOpen, setIsNotificationModalOpen] =useState(false);

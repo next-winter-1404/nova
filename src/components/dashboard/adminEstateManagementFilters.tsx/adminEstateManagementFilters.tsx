@@ -53,7 +53,7 @@ const AdminEstateManagement = () => {
     { value: "commercial", label: "تجاری " },
   ];
   return (
-    <div className="flex gap-3 py-1">
+    <div className="flex gap-3 py-1  px-1">
       <Input
         labelText="جستجو"
         InputHeight="h-[50px]"
@@ -61,7 +61,7 @@ const AdminEstateManagement = () => {
         borderColor="border-white border"
         textColor="text-white"
         placeHolder="نام ملک مورد نظر..."
-        parentWidth=" w-full"
+        parentWidth=" md:w-full"
         value={search}
         onChange={handleSearch}
         dir="rtl"

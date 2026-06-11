@@ -70,7 +70,7 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
                 </div>
                 <div>
                   <div className="flex flex-col mr-8 gap-3 " dir="rtl">
-                    <h2 className="text-xl text-white">
+                    <h2 className="text-xl text-white-pure">
                       {user?.user.name || "نویسنده"}
                     </h2>
                     <div className="flex items-center gap-1 text-gray-300">
@@ -86,7 +86,7 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
               </div>
             </div>
             <div className="md:flex flex-col w-1/2 hidden gap-4" dir="rtl">
-              <h2 className="lg:text-[32px] text-[18px] text-white font-semibold">
+              <h2 className="lg:text-[32px] text-[18px] text-white-pure font-semibold">
                 {BlogDetail?.title}
               </h2>
             </div>
@@ -100,7 +100,7 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
 
             <div className="flex flex-col gap-4 " dir="rtl">
               <h2 className="text-semibold-24">{BlogDetail?.title}</h2>
-              <p className="text-white">{BlogDetail?.caption}</p>
+              <p className="text-white-pure lg:text-[18px]">{BlogDetail?.caption}</p>
             </div>
           </section>
           <div className="flex flex-col w-full gap-4 mb-30 mt-10 ">

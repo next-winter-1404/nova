@@ -16,7 +16,6 @@ const EditPageDetail: FC<IProps> = async ({ params }) => {
   ];
   const result = await getCategory();
   const categories = result.data || [];
-  console.log("categories", categories);
   const categoriesItems = categories.map((cat) => ({
     value: cat.name,
     label: cat.name,

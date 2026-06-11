@@ -5,6 +5,7 @@ import PaginationClient from "@/src/components/common/pagination/page";
 import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import ReservationItem from "@/src/components/dashboard/ReservationItem/ReservationItem";
 import { formatDateTime } from "@/src/utils/hooks/formDates";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 import { getBookings } from "@/src/utils/sevices/api/processReserve/getbooking";
 import { FC } from "react";
 interface IProps {
@@ -102,7 +103,7 @@ const SellerReservePage: FC<IProps> = async ({ searchParams }) => {
                             className="flex-center gap-1 text-center "
                             dir="rtl"
                           >
-                            <span>{item.house?.price || "  --"}</span>
+                            <span>{formatPrice(Number(item.house?.price ))|| "  --"}</span>
                             <span>تومان</span>
                           </div>
                           <span className="text-center ml-5">

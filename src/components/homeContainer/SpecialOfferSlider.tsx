@@ -1,33 +1,32 @@
-"use client"
+"use client";
 import ProductCard from "@/src/components/common/productCard/ProductCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { IHouse } from "@/src/core/types/IHouse";
-import { IProductCard } from "@/src/core/types/IProductCard";
 
 interface HouseCardInfoProp {
   houses: IHouse[];
 }
 
 const SpecialOfferSlider = ({ houses }: HouseCardInfoProp) => {
-  const getHouseWithOffer = houses.filter(house=> house.discounted_price !== null)
+  const getHouseWithOffer = houses.filter(
+    (house) => house.discounted_price !== null,
+  );
   return (
     <Swiper
       modules={[Navigation, Autoplay, Pagination]}
       spaceBetween={20}
-      slidesPerView={4}
+      slidesPerView={1}
       autoplay={{ delay: 3000, disableOnInteraction: false }}
       breakpoints={{
-        390: { slidesPerView: 1 },
         640: { slidesPerView: 2 },
         1024: { slidesPerView: 4 },
       }}
-      pagination={{
-        clickable: true,
-      }}
-      className="my-house-swiper"
+      pagination={{ clickable: true }}
+      centerInsufficientSlides={true}
+      className="w-full"
     >
       {getHouseWithOffer.map((item: IHouse) => (
         <SwiperSlide key={item.id} className="group">

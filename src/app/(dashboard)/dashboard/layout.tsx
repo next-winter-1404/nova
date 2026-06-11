@@ -1,6 +1,6 @@
 import ToolTip from "@/src/components/common/tooltip";
 import Link from "next/link";
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown ,FiHelpCircle} from "react-icons/fi";
 import { HiOutlineBell } from "react-icons/hi";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { FC, ReactNode } from "react";
@@ -17,7 +17,9 @@ import {
   TbUsers,
   TbCategoryFilled,
   TbCalendarEvent,
-  TbTool  
+  TbTool,  
+  TbPhone,
+  TbTrendingUp  
 } from "react-icons/tb";
 import { FaCommentDots,FaMapMarkerAlt } from "react-icons/fa";
 import { BsGlobe } from "react-icons/bs";
@@ -30,6 +32,8 @@ import MenuController from "@/src/components/dashboard/menu/menuController/menuC
 import { PiReadCvLogoFill } from "react-icons/pi";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 import { LuClipboardList } from "react-icons/lu";
+import { RiDiscountPercentLine } from "react-icons/ri";
+import { FiMessageSquare } from "react-icons/fi";
 interface IProp {
   children: ReactNode;
 }
@@ -44,28 +48,28 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
     {
       label: "داشبورد",
       href: `/dashboard/${role}`,
-      icon: <TbHomeFilled className="w-6 h-6" />,
+      icon: <TbHomeFilled className="w-6 h-6 text-white-pure" />,
     },
     {
       label: "اطلاعات کاربری",
       href: `/dashboard/${role}/profile`,
-      icon: <TbUserFilled className="w-6 h-6" />,
+      icon: <TbUserFilled className="w-6 h-6 text-white-pure" />,
     },
     {
       label: "مدیریت رزرو‌ها",
       href: `/dashboard/${role}/reserve-management`,
-      icon: <TbCirclePlusFilled className="w-6 h-6" />,
+      icon: <TbCirclePlusFilled className="w-6 h-6 text-white-pure" />,
     },
    
     {
       label: "مدیریت مالی",
       href: `/dashboard/${role}/financial-management`,
-      icon: <TbReceiptDollar className="w-6 h-6" />,
+      icon: <TbReceiptDollar className="w-6 h-6 text-white-pure" />,
     },
     {
       label: "اعلان‌ها",
       href: `/dashboard/${role}/notification`,
-      icon: <TbBellFilled className="w-6 h-6" />,
+      icon: <TbBellFilled className="w-6 h-6 text-white-pure" />,
     },
   ];
   const buyerItems =[
@@ -84,6 +88,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       href: `/dashboard/${role}/user-request`,
       icon: <LuClipboardList  className="w-6 h-6" />,
     },
+    {
+      label: "پیش بینی قیمت",
+      href: `/dashboard/${role}/predict-price`,
+      icon: <TbTrendingUp    className="w-6 h-6" />,
+    },
   ]
   const sellerItems = [
     {
@@ -94,12 +103,12 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
     {
       label: "مدیریت املاک",
       href: `/dashboard/${role}/estate-management`,
-      icon: <TbKeyFilled className="w-6 h-6" />,
+      icon: <TbKeyFilled className="w-6 h-6 text-white-pure" />,
     },
     {
       label: "مدیریت نظرات",
       href: `/dashboard/${role}/comments-management`,
-      icon: <FaCommentDots className="w-5 h-5" />,
+      icon: <FaCommentDots className="w-5 h-5 text-white-pure" />,
     },
     {
       label: "مدیریت قرار ها",
@@ -111,27 +120,37 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       href: `/dashboard/${role}/maintenance-management`,
       icon: <TbTool   className="w-5 h-5" />,
     },
+    {
+      label: "سوالات کاربران",
+      href: `/dashboard/${role}/qa-management`,
+      icon: <FiHelpCircle   className="w-5 h-5" />,
+    },
   ];
   const adminItems = [
     {
       label: "مدیریت کاربران",
       href: `/dashboard/${role}/users-management`,
-      icon: <TbUsers className="w-6 h-6" />,
+      icon: <TbUsers className="w-6 h-6 text-white-pure" />,
     },
     {
       label: "مدیریت املاک",
       href: `/dashboard/${role}/estate-management`,
-      icon: <TbKeyFilled className="w-5 h-5" />,
+      icon: <TbKeyFilled className="w-5 h-5 text-white-pure" />,
     },
     {
       label: "مدیریت نظرات",
       href: `/dashboard/${role}/comments-management`,
-      icon: <FaCommentDots className="w-5 h-5" />,
+      icon: <FaCommentDots className="w-5 h-5 text-white-pure" />,
+    },
+    {
+      label: "مدیریت گفتوگو ها",
+      href: `/dashboard/${role}/chats-manegment`,
+      icon: <FiMessageSquare className="w-5 h-5 text-white-pure" />,
     },
     {
       label: "مدیریت وبلاگ ها",
       href: `/dashboard/${role}/blog-management`,
-      icon: <PiReadCvLogoFill className="w-5 h-5" />,
+      icon: <PiReadCvLogoFill className="w-5 h-5 text-white-pure" />,
     },
     {
       label: "مدیریت دسته بندی ها",
@@ -152,6 +171,21 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       label: " موقعیت ها ",
       href: `/dashboard/${role}/locations`,
       icon: <FaMapMarkerAlt   className="w-5 h-5" />,
+    },
+    {
+      label: "سوالات کاربران",
+      href: `/dashboard/${role}/qa-management`,
+      icon: <FiHelpCircle   className="w-5 h-5" />,
+    },
+    {
+      label: "مدیریت تخفیف ها",
+      href: `/dashboard/${role}/discount-management`,
+      icon: <RiDiscountPercentLine   className="w-5 h-5" />,
+    },
+    {
+      label: "ارتباط با ما",
+      href: `/dashboard/${role}/contact-us-management`,
+      icon: <TbPhone   className="w-5 h-5" />,
     },
   ];
 
@@ -178,36 +212,36 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
     },
     {
       label: "موجودی قابل برداشت",
-      icon: <TbCirclePlusFilled className="w-4 h-4 text-white" />,
+      icon: <TbCirclePlusFilled className="w-4 h-4 text-white-pure" />,
     },
 
     {
       label: "خروج",
-      icon: <TbLogout className="w-4 h-4 text-white" />,
+      icon: <TbLogout className="w-4 h-4 text-white-pure" />,
     },
   ];
 
   return (
     <>
-      <div className="flex w-full pt-5 px-5 h-full gap-5 font-vazir" dir="rtl">
+      <div className="flex w-full pt-5 px-5 h-full gap-5 font-vazir bg-dark-850" dir="rtl">
         <div className="hidden lg:block">
           <AsideMenu role={role} menuItems={menuItems} isOpen={true} />
         </div>
 
         <div className="flex flex-col w-full xl:w-[1113px] 2xl:w-[1400px]">
           <div className="flex justify-between p-5 items-center h-[66px] bg-dark-700 rounded-xl">
-            <div className="font-extrabold text-white text-[20px] flex items-center gap-2">
+            <div className="font-extrabold text-white-pure text-[20px] flex items-center gap-2">
               <MenuController role={role} menuItems={menuItems} />
-              <h2 className="hidden lg:block">داشبورد</h2>
+              <h2 className="hidden lg:block text-white-pure">داشبورد</h2>
             </div>
 
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-4 items-center text-white-pure">
               <ToolTip
                 tooltipText="صفحه اصلی"
-                twClassname="z-100 bg-gray-550 "
+                twClassname="z-100 bg-gray-550 text-white-pure"
                 mainContent={
                   <Link href={"/"}>
-                    <TbHome className="w-6 h-6 text-white cursor-pointer hidden md:block" />
+                    <TbHome className="w-6 h-6 text-white-pure cursor-pointer hidden md:block" />
                   </Link>
                 }
               />
@@ -218,12 +252,12 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
                     href={`/dashboard/${role}/notification`}
                     className=" relative hidden md:block"
                   >
-                    <HiOutlineBell className="w-6 h-6 text-white cursor-pointer" />
+                    <HiOutlineBell className="w-6 h-6 text-white-pure cursor-pointer" />
                     <div className="w-[7px] h-[7px] rounded-xl bg-red-500 absolute top-0.5 right-1" />
                   </Link>
                 }
                 tooltipText="اعلان ها"
-                twClassname="z-100 bg-gray-550"
+                twClassname="z-100 bg-gray-550 text-white-pure"
               />
 
               <div className="flex gap-2 w-[150px] justify-start items-center cursor-pointer">
@@ -239,14 +273,14 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
                   />
                 </div>
                 <div className="flex flex-col" dir="rtl">
-                  <h2 className="text-[14px] text-white">{`${userDetail?.firstName} ${userDetail?.lastName}`}</h2>
+                  <h2 className="text-[14px] text-white-pure">{`${userDetail?.firstName} ${userDetail?.lastName}`}</h2>
                   <span className="text-[12px] text-gray-500">{role}</span>
                 </div>
               </div>
               <DropMenu
                 trigger={
                   <FiChevronDown
-                    className="text-gray-500 cursor-pointer"
+                    className="text-gray-500 cursor-pointer "
                     strokeWidth={2}
                   />
                 }

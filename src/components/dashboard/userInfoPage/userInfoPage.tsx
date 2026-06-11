@@ -16,12 +16,15 @@ const UserInfoPage = async () => {
     <div className="bg-dark-700 rounded-xl p-5 flex-col flex gap-10">
       <div className="flex  lg:w-1/2 w-full justify-between">
         <div className="text-white  flex  flex-col gap-2">
-          <h1 className="text-[20px] font-black ">عکس نمایه شما</h1>
-          <span>میتوانید عکس نمایه خود را تغییر دهید</span>
+          <h1 className="text-[20px] font-black text-white-pure">
+            عکس نمایه شما
+          </h1>
+          <span className="text-white-pure">
+            میتوانید عکس نمایه خود را تغییر دهید
+          </span>
         </div>
         <div className="  relative">
-          <ImageFallback
-            fallbackSrc={userDefault}
+          <Image
             width={125}
             height={125}
             className="rounded-full border border-gray-300"

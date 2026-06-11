@@ -1,22 +1,131 @@
 "use client";
 import { useState } from "react";
-import { MdSend } from "react-icons/md";
+import { MdEdit, MdSend } from "react-icons/md";
 import { FiPaperclip } from "react-icons/fi";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { sendChat } from "@/src/utils/sevices/api/chats/send/send";
+import { useQueryClient } from "@tanstack/react-query";
+import { getChatHistory } from "@/src/utils/sevices/api/chats/getChatHistory/getChatHistory";
+import { FaUser } from "react-icons/fa";
+import { TiDeleteOutline } from "react-icons/ti";
+import DropMenu from "../common/dropMenu/DropMenu";
+import { TbDots, TbDotsVertical } from "react-icons/tb";
+import { editMessage } from "@/src/utils/sevices/api/chats/editMessage/editMessage";
+import { deleteMessage } from "@/src/utils/sevices/api/chats/deleteMessage/deleteMessage";
+import { uploadChatFile } from "@/src/utils/sevices/api/chats/uploadChatFile/uploadChatFile";
 
 interface ChatProps {
-    room:string;
-    userId:string;
+  senderId: number;
+  sellerName: string;
+  sellerId: number;
 }
 
-const Chat = ({room,userId} : ChatProps) => {
+const Chat = ({ senderId, sellerId, sellerName }: ChatProps) => {
+  const queryClient = useQueryClient();
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<string[]>([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [editingMessageId, setEditingMessageId] = useState<number | null>(null);
 
-  const handleSend = (e: any) => {
+  const room = `seller-${sellerId}-user-${senderId}`; // creating room by using sellerId and senderId
+
+  const handleOpenMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  // ========================= Getting Chat History ========================= //
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["chat", room],
+    queryFn: () => getChatHistory(room),
+  });
+
+  // ========================= Handle Sending Message ========================= //
+
+  const sendMessageMutation = useMutation({
+    mutationFn: sendChat,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["chat", room],
+      });
+    },
+  });
+
+  // handle send message
+
+  const handleSend = async (e: any) => {
     e.preventDefault();
-    const messages = setMessages(prev => [...prev, input]);
-    if (!input.trim()) return;
+
+    if (!input.trim()) return; /* if the input is empty return function */
+
+    if (editingMessageId) {
+      await EditMessageMutation.mutateAsync({
+        id: editingMessageId,
+        message: input,
+      });
+
+      setEditingMessageId(null);
+    } else {
+      await sendMessageMutation.mutateAsync({
+        room,
+        getterId: sellerId,
+        message: input,
+      });
+    }
+
     setInput("");
+  };
+
+  // ========================= Handle Editing Message ========================= //
+  const handleEdit = (message: any) => {
+    setInput(message.message);
+    setEditingMessageId(message.id);
+  };
+
+  const EditMessageMutation = useMutation({
+    mutationFn: editMessage,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["chat", room],
+      });
+    },
+  });
+  const handleEditMessage = async (id: number, message: string) => {
+    EditMessageMutation.mutate({
+      id,
+      message,
+    });
+  };
+  // ========================= Handle Deleting Message ========================= //
+  const deleteMessageMutation = useMutation({
+    mutationFn: deleteMessage,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["chat", room],
+      });
+    },
+  });
+
+  const handleDelete = async (id: number) => {
+    deleteMessageMutation.mutate(id);
+  };
+
+  // ========================= Upload Chat File ========================= //
+  const uploadMutation = useMutation({
+    mutationFn: uploadChatFile,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["chat", room],
+      });
+    },
+  });
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    uploadMutation.mutate({
+      room,
+      getterId: sellerId,
+      files,
+    });
   };
 
   return (
@@ -40,21 +149,115 @@ const Chat = ({room,userId} : ChatProps) => {
           placeholder="پیام خود را بنویسید..."
           className="flex-1 border border-dark-purple rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 "
         />
-        {!input && (
+        
           <span className="p-2 text-primary-accent-green hover:bg-primary-accent-green-transparent-20 rounded-full">
-            <FiPaperclip className="w-6 h-6 rounded-full" />
+            <input
+              id="file-upload"
+              type="file"
+              className="hidden"
+              multiple
+              onChange={handleFileChange}
+            />
+            <label htmlFor="file-upload" className="relative flex-center">
+              <FiPaperclip className="w-6 h-6 rounded-full" />
+            </label>
           </span>
-        )}
+       
       </form>
       <div className="flex-1 p-4 overflow-y-auto flex flex-col-reverse items-start bg-primary-accent-green">
-          <div className="flex flex-col space-y-2 ">
-            {messages.map((message,index) => (
-            <div className="max-w-[70%] w-fit wrap-break-word bg-tomato-red px-4 py-3 rounded-xl shadow bg-primary-accent-green-transparent-80 text-right" key={index}>{message}</div>
-          ))}
-          </div>
+        <div className="flex flex-col space-y-2 ">
+          {data?.map((message: any, index: any) => {
+            const isMine = message.senderId === senderId;
+            const updateMessageATime = message.updatedAt;
+            const menuItems = [
+              {
+                label: "ویرایش",
+                icon: <MdEdit className="w-4 h-4 text-white" />,
+                onClick: () => handleEdit(message),
+              },
+              {
+                label: "حذف",
+                icon: <TiDeleteOutline className="w-4 h-4 text-white" />,
+                onClick: () => handleDelete(message.id),
+              },
+            ];
+
+            return (
+              <div
+                key={index}
+                className="group relative w-[80%] w-fit px-4 py-3 rounded-xl shadow bg-amber-600 flex-center gap-2"
+              >
+                <div
+                  className={` ${isMine ? "senderMessage" : "getterMessage"}`}
+                >
+                  {message.message}
+                </div>
+                {isMine && (
+                  <div className="relative invisible group-hover:visible">
+                    <DropMenu
+                      trigger={
+                        <button>
+                          <TbDots className="w-6 h-6 cursor-pointer text-gray-400 hover:text-primary-accent-green transition hidden md:block" />
+                          <TbDotsVertical className="w-5 h-5 cursor-pointer text-gray-400 hover:text-primary-accent-green transition md:hidden" />
+                        </button>
+                      }
+                      items={menuItems}
+                      align="end"
+                      side="left"
+                    />
+                  </div>
+                )}
+                <div className="text-gray-300 absolute left-0 bottom-0">
+                  {message.updatedAt || message.createdAt
+                    ? new Date(
+                        message.updatedAt || message.createdAt,
+                      ).toLocaleTimeString("fa-IR")
+                    : ""}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className="w-full p-4 flex-center justify-end gap-2">
+        <span className="text-16-regular text-white-pure">{sellerName}</span>
+        <span className="text-white-pure p-2 rounded-full bg-gray-550">
+          {" "}
+          <FaUser className="w-4 h-4" />{" "}
+        </span>
       </div>
     </div>
   );
 };
 
 export default Chat;
+// Array(4)
+// 0
+// :
+// createdAt
+// :
+// null
+// files
+// :
+// null
+// getterId
+// :
+// 175
+// id
+// :
+// 27
+// message
+// :
+// "سلام"
+// room
+// :
+// "seller-175-user-331"
+// sender
+// :
+// {id: 331, fullName: 'نام کاربر', email: 'bvAdmin@gmail.com'}
+// senderId
+// :
+// 331
+// updatedAt
+// :
+// null

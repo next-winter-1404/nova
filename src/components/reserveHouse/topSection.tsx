@@ -20,7 +20,9 @@ const TopReserveHouseSection = ({
   const [sort] = useState(searchParams.get("sort") || "");
   const [address, setAddress] = useState(searchParams.get("address") || "");
   const [search, setSearch] = useState(searchParams.get("search") || "");
-
+  useEffect(() => {
+    setAddress(searchParams.get("address") || "");
+  }, [searchParams]);
   const [debounceSort] = useDebounce(sort, 500);
   const [debounceAddress] = useDebounce(address, 500);
   const [debounceSearch] = useDebounce(search, 500);
@@ -67,9 +69,9 @@ const TopReserveHouseSection = ({
         <Input
           labelText="آدرس"
           InputHeight="h-[50px]"
-          tagBgStyle={{ background: "var(--color-dark-800)", color: "white" }}
-          borderColor="border-white border"
-          textColor="text-white"
+          tagBgStyle={{ background: "var(--color-dark-800)", color: "var(--color-white-pure)" }}
+          borderColor="border-white-pure border"
+          textColor="text-white-pure"
           placeHolder="آدرس ملک مورد نظر را وارد کنید"
           parentWidth="lg:w-[223px] hidden lg:block"
           value={address}
@@ -90,9 +92,9 @@ const TopReserveHouseSection = ({
         <Input
           labelText="جستجو"
           InputHeight="h-[50px]"
-          tagBgStyle={{ background: "var(--color-dark-800)", color: "white" }}
-          borderColor="border-white border"
-          textColor="text-white"
+          tagBgStyle={{ background: "var(--color-dark-800)", color: "var(--color-white-pure)" }}
+          borderColor="border-white-pure border"
+          textColor="text-white-pure"
           placeHolder="نام ملک مورد نظر..."
           parentWidth="lg:w-[619px] w-full"
           value={search}
@@ -105,7 +107,7 @@ const TopReserveHouseSection = ({
         <Button
           text={`تعداد آگهی : ${totalCount}`}
           backgroundColor="transparent"
-          buttonStyle={{ background: "transparent", border: "1px solid white" }}
+          buttonStyle={{ background: "transparent", border: "1px solid var(--color-white-pure)" }}
           icon={<Image alt="megaphone" src={megaPhone} />}
         />
       </div>
@@ -133,10 +135,10 @@ const TopReserveHouseSection = ({
                 InputHeight="h-[50px]"
                 tagBgStyle={{
                   background: "var(--color-dark-900)",
-                  color: "white",
+                  color: "var(--color-white-pure)",
                 }}
-                borderColor="border-white border"
-                textColor="text-white"
+                borderColor="border-white-pure border"
+                textColor="text-white-pure"
                 placeHolder="آدرس ملک مورد نظر را وارد کنید"
                 parentWidth="w-full"
                 value={address}
@@ -156,7 +158,7 @@ const TopReserveHouseSection = ({
                 paramKey="propertyType"
                 placeholder="نوع ملک"
                 labelText="نوع ملک"
-                triggerClassName="lg:w-[250px] lg:h-[50px] text-white w-full h-[50px]"
+                triggerClassName="lg:w-[250px] lg:h-[50px] text-white-pure w-full h-[50px]"
                 tagBg="bg-dark-900"
               />
               <div className="flex gap-5">
@@ -167,7 +169,7 @@ const TopReserveHouseSection = ({
                   placeHolder="تومان"
                   textColor="text-[#AAAAAA]"
                   textSize="indent-5"
-                  borderColor="border-[#DDDDDD]"
+                  borderColor="border-white-pure"
                   labelTextSize="text-[#AAAAAA]"
                   type="number"
                 />
@@ -178,7 +180,7 @@ const TopReserveHouseSection = ({
                   placeHolder="تومان"
                   textColor="text-[#AAAAAA]"
                   textSize="indent-5"
-                  borderColor="border-[#DDDDDD]"
+                  borderColor="border-white-pure"
                   labelTextSize="text-[#AAAAAA]"
                   type="number"
                 />

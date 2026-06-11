@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@import "@heroui/styles"; 
 @theme {
   /* Black colors */
   --color-black-transparent-16: rgb(0 0 0 / 0.16);
@@ -111,6 +111,7 @@
 
   /* White / black transparent overlays */
   --color-white-pure: #000000;
+  --color-white-transparent-80: rgb(0 0 0 / 0.8);
   --color-white-transparent-20: rgb(0 0 0 / 0.15);
   --color-white-transparent-16: rgb(0 0 0 / 0.12);
   --color-white-transparent-12: rgb(0 0 0 / 0.08);
@@ -213,7 +214,7 @@
 }
 
 body {
-  background: #232323;
+  background: var(--color-dark-900);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   padding: 0;
@@ -401,6 +402,10 @@ header {
     scroll-behavior: smooth;
   }
 }
+.blikingBlob {
+  animation: softBlinkMove 4s infinite ease-in; 
+}
+
 @keyframes spinBlob {
   0% {
     transform:rotate(0deg) scale(2);
@@ -409,4 +414,12 @@ header {
   100% {
     transform:rotate(1turn) scale(2);
   }
+}
+
+.senderMessage{
+  @apply text-right justify-end
+}
+
+.getterMessage{
+  @apply  justify-start
 }

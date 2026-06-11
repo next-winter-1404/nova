@@ -29,10 +29,10 @@ const BlogPage = async () => {
             <Image src={LeftTriangle} alt="." className="max-w-none mb-1" />
           </div>
 
-          <span className="text-32-semibold text-white">
+          <span className="text-32-semibold text-white-pure">
             در بالاترین سطح دانش با مقالات دلتا
           </span>
-          <p className="text-white">
+          <p className="text-white-pure">
             در این قسمت می توانید بروز ترین مقالات دنیای ملک و مکان های تفریحی
             را پیدا کنید و از جدید ترین مطالب ما لذت ببرید !
           </p>
@@ -64,7 +64,7 @@ const BlogPage = async () => {
         <div className=" w-full">
           <BlogCategories data={category} />
         </div>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-col-1 p-4 w-[500px] gap-6  mt-10">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-col-1 p-4 w-[500px] gap-6  mt-10 w-full">
           {blogs?.slice(6, blogLength).map((blog) => (
             <BlogCard
               key={blog.id}

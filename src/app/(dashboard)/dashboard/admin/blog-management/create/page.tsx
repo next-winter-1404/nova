@@ -23,8 +23,7 @@ const CreateBlogPage= () => {
     queryFn: () => getCategory(),
   });
   
-  console.log("error =", error);
-  console.log("loading =", isLoading);
+
   const categoriesItems = categories?.data?.map((cat) => ({
     value: cat.id,
     label: cat.name,
@@ -44,7 +43,6 @@ const CreateBlogPage= () => {
       toast.error(state.message);
     }
   }, [state]);
-console.log("categories---",categories)
   return (
     <form action={formAction} className="flex flex-col gap-10 w-full">
       <input type="hidden" name="category" value={category||""} />
