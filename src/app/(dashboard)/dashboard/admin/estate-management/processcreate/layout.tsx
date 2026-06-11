@@ -37,7 +37,7 @@ const stepIcons =[
                 twTopContent="w-1/"
                 topSectionContent={
                 <div className="flex gap-4 w-1/2">
-                    <Link href={"/dashboard/seller/estate-management"}>
+                    <Link href={"/dashboard/admin/estate-management"}>
                         <button className='w-[153px] flex items-center justify-center gap-2 text-[#0059FF] text-[16px]'>
                             لیست املاک من 
                             <Image src={blueTriangle} alt='blueTriangle'/>

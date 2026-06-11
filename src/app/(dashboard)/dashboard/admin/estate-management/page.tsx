@@ -11,6 +11,9 @@ import imagePlaceHolder from "@/src/assets/images/imagePlaceHolder (2).png";
 import Link from "next/link";
 import PaginationClient from "@/src/components/common/pagination/page";
 import { IFilters } from "@/src/core/types/IFilters";
+import Image from "next/image";
+import Add from "@/src/assets/icons/Add.svg";
+
 
 const EstateManagementPage = async ({
   searchParams,
@@ -107,12 +110,12 @@ const EstateManagementPage = async ({
           </div>
         </div>
         <div className="flex justify-between w-full items-center">
-          <Link
-            href={"/"}
-            className="cursor-pointer bg-primary-accent-green w-[150px] h-[43px] rounded-[16px] flex-center"
-          >
-            ساخت ملک +
-          </Link>
+        <Link href={"/dashboard/admin/estate-management/processcreate"}>
+                <button className="w-[146px] rounded-[12px] h-10 bg-primary-accent-green text-black text-[16px] flex items-center justify-center gap-2">
+                    افرودن ملک
+                    <Image src={Add} alt="Add" />
+                </button>
+                </Link>
 
           <PaginationClient
             totalPages={totalPages}

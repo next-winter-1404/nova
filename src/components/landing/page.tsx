@@ -4,7 +4,8 @@ import BuyHouse from './buyhouse/page'
 import UserComment from './usercomment/page'
 const Landing = () => {
   return (
-    <> <AboutUs></AboutUs>
+    <> 
+    <AboutUs></AboutUs>
     <BuyHouse/>
     <UserComment></UserComment>
     </>
