@@ -66,7 +66,7 @@ const MortgageTabContent = ({
           </div>
         );
       case "comment":
-        return <CommentSection houseId={id} comments={comments} />;
+        return <CommentSection houseId={id} comments={comments} mortgage/>;
     }
   };
 
