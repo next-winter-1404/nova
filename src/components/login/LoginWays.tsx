@@ -15,6 +15,7 @@ const LoginWays = () => {
         cursor: "pointer",
         display: "flex",
         gap: 10,
+        color:"var(--color-white-pure)"
       }}
       icon={<Image src={google} alt="google" />}
     />
@@ -26,6 +27,7 @@ const LoginWays = () => {
         cursor: "pointer",
         display: "flex",
         gap: 10,
+        color:"var(--color-white-pure)"
       }}
       icon={<Image src={apple} alt="apple" />}
     />

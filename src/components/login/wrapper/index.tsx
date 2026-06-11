@@ -19,7 +19,7 @@ const LoginWrapper = ({content,ButtonSection,headerText="خوش اومدی!",des
       <h2 className='text-32-medium'>به خانواده دلتا،</h2>
       <h2 className='text-32-semibold'> {headerText}</h2>
     </div>
-    <span className='text-16-medium text-white'>
+    <span className='text-16-medium text-white-pure'>
       {description}
     </span>
   </div>

@@ -52,9 +52,9 @@ const RegisterWithPhone = () => {
             htmlFor="phone"
             parentWidth="w-full"
             placeHolder="0912....."
-            borderColor="border-white "
+            borderColor="text-white-pure border-white-pure "
             tagBgStyle={{ background: "var(--color-dark-900)", color: "white" }}
-            textColor="text-white"
+            textColor="text-white-pure"
             dir="rtl"
           />
         }

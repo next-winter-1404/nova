@@ -49,9 +49,9 @@ const ForgetPassWordRequest = () => {
             htmlFor="email"
             parentWidth="w-full"
             placeHolder="example@gmail.com"
-            borderColor="border-white "
+            borderColor="text-white-pure border-white-pure "
             tagBgStyle={{background:"var(--color-dark-900)",color:"white"}}
-            textColor="text-white"
+            textColor="text-white-pure"
             dir="rtl"
 
           />

@@ -1,6 +1,4 @@
 "use client";
-import leftArrow from "@/src/assets/icons/leftArrow.svg";
-import Image from "next/image";
 import Input from "@/src/components/common/input/Input";
 import LoginWrapper from "@/src/components/login/wrapper";
 import LoginButton from "@/src/components/login/button/LoginButton";
@@ -8,8 +6,7 @@ import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { Login } from "@/src/utils/sevices/api/auth/login/login";
 import toast from "react-hot-toast";
-import Timer from "@/src/utils/hooks/timer";
-
+import { FaArrowLeft } from "react-icons/fa";
 const LoginPage = () => {
   const router = useRouter();
   const [state, formAction] = useActionState(Login, {
@@ -51,7 +48,7 @@ const LoginPage = () => {
               placeHolder={"example@gmail.com"}
               type={"email"}
               textColor="text-gray-300"
-              borderColor="text-white-pure"
+              borderColor="text-white-pure border-white-pure"
               labelTextSize="text-13-regular"
               dir="rtl"
             />
@@ -66,20 +63,20 @@ const LoginPage = () => {
                 parentWidth={"w-full"}
                 type={"password"}
                 textColor="text-gray-300"
-                borderColor="text-white"
+                borderColor="text-white-pure border-white-pure"
                 labelTextSize="text-13-regular"
                 dir="rtl"
               />
-              <div className="flex gap-3">
+              <div className="flex gap-3 items-center">
                 <span
-                  className="text-16-medium md:indent-3 text-white cursor-pointer"
+                  className="text-16-medium md:indent-3 text-white-pure cursor-pointer"
                   onClick={() => {
                     router.push("/forgetPassword/request");
                   }}
                 >
                   رمز عبور خود را فراموش کردم
                 </span>
-                <Image src={leftArrow} alt="arrow" />
+                <FaArrowLeft className="text-white-pure w-4 h-4" />
               </div>
             </div>
           </div>

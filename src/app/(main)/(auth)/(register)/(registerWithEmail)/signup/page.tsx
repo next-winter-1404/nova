@@ -36,7 +36,7 @@ const SignUpPage = () => {
       dir="rtl"
     >
       <LoginWrapper
-      description="جهت شروع فرایند ساخت اکانت ایمیل خود را وارد کنید"
+        description="جهت شروع فرایند ساخت اکانت ایمیل خود را وارد کنید"
         ButtonSection={
           <LoginButton
             loadingText="در حال ارسال کد"
@@ -52,10 +52,10 @@ const SignUpPage = () => {
             htmlFor="email"
             parentWidth="w-full"
             placeHolder="example@gmail.com"
-            borderColor="border-white "
-            tagBgStyle={{background:"var(--color-dark-900)",color:"white"}}
-            textColor="text-white"
-dir="rtl"
+            borderColor="text-white-pure border-white-pure"
+            tagBgStyle={{ background: "var(--color-dark-900)", color: "white" }}
+            textColor="text-white-pure"
+            dir="rtl"
           />
         }
       />

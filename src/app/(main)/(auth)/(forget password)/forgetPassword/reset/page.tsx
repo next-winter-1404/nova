@@ -44,10 +44,10 @@ const ForgetPassWordReset = () => {
               labelText={"کد ورود * :"}
               parentWidth={"w-full"}
               type={"text"}
-              borderColor="border-white"
+              borderColor="text-white-pure border-white-pure"
               tagBgStyle={{ background: "var(--color-dark-900)" }}
-              labelTextSize="text-white"
-              textColor="text-white"
+              labelTextSize="text-white-pure"
+              textColor="text-white-pure"
               dir="rtl"
             />
             <Input

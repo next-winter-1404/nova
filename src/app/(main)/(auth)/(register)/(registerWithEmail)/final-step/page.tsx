@@ -44,10 +44,10 @@ const SetPasswordAndPhonePage = () => {
               parentWidth={"w-1/2"}
               placeHolder={".......0911"}
               type={"number"}
-              borderColor="border-white"
+              borderColor="text-white-pure border-white-pure"
               tagBgStyle={{ background: "var(--color-dark-900)" }}
-              labelTextSize="text-white"
-              textColor="text-white"
+              labelTextSize="text-white-pure"
+              textColor="text-white-pure"
               dir="rtl"
             />
             <div className="flex flex-col gap-4 w-1/2">
