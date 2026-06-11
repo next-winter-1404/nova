@@ -149,6 +149,38 @@
 .Container {
   @apply mx-auto container flex flex-col items-center sm:px-6 py-20 px-4;
 }
+
+.hero-bg {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(255,255,255,.22) 0%,
+      transparent 40%
+    ),
+
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(255,255,255,.14) 0%,
+      transparent 35%
+    ),
+
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(255,255,255,.10) 0%,
+      transparent 35%
+    ),
+
+    linear-gradient(
+      180deg,
+      #b7bbbf 0%,
+      #9fa3a7 50%,
+      #707478 100%
+    );
+}
+
 .selected-button {
   box-shadow:
     inset -1px -1px 8px 0px #0000000a,
