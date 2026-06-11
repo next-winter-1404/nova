@@ -42,10 +42,10 @@ const handleSetAmount =()=>{
             />
 
             <button
-              className="bg-primary-accent-green w-full mt-4 py-2 rounded-lg"
+              className="bg-primary-accent-green w-full mt-4 py-2 rounded-lg text-black cursor-pointer"
               onClick={() => handleSetAmount()}
             >
-              شارژ
+             شارژ حساب
             </button>
           </div>
         }
@@ -55,9 +55,9 @@ const handleSetAmount =()=>{
 
       <DropMenu
         trigger={
-          <div className="border border-dashed w-full p-3 border-gray-500 flex items-center gap-4 rounded-[18px]">
+          <div className="border border-dashed w-full p-3 border-gray-500 flex items-center gap-4 rounded-[18px]" dir="rtl">
             <TbCreditCard className="w-[28px] h-[28px] text-white" />
-            <div className="flex-col flex" dir="rtl">
+            <div className="flex-col flex">
               <h2 className="text-[20px] text-white">کیف پول</h2>
 
               <span className="text-gray-500 text-[14px]">
