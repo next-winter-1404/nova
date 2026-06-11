@@ -22,23 +22,28 @@ const BuyerWallet = () => {
       onClick: () => setISModalOpen(true),
     },
   ];
-
+const handleSetAmount =()=>{
+  router.push("/dashboard/buyer/payment");
+  setISModalOpen(false)
+}
   return (
     <>
-      <Modal
+      <Modal 
+      modalTitle="شارژ کیف پول" modalDescription="مبلغ شارژ را به تومان وارد کنید"
         contentClassName="bg-dark-900"
         mainContent={
           <div>
             <Input
               InputHeight="h-[50px]"
-              borderColor="border-white-pure"
+              borderColor="border-white-pure" 
+              placeHolder="تومان"
               value={chargeAmount || ""}
               onChange={(e) => setChargeAmount(Number(e.target.value))}
             />
 
             <button
               className="bg-primary-accent-green w-full mt-4 py-2 rounded-lg"
-              onClick={() => router.push("/dashboard/buyer/payment")}
+              onClick={() => handleSetAmount()}
             >
               شارژ
             </button>

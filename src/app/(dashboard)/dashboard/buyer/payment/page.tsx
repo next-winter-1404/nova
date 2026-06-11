@@ -2,6 +2,7 @@
 
 import Input from "@/src/components/common/input/Input";
 import { useWalletStore } from "@/src/stores/walletPaymentStore";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
@@ -53,7 +54,7 @@ const WalletPayment = () => {
       addToBalance(chargeAmount);
       resetChargeAmount();
 
-      toast.success("کیف پول شما با موفقیت شارژ شد 💳");
+      toast.success("کیف پول شما با موفقیت شارژ شد ");
 
       setLoading(false);
       router.push("/dashboard/buyer");
@@ -63,9 +64,9 @@ const WalletPayment = () => {
   return (
     <div className="flex flex-col items-center w-full" dir="rtl">
       <div className="bg-dark-600 rounded-2xl shadow-xl w-2/5 overflow-hidden mt-10">
-        <div className="bg-primary-accent-green p-6 text-center text-white">
-          <h2 className="text-2xl font-bold mb-2">درگاه پرداخت کیف پول</h2>
-          <p>مبلغ: {Number(chargeAmount).toLocaleString()} تومان</p>
+        <div className="bg-primary-accent-green p-6 text-center text-black">
+          <h2 className="text-2xl font-bold mb- 2">درگاه پرداخت دلتا</h2>
+          <p>مبلغ: {formatPrice(chargeAmount)} تومان</p>
         </div>
 
         <div className="p-6 space-y-6">
@@ -148,7 +149,7 @@ const WalletPayment = () => {
           <button
             onClick={handlePayment}
             disabled={loading}
-            className={`w-full py-4 rounded-xl font-bold text-white transition ${
+            className={`w-full py-4 rounded-xl font-bold text-black transition cursor-pointer ${
               loading
                 ? "bg-gray-500"
                 : "bg-primary-accent-green hover:bg-primary-accent-green-transparent-64"
