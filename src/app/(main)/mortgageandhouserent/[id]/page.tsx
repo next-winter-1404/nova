@@ -69,15 +69,15 @@ const SingleHousePage = async ({ params }: IProps) => {
   const getAppointments = await getVisitAppointments(id);
   const items: BreadcrumbItem[] = [
     {
-      href: "/reserve-house",
+      href: "/mortgageandhouserent",
       label: "رهن و اجاره",
     },
+    // {
+    //   href: "/reserve-house",
+    //   label: "رهن و اجاره آپارتمان",
+    // },
     {
-      href: "/reserve-house",
-      label: "رهن و اجاره آپارتمان",
-    },
-    {
-      href: "/reserve-house",
+      href: "/mortgageandhouserent",
       label: `رهن و اجاره ${getHouseInfo?.location}`,
     },
     {
