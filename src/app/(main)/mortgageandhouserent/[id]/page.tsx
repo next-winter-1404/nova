@@ -34,6 +34,7 @@ import HousesPicturesSlider from "@/src/components/mortgageAndRentPageContainer/
 import VisitAppointment from "@/src/components/mortgageAndRentPageContainer/VisitAppointment/VisitApointment";
 import { getVisitAppointments } from "@/src/utils/sevices/api/visitAppointment/getVisitAppointment";
 import { formatPrice } from "@/src/utils/hooks/formatPrice";
+import DepositRentCalculator from "@/src/components/common/depositRentCalculater/DepositRentCalculator";
 
 interface IProps {
   params: Promise<{ id: number }>;
@@ -78,7 +79,7 @@ const SingleHousePage = async ({ params }: IProps) => {
     },
     {
       href: "/reserve-house",
-      label: `رهن و اجاره ${getHouseInfo?.location}`,
+      label: `رهن و اجاره ${getHouseInfo?.address}`,
     },
     {
       label: `${getHouseInfo?.title}`,
@@ -114,7 +115,7 @@ const SingleHousePage = async ({ params }: IProps) => {
           items={items}
           twClassname="w-full flex-center justify-start"
         />
-        <div className="flex-center justify gap-7">
+        <div className="flex-center h-[600px] justify gap-7">
           <div className="flex-col-center gap-6 mt-4 sm:mt-0">
             <div className="sm:hidden flex-col-center gap-3">
               <div className="sm:hidden block">
@@ -164,7 +165,7 @@ const SingleHousePage = async ({ params }: IProps) => {
                 icon={<FiPhoneCall />}
                 labelText="اطلاعات تماس"
               >
-                <div className="w-full flex-col-center gap-8">
+                <div className="w-full flex-col-center gap-5">
                   <div className="relative flex flex-col w-full gap-6">
                     <div className="flex-col-center gap-3">
                       <span className="w-12 h-12 rounded-2xl bg-gray-200"></span>
@@ -206,6 +207,7 @@ const SingleHousePage = async ({ params }: IProps) => {
                     </div>
                   </div>
                   <div className="w-full flex-col-center gap-4">
+                    <DepositRentCalculator/>
                     <VisitAppointment
                       houseId={Number(getHouseInfo?.id)}
                       userId={Number(userId)}
