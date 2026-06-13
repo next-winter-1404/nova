@@ -82,6 +82,7 @@ const WalletPayment = () => {
             textSize="md:text-[16px] text-[12px]"
             labelTextSize="text-[16px]"
             tagBgStyle={{ background: "var(--color-dark-600)" }}
+            dir="rtl"
           />
 
           <div className="flex gap-4">
@@ -99,6 +100,7 @@ const WalletPayment = () => {
               textSize="md:text-[16px] text-[12px]"
               labelTextSize="text-[16px]"
               tagBgStyle={{ background: "var(--color-dark-600)" }}
+              dir="rtl"
             />
 
             <Input
@@ -111,6 +113,7 @@ const WalletPayment = () => {
               textColor="text-gray-300"
               labelTextColor="text-gray-300"
               tagBgStyle={{ background: "var(--color-dark-600)" }}
+              dir="rtl"
             />
 
             <Input
@@ -123,6 +126,7 @@ const WalletPayment = () => {
               textColor="text-gray-300"
               labelTextColor="text-gray-300"
               tagBgStyle={{ background: "var(--color-dark-600)" }}
+              dir="rtl"
             />
           </div>
 
@@ -138,6 +142,7 @@ const WalletPayment = () => {
             textColor="text-gray-300"
             labelTextColor="text-gray-300"
             tagBgStyle={{ background: "var(--color-dark-600)" }}
+            dir="rtl"
           />
 
           {error && (
