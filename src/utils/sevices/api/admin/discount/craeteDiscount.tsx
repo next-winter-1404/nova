@@ -12,7 +12,7 @@ export async function adminCreateDiscount(
         code: String(formData.get("code")),
         discount_percentage:String(formData.get("discount_percentage")),
         valid_until:formData.get("valid_until"),
-        is_active: true
+        house_id:formData.get("houseId")
       }
     );
 
