@@ -1,5 +1,8 @@
 import DashboardInformation from "@/src/components/common/dashboardInformation/dashboardInformation";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
+import ProgressBar from "@/src/components/common/progressBar/ProgressBar";
+import ProgressBarAdmin from "@/src/components/common/progressBar/adminProgressBar";
+import UsersChart from "@/src/components/dashboard/chart/userChart";
 import { getDashbordSummery } from "@/src/utils/sevices/api/admin/users/getDashbordSummery";
 import {
   TbUsers,
@@ -14,6 +17,11 @@ import {
 } from "react-icons/tb";
 const AdminPage = async () => {
   const dashboardSummery = await getDashbordSummery();
+  const bookingSuccessPercent = Math.round(
+    ((dashboardSummery.bookings?.conformedBookings ?? 0) /
+      (dashboardSummery.bookings?.bookingCount ?? 1)) *
+      100
+  );
   const usersData = [
     {
       label: "کل کاربران",
@@ -56,6 +64,20 @@ const AdminPage = async () => {
       label: "لغو شده",
       value: dashboardSummery?.bookings?.canceledBookings,
       icon: <TbX className="w-5 h-5 text-gray-300" />,
+    },
+  ];
+  const userChartData = [
+    {
+      name: "خریداران",
+      value: dashboardSummery.users?.buyers ?? 0,
+    },
+    {
+      name: "فروشندگان",
+      value: dashboardSummery.users?.sellers ?? 0,
+    },
+    {
+      name: "ادمین‌ها",
+      value: dashboardSummery.users?.admins ?? 0,
     },
   ];
   return (
@@ -108,7 +130,9 @@ const AdminPage = async () => {
                     {item.label || 0}
                   </p>
                 </div>
-                <h2 className="text-xl font-bold text-white-pure">{item.value || 0}</h2>
+                <h2 className="text-xl font-bold text-white-pure">
+                  {item.value || 0}
+                </h2>
               </div>
             ))}
           </div>
@@ -127,9 +151,34 @@ const AdminPage = async () => {
                   </p>
                 </div>
 
-                <h2 className="text-xl font-bold text-white-pure">{item.value ?? 0}</h2>
+                <h2 className="text-xl font-bold text-white-pure">
+                  {item.value ?? 0}
+                </h2>
               </div>
             ))}
+          </div>
+        </DashboardContentContainer>
+      </div>
+      <div className="grid grid-cols-2  gap-4  w-full">
+        <DashboardContentContainer isIcon title="کاربران سیستم">
+          <div className="text-white flex flex-col justify-between items-center gap-4">
+            <div className="w-[50%]">
+              <UsersChart data={userChartData} />
+            </div>
+
+            <p className="text-gray-300 text-sm leading-6 text-center">
+              توزیع کاربران بر اساس نقش‌های مختلف در سیستم
+            </p>
+          </div>
+        </DashboardContentContainer>
+        <DashboardContentContainer isIcon title="رزرو های تایید شده">
+          <div className="text-white flex flex-col justify-between items-center gap-4">
+            <div className="w-[50%]">
+              <ProgressBarAdmin bookingSuccessPercent={bookingSuccessPercent} />
+            </div>
+            <p className="flex flex-col gap-2  text-gray-300  leading-6">
+              نرخ موفقیت رزروهای سیستم بر اساس رزروهای تایید شده
+            </p>
           </div>
         </DashboardContentContainer>
       </div>
