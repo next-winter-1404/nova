@@ -53,21 +53,23 @@ const PredictPage = () => {
             <Input
               placeHolder="متر مربع"
               name="size"
-              InputHeight="md:h-[50px] h-[35px] text-white"
+              borderColor="border-white-pure"
+              InputHeight="md:h-[50px] h-[35px] text-white-pure"
               tagBgStyle={{
                 background: "var(--color-dark-600)",
-                color: "white",
+                color: "white-pure",
               }}
               labelText="متراژ"
             />
 
             <Input
               name="rooms"
-              InputHeight="md:h-[50px] h-[35px] text-white"
+              InputHeight="md:h-[50px] h-[35px] text-white-pure "
+              borderColor="border-white-pure"
               dir="rtl"
               tagBgStyle={{
                 background: "var(--color-dark-600)",
-                color: "white",
+                color: "white-pure",
               }}
               labelText="تعداد اتاق"
             />
@@ -75,11 +77,12 @@ const PredictPage = () => {
           <div className="grid grid-cols-2 gap-5 w-full">
             <Input
               name="location"
-              InputHeight="md:h-[50px] h-[35px] text-white"
+              borderColor="border-white-pure"
+              InputHeight="md:h-[50px] h-[35px] text-white-pure"
               dir="rtl"
               tagBgStyle={{
                 background: "var(--color-dark-600)",
-                color: "white",
+                color: "white-pure",
               }}
               labelText="ادرس"
             />

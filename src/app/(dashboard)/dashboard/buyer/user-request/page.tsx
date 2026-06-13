@@ -18,7 +18,6 @@ const BuyerVisitAppointmentPage: FC<IProp> = async ({ searchParams }) => {
   ];
 
   const myRequests = await getCurrentUserRequest();
-console.log("object",myRequests.createdAt)
   return (
     <DashboardContentContainer title={`لیست درخواست های شما `}>
       <div className="flex flex-col gap-4">
