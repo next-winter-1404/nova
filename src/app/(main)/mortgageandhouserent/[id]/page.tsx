@@ -138,7 +138,7 @@ const SingleHousePage = async ({ params }: IProps) => {
           items={items}
           twClassname="w-full flex-center justify-start"
         />
-        <div className="flex-center h-[600px] justify gap-7 border">
+        <div className="flex-center h-[600px] justify gap-7 ">
           <div className="flex-col-center gap-6 mt-4 sm:mt-0 ">
             <div className="sm:hidden flex-col-center gap-3 ">
               <div className="sm:hidden block">
