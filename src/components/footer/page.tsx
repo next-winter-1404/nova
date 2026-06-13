@@ -25,7 +25,6 @@ import toast from 'react-hot-toast'
 import { postCommentsLand } from '@/src/utils/sevices/api/contactus/postCommentLand'
 import LoginButton from '../login/button/LoginButton'
 import { FaGlobe, FaInstagram, FaLinkedin, FaTelegram, FaWhatsapp } from 'react-icons/fa'
-import { ISocialMedia } from '@/src/core/types/ISocialMedia'
 import { useSocialMedia } from '@/src/utils/hooks/useSocialMedia'
 
 const Footer = () => {
@@ -128,16 +127,16 @@ const Footer = () => {
             curveColor='var(--color-primary-accent-green)'
             labelBackground='bg-primary-accent-green'
             mainContent={<div className='h-[1100px] items-center md:gap-[66px] gap-4 md:w-full w-[340px] flex flex-col' dir='rtl'>
-              <div className='md:h-[145px] md:w-full h-[130px] w-[330px] md:gap-6 gap-3 flex-col flex'>                
+              <div className='md:h-[145px] md:w-full h-[170px] w-[330px] md:gap-6 gap-3 flex-col flex'>                
                   <div className='flex w-[160px] h-5 md:text-[16px] text-[12px] text-selectedButtonText md:gap-4 gap-2'>همیشه کنارتیم <Image src={leftBlackTriangle} alt='leftBlackTriangle'/></div>      
                   <h2 className='md:text-[32px] text-[20px] text-selectedButtonText'>24 ساعت روز و 7 روز هفته در اختیار شماییم !</h2>        
                   <h2 className='text-selectedButtonText md:text-[20px] text-[16px] w-[300px] md:w-full'>تیم دلتا با ارائه بهترین نیرو های خدماتی و سرویس های املاکی سعی دارد تا بتواند در تمام لحظات کنار شما باشد .</h2>  
               </div> 
               <div className='flex md:w-full items-center w-[330px] relative'>
-              <form className='md:h-[345px] h-[315px] md:w-[620px] w-[330px] flex flex-col items-center md:gap-[42px] gap-6'  onSubmit={handleSubmit}> 
+              <form className='md:h-[345px] h-[335px] md:w-[620px] w-[330px] flex flex-col justify-center items-center md:gap-[42px] gap-6'  onSubmit={handleSubmit}> 
                 <div className='flex md:w-full w-[330px] h-[59px] gap-6'>     
                   <Input
-                      labelText={':عنوان'} 
+                      labelText={'عنوان :'} 
                       id={'title'} 
                       InputHeight={'h-[59px]'}
                       htmlFor={'title'}
@@ -145,8 +144,8 @@ const Footer = () => {
                       placeHolder={'وارد کنید ....'}
                       parentWidth='md:w-full w-[150px]'
                       borderColor='border-selectedButtonText'               
-                      labelTextSize='md:text-[16px] text-[12px]'
-                      textSize='md:text-[20px] text-[16px]'
+                      labelTextSize='md:text-[16px] text-[12px] text-selectedButtonText'
+                      textSize='md:text-[16px] text-[14px] text-gray-300'
                       tagBgStyle={{background:"var(--color-primary-accent-green)"}}
                       value={formData.title}
                       onChange={handleChange}
@@ -163,8 +162,8 @@ const Footer = () => {
                       type={'message'}                      
                       parentWidth='md:w-full w-[322px]'
                       borderColor='border-selectedButtonText'               
-                      labelTextSize='md:text-[16px] text-[12px]'
-                      textSize='md:text-[20px] text-[16px]'
+                      labelTextSize='md:text-[16px] text-[12px] text-selectedButtonText'
+                      textSize='md:text-[14px] text-[12px]'
                       tagBgStyle={{background:"var(--color-primary-accent-green)"}}
                       value={formData.message}
                       name='message'
@@ -238,7 +237,7 @@ const Footer = () => {
                     تمام حقوق مادی و معنوی این اثر برای دلتا محفوظ است .
                   </h2>
                   <div className='md:h-9 md:w-1/6 w-1/2 flex md:gap-4 gap-1.5'>
-                    {footerLinks.map((item) => {
+                    {footerLinks.slice(0,4).map((item) => {
                       const Icon =
                         socialIcons [
                           item.platform.toLowerCase() as keyof typeof socialIcons

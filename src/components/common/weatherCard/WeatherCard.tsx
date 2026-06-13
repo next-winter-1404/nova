@@ -44,30 +44,31 @@ const WeatherCard = ({ weather}: WeatherCardProps) => {
             mt-6
         `}
         >
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6"> 
-            <div className="flex flex-col items-end text-right" dir="ltr">
-                <h2 className="text-xl font-bold">
+        <div className="flex flex-col lg:flex-row items-center justify-between md:gap-6 gap-3"> 
+            <div className="flex md:gap-3 gap-1.5 flex-col items-end text-right" dir="ltr">
+                <h2 className="md:text-xl text-[14px] font-bold">
                     آب و هوای منطقه ملک
                 </h2>
-                <span className="mt-3 px-3 py-1 rounded-full bg-white/10 text-sm">
+                <span className=" md:px-3 px-2 py-1 rounded-full bg-white/10 text-[10px] md:text-sm">
                     {climateLabel}
                 </span>
             </div>
 
-            <div className="flex flex-col items-center">
-                <span className="text-6xl font-bold">
+            <div className="flex gap-1.5 flex-col items-center">
+                <span className="md:text-6xl text-[40px] font-bold">
                     {weather.current.temp_c}°
                 </span>
-                <span className="text-gray-300 text-sm mt-1">
+                <span className="text-gray-300 md:text-sm text-[12px] ">
                     {conditionText}
                 </span>
-                <span className="text-xs text-gray-400 mt-2">
+                <span className="md:text-xs text-[10px] text-gray-400 ">
                     دمای احساس‌ شده: °{weather.current.feelslike_c}
                 </span>
             </div>
 
             <div className="flex flex-col items-center gap-3">
                 <Image
+                className="hidden md:block "
                     src={`https:${weather.current.condition.icon}`}
                     alt={conditionText}
                     width={96}
@@ -92,13 +93,13 @@ const WeatherCard = ({ weather}: WeatherCardProps) => {
         <div className="w-full h-px bg-white/10 my-5" />
 
         <div className="flex justify-between text-xs text-gray-400">
-            <span className="flex gap-1">
+            <span className="flex md:gap-1">
             بروزرسانی :
             {" "}
             <h2 dir="ltr">{weather.current.last_updated}</h2>
             </span>
 
-            <span>
+            <span className="hidden md:block">
             {weather.location.region}
             </span>
         </div>

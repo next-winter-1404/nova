@@ -343,7 +343,7 @@ const SingleHousePage = async ({ params }: IProps) => {
             </div>
           </div>
           {weather && (
-            <div className="w-1/2  mt-6">
+            <div className="w-1/2 mt-42 ml-20 md:-ml-0 md:mt-6">
               <WeatherCard weather={weather} />
             </div>
           )}
