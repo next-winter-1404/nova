@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: "https",
+        hostname: "cdn.weatherapi.com",
+      },
+      {
         protocol: 'http',
         hostname: 'localhost',
         port: '3000',
