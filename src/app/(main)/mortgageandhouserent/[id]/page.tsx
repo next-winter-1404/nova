@@ -35,6 +35,9 @@ import VisitAppointment from "@/src/components/mortgageAndRentPageContainer/Visi
 import { getVisitAppointments } from "@/src/utils/sevices/api/visitAppointment/getVisitAppointment";
 import { formatPrice } from "@/src/utils/hooks/formatPrice";
 import DepositRentCalculator from "@/src/components/common/depositRentCalculater/DepositRentCalculator";
+import { getWeatherQuery } from "@/src/utils/helper/weatherQuery/weatherQuery";
+import { getWeather } from "@/src/utils/sevices/api/weather/getWeather";
+import WeatherCard from "@/src/components/common/weatherCard/WeatherCard";
 
 interface IProps {
   params: Promise<{ id: number }>;
@@ -45,6 +48,8 @@ export const revalidate = 30;
 const SingleHousePage = async ({ params }: IProps) => {
   const { id } = await params;
   const getHouseInfo = await getHousesDetail(id);
+//   console.log( "location", getHouseInfo.location);
+// console.log("address",getHouseInfo.address);
   const tags = Array.isArray(getHouseInfo?.tags)
     ? getHouseInfo.tags
     : typeof getHouseInfo?.tags === "string"
@@ -58,13 +63,27 @@ const SingleHousePage = async ({ params }: IProps) => {
 
   const getAllHouse = await getHouses();
   const result = getAllHouse?.houses || [];
-  console.log("result", result);
+  // console.log("result", result);
   if (!getHouseInfo) {
   return <div>داده بارگذاری نشد</div>;
 }
 
   const token = await getServerSideCookie("ServerAccessToken");
   const isLoggedIn = !!token;
+
+  const weatherQuery = getWeatherQuery(
+    getHouseInfo?.location,
+    getHouseInfo?.address
+  );
+  
+  const weather = weatherQuery
+    ? await getWeather(weatherQuery)
+    : null;
+
+    console.log("location =", getHouseInfo.location);
+    console.log("address =", getHouseInfo.address);
+    console.log("weatherQuery =", weatherQuery);
+    console.log("weather =", weather);
 
   const userId = await getServerSideCookie("userId");
   const getAppointments = await getVisitAppointments(id);
@@ -115,9 +134,9 @@ const SingleHousePage = async ({ params }: IProps) => {
           items={items}
           twClassname="w-full flex-center justify-start"
         />
-        <div className="flex-center h-[600px] justify gap-7">
-          <div className="flex-col-center gap-6 mt-4 sm:mt-0">
-            <div className="sm:hidden flex-col-center gap-3">
+        <div className="flex-center h-[600px] justify gap-7 border">
+          <div className="flex-col-center gap-6 mt-4 sm:mt-0 ">
+            <div className="sm:hidden flex-col-center gap-3 ">
               <div className="sm:hidden block">
                 <HousesPicturesSlider imagesSrc={getHouseInfo?.photos} />
               </div>
@@ -158,7 +177,9 @@ const SingleHousePage = async ({ params }: IProps) => {
                   {getHouseInfo?.address || "ادرسی وجود ندارد"}
                 </h2>
                 <Image src={Location} alt="Location" className="w-4 h-4" />
+                
               </div>
+              
             </div>
             <div className="flex flex-1">
               <InfoCardContainer
@@ -276,44 +297,55 @@ const SingleHousePage = async ({ params }: IProps) => {
             </div>
           </div>
         </div>
-        <div className="flex-center justify-end gap-4 w-full">
-          <div className="hidden sm:flex-center gap-4">
-            <span className="w-[82px] flex-center gap-1 px-3 py-1.5 whitespace-nowrap text-white bg-blue-purple-500 rounded-lg">
-              ستاره
-              <span
-                style={{ display: "flex", alignItems: "center", gap: "4px" }}
-                className=""
-              >
-                {getHouseInfo?.rate}
-                <FaStar className="w-4 h-4" />
+        
+        <div className="flex-center justify-between w-full" dir="rtl">
+          
+          <div className="flex flex-col gap-11">
+            <div className="hidden sm:flex-center gap-4">
+              <span className="w-[82px] flex-center gap-1 px-3 py-1.5 whitespace-nowrap text-white bg-blue-purple-500 rounded-lg">
+                ستاره
+                <span
+                  style={{ display: "flex", alignItems: "center", gap: "4px" }}
+                  className=""
+                >
+                  {getHouseInfo?.rate}
+                  <FaStar className="w-4 h-4" />
+                </span>
               </span>
-            </span>
-            <i className="h-[21px] w-0.5 bg-gray-300"></i>
-            <div className="flex-center gap-4">
-              {tags?.map((tag) => {
-                return (
-                  <div
-                    key={tag}
-                    className="text-gray-300 text-[16px] bg-dark-700 border border-gray-200 rounded-xl p-8-16"
-                  >
-                    {tag}#
-                  </div>
-                );
-              })}
+              <i className="h-[21px] w-0.5 bg-gray-300"></i>
+              <div className="flex-center gap-4">
+                {tags?.map((tag) => {
+                  return (
+                    <div
+                      key={tag}
+                      className="text-gray-300 text-[16px] bg-dark-700 border border-gray-200 rounded-xl p-8-16"
+                    >
+                      {tag}#
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flex flex-col gap-3">
+              <span className="sm:block hidden w-full text-right text-semibold-28 text-white-pure">
+                {getHouseInfo?.title}
+              </span>
+              <div className="hidden w-full sm:flex gap-1.5">
+              <h2 className="text-[16px] text-gray-300 text-right  whitespace-nowrap">
+                {getHouseInfo?.address || "ادرسی وجود ندارد"}
+              </h2>
+              <Image src={Location} alt="Location" className="w-4 h-4" />
+              </div>
             </div>
           </div>
+          {weather && (
+            <div className="w-1/2  mt-6">
+              <WeatherCard weather={weather} />
+            </div>
+          )}
         </div>
-        <span className="sm:block hidden w-full text-right text-semibold-28 text-white-pure">
-          {getHouseInfo?.title}
-        </span>
-        <div className="hidden w-full sm:flex justify-end gap-1.5">
-          <h2 className="text-[16px] text-gray-300 text-right  whitespace-nowrap">
-            {getHouseInfo?.address || "ادرسی وجود ندارد"}
-          </h2>
-          <Image src={Location} alt="Location" className="w-4 h-4" />
-        </div>
+        
       </div>
-
       <Container>
         <div className="w-full shadow-000-8">
           <SelectedTab options={tabs} twClassname="w-full" buttonWidth="p-4" />
