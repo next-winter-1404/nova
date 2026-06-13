@@ -55,7 +55,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
     {
       href: "/reserve-house",
 
-      label: `رزرو  ${house.location}`,
+      label: `رزرو  ${house.address||""}`,
     },
     {
       label: `رزرو  ${house.title}`,
