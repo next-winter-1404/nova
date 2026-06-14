@@ -98,7 +98,7 @@ const Navbar = () => {
   }, []);
   return (
     <header
-      className={`whitespace-nowrap md:w-[96%] md:fixed w-[90%] inset-x-0 mx-auto glass shadow-3xl inset-shadow-fff-16 rounded-2xl   z-50   ${
+      className={`whitespace-nowrap md:w-[96%] md:fixed w-[90%] inset-x-0 mx-auto glass shadow-3xl inset-shadow-fff-16 rounded-2xl   z-1000   ${
         visibleShadow ? "top-1" : "top-6"
       }`}
     >
