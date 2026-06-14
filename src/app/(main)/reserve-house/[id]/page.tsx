@@ -47,14 +47,9 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   const commentsData = await getHousesComment(id);
   const comments = commentsData?.comments || [];
 
-  const weatherQuery = getWeatherQuery(
-      house?.location,
-      house?.address
-    );
-    
-    const weather = weatherQuery
-      ? await getWeather(weatherQuery)
-      : null;
+  const weatherQuery = getWeatherQuery(house?.location, house?.address);
+
+  const weather = weatherQuery ? await getWeather(weatherQuery) : null;
 
   if (!house) {
     return notFound();
@@ -67,7 +62,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
     {
       href: "/reserve-house",
 
-      label: `رزرو  ${house.address||""}`,
+      label: `رزرو  ${house.address || ""}`,
     },
     {
       label: `رزرو  ${house.title}`,
@@ -99,12 +94,14 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   const renderContent = () => {
     switch (activeTab) {
       case "QA":
-        return (
-          <HouseQA houseId={Number(house.id)} />
-        );
+        return <HouseQA houseId={Number(house.id)} />;
       case "about":
         return (
-          <AboutHouseContainer caption={house?.caption} title={house?.title} />
+          <AboutHouseContainer
+            caption={String(house?.caption)}
+            title={String(house?.title)}
+            weather={weather}
+          />
         );
       case "comment":
         return <CommentSection houseId={house.id} comments={comments} />;
@@ -121,8 +118,9 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
       default:
         return (
           <AboutHouseContainer
-            caption={house?.caption}
-            title={house?.caption}
+            weather={weather}
+            caption={String(house?.caption)}
+            title={String(house?.title)}
           />
         );
     }
@@ -138,7 +136,7 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
           />
           <div className="flex items-center gap-4 justify-between " dir="rtl">
             <Button
-              text={`${house?.rate||0} ستاره `}
+              text={`${house?.rate || 0} ستاره `}
               icon={<FaStar className="text-white h-4 w-4" />}
               buttonStyle={{
                 background: "var(--color-blue-purple-500)",
@@ -174,8 +172,9 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
                     key={index}
                     className="w-24 h-24 bg-dark-700 rounded-4xl cursor-pointer hover:border-primary-accent-green hover:border overflow-hidden"
                   >
-                    <Image
-                      src={photo}
+                    <ImageFallback
+                      fallbackSrc={deaf}
+                      src={photo || deaf}
                       alt={`تصویر ${index + 1}`}
                       width={96}
                       height={96}
@@ -199,13 +198,13 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
             className="md:w-full lg:w-[80%] xl:max-w-[1100px] lg:h-[420px] rounded-[40px] border border-dark-800"
           />
         </div>
-        <div className="w-full" dir="rtl">
-        {weather && (
-            <div className="w-2/3 ">
+        {/* <div className="w-full" dir="rtl">
+          {weather && (
+            <div className="w-full ">
               <WeatherCard weather={weather} />
             </div>
           )}
-        </div>
+        </div> */}
         <section className=" relative flex flex-row-reverse justify-between gap-4 w-full items-start">
           <section className=" lg:w-[1000px] flex flex-col w-full gap-8 ">
             <SelectedTab
