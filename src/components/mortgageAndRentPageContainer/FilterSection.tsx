@@ -319,15 +319,14 @@ const FilterSection = ({ totalCount }: FilterSectionProps) => {
 
         <div className="sm:flex-1">
           <Input
-            labelText=": جستوجو"
-            InputHeight="h-[50px]"
+            labelText=" جستوجو :"
+            InputHeight="h-[65px]"
             tagBgStyle={{
-              background: "var(--color-dark-800)",
-              color: "white",
+              background: "var(--color-unSelectedButton)",
             }}
             borderColor="border-white border"
             textColor="text-white"
-            placeHolder="... نام هتل مورد نظر"
+            placeHolder=" نام هتل مورد نظر ..."
             value={search}
             onChange={handleSearch}
             dir="rtl"
@@ -369,16 +368,16 @@ const FilterSection = ({ totalCount }: FilterSectionProps) => {
         <div className="sm:flex-1">
           <Input
             labelText="محل مورد نظر"
-            InputHeight="h-[50px]"
+            InputHeight="h-[65px]"
             tagBgStyle={{
-              background: "var(--color-dark-800)",
-              color: "white",
+              background: "var(--color-unSelectedButton)",
             }}
             borderColor="border-white border"
             textColor="text-white"
             placeHolder="استان ، شهر ..."
             value={address}
             onChange={handleAdress}
+            dir="rtl"
           />
         </div>
       </div>

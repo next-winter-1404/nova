@@ -6,6 +6,7 @@ import DiscountItemsManagement from "@/src/components/dashboard/DiscountItemsMan
 import CreateDiscountComponent from "@/src/components/dashboard/createDiscountComponent/CreateDiscountComponent";
 import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getDiscounts } from "@/src/utils/sevices/api/admin/discount/getDiscount";
+import { getAllHouses } from "@/src/utils/sevices/api/admin/houses/getAllHouses/getAllHouses";
 import { FC } from "react";
 interface IProps {
   searchParams: Promise<IFilters>;
@@ -35,7 +36,7 @@ const DiscountManagement: FC<IProps> = async ({ searchParams }) => {
   const discounts = result.data || [];
 
   const totalPages = Math.ceil(Number(result?.totalCount) / limit);
-
+  const allHouses = await getAllHouses();
   const sortItem = [
     { value: "ASC", label: "صعودی" },
     { value: "DESC", label: "نزولی" },
@@ -107,8 +108,8 @@ const DiscountManagement: FC<IProps> = async ({ searchParams }) => {
           </div>
         </div>
         <div className="flex justify-between w-full items-center">
-         <CreateDiscountComponent/>
-         
+          <CreateDiscountComponent allHouses={allHouses.data?.slice(0,8)} />
+
           <PaginationClient
             totalPages={totalPages}
             totalCount={Number(result?.totalCount)}

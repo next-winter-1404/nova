@@ -29,6 +29,9 @@ import { Modal } from "@/src/components/common/modal";
 import AddToFavorite from "@/src/components/reserveHouse/addToFavorite/AddToFavorite";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 import HouseQA from "@/src/components/common/houseQA/HouseQA";
+import { getWeatherQuery } from "@/src/utils/helper/weatherQuery/weatherQuery";
+import { getWeather } from "@/src/utils/sevices/api/weather/getWeather";
+import WeatherCard from "@/src/components/common/weatherCard/WeatherCard";
 
 interface IProps {
   params: Promise<{ id: number }>;
@@ -43,6 +46,15 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   //get comments
   const commentsData = await getHousesComment(id);
   const comments = commentsData?.comments || [];
+
+  const weatherQuery = getWeatherQuery(
+      house?.location,
+      house?.address
+    );
+    
+    const weather = weatherQuery
+      ? await getWeather(weatherQuery)
+      : null;
 
   if (!house) {
     return notFound();
@@ -186,6 +198,13 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
             height={420}
             className="md:w-full lg:w-[80%] xl:max-w-[1100px] lg:h-[420px] rounded-[40px] border border-dark-800"
           />
+        </div>
+        <div className="w-full" dir="rtl">
+        {weather && (
+            <div className="w-2/3 ">
+              <WeatherCard weather={weather} />
+            </div>
+          )}
         </div>
         <section className=" relative flex flex-row-reverse justify-between gap-4 w-full items-start">
           <section className=" lg:w-[1000px] flex flex-col w-full gap-8 ">

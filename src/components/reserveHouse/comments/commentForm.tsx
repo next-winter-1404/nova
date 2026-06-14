@@ -62,6 +62,7 @@ const CommentForm:FC<IProp> = ({houseId}) => {
         textColor="text-white"
         parentWidth="w-full"
         name="caption"
+        dir='rtl'
       />
     </div>
     <Image alt="icon" src={line} />

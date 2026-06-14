@@ -8,7 +8,6 @@ import Button from "../../common/button/page";
 import { FaStar } from "react-icons/fa";
 import { FiChevronLeft } from "react-icons/fi";
 import { FC } from "react";
-import { ICommentsProps } from "./commentSection";
 import { Modal } from "../../common/modal";
 import line from "@/src/assets/icons/replyLine.svg";
 import Image from "next/image";
@@ -17,23 +16,26 @@ import { useRouter } from "next/navigation";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 import userPlaceHolder from "@/src/assets/images/userPlaceHolder.jpg";
 import { formatDateTime } from "@/src/utils/hooks/formDates";
+import { IComment } from "@/src/core/types/IComment";
+import { ICommentsProps } from "./commentSection";
 
-const UserComments: FC<ICommentsProps> = ({ comments, houseId }) => {
+
+const UserComments: FC<ICommentsProps> = ({ comments, mortgage=false }) => {
   const router = useRouter();
   const getReply = (commentId: number | string) => {
     return comments.filter((comment) => comment.parent_comment_id == commentId);
   };
 
   return (
-    <div className="w-full overflow-hidden flex-center gap-8">
+    <div className="w-full overflow-hidden flex-center gap-8 border">
       <Swiper
         modules={[Navigation, Autoplay, Pagination]}
         spaceBetween={20}
-        slidesPerView={4}
+        slidesPerView={mortgage ? 3 : 2}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         breakpoints={{
           390: { slidesPerView: 1 },
-          1024: { slidesPerView: 2 },
+          1024: { slidesPerView: mortgage ? 3 : 2 },
         }}
         pagination={{ clickable: true }}
         className="w-full"
