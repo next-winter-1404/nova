@@ -5,7 +5,6 @@ import {
 import Button from "@/src/components/common/button/page";
 import HouseMainInformation from "@/src/components/common/houseMainInformation";
 import ToolTip from "@/src/components/common/tooltip";
-import Image from "next/image";
 import deaf from "@/src/assets/images/imagePlaceHolder (2).png";
 import { ITab } from "@/src/core/types/ITab";
 import SelectedTab from "@/src/components/reserveHouse/SelectedTab";
@@ -31,7 +30,6 @@ import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 import HouseQA from "@/src/components/common/houseQA/HouseQA";
 import { getWeatherQuery } from "@/src/utils/helper/weatherQuery/weatherQuery";
 import { getWeather } from "@/src/utils/sevices/api/weather/getWeather";
-import WeatherCard from "@/src/components/common/weatherCard/WeatherCard";
 
 interface IProps {
   params: Promise<{ id: number }>;
