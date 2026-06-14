@@ -73,27 +73,40 @@ const EditHouseComponent: FC<IProp> = ({
       <div className="grid grid-cols-3 gap-5">
         <Input
           name="title"
-          InputHeight="md:h-[50px] h-[35px] text-white"
+          borderColor="border-white-pure"
+
+          InputHeight="md:h-[50px] h-[35px] text-white-pure"
           dir="rtl"
-          tagBgStyle={{ background: "var(--color-dark-900)", color: "white" }}
+          tagBgStyle={{
+            background: "var(--color-dark-900)",
+            color: "var(--color-white-pure)",
+          }}
           labelText="عنوان"
           defaultValue={houseDetail?.title || "عنوانی وجود ندارد"}
         />
 
         <Input
           name="price"
-          InputHeight="md:h-[50px] h-[35px] text-white"
+          InputHeight="md:h-[50px] h-[35px] text-white-pure"
+          borderColor="border-white-pure"
           dir="rtl"
-          tagBgStyle={{ background: "var(--color-dark-900)", color: "white" }}
+          tagBgStyle={{
+            background: "var(--color-dark-900)",
+            color: "var(--color-white-pure)",
+          }}
           labelText="قیمت"
           defaultValue={houseDetail?.price || 0}
         />
 
         <Input
           name="capacity"
+          borderColor="border-white-pure"
           InputHeight="md:h-[50px] h-[35px] text-white"
           dir="rtl"
-          tagBgStyle={{ background: "var(--color-dark-900)", color: "white" }}
+          tagBgStyle={{
+            background: "var(--color-dark-900)",
+            color: "var(--color-white-pure)",
+          }}
           labelText="ظرفیت"
           defaultValue={houseDetail?.capacity || 0}
         />
@@ -101,10 +114,14 @@ const EditHouseComponent: FC<IProp> = ({
 
       <Input
         name="address"
+        borderColor="border-white-pure"
         parentWidth="w-full"
         InputHeight="md:h-[50px] h-[35px] text-white w-full"
         dir="rtl"
-        tagBgStyle={{ background: "var(--color-dark-900)", color: "white" }}
+        tagBgStyle={{
+          background: "var(--color-dark-900)",
+          color: "var(--color-white-pure)",
+        }}
         labelText="ادرس"
         defaultValue={houseDetail?.address || "ادرسی وجود ندارد"}
       />
@@ -139,45 +156,49 @@ const EditHouseComponent: FC<IProp> = ({
           <div className="grid grid-cols-4 gap-5">
             <Input
               name="bathrooms"
+              borderColor="border-white-pure"
               InputHeight="md:h-[50px] h-[35px] text-white"
               labelText="حمام"
               defaultValue={houseDetail?.bathrooms || 0}
               tagBgStyle={{
                 background: "var(--color-dark-900)",
-                color: "white",
+                color: "var(--color-white-pure)",
               }}
             />
 
             <Input
               name="rooms"
+              borderColor="border-white-pure"
               InputHeight="md:h-[50px] h-[35px] text-white"
               labelText="اتاق"
               defaultValue={houseDetail?.rooms || 0}
               tagBgStyle={{
                 background: "var(--color-dark-900)",
-                color: "white",
+                color: "var(--color-white-pure)",
               }}
             />
 
             <Input
               name="parking"
+              borderColor="border-white-pure"
               InputHeight="md:h-[50px] h-[35px] text-white"
               labelText="پارکینگ"
               defaultValue={houseDetail?.parking || 0}
               tagBgStyle={{
                 background: "var(--color-dark-900)",
-                color: "white",
+                color: "var(--color-white-pure)",
               }}
             />
 
             <Input
               name="yard_type"
+              borderColor="border-white-pure"
               InputHeight="md:h-[50px] h-[35px] text-white"
               labelText="نوع حیاط"
               defaultValue={houseDetail?.yard_type || "نوع حیاط مشخص نشده است"}
               tagBgStyle={{
                 background: "var(--color-dark-900)",
-                color: "white",
+                color: "var(--color-white-pure)",
               }}
             />
           </div>
@@ -190,10 +211,11 @@ const EditHouseComponent: FC<IProp> = ({
         name="caption"
         defaultValue={houseDetail?.caption || "توضیحی وجود ندارد"}
         InputHeight="md:h-[150px] h-[35px] text-white"
+        borderColor="border-white-pure"
         labelText="توضیحات"
         tagBgStyle={{
           background: "var(--color-dark-900)",
-          color: "white",
+          color: "var(--color-white-pure)",
         }}
         dir="rtl"
       />

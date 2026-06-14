@@ -61,7 +61,7 @@ const SimpleDropdown: FC<IDropDownProps> = ({
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className="DropdownMenuContent p-4 rounded-xl z-100 gap-2 bg-dark-800 text-white cursor-pointer">
+        <DropdownMenu.Content className="DropdownMenuContent p-4 rounded-xl z-100 gap-2 bg-dark-800 text-white cursor-pointer font-vazir">
           {options.map((op) => (
             <DropdownMenu.Item
               key={op.value}

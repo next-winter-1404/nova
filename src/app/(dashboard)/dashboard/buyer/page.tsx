@@ -19,7 +19,6 @@ const BuyerDashboardPage = async () => {
   const booking = result?.data || [];
   const user = await getUsersDetail(Number(userId));
   const favorites = await getFavoriteForUser(Number(userId));
- 
 
   return (
     <div className="flex flex-col gap-5">
@@ -39,7 +38,6 @@ const BuyerDashboardPage = async () => {
           href="reserve-management"
           icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
           seeMore
-
         />
         <DashboardInformation
           amount={booking.filter((b) => b.status === "pending").length}
@@ -48,7 +46,6 @@ const BuyerDashboardPage = async () => {
           href="reserve-management"
           icon={<TbPinFilled className="w-[26px] h-[26px] text-white" />}
           seeMore
-
         />
         <DashboardInformation
           amount={favorites?.data.length}
@@ -57,7 +54,6 @@ const BuyerDashboardPage = async () => {
           href="favorites"
           icon={<TbHeartFilled className="w-[26px] h-[26px] text-white" />}
           seeMore
-
         />
       </div>
       <div className="grid lg:grid-cols-2 gap-5 2xl:gap-4">
@@ -73,7 +69,7 @@ const BuyerDashboardPage = async () => {
           <ReserveChart data={booking} />
         </DashboardContentContainer>
         <DashboardContentContainer
-        isIcon
+          isIcon
           seemore
           twParentClassName=""
           href="profile"
@@ -96,7 +92,7 @@ const BuyerDashboardPage = async () => {
         </DashboardContentContainer>
       </div>
       <DashboardContentContainer
-      isIcon
+        isIcon
         seemore
         href="reserve-management"
         navigateText="مشاهده همه"
@@ -128,7 +124,9 @@ const BuyerDashboardPage = async () => {
                           className="flex-center gap-1 text-center "
                           dir="rtl"
                         >
-                          <span>{formatPrice(Number(item.house?.price ))|| "  --"}</span>
+                          <span>
+                            {formatPrice(Number(item.house?.price)) || "  --"}
+                          </span>
                           <span>تومان</span>
                         </div>
                         <StatusLabel status={item.status} />
@@ -139,7 +137,9 @@ const BuyerDashboardPage = async () => {
                 </>
               </div>
             ) : (
-              <div className="text-4xl text-gray-300 text-center w-full">رزوری وجود ندارد</div>
+              <div className="text-4xl text-gray-300 text-center w-full">
+                رزوری وجود ندارد
+              </div>
             )}
           </div>
         </div>

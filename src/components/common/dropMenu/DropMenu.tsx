@@ -38,7 +38,7 @@ const DropMenu: FC<IDropMenuProps> = ({
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          className={`bg-dark-800 rounded-xl p-2  shadow-lg z-50 ${contentClassName}`}
+          className={`bg-dark-800 rounded-xl p-2  shadow-lg z-50 font-vazir ${contentClassName}`}
           side={side}
           align={align}
           sideOffset={sideOffset}
