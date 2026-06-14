@@ -34,7 +34,7 @@ const SelectedTab: FC<IPropertyTab> = ({ options, twClassname, buttonWidth }) =>
           key={op.value}
           className={`${buttonWidth} h-full  text-[13px] md:text-[18px] whitespace-nowrap rounded-xl flex-center ${
             selectedTab === op.value
-              ? "bg-primary-accent-green "
+              ? "bg-primary-accent-green text-black "
               : "bg-dark-700 text-gray-300"
           }`}
         >
