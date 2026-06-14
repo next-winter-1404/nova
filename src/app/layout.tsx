@@ -11,6 +11,8 @@ const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 export const metadata: Metadata = {
   title: "Delta",
   description: "Easy to find!",
+  manifest: "/manifest.webmanifest",
+  themeColor: "#0f0f0f",
 };
 
 const vazir = localFont({
