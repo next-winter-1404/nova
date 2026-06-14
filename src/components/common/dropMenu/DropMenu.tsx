@@ -34,7 +34,7 @@ const DropMenu: FC<IDropMenuProps> = ({
 }) => {
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>{trigger}</DropdownMenu.Trigger>
+      <DropdownMenu.Trigger >{trigger}</DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content
