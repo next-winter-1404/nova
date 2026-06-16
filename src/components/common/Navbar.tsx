@@ -5,8 +5,8 @@ import Link from "next/link";
 // import LoginButton from '@/src/components/auth/LoginButton'
 import { FiMenu } from "react-icons/fi";
 import { BsChevronDown } from "react-icons/bs";
-import megaphoneIcon from "@/public/icons/megaphone.svg"
-
+import megaphoneIcon from "@/public/icons/megaphone.svg";
+import userPlaceHolder from "@/src/assets/images/userPlaceHolder.jpg";
 import {
   Menu,
   MenuWrapper,
@@ -17,45 +17,166 @@ import {
 import NavbarTab from "./navbar/NavbarTab";
 import Divider from "./Divider";
 import NavLoginButton from "../auth/NavLoginButton";
-
+import { motion, useScroll } from "framer-motion";
+import { useActionState, useEffect, useState } from "react";
+import { Modal } from "./modal";
+import LoginButton from "../login/button/LoginButton";
+import { sendSellerUpgradeRequest } from "@/src/utils/sevices/api/seller/sellerUpgrade/requestSeller";
+import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import { getUserPublicProfile } from "@/src/utils/sevices/api/users/getUserPublicProfile";
+import { getClientCookie } from "@/src/utils/helper/cookies/clientCookie/clientSideCookie";
+import Grainient from "../animations/Grainient/Grainient";
 const navigation = [
   { labelName: "تماس با ما", href: "/contactus", current: false },
   { labelName: "مقالات ما", href: "/blogs", current: false },
-  { labelName: "درباره دلتا", href: "/aboutus", current: false },
+  { labelName: "درباره دلتا", href: "#aboutus", current: false },
 ];
 
 const Navbar = () => {
+  const { scrollYProgress } = useScroll();
+  const [visibleShadow, setVisibleShadow] = useState(false);
+  const [isAuth, setIsAuth] = useState<boolean | null>(null);
+  const userId = getClientCookie("userId");
+  const { data } = useQuery({
+    queryKey: ["prof"],
+    queryFn: () => getUserPublicProfile(Number(userId)),
+  });
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) setVisibleShadow(true);
+      else setVisibleShadow(false);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+  const checkAuth = async (): Promise<boolean> => {
+    try {
+      const response = await fetch("/api/auth/check");
+      const data = await response.json();
+      return data.isAuthenticated;
+    } catch (error) {
+      console.log("Error checking auth:", error);
+      return false;
+    }
+  };
+
+  const [state, formAction] = useActionState(
+    async (prevState: any, formData: FormData) => {
+      const isAuth = await checkAuth();
+
+      if (!isAuth) {
+        return {
+          success: false,
+          message: "ابتدا وارد حساب کاربری شوید",
+        };
+      }
+
+      return sendSellerUpgradeRequest(prevState, formData);
+    },
+    {
+      success: false,
+      message: "",
+    },
+  );
+  useEffect(() => {
+    if (!state.message) return;
+
+    if (state.success) {
+      toast.success(state.message);
+    } else {
+      toast.error(state.message);
+    }
+  }, [state]);
+
+  useEffect(() => {
+    const runCheck = async () => {
+      const result = await checkAuth();
+      setIsAuth(result);
+    };
+
+    runCheck();
+  }, []);
   return (
-    <header className="whitespace-nowrap">
+    <header
+      className={`whitespace-nowrap md:w-[96%] md:fixed w-[90%] inset-x-0 mx-auto glass shadow-3xl inset-shadow-fff-16 rounded-2xl   z-50   ${
+        visibleShadow ? "top-1" : "top-6"
+      }`}
+    >
       <nav>
         <div>
           <div>
             <span>
-              <Link href="/login">
-                <NavLoginButton>
-                  <span>
-                    <p>ورود / ثبت نام</p>
-                    <Image
-                      src="/icons/user1.svg"
-                      alt="user"
-                      width={16}
-                      height={16}
-                    />
-                  </span>
-                </NavLoginButton>
-              </Link>
+              {isAuth === null ? null : isAuth ? (
+                <Link href={"/dashboard"}>
+                  <Image
+                    alt="prof"
+                    src={data?.user.profilePicture || userPlaceHolder}
+                    width={40}
+                    height={40}
+                    className="rounded-full border border-gray-300"
+                  />
+                </Link>
+              ) : (
+                <Link href="/login">
+                  <NavLoginButton>
+                    <span className="flex items-center gap-2">
+                      <p>ورود / ثبت نام</p>
+                      <Image
+                        src="/icons/user1.svg"
+                        alt="user"
+                        width={16}
+                        height={16}
+                      />
+                    </span>
+                  </NavLoginButton>
+                </Link>
+              )}
             </span>
           </div>
 
           {/* Desktop version: visible on medium screens and up */}
           <div className="test text-amber-50 flex items-center">
             <div className="flex gap-3 items-center text-amber-50">
-              <span className="w-[134px] h-9 flex-center gap-2 bg-blue-purple-500 px-4 py-2 rounded-xl text-white-pure shadow-blue-transparent-20 inset-shadow-fff-4">
-                <Link href="#">
-                  <p>! فروشنده شو</p>
-                </Link>
-                <Image src={megaphoneIcon} alt="megaphone icon" />
-              </span>
+              <Modal
+                contentClassName="bg-dark-900 text-white"
+                modalTitle="ثبت درخواست همکاری"
+                modalDescription="در صورت تمایل به فعالیت به عنوان فروشنده، لطفاً درخواست خود را به همراه توضیحات لازم در کادر زیر ثبت نمایید."
+                mainContent={
+                  <form action={formAction} className="flex flex-col gap-5">
+                    <textarea
+                      dir="rtl"
+                      name="message"
+                      className="border border-gray-300 min-h-[200px] p-2"
+                    />
+                    <LoginButton
+                      buttonText="ثبت درخواست "
+                      loadingText="ثبت درخواست ..."
+                      type="submit"
+                      noIcon
+                    />
+                  </form>
+                }
+                modalBtn={
+                  <span className="relative overflow-hidden w-[134px] h-9 flex-center gap-2 rounded-xl">
+                    <div className="absolute inset-0">
+                      <Grainient
+                        color1="#B497CF"
+                        
+                        color3="#7569ff"
+                      />
+                    </div>
+
+                    <p className="relative z-10 text-white">! فروشنده شو</p>
+
+                    <Image
+                      className="relative z-10"
+                      src={megaphoneIcon}
+                      alt="megaphone icon"
+                    />
+                  </span>
+                }
+              />
               {navigation.map((item) => {
                 return (
                   <NavbarTab
@@ -102,6 +223,12 @@ const Navbar = () => {
           </span>
         </div>
       </nav>
+      <motion.div
+        className="w-full px-2.5"
+        style={{ scaleX: scrollYProgress, originX: 0.01 }}
+      >
+        <div className="h-[4px] bg-primary-accent-green w-full rounded-xl" />
+      </motion.div>
     </header>
   );
 };

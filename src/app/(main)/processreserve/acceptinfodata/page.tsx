@@ -1,6 +1,7 @@
 import { getBookingsById } from '@/src/utils/sevices/api/processReserve/getTravelerInfo'
 import React from 'react'
 import AcceptInfo from './acceptinfo/page';
+import Slide from '@/src/components/animations/Slide';
 
 
 const AcceptInfoData = async ({
@@ -11,11 +12,11 @@ const AcceptInfoData = async ({
     const params = await searchParams;
   
     const bookingId = Number(params.bookingId);
-const data = await getBookingsById(bookingId);
-console.log("PARAM BOOKING ID:", bookingId);
-console.log("PARAMS =", params);
-console.log("BOOKING DATA:", data);
-    return <AcceptInfo data={data} bookingId ={bookingId}/>; 
+    const data = await getBookingsById(bookingId);
+    console.log("Parm Booking Id:", bookingId);
+    console.log("Params =", params);
+    console.log("Booking Data:", data);
+    return <Slide direction="right"><AcceptInfo data={data} bookingId ={bookingId}/></Slide>; 
     
 };
 export default AcceptInfoData;

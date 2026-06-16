@@ -7,20 +7,21 @@ import CalendarTime from "@/src/assets/icons/calendarclock.svg"
 import greenhotel from "@/src/assets/icons/greenhotel.svg"
 import timepast from "@/src/assets/icons/timepast.svg"
 import users2 from "@/src/assets/icons/users2.svg"
-import checkCircle from "@/src/assets/icons/checkCircle.svg"
 import ticket from "@/src/assets/icons/ticket.svg"
 import arrowLeftGreen from "@/src/assets/icons/arrowLeftGreen.svg"
 import imagePlaceHolder from "@/src/assets/images/imagePlaceHolder (2).png"
 import Image from 'next/image'
 import Button from '@/src/components/common/button/page'
 import Input from '@/src/components/common/input/Input'
-import useStepNavigation from '../navigation'
 import PassengerSection from './passengerSection/page'
 import toast from 'react-hot-toast'
 import { postTravelerInfo } from '@/src/utils/sevices/api/processReserve/postTravelerInfo'
 import { getHousesDetail } from '@/src/utils/sevices/api/houses/getHousesDetail'
 import { useQuery } from '@tanstack/react-query'
 import { IPassengerInfo } from '@/src/core/types/IPassengerInfo'
+import { computingDiscount } from '@/src/utils/helper/computingDiscount'
+import OldPriceComponent from '@/src/components/common/productCard/OldPrice'
+import Slide from '@/src/components/animations/Slide'
 
 
 const Traveler = () => {
@@ -28,19 +29,17 @@ const Traveler = () => {
     const searchParams = useSearchParams();
     const checkInDate = searchParams.get("checkInDate")
     const checkOutDate = searchParams.get("checkOutDate")
+    const totalPrice = searchParams.get("totalPrice")
     const houseId = searchParams.get("houseId")
-    const currentStep = searchParams.get('step') || 'travelerinfo'
     const [passengers, setPassengers] = useState<IPassengerInfo[]>([]);
     const [sharedEmail, setSharedEmail] = useState('')
     const [sharedMobile, setSharedMobile] = useState('')
-    const [bookingId, setBookingId] = useState<number | null>(null);
     const handlePassengerChange = useCallback(
       (newPassengers: IPassengerInfo[]) => {
         setPassengers(newPassengers);
       },
       []
     );
-    const {goToNext} = useStepNavigation();
     console.log("houseId: ", houseId)
     const reservedDates = [checkInDate, checkOutDate]
     const handleSubmit = async () => {
@@ -111,8 +110,11 @@ const Traveler = () => {
         };
         const response = await postTravelerInfo(payload);
         const bookingId = response.data.id;
+        const params = new URLSearchParams({
+          totalPrice : totalPrice.toString(),
+        })
         router.push(
-          `/processreserve/acceptinfodata?bookingId=${bookingId}`
+          `/processreserve/acceptinfodata?bookingId=${bookingId}&step=acceptinfodata&${params.toString()}`
         );
         toast.success("اطلاعات با موفقیت ثبت شد")
       }
@@ -130,13 +132,18 @@ const Traveler = () => {
     queryFn : () => getHousesDetail(Number(houseId)),
     enabled: !!houseId,
   })
+    const discounted_price = housedetail?.discounted_price
+    const price = housedetail?.price
+    const discountPercent = computingDiscount({discounted_price, price});
+    const roundDiscountPercent = Math.round(discountPercent)
 
   return (
-    <div className='flex mt-[130px] flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
+    <Slide direction="right">
+    <div className='flex mt-[20px] flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
         <div className='flex items-center justify-center md:w-11/12 w-[340px] md:h-[142px] h-[400px] bg-dark-700 rounded-3xl '>
           <div className='w-22/23 flex md:flex-row flex-col'>
-            <div className ='md:w-[630px] md:h-[110px] h-[120px] items-center md:border-l md:border-gray-200 flex gap-2 md:gap-4'>
-              <div className='md:w-[160px] md:h-full h-[70px] w-[100px] bg-gray-250 rounded-[20px]'>{housedetail?.photos || <Image src={imagePlaceHolder} alt='imagePlaceHolder' className='w-full h-full rounded-2xl'/>}</div>
+            <div className ='md:w-[590px] md:h-[110px] h-[120px] items-center md:border-l md:border-gray-200 flex gap-2 md:gap-4'>
+              <div className='md:w-[160px] md:h-full h-[70px] w-[100px] bg-gray-250 rounded-[20px]'>{housedetail?.photos?.[0] || <Image src={imagePlaceHolder} alt='imagePlaceHolder' className='w-full h-full rounded-2xl'/>}</div>
               <div className='w-[385px] md:gap-4 gap-2 flex flex-col'>
                 <div className='md:w-[83px] w-[73px] items-center gap-1 justify-center flex md:h-[29px] h-[20px] text-white-pure md:text-[13px] text-[11px] bg-blue-purple-500 rounded-[8px]'><Image src={whiteStar} alt='whiteStar'/> {housedetail?.rate} ستاره</div>
                 <h2 className='md:text-2xl text-[20px] text-white-pure'> {housedetail?.title || "عنوانی وجو ندارد"}</h2>
@@ -146,22 +153,25 @@ const Traveler = () => {
                 </div>
               </div>
             </div>
-            <div className ='md:w-[470px] flex flex-col gap-4 items-center justify-center h-[110px] md:border-l md:border-gray-200'>
-              <div className='md:w-[350px] h-[21px] flex md:text-[16px] text-[12px] gap-0.5 items-center'>
-                <h2 className='flex gap-3 text-gray-300 '><Image src={CalendarTime} alt='CalendarTime'/> تاریخ ورود :</h2>
+            <div className ='md:w-[450px] flex flex-col gap-4 items-center justify-center h-[110px] md:border-l md:border-gray-200'>
+              <div className='h-[21px] flex md:text-[18px] text-[12px] gap-0.5 md:gap-4 items-center'>
+                <h2 className='flex gap-3 text-gray-300'><Image src={CalendarTime} alt='CalendarTime'/> تاریخ ورود :</h2>
                 <h2 className='text-primary-accent-green'> {checkInDate}</h2>
               </div>
-              <div className='md:w-[350px] h-[21px] flex md:text-[16px] text-[12px] gap-0.5 items-center'>
+              <div className ='h-[21px] flex md:text-[18px] text-[12px] gap-0.5 md:gap-4 items-center'>
                 <h2 className='flex gap-3 text-gray-300 '><Image src={CalendarTime} alt='CalendarTime'/> تاریخ خروج :</h2>
                 <h2 className='text-primary-accent-green'> {checkOutDate}</h2>
               </div>
             </div>
-            <div className ='md:w-[370px] h-[110px] flex flex-col items-end justify-center'>
-              <div className='md:w-[335px] h-[83px] flex-col items-end flex gap-4'>
-                <div className='w-full flex h-[30px] items-center justify-end gap-[9px]'>
-                  <h2 className='md:text-[16px] text-[12px] text-gray-300'>{housedetail?.price} ت</h2>
-                  <div className='w-[42px] h-[24px] rounded-[46px] bg-tomato-red text-[13px] text-white-pure flex items-center justify-center'>%{housedetail?.discount_id}</div>
-                  <h2 className='md:text-2xl text-[16px] text-primary-accent-green'>{housedetail?.discounted_price} ت</h2>               
+            <div className ='md:w-[430px] h-[110px] flex flex-col items-end justify-center'>
+              <div className='md:w-[345px] h-[83px] flex-col items-end flex gap-4'>
+                <div className='w-full flex h-[30px] items-center justify-end gap-3' dir='ltr'>
+                  <h2 className='md:text-2xl text-[16px] text-primary-accent-green' dir='rtl'> {housedetail?.discounted_price} ت</h2>
+                  <Button
+                      text={`${roundDiscountPercent} %`} 
+                      buttonStyle={{ height: 25, width: 40, borderRadius: 8 }}
+                  />
+                  <OldPriceComponent oldPrice={price || ""} /> 
                 </div>
                 <Button text={"تغییر هتل"} 
                   icon={<Image src={greenhotel} alt='greenhotel'/>} width='w-[120px]' height='h-[36px]' textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent"}}
@@ -224,28 +234,24 @@ const Traveler = () => {
                 onChange={(e) => setSharedEmail(e.target.value)}
               />
             </form>            
-            {/* <Button text={"ثبت اطلاعات"} 
-              icon={<Image src={checkCircle} alt='checkCircle'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"142px"}}
-              onClick={handleSubmit}
-            />           */}
           </div>          
         </div>
         <div className='md:h-[84px] h-[74px] w-[340px] md:w-11/12 flex items-center justify-center border-3 border-dashed rounded-4xl border-gray-300'>
             <div className='h-9 md:w-[1410px] flex md:justify-between gap-6 md:gap-0' dir='ltr'>
             <Button text={"تایید و ادامه فرایند"} icon={<Image src={arrowLeftGreen} alt='arrowLeftGreen'/>} textStyle={{color: "#8CFF45", fontSize:"16px"}} buttonStyle={{border:"2px solid #8CFF45", borderRadius:"12px", background:"transparent", height:"36px", width:"165px"}}
               onClick={handleSubmit}
-              // disabled={!bookingId}
               type='button'
             />          
               <div className='md:w-[300px] h-[30px] md:gap-3 gap-2 flex items-center md:text-[24px] text-[18px] text-white-pure' dir='rtl'>
                 <Image src={ticket} alt='ticket'/> 
                 <div className='flex md:flex-row flex-col md:gap-0.5'>
-                  <h2 > قیمت بلیط :</h2> <h2 className='text-primary-accent-green'> {housedetail?.price} </h2>
+                  <h2 > قیمت بلیط :</h2> <h2 className='text-primary-accent-green'> {totalPrice} </h2>
                 </div>
               </div>
             </div>
         </div>
     </div>
+    </Slide>
   )
 }
 

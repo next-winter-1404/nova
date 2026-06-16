@@ -1,11 +1,309 @@
-import React from 'react'
+"use client";
+import Image from "next/image";
+import LeftTriangle from "@/src/assets/images/LeftTriangle.svg";
+import at from "@/src/assets/icons/at.svg";
+import phoneGray from "@/src/assets/icons/phoneGray.svg";
+import Location from "@/src/assets/icons/Location.svg";
+import LoginButton from "@/src/components/login/button/LoginButton";
+import Input from "@/src/components/common/input/Input";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { postCommentsLand } from "@/src/utils/sevices/api/contactus/postCommentLand";
+import { Breadcrumb } from "@/src/components/common/breadCrumbs";
+import {
+  FaGlobe,
+  FaInstagram,
+  FaLinkedin,
+  FaTelegram,
+  FaWhatsapp,
+} from "react-icons/fa";
+import { useSocialMedia } from "@/src/utils/hooks/useSocialMedia";
+import Slide from "@/src/components/animations/Slide";
+import ScrollFloat from "@/src/components/animations/ScrollFloat/ScrollFloat";
+import ShinyText from "@/src/components/animations/ShinyText/ShinyText";
+import GlareHover from "@/src/components/animations/GlareHover/GlareHover";
 
 const ContactUsPage = () => {
-  return (
-    <div>
-      contactus      
-    </div>
-  )
-}
+  const router = useRouter();
+  const { socials } = useSocialMedia();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [formData, setFormData] = useState({
+    title: "",
+    message: "",
+  });
+  const items = [{ label: "ارتباط با ما" }];
 
-export default ContactUsPage
+  const checkAuth = async (): Promise<boolean> => {
+    try {
+      const response = await fetch("/api/auth/check");
+      const data = await response.json();
+      console.log("Auth check response:", data);
+      setIsAuthenticated(data.isAuthenticated);
+      return data.isAuthenticated;
+    } catch (error) {
+      console.log("Error checking auth:", error);
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const socialIcons = {
+    instagram: FaInstagram,
+    telegram: FaTelegram,
+    linkedin: FaLinkedin,
+    whatsapp: FaWhatsapp,
+    website: FaGlobe,
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const isAuth = await checkAuth();
+
+    if (!isAuth) {
+      sessionStorage.setItem("redirectAfterLogin", window.location.pathname);
+      toast.error("ابتدا وارد حساب کاربری شوید");
+      router.push("/login");
+      return;
+    }
+
+    try {
+      await postCommentsLand({
+        title: formData.title,
+        message: formData.message,
+      });
+      toast.success("! پیام شما با موفقیت ارسال شد ");
+      setFormData({ title: "", message: "" });
+    } catch (error) {
+      toast.error("متاسفانه خطایی رخ داده لطفا دوباره تلاش کنید.");
+    }
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  return (
+    <Slide direction="right">
+      <div
+        className=" md:w-full mt-30 w-[390px] md:h-full md:items-center flex-col justify-center flex"
+        dir="rtl"
+      >
+        <div className=" md:w-11/12  w-[390px] md:gap-12 gap-7 flex flex-col text-right">
+          <Breadcrumb items={items} />
+          <div className="md:w-full  w-[389px] flex gap-6 flex-col">
+            <div className="flex gap-4">
+              <h2 className="text-primary-accent-green md:text-[16px] text-[14px]">
+                <ScrollFloat
+                  animationDuration={1}
+                  ease="back.inOut(2)"
+                  scrollStart="center bottom+=50%"
+                  scrollEnd="bottom bottom-=40%"
+                  stagger={0.1}
+                >
+                  ارتباط با ما
+                </ScrollFloat>
+              </h2>
+              <Image src={LeftTriangle} alt="." />
+            </div>
+          </div>
+          <div className="w-full flex gap-16">
+            <div className="w-1/2 gap-9 justify-center flex flex-col">
+              <span className="text-[16px] text-white-pure">
+                <ScrollFloat
+                  animationDuration={1}
+                  ease="back.inOut(2)"
+                  scrollStart="center bottom+=50%"
+                  scrollEnd="bottom bottom-=40%"
+                  stagger={0.1}
+                >
+                  هر ساعت از شبانه روز که باشه تیم پیشتیبانی دلتا پاسخگوی سوالات
+                  و انتقادات شما هستند تا در اسرع وقت مشکلتان را حل کنیم !
+                </ScrollFloat>
+              </span>
+              <div className="flex flex-col gap-6">
+                <div className="w-[320px] h-[50px]">
+                  <GlareHover
+                    glareColor="var(--color-gray-300)"
+                    glareOpacity={0.3}
+                    glareAngle={-30}
+                    glareSize={300}
+                    transitionDuration={800}
+                    playOnce={false}
+                    className="rounded-[10px]"
+                  >
+                    <div className="w-[320px] rounded-2xl bg-unSelectedButton justify-center items-center text-gray-300 h-[50px] flex gap-2.5">
+                      <Image src={phoneGray} alt="phoneGray" /> 09229167194 -
+                      098541612310
+                    </div>
+                  </GlareHover>
+                </div>
+                <div className="w-[235px] h-[50px] ">
+                  <GlareHover
+                    glareColor="var(--color-gray-300)"
+                    glareOpacity={0.3}
+                    glareAngle={-30}
+                    glareSize={300}
+                    transitionDuration={800}
+                    playOnce={false}
+                    className="rounded-[10px]"
+                  >
+                    <div className="w-[235px] rounded-2xl bg-unSelectedButton justify-center items-center text-gray-300 h-[50px] flex gap-2.5">
+                      <Image src={at} alt="at" />
+                      Delta@gmail.com
+                    </div>
+                  </GlareHover>
+                </div>
+                <div className="w-[410px] h-[50px] ">
+                  <GlareHover
+                    glareColor="var(--color-gray-300)"
+                    glareOpacity={0.3}
+                    glareAngle={-30}
+                    glareSize={300}
+                    transitionDuration={800}
+                    playOnce={false}
+                    className="rounded-[10px]"
+                  >
+                    <div className="w-[410px] rounded-2xl bg-unSelectedButton justify-center items-center text-gray-300 h-[50px] flex gap-2.5">
+                      <Image src={Location} alt="Location" /> گیلان ، رشت ،
+                      میدان آزادی ، جنب چهار راه عظیمی زاده
+                    </div>
+                  </GlareHover>
+                </div>
+              </div>
+            </div>
+            <div className="w-1/2   flex items-center justify-center flex-col">
+              <div className="w-[388px] relative h-[366px] rounded-4xl bg-[#3B3B3B]">
+                <div className="absolute top-3 -right-12 w-[479px] h-[340px] rounded-4xl bg-dark-850">
+                  <div className="w-[575px] h-[315px] flex items-center justify-center rounded-4xl bg-dark-500 absolute top-3 -right-12">
+                    <form
+                      className="md:h-[345px] h-[315px] md:w-[527px] w-[330px] flex flex-col items-center justify-center md:gap-[34px] gap-6"
+                      onSubmit={handleSubmit}
+                    >
+                      <div className="flex md:w-full w-[330px] gap-6">
+                        <Input
+                          labelText={"عنوان :"}
+                          id={"title"}
+                          InputHeight={"h-[50px]"}
+                          htmlFor={"title"}
+                          type={"text"}
+                          labelTextColor="text-gray-300"
+                          placeHolder={"وارد کنید ...."}
+                          parentWidth="md:w-full w-[150px]"
+                          borderColor="border-selectedButtonText"
+                          labelTextSize="md:text-[16px] text-[12px] "
+                          textSize="md:text-[20px] text-[16px] text-gray-300"
+                          tagBgStyle={{
+                            background: "var(--color-dark-500)",
+                          }}
+                          value={formData.title}
+                          onChange={handleChange}
+                          name="title"
+                          dir="rtl"
+                        />
+                      </div>
+                      <div className="md:w-full w-[330px]">
+                        <Input
+                          labelText={"پیام شما :"}
+                          id={"message"}
+                          InputHeight={"h-[109px]"}
+                          htmlFor={"message"}
+                          type={"message"}
+                          labelTextColor="text-gray-300"
+                          placeHolder="وارد کنید ..."
+                          parentWidth="md:w-full w-[322px]"
+                          borderColor="border-selectedButtonText"
+                          labelTextSize="md:text-[16px] text-[12px]"
+                          textSize="md:text-[20px] text-[16px] text-gray-300"
+                          tagBgStyle={{
+                            background: "var(--color-dark-500)",
+                          }}
+                          value={formData.message}
+                          name="message"
+                          onChange={handleChange}
+                          dir="rtl"
+                        />
+                      </div>
+                      <LoginButton
+                        type="submit"
+                        buttonText="ارسال درخواست"
+                        width="w-full"
+                        buttonStyle="bg-primary-accent-green text-dark-800"
+                        loadingText="درحال ارسال پیام"
+                      />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className=" w-2/5 flex flex-col gap-5">
+            <h3 className="text-white-pure text-[18px] font-bold">
+              <ShinyText
+                text=" شبکه های اجتماعی"
+                speed={1}
+                delay={0}
+                color="var(--color-white-pure)"
+                shineColor="var(--color-gray-300)"
+                spread={120}
+                direction="right"
+                yoyo={true}
+                pauseOnHover={false}
+                disabled={false}
+              />
+            </h3>
+            <div className="grid grid-cols-3 gap-4">
+              {socials.map((item) => {
+                const Icon =
+                  socialIcons[
+                    item.platform.toLowerCase() as keyof typeof socialIcons
+                  ] || FaGlobe;
+                if (!Icon) return null;
+                console.log(item.platform, Icon);
+                return (
+                  <a
+                    key={item.id}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="w-[150px]h-[40px]">
+                      <GlareHover
+                        glareColor="var(--color-gray-300)"
+                        glareOpacity={0.3}
+                        glareAngle={-30}
+                        glareSize={300}
+                        transitionDuration={800}
+                        playOnce={false}
+                        className="rounded-[10px]"
+                      >
+                        <div className="w-[150px] rounded-2xl bg-unSelectedButton flex-center text-gray-300 h-[40px] gap-2.5">
+                          <Icon size={20} />
+                          <span>{item.platform}</span>
+                        </div>
+                      </GlareHover>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </Slide>
+  );
+};
+
+export default ContactUsPage;

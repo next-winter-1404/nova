@@ -11,6 +11,7 @@ import StatusLabel from "../../common/statusLabel/StatusLabel";
 import ReserveItemsIcon from "../ReserveItemsIcon/ReserveItemsIcon";
 import useSearch from "@/src/utils/hooks/searchHook";
 import { IBooking } from "@/src/core/types/IBooking";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 interface IProp {
   allBookings: IBooking[];
   items: string[];
@@ -20,8 +21,8 @@ const BookingManagementClient: FC<IProp> = ({ allBookings, items }) => {
 
   const result = useSearch(allBookings, search, (allBookings, query) =>
     allBookings.filter((item) =>
-      item.status?.toLowerCase().includes(query.toLowerCase())
-    )
+      item.status?.toLowerCase().includes(query.toLowerCase()),
+    ),
   );
   return (
     <DashboardContentContainer
@@ -41,43 +42,91 @@ const BookingManagementClient: FC<IProp> = ({ allBookings, items }) => {
       }
     >
       <div className="flex flex-col gap-5 w-full">
-        <ItemNavbar colsNumber={4} items={items} />
+        {/* Navbar */}
+        <ItemNavbar colsNumber={5} items={items} />
 
-        <div>
-          {result.length > 0 ? (
-            result.map((booking) => (
-              <div
-                className="flex justify-between w-full items-center"
-                key={booking.id}
-              >
-                <div className="grid grid-cols-4 gap-15 md:text-[18px] text-white text-[10px] whitespace-nowrap  w-full">
-                  <UserName userId={Number(booking.user_id)} />
-                  <p className="md:mr-10 ">
-                    {booking.created_at?.slice(0, 10)}
-                  </p>
-                  <p>
+        {/* Table Wrapper */}
+        <div className="w-full overflow-x-auto">
+          <div className="min-w-[900px] flex flex-col gap-3">
+            {result.length > 0 ? (
+              result.map((booking) => (
+                <div
+                  key={booking.id}
+                  style={{
+                    gridTemplateColumns: "repeat(5,minmax(0,1fr))",
+                  }}
+                  className="
+              grid
+              items-center
+              gap-4
+
+              bg-dark-800
+              rounded-xl
+
+              px-4 md:px-6
+              py-3
+
+              text-white-pure
+              text-[11px] md:text-[15px]
+
+              transition-all
+              duration-300
+              ease-out
+              transform-gpu
+
+              hover:-translate-y-1
+              hover:scale-[1.01]
+
+              hover:bg-dark-700
+              hover:shadow-2xl
+              hover:shadow-black/40
+
+              border
+              border-transparent
+              hover:border-white/10
+
+              cursor-pointer
+            "
+                >
+                  {/* User */}
+                  <div className="flex items-center">
+                    <UserName userId={Number(booking.user_id)} />
+                  </div>
+
+                  {/* Created At */}
+                  <div className="text-center">
+                    {formatDateTime(booking.created_at)}
+                  </div>
+
+                  {/* Days */}
+                  <div className="text-center">
                     {calculateDaysBetween(
                       booking?.reservedDates?.[0],
-                      booking.reservedDates?.[1]
+                      booking?.reservedDates?.[1],
                     )}
-                  </p>
+                  </div>
 
-                  <div className="-mr-15">
+                  {/* Status */}
+                  <div className="flex justify-center">
                     <StatusLabel status={booking.status} />
                   </div>
+
+                  {/* Actions */}
+                  <div className="flex justify-center">
+                    <ReserveItemsIcon
+                      bookingId={Number(booking.id)}
+                      houseId={booking.houseId}
+                      userId={booking.user_id}
+                    />
+                  </div>
                 </div>
-                <ReserveItemsIcon
-                  bookingId={Number(booking?.id)}
-                  houseId={booking.houseId}
-                  userId={booking.user_id}
-                />
+              ))
+            ) : (
+              <div className="text-center text-3xl text-gray-300 py-10">
+                رزروی وجود ندارد
               </div>
-            ))
-          ) : (
-            <div className="w-full text-3xl text-gray-300 text-center font-semibold">
-              رزروی وجود ندارد
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </DashboardContentContainer>

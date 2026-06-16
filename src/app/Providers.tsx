@@ -8,7 +8,11 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      <Toaster/>
+      <Toaster  toastOptions={{
+          style: {
+            fontFamily: "var(--font-vazir)",
+          },
+        }}/>
     </QueryClientProvider>
   );
 };

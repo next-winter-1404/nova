@@ -1,4 +1,5 @@
 'use client'
+import Slide from '@/src/components/animations/Slide';
 import Input from '@/src/components/common/input/Input';
 import { postPayment } from '@/src/utils/sevices/api/processReserve/postPayment';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -10,7 +11,7 @@ const Payment = () => {
     const router = useRouter();
     const searchParams = useSearchParams();  
     const bookingId = searchParams.get("bookingId")
-    const amount = searchParams.get("amount")
+    const totalPrice = searchParams.get("totalPrice")
 
     const [cardNumber, setCardNumber] = useState("");
     const [cvv2, setCvv2] = useState('');
@@ -24,14 +25,14 @@ const Payment = () => {
 
     useEffect(() => {
         initPayment();
-    },[bookingId,amount])
+    },[bookingId,totalPrice])
 
     const initPayment = async () => {
         setLoading(true)
         setError(null)
         try{
             const payload = {
-                amount : Number(amount),
+                amount : Number(totalPrice),
                 callbackUrl : `${window.location.origin}/processreserve/ticket/`,
                 description : 'پرداخت رزرو هتل',
                 bookingId : Number(bookingId)
@@ -76,18 +77,19 @@ const Payment = () => {
         try {   
             const currentStep = searchParams.get('step') || "payment";
             const nextStep = 'ticket';
-            router.push(`/processreserve/ticket?bookingId=${bookingId}&amount=${amount}&step=${nextStep}`);    
+            router.push(`/processreserve/ticket?bookingId=${bookingId}&amount=${totalPrice}&step=${nextStep}`);    
         } catch (err: any) {
             setError('خطا در پردازش نهایی. لطفاً دوباره تلاش کنید.');
             setLoading(false);
         }
     };
     return(
-        <div className='flex mt-[130px] flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
+        <Slide direction="right">
+        <div className='flex mt-[20px] flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
             <div className="bg-dark-600 rounded-2xl shadow-xl w-2/5 overflow-hidden">
                 <div className="bg-primary-accent-green p-6 text-center text-white">
                     <h2 className="text-2xl font-bold mb-2">پرداخت امن</h2>
-                    <p className="text-gray-600">مبلغ: {Number(amount).toLocaleString()} تومان</p>
+                    <p className="text-gray-600">مبلغ: {Number(totalPrice).toLocaleString()} تومان</p>
                 </div>
 
                 <form onSubmit={handleFinalPayment} className="p-6 space-y-12" >
@@ -200,6 +202,7 @@ const Payment = () => {
                 </form>
             </div>
         </div>
+        </Slide>
     )
 }
 

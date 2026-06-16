@@ -7,16 +7,21 @@ import { TbCamera, TbCircleX } from "react-icons/tb";
 import userDefault from "@/src/assets/images/userPlaceHolder.jpg";
 import { Modal } from "@/src/components/common/modal";
 import ChoosePicture from "@/src/components/dashboard/choosePic/ChoosePicture";
-const UserInfoPage = async() => { 
-    const userId = await getServerSideCookie("userId");
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+const UserInfoPage = async () => {
+  const userId = await getServerSideCookie("userId");
   const result = await getUsersDetail(Number(userId));
   const userDetail = result?.user;
   return (
     <div className="bg-dark-700 rounded-xl p-5 flex-col flex gap-10">
       <div className="flex  lg:w-1/2 w-full justify-between">
         <div className="text-white  flex  flex-col gap-2">
-          <h1 className="text-[20px] font-black ">عکس نمایه شما</h1>
-          <span>میتوانید عکس نمایه خود را تغییر دهید</span>
+          <h1 className="text-[20px] font-black text-white-pure">
+            عکس نمایه شما
+          </h1>
+          <span className="text-white-pure">
+            میتوانید عکس نمایه خود را تغییر دهید
+          </span>
         </div>
         <div className="  relative">
           <Image
@@ -37,7 +42,7 @@ const UserInfoPage = async() => {
                   src={userDetail?.profilePicture || userDefault}
                   alt="user profile"
                 />
-               <ChoosePicture/>
+                <ChoosePicture />
               </div>
             }
             modalBtn={
@@ -65,6 +70,6 @@ const UserInfoPage = async() => {
       <UserChangePasswordForm />
     </div>
   );
-}
+};
 
-export default UserInfoPage
+export default UserInfoPage;

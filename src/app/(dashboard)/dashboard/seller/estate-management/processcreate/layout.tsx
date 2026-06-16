@@ -53,7 +53,7 @@ const stepIcons =[
                             const isCompleted = currentIndex > index ;
                             const isActive = currentIndex === index;
                             return(
-                                <div key={step.id} className='flex items-center gap-1.5 md:gap-4'>
+                                <div key={step.id} className='flex items-center gap-1.5 md:gap-2'>
                                     <div className ={`md:w-9 w-6 md:h-9 h-6 rounded-full bg-primary-accent-green flex items-center justify-center ${
                                         isCompleted ? 'bg-primary-accent-green' : isActive ? 'border border-white-pure bg-transparent' : 'border border-gray-300 bg-transparent'
                                         }`}

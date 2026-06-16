@@ -21,6 +21,15 @@ const InnerHouseCard : FC<IHouse> = ({
     photos,
     rate
 }) => {
+    console.log("photo 0", photos?.[0]);
+    const hasPhoto =
+        photos &&
+        photos.length > 0 &&
+        Object.keys(photos[0]).length > 0;
+
+        console.log("photos =", photos);
+        console.log("photo0 =", photos?.[0]);
+        console.log("title =", title);
 
   return (
     <div className='h-[430px] relative overflow-hidden text-white-pure flex flex-col gap-4'>                   
@@ -32,9 +41,27 @@ const InnerHouseCard : FC<IHouse> = ({
             cavity="round"
             labelContent={<div className='w-[67px] h-[30px] mt-[9px] ml-[5px] flex items-center  text-dark-800 justify-center gap-1 bg-white-pure rounded-[8px] z-20 '><Image src={Star} alt='star'/> {rate}</div>}
             labelSize="md"
-            mainContent={<div className='w-[297px] h-[156px] bg-dark-600 rounded-2xl'>{photos?.[0] || <Image src={imagePlaceHolder} alt='imagePlaceHolder' className='w-full h-full rounded-2xl'/>}</div>
-                
-            }                            
+            mainContent={
+                            <div className='w-[297px] h-[156px] bg-dark-600 rounded-2xl'>
+                                {typeof photos?.[0] === "string" && photos[0] !== "" ? (
+                                    <Image
+                                    src={photos[0]}
+                                    alt={title ?? "house image"}
+                                    width={297}
+                                    height={156}
+                                    className="w-full h-full rounded-2xl"
+                                    />
+                                ) : (
+                                    <Image
+                                    src={imagePlaceHolder}
+                                    alt="imagePlaceHolder"
+                                    width={297}
+                                    height={156}
+                                    className="w-full h-full rounded-2xl"
+                                    />
+                                )}
+                            </div>                
+                        }                            
             labelBackground="bg-dark-700"
             labelExtraStyle={{height:'50px'}}
             mainExtraStyle="bg-dark-700 p-6"

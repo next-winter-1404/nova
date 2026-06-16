@@ -37,13 +37,13 @@ const FavoriteFunctions: FC<IProps> = ({ favoriteId, houseId }) => {
   const menuItems = [
     {
       label: "جزییات",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      icon: <FiAlertCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => router.push(`/reserve-house/${houseId}`),
     },
 
     {
       label: "حذف",
-      icon: <FaRegCircleXmark className="mt-px text-red-500" />,
+      icon: <FaRegCircleXmark className="mt-px text-white-pure" />,
       onClick: () => setIsModalOpen(true),
     },
   ];

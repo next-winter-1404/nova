@@ -9,6 +9,7 @@ import { FaSearch } from "react-icons/fa";
 import DatePickerComponent from "../datePicker";
 import { useRouter, useSearchParams } from 'next/navigation';
 import ListingType from "./ListingType";
+import FadeIn from "../../animations/FadeIn";
 
 interface SearchWrapperProps {
   cityOptions: { value: string; label: string }[];
@@ -47,9 +48,10 @@ const SearchWrapper = ({ cityOptions }: SearchWrapperProps) => {
       className="flex flex-col gap-4 w-full h-30"
       onSubmit={handleSearchSubmit}
     >
-      <ListingType value={stateType} onChange={setStateType} />
+      <FadeIn y={0} x={10}><ListingType value={stateType} onChange={setStateType} /></FadeIn>
+      
       <div className="flex md:flex-row flex-col-reverse items-center justify-between gap-6 bg-dark-800 border-2 border-dark-650 shadow-000-16 inset-shadow-fff-8 rounded-4xl px-6 py-5">
-        <button type="submit" className="serach-button">
+        <button type="submit" className="serach-button text-black">
           <span>جستوجو کنید</span>
           <FaSearch />
         </button>

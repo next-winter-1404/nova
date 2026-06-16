@@ -71,8 +71,8 @@ const ChatManegmentActionMenu = ({ room }: any) => {
     },
   });
 
-   // ================= DELETE CHAT =================
-     const deleteChatMutation = useMutation({
+  // ================= DELETE CHAT =================
+  const deleteChatMutation = useMutation({
     mutationFn: (room: string) => deleteChatAdmin(room),
 
     onSuccess: () => {
@@ -100,20 +100,20 @@ const ChatManegmentActionMenu = ({ room }: any) => {
     });
   };
 
-   const handleDeleteChat = () => {
-  deleteChatMutation.mutate(room);
-};
+  const handleDeleteChat = () => {
+    deleteChatMutation.mutate(room);
+  };
 
   // ================= DROP ITEMS =================
   const getDropItems = (chat: any) => [
     {
       label: "ویرایش",
-      icon: <MdEdit className="w-4 h-4 text-white" />,
+      icon: <MdEdit className="w-4 h-4 text-white-pure" />,
       onClick: () => openEdit(chat),
     },
     {
       label: "حذف",
-       icon: <TiDeleteOutline className="w-4 h-4 text-white" />,
+      icon: <TiDeleteOutline className="w-4 h-4 text-white-pure" />,
       onClick: () => deleteMutation.mutate(chat.id),
     },
   ];
@@ -129,42 +129,83 @@ const ChatManegmentActionMenu = ({ room }: any) => {
         contentClassName="bg-dark-900"
         width="w-[60%]"
         mainContent={
-          <DashboardContentContainer title="جزییات چت" topSectionContent={
-            <div className="flex-center gap-2 text-tomato-red cursor-pointer" onClick={handleDeleteChat}><FaTrashAlt className="w-4 h-4 text-tomato-red" />حذف چت</div>
-          }>
-            <ItemNavbar colsNumber={5} items={items} />
+          <DashboardContentContainer
+  title="جزییات چت"
+  topSectionContent={
+    <div
+      className="flex-center gap-2 text-tomato-red cursor-pointer"
+      onClick={handleDeleteChat}
+    >
+      <FaTrashAlt className="w-4 h-4 text-tomato-red" />
+      حذف چت
+    </div>
+  }
+>
 
-            <div className="max-h-[70vh] overflow-y-auto w-full flex flex-col gap-3 mt-5">
-              {isLoading ? (
-                <div>در حال دریافت...</div>
-              ) : (
-                data?.chats?.map((chat: any) => (
-                  <div
-                    key={chat.id}
-                    className="grid grid-cols-5 gap-3 items-center text-center border-b pb-2"
-                    dir="rtl"
-                  >
-                    <div>{chat.id}</div>
-                    <div>{chat.senderId}</div>
-                    <div>{chat.getterId}</div>
-                    <div className="break-words">{chat.message}</div>
+  {/* NAVBAR */}
+  <ItemNavbar colsNumber={5} items={items} />
 
-                    <div className="flex justify-center">
-                      <DropMenu
-                        trigger={
-                          <div>
-                            <TbDots className="w-6 h-6 cursor-pointer text-gray-400 hover:text-primary-accent-green transition hidden md:block" />
-                            <TbDotsVertical className="w-5 h-5 cursor-pointer text-gray-400 hover:text-primary-accent-green transition md:hidden" />
-                          </div>
-                        }
-                        items={getDropItems(chat)}
-                      />
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-          </DashboardContentContainer>
+  {/* LIST WRAPPER (FIX اصلی اینجاست) */}
+  <div className="mt-5 flex flex-col gap-3 max-h-[60vh] overflow-y-auto pr-1">
+
+    {isLoading ? (
+      <div className="text-center text-gray-400">در حال دریافت...</div>
+    ) : (
+      data?.chats?.map((chat: any) => (
+        <div
+          key={chat.id}
+          className="
+            grid
+            grid-cols-5
+            items-center
+            gap-4
+
+            bg-dark-800
+            rounded-xl
+
+            px-4 md:px-6
+            py-3
+
+            text-white-pure
+            text-[12px] md:text-[14px]
+
+            transition-all duration-300
+
+            hover:-translate-y-1
+            hover:scale-[1.01]
+            hover:bg-dark-700
+            hover:shadow-xl hover:shadow-black/30
+
+            border border-transparent hover:border-white/10
+
+            w-full min-w-0
+          "
+          dir="rtl"
+        >
+          <div className="text-center truncate">{chat.id}</div>
+          <div className="text-center truncate">{chat.senderId}</div>
+          <div className="text-center truncate">{chat.getterId}</div>
+          <div className="text-center truncate">{chat.message}</div>
+
+          <div className="flex justify-center">
+            <DropMenu
+              trigger={
+                <div>
+                  <TbDots className="w-5 h-5 text-gray-400 hover:text-white hidden md:block" />
+                  <TbDotsVertical className="w-5 h-5 text-gray-400 hover:text-white md:hidden" />
+                </div>
+              }
+              items={getDropItems(chat)}
+            />
+          </div>
+
+        </div>
+      ))
+    )}
+
+  </div>
+
+</DashboardContentContainer>
         }
       />
 

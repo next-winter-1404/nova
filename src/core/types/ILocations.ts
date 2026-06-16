@@ -1,6 +1,6 @@
 export interface ILocations {
   id: number;
-  areaName: string | null;
+  areaName: string ;
   lat: string;
   lng: string;
 }

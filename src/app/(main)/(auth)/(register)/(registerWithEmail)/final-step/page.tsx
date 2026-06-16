@@ -1,4 +1,5 @@
 "use client";
+import FadeIn from "@/src/components/animations/FadeIn";
 import Input from "@/src/components/common/input/Input";
 import LoginButton from "@/src/components/login/button/LoginButton";
 import LoginWrapper from "@/src/components/login/wrapper";
@@ -25,6 +26,7 @@ const SetPasswordAndPhonePage = () => {
   }, [state, router]);
 
   return (
+    <FadeIn>
     <form
       action={formAction}
       className="md:w-1/2 w-full flex flex-col gap-9"
@@ -77,6 +79,7 @@ const SetPasswordAndPhonePage = () => {
         }
       />
     </form>
+    </FadeIn>
   );
 };
 

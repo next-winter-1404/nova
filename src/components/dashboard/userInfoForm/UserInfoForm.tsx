@@ -34,7 +34,7 @@ const UserInfoForm: FC<IUser> = ({
         title="اطلاعات فردی"
         explanation="میتوانید اطلاعات فردی خود را تغییر دهید"
       />
-      <div  className="flex flex-col gap-4 w-[394px] ">
+      <div  className="flex flex-col gap-4 sm:w-[394px] ">
         <Input
           borderColor="border-gray-300"
           dir="rtl"
@@ -42,8 +42,9 @@ const UserInfoForm: FC<IUser> = ({
           name="firstName"
           tagBgStyle={{ background: "var(--color-dark-700)" }}
           labelTextColor="text-gray-300"
-          InputHeight="h-[50px] text-white"
+          InputHeight="h-[50px] text-white-pure"
           defaultValue={firstName}
+
         />
         <Input
           borderColor="border-gray-300"
@@ -52,7 +53,7 @@ const UserInfoForm: FC<IUser> = ({
           name="lastName"
           tagBgStyle={{ background: "var(--color-dark-700)" }}
           labelTextColor="text-gray-300"
-          InputHeight="h-[50px] text-white"
+          InputHeight="h-[50px] text-white-pure"
           defaultValue={lastName}
         />
         <Input
@@ -62,7 +63,7 @@ const UserInfoForm: FC<IUser> = ({
           name="email"
           tagBgStyle={{ background: "var(--color-dark-700)" }}
           labelTextColor="text-gray-300"
-          InputHeight="h-[50px] placeholder-gray-300 text-white"
+          InputHeight="h-[50px] placeholder-gray-300 text-white-pure"
           placeHolder="example@gmail.com"
           type="email"
           defaultValue={email}
@@ -74,7 +75,7 @@ const UserInfoForm: FC<IUser> = ({
           name="phoneNumber"
           tagBgStyle={{ background: "var(--color-dark-700)" }}
           labelTextColor="text-gray-300"
-          InputHeight="h-[50px] placeholder-gray-300 text-white"
+          InputHeight="h-[50px] placeholder-gray-300 text-white-pure"
           placeHolder="09123456789"
           defaultValue={phoneNumber || ""}
         />

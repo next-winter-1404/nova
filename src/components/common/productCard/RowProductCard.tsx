@@ -11,6 +11,11 @@ import Button from "../button/page";
 import imgPlaceholder from "@/src/assets/images/imagePlaceHolder (2).png"
 import { IProductCard } from "@/src/core/types/IProductCard";
 import Link from "next/link";
+import CompareButton from "../compareButton/page";
+import CompareBadge from "../compareBadge/page";
+
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 const RowProductCard: FC<IProductCard> = ({
   price,
   rate,
@@ -19,15 +24,20 @@ const RowProductCard: FC<IProductCard> = ({
   bathrooms,
   rooms,
   parking,
-  href
+  href,
+  id
 }) => {
   return (
     <div className="flex gap-15">
-      <div className="flex flex-col justify-end flex-1 gap-4 whitespace-nowrap">
+      <div className="flex flex-col items-start justify-between flex-1 gap-4 whitespace-nowrap">
+        <div>
+        <CompareButton propertyId={id}/>
+        <CompareBadge/>
+        </div>
         {price && (
           <span className="flex-center gap-2 px-3 py-1.5 whitespace-nowrap text-semibold-28 text-primary-accent-green">
             <i>ت</i>
-            <span>{price}</span>
+            <span>{formatPrice(Number(price))}</span>
           </span>
         )}
         <Link href={href}>
@@ -61,13 +71,14 @@ const RowProductCard: FC<IProductCard> = ({
                 <FaStar className="w-4 h-4" />
               </span>
             </span>
+
           </div>
           <span className="flex justify-end text-20-medium whitespace-nowrap">
-            {title ? <Link href={href}>{title}</Link> : "عنوانی وجود ندارد"}
+            {title ? <Link href={href} className="block w-full max-w-full truncate whitespace-nowrap overflow-hidden text-right direction-rtl text-20-regular">{title}</Link> : "عنوانی وجود ندارد"}
           </span>
           <div className="flex flex-col items-end gap-5">
             <div className="flex justify-start gap-1.5">
-              <h2 className="text-[16px] text-gray-300 text-right  whitespace-nowrap">
+              <h2 className="w-[80px] text-[16px] text-gray-300  whitespace-nowrap block w-full max-w-full truncate  overflow-hidden text-right direction-rtl ">
                 {address || "ادرسی وجود ندارد"}
               </h2>
               <Image src={Location} alt="Location" className="w-4 h-4" />
@@ -95,7 +106,14 @@ const RowProductCard: FC<IProductCard> = ({
           </div>
         </div>
         <div className="w-[200px] h-[160px] ">
-          <Image src={imgPlaceholder} alt="image placeholder" className="w-fit h-full rounded-xl"/>
+          <ImageFallback
+              fallbackSrc={imgPlaceholder}
+              src={ imgPlaceholder}
+              alt="state image"
+              width={200}
+              height={160}
+              className="rounded-2xl w-fit h-full rounded-xl"
+            />
         </div>
       </div>
     </div>

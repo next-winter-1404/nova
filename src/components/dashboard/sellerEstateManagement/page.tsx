@@ -10,6 +10,8 @@ import { IHouse } from "@/src/core/types/IHouse";
 import useSearch from "@/src/utils/hooks/searchHook";
 import EstateItems from "../estateItems/EstateItems";
 import { SellerDeleteHouses } from "@/src/utils/sevices/api/seller/houses/deleteHouse/deleteHouse";
+import { FaStar } from "react-icons/fa";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 
 interface IProps {
   items: string[];
@@ -50,32 +52,45 @@ const SellerEstateManagement: FC<IProps> = ({ items, house, role }) => {
                     <ItemNavbar colsNumber={5} items={items} />
                     <div className="flex text-white mt-5 items-center">
                         {result?.length > 0 ? (
-                            <div className="w-full flex flex-col gap-5">
+                            <div className="w-full flex flex-col md:gap-5 gap-1.5">
                             <>
                                 {result?.map((item) => (
                                 <div
                                     className="flex justify-between w-full items-center"
                                     key={item.id}
                                 >
-                                    <div className="grid grid-cols-5 w-full  items-center">
-                                    <div className="flex gap-4 items-center w-[300px] ">
-                                        <div className="w-[100px] h-[72px] rounded-xl bg-gray-600"></div>
-                                        <div className="whitespace-nowrap">
+                                    <div className="grid md:grid-cols-5 grid-cols-4 w-full  items-center">
+                                    <div className=" flex md:gap-4 gap-1 items-center w-[300px]">
+                                        <div className="hidden md:block w-[100px] h-[72px] rounded-xl bg-gray-600"></div>
+                                        <div className="text-[10px] md:text-[16px] whitespace-nowrap">
                                         {item?.title || "عنوانی وجود ندارد"}
                                         </div>
                                     </div>
                                     <div className="flex-center gap-1 " dir="rtl">
-                                        <span>{item?.price || "--"}</span>
+                                        <span>{formatPrice(Number(item?.price)) || "--"}</span>
                                         <span>تومان</span>
                                     </div>
-                                    <div className="ml-[105px] text-center">
+                                    <div className="md:ml-[105px] text-[10px] md:text-[16px] text-center">
                                         {item?.address || "--"}
                                     </div>
 
-                                    <div className=" text-center ml-[195px]">
-                                        {item?.rate || "--"}
+                                    <div className="text-[10px] md:text-[16px] text-center flex gap-1 md:mr-[25px]">
+                                        {item?.rate ? (   
+                                            <>
+                                                {Array.from({length: 5}).map((_, index) => (
+                                                    <FaStar 
+                                                        key={index}
+                                                        fill = {index < Number(item?.rate) ? "#FFD700" : "none"}
+                                                    />
+                                                ))}
+                                            </>
+                                        ) : (
+                                            <span className="text-primary-accent-green">
+                                                جدید
+                                            </span>
+                                            )}
                                     </div>
-                                    <div className=" ml-[265px]">
+                                    <div className="hidden md:block text-[10px] md:text-[16px] md:mr-[5px]">
                                         {item?.capacity || "--"}
                                     </div>
                                     </div>

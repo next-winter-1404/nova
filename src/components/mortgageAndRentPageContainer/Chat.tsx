@@ -16,7 +16,7 @@ import { uploadChatFile } from "@/src/utils/sevices/api/chats/uploadChatFile/upl
 
 interface ChatProps {
   senderId: number;
-  sellerName: string;
+  sellerName?: string;
   sellerId: number;
 }
 
@@ -147,7 +147,7 @@ const Chat = ({ senderId, sellerId, sellerName }: ChatProps) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="پیام خود را بنویسید..."
-          className="flex-1 border border-dark-purple rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 "
+          className="flex-1 border text-black border-dark-purple rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 "
         />
         
           <span className="p-2 text-primary-accent-green hover:bg-primary-accent-green-transparent-20 rounded-full">
@@ -164,7 +164,7 @@ const Chat = ({ senderId, sellerId, sellerName }: ChatProps) => {
           </span>
        
       </form>
-      <div className="flex-1 p-4 overflow-y-auto flex flex-col-reverse items-start bg-primary-accent-green">
+      <div className="flex-1 p-4 overflow-y-auto flex flex-col-reverse items-start chat-bg">
         <div className="flex flex-col space-y-2 ">
           {data?.map((message: any, index: any) => {
             const isMine = message.senderId === senderId;
@@ -185,13 +185,11 @@ const Chat = ({ senderId, sellerId, sellerName }: ChatProps) => {
             return (
               <div
                 key={index}
-                className="group relative w-[80%] w-fit px-4 py-3 rounded-xl shadow bg-amber-600 flex-center gap-2"
+                className={`group relative w-[80%] w-fit px-4 py-3 rounded-xl shadow  flex-center gap-2 ${isMine ? "senderMessage" : "getterMessage"}`}
               >
-                <div
-                  className={` ${isMine ? "senderMessage" : "getterMessage"}`}
-                >
+                
                   {message.message}
-                </div>
+               
                 {isMine && (
                   <div className="relative invisible group-hover:visible">
                     <DropMenu
@@ -231,33 +229,3 @@ const Chat = ({ senderId, sellerId, sellerName }: ChatProps) => {
 };
 
 export default Chat;
-// Array(4)
-// 0
-// :
-// createdAt
-// :
-// null
-// files
-// :
-// null
-// getterId
-// :
-// 175
-// id
-// :
-// 27
-// message
-// :
-// "سلام"
-// room
-// :
-// "seller-175-user-331"
-// sender
-// :
-// {id: 331, fullName: 'نام کاربر', email: 'bvAdmin@gmail.com'}
-// senderId
-// :
-// 331
-// updatedAt
-// :
-// null

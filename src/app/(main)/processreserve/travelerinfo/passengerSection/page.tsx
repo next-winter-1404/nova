@@ -139,7 +139,7 @@ const PassengerSection = ({onPassengersChange} : {onPassengersChange : (data : I
                             value={p.gender}
                             onChange={(e) => handleChange(index, "gender", e.target.value)}
                         >
-                            <option value=""> انتخاب کنید </option>
+                            <option value="" disabled> انتخاب کنید </option>
                             <option value="male">مرد</option>
                             <option value="female">زن</option>
                         </select>

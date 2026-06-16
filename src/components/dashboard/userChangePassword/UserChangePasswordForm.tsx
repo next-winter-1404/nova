@@ -28,14 +28,14 @@ const UserChangePasswordForm = () => {
         title="امنیت"
         explanation="میتوانید در این بخش رمز خود را تغییر دهید"
       />
-      <div className="flex flex-col gap-4 w-[394px] text-white">
+      <div className="flex flex-col gap-4 sm:w-[394px] text-white-pure">
         <Input
           borderColor="border-gray-300"
           dir="rtl"
           labelText="رمز عبور قبلی"
           name="currentPassword"
           tagBgStyle={{ background: "var(--color-dark-700)" }}
-          labelTextColor="text-white"
+          labelTextColor="text-white-pure"
           InputHeight="h-[50px]"
         />
         <Input
@@ -44,7 +44,7 @@ const UserChangePasswordForm = () => {
           labelText="رمز عبور جدید"
           name="newPassword"
           tagBgStyle={{ background: "var(--color-dark-700)" }}
-          labelTextColor="text-white"
+          labelTextColor="text-white-pure"
           InputHeight="h-[50px]"
         />
         <Input
@@ -53,7 +53,7 @@ const UserChangePasswordForm = () => {
           labelText="تکرار رمز عبور جدید"
           name="confirmPassword"
           tagBgStyle={{ background: "var(--color-dark-700)" }}
-          labelTextColor="text-white"
+          labelTextColor="text-white-pure"
           InputHeight="h-[50px]"
         />
       </div>

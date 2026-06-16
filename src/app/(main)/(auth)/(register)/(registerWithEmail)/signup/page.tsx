@@ -9,6 +9,7 @@ import {
   SendEmailResult,
   sendEmail,
 } from "@/src/utils/sevices/api/auth/register/sendEmail";
+import FadeIn from "@/src/components/animations/FadeIn";
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -30,36 +31,41 @@ const SignUpPage = () => {
   }, [state, router]);
 
   return (
-    <form
-      action={formAction}
-      className="md:w-1/2 w-full flex flex-col gap-9"
-      dir="rtl"
-    >
-      <LoginWrapper
-      description="جهت شروع فرایند ساخت اکانت ایمیل خود را وارد کنید"
-        ButtonSection={
-          <LoginButton
-            loadingText="در حال ارسال کد"
-            buttonText="ارسال کد تایید"
-            width="w-full"
-          />
-        }
-        content={
-          <Input
-            name="email"
-            labelText="ایمیل شما* : "
-            InputHeight={"h-[43px]"}
-            htmlFor="email"
-            parentWidth="w-full"
-            placeHolder="example@gmail.com"
-            borderColor="border-white "
-            tagBgStyle={{background:"var(--color-dark-900)",color:"white"}}
-            textColor="text-white"
-dir="rtl"
-          />
-        }
-      />
-    </form>
+    <FadeIn>
+      <form
+        action={formAction}
+        className="md:w-1/2 w-full flex flex-col gap-9"
+        dir="rtl"
+      >
+        <LoginWrapper
+          description="جهت شروع فرایند ساخت اکانت ایمیل خود را وارد کنید"
+          ButtonSection={
+            <LoginButton
+              loadingText="در حال ارسال کد"
+              buttonText="ارسال کد تایید"
+              width="w-full"
+            />
+          }
+          content={
+            <Input
+              name="email"
+              labelText="ایمیل شما* : "
+              InputHeight={"h-[43px]"}
+              htmlFor="email"
+              parentWidth="w-full"
+              placeHolder="example@gmail.com"
+              borderColor="border-white "
+              tagBgStyle={{
+                background: "var(--color-dark-900)",
+                color: "white",
+              }}
+              textColor="text-white"
+              dir="rtl"
+            />
+          }
+        />
+      </form>
+    </FadeIn>
   );
 };
 

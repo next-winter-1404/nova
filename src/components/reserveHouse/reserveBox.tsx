@@ -16,6 +16,7 @@ import { calculateDaysBetween } from "@/src/utils/hooks/countDays";
 import { IHouse } from "@/src/core/types/IHouse";
 import toast from "react-hot-toast";
 import { computingDiscount } from "@/src/utils/helper/computingDiscount";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 
 const ReserveBox: FC<IHouse> = ({ price, id, discounted_price }) => {
   const router = useRouter();
@@ -33,7 +34,6 @@ const ReserveBox: FC<IHouse> = ({ price, id, discounted_price }) => {
     try {
       const response = await fetch("/api/auth/check");
       const data = await response.json();
-      console.log("Auth check response:", data);
       setIsAuthenticated(data.isAuthenticated);
       return data.isAuthenticated;
     } catch (error) {
@@ -92,12 +92,13 @@ const ReserveBox: FC<IHouse> = ({ price, id, discounted_price }) => {
     if (checkOutDate) queryParams.append("checkOutDate", checkOutDate);
     if (passengers) queryParams.append("passengers", passengers.toString());
     if (id) queryParams.append("houseId", id.toString());
+    queryParams.append("totalPrice", totalPrice.toString());
     router.push(`/processreserve/travelerinfo?${queryParams.toString()}`);
   };
   const priceNumber = Number(discounted_price || price) || 0;
   const totalPrice = days > 0 ? priceNumber * days : priceNumber;
-  const discountPercent = computingDiscount({discounted_price, price});
-  const roundDiscountPercent = Math.round(discountPercent)
+  const discountPercent = computingDiscount({ discounted_price, price });
+  const roundDiscountPercent = Math.round(discountPercent);
   return (
     <InfoCardContainer
       icon={<Image alt="icon" src={building} className="w-5 h-5" />}
@@ -135,7 +136,7 @@ const ReserveBox: FC<IHouse> = ({ price, id, discounted_price }) => {
           <div className="flex justify-between w-full" dir="rtl">
             <span className="text-gray-300 text-16-bold">★ {days} شب</span>
             <div className="flex gap-2 text-16-bold text-white">
-              <span>{totalPrice}</span>
+              <span>{formatPrice(Number(totalPrice))}</span>
               <span>تومان</span>
             </div>
           </div>
@@ -143,15 +144,23 @@ const ReserveBox: FC<IHouse> = ({ price, id, discounted_price }) => {
 
         <div className="w-full px-2 flex flex-col justify-start gap-4">
           <div className="flex gap-4 w-full">
-            <Button
-              text={`${roundDiscountPercent} %`} 
-              buttonStyle={{ height: 25, width: 40, borderRadius: 8 }}
-            />
-            <OldPriceComponent oldPrice={price || ""} />
+            {discountPercent > 0 && (
+              <Button
+                text={`${roundDiscountPercent} %`}
+                buttonStyle={{
+                  height: 25,
+                  width: 45,
+                  borderRadius: 8,
+                  whiteSpace: "nowrap",
+                  padding: 8,
+                }}
+              />
+            )}
+            {price && <OldPriceComponent oldPrice={price || ""} />}
           </div>
           <div className="text-primary-accent-green font-semibold text-[24px] flex gap-2">
             <i>تومان</i>
-            <span>{discounted_price || price}</span>
+            <span>{formatPrice(Number(discounted_price)) || formatPrice(Number(price))}</span>
           </div>
         </div>
 

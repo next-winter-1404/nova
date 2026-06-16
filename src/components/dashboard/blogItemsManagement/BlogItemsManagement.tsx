@@ -3,8 +3,6 @@ import { FC, useState } from "react";
 import DropMenu from "../../common/dropMenu/DropMenu";
 import { TbDots, TbDotsVertical } from "react-icons/tb";
 import { FiAlertCircle } from "react-icons/fi";
-import { Modal } from "../../common/modal";
-import ProductCard from "../../common/productCard/ProductCard";
 import { TbEdit, TbTrash } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import AlertComponent from "../../common/alert/alert";
@@ -34,18 +32,18 @@ const BlogItemsManagement: FC<IProp> = ({ blogId}) => {
   const menuItems = [
     {
       label: "جزییات",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      icon: <FiAlertCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => router.push(`/blogs/${blogId}`),
     },
 
     {
       label: "ویرایش",
-      icon: <TbEdit className="mt-px text-white" />,
+      icon: <TbEdit className="mt-px text-white-pure" />,
       onClick: () => router.push(`/dashboard/admin/blog-management/edit/${blogId}`),
     },
     {
       label: "حذف",
-      icon: <TbTrash className="mt-px text-white" />,
+      icon: <TbTrash className="mt-px text-white-pure" />,
       onClick: () => setIsAlertModalOpen(true),
     },
   ];

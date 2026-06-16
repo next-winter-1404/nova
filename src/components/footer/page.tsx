@@ -13,10 +13,6 @@ import Location from "@/src/assets/icons/Location.svg"
 import z2 from "@/src/assets/images/z2.svg"
 import T1_1591355889268  from "@/src/assets/images/T1_1591355889268.svg"
 import file_20191206_1550_36991  from "@/src/assets/images/file_20191206_1550_36991.svg"
-import instagram from "@/src/assets/icons/instagram.svg"
-import inI from "@/src/assets/icons/inl.svg"
-import telegram from "@/src/assets/icons/telegram.svg"
-import whatsApp from "@/src/assets/icons/whatsApp.svg"
 import man from "@/src/assets/images/man.svg"
 import Star15 from "@/src/assets/images/Star 15.svg"
 import Star16 from "@/src/assets/images/Star 16.svg"
@@ -28,11 +24,15 @@ import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { postCommentsLand } from '@/src/utils/sevices/api/contactus/postCommentLand'
 import LoginButton from '../login/button/LoginButton'
+import { FaGlobe, FaInstagram, FaLinkedin, FaTelegram, FaWhatsapp } from 'react-icons/fa'
+import { ISocialMedia } from '@/src/core/types/ISocialMedia'
+import { useSocialMedia } from '@/src/utils/hooks/useSocialMedia'
 
 const Footer = () => {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const { socials } = useSocialMedia();
   const [formData, setFormData] = useState({
     title: "",
     message: ""
@@ -52,6 +52,30 @@ const Footer = () => {
       setLoading(false);
     }
   };
+
+  const socialIcons = {
+    instagram: FaInstagram,
+    telegram: FaTelegram,
+    linkedin: FaLinkedin,
+    whatsapp: FaWhatsapp,
+    website: FaGlobe,
+  };
+
+  const footerPlatforms = [
+    "instagram",
+    "telegram",
+    "linkedin",
+    "whatsapp",
+    "website",
+  ];
+
+  const footerLinks = socials.filter(
+    (item) =>
+      item.platform &&
+      footerPlatforms.includes(
+        item.platform.toLowerCase()
+      )
+  );
 
   useEffect(() => {
     checkAuth();
@@ -81,9 +105,6 @@ const Footer = () => {
     }
   };
 
-
-
-
   const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = e.target;
     setFormData((prev) => ({
@@ -92,8 +113,6 @@ const Footer = () => {
     }));
   };
   
-
- 
 
   return (
     <div className='h-[1310px] bg-dark-900 relative w-full flex justify-center items-center '>
@@ -134,18 +153,6 @@ const Footer = () => {
                       name='title'
                       dir='rtl'
                     />            
-                    {/* <Input
-                      labelText={'شماره یا ایمیل :'} 
-                      id={'email'} 
-                      InputHeight={'h-[59px]'}
-                      htmlFor={'email'}
-                      type={'text'}
-                      placeHolder={'وارد کنید ....'}
-                      parentWidth='md:w-[297px] w-[150px]'
-                      borderColor='border-selectedButtonText'               
-                      labelTextSize='md:text-[16px] text-[12px]'
-                      textSize='md:text-[20px] text-[16px]'
-                    />                     */}
                 </div>
                 <div className='md:w-full w-[330px] h-[156px]' >
                 <Input
@@ -227,12 +234,30 @@ const Footer = () => {
                   </div>
                 </div>
                 <div className='h-20 flex items-center justify-between w-11/12'>
-                  <h2 className='md:text-[16px] text-[12px] text-white-pure'>تمام حقوق مادی و معنوی این اثر برای دلتا محفوظ است .</h2>
-                  <div className='md:h-10 md:w-1/6 w-1/2 flex md:gap-4 gap-1.5'>
-                    <div className='hover:cursor-pointer border flex justify-center border-amber-50 md:h-full h-7 w-1/3 rounded-2xl bg-white-pure'><Image src={inI} alt='inI'/></div>
-                    <div className='hover:cursor-pointer border border-amber-50 flex justify-center md:h-full h-7 w-1/3 rounded-2xl'><Image src={instagram} alt='instagram'/></div>
-                    <div className='hover:cursor-pointer border border-amber-50 md:h-full h-7 w-1/3 flex justify-center rounded-2xl'><Image src={telegram} alt='telegram'/></div>
-                    <div className='hover:cursor-pointer border border-amber-50 md:h-full h-7 w-1/3 rounded-2xl flex justify-center'><Image src={whatsApp} alt='whatsApp'/></div>
+                  <h2 className='md:text-[16px] text-[12px] text-white-pure'>
+                    تمام حقوق مادی و معنوی این اثر برای دلتا محفوظ است .
+                  </h2>
+                  <div className='md:h-9 md:w-1/6 w-1/2 flex md:gap-4 gap-1.5'>
+                    {footerLinks.map((item) => {
+                      const Icon =
+                        socialIcons [
+                          item.platform.toLowerCase() as keyof typeof socialIcons
+                        ] || <FaGlobe/>;
+
+                      if (!Icon) return null;
+
+                      return (
+                        <a
+                          key={item.id}
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:cursor-pointer border border-amber-50 md:h-full h-7 w-1/3 rounded-2xl flex justify-center items-center text-white"
+                        >
+                          <Icon size={20} />
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

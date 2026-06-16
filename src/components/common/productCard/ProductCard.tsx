@@ -11,8 +11,11 @@ import OldPriceComponent from "./OldPrice";
 import { IProductCard } from "@/src/core/types/IProductCard";
 import { computingDiscount } from "@/src/utils/helper/computingDiscount";
 import Link from "next/link";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import imagePalaceHolder from "@/src/assets/images/imagePlaceHolder (2).png";
 import { FaStar } from "react-icons/fa";
 import CardShape from "../shape/CardShape";
+import { formatPrice } from "@/src/utils/hooks/formatPrice";
 
 const ProductCard = ({
   title,
@@ -115,7 +118,7 @@ const ProductCard = ({
               </div>
             </div>
             <div className="w-full h-[36px] group-hover:bg-primary-accent-green bg-dark-600 text-white-pure group-hover:text-dark-800 rounded-[12px] flex items-center justify-between pl-3 pr-3">
-              <h2 className="text-16-medium"> {price} </h2>
+              <h2 className="text-16-medium"> {formatPrice(Number(price))} </h2>
               <h2 className="text-gray-300 text-16-medium">
                 {discounted_price && discounted_price === "0" ? (
                   <OldPriceComponent oldPrice={price} />

@@ -13,6 +13,8 @@ import InnerAmusementCard from "../innerAmusementCard/page";
 import { IHouse } from "@/src/core/types/IHouse";
 import ProductCard from "../productCard/ProductCard";
 import ContentContainerShape from "../shape/ContentContainerShape";
+import ScrollSlide from "../../animations/GoingFromRight";
+import BlogCard from "../productCard/BlogCard";
 
 interface AmusementCardProp {
   houses: IHouse[];
@@ -22,6 +24,7 @@ const AmusementCard: FC<AmusementCardProp> = ({ houses }) => {
     return <p>در حال بارگذاری</p>;
   }
   return (
+     <ScrollSlide direction="ledf">
     <div className="flex-center relative">
       <svg
         viewBox="0 0 1376 550.5"
@@ -77,9 +80,9 @@ const AmusementCard: FC<AmusementCardProp> = ({ houses }) => {
           >
             {houses.map((house: IHouse) => (
               <SwiperSlide key={house.id}>
-                <ProductCard
+                
+                <BlogCard
                   title={house.title}
-                  photos={house.photos}
                   rate={house.rate}
                 />
               </SwiperSlide>
@@ -88,6 +91,7 @@ const AmusementCard: FC<AmusementCardProp> = ({ houses }) => {
         </div>
       </div>
     </div>
+    </ScrollSlide>
   );
 };
 

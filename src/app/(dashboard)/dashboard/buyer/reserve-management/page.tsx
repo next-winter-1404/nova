@@ -1,9 +1,11 @@
+import FadeIn from "@/src/components/animations/FadeIn";
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import SimpleDropdown from "@/src/components/common/dropDown";
 import PaginationClient from "@/src/components/common/pagination/page";
 import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
 import ReservationItem from "@/src/components/dashboard/ReservationItem/ReservationItem";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 import { getBookings } from "@/src/utils/sevices/api/processReserve/getbooking";
 import { FC } from "react";
 interface IProps {
@@ -35,8 +37,8 @@ const SellerReservePage: FC<IProps> = async ({ searchParams }) => {
     "تاریخ رزرو",
     "قیمت کل",
     "تعداد مسافر",
-    "وضعیت رزو",
-    "وضعیت پرداخت",
+    "وضعیت رزرو",
+    "عملیات"
   ];
   const sortItem = [
     { value: "ASC", label: "صعودی" },
@@ -50,6 +52,7 @@ const SellerReservePage: FC<IProps> = async ({ searchParams }) => {
   ];
 
   return (
+    <FadeIn>
     <div>
       <DashboardContentContainer
         title="لیست رزرو های شما"
@@ -75,59 +78,109 @@ const SellerReservePage: FC<IProps> = async ({ searchParams }) => {
           </div>
         }
       >
-        <div className="flex flex-col items-end">
-          <div className="flex flex-col gap-5 w-full">
-            <ItemNavbar colsNumber={6} items={items} />
-            <div className="flex text-white mt-5 items-center">
-              {booking?.length > 0 ? (
-                <div className="w-full flex flex-col gap-5">
-                  <>
-                    {booking?.map((item) => (
-                      <div
-                        className="flex justify-between w-full items-center"
-                        key={item.id}
-                      >
-                        <div className="grid grid-cols-6 w-full  items-center md:text-[16px] text-[10px]">
-                          <div className="flex gap-4 items-center xl:max-w-[300px] ">
-                            <div className="w-[100px] h-[72px] rounded-xl hidden md:block bg-gray-600"></div>
-                            <div className="whitespace-nowrap">
-                              {item.house?.title || "عنوانی وجود ندارد"}
-                            </div>
-                          </div>
-                          <div className=" text-center">
-                            {item.created_at?.slice(0, 10) || "--"}
-                          </div>
-                          <div
-                            className="flex-center gap-1 text-center "
-                            dir="rtl"
-                          >
-                            <span>{item.house?.price || "  --"}</span>
-                            <span>تومان</span>
-                          </div>
-                          <span className="text-center ml-5">
-                            {item.traveler_details?.length} نفر
-                          </span>
-                          <StatusLabel status={item.status} />
-                          <StatusLabel status={item.status} />
-                        </div>
+      <div className="flex flex-col gap-3 w-full">
+  <ItemNavbar colsNumber={6} items={items} />
 
-                        <ReservationItem item={item} />
-                      </div>
-                    ))}
-                  </>
-                </div>
-              ) : (
-                <div className="text-4xl text-gray-300">رزوری وجود ندارد</div>
-              )}
-            </div>
+  <div className="flex flex-col gap-3 w-full">
+    {booking?.length > 0 ? (
+      booking.map((item) => (
+        <div
+          key={item.id}
+          className="
+            grid
+            grid-cols-6
+            items-center
+
+            w-full
+            bg-dark-800
+            rounded-xl
+
+            px-4 md:px-6
+            py-4
+
+            text-white-pure
+            text-[11px] md:text-[15px]
+
+            transition-all
+            duration-300
+            ease-out
+            transform-gpu
+
+            hover:-translate-y-1
+            hover:scale-[1.01]
+            hover:bg-dark-700
+            hover:shadow-xl
+            hover:shadow-black/30
+
+            border
+            border-transparent
+            hover:border-white/10
+
+            cursor-pointer
+          "
+        >
+          {/* نام اقامتگاه */}
+          <div className="flex items-center gap-3 overflow-hidden">
+            <div className="w-[70px] h-[55px] rounded-lg bg-gray-600 hidden md:block shrink-0" />
+
+            <span className="truncate">
+              {item.house?.title || "عنوانی وجود ندارد"}
+            </span>
           </div>
-          <PaginationClient
-            totalPages={totalPages}
-            totalCount={Number(result.totalCount)}
-          />
+
+          {/* تاریخ رزرو */}
+          <p className="text-center truncate">
+            {formatDateTime(item.created_at)}
+          </p>
+
+          {/* قیمت */}
+          <p className="text-center truncate">
+            {item.house?.price
+              ? `${item.house.price} تومان`
+              : "--"}
+          </p>
+
+          {/* تعداد مسافر */}
+          <p className="text-center">
+            {item.traveler_details?.length || 0} نفر
+          </p>
+
+          {/* وضعیت */}
+          <div className="flex justify-center">
+            <StatusLabel status={item.status} />
+          </div>
+
+          {/* عملیات */}
+          <div className="flex justify-center">
+            <ReservationItem
+              houseId={Number(item.houseId)}
+              item={item}
+            />
+          </div>
         </div>
+      ))
+    ) : (
+      <div className="w-full flex items-center justify-center py-20">
+        <p className="text-gray-400 text-xl md:text-2xl">
+          رزروی وجود ندارد
+        </p>
+      </div>
+    )}
+  </div>
+
+  <PaginationClient
+    totalPages={totalPages}
+    totalCount={Number(result.totalCount)}
+  />
+</div>
+
+<PaginationClient
+  totalPages={totalPages}
+  totalCount={Number(result.totalCount)}
+/>
       </DashboardContentContainer>
     </div>
+    </FadeIn>
   );
 };
 

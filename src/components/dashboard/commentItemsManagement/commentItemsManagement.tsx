@@ -15,6 +15,7 @@ import LoginButton from "../../login/button/LoginButton";
 import { adminEditComment } from "@/src/utils/sevices/api/admin/comments/editComments/editComments";
 import { adminDeleteComment } from "@/src/utils/sevices/api/admin/comments/deleteComments/deleteComments";
 import AlertComponent from "../../common/alert/alert";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 
 interface IProp {
   comment: IComment;
@@ -61,18 +62,18 @@ const CommentITemsManagement: FC<IProp> = ({ comment }) => {
   const menuItems = [
     {
       label: "جزییات",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      icon: <FiAlertCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsDetailOpen(true),
     },
 
     {
       label: "ویرایش",
-      icon: <TbEdit className="mt-px text-white" />,
+      icon: <TbEdit className="mt-px text-white-pure" />,
       onClick: () => setIsEditOpen(true),
     },
     {
       label: "حذف",
-      icon: <TbTrash className="mt-px text-white" />,
+      icon: <TbTrash className="mt-px text-white-pure" />,
       onClick: () => setIsDeleteOpen(true),
     },
   ];
@@ -94,7 +95,7 @@ const CommentITemsManagement: FC<IProp> = ({ comment }) => {
       <Modal
         onOpenChange={setIsDetailOpen}
         open={isDetailOpen}
-        contentClassName="bg-dark-900 text-white "
+        contentClassName="bg-dark-900 text-white-pure "
         mainContent={
           <div className="flex flex-col gap-8 " dir="rtl">
             <div className="flex gap-3 items-center">
@@ -129,11 +130,12 @@ const CommentITemsManagement: FC<IProp> = ({ comment }) => {
       <Modal
         onOpenChange={setIsEditOpen}
         open={isEditOpen}
-        contentClassName="bg-dark-900 text-white "
+        contentClassName="bg-dark-900 text-white-pure "
         mainContent={
           <form action={formAction} className="flex flex-col gap-8 " dir="rtl">
             <div className="flex gap-3 items-center">
-              <Image
+              <ImageFallback
+                fallbackSrc={userPlaceHolder}
                 src={comment.user?.profilePicture || userPlaceHolder}
                 alt="prof"
                 width={37}
@@ -149,7 +151,7 @@ const CommentITemsManagement: FC<IProp> = ({ comment }) => {
               <div className="flex flex-col gap-2">
                 <span>عنوان نظر:</span>
                 <Input
-                  InputHeight="h-[50px] text-white "
+                  InputHeight="h-[50px] text-white-pure "
                   defaultValue={comment.title}
                   name="title"
                 />
@@ -158,7 +160,7 @@ const CommentITemsManagement: FC<IProp> = ({ comment }) => {
                 <span>توضیحات نظر:</span>
 
                 <Input
-                  InputHeight="h-[150px] text-white "
+                  InputHeight="h-[150px] text-white-pure "
                   defaultValue={comment.caption}
                   name="caption"
                 />

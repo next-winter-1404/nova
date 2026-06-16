@@ -32,6 +32,8 @@ import { EditBooking } from "@/src/utils/sevices/api/admin/booking/editBooking/e
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { deleteBooking } from "@/src/utils/sevices/api/admin/booking/deleteBooking/deleteBooking";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 interface IProp {
   bookingId: number;
   houseId?: number;
@@ -41,7 +43,7 @@ const ReserveItemsIcon: FC<IProp> = ({ bookingId, houseId, userId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTravelersModalOpen, setIsTravelersModalOpen] = useState(false);
   const router = useRouter();
-//   api callings
+  //   api callings
   const { data: houseDetail, isLoading: houseLoading } =
     useQuery<IHouse | null>({
       queryKey: ["houseDetail", houseId],
@@ -71,51 +73,50 @@ const ReserveItemsIcon: FC<IProp> = ({ bookingId, houseId, userId }) => {
   const usersDetail = getUsers?.user;
   const isLoading = houseLoading || bookingLoading || userLoading;
 
-//   edit and delete reservation function
+  //   edit and delete reservation function
   const confirmReservation = async () => {
     try {
-        await EditBooking(bookingId, "confirmed");
-        toast.success("رزرو با موفقیت تأیید شد ");
-        router.refresh();
-      } catch (error) {
-        toast.error("خطا در تأیید رزرو ");
-        console.error(error);
-      }
-    };
-  
+      await EditBooking(bookingId, "confirmed");
+      toast.success("رزرو با موفقیت تأیید شد ");
+      router.refresh();
+    } catch (error) {
+      toast.error("خطا در تأیید رزرو ");
+      console.error(error);
+    }
+  };
+
   const deleteReservation = async () => {
     try {
-        await deleteBooking(bookingId);
-        toast.success("رزرو با موفقیت حذف شد ");
-        router.refresh();
-      } catch (error) {
-        toast.error("خطا در حذف رزرو ");
-        console.error(error);
-      }
-    };
-  
- 
-// drop down items with their functions
+      await deleteBooking(bookingId);
+      toast.success("رزرو با موفقیت حذف شد ");
+      router.refresh();
+    } catch (error) {
+      toast.error("خطا در حذف رزرو ");
+      console.error(error);
+    }
+  };
+
+  // drop down items with their functions
   const allMenuItems = [
     {
       label: "جزییات",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      icon: <FiAlertCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsModalOpen(true),
     },
 
     {
       label: "تایید",
-      icon: <TbCircleCheckFilled className="mt-px text-white" />,
+      icon: <TbCircleCheckFilled className="mt-px text-white-pure" />,
       onClick: () => confirmReservation(),
     },
     {
-        label: "حذف",
-        icon: <TbTrash className="mt-px text-white" />,
-        onClick: () => deleteReservation(),
+      label: "حذف",
+      icon: <TbTrash className="mt-px text-white-pure" />,
+      onClick: () => deleteReservation(),
     },
   ];
-  const menuItems = allMenuItems.filter(item => 
-    !(bookingDetail?.status === "confirmed" && item.label === "تایید")
+  const menuItems = allMenuItems.filter(
+    (item) => !(bookingDetail?.status === "confirmed" && item.label === "تایید")
   );
   const navbarItem = ["تاریخ تولد", " جنسیت", "کدملی", " نام"];
 
@@ -142,9 +143,10 @@ const ReserveItemsIcon: FC<IProp> = ({ bookingId, houseId, userId }) => {
               <div>در حال بارگزاری....</div>
             ) : (
               <div className="w-full flex justify-between ">
-                <div className="w-1/2 flex flex-col text-white gap-5" dir="rtl">
+                <div className="w-1/2 flex flex-col text-white-pure gap-5" dir="rtl">
                   <div className="flex gap-4 items-center">
-                    <Image
+                    <ImageFallback
+                      fallbackSrc={userPlaceHolder}
                       src={usersDetail?.profilePicture || userPlaceHolder}
                       alt={`${usersDetail?.fullName}`}
                       width={50}
@@ -196,14 +198,14 @@ const ReserveItemsIcon: FC<IProp> = ({ bookingId, houseId, userId }) => {
                       <TbCalendarClock />
                       <span>تاریخ ایجاد رزرو:</span>
                     </div>
-                    {bookingDetail?.created_at?.slice(0, 10)}
+                    {formatDateTime(bookingDetail?.created_at)}
                   </div>
                   <div className="flex gap-2 ">
                     <div className="flex gap-1 text-gray-300 items-center ">
                       <TbEdit />
                       <span>اخرین ویرایش:</span>
                     </div>
-                    {bookingDetail?.updated_at?.slice(0, 10)}
+                    {formatDateTime(bookingDetail?.updated_at)}
                   </div>
                   <Button
                     text={`لیست مسافرین (${bookingDetail?.traveler_details?.length})`}
@@ -260,7 +262,7 @@ const ReserveItemsIcon: FC<IProp> = ({ bookingId, houseId, userId }) => {
                 dir="rtl"
                 key={`${traveler.firstName} - ${traveler.nationalId}`}
               >
-                <div className="grid grid-cols-4 gap-4 text-white">
+                <div className="grid grid-cols-4 gap-4 text-white-pure">
                   <span>
                     {`${traveler.firstName} ${traveler.lastName}` ||
                       "نام کاربر"}

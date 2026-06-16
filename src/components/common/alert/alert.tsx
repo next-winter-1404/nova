@@ -42,7 +42,7 @@ const AlertComponent: FC<IAlertProp> = ({ alertText, acceptButtonText,isModalOpe
                   height: 40,
                   border: "1px solid var(--color-gray-300)",
                   borderRadius: 12,
-                  cursor:"pointer"
+                  cursor:"pointer",
                 }}
                 text={"انصراف"}
                 onClick={() => {

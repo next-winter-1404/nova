@@ -15,7 +15,7 @@ import {
   FaRegFileAlt,
   FaStar,
 } from "react-icons/fa";
-import { FiCopy, FiHeart } from "react-icons/fi";
+import { FiCopy, FiHelpCircle } from "react-icons/fi";
 import AboutHouseContainer from "@/src/components/reserveHouse/aboutHouseContainer";
 import HouseItemsComponent from "@/src/components/reserveHouse/houseItemsComponent";
 import SimilarHouses from "@/src/components/reserveHouse/similarHouse/SimilarHousesNavbar";
@@ -27,6 +27,11 @@ import ReserveBox from "@/src/components/reserveHouse/reserveBox";
 import { getHousesComment } from "@/src/utils/sevices/api/comments/reserveHouseDetailComment/getComment";
 import { Modal } from "@/src/components/common/modal";
 import AddToFavorite from "@/src/components/reserveHouse/addToFavorite/AddToFavorite";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import HouseQA from "@/src/components/common/houseQA/HouseQA";
+import ScrollSlide from "@/src/components/animations/GoingFromRight";
+import GlareHover from "@/src/components/animations/GlareHover/GlareHover";
+import Slide from "@/src/components/animations/Slide";
 
 interface IProps {
   params: Promise<{ id: number }>;
@@ -61,168 +66,233 @@ const SingleReserveHousePage: FC<IProps> = async ({ searchParams, params }) => {
   ];
   const tabs: ITab[] = [
     {
+      value: "QA",
+      label: "سوالات کاربران",
+      icon: <FiHelpCircle className="md:w-4 md:h-4" />,
+    },
+    {
       value: "comment",
       label: "نظرات کاربران",
-      icon: <FaRegCommentDots className="w-4 h-4" />,
+      icon: <FaRegCommentDots className="md:w-4 md:h-4" />,
     },
     {
       value: "facilities",
       label: " امکانات اقامتگاه",
-      icon: <FaRegSave className="w-4 h-4" />,
+      icon: <FaRegSave className="md:w-4 md:h-4" />,
     },
 
     {
       value: "about",
       label: "درباره ملک",
-      icon: <FaRegFileAlt className="w-4 h-4" />,
+      icon: <FaRegFileAlt className="md:w-4 md:h-4" />,
     },
   ];
   const renderContent = () => {
     switch (activeTab) {
+      case "QA":
+        return (
+          <Slide direction="right">
+            <HouseQA houseId={Number(house.id)} />
+          </Slide>
+        );
       case "about":
         return (
-          <AboutHouseContainer
-            caption={house?.caption}
-            title={house?.title}
-          />
+          <Slide direction="right">
+            <AboutHouseContainer
+              caption={house?.caption}
+              title={house?.title}
+            />
+          </Slide>
         );
       case "comment":
         return <CommentSection houseId={house.id} comments={comments} />;
       case "facilities":
         return (
-          <HouseItemsComponent
-            bathrooms={house.bathrooms}
-            capacity={house.capacity}
-            parking={house.parking}
-            rooms={house.rooms}
-            yard_type={house.yard_type}
-          />
+          <Slide direction="right">
+            <HouseItemsComponent
+              bathrooms={house.bathrooms}
+              capacity={house.capacity}
+              parking={house.parking}
+              rooms={house.rooms}
+              yard_type={house.yard_type}
+            />
+          </Slide>
         );
       default:
         return (
-          <AboutHouseContainer
-            caption={house?.caption}
-            title={house?.caption}
-          />
+          <Slide direction="right">
+            <AboutHouseContainer
+              caption={house?.caption}
+              title={house?.caption}
+            />
+          </Slide>
         );
     }
   };
   return (
-    <div className="flex-center bg-dark-900 w-full">
-      <div className="flex items-end flex-col gap-6 w-4/5 xl:w-[1340px]  2xl:w-[1444px]  lg:w-[95%]  lg:px-8 mt-17 ">
-        <Breadcrumb items={items} twClassname="lg:mt-14 mt-6" />
-        <div className="flex  flex-col gap-8 md:gap-4 lg:flex-row-reverse lg:items-end justify-between  w-full mt-4 p-4">
-          <HouseMainInformation
-            houseTitle={house?.title || "نام اقامتگاه"}
-            houseAddress={house?.address || "ادرسی وجود ندارد"}
-          />
-          <div className="flex items-center gap-4 justify-between " dir="rtl">
-            <Button
-              text={`${house?.rate} ستاره `}
-              icon={<FaStar className="text-white h-4 w-4" />}
-              buttonStyle={{
-                background: "var(--color-blue-purple-500)",
-                width: 92,
-                height: 32,
-                borderRadius: 10,
-              }}
-            />
-            <div className="w-1 h-4 border-white border-1 bg-white hidden lg:block " />
-            <div className="flex gap-4">
-              <ToolTip
-                mainContent={
-                  <div className="flex-center w-10 h-10 bg-dark-700 rounded-xl hover:bg-primary-accent-green">
-                    <FiCopy className="w-4 h-4 text-gray-300 hover:text-black" />
-                  </div>
-                }
-                tooltipText="کپی کردن"
-              />
-              <AddToFavorite
-                houseId={Number(house?.id)}
-                isFavorite={house.isFavorite}
-                favoriteId={Number(house.favoriteId)}
-              />
+    <Slide direction="right">
+      <div className="flex-center bg-dark-900 w-full">
+        <div className="flex items-end flex-col gap-6 w-[98%] sm:w-[90%] xl:w-[1340px]  2xl:w-[1444px]  lg:w-[95%]  lg:px-8 mt-17 ">
+          <ScrollSlide direction="right">
+            <div className="w-full flex-center justify-end">
+              <Breadcrumb items={items} twClassname="lg:mt-14 mt-6" />
             </div>
-          </div>
-        </div>
-
-        <div className="flex gap-15 lg:gap-5 lg:flex-row lg:p-2 lg:justify-between lg:items-start p-4 flex-col-reverse  items-end w-full">
-          <div className="flex gap-3 md:flex md:flex-wrap md:justify-between lg:grid lg:grid-cols-2 lg:w-[228px]">
-            {house.photos && house.photos.length > 0
-              ? house.photos.map((photo, index) => (
-                  <div
-                    key={index}
-                    className="w-24 h-24 bg-dark-700 rounded-4xl cursor-pointer hover:border-primary-accent-green hover:border overflow-hidden"
-                  >
-                    <Image
-                      src={photo}
-                      alt={`تصویر ${index + 1}`}
-                      width={96}
-                      height={96}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                ))
-              : [...Array(8)].map((_, index) => (
-                  <div
-                    key={index}
-                    className=" hidden lg:block w-24 h-24 bg-dark-700 rounded-4xl cursor-pointer hover:border-primary-accent-green hover:border"
-                  />
-                ))}
-          </div>
-          <Image
-            alt="house picture"
-            src={house?.photos?.[0] || deaf}
-            width={1100}
-            height={420}
-            className="md:w-full lg:w-[80%] xl:max-w-[1100px] lg:h-[420px] rounded-[40px] border border-dark-800"
-          />
-        </div>
-        <section className=" relative flex flex-row-reverse justify-between gap-4 w-full items-start">
-          <section className=" lg:w-[1000px] flex flex-col w-full gap-8">
-            <SelectedTab
-              options={tabs}
-              twClassname="w-full"
-              buttonWidth="p-2 md:p-4"
+          </ScrollSlide>
+          <div className="flex  flex-col gap-8 md:gap-4 lg:flex-row-reverse lg:items-end justify-between  w-full mt-4 p-4">
+            <HouseMainInformation
+              houseTitle={house?.title || "نام اقامتگاه"}
+              houseAddress={house?.address || "ادرسی وجود ندارد"}
             />
 
-            {renderContent()}
-          </section>
-          <div className="hidden lg:block">
-            <ReserveBox
-              price={house.price}
-              id={house.id}
-              discounted_price={house.discounted_price}
-            />
-          </div>
-          <div className="block lg:hidden fixed z-10 bottom-5 right-5">
-            <Modal
-              contentClassName="bg-dark-900 block lg:hidden h-fit"
-              modalBtn={
+            <div className="flex items-center gap-4 justify-between " dir="rtl">
+              <GlareHover
+                glareColor="var(--color-gray-300)"
+                glareOpacity={0.3}
+                glareAngle={-30}
+                glareSize={300}
+                transitionDuration={800}
+                playOnce={false}
+                className="rounded-[10px]"
+              >
                 <Button
-                  text={"همین حالا رزرو کن"}
+                  text={`${house?.rate || 0} ستاره `}
+                  icon={<FaStar className="text-white h-4 w-4" />}
                   buttonStyle={{
-                    background: "var(--color-primary-accent-green)",
-                    color: "black",
-                    width: 100,
-                    height: 50,
-                    cursor: "pointer",
+                    background: "var(--color-blue-purple-500)",
+                    width: 92,
+                    height: 32,
+                    borderRadius: 10,
                   }}
                 />
-              }
-              mainContent={
-                <ReserveBox
-                  price={house.price}
-                  id={house.id}
-                  discounted_price={house.discounted_price}
-                />
-              }
+              </GlareHover>
+              <div className="w-1 h-4 border-white border-1 bg-white hidden lg:block " />
+              <div className="flex gap-4">
+                <GlareHover
+                  glareColor="var(--color-gray-300)"
+                  glareOpacity={0.3}
+                  glareAngle={-30}
+                  glareSize={300}
+                  transitionDuration={800}
+                  playOnce={false}
+                  className="rounded-[10px]"
+                >
+                  <ToolTip
+                    mainContent={
+                      <div className="flex-center w-10 h-10 bg-dark-700 rounded-xl hover:bg-primary-accent-green">
+                        <FiCopy className="w-4 h-4 text-gray-300 hover:text-black" />
+                      </div>
+                    }
+                    tooltipText="کپی کردن"
+                  />
+                </GlareHover>
+                <GlareHover
+                  glareColor="var(--color-gray-300)"
+                  glareOpacity={0.3}
+                  glareAngle={-30}
+                  glareSize={300}
+                  transitionDuration={800}
+                  playOnce={false}
+                  className="rounded-[10px]"
+                >
+                  <AddToFavorite
+                    houseId={Number(house?.id)}
+                    isFavorite={house.isFavorite}
+                    favoriteId={Number(house.favoriteId)}
+                  />
+                </GlareHover>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-15 lg:gap-5 lg:flex-row lg:p-2 lg:justify-between lg:items-start p-4 flex-col-reverse  items-end w-full">
+            <div className="hidden gap-3 md:flex md:flex-wrap md:justify-between lg:grid lg:grid-cols-2 lg:w-[228px]">
+              {house.photos && house.photos.length > 0
+                ? house.photos.map((photo, index) => (
+                    <div
+                      key={index}
+                      className="w-24 h-24 bg-dark-700 rounded-4xl cursor-pointer hover:border-primary-accent-green hover:border overflow-hidden"
+                    >
+                      <Image
+                        src={photo}
+                        alt={`تصویر ${index + 1}`}
+                        width={96}
+                        height={96}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                  ))
+                : [...Array(8)].map((_, index) => (
+                    <GlareHover
+                      glareColor="var(--color-gray-300)"
+                      glareOpacity={0.3}
+                      glareAngle={-30}
+                      glareSize={300}
+                      transitionDuration={1000}
+                      playOnce={false}
+                      className="rounded-[10px]"
+                    >
+                      <div
+                        key={index}
+                        className=" hidden lg:block w-24 h-24 bg-dark-700 rounded-4xl cursor-pointer hover:border-primary-accent-green hover:border"
+                      />
+                    </GlareHover>
+                  ))}
+            </div>
+            <ImageFallback
+              fallbackSrc={deaf}
+              alt="house picture"
+              src={house?.photos?.[0] ?? deaf}
+              width={1100}
+              height={420}
+              className="md:w-full lg:w-[80%] xl:max-w-[1100px] lg:h-[420px] rounded-[40px] border border-dark-800"
             />
           </div>
-        </section>
-        <SimilarHouses />
+          <section className=" relative flex flex-row-reverse justify-between gap-4 w-full items-start">
+            <section className=" lg:w-[1000px] flex flex-col w-full gap-8 ">
+              <SelectedTab
+                options={tabs}
+                twClassname="w-full"
+                buttonWidth="p-px md:p-4"
+              />
+
+              {renderContent()}
+            </section>
+            <div className="hidden lg:block">
+              <ReserveBox
+                price={house.price}
+                id={house.id}
+                discounted_price={house.discounted_price}
+              />
+            </div>
+            <div className="block lg:hidden fixed z-10 bottom-35 right-5">
+              <Modal
+                contentClassName="bg-dark-900 block lg:hidden h-fit"
+                modalBtn={
+                  <Button
+                    text={"همین حالا رزرو کن"}
+                    buttonStyle={{
+                      background: "var(--color-primary-accent-green)",
+                      color: "black",
+                      width: 100,
+                      height: 50,
+                      cursor: "pointer",
+                    }}
+                  />
+                }
+                mainContent={
+                  <ReserveBox
+                    price={house.price}
+                    id={house.id}
+                    discounted_price={house.discounted_price}
+                  />
+                }
+              />
+            </div>
+          </section>
+          <SimilarHouses />
+        </div>
       </div>
-    </div>
+    </Slide>
   );
 };
 

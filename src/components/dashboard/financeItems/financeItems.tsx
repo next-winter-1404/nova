@@ -35,13 +35,20 @@ import { editPayment } from "@/src/utils/sevices/api/admin/payments/editPayment/
 import { FaBan } from "react-icons/fa";
 import AlertComponent from "../../common/alert/alert";
 import { deletePayment } from "@/src/utils/sevices/api/admin/payments/deletePayment/deletePayment";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 interface IProp {
   bookingId?: number;
   userId?: number;
   paymentId: number;
   paymentStatus?: string;
 }
-const FinanceItems: FC<IProp> = ({ bookingId, userId, paymentId,paymentStatus }) => {
+const FinanceItems: FC<IProp> = ({
+  bookingId,
+  userId,
+  paymentId,
+  paymentStatus,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTravelersModalOpen, setIsTravelersModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
@@ -74,7 +81,7 @@ const FinanceItems: FC<IProp> = ({ bookingId, userId, paymentId,paymentStatus })
     try {
       await editPayment(paymentId!, updateValue);
       toast.success(" با موفقیت ویرایش شد ");
-      setIsAlertModalOpen(false)
+      setIsAlertModalOpen(false);
       router.refresh();
     } catch (error) {
       toast.error("خطا در ویرایش  ");
@@ -91,54 +98,48 @@ const FinanceItems: FC<IProp> = ({ bookingId, userId, paymentId,paymentStatus })
   };
   const handleDeletePayment = async () => {
     try {
-        await deletePayment(paymentId);
-        toast.success("پرداخت با موفقیت حذف شد ");
-        router.refresh();
-      } catch (error) {
-        toast.error("خطا در حذف پرداخت ");
-        console.error(error);
-      }
-    };
+      await deletePayment(paymentId);
+      toast.success("پرداخت با موفقیت حذف شد ");
+      router.refresh();
+    } catch (error) {
+      toast.error("خطا در حذف پرداخت ");
+      console.error(error);
+    }
+  };
 
   // drop down items with their functions
   const allMenuItems = [
     {
       label: "جزییات",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      icon: <FiAlertCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsModalOpen(true),
     },
 
     {
       label: "تایید",
-      icon: <TbCircleCheckFilled className="mt-px text-white" />,
+      icon: <TbCircleCheckFilled className="mt-px text-white-pure" />,
       onClick: () => handleConfirm(),
     },
     {
       label: "لغو",
-      icon: <FaBan className="mt-px text-white" />,
+      icon: <FaBan className="mt-px text-white-pure" />,
       onClick: () => handleCancel(),
     },
     {
       label: "حذف",
-      icon: <TbTrash className="mt-px text-white" />,
+      icon: <TbTrash className="mt-px text-white-pure" />,
       onClick: () => handleDeletePayment(),
     },
   ];
   const menuItems = allMenuItems.filter((item) => {
-    if (
-      paymentStatus === "completed" &&
-      item.label === "تایید"
-    ) {
+    if (paymentStatus === "completed" && item.label === "تایید") {
       return false;
     }
-  
-    if (
-      paymentStatus === "failed" &&
-      item.label === "لغو"
-    ) {
+
+    if (paymentStatus === "failed" && item.label === "لغو") {
       return false;
     }
-  
+
     return true;
   });
   const navbarItem = ["تاریخ تولد", " جنسیت", "کدملی", " نام"];
@@ -166,9 +167,10 @@ const FinanceItems: FC<IProp> = ({ bookingId, userId, paymentId,paymentStatus })
                 در حال بارگزاری....
               </div>
             ) : (
-              <div className="w-full flex flex-col text-white gap-5" dir="rtl">
+              <div className="w-full flex flex-col text-white-pure gap-5" dir="rtl">
                 <div className="flex gap-4 items-center">
-                  <Image
+                  <ImageFallback
+                    fallbackSrc={userPlaceHolder}
                     src={usersDetail?.profilePicture || userPlaceHolder}
                     alt={`${usersDetail?.fullName}`}
                     width={50}
@@ -220,14 +222,14 @@ const FinanceItems: FC<IProp> = ({ bookingId, userId, paymentId,paymentStatus })
                     <TbCalendarClock />
                     <span>تاریخ ایجاد رزرو:</span>
                   </div>
-                  {bookingDetail?.created_at?.slice(0, 10) || "--"}
+                  {formatDateTime(bookingDetail?.created_at)}
                 </div>
                 <div className="flex gap-2 ">
                   <div className="flex gap-1 text-gray-300 items-center ">
                     <TbEdit />
                     <span>اخرین ویرایش:</span>
                   </div>
-                  {bookingDetail?.updated_at?.slice(0, 10) || "--"}
+                  {formatDateTime(bookingDetail?.updated_at)}
                 </div>
                 <Button
                   text={`لیست مسافرین (${
@@ -269,7 +271,7 @@ const FinanceItems: FC<IProp> = ({ bookingId, userId, paymentId,paymentStatus })
                 dir="rtl"
                 key={`${traveler.firstName} - ${traveler.nationalId}`}
               >
-                <div className="grid grid-cols-4 gap-4 text-white">
+                <div className="grid grid-cols-4 gap-4 text-white-pure">
                   <span>
                     {`${traveler.firstName} ${traveler.lastName}` ||
                       "نام کاربر"}

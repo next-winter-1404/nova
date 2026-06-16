@@ -14,6 +14,8 @@ import { IHouse } from "@/src/core/types/IHouse";
 import { IComment, ICommentResponse } from "@/src/core/types/IComment";
 import CommentITemsManagement from "../commentItemsManagement/commentItemsManagement";
 import SellerHouse from "../sellerHouse/SellerHouse";
+import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
+import { formatDateTime } from "@/src/utils/hooks/formDates";
 interface IProp {
   orderItems: IOption[];
   sortItems: IOption[];
@@ -36,7 +38,7 @@ const DashboardCommentManagement: FC<IProp> = ({
     <DashboardContentContainer
       title={`لیست نظرات کاربران (${res.totalCount})`}
       topSectionContent={
-        <div className="flex gap-4 py-2">
+        <div className="flex gap-4 py-2 flex-col   items-center sm:flex-row">
           <Modal
             contentClassName="bg-dark-900 text-white text-right"
             modalTitle="لیست املاک شما:"
@@ -48,113 +50,152 @@ const DashboardCommentManagement: FC<IProp> = ({
                 buttonStyle={{
                   background: "var(--color-primary-accent-green)",
                   color: "black",
+                  height: 52,
                 }}
                 icon={<RiBuildingLine className="w-4 h-4" />}
               />
             }
           />
 
-          <SimpleDropdown
-            options={orderItems}
-            paramKey="order"
-            placeholder="ترتیب نمایش"
-            tagBg="bg-dark-600"
-            triggerClassName="h-[50px] md:w-[155px] w-[100px] text-[13px]"
-            labelText="ترتیب نمایش"
-          />
-          <SimpleDropdown
-            options={sortItems}
-            paramKey="sort"
-            placeholder="مرتب سازی"
-            tagBg="bg-dark-600"
-            triggerClassName="h-[50px] md:w-[155px] w-[100px] text-[13px] "
-            labelText="مرتب سازی"
-          />
+          <div className=" flex w-full  justify-between gap-2">
+            <SimpleDropdown
+              options={orderItems}
+              paramKey="order"
+              placeholder="ترتیب نمایش"
+              tagBg="bg-dark-600"
+              triggerClassName="md:h-[50px] h-10  w-full text-[10px] md:text-base"
+              labelText="ترتیب نمایش"
+            />
+            <SimpleDropdown
+              options={sortItems}
+              paramKey="sort"
+              placeholder="مرتب سازی"
+              tagBg="bg-dark-600"
+              triggerClassName="md:h-[50px] h-10  w-full text-[10px] md:text-base "
+              labelText="مرتب سازی"
+            />
+          </div>
         </div>
       }
     >
-      <div className="flex flex-col items-end">
-        <div className="flex flex-col gap-5 w-full">
-          <ItemNavbar
-            items={items}
-            colsNumber={3}
-            twClassName="p-3 text-[20px] "
-          />
-          <div className="flex flex-col gap-5">
-            {comments.length > 0 ? (
-              comments.map((comment) => (
-                <div className="w-full flex justify-between" key={comment.id}>
-                  <div className=" grid grid-cols-3 md:w-[90%]  w-full text-[13px] md:text-base text-white">
-                    <div className="flex items-center gap-3   ">
-                      <Image
-                        src={comment.user?.profilePicture || userPlaceHolder}
-                        alt="prof"
-                        width={37}
-                        height={37}
-                        className="rounded-lg border border-amber-50"
-                      />
-                      <p>
-                        {`${comment.user?.firstName} ${comment.user?.lastName}` ||
-                          "نام کاربر"}
-                      </p>
-                    </div>
-                    <p className=" md:px-15  mr-5 md:mr-0">{comment.title || "بدون عنوان"}</p>
-                    <p className="  md:ml-8   md:text-center">
-                      {comment.created_at?.slice(0, 10) || "--"}
-                    </p>
-                  </div>
+      <div className="flex flex-col gap-5 w-full">
+        {/* NAVBAR */}
+        <ItemNavbar colsNumber={4} items={items} />
+
+        {/* LIST */}
+        <div className="flex flex-col gap-3 w-full">
+          {comments.length > 0 ? (
+            comments.map((comment) => (
+              <div
+                key={comment.id}
+                className="
+            grid
+            grid-cols-4
+            items-center
+            gap-4
+
+            bg-dark-800
+            rounded-xl
+            px-4 md:px-6
+            py-3
+
+            text-white-pure
+            text-[12px] md:text-[15px]
+
+            transition-all
+            duration-300
+
+            hover:-translate-y-1
+            hover:scale-[1.01]
+            hover:bg-dark-700
+            hover:shadow-xl
+            hover:shadow-black/30
+
+            border border-transparent
+            hover:border-white/10
+          "
+              >
+                {/* USER */}
+                <div className="flex items-center gap-3 min-w-0">
+                  <Image
+                    src={comment.user?.profilePicture || userPlaceHolder}
+                    alt="user"
+                    width={34}
+                    height={34}
+                    className="rounded-lg"
+                  />
+                  <p className="truncate">
+                    {`${comment.user?.firstName || ""} ${comment.user?.lastName || ""}`.trim() ||
+                      "نام کاربر"}
+                  </p>
+                </div>
+
+                {/* TITLE */}
+                <p className="text-center truncate">
+                  {comment.title || "بدون عنوان"}
+                </p>
+
+                {/* DATE */}
+                <p className="text-center">
+                  {formatDateTime(comment.created_at)}
+                </p>
+
+                {/* ACTIONS */}
+                <div className="flex justify-center">
                   {isAdmin ? (
                     <CommentITemsManagement comment={comment} />
                   ) : (
                     <Modal
-                      contentClassName="bg-dark-900 text-white "
+                      contentClassName="bg-dark-900 text-white"
                       modalBtn={
-                        <TbEye className="w-5 h-5 text-gray-500 cursor-pointer" />
+                        <TbEye className="w-5 h-5 text-gray-400 cursor-pointer hover:text-white transition" />
                       }
                       mainContent={
-                        <div className="flex flex-col gap-8 " dir="rtl">
-                          <div className="flex gap-3 items-center">
-                            <Image
+                        <div className="flex flex-col gap-6" dir="rtl">
+                          <div className="flex items-center gap-3">
+                            <ImageFallback
+                              fallbackSrc={userPlaceHolder}
                               src={
                                 comment.user?.profilePicture || userPlaceHolder
                               }
-                              alt="prof"
+                              alt="user"
                               width={37}
                               height={37}
-                              className="rounded-lg border border-amber-50"
+                              className="rounded-lg"
                             />
                             <p>
-                              {`${comment.user?.firstName} ${comment.user?.lastName}` ||
-                                "نام کاربر"}
+                              {`${comment.user?.firstName || ""} ${comment.user?.lastName || ""}`.trim()}
                             </p>
                           </div>
-                          <div className="flex flex-col gap-6">
-                            <div className="flex flex-col gap-2">
-                              <span>عنوان نظر:</span>
-                              <p className="bg-dark-600 p-2 rounded-lg">
-                                {comment.title}
-                              </p>
-                            </div>
-                            <div className="flex flex-col gap-2">
-                              <span>توضیحات نظر:</span>
-                              <p className="bg-dark-600 p-2 rounded-lg h-[150px]">
-                                {comment.caption}
-                              </p>
-                            </div>
+
+                          <div className="flex flex-col gap-2">
+                            <span>عنوان نظر:</span>
+                            <p className="bg-dark-600 p-2 rounded-lg">
+                              {comment.title}
+                            </p>
+                          </div>
+
+                          <div className="flex flex-col gap-2">
+                            <span>توضیحات:</span>
+                            <p className="bg-dark-600 p-2 rounded-lg h-[150px]">
+                              {comment.caption}
+                            </p>
                           </div>
                         </div>
                       }
                     />
                   )}
                 </div>
-              ))
-            ) : (
-              <div className="w-full text-3xl text-center text-gray-300">
-                کامنتی وجود ندارد
               </div>
-            )}
-          </div>
+            ))
+          ) : (
+            <div className="text-center text-3xl text-gray-300 py-10">
+              کامنتی وجود ندارد
+            </div>
+          )}
         </div>
+
+        {/* PAGINATION */}
         <PaginationClient
           totalCount={Number(res.totalCount)}
           totalPages={Number(res.totalPages)}

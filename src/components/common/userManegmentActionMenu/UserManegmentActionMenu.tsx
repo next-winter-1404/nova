@@ -30,14 +30,15 @@ const UserManegmentActionMenu = ({ user }: IProp) => {
   const [formData, setFormData] = useState<IAdminUserEdit>({
     firstName: user.firstName,
     lastName: user.lastName,
-    fullName: user.fullName,
+    fullName: user.fullName, 
     email: user.email,
     phoneNumber: user.phoneNumber,
   });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isRoleAlertOpen, setIsRoleAlertOpen] = useState(false);
-  const [isNotificationModalOpen, setIsNotificationModalOpen] =useState(false);
+  const [notifMessage, setNotifMessage] = useState("");
+  const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
 
@@ -52,19 +53,7 @@ const UserManegmentActionMenu = ({ user }: IProp) => {
 
   const queryclient = useQueryClient();
 
-   // Handle Notification
-  const handleSendNotification = async () => {
-    await sendNotifications({
-      room: "users",
-      notification: {
-        userId: user.id,
-        title,
-        message,
-        type: "info",
-        data: {},
-      },
-    });
-  };
+  // Handle Notification
 
   // ============================== Edit user ============================== //
   // fetching user edit api
@@ -156,30 +145,63 @@ const UserManegmentActionMenu = ({ user }: IProp) => {
     router.push(`/dashboard/admin/users-management/${user.id}`);
   };
 
+  // ============================== HENDLE NOTIF ============================== //
+  const notificationMutation = useMutation({
+    mutationFn: sendNotifications,
+    onSuccess: () => {
+      toast.success("نوتیفیکیشن با موفقیت ارسال شد");
+      setNotifMessage("");
+      setIsNotificationModalOpen(false);
+    },
+
+    onError: () => {
+      toast.error("خطا در ارسال نوتیفیکیشن");
+    },
+  });
+
+  const handleNotifChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNotifMessage(e.target.value);
+  };
+
+  const handleSendNotif = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    notificationMutation.mutate({
+      room: "users",
+      notification: {
+        userId: user.id,
+        title: "اعلان جدید",
+        message: notifMessage,
+        type: "info",
+        data: {},
+      },
+    });
+  };
+
   const droMItems = [
     {
       label: "جزییات",
-      icon: <CgDanger className="w-4 h-4 text-white" />,
+      icon: <CgDanger className="w-4 h-4 text-white-pure" />,
       onClick: () => openDetailModal(),
     },
     {
       label: " ویرایش",
-      icon: <MdEdit className="w-4 h-4 text-white" />,
+      icon: <MdEdit className="w-4 h-4 text-white-pure" />,
       onClick: () => openEditModal(),
     },
     {
       label: " حذف",
-      icon: <TiDeleteOutline className="w-4 h-4 text-white" />,
+      icon: <TiDeleteOutline className="w-4 h-4 text-white-pure" />,
       onClick: () => openِDeleteModal(),
     },
     {
       label: "نقش",
-      icon: <FaUserPlus className="w-4 h-4 text-white" />,
+      icon: <FaUserPlus className="w-4 h-4 text-white-pure" />,
       onClick: () => openGivingRoleAlert(),
     },
     {
       label: "اعلان",
-      icon: <GoBell className="w-4 h-4 text-white" />,
+      icon: <GoBell className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsNotificationModalOpen(!isNotificationModalOpen),
     },
   ];
@@ -224,12 +246,6 @@ const UserManegmentActionMenu = ({ user }: IProp) => {
                 </div>
               </div>
               <div className="w-full flex items-center justify-center gap-5 mt-4">
-                {/* <div className="w-full flex-center text-white-pure text-right">
-                  <label className="w-full flex-center justify-end gap-3">
-                    <span> ایمیل تایید شده</span>
-                    <input type="checkbox" defaultValue={user.emailVerified}/>
-                  </label>
-                </div> */}
                 <div className="w-full flex flex-col text-right text-white-pure">
                   <Input
                     htmlFor="fullName"
@@ -302,8 +318,48 @@ const UserManegmentActionMenu = ({ user }: IProp) => {
           </div>
         }
       />
-      {/*  ========================================================================= */}
-      
+
+      {/*  ============================== SEND NOTIF ============================== */}
+      <Modal
+        open={isNotificationModalOpen}
+        onOpenChange={setIsNotificationModalOpen}
+        modalBtn={<div></div>}
+        contentClassName=" bg-dark-900"
+        width="w-[55%]"
+        mainContent={
+          <div className="flex-center padding-section">
+            <form
+              onSubmit={handleSendNotif}
+              className="w-full flex-col-center gap-6"
+            >
+              <div className="w-full flex items-center justify-center gap-5 mt-4">
+                <div className="w-full flex flex-col text-right text-white-pure">
+                  <Input
+                    htmlFor="fullName"
+                    name="fullName"
+                    labelText="متن پیام را وارد کنید"
+                    type="text"
+                    InputHeight="h-[50px] text-white-pure"
+                    value={notifMessage}
+                    onChange={handleNotifChange}
+                  />
+                </div>
+              </div>
+
+              <LoginButton
+                width="w-full mt-6"
+                buttonText="اعمال تغییرات"
+                type="submit"
+                loadingText="اعمال تغییرات..."
+                noIcon
+              />
+            </form>
+          </div>
+        }
+      />
+
+      {/*  ==================================== DELETE ALERT ===================================== */}
+
       {/* delete comment alert */}
       <AlertComponent
         acceptButtonText="حذف"
@@ -326,9 +382,3 @@ const UserManegmentActionMenu = ({ user }: IProp) => {
 };
 
 export default UserManegmentActionMenu;
-
-// {
-//       label: "جزییات",
-//       icon: <FiAlertCircle className="w-4 h-4 text-white" />,
-//       onClick: () => handleOpenModal(),
-//     },

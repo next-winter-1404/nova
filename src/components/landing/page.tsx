@@ -2,13 +2,21 @@ import React from "react";
 import AboutUs from "./aboutus/page";
 import BuyHouse from "./buyhouse/page";
 import UserComment from "./usercomment/page";
+import ScrollSlide from "@/src/components/animations/GoingFromRight";
 const Landing = () => {
   return (
     <>
-      {" "}
-      <AboutUs></AboutUs>
+      <ScrollSlide direction="left">
+        <AboutUs></AboutUs>
+      </ScrollSlide>
+
       <BuyHouse />
-      <UserComment></UserComment>
+
+      <ScrollSlide direction="right">
+        <div className="flex-col-center">
+          <UserComment></UserComment>
+        </div>
+      </ScrollSlide>
     </>
   );
 };
