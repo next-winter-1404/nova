@@ -26,6 +26,7 @@ const SellerEstatesPage : FC<IProps> = async() => {
     "ادرس",
     "امتیاز",
     "ظرفیت",
+    "عملیات"
 
   ];
   return (

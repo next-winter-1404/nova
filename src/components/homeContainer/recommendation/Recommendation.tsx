@@ -28,7 +28,7 @@ const Recommendation = async () => {
                   ✨ خانه‌های پیشنهادی برای شما
                 </ScrollFloat>
               </h2>
-              <p className="text-16-medium text-center text-white">
+              <p className="text-16-medium text-center text-white-pure">
                 <ScrollFloat
                   animationDuration={1}
                   ease="back.inOut(2)"

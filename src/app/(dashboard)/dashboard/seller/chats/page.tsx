@@ -31,7 +31,7 @@ const BuyerChatsPage = async () => {
                   <span className="text-gray-400 text-sm truncate">
                     {chat.message}
                   </span>
-                </div>
+                </div>``
               </Link>
             ))
           ) : (

@@ -200,8 +200,10 @@ const Navbar = () => {
               <Divider color="#4A4A4A" width="3" height="20" />
               <Link
                 href="/"
-                className="w-22 h-8 rounded-xl bg-[#4A4A4A]"
-              ></Link>
+                className="w-22 h-8 rounded-xl"
+              >
+                Delta
+              </Link>
             </div>
           </div>
 

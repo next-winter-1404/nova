@@ -38,7 +38,7 @@ const ScrollButton = () => {
           border: " 1px solid var(--color-dark-600)",
           backdropFilter: " blur(10px)",
         }}
-        icon={<FaChevronUp className="text-white" size={20} />}
+        icon={<FaChevronUp className="text-white-pure" size={20} />}
         className="w-[48px] h-[48px]  cursor-pointer transition-all"
         onClick={scrollToTop}
       />

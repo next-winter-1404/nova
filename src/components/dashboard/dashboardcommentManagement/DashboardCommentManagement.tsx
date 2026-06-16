@@ -78,32 +78,36 @@ const DashboardCommentManagement: FC<IProp> = ({
         </div>
       }
     >
-      <div className="flex flex-col gap-5 w-full">
-        {/* NAVBAR */}
-        <ItemNavbar colsNumber={4} items={items} />
+      <div className="flex flex-col gap-3 w-full">
 
-        {/* LIST */}
-        <div className="flex flex-col gap-3 w-full">
-          {comments.length > 0 ? (
-            comments.map((comment) => (
-              <div
-                key={comment.id}
-                className="
+  {/* NAVBAR */}
+  <ItemNavbar colsNumber={5} items={items} />
+
+  {/* LIST */}
+  <div className="flex flex-col gap-3 w-full">
+    {comments.length > 0 ? (
+      comments.map((comment) => (
+        <div
+          key={comment.id}
+          className="
             grid
-            grid-cols-4
+            grid-cols-5
             items-center
-            gap-4
 
+            w-full
             bg-dark-800
             rounded-xl
+
             px-4 md:px-6
-            py-3
+            py-4
 
             text-white-pure
-            text-[12px] md:text-[15px]
+            text-[11px] md:text-[15px]
 
             transition-all
             duration-300
+            ease-out
+            transform-gpu
 
             hover:-translate-y-1
             hover:scale-[1.01]
@@ -111,96 +115,100 @@ const DashboardCommentManagement: FC<IProp> = ({
             hover:shadow-xl
             hover:shadow-black/30
 
-            border border-transparent
+            border
+            border-transparent
             hover:border-white/10
           "
-              >
-                {/* USER */}
-                <div className="flex items-center gap-3 min-w-0">
-                  <Image
-                    src={comment.user?.profilePicture || userPlaceHolder}
-                    alt="user"
-                    width={34}
-                    height={34}
-                    className="rounded-lg"
-                  />
-                  <p className="truncate">
-                    {`${comment.user?.firstName || ""} ${comment.user?.lastName || ""}`.trim() ||
-                      "نام کاربر"}
-                  </p>
-                </div>
+        >
+          {/* USER */}
+          <div className="flex items-center gap-3 min-w-0">
+            <Image
+              src={comment.user?.profilePicture || userPlaceHolder}
+              alt="user"
+              width={34}
+              height={34}
+              className="rounded-lg"
+            />
+            <p className="truncate">
+              {`${comment.user?.firstName || ""} ${comment.user?.lastName || ""}`.trim() ||
+                "نام کاربر"}
+            </p>
+          </div>
 
-                {/* TITLE */}
-                <p className="text-center truncate">
-                  {comment.title || "بدون عنوان"}
-                </p>
+          {/* TITLE */}
+          <p className="text-center truncate">
+            {comment.title || "بدون عنوان"}
+          </p>
 
-                {/* DATE */}
-                <p className="text-center">
-                  {formatDateTime(comment.created_at)}
-                </p>
+          {/* DATE */}
+          <p className="text-center truncate">
+            {formatDateTime(comment.created_at)}
+          </p>
 
-                {/* ACTIONS */}
-                <div className="flex justify-center">
-                  {isAdmin ? (
-                    <CommentITemsManagement comment={comment} />
-                  ) : (
-                    <Modal
-                      contentClassName="bg-dark-900 text-white"
-                      modalBtn={
-                        <TbEye className="w-5 h-5 text-gray-400 cursor-pointer hover:text-white transition" />
-                      }
-                      mainContent={
-                        <div className="flex flex-col gap-6" dir="rtl">
-                          <div className="flex items-center gap-3">
-                            <ImageFallback
-                              fallbackSrc={userPlaceHolder}
-                              src={
-                                comment.user?.profilePicture || userPlaceHolder
-                              }
-                              alt="user"
-                              width={37}
-                              height={37}
-                              className="rounded-lg"
-                            />
-                            <p>
-                              {`${comment.user?.firstName || ""} ${comment.user?.lastName || ""}`.trim()}
-                            </p>
-                          </div>
+          {/* CAPTION */}
+          <p className="text-center truncate px-2">
+            {comment.caption || "---"}
+          </p>
 
-                          <div className="flex flex-col gap-2">
-                            <span>عنوان نظر:</span>
-                            <p className="bg-dark-600 p-2 rounded-lg">
-                              {comment.title}
-                            </p>
-                          </div>
+          {/* ACTIONS / DETAILS */}
+          <div className="flex justify-center">
+            {isAdmin ? (
+              <CommentITemsManagement comment={comment} />
+            ) : (
+              <Modal
+                contentClassName="bg-dark-900 text-white-pure"
+                modalBtn={
+                  <TbEye className="w-5 h-5 text-gray-400 cursor-pointer hover:text-white transition" />
+                }
+                mainContent={
+                  <div className="flex flex-col gap-6" dir="rtl">
+                    <div className="flex items-center gap-3">
+                      <ImageFallback
+                        fallbackSrc={userPlaceHolder}
+                        src={comment.user?.profilePicture || userPlaceHolder}
+                        alt="user"
+                        width={37}
+                        height={37}
+                        className="rounded-lg"
+                      />
+                      <p>
+                        {`${comment.user?.firstName || ""} ${comment.user?.lastName || ""}`.trim()}
+                      </p>
+                    </div>
 
-                          <div className="flex flex-col gap-2">
-                            <span>توضیحات:</span>
-                            <p className="bg-dark-600 p-2 rounded-lg h-[150px]">
-                              {comment.caption}
-                            </p>
-                          </div>
-                        </div>
-                      }
-                    />
-                  )}
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="text-center text-3xl text-gray-300 py-10">
-              کامنتی وجود ندارد
-            </div>
-          )}
+                    <div className="flex flex-col gap-2">
+                      <span>عنوان نظر:</span>
+                      <p className="bg-dark-600 p-3 rounded-lg">
+                        {comment.title}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <span>توضیحات:</span>
+                      <p className="bg-dark-600 p-3 rounded-lg min-h-[150px]">
+                        {comment.caption}
+                      </p>
+                    </div>
+                  </div>
+                }
+              />
+            )}
+          </div>
         </div>
-
-        {/* PAGINATION */}
-        <PaginationClient
-          totalCount={Number(res.totalCount)}
-          totalPages={Number(res.totalPages)}
-        />
+      ))
+    ) : (
+      <div className="w-full text-center py-16 text-gray-300 text-xl md:text-3xl">
+        کامنتی وجود ندارد
       </div>
+    )}
+  </div>
+
+  {/* PAGINATION */}
+  <PaginationClient
+    totalCount={Number(res.totalCount)}
+    totalPages={Number(res.totalPages)}
+  />
+</div>
     </DashboardContentContainer>
   );
 };

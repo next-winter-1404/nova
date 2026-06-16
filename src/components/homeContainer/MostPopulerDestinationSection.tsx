@@ -34,7 +34,7 @@ const MostPopulerDestinationSection = () => {
                 اجاره ویلا در محبوب ترین مقاصد این ماه
               </ScrollFloat>
             </h2>
-            <p className="text-16-medium text-center text-white">
+            <p className="text-16-medium text-center text-white-pure">
               <ScrollFloat
                 animationDuration={1}
                 ease="back.inOut(2)"
@@ -62,7 +62,7 @@ const MostPopulerDestinationSection = () => {
                 pagination={{ clickable: true }}
                 className="my-house-swiper"
               >
-                {isLoading && <p className="text-white">Loading...</p>}
+                {isLoading && <p className="text-white-pure">Loading...</p>}
 
                 {data?.houses?.map((house: any) => (
                   <SwiperSlide key={house.id}>

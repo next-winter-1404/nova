@@ -67,7 +67,7 @@ const SellerUpgradeRequest: FC<IProp> = ({
       <Modal
         open={isModalOpen}
         onOpenChange={setIsModalOpen}
-        contentClassName="bg-dark-900 text-white text-right "
+        contentClassName="bg-dark-900 text-white-pure text-right "
         modalTitle="لیست درخواست‌های فروشندگی"
         width="overflow-y-auto h-[550px] min-w-[400px]"
         mainContent={
@@ -135,7 +135,7 @@ const SellerUpgradeRequest: FC<IProp> = ({
                                 notes[Number(request.id)] || ""
                               )
                             }
-                            className="px-3 py-2 bg-red-500 text-white rounded w-full"
+                            className="px-3 py-2 bg-red-500 text-white-pure rounded w-full"
                           >
                             رد
                           </button>

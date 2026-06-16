@@ -384,7 +384,7 @@ const SingleHousePage = async ({ params }: IProps) => {
               </span>
             </span>
           </div>
-          <SliderSection cardData={result} />
+          {result ? (<SliderSection cardData={result} />) : (<div className="text-white-pure text-20-regular">آگهی مشابهی یافت نشد</div>)}
         </Container>
       </div>
     </Slide>

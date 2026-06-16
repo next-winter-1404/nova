@@ -37,7 +37,7 @@ const SellerCommentManagementPage: FC<IProp> = async ({ searchParams }) => {
   const comments = res.comments || [];
   const result = await getSellerHouses();
   const sellerHouses = result.houses || [];
-  const items = ["نام کاربر", "عنوان نظر", "تاریخ"];
+  const items = ["نام کاربر", "عنوان نظر", "تاریخ", "متن نظر", "جزییات"];
 
   const orderItems = [
     { value: "DESC", label: "نزولی" },

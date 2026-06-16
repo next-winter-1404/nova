@@ -449,68 +449,13 @@ header {
 }
 
 .chat-bg {
-  position: relative;
-  background-color: #0b141a;
-  overflow: hidden;
-}
+  
 
-/* الگوی دایره‌ای مثل تلگرام */
-.chat-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background-image: radial-gradient(
-      circle at 20% 20%,
-      rgba(255, 255, 255, 0.03) 0%,
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 80% 60%,
-      rgba(34, 197, 94, 0.05) 0%,
-      transparent 45%
-    );
-
-  animation: floatBg 12s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
-/* خطوط خیلی محو مثل texture */
-.chat-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.02) 0px,
-    rgba(255, 255, 255, 0.02) 1px,
-    transparent 1px,
-    transparent 12px
-  );
-
-  opacity: 0.4;
-  animation: moveLines 20s linear infinite;
-  pointer-events: none;
-}
-
-/* انیمیشن‌ها */
-@keyframes floatBg {
-  0% {
-    transform: translate(0px, 0px) scale(1);
-  }
-  100% {
-    transform: translate(-20px, -10px) scale(1.05);
-  }
-}
-
-@keyframes moveLines {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(20px);
-  }
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.05) 0, transparent 25%),
+    radial-gradient(circle at 80% 30%, rgba(255,255,255,.03) 0, transparent 30%),
+    radial-gradient(circle at 50% 80%, rgba(255,255,255,.04) 0, transparent 25%),
+    #0f172a;
 }
 
 .senderMessage{

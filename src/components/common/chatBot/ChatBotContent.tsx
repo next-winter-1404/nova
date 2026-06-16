@@ -42,7 +42,7 @@ const ChatUI = () => {
   };
 
   return (
-    <div className="flex flex-col h-[400px] text-white">
+    <div className="flex flex-col h-[400px] text-white-pure">
       {/* messages box */}
       <div className="flex-1 overflow-y-auto border p-2 mb-2 rounded-xl">
       {messages.map((m, i) => (
@@ -56,7 +56,7 @@ const ChatUI = () => {
       className={`max-w-[80%] rounded-2xl px-3 py-2 ${
         m.role === "user" 
           ? "bg-primary-accent-green text-dark-900"
-          : "bg-gray-700 text-white"
+          : "bg-gray-700 text-white-pure"
       }`}
     >
       {m.content}
@@ -68,7 +68,7 @@ const ChatUI = () => {
       </div>
 
       {/* sen message input */}
-      <div className="flex gap-2 text-white">
+      <div className="flex gap-2 text-white-pure">
         <input
           className="border border-gray-300 flex-1 p-1 rounded-lg"
           value={input}

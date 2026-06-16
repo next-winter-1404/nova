@@ -28,7 +28,7 @@ const AccordionComponent: FC<IAccordion> = ({
           <div className="w-full flex items-center gap-0.5">
           <span className={`${twTitleClassName}`}> {accordionTitle}</span>
           <div  className={`w-full bg-gray-300 h-px ${!isLine?"hidden":""}`}/>
-            <ChevronDownIcon className="h-4 w-4 text-white transition-transform duration-300 group-data-[state=open]:rotate-180" />
+            <ChevronDownIcon className="h-4 w-4 text-white-pure transition-transform duration-300 group-data-[state=open]:rotate-180" />
           </div>
           </Accordion.Trigger>
         </Accordion.Header>

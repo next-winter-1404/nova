@@ -16,7 +16,7 @@ interface IProp {
   searchParams: Promise<{ houseId: string }>;
 }
 const SellerQAManagement: FC<IProp> = async ({ searchParams }) => {
-  const items = ["نام کاربر", "سوال کاربر", "تاریخ ایجاد ", "اخرین ویرایش"];
+  const items = ["نام کاربر", "سوال کاربر", "تاریخ ایجاد ", "اخرین ویرایش", "پاسخ ها"];
   const params = await searchParams;
   const houseId = params.houseId;
   const result = await getSellerHouses();
@@ -49,44 +49,93 @@ const SellerQAManagement: FC<IProp> = async ({ searchParams }) => {
           />
         }
       >
-        <div className="flex flex-col gap-5">
-          <ItemNavbar colsNumber={4} items={items} />
-          {!houseId ? (
-            <div className="w-full text-blue-300 text-center text-2xl mt-5">
-              هنوز ملکی انتخاب نشده است. برای مشاهده سوالات مربوط به ملک، روی
-              «انتخاب ملک» کلیک کنید.
-            </div>
-          ) : houseQA.length > 0 ? (
-            houseQA.map((QA) => (
-              <div
-                key={QA.id}
-                className="flex justify-between w-full items-center"
-              >
-                <div className="grid grid-cols-4 items-center text-white w-full">
-                  <div className="px-10">
-                    <UserName userId={Number(QA.userId)} />
-                  </div>
-                  <ToolTip
-                    mainContent={
-                      <p className="truncate text-center">{QA.question}</p>
-                    }
-                    tooltipText={QA.question}
-                  />
-                  <p className="text-center">{formatDateTime(QA.created_at)}</p>
-                  <p className="text-center">{formatDateTime(QA.updated_at)}</p>
-                </div>
-                <QAItemsManagement
-                  questionId={Number(QA.id)}
-                  answer={QA.answer}
-                />
-              </div>
-            ))
-          ) : (
-            <div className="text-center text-gray-300 lg:text-3xl mt-5">
-              هیچ سوالی برای این خانه وجود ندارد
-            </div>
-          )}
+      <div className="flex flex-col gap-5">
+  <ItemNavbar colsNumber={5} items={items} />
+
+  {!houseId ? (
+    <div className="w-full text-blue-300 text-center text-2xl mt-5">
+      هنوز ملکی انتخاب نشده است. برای مشاهده سوالات مربوط به ملک، روی
+      «انتخاب ملک» کلیک کنید.
+    </div>
+  ) : houseQA.length > 0 ? (
+    <div className="flex flex-col gap-3 w-full">
+      {houseQA.map((QA) => (
+        <div
+          key={QA.id}
+          className="
+            grid
+            grid-cols-5
+            items-center
+
+            w-full
+            bg-dark-800
+            rounded-xl
+
+            px-2 md:px-3
+            py-2
+
+            text-white-pure
+            text-[11px] md:text-[15px]
+
+            transition-all
+            duration-300
+            ease-out
+            transform-gpu
+
+            hover:-translate-y-1
+            hover:scale-[1.01]
+            hover:bg-dark-700
+            hover:shadow-xl
+            hover:shadow-black/30
+
+            border
+            border-transparent
+            hover:border-white/10
+          "
+        >
+          {/* USER */}
+          <div className="px-2 truncate">
+            <UserName userId={Number(QA.userId)} />
+          </div>
+
+          {/* QUESTION */}
+          <div className="text-center truncate">
+            <ToolTip
+              mainContent={
+                <span className="truncate block">
+                  {QA.question}
+                </span>
+              }
+              tooltipText={QA.question}
+            />
+          </div>
+
+          {/* CREATED DATE */}
+          <p className="text-center truncate">
+            {formatDateTime(QA.created_at)}
+          </p>
+
+          {/* UPDATED DATE */}
+          <p className="text-center truncate">
+            {formatDateTime(QA.updated_at)}
+          </p>
+
+          {/* ACTIONS */}
+          <div className="flex justify-center">
+            <QAItemsManagement
+              questionId={Number(QA.id)}
+              answer={QA.answer}
+            />
+          </div>
         </div>
+      ))}
+    </div>
+  ) : (
+    <div className="text-center text-gray-300 lg:text-3xl mt-5">
+      هیچ سوالی برای این خانه وجود ندارد
+    </div>
+  )}
+</div>
       </DashboardContentContainer>
     </FadeIn>
   );

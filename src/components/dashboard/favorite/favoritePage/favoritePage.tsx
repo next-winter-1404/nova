@@ -108,28 +108,36 @@ const FavoritePage: FC<IProps> = async ({ searchParams }) => {
             border
             border-transparent
             hover:border-white/10
-
-            cursor-pointer
           "
               >
+                {/* NAME */}
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-[70px] h-[55px] rounded-lg bg-gray-600 hidden md:block flex-shrink-0" />
+                  <div className="hidden md:block w-[80px] h-[60px] rounded-xl bg-gray-600 shrink-0" />
 
                   <span className="truncate">
                     {item.house?.title || "عنوانی وجود ندارد"}
                   </span>
                 </div>
 
-                <p className="text-center truncate">
-                  {item.house?.price
-                    ? `${formatPrice(Number(item.house.price))} تومان`
-                    : "--"}
-                </p>
+                {/* PRICE */}
+                <div
+                  className="flex justify-center gap-1 whitespace-nowrap"
+                  dir="rtl"
+                >
+                  <span>
+                    {item.house?.price
+                      ? formatPrice(Number(item.house.price))
+                      : "--"}
+                  </span>
+                  {item.house?.price && <span>تومان</span>}
+                </div>
 
+                {/* ADDRESS */}
                 <p className="text-center truncate px-2">
                   {item.house?.address || "آدرسی وجود ندارد"}
                 </p>
 
+                {/* ACTIONS */}
                 <div className="flex justify-center">
                   <FavoriteFunctions
                     favoriteId={item.id}
@@ -147,10 +155,12 @@ const FavoritePage: FC<IProps> = async ({ searchParams }) => {
           )}
         </div>
 
-        <PaginationClient
-          totalPages={totalPages}
-          totalCount={Number(result?.totalCount)}
-        />
+        <div className="mt-4">
+          <PaginationClient
+            totalPages={totalPages}
+            totalCount={Number(result?.totalCount)}
+          />
+        </div>
       </div>
     </DashboardContentContainer>
   );
