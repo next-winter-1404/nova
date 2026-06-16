@@ -1,3 +1,4 @@
+import FadeIn from "@/src/components/animations/FadeIn";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import SimpleDropdown from "@/src/components/common/dropDown";
@@ -44,9 +45,10 @@ const SocialMedia : FC<IProps> = async({searchParams}) => {
     ];
     
 
-    const items = ["ایدی", "موقعیت"]
+    const items = ["ایدی", "موقعیت","عملیات"]
 
     return (
+        <FadeIn>
         <DashboardContentContainer 
             title={`لیست موقعیت ها  (${result.totalCount})`}
                 twTopContent="w-1/2"
@@ -66,43 +68,93 @@ const SocialMedia : FC<IProps> = async({searchParams}) => {
             }
         >
 
-            <div className="flex flex-col gap-9 items-end">
-                <div className="flex flex-col gap-5 w-full">
-                    <ItemNavbar colsNumber={2} items={items} />
-                    <div>
-                        {location?.map((location) => (
-                        <div
-                            key={location.id}
-                            className="flex justify-between w-full items-center"
-                        >
-                            <div className="grid grid-cols-2 text-white w-full md:px-10 items-center">
-                                <p className="h-15 md:mr-[80px] mr-4 text-[12px] md:text-[16px] flex items-center">
-                                    {location.id || "ایدی وجود ندارد"}
-                                </p>
-                                <p className="md:mr-[40px] text-[12px] md:text-[16px]">
-                                    {location.areaName || "موقعیت وجود ندارد"}
-                                </p>
-                            </div>
-                            <LocationItemsManagement locationId={location.id} areaName = {location.areaName} lat= {location.lat} lng = {location.lng}/>
-                        </div>
-                        ))}
-                    </div>
-                </div>
-                <div className="flex justify-between w-full items-center">
-                <Link
-                    href={"/dashboard/admin/locations/create"}
-                    className="cursor-pointer bg-primary-accent-green md:w-[150px] w-[120px] md:h-[43px] h-[33px] rounded-[16px] flex-center"
-                >
-                    ساخت موقعیت +
-                </Link>
+            <div className="flex flex-col gap-9 items-end w-full">
 
-                <PaginationClient
-                    totalPages={totalPages}
-                    totalCount={Number(result?.totalCount)}
-                />
-                </div>
-            </div>
+  {/* TABLE */}
+  <div className="flex flex-col gap-5 w-full">
+
+    <ItemNavbar colsNumber={3} items={items} />
+
+    <div className="flex flex-col gap-3 w-full">
+
+      {location?.map((loc) => (
+        <div
+          key={loc.id}
+          className="
+            grid
+            grid-cols-3
+            items-center
+
+            w-full
+            bg-dark-800
+            rounded-xl
+
+            px-4 md:px-6
+            py-3
+
+            text-white-pure
+            text-[12px] md:text-[15px]
+
+            transition-all
+            duration-200
+
+            hover:bg-dark-700
+          "
+        >
+
+          {/* ID */}
+          <p className="truncate">
+            {loc.id || "ایدی وجود ندارد"}
+          </p>
+
+          {/* NAME */}
+          <p className="truncate text-center">
+            {loc.areaName || "موقعیت وجود ندارد"}
+          </p>
+
+          {/* ACTIONS */}
+          <div className="flex justify-end">
+            <LocationItemsManagement
+              locationId={loc.id}
+              areaName={loc.areaName}
+              lat={loc.lat}
+              lng={loc.lng}
+            />
+          </div>
+
+        </div>
+      ))}
+
+    </div>
+  </div>
+
+  {/* FOOTER */}
+  <div className="flex justify-between w-full items-center">
+
+    <Link
+      href="/dashboard/admin/locations/create"
+      className="
+        bg-primary-accent-green
+        text-black
+        md:w-[150px] w-[120px]
+        md:h-[43px] h-[35px]
+        rounded-[16px]
+        flex items-center justify-center
+      "
+    >
+      ساخت موقعیت +
+    </Link>
+
+    <PaginationClient
+      totalPages={totalPages}
+      totalCount={Number(result?.totalCount)}
+    />
+
+  </div>
+
+</div>
         </DashboardContentContainer>
+        </FadeIn>
     )
 }
 

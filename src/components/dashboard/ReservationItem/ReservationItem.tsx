@@ -70,13 +70,13 @@ const ReservationItem = ({ houseId, item }: IReservationItemProps) => {
   const menuItems = [
     {
       label: "جزییات",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      icon: <FiAlertCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsModalOpen(true),
     },
 
     {
       label: "گزارش خرابی",
-      icon: <TbTool className="mt-px text-white" />,
+      icon: <TbTool className="mt-px text-white-pure" />,
       onClick: () => setIsMaintenanceModalOpen(true),
     },
   ];
@@ -96,7 +96,7 @@ const ReservationItem = ({ houseId, item }: IReservationItemProps) => {
       />
       {/* send report modal */}
       <Modal
-        contentClassName="bg-dark-900 text-white"
+        contentClassName="bg-dark-900 text-white-pure"
         mainContent={
           <form action={formAction} className="flex flex-col gap-5">
             <textarea
@@ -127,7 +127,7 @@ const ReservationItem = ({ houseId, item }: IReservationItemProps) => {
         width="w-[55%]"
         mainContent={
           <div className="flex justify-between">
-            <div className=" text-white flex flex-col justify-between ">
+            <div className=" text-white-pure flex flex-col justify-between ">
               <div className="flex-col flex gap-5 w-[90%]  ">
                 <p dir="rtl">{houseDetail?.caption || "توضیحاتی وجود ندارد"}</p>
                 <div className="flex gap-4" dir="rtl">
@@ -170,7 +170,7 @@ const ReservationItem = ({ houseId, item }: IReservationItemProps) => {
                             items={navbarItem}
                             twClassName="whitespace-nowrap"
                           />
-                          <div className="grid grid-cols-4 gap-4 text-white">
+                          <div className="grid grid-cols-4 gap-4 text-white-pure">
                             <span>
                               {`${traveler.firstName} ${traveler.lastName}` ||
                                 "نام کاربر"}

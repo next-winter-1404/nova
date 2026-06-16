@@ -1,8 +1,9 @@
+import FadeIn from '@/src/components/animations/FadeIn'
 import FavoritePage from '@/src/components/dashboard/favorite/favoritePage/favoritePage'
 
 const BuyerFavoritesPage = async({ searchParams }: { searchParams: Promise<any> }) => {
   return (
-    <FavoritePage searchParams={searchParams}/>
+    <FadeIn><FavoritePage searchParams={searchParams}/></FadeIn>
   )
 }
 

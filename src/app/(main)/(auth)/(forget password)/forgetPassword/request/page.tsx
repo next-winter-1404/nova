@@ -6,6 +6,7 @@ import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { RequestPassword } from "@/src/utils/sevices/api/auth/forgetPassword/requestPass";
+import FadeIn from "@/src/components/animations/FadeIn";
 
 const ForgetPassWordRequest = () => {
   const router = useRouter();
@@ -27,37 +28,39 @@ const ForgetPassWordRequest = () => {
   }, [state, router]);
 
   return (
-    <form
-      action={formAction}
-      className="md:w-1/2 w-full flex flex-col gap-9"
-      dir="rtl"
-    >
-      <LoginWrapper
-      description="ایمیل خود را وارد کنید تا کد را دریافت کنید"
-        ButtonSection={
-          <LoginButton
-            loadingText="در حال ارسال کد"
-            buttonText="ارسال کد تایید"
-            width="w-full"
-          />
-        }
-        content={
-          <Input
-            name="email"
-            labelText="ایمیل شما* : "
-            InputHeight={"h-[43px]"}
-            htmlFor="email"
-            parentWidth="w-full"
-            placeHolder="example@gmail.com"
-            borderColor="text-white-pure border-white-pure "
-            tagBgStyle={{background:"var(--color-dark-900)",color:"white"}}
-            textColor="text-white-pure"
-            dir="rtl"
-
-          />
-        }
-      />
-    </form>
+      <form
+        action={formAction}
+        className="md:w-1/2 w-full flex flex-col gap-9"
+        dir="rtl"
+      >
+        <LoginWrapper
+          description="ایمیل خود را وارد کنید تا کد را دریافت کنید"
+          ButtonSection={
+            <LoginButton
+              loadingText="در حال ارسال کد"
+              buttonText="ارسال کد تایید"
+              width="w-full"
+            />
+          }
+          content={
+            <Input
+              name="email"
+              labelText="ایمیل شما* : "
+              InputHeight={"h-[43px]"}
+              htmlFor="email"
+              parentWidth="w-full"
+              placeHolder="example@gmail.com"
+              borderColor="border-white "
+              tagBgStyle={{
+                background: "var(--color-dark-900)",
+                color: "white",
+              }}
+              textColor="text-white"
+              dir="rtl"
+            />
+          }
+        />
+      </form>
   );
 };
 

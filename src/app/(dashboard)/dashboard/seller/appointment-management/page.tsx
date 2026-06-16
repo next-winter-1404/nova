@@ -1,3 +1,4 @@
+import FadeIn from "@/src/components/animations/FadeIn";
 import Button from "@/src/components/common/button/page";
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
@@ -21,6 +22,7 @@ const SellerVisitAppointmentPage: FC<IProp> = async ({ searchParams }) => {
     "نوع قرار",
     "تاریخ ایجاد قرار",
     "وضعیت",
+    "عملیات",
   ];
   const params = await searchParams;
   const houseId = params.houseId;
@@ -29,69 +31,108 @@ const SellerVisitAppointmentPage: FC<IProp> = async ({ searchParams }) => {
 
   const allAppointment = await getVisitAppointments(Number(houseId));
   return (
-    <DashboardContentContainer
-    title={`لیست قرار های ملاقات شما (${allAppointment.length})`}
-      topSectionContent={
-        <Modal
-          contentClassName="bg-dark-900 text-white text-right"
-          modalTitle="لیست املاک شما:"
-          width="lg:w-[60%] overflow-y-auto h-[550px]"
-          mainContent={<SellerHouse modalHouse={sellerHouse} />}
-          modalBtn={
-            <Button
-              text={"انتخاب ملک"}
-              buttonStyle={{
-                background: "var(--color-primary-accent-green)",
-                color: "black",
-              }}
-              icon={<RiBuildingLine className="w-4 h-4" />}
-            />
-          }
-        />
-      }
-    >
-      <div className="flex flex-col gap-5">
-        <ItemNavbar colsNumber={5} items={items} />
-        {!houseId ? (
-          <div className="w-full text-blue-300 text-center text-2xl mt-5">
-            هنوز ملکی انتخاب نشده است. برای مشاهده قرارهای ملاقات، روی «انتخاب
-            ملک» کلیک کنید.
-          </div>
-        ) : allAppointment.length > 0 ? (
-          allAppointment.map((appointment) => (
-           <div key={appointment.id} className="flex justify-between w-full items-center">
-             <div
-              
-              className="grid grid-cols-5 items-center text-white w-full"
-            >
-              <div className="px-10">
-                <UserName userId={Number(appointment.userId)} />
-              </div>
+    <FadeIn>
+      <DashboardContentContainer
+        title={`لیست قرار های ملاقات شما (${allAppointment.length})`}
+        topSectionContent={
+          <Modal
+            contentClassName="bg-dark-900 text-white text-right"
+            modalTitle="لیست املاک شما:"
+            width="lg:w-[60%] overflow-y-auto h-[550px]"
+            mainContent={<SellerHouse modalHouse={sellerHouse} />}
+            modalBtn={
+              <Button
+                text={"انتخاب ملک"}
+                buttonStyle={{
+                  background: "var(--color-primary-accent-green)",
+                  color: "black",
+                }}
+                icon={<RiBuildingLine className="w-4 h-4" />}
+              />
+            }
+          />
+        }
+      >
+        <div className="flex flex-col gap-3 w-full">
+          <ItemNavbar colsNumber={6} items={items} />
 
-              <p className="text-center">
-                {formatDateTime(appointment.appointmentTime)}
-              </p>
-
-              <p className="px-12">
-                {appointment.type === "virtual" ? "مجازی" : "حضوری"}
-              </p>
-
-              <p className="px-5">{formatDateTime(appointment.created_at)}</p>
-
-              <div className="-mr-8">
-                <StatusLabel status={appointment.status} />
-              </div>
+          {!houseId ? (
+            <div className="w-full text-center py-16 text-blue-300 text-lg md:text-2xl">
+              هنوز ملکی انتخاب نشده است. برای مشاهده قرارهای ملاقات، روی «انتخاب
+              ملک» کلیک کنید.
             </div>
-            <VisitAppointmentMAnagement visitId={Number(appointment.id)} status={appointment.status}/>
-           </div>
-          ))
-        ) : (
-          <div className="text-center text-gray-300 lg:text-3xl mt-5">
-            هیچ قرار ملاقاتی برای این خانه وجود ندارد
-          </div>
-        )}
-      </div>
-    </DashboardContentContainer>
+          ) : allAppointment.length > 0 ? (
+            allAppointment.map((appointment) => (
+              <div
+                key={appointment.id}
+                className="
+          grid
+          grid-cols-6
+          items-center
+
+          w-full
+          bg-dark-800
+          rounded-xl
+
+          px-4 md:px-6
+          py-4
+
+          text-white-pure
+          text-[11px] md:text-[15px]
+
+          transition-all
+          duration-300
+          ease-out
+          transform-gpu
+
+          hover:-translate-y-1
+          hover:scale-[1.01]
+          hover:bg-dark-700
+          hover:shadow-xl
+          hover:shadow-black/30
+
+          border
+          border-transparent
+          hover:border-white/10
+        "
+              >
+                {/* نام کاربر */}
+                <div className="flex justify-center truncate">
+                  <UserName userId={Number(appointment.userId)} />
+                </div>
+
+                <p className="text-center truncate">
+                  {formatDateTime(appointment.appointmentTime)}
+                </p>
+
+                <p className="text-center">
+                  {appointment.type === "virtual" ? "مجازی" : "حضوری"}
+                </p>
+
+                <p className="text-center truncate">
+                  {formatDateTime(appointment.created_at)}
+                </p>
+
+                <div className="flex justify-center">
+                  <StatusLabel status={appointment.status} />
+                </div>
+
+                <div className="flex justify-center">
+                  <VisitAppointmentMAnagement
+                    visitId={Number(appointment.id)}
+                    status={appointment.status}
+                  />
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="w-full text-center py-16 text-gray-300 text-xl md:text-3xl">
+              هیچ قرار ملاقاتی برای این خانه وجود ندارد
+            </div>
+          )}
+        </div>
+      </DashboardContentContainer>
+    </FadeIn>
   );
 };
 

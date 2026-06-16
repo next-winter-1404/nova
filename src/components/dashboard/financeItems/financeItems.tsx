@@ -111,23 +111,23 @@ const FinanceItems: FC<IProp> = ({
   const allMenuItems = [
     {
       label: "جزییات",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      icon: <FiAlertCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsModalOpen(true),
     },
 
     {
       label: "تایید",
-      icon: <TbCircleCheckFilled className="mt-px text-white" />,
+      icon: <TbCircleCheckFilled className="mt-px text-white-pure" />,
       onClick: () => handleConfirm(),
     },
     {
       label: "لغو",
-      icon: <FaBan className="mt-px text-white" />,
+      icon: <FaBan className="mt-px text-white-pure" />,
       onClick: () => handleCancel(),
     },
     {
       label: "حذف",
-      icon: <TbTrash className="mt-px text-white" />,
+      icon: <TbTrash className="mt-px text-white-pure" />,
       onClick: () => handleDeletePayment(),
     },
   ];
@@ -167,7 +167,7 @@ const FinanceItems: FC<IProp> = ({
                 در حال بارگزاری....
               </div>
             ) : (
-              <div className="w-full flex flex-col text-white gap-5" dir="rtl">
+              <div className="w-full flex flex-col text-white-pure gap-5" dir="rtl">
                 <div className="flex gap-4 items-center">
                   <ImageFallback
                     fallbackSrc={userPlaceHolder}
@@ -271,7 +271,7 @@ const FinanceItems: FC<IProp> = ({
                 dir="rtl"
                 key={`${traveler.firstName} - ${traveler.nationalId}`}
               >
-                <div className="grid grid-cols-4 gap-4 text-white">
+                <div className="grid grid-cols-4 gap-4 text-white-pure">
                   <span>
                     {`${traveler.firstName} ${traveler.lastName}` ||
                       "نام کاربر"}

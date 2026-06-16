@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { adminPostLocation } from "@/src/utils/sevices/api/locations/postLocation/postLocation";
 import LocationPickerMap from "@/src/components/common/map/LocationPickerMap";
+import FadeIn from "@/src/components/animations/FadeIn";
 
 const CreateLocationsPage = () => {
   const router = useRouter();
@@ -42,7 +43,8 @@ const CreateLocationsPage = () => {
     }));
   };
   return (
-    <form className="flex flex-col gap-10 w-full" onSubmit={handleSubmit}>
+    <FadeIn>
+    <form  className="flex flex-col gap-10 w-full" onSubmit={handleSubmit}> 
       <div className="w-full mt-5">
         <Input
           name="areaName"
@@ -98,6 +100,7 @@ const CreateLocationsPage = () => {
         type="submit"
       />
     </form>
+    </FadeIn>
   );
 };
 

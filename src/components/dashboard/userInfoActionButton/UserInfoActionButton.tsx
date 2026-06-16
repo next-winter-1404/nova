@@ -11,7 +11,7 @@ const UserInfoActionButton: FC<IProp> = ({ title, explanation }) => {
         <h1 className="font-black text-[20px]">{title}</h1>
         <p>{explanation}</p>
       </div>
-      <div className="flex gap-3 text-white">
+      <div className="flex gap-3 text-white-pure">
         <LoginButton
           buttonText="انصراف"
           buttonStyle="bg-transparent border p-3  text-center "
@@ -21,7 +21,7 @@ const UserInfoActionButton: FC<IProp> = ({ title, explanation }) => {
           buttonText="اعمال تغییرات"
           type="submit"
           noIcon
-          width="p-3 text-white"
+          width="p-3 text-white-pure"
           loadingText="اعمال تغییرات ..."
         />
       </div>

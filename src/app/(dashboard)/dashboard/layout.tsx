@@ -1,6 +1,6 @@
 import ToolTip from "@/src/components/common/tooltip";
 import Link from "next/link";
-import { FiChevronDown ,FiHelpCircle} from "react-icons/fi";
+import { FiChevronDown, FiHelpCircle } from "react-icons/fi";
 import { HiOutlineBell } from "react-icons/hi";
 import { getServerSideCookie } from "@/src/utils/helper/cookies/serverCookie/serverSideCookie";
 import { FC, ReactNode } from "react";
@@ -17,11 +17,11 @@ import {
   TbUsers,
   TbCategoryFilled,
   TbCalendarEvent,
-  TbTool,  
+  TbTool,
   TbPhone,
-  TbTrendingUp  
+  TbTrendingUp,
 } from "react-icons/tb";
-import { FaCommentDots,FaMapMarkerAlt } from "react-icons/fa";
+import { FaCommentDots, FaMapMarkerAlt } from "react-icons/fa";
 import { BsGlobe } from "react-icons/bs";
 import { getUsersDetail } from "@/src/utils/sevices/api/users/getUserDetail";
 import userPlaceholder from "@/src/assets/images/userPlaceHolder.jpg";
@@ -34,6 +34,7 @@ import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 import { LuClipboardList } from "react-icons/lu";
 import { RiDiscountPercentLine } from "react-icons/ri";
 import { FiMessageSquare } from "react-icons/fi";
+import FadeIn from "@/src/components/animations/FadeIn";
 interface IProp {
   children: ReactNode;
 }
@@ -60,7 +61,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       href: `/dashboard/${role}/reserve-management`,
       icon: <TbCirclePlusFilled className="w-6 h-6 text-white-pure" />,
     },
-   
+
     {
       label: "مدیریت مالی",
       href: `/dashboard/${role}/financial-management`,
@@ -72,7 +73,7 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       icon: <TbBellFilled className="w-6 h-6 text-white-pure" />,
     },
   ];
-  const buyerItems =[
+  const buyerItems = [
     {
       label: "علاقه‌مندی‌ها",
       href: `/dashboard/${role}/favorites`,
@@ -81,19 +82,24 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
     {
       label: "قرار های ملاقات من",
       href: `/dashboard/${role}/user-visitAppointments`,
-      icon: <TbCalendarEvent  className="w-6 h-6" />,
+      icon: <TbCalendarEvent className="w-6 h-6" />,
     },
     {
       label: "درخواست های من",
       href: `/dashboard/${role}/user-request`,
-      icon: <LuClipboardList  className="w-6 h-6" />,
+      icon: <LuClipboardList className="w-6 h-6" />,
+    },
+    {
+      label: "گفتوگوهای من",
+      href: `/dashboard/${role}/chats`,
+      icon: <FiMessageSquare className="w-5 h-5 text-white-pure" />,
     },
     {
       label: "پیش بینی قیمت",
       href: `/dashboard/${role}/predict-price`,
-      icon: <TbTrendingUp    className="w-6 h-6" />,
+      icon: <TbTrendingUp className="w-6 h-6" />,
     },
-  ]
+  ];
   const sellerItems = [
     {
       label: "علاقه‌مندی‌ها",
@@ -111,6 +117,11 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
       icon: <FaCommentDots className="w-5 h-5 text-white-pure" />,
     },
     {
+      label: "گفتوگوهای من",
+      href: `/dashboard/${role}/chats`,
+      icon: <FiMessageSquare className="w-5 h-5 text-white-pure" />,
+    },
+    {
       label: "مدیریت قرار ها",
       href: `/dashboard/${role}/appointment-management`,
       icon: <TbCalendarEvent className="w-5 h-5" />,
@@ -118,12 +129,12 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
     {
       label: "درخواست‌های تعمیر",
       href: `/dashboard/${role}/maintenance-management`,
-      icon: <TbTool   className="w-5 h-5" />,
+      icon: <TbTool className="w-5 h-5" />,
     },
     {
       label: "سوالات کاربران",
       href: `/dashboard/${role}/qa-management`,
-      icon: <FiHelpCircle   className="w-5 h-5" />,
+      icon: <FiHelpCircle className="w-5 h-5" />,
     },
   ];
   const adminItems = [
@@ -160,32 +171,32 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
     {
       label: "درخواست‌های تعمیر",
       href: `/dashboard/${role}/maintenance-management`,
-      icon: <TbTool   className="w-5 h-5" />,
+      icon: <TbTool className="w-5 h-5" />,
     },
     {
       label: "شبکه  های اجتماعی",
       href: `/dashboard/${role}/social-media`,
-      icon: <BsGlobe   className="w-5 h-5" />,
+      icon: <BsGlobe className="w-5 h-5" />,
     },
     {
       label: " موقعیت ها ",
       href: `/dashboard/${role}/locations`,
-      icon: <FaMapMarkerAlt   className="w-5 h-5" />,
+      icon: <FaMapMarkerAlt className="w-5 h-5" />,
     },
     {
       label: "سوالات کاربران",
       href: `/dashboard/${role}/qa-management`,
-      icon: <FiHelpCircle   className="w-5 h-5" />,
+      icon: <FiHelpCircle className="w-5 h-5" />,
     },
     {
       label: "مدیریت تخفیف ها",
       href: `/dashboard/${role}/discount-management`,
-      icon: <RiDiscountPercentLine   className="w-5 h-5" />,
+      icon: <RiDiscountPercentLine className="w-5 h-5" />,
     },
     {
       label: "ارتباط با ما",
       href: `/dashboard/${role}/contact-us-management`,
-      icon: <TbPhone   className="w-5 h-5" />,
+      icon: <TbPhone className="w-5 h-5" />,
     },
   ];
 
@@ -195,7 +206,6 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
     menuItems = [...menuItems, ...sellerItems];
   } else if (role === "admin") {
     menuItems = [...menuItems, ...adminItems];
-  
   } else if (role === "buyer") {
     menuItems = [...menuItems, ...buyerItems];
   }
@@ -223,76 +233,80 @@ const DashboardLayout: FC<IProp> = async ({ children }) => {
 
   return (
     <>
-      <div className="flex w-full pt-5 px-5 h-full gap-5 font-vazir bg-dark-900" dir="rtl">
-        <div className="hidden lg:block">
-          <AsideMenu role={role} menuItems={menuItems} isOpen={true} />
-        </div>
-
-        <div className="flex flex-col w-full xl:w-[1113px] 2xl:w-[1400px]">
-          <div className="flex justify-between p-5 items-center h-[66px] bg-dark-700 rounded-xl">
-            <div className="font-extrabold text-white-pure text-[20px] flex items-center gap-2">
-              <MenuController role={role} menuItems={menuItems} />
-              <h2 className="hidden lg:block text-white-pure">داشبورد</h2>
-            </div>
-
-            <div className="flex gap-4 items-center text-white-pure">
-              <ToolTip
-                tooltipText="صفحه اصلی"
-                twClassname="z-100 bg-gray-550 text-white-pure"
-                mainContent={
-                  <Link href={"/"}>
-                    <TbHome className="w-6 h-6 text-white-pure cursor-pointer hidden md:block" />
-                  </Link>
-                }
-              />
-              <div className="w-px h-8 bg-[#9C9C9C] hidden md:block" />
-              <ToolTip
-                mainContent={
-                  <Link
-                    href={`/dashboard/${role}/notification`}
-                    className=" relative hidden md:block"
-                  >
-                    <HiOutlineBell className="w-6 h-6 text-white-pure cursor-pointer" />
-                    <div className="w-[7px] h-[7px] rounded-xl bg-red-500 absolute top-0.5 right-1" />
-                  </Link>
-                }
-                tooltipText="اعلان ها"
-                twClassname="z-100 bg-gray-550 text-white-pure"
-              />
-
-              <div className="flex gap-2 w-[150px] justify-start items-center cursor-pointer">
-                <div className="border border-[#D9D9D9] rounded-lg">
-                 
-                  <ImageFallback
-                  fallbackSrc={userPlaceholder}
-                    alt="prof"
-                    src={userDetail?.profilePicture || userPlaceholder}
-                    width={37}
-                    height={37}
-                    className="rounded-lg"
-                  />
-                </div>
-                <div className="flex flex-col" dir="rtl">
-                  <h2 className="text-[14px] text-white-pure">{`${userDetail?.firstName} ${userDetail?.lastName}`}</h2>
-                  <span className="text-[12px] text-gray-500">{role}</span>
-                </div>
-              </div>
-              <DropMenu
-                trigger={
-                  <FiChevronDown
-                    className="text-gray-500 cursor-pointer "
-                    strokeWidth={2}
-                  />
-                }
-                items={profileItems}
-                side="bottom"
-                align="end"
-              />
-            </div>
+      <FadeIn>
+        <div
+          className="flex w-full pt-5 px-5 h-full gap-5 font-vazir bg-dark-850"
+          dir="rtl"
+        >
+          <div className="hidden lg:block">
+            <AsideMenu role={role} menuItems={menuItems} isOpen={true} />
           </div>
-          <div className="mt-5">{children}</div>
+
+          <div className="flex flex-col w-full xl:w-[1113px] 2xl:w-[1400px]">
+            <div className="flex justify-between p-5 items-center h-[66px] bg-dark-700 rounded-xl">
+              <div className="font-extrabold text-white-pure text-[20px] flex items-center gap-2">
+                <MenuController role={role} menuItems={menuItems} />
+                <h2 className="hidden lg:block text-white-pure">داشبورد</h2>
+              </div>
+
+              <div className="flex gap-4 items-center text-white-pure">
+                <ToolTip
+                  tooltipText="صفحه اصلی"
+                  twClassname="z-100 bg-gray-550 text-white-pure"
+                  mainContent={
+                    <Link href={"/"}>
+                      <TbHome className="w-6 h-6 text-white-pure cursor-pointer hidden md:block" />
+                    </Link>
+                  }
+                />
+                <div className="w-px h-8 bg-[#9C9C9C] hidden md:block" />
+                <ToolTip
+                  mainContent={
+                    <Link
+                      href={`/dashboard/${role}/notification`}
+                      className=" relative hidden md:block"
+                    >
+                      <HiOutlineBell className="w-6 h-6 text-white-pure cursor-pointer" />
+                      <div className="w-[7px] h-[7px] rounded-xl bg-red-500 absolute top-0.5 right-1" />
+                    </Link>
+                  }
+                  tooltipText="اعلان ها"
+                  twClassname="z-100 bg-gray-550 text-white-pure"
+                />
+
+                <div className="flex gap-2 w-[150px] justify-start items-center cursor-pointer">
+                  <div className="border border-[#D9D9D9] rounded-lg">
+                    <ImageFallback
+                      fallbackSrc={userPlaceholder}
+                      alt="prof"
+                      src={userDetail?.profilePicture || userPlaceholder}
+                      width={37}
+                      height={37}
+                      className="rounded-lg"
+                    />
+                  </div>
+                  <div className="flex flex-col" dir="rtl">
+                    <h2 className="text-[14px] text-white-pure">{`${userDetail?.firstName} ${userDetail?.lastName}`}</h2>
+                    <span className="text-[12px] text-gray-500">{role}</span>
+                  </div>
+                </div>
+                <DropMenu
+                  trigger={
+                    <FiChevronDown
+                      className="text-gray-500 cursor-pointer "
+                      strokeWidth={2}
+                    />
+                  }
+                  items={profileItems}
+                  side="bottom"
+                  align="end"
+                />
+              </div>
+            </div>
+            <div className="mt-5">{children}</div>
+          </div>
         </div>
-      </div>
+      </FadeIn>
     </>
   );
 };

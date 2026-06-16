@@ -74,11 +74,11 @@ const RowProductCard: FC<IProductCard> = ({
 
           </div>
           <span className="flex justify-end text-20-medium whitespace-nowrap">
-            {title ? <Link href={href}>{title}</Link> : "عنوانی وجود ندارد"}
+            {title ? <Link href={href} className="block w-full max-w-full truncate whitespace-nowrap overflow-hidden text-right direction-rtl text-20-regular">{title}</Link> : "عنوانی وجود ندارد"}
           </span>
           <div className="flex flex-col items-end gap-5">
             <div className="flex justify-start gap-1.5">
-              <h2 className="text-[16px] text-gray-300 text-right  whitespace-nowrap">
+              <h2 className="w-[80px] text-[16px] text-gray-300  whitespace-nowrap block w-full max-w-full truncate  overflow-hidden text-right direction-rtl ">
                 {address || "ادرسی وجود ندارد"}
               </h2>
               <Image src={Location} alt="Location" className="w-4 h-4" />

@@ -22,7 +22,7 @@ const LoginButton: FC<ILoginButtonProp> = ({
       dir="rtl"
       className={` ${
         pending ? "opacity-60" : ""
-      } flex-center gap-4  ${height} ${radius} cursor-pointer ${width} ${buttonStyle}`}
+      } flex-center gap-4  ${height} ${radius} cursor-pointer hover:opacity-70 ${width} ${buttonStyle}`}
       type={type}
       disabled={pending}
     >

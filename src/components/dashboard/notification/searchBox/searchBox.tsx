@@ -25,8 +25,8 @@ const NotificationSearchBox = () => {
       labelText="جستجو"
       InputHeight="h-[50px]"
       tagBgStyle={{ background: "var(--color-dark-600)", color: "white" }}
-      borderColor="border-white border"
-      textColor="text-white"
+      borderColor="border-white-pure border"
+      textColor="text-white-pure"
       placeHolder="جستجو ..."
       parentWidth=""
       value={search}

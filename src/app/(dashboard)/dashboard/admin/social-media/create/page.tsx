@@ -5,6 +5,7 @@ import LoginButton from "@/src/components/login/button/LoginButton";
 import { PostSocialMedia } from "@/src/utils/sevices/api/socialMedia/postSocialMedia";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import FadeIn from "@/src/components/animations/FadeIn";
 
 
 const CreateSocialMediaPage= () => {
@@ -38,6 +39,7 @@ const CreateSocialMediaPage= () => {
       }));
     };
   return (
+    <FadeIn>
     <form  className="flex flex-col gap-10 w-full" onSubmit={handleSubmit}> 
       <div className=" w-1/2 mt-5">
         <Input
@@ -66,6 +68,7 @@ const CreateSocialMediaPage= () => {
         type="submit"
       />     
     </form>
+    </FadeIn>
   );
 };
 

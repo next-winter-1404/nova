@@ -51,33 +51,6 @@ const ProductCard = ({
           <Image src={leftArrow} alt="leftArrow" />
         </div>
       )}
-      {/* <CardContainer
-        // parentExtraStyle={{width:"300px"}}
-        curveColor="#393939"
-        cavity="round"
-        labelContent={
-          <div className="w-[67px] h-[30px] mt-[5px] flex items-center  text-dark-800 justify-center gap-1 bg-white-pure rounded-[8px] z-20 ">
-            <Image src={Star} alt="star" />
-            {rate}
-          </div>
-        }
-        labelSize="md"
-        mainContent={
-          <div>
-            <ImageFallback
-              fallbackSrc={imagePalaceHolder}
-              src={photos?.[0] || imagePalaceHolder}
-              alt="state image"
-              width={297}
-              height={156}
-              className="rounded-2xl"
-            />
-          </div>
-        }
-        labelBackground="group-hover:bg-[#8cff45] bg-[#393939]"
-        labelExtraStyle={{ minHeight: "25px" }}
-        mainExtraStyle="group-hover:bg-primary-accent-green bg-dark-700 p-6"
-      /> */}
 
       <div className="relative flex-center max-w-76.5 h-58 p-5">
 

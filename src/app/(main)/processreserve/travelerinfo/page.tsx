@@ -21,6 +21,7 @@ import { useQuery } from '@tanstack/react-query'
 import { IPassengerInfo } from '@/src/core/types/IPassengerInfo'
 import { computingDiscount } from '@/src/utils/helper/computingDiscount'
 import OldPriceComponent from '@/src/components/common/productCard/OldPrice'
+import Slide from '@/src/components/animations/Slide'
 
 
 const Traveler = () => {
@@ -137,6 +138,7 @@ const Traveler = () => {
     const roundDiscountPercent = Math.round(discountPercent)
 
   return (
+    <Slide direction="right">
     <div className='flex mt-[20px] flex-col items-center md:gap-[36px] gap-[26px] w-[1683px] md:h-[950px] h-[1900px]' dir='rtl'>
         <div className='flex items-center justify-center md:w-11/12 w-[340px] md:h-[142px] h-[400px] bg-dark-700 rounded-3xl '>
           <div className='w-22/23 flex md:flex-row flex-col'>
@@ -249,6 +251,7 @@ const Traveler = () => {
             </div>
         </div>
     </div>
+    </Slide>
   )
 }
 

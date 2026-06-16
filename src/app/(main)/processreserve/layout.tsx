@@ -11,6 +11,7 @@ import Ticket from "@/src/assets/icons/ticeitbill.svg"
 import { Breadcrumb, BreadcrumbItem } from "@/src/components/common/breadCrumbs";
 import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail";
 import { useQuery } from "@tanstack/react-query";
+import Slide from "@/src/components/animations/Slide";
 
 interface IProps  {
     children : ReactNode;
@@ -48,6 +49,7 @@ const stepIcons =[
         },
     ];
     return(
+        <Slide direction="right">
         <div>
             <div className='flex flex-col w-full gap-6 justify-center items-center mt-[160px] ' dir='rtl'>
                 <div className="w-11/12" >
@@ -97,6 +99,7 @@ const stepIcons =[
                 </main>
             </div>   
         </div>
+        </Slide>
     )
 }
 

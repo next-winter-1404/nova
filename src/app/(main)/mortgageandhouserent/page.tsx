@@ -1,4 +1,3 @@
-
 import RowProductCard from "@/src/components/common/productCard/RowProductCard";
 import CardContainer from "@/src/components/common/card/page";
 import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
@@ -6,6 +5,9 @@ import { IProductCard } from "@/src/core/types/IProductCard";
 import FilterSection from "@/src/components/mortgageAndRentPageContainer/FilterSection";
 import { IMortgagePageFilter } from "./../../../core/types/IMortgagePageFilter";
 import ProductCard from "@/src/components/common/productCard/ProductCard";
+import FadeIn from "@/src/components/animations/FadeIn";
+import ScrollSlide from "@/src/components/animations/GoingFromRight";
+import Slide from "@/src/components/animations/Slide";
 
 const MortgageAndHouseRent = async ({
   searchParams,
@@ -64,65 +66,71 @@ const MortgageAndHouseRent = async ({
   // );
 
   return (
-    <div className="w-full flex-col-center sm:gap-49 bg-dark-900 mt-28 w-full ">
-      {/* <Breadcrumb items={{}} /> */}
-      <div className="w-full padding-section flex-col-center gap-10">
-        <FilterSection totalCount={totalCount} />
-        <div className="w-full sm:flex-center flex-wrap gap-6">
-          {houses.length > 0 ? (
-            houses.map((item: IProductCard) => [
-              <div className="hidden sm:block group" key={item.id}>
-                <CardContainer
-                  parentExtraStyle={{ width: "740px" }}
-                  curveColor="#393939"
-                  cavity="round"
-                  labelContent={
-                    <div className="w-[67px] h-[10px] flex items-center  text-dark-800 justify-center gap-1 ">
-                      {/* <Image src={Star} alt='star'/>  */}
-                      {/* {rate} */}
-                    </div>
-                  }
-                  labelSize="lg"
-                  mainContent={
-                    <div className="flex-col-center mx-auto ">
-                      <RowProductCard
-                        id={item.id}
-                        title={item.title}
-                        address={item.address}
-                        price={item.price}
-                        rooms={item.rooms}
-                        parking={item.parking}
-                        bathrooms={item.bathrooms}
-                        rate={item.rate}
-                        href={`/mortgageandhouserent/${item.id}`}
-                      />
-                    </div>
-                  }
-                  labelBackground="bg-[#393939]"
-                  labelExtraStyle={{ minHeight: "10px" }}
-                  mainExtraStyle="p-6 bg-dark-700"
-                />
-              </div>,
-              <div key={item.title} className="w-full mx-auto flex flex-col justify-center items-center sm:hidden mt-6">
-                <ProductCard
-                  title={item.title}
-                  address={item.address}
-                  price={item.price}
-                  rooms={item.rooms}
-                  parking={item.parking}
-                  bathrooms={item.bathrooms}
-                  rate={item.rate}
-                  href={`/mortgageandhouserent/${item.id}`}
-                  buttonText="رزرو ملک"
-                />
-              </div>,
-            ])
-          ) : (
-            <i className="text-[56px] text-white">! اطلاعاتی یافت نشد</i>
-          )}
+    <Slide direction="right">
+      <div className="w-full flex-col-center sm:gap-49 bg-dark-900 mt-28 w-full ">
+        {/* <Breadcrumb items={{}} /> */}
+        <div className="w-full padding-section flex-col-center gap-10">
+          <FilterSection totalCount={totalCount} />
+
+          <div className="w-full sm:flex-center flex-wrap gap-6">
+            {houses.length > 0 ? (
+              houses.map((item: IProductCard) => [
+                <div className="hidden sm:block group" key={item.id}>
+                  <CardContainer
+                    parentExtraStyle={{ width: "740px" }}
+                    curveColor="#393939"
+                    cavity="round"
+                    labelContent={
+                      <div className="w-[67px] h-[10px] flex items-center  text-dark-800 justify-center gap-1 ">
+                        {/* <Image src={Star} alt='star'/>  */}
+                        {/* {rate} */}
+                      </div>
+                    }
+                    labelSize="lg"
+                    mainContent={
+                      <div className="flex-col-center mx-auto ">
+                        <RowProductCard
+                          id={item.id}
+                          title={item.title}
+                          address={item.address}
+                          price={item.price}
+                          rooms={item.rooms}
+                          parking={item.parking}
+                          bathrooms={item.bathrooms}
+                          rate={item.rate}
+                          href={`/mortgageandhouserent/${item.id}`}
+                        />
+                      </div>
+                    }
+                    labelBackground="bg-[#393939]"
+                    labelExtraStyle={{ minHeight: "10px" }}
+                    mainExtraStyle="p-6 bg-dark-700"
+                  />
+                </div>,
+                <div
+                  key={item.title}
+                  className="w-full mx-auto flex flex-col justify-center items-center sm:hidden mt-6"
+                >
+                  <ProductCard
+                    title={item.title}
+                    address={item.address}
+                    price={item.price}
+                    rooms={item.rooms}
+                    parking={item.parking}
+                    bathrooms={item.bathrooms}
+                    rate={item.rate}
+                    href={`/mortgageandhouserent/${item.id}`}
+                    buttonText="رزرو ملک"
+                  />
+                </div>,
+              ])
+            ) : (
+              <i className="text-[56px] text-white">! اطلاعاتی یافت نشد</i>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </Slide>
   );
 };
 

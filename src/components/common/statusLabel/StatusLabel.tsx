@@ -15,8 +15,8 @@ export enum BookingStatus {
   CANCELLED = "canceled",
   CONFIRMED = "confirmed",
   COMPLETED = "completed",
-  FAILED = "failed", 
-  REJECTED = "rejected", 
+  FAILED = "failed",
+  REJECTED = "rejected",
 }
 
 interface IStatus {
@@ -88,7 +88,7 @@ const StatusLabel: FC<IStatus> = ({ status }) => {
   return (
     <div
       className={`${getStatusStyle(
-        status
+        status,
       )} md:w-[90px] w-[50px] md:h-[22px] text-[10px] rounded-4xl text-center whitespace-nowrap md:text-[14px] flex items-center justify-center p-px gap-px md:gap-1`}
     >
       {getStatusIcon(status)}

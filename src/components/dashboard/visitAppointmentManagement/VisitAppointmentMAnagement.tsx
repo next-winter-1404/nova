@@ -76,32 +76,32 @@ const VisitAppointmentMAnagement: FC<IProp> = ({ visitId, status }) => {
   let menuItems = [
     {
       label: "ویرایش درخواست",
-      icon: <TbEdit className="w-4 h-4 text-white" />,
+      icon: <TbEdit className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsEditModal(true),
     },
   ];
   if (status === "canceled") {
     menuItems.push({
       label: "تأیید درخواست",
-      icon: <FiCheckCircle className="w-4 h-4 text-white" />,
+      icon: <FiCheckCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsAcceptModalOpen(true),
     });
   } else if (status === "confirmed") {
     menuItems.push({
       label: "رد درخواست",
-      icon: <FiXCircle className="w-4 h-4 text-white" />,
+      icon: <FiXCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsCancelModalOpen(true),
     });
   } else {
     menuItems.push(
       {
         label: "تأیید درخواست",
-        icon: <FiCheckCircle className="w-4 h-4 text-white" />,
+        icon: <FiCheckCircle className="w-4 h-4 text-white-pure" />,
         onClick: () => setIsAcceptModalOpen(true),
       },
       {
         label: "رد درخواست",
-        icon: <FiXCircle className="w-4 h-4 text-white" />,
+        icon: <FiXCircle className="w-4 h-4 text-white-pure" />,
         onClick: () => setIsCancelModalOpen(true),
       }
     );

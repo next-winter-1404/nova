@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 import { sendPhone } from "@/src/utils/sevices/api/auth/phoneRegister/sendPhone";
+import FadeIn from "@/src/components/animations/FadeIn";
 
 const RegisterWithPhone = () => {
   const router = useRouter();
@@ -28,38 +29,41 @@ const RegisterWithPhone = () => {
   }, [state, router]);
 
   return (
-    <form
-      action={formAction}
-      className="md:w-1/2 w-full flex flex-col gap-9"
-      dir="rtl"
-    >
-      <LoginWrapper
-      description="جهت ساخت اکانت با شماره تلفن لطفا شماره تماس خود را وارد کنید"
-        ButtonSection={
-          <LoginButton
-            loadingText="در حال ارسال کد"
-            buttonText="ارسال کد تایید"
-            width="w-full"
-          />
-        }
-        content={
-          <Input
-            name="phone"
-            type="number"
-            id="phone"
-            labelText="شماره شما* : "
-            InputHeight={"h-[43px]"}
-            htmlFor="phone"
-            parentWidth="w-full"
-            placeHolder="0912....."
-            borderColor="text-white-pure border-white-pure "
-            tagBgStyle={{ background: "var(--color-dark-900)", color: "white" }}
-            textColor="text-white-pure"
-            dir="rtl"
-          />
-        }
-      />
-    </form>
+      <form
+        action={formAction}
+        className="md:w-1/2 w-full flex flex-col gap-9"
+        dir="rtl"
+      >
+        <LoginWrapper
+          description="جهت ساخت اکانت با شماره تلفن لطفا شماره تماس خود را وارد کنید"
+          ButtonSection={
+            <LoginButton
+              loadingText="در حال ارسال کد"
+              buttonText="ارسال کد تایید"
+              width="w-full"
+            />
+          }
+          content={
+            <Input
+              name="phone"
+              type="number"
+              id="phone"
+              labelText="شماره شما* : "
+              InputHeight={"h-[43px]"}
+              htmlFor="phone"
+              parentWidth="w-full"
+              placeHolder="0912....."
+              borderColor="border-white "
+              tagBgStyle={{
+                background: "var(--color-dark-900)",
+                color: "white",
+              }}
+              textColor="text-white"
+              dir="rtl"
+            />
+          }
+        />
+      </form>
   );
 };
 

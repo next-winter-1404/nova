@@ -57,12 +57,12 @@ const CategoryItems: FC<IProp> = ({ categoryName, categoryId }) => {
   const menuItems = [
     {
       label: "ویرایش",
-      icon: <TbEdit className="mt-px text-white" />,
+      icon: <TbEdit className="mt-px text-white-pure" />,
       onClick: () => setIsEditModalOpen(true),
     },
     {
       label: "حذف",
-      icon: <TbTrash className="mt-px text-white" />,
+      icon: <TbTrash className="mt-px text-white-pure" />,
       onClick: () => setIsAlertModalOpen(true),
     },
   ];

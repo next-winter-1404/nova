@@ -9,7 +9,7 @@ import { IHousesResponse } from "@/src/core/types/IHouse";
 
 const SimilarHouseItems: FC<IHousesResponse> = ({ houses }) => {
   return (
-    <div className="w-full overflow-hidden flex-center gap-8 ">
+    <div className="sm:max-w-[1376px] max-w-[400px] padding-section overflow-hidden flex-center gap-8 ">
       <Swiper
         modules={[Navigation, Autoplay, Pagination]}
         spaceBetween={20}

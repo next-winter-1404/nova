@@ -14,6 +14,10 @@ import { getBlogs } from "@/src/utils/sevices/api/blogs/getBlogs";
 import { getUserPublicProfile } from "@/src/utils/sevices/api/users/getUserPublicProfile";
 import ImageFallback from "@/src/utils/helper/imageFallBack/ImageFallBack";
 import { formatDateTime } from "@/src/utils/hooks/formDates";
+import Slide from "@/src/components/animations/Slide";
+import ShinyText from "@/src/components/animations/ShinyText/ShinyText";
+import GlareHover from "@/src/components/animations/GlareHover/GlareHover";
+import ScrollSlide from "@/src/components/animations/GoingFromRight";
 
 export const revalidate = 30;
 
@@ -34,84 +38,122 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
   const user = await getUserPublicProfile(Number(BlogDetail?.author_id));
   console.log("users", user);
   return (
-    <div className="w-full flex-center">
-      <div className="mt-25 xl:w-[1376px] lg:w-[1090px]  w-[80%] flex items-end flex-col lg:gap-6 gap-10 ">
-        <Breadcrumb items={items} />
-        <div className="w-full flex flex-col gap-8 ">
-          <div className="flex items-center  w-full justify-between  ">
-            <div className="md:w-1/2 w-full ">
-              <div className="max-w-100 rounded-[28px] bg-dark-860 flex justify-between p-4  items-center relative">
-                <ImageFallback
-                  fallbackSrc={userPlaceHolder}
-                  alt="user photo"
-                  src={user?.user.profilePicture || userPlaceHolder}
-                  width={74}
-                  height={74}
-                  className="rounded-[60px]  absolute -top-9 -right-8 shadow-[-6px_6px_0px_-1px__#232323] border border-dark-600"
-                />
+    <Slide direction="right">
+      <div className="w-full flex-center">
+        <div className="mt-30 xl:w-[1376px] lg:w-[1090px]  w-[80%] flex items-end flex-col lg:gap-6 gap-10 ">
+          <Breadcrumb items={items} />
+          <div className="w-full flex flex-col gap-8 ">
+            <div className="flex items-center  w-full justify-between  ">
+              <div className="md:w-1/2 w-full ">
+                <div className="max-w-100 rounded-[28px] bg-dark-860 flex justify-between p-4  items-center relative">
+                  <ImageFallback
+                    fallbackSrc={userPlaceHolder}
+                    alt="user photo"
+                    src={user?.user.profilePicture || userPlaceHolder}
+                    width={74}
+                    height={74}
+                    className="rounded-[60px]  absolute -top-9 -right-8 shadow-[-6px_6px_0px_-1px__#232323] border border-dark-600"
+                  />
 
-                <div className="flex  flex-col gap-2">
-                  <ToolTip
-                    mainContent={
-                      <div className="flex-center w-10 h-10 bg-dark-700 rounded-xl hover:bg-white">
-                        <FiCopy className="w-4 h-4 text-white hover:text-black" />
+                  <GlareHover
+                    glareColor="var(--color-gray-300)"
+                    glareOpacity={0.3}
+                    glareAngle={-30}
+                    glareSize={300}
+                    transitionDuration={800}
+                    playOnce={false}
+                    className="rounded-[10px]"
+                  >
+                    <div className="w-full flex justify-between p-4  items-center">
+                      <div className="flex  flex-col gap-2">
+                        <ToolTip
+                          mainContent={
+                            <div className="flex-center w-10 h-10 bg-dark-700 rounded-xl hover:bg-white">
+                              <FiCopy className="w-4 h-4 text-white hover:text-black" />
+                            </div>
+                          }
+                          tooltipText="کپی کردن"
+                        />
+                        <ToolTip
+                          mainContent={
+                            <div className="flex-center w-10 h-10 bg-dark-700 rounded-xl hover:bg-white">
+                              <Image
+                                className="w-4 h-4"
+                                alt="icon"
+                                src={share}
+                              />
+                            </div>
+                          }
+                          tooltipText="اشتراک گذاری"
+                        />
                       </div>
-                    }
-                    tooltipText="کپی کردن"
-                  />
-                  <ToolTip
-                    mainContent={
-                      <div className="flex-center w-10 h-10 bg-dark-700 rounded-xl hover:bg-white">
-                        <Image className="w-4 h-4" alt="icon" src={share} />
-                      </div>
-                    }
-                    tooltipText="اشتراک گذاری"
-                  />
-                </div>
-                <div>
-                  <div className="flex flex-col mr-8 gap-3 " dir="rtl">
-                    <h2 className="text-xl text-white-pure">
-                      {user?.user.name || "نویسنده"}
-                    </h2>
-                    <div className="flex items-center gap-1 text-gray-300">
-                      <FaCalendarAlt className="w-4 h-4 mb-1" />
-                      <div className="flex gap-2">
-                        <span>{formatDateTime(BlogDetail?.created_at)} </span>
-                        <span>-</span>
-                        <span>{BlogDetail?.estimated_reading_time}</span>
+                      <div>
+                        <div className="flex flex-col mr-8 gap-3 " dir="rtl">
+                          <h2 className="text-xl text-white-pure">
+                            {user?.user.name || "نویسنده"}
+                          </h2>
+                          <div className="flex items-center gap-1 text-gray-300">
+                            <FaCalendarAlt className="w-4 h-4 mb-1" />
+                            <div className="flex gap-2">
+                              <span>
+                                {formatDateTime(BlogDetail?.created_at)}{" "}
+                              </span>
+                              <span>-</span>
+                              <span>{BlogDetail?.estimated_reading_time}</span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </GlareHover>
                 </div>
               </div>
+              <div className="md:flex flex-col w-1/2 hidden gap-4" dir="rtl">
+                <h2 className="lg:text-[32px] text-[18px] text-white-pure font-semibold">
+                  <ShinyText
+                    text={BlogDetail?.title}
+                    speed={1}
+                    delay={0}
+                    color="var(--color-white-pure)"
+                    shineColor="var(--color-gray-300)"
+                    spread={120}
+                    direction="right"
+                    yoyo={true}
+                    pauseOnHover={false}
+                    disabled={false}
+                  />
+                </h2>
+              </div>
             </div>
-            <div className="md:flex flex-col w-1/2 hidden gap-4" dir="rtl">
-              <h2 className="lg:text-[32px] text-[18px] text-white-pure font-semibold">
-                {BlogDetail?.title}
-              </h2>
-            </div>
-          </div>
-          <section className="flex flex-col gap-8">
-            <Image
-              alt="blog image"
-              src={placeHolder}
-              className="w-full  h-[356px]  rounded-[56px]"
-            />
+            <section className="flex flex-col gap-8">
+              <Image
+                alt="blog image"
+                src={placeHolder}
+                className="w-full  h-[356px]  rounded-[56px]"
+              />
 
-            <div className="flex flex-col gap-4 " dir="rtl">
-              <h2 className="text-semibold-24">{BlogDetail?.title}</h2>
-              <p className="text-white-pure lg:text-[18px]">{BlogDetail?.caption}</p>
-            </div>
-          </section>
-          <div className="flex flex-col w-full gap-4 mb-30 mt-10 ">
-            <SimilarNavbarItem href="/blogs" similarTitle="وبلاگ های مشابه" />
-            <div className="flex w-full mt-10">
-              <SimilarBlogItems data={data} />
-            </div>
+              <div className="flex flex-col gap-4 " dir="rtl">
+                <h2 className="text-semibold-24">{BlogDetail?.title}</h2>
+                <p className="text-white-pure lg:text-[18px]">
+                  {BlogDetail?.caption}
+                </p>
+              </div>
+            </section>
+            <ScrollSlide direction="right">
+              <div className="flex flex-col w-full gap-4 mb-30 mt-10 ">
+                <SimilarNavbarItem
+                  href="/blogs"
+                  similarTitle="وبلاگ های مشابه"
+                />
+                <div className="flex w-full mt-10">
+                  <SimilarBlogItems data={data} />
+                </div>
+              </div>
+            </ScrollSlide>
           </div>
         </div>
       </div>
-    </div>
+    </Slide>
   );
 };
 

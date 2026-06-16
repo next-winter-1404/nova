@@ -100,18 +100,18 @@ const ReserveItemsIcon: FC<IProp> = ({ bookingId, houseId, userId }) => {
   const allMenuItems = [
     {
       label: "جزییات",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      icon: <FiAlertCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsModalOpen(true),
     },
 
     {
       label: "تایید",
-      icon: <TbCircleCheckFilled className="mt-px text-white" />,
+      icon: <TbCircleCheckFilled className="mt-px text-white-pure" />,
       onClick: () => confirmReservation(),
     },
     {
       label: "حذف",
-      icon: <TbTrash className="mt-px text-white" />,
+      icon: <TbTrash className="mt-px text-white-pure" />,
       onClick: () => deleteReservation(),
     },
   ];
@@ -143,7 +143,7 @@ const ReserveItemsIcon: FC<IProp> = ({ bookingId, houseId, userId }) => {
               <div>در حال بارگزاری....</div>
             ) : (
               <div className="w-full flex justify-between ">
-                <div className="w-1/2 flex flex-col text-white gap-5" dir="rtl">
+                <div className="w-1/2 flex flex-col text-white-pure gap-5" dir="rtl">
                   <div className="flex gap-4 items-center">
                     <ImageFallback
                       fallbackSrc={userPlaceHolder}
@@ -262,7 +262,7 @@ const ReserveItemsIcon: FC<IProp> = ({ bookingId, houseId, userId }) => {
                 dir="rtl"
                 key={`${traveler.firstName} - ${traveler.nationalId}`}
               >
-                <div className="grid grid-cols-4 gap-4 text-white">
+                <div className="grid grid-cols-4 gap-4 text-white-pure">
                   <span>
                     {`${traveler.firstName} ${traveler.lastName}` ||
                       "نام کاربر"}

@@ -48,7 +48,7 @@ const QAItemsManagement: FC<IProp> = ({ questionId, answer }) => {
             
           />
           <Modal
-            contentClassName="bg-dark-900 text-white"
+            contentClassName="bg-dark-900 text-white-pure"
             mainContent={<p className=" bg-dark-600 rounded-xl p-5" dir="rtl">{answer}</p>}
             modalTitle="پاسخ به این سوال"
             onOpenChange={setIsModalOpen}
@@ -57,7 +57,7 @@ const QAItemsManagement: FC<IProp> = ({ questionId, answer }) => {
         </div>
       ) : (
         <Modal
-          contentClassName="bg-dark-900 text-white"
+          contentClassName="bg-dark-900 text-white-pure"
           mainContent={
             <div className="flex flex-col gap-5 w-full" dir="rtl">
               <textarea className="min-h-[200px] p-2" value={sendAnswer} onChange={(e)=>setSendAnswer(e.target.value)}/>

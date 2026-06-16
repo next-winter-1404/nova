@@ -1,3 +1,4 @@
+import FadeIn from "@/src/components/animations/FadeIn";
 import DashboardCommentManagement from "@/src/components/dashboard/dashboardcommentManagement/DashboardCommentManagement";
 import { getAllComment } from "@/src/utils/sevices/api/comments/getAllComments/getAllComments";
 import { getHouses } from "@/src/utils/sevices/api/houses/getHouses";
@@ -35,7 +36,7 @@ const AdminCommentManagementPage: FC<IProp> = async ({ searchParams }) => {
   const comments = res.comments || [];
   const result = await getHouses()
   const allHouses = result.houses||[]
-  const items = ["نام کاربر", "عنوان نظر", "تاریخ"];
+  const items = ["نام کاربر", "عنوان نظر", "تاریخ", "عملیات"];
 // console.log("all houses-----",allHouses)
   const orderItems = [
     { value: "DESC", label: "نزولی" },
@@ -46,6 +47,7 @@ const AdminCommentManagementPage: FC<IProp> = async ({ searchParams }) => {
     { value: "created_at", label: "زمان ایجاد" },
   ];
   return (
+    <FadeIn>
     <div>
       <DashboardCommentManagement
         comments={comments}
@@ -57,6 +59,7 @@ const AdminCommentManagementPage: FC<IProp> = async ({ searchParams }) => {
         isAdmin
       />
     </div>
+    </FadeIn>
   );
 };
 

@@ -1,3 +1,4 @@
+import FadeIn from "@/src/components/animations/FadeIn";
 import Button from "@/src/components/common/button/page";
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
@@ -27,6 +28,7 @@ const AdminQAManagement: FC<IProp> = async ({ searchParams }) => {
 
   const houseQA = hasValidHouseId ? await getHouseQA(parsedHouseId) : [];
   return (
+    <FadeIn>
     <DashboardContentContainer
       title={`لیست سوالات کاربران (${houseQA.length})`}
       topSectionContent={
@@ -92,6 +94,7 @@ const AdminQAManagement: FC<IProp> = async ({ searchParams }) => {
         )}
       </div>
     </DashboardContentContainer>
+    </FadeIn>
   );
 };
 

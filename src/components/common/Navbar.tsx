@@ -26,6 +26,7 @@ import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { getUserPublicProfile } from "@/src/utils/sevices/api/users/getUserPublicProfile";
 import { getClientCookie } from "@/src/utils/helper/cookies/clientCookie/clientSideCookie";
+import Grainient from "../animations/Grainient/Grainient";
 const navigation = [
   { labelName: "تماس با ما", href: "/contactus", current: false },
   { labelName: "مقالات ما", href: "/blogs", current: false },
@@ -76,7 +77,7 @@ const Navbar = () => {
     {
       success: false,
       message: "",
-    }
+    },
   );
   useEffect(() => {
     if (!state.message) return;
@@ -106,21 +107,8 @@ const Navbar = () => {
         <div>
           <div>
             <span>
-              {/* <Link href="/login">
-                <NavLoginButton>
-                  <span>
-                    <p>ورود / ثبت نام</p>
-                    <Image
-                      src="/icons/user1.svg"
-                      alt="user"
-                      width={16}
-                      height={16}
-                    />
-                  </span>
-                </NavLoginButton>
-              </Link> */}
               {isAuth === null ? null : isAuth ? (
-                <Link href={"/dashboard"} >
+                <Link href={"/dashboard"}>
                   <Image
                     alt="prof"
                     src={data?.user.profilePicture || userPlaceHolder}
@@ -170,9 +158,22 @@ const Navbar = () => {
                   </form>
                 }
                 modalBtn={
-                  <span className="w-[134px] h-9 flex-center gap-2 bg-blue-purple-500 px-4 py-2 rounded-xl text-white-pure shadow-blue-transparent-20 inset-shadow-fff-4">
-                    <p>! فروشنده شو</p>
-                    <Image src={megaphoneIcon} alt="megaphone icon" />
+                  <span className="relative overflow-hidden w-[134px] h-9 flex-center gap-2 rounded-xl">
+                    <div className="absolute inset-0">
+                      <Grainient
+                        color1="#B497CF"
+                        
+                        color3="#7569ff"
+                      />
+                    </div>
+
+                    <p className="relative z-10 text-white">! فروشنده شو</p>
+
+                    <Image
+                      className="relative z-10"
+                      src={megaphoneIcon}
+                      alt="megaphone icon"
+                    />
                   </span>
                 }
               />
@@ -199,8 +200,10 @@ const Navbar = () => {
               <Divider color="#4A4A4A" width="3" height="20" />
               <Link
                 href="/"
-                className="w-22 h-8 rounded-xl bg-[#4A4A4A]"
-              ></Link>
+                className="w-22 h-8 rounded-xl"
+              >
+                Delta
+              </Link>
             </div>
           </div>
 

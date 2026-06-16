@@ -2,6 +2,7 @@ import { getSellerHouses } from '@/src/utils/sevices/api/seller/houses/getHouses
 import React, { FC } from 'react'
 import SellerEstateManagement from '@/src/components/dashboard/sellerEstateManagement/page';
 import { getServerSideCookie } from '@/src/utils/helper/cookies/serverCookie/serverSideCookie';
+import FadeIn from '@/src/components/animations/FadeIn';
 
 
 interface IProps {
@@ -25,12 +26,15 @@ const SellerEstatesPage : FC<IProps> = async() => {
     "ادرس",
     "امتیاز",
     "ظرفیت",
+    "عملیات"
 
   ];
   return (
+    <FadeIn>
     <div>
       <SellerEstateManagement items = {items} house={house} role = {role}/>
     </div>
+    </FadeIn>
   )
 }
 

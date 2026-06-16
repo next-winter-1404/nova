@@ -1,3 +1,5 @@
+import FadeIn from "@/src/components/animations/FadeIn";
+import Slide from "@/src/components/animations/Slide";
 import DashboardInformation from "@/src/components/common/dashboardInformation/dashboardInformation";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import ProgressBar from "@/src/components/common/progressBar/ProgressBar";
@@ -81,6 +83,7 @@ const AdminPage = async () => {
     },
   ];
   return (
+    <Slide direction="right">
     <div className="flex flex-col gap-5">
       <div className=" grid grid-cols-2 lg:grid-cols-4 gap-4  w-full ">
         <DashboardInformation
@@ -118,7 +121,7 @@ const AdminPage = async () => {
       </div>
       <div className="grid lg:grid-cols-2 gap-5 ">
         <DashboardContentContainer isIcon title="کاربران">
-          <div className="grid grid-cols-2 gap-3 text-white">
+          <div className="grid grid-cols-2 gap-3 text-white-pure">
             {usersData.map((item) => (
               <div
                 key={item.label}
@@ -138,7 +141,7 @@ const AdminPage = async () => {
           </div>
         </DashboardContentContainer>
         <DashboardContentContainer isIcon title="رزرو ها">
-          <div className="grid grid-cols-2 gap-3 text-white">
+          <div className="grid grid-cols-2 gap-3 text-white-pure">
             {bookingsData.map((item) => (
               <div
                 key={item.label}
@@ -183,6 +186,7 @@ const AdminPage = async () => {
         </DashboardContentContainer>
       </div>
     </div>
+    </Slide>
   );
 };
 

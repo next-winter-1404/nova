@@ -1,9 +1,16 @@
-import NotificationPage from '@/src/components/dashboard/notification/notificationPage/notificationPage'
+import FadeIn from "@/src/components/animations/FadeIn";
+import NotificationPage from "@/src/components/dashboard/notification/notificationPage/notificationPage";
 
-const AdminNotificationPage = async({ searchParams }: { searchParams: Promise<any> }) => {
+const AdminNotificationPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<any>;
+}) => {
   return (
-    <NotificationPage searchParams={searchParams}/>
-  )
-}
+    <FadeIn>
+      <NotificationPage searchParams={searchParams} />
+    </FadeIn>
+  );
+};
 
-export default AdminNotificationPage
+export default AdminNotificationPage;

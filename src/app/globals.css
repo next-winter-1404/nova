@@ -150,6 +150,38 @@
 .Container {
   @apply mx-auto container flex flex-col items-center sm:px-6 py-20 px-4;
 }
+
+.hero-bg {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(255,255,255,.22) 0%,
+      transparent 40%
+    ),
+
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(255,255,255,.14) 0%,
+      transparent 35%
+    ),
+
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(255,255,255,.10) 0%,
+      transparent 35%
+    ),
+
+    linear-gradient(
+      180deg,
+      #b7bbbf 0%,
+      #9fa3a7 50%,
+      #707478 100%
+    );
+}
+
 .selected-button {
   box-shadow:
     inset -1px -1px 8px 0px #0000000a,
@@ -416,13 +448,24 @@ header {
   }
 }
 
+.chat-bg {
+  
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.05) 0, transparent 25%),
+    radial-gradient(circle at 80% 30%, rgba(255,255,255,.03) 0, transparent 30%),
+    radial-gradient(circle at 50% 80%, rgba(255,255,255,.04) 0, transparent 25%),
+    #0f172a;
+}
+
 .senderMessage{
-  @apply text-right justify-end
+  @apply text-right justify-end bg-primary-accent-green text-black
 }
 
 .getterMessage{
   @apply  justify-start
 }
+
 .scrollbar::-webkit-scrollbar {
   width: 4px;
 }
@@ -430,4 +473,5 @@ header {
 .scrollbar::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,.2);
   border-radius: 999px;
+  @apply  justify-start bg-blue-purple-500
 }

@@ -78,17 +78,17 @@ const DiscountItemsManagement: FC<IProp> = ({
   const menuItems = [
     {
       label: "جزییات",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      icon: <FiAlertCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsDetailModalOpen(true),
     },
     {
       label: "ویرایش",
-      icon: <TbEdit className="text-white" />,
+      icon: <TbEdit className="text-white-pure" />,
       onClick: () => setIsEditOpen(true),
     },
     {
       label: "حذف",
-      icon: <TbTrash className="text-white" />,
+      icon: <TbTrash className="text-white-pure" />,
       onClick: () => setIsAlertModalOpen(true),
     },
   ];

@@ -42,13 +42,13 @@ const ContactUsItemsManagement: FC<IProp> = ({
   const menuItems = [
     {
       label: "جزییات",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      icon: <FiAlertCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsDetailOpen(true),
     },
 
     {
       label: "حذف",
-      icon: <TbTrash className="mt-px text-white" />,
+      icon: <TbTrash className="mt-px text-white-pure" />,
       onClick: () => setIsAlertModalOpen(true),
     },
   ];
@@ -69,7 +69,7 @@ const ContactUsItemsManagement: FC<IProp> = ({
       <Modal
         onOpenChange={setIsDetailOpen}
         open={isDetailOpen}
-        contentClassName="bg-dark-900 text-white "
+        contentClassName="bg-dark-900 text-white-pure "
         mainContent={
           <div className="flex flex-col gap-8 " dir="rtl">
             <div className="flex flex-col gap-6">

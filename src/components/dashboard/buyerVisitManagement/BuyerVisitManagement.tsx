@@ -103,7 +103,7 @@ const BuyerVisitManagement: FC<IProp> = ({ houseId }) => {
                 در حال بارگزاری....
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-3 text-white" dir="rtl">
+              <div className="grid grid-cols-2 gap-3 text-white-pure" dir="rtl">
                 {houseInfo.map((item, index) => (
                   <div
                     key={index}
@@ -114,7 +114,7 @@ const BuyerVisitManagement: FC<IProp> = ({ houseId }) => {
                       <span className="text-sm">{item.label}</span>
                     </div>
 
-                    <span className="text-white font-medium">
+                    <span className="text-white-pure font-medium">
                       {item.value ?? "--"}
                     </span>
                   </div>

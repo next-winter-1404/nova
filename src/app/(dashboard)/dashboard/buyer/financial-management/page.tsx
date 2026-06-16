@@ -1,121 +1,153 @@
-import DashboardContentContainer from '@/src/components/common/dashboardcontentcontainer/container'
-import ItemNavbar from '@/src/components/common/dashboardItemNavbar/ItemNavbar'
-import SimpleDropdown from '@/src/components/common/dropDown'
-import PaginationClient from '@/src/components/common/pagination/page'
-import Pagination from '@/src/components/common/pagination/page'
-import StatusLabel from '@/src/components/common/statusLabel/StatusLabel'
-import { getBuyerPayment } from '@/src/utils/sevices/api/buyerPayment/getBuyerPayment'
-import React, { FC, Suspense } from 'react'
-const items = ["تاریخ" ,"مبلغ","بابت ","وضعیت پرداخت"]
+import FadeIn from "@/src/components/animations/FadeIn";
+import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
+import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
+import SimpleDropdown from "@/src/components/common/dropDown";
+import PaginationClient from "@/src/components/common/pagination/page";
+import Pagination from "@/src/components/common/pagination/page";
+import StatusLabel from "@/src/components/common/statusLabel/StatusLabel";
+import { getBuyerPayment } from "@/src/utils/sevices/api/buyerPayment/getBuyerPayment";
+import React, { FC, Suspense } from "react";
+const items = ["تاریخ", "مبلغ", "بابت ", "وضعیت پرداخت"];
 
 interface IProps {
   searchParams: Promise<IFilter>;
 }
 interface IFilter {
-  status? : string,
-  orders? : string,
-  page ? : number,
-  limit? : number,
+  status?: string;
+  orders?: string;
+  page?: number;
+  limit?: number;
 }
 
-const BuyerPaymentPage : FC<IProps> = async({ searchParams }) => {    
+const BuyerPaymentPage: FC<IProps> = async ({ searchParams }) => {
   const params = await searchParams;
   const status = params.status;
   const orders = params.orders;
   const limit = 5;
   const currentPage = Number(params.page) || 1;
-  const filter : IFilter = {};
+  const filter: IFilter = {};
   if (status) filter.status = status;
   if (orders) filter.orders = orders;
-  if (currentPage )filter.page = currentPage 
-  if (limit) filter.limit = limit
-  
+  if (currentPage) filter.page = currentPage;
+  if (limit) filter.limit = limit;
+
   const paymentList = await getBuyerPayment(filter);
   const totalPages = Math.ceil(Number(paymentList.totalCount) / limit);
-  const result = paymentList?.payments || []
+  const result = paymentList?.payments || [];
   const payStatus = [
-    {value : "completed", label : "تایید شده"},
-    {value : "cancelled", label : "تایید نشده"},
-    {value : "pending", label : " در انتظار"}
-  ]
+    { value: "completed", label: "تایید شده" },
+    { value: "cancelled", label: "تایید نشده" },
+    { value: "pending", label: " در انتظار" },
+  ];
   const orderItem = [
     { value: "ASC", label: "صعودی" },
     { value: "DESC", label: "نزولی" },
   ];
   return (
-    <div className='flex flex-col'>
-      <DashboardContentContainer
-      twTopContent='w-1/2'
-      title='لیست تراکنش های مشتریان'
-      topSectionContent = {
-        <div className='w-full flex py-2 gap-4'>
-          <SimpleDropdown
-            options={payStatus}
-            paramKey='status'
-            placeholder='انتخاب کنید'
-            labelText='وضعیت پرداخت'
-            tagBg="bg-dark-600"
-            triggerClassName="w-1/2 h-[50px]"
-          />
-          <SimpleDropdown
-            options={orderItem}
-            paramKey='orders'
-            placeholder='انتخاب کنید'
-            labelText=' ترتیب نمایش'
-            tagBg="bg-dark-600"
-            triggerClassName="w-1/2 h-[50px]"   
-          />
-        </div>
-      }
-    >
-      <div className="flex flex-col items-end">
-        <div className="flex flex-col gap-5 w-full">
-          <ItemNavbar colsNumber={4} items={items} />
-          <div className="flex text-white mt-5 items-center">
-            {result?.length > 0 ? (
-              <div className="w-full flex flex-col gap-5">
-                <>
-                  {result?.map((item) => (
+    <FadeIn>
+      <div className="flex flex-col">
+        <DashboardContentContainer
+          twTopContent="w-1/2"
+          title="لیست تراکنش های مشتریان"
+          topSectionContent={
+            <div className="w-full flex py-2 gap-4">
+              <SimpleDropdown
+                options={payStatus}
+                paramKey="status"
+                placeholder="انتخاب کنید"
+                labelText="وضعیت پرداخت"
+                tagBg="bg-dark-600"
+                triggerClassName="w-1/2 h-[50px]"
+              />
+              <SimpleDropdown
+                options={orderItem}
+                paramKey="orders"
+                placeholder="انتخاب کنید"
+                labelText=" ترتیب نمایش"
+                tagBg="bg-dark-600"
+                triggerClassName="w-1/2 h-[50px]"
+              />
+            </div>
+          }
+        >
+          <div className="flex flex-col items-end">
+            <div className="flex flex-col gap-3 w-full">
+              <ItemNavbar colsNumber={4} items={items} />
+
+              <div className="flex flex-col gap-3 w-full">
+                {result?.length > 0 ? (
+                  result.map((item) => (
                     <div
-                      className="flex justify-between w-full items-center"
                       key={item.id}
+                      className="
+            grid
+            grid-cols-4
+            items-center
+
+            w-full
+            bg-dark-800
+            rounded-xl
+
+            px-4 md:px-6
+            py-4
+
+            text-white-pure
+            text-[11px] md:text-[15px]
+
+            transition-all
+            duration-300
+            ease-out
+            transform-gpu
+
+            hover:-translate-y-1
+            hover:scale-[1.01]
+            hover:bg-dark-700
+            hover:shadow-xl
+            hover:shadow-black/30
+
+            border
+            border-transparent
+            hover:border-white/10
+
+            cursor-pointer
+          "
                     >
-                    <div className ="grid grid-cols-5 w-full h-[50px] items-center">
-                      <div className="flex-center whitespace-nowrap">
-                        {item.createdAt || "- -"}
-                      </div>                              
-                      <div
-                        className="flex-center gap-1 text-center "
-                        dir="rtl"
-                      >
-                        <span>{item.amount || "  --"}</span>
-                        <span>تومان</span>
-                      </div>
-                      <div className="text-center mr-[100px]">
-                        {item.description} 
-                      </div>
-                      <div className='mr-[175px] text-center'>
+                      <p className="text-center truncate">
+                        {item.createdAt || "--"}
+                      </p>
+
+                      <p className="text-center truncate">
+                        {item.amount ? `${item.amount} تومان` : "--"}
+                      </p>
+
+                      <p className="text-center truncate">
+                        {item.description || "--"}
+                      </p>
+
+                      <div className="flex justify-center">
                         <StatusLabel status={item.status} />
                       </div>
                     </div>
+                  ))
+                ) : (
+                  <div className="w-full flex items-center justify-center py-20">
+                    <p className="text-gray-400 text-xl md:text-2xl">
+                      تراکنشی وجود ندارد
+                    </p>
                   </div>
-                  ))}
-                </>
-                </div>
-              ) : (
-                <div className="text-4xl text-gray-300">رزوری وجود ندارد</div>
-              )}
-            </div>
-            <PaginationClient 
-              totalPages={totalPages} 
-              totalCount={Number(paymentList.totalCount)} 
-            />
-        </div>
-      </div>
-    </DashboardContentContainer>
-    </div>
-    
-  )
-}
+                )}
+              </div>
 
-export default BuyerPaymentPage
+              <PaginationClient
+                totalPages={totalPages}
+                totalCount={Number(paymentList.totalCount)}
+              />
+            </div>
+          </div>
+        </DashboardContentContainer>
+      </div>
+    </FadeIn>
+  );
+};
+
+export default BuyerPaymentPage;

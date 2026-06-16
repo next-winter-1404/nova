@@ -30,12 +30,12 @@ const SocialMediaItemsManagement: FC<IProp> = ({ mediaId}) => {
   const menuItems = [
     {
       label: "ویرایش",
-      icon: <TbEdit className="mt-px text-white" />,
+      icon: <TbEdit className="mt-px text-white-pure" />,
       onClick: () => router.push(`/dashboard/admin/social-media/edit/${mediaId}`),
     },
     {
       label: "حذف",
-      icon: <TbTrash className="mt-px text-white" />,
+      icon: <TbTrash className="mt-px text-white-pure" />,
       onClick: () => setIsAlertModalOpen(true),
     },
   ];

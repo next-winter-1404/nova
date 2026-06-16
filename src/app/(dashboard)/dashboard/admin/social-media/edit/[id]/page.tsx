@@ -1,3 +1,4 @@
+import FadeIn from "@/src/components/animations/FadeIn";
 import EditSocialMediaForm from "@/src/components/dashboard/editSocialMediaForm/EditSocialMediaForm";
 import { getSocialMedia } from "@/src/utils/sevices/api/socialMedia/getSocial";
 
@@ -7,9 +8,7 @@ interface IProps {
   }>;
 }
 
-const EditSocialMediaPage = async ({
-  params,
-}: IProps) => {
+const EditSocialMediaPage = async ({ params }: IProps) => {
   const { id } = await params;
 
   const result = await getSocialMedia({
@@ -17,16 +16,16 @@ const EditSocialMediaPage = async ({
     limit: 100,
   });
 
-  const social = result.data.find(
-    (item) => item.id === Number(id)
-  );
+  const social = result.data.find((item) => item.id === Number(id));
 
   if (!social) {
     return <div>شبکه اجتماعی پیدا نشد</div>;
   }
 
   return (
-    <EditSocialMediaForm social={social} />
+    <FadeIn>
+      <EditSocialMediaForm social={social} />
+    </FadeIn>
   );
 };
 

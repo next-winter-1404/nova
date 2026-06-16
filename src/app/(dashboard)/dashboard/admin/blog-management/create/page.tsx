@@ -8,9 +8,9 @@ import LoginButton from "@/src/components/login/button/LoginButton";
 import { CreateBlog } from "@/src/utils/sevices/api/blogs/createBlog";
 import { useQuery } from "@tanstack/react-query";
 import { getCategory } from "@/src/utils/sevices/api/category/getCategory";
+import FadeIn from "@/src/components/animations/FadeIn";
 
-
-const CreateBlogPage= () => {
+const CreateBlogPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const category = searchParams.get("categories");
@@ -22,7 +22,6 @@ const CreateBlogPage= () => {
     queryKey: ["categories"],
     queryFn: () => getCategory(),
   });
-  
 
   const categoriesItems = categories?.data?.map((cat) => ({
     value: cat.id,
@@ -44,42 +43,44 @@ const CreateBlogPage= () => {
     }
   }, [state]);
   return (
-    <form action={formAction} className="flex flex-col gap-10 w-full">
-      <input type="hidden" name="category" value={category||""} />
-      <Input
-        name="title"
-        InputHeight="h-[50px] h-[35px] text-white"
-        dir="rtl"
-        tagBgStyle={{ background: "var(--color-dark-900)", color: "white" }}
-        labelText="عنوان"
-      />
-      <div className="grid grid-cols-2 gap-5">
+    <FadeIn>
+      <form action={formAction} className="flex flex-col gap-10 w-full">
+        <input type="hidden" name="category" value={category || ""} />
         <Input
-          name="estimated_reading_time"
+          name="title"
           InputHeight="h-[50px] h-[35px] text-white"
           dir="rtl"
           tagBgStyle={{ background: "var(--color-dark-900)", color: "white" }}
-          labelText="مقدار زمان مطالعه"
+          labelText="عنوان"
         />
-        <SimpleDropdown
-          options={categoriesItems || []}
-          paramKey="category"
-          placeholder="دسته بندی"
-          labelText="دسته بندی"
-          triggerClassName="h-[50px] w-full"
-          tagBg="bg-dark-900"
+        <div className="grid grid-cols-2 gap-5">
+          <Input
+            name="estimated_reading_time"
+            InputHeight="h-[50px] h-[35px] text-white"
+            dir="rtl"
+            tagBgStyle={{ background: "var(--color-dark-900)", color: "white" }}
+            labelText="مقدار زمان مطالعه"
+          />
+          <SimpleDropdown
+            options={categoriesItems || []}
+            paramKey="category"
+            placeholder="دسته بندی"
+            labelText="دسته بندی"
+            triggerClassName="h-[50px] w-full"
+            tagBg="bg-dark-900"
+          />
+        </div>
+        <textarea
+          className="h-[300px] border border-white rounded-xl text-white p-2"
+          name="caption"
         />
-      </div>
-      <textarea
-        className="h-[300px] border border-white rounded-xl text-white p-2"
-        name="caption"
-      />
-      <LoginButton
-        buttonText="ساخت وبلاگ"
-        loadingText=" درحال ساخت ..."
-        type="submit"
-      />
-    </form>
+        <LoginButton
+          buttonText="ساخت وبلاگ"
+          loadingText=" درحال ساخت ..."
+          type="submit"
+        />
+      </form>
+    </FadeIn>
   );
 };
 

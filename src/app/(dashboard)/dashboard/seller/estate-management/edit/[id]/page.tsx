@@ -1,3 +1,4 @@
+import FadeIn from "@/src/components/animations/FadeIn";
 import EditHouseComponent from "@/src/components/dashboard/editHouseCompoenent/EditHouseCompoenent";
 import { EditHouse } from "@/src/utils/sevices/api/admin/houses/editHouse/editHouse";
 import { getCategory } from "@/src/utils/sevices/api/category/getCategory";
@@ -21,12 +22,14 @@ const EditPageDetail: FC<IProps> = async ({ params }) => {
     label: cat.name,
   }));
   return (
-    <EditHouseComponent
-    editAction={EditHouse}
-      transactionItem={transactionItem}
-      categoriesItems={categoriesItems}
-      houseId ={id}
-    />
+    <FadeIn>
+      <EditHouseComponent
+        editAction={EditHouse}
+        transactionItem={transactionItem}
+        categoriesItems={categoriesItems}
+        houseId={id}
+      />
+    </FadeIn>
   );
 };
 

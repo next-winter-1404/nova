@@ -1,3 +1,4 @@
+import FadeIn from "@/src/components/animations/FadeIn";
 import EditLocationForm from "@/src/components/dashboard/editLocationForm/EditLocationForm";
 import { getAllLocation } from "@/src/utils/sevices/api/locations/getAllLocations/getAllLocation";
 
@@ -26,7 +27,7 @@ const EditLocationPage = async ({
   }
 
   return (
-    <EditLocationForm location={location} />
+    <FadeIn><EditLocationForm location={location} /></FadeIn>
   );
 };
 

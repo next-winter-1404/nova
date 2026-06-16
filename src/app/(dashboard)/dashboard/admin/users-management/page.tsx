@@ -19,6 +19,7 @@ import SimpleDropdown from "@/src/components/common/dropDown";
 import SellerUpgradeRequest from "@/src/components/dashboard/sellerUpgradeList/SellerUpgradeRequest";
 import { FC } from "react";
 import PaginationClient from "@/src/components/common/pagination/page";
+import FadeIn from "@/src/components/animations/FadeIn";
 const items = [
   " پروفایل",
   "نام کاربر",
@@ -51,69 +52,97 @@ const UserManegment: FC<IProp> = async ({ searchParams }) => {
   const totalPages = result.totalPages;
 
   return (
-    <DashboardContentContainer
-      title="لیست کاربران"
-      topSectionContent={
-        <div className="flex gap-4">
-          <UserManegmentSearch />
-          <SellerUpgradeRequest allSellerRequest={allSellerRequest} totalCount={result.totalCount} totalPages={totalPages}/>
-        </div>
-      }
-    >
-      <div>
-        <div className="w-full flex-col-center">
-          <ItemNavbar colsNumber={6} items={items} />
-        </div>
-        <div className="flex text-white-pure mt-5 items-center">
-          {allUser?.data?.length > 0 ? (
-            <div className="w-full flex flex-col gap-5">
-              <>
-                {allUser?.data?.map((item: IAdminAllUsers) => (
-                  <div
-                    className="flex justify-between w-full items-center"
-                    key={item.id}
-                  >
-                    <div className="flex-center justify-between w-full h-[50px] items-center">
-                      <div className="flex-center rounded-full  mr-[140px]">
-                        <ImageFallback
-                          fallbackSrc={usePlaceHolder}
-                          src={item.profilePicture || usePlaceHolder}
-                          alt="user profile"
-                          width={40}
-                          height={40}
-                          className="rounded-lg"
-                        />
-                      </div>
-                      <div
-                        className="max-w-[150px] overflow-ellipsis flex-center"
-                        dir="rtl"
-                      >
-                        <span>{item.fullName || "  --"}</span>
-                      </div>
-                      <div className="max-w-[150px] overflow-ellipsis text-center">
-                        {item.email}
-                      </div>
-                      <div className="text-center  ">
-                        {formatDateTime(item.created_at)}
-                      </div>
-                      <div className="text-center  ">
-                        {formatDateTime(item.updated_at)}
-                      </div>
-                      <div className=" ml-[140px] flex-center ">
-                        <UserManegmentActionMenu user={item} />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </>
-              
+    <FadeIn>
+      <DashboardContentContainer
+        title="لیست کاربران"
+        topSectionContent={
+          <div className="flex gap-4">
+            <UserManegmentSearch />
+            <SellerUpgradeRequest
+              allSellerRequest={allSellerRequest}
+              totalCount={result.totalCount}
+              totalPages={totalPages}
+            />
+          </div>
+        }
+      >
+       <div>
+  <div className="w-full flex-col-center">
+    <ItemNavbar colsNumber={6} items={items} />
+  </div>
+
+  <div className="mt-5 text-white-pure">
+    {allUser?.data?.length > 0 ? (
+      <div className="flex flex-col gap-3">
+        {allUser.data.map((item: IAdminAllUsers) => (
+          <div
+            key={item.id}
+            className="
+              grid
+              grid-cols-6
+              items-center
+              rounded-xl
+              bg-dark-800
+              px-6
+              py-4
+              transition-all
+              duration-300
+              hover:scale-[1.01]
+              hover:shadow-xl
+              hover:shadow-black/20
+              hover:bg-dark-700
+            "
+          >
+            {/* avatar */}
+            <div className="flex justify-center">
+              <ImageFallback
+                fallbackSrc={usePlaceHolder}
+                src={item.profilePicture || usePlaceHolder}
+                alt="user profile"
+                width={40}
+                height={40}
+                className="rounded-lg"
+              />
             </div>
-          ) : (
-            <div className="text-4xl text-gray-300">کاربری وجود ندارد</div>
-          )}
-        </div>
+
+            {/* name */}
+            <div className="truncate text-center">
+              {item.fullName || "--"}
+            </div>
+
+            {/* email */}
+            <div className="truncate text-center">
+              {item.email || "--"}
+            </div>
+
+            {/* created */}
+            <div className="text-center">
+              {formatDateTime(item.created_at)}
+            </div>
+
+            {/* updated */}
+            <div className="text-center">
+              {formatDateTime(item.updated_at)}
+            </div>
+
+            {/* actions */}
+            <div className="flex justify-center">
+              <UserManegmentActionMenu user={item} />
+            </div>
+          </div>
+        ))}
       </div>
-    </DashboardContentContainer>
+    ) : (
+      <div className="flex justify-center py-20">
+        <span className="text-3xl text-gray-400">
+          کاربری وجود ندارد
+        </span>
+      </div>
+    )}
+  </div>
+</div>
+      </DashboardContentContainer>
+    </FadeIn>
   );
 };
 

@@ -6,7 +6,7 @@ const ChatBotModal = () => {
   return (
     <div className="flex gap-4 items-center fixed right-10 bottom-5 z-50 ">
       <Modal
-        contentClassName="bg-dark-900 text-white-pure mt-5"
+        contentClassName="chat-bg text-white-pure mt-5"
         mainContent={<ChatUI />}
         modalTitle="گفتگو با هوش مصنوعی"
         modalBtn={
@@ -17,7 +17,7 @@ const ChatBotModal = () => {
         border border-dark-300
         backdrop-blur-md flex-center"
           >
-            <VscRobot className="w-6 h-6 text-white-pure" />
+          <VscRobot className="w-6 h-6 text-white-pure"/>
           </button>
         }
       />

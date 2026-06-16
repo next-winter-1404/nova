@@ -1,3 +1,4 @@
+import FadeIn from "@/src/components/animations/FadeIn";
 import ItemNavbar from "@/src/components/common/dashboardItemNavbar/ItemNavbar";
 import DashboardContentContainer from "@/src/components/common/dashboardcontentcontainer/container";
 import SimpleDropdown from "@/src/components/common/dropDown";
@@ -5,7 +6,7 @@ import PaginationClient from "@/src/components/common/pagination/page";
 import CategoryItems from "@/src/components/dashboard/categoryManagement/categoryManagement";
 import CreateCategory from "@/src/components/dashboard/createCategory/createCategory";
 import { getCategory } from "@/src/utils/sevices/api/category/getCategory";
-import { FC} from "react";
+import { FC } from "react";
 interface IProps {
   searchParams: Promise<IFilters>;
 }
@@ -47,65 +48,105 @@ const CategoryManagementPage: FC<IProps> = async ({ searchParams }) => {
   ];
 
   return (
-    <DashboardContentContainer
-      title={`دسته بندی ها (${result.totalCount})`}
-      twTopContent="w-1/2"
-      topSectionContent={
-        <div className="flex gap-4  w-full py-2">
-          <SimpleDropdown
-            options={sortItem}
-            paramKey="order"
-            placeholder="ترتیب نمایش"
-            labelText="ترتیب نمایش"
-            tagBg="bg-dark-600"
-            triggerClassName="w-1/2 h-[50px]  text-[10px] md:text-base"
-          />
-          <SimpleDropdown
-            options={dropItem}
-            paramKey="sort"
-            placeholder="انتخاب کنید"
-            labelText="مرتب بر اساس"
-            tagBg="bg-dark-600"
-            triggerClassName="w-1/2 h-[50px]  text-[10px] md:text-base"
-          />
-        </div>
-      }
-    >
-      <div className="flex flex-col items-end gap-5">
-        <div className="flex flex-col gap-5 w-full">
-          <ItemNavbar colsNumber={2} items={["ایدی", "نام کتگوری"]} />
-          <div>
-            {allCategory.length > 0 ? (
-              <div className=" text-white px-10">
-                {allCategory.map((cat) => (
-                  <div className="flex w-full justify-between" key={cat.id}>
-                    <div className="grid grid-cols-2 w-full mb-5">
-                      <span className="px-20">{cat.id || "--"}</span>
-                      <p className="px-7">{cat.name || "عنوانی وجود ندارد"}</p>
-                    </div>
-                    <CategoryItems
-                      categoryId={cat.id}
-                      categoryName={cat.name}
-                    />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="w-full text-3xl text-gray-300 text-center">
-                دسته بندی وجود ندارد
-              </p>
-            )}
-          </div>
-          <div className="flex justify-between w-full items-center ">
-           <CreateCategory/>
-            <PaginationClient
-              totalPages={totalPages}
-              totalCount={Number(result?.totalCount)}
+    <FadeIn>
+      <DashboardContentContainer
+        title={`دسته بندی ها (${result.totalCount})`}
+        twTopContent="w-1/2"
+        topSectionContent={
+          <div className="flex gap-4  w-full py-2">
+            <SimpleDropdown
+              options={sortItem}
+              paramKey="order"
+              placeholder="ترتیب نمایش"
+              labelText="ترتیب نمایش"
+              tagBg="bg-dark-600"
+              triggerClassName="w-1/2 h-[50px]  text-[10px] md:text-base"
+            />
+            <SimpleDropdown
+              options={dropItem}
+              paramKey="sort"
+              placeholder="انتخاب کنید"
+              labelText="مرتب بر اساس"
+              tagBg="bg-dark-600"
+              triggerClassName="w-1/2 h-[50px]  text-[10px] md:text-base"
             />
           </div>
+        }
+      >
+       <div className="flex flex-col gap-3 w-full">
+
+  <ItemNavbar colsNumber={3} items={["ایدی", "نام کتگوری", "عملیات"]} />
+
+  <div className="w-full flex flex-col gap-3">
+
+    {allCategory.length > 0 ? (
+      allCategory.map((cat) => (
+        <div
+          key={cat.id}
+          className="
+            grid
+            grid-cols-3
+            items-center
+
+            w-full
+            bg-dark-800
+            rounded-xl
+
+            px-4 md:px-6
+            py-3
+
+            text-white-pure
+            text-[11px] md:text-[15px]
+
+            transition-all
+            duration-300
+            ease-out
+            transform-gpu
+
+            hover:-translate-y-1
+            hover:scale-[1.01]
+            hover:bg-dark-700
+            hover:shadow-xl
+            hover:shadow-black/30
+
+            border
+            border-transparent
+            hover:border-white/10
+
+            cursor-pointer
+          "
+        >
+
+          {/* ID */}
+          <div className="text-center font-medium">
+            {cat.id || "--"}
+          </div>
+
+          {/* NAME */}
+          <div className="text-center truncate">
+            {cat.name || "عنوانی وجود ندارد"}
+          </div>
+
+          {/* ACTIONS */}
+          <div className="flex justify-center">
+            <CategoryItems
+              categoryId={cat.id}
+              categoryName={cat.name}
+            />
+          </div>
+
         </div>
+      ))
+    ) : (
+      <div className="w-full text-3xl text-gray-300 text-center py-10">
+        دسته بندی وجود ندارد
       </div>
-    </DashboardContentContainer>
+    )}
+
+  </div>
+</div>
+      </DashboardContentContainer>
+    </FadeIn>
   );
 };
 

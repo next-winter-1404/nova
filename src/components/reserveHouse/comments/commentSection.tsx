@@ -5,6 +5,7 @@ import { IComment } from "@/src/core/types/IComment";
 import CommentForm from "./commentForm";
 import { useSearchParams } from "next/navigation";
 import ReplyForm from "./replyForm";
+import Slide from "../../animations/Slide";
 
 export interface ICommentsProps {
   comments: IComment[];
@@ -17,15 +18,17 @@ const CommentSection: FC<ICommentsProps> = ({ comments, houseId,mortgage=false }
   const searchParams = useSearchParams();
   const replyTo = searchParams.get("replyTo");
   return (
-    <div className="w-full">
-      {replyTo ? (
-        <ReplyForm houseId={Number(houseId)} parentId={Number(replyTo)} />
-      ) : (
-        <CommentForm houseId={houseId} />
-      )}
-      
-      <UserComments houseId={houseId} comments={comments} mortgage={mortgage}/>
-    </div>
+      <div className="w-full">
+    <Slide direction="right">
+        {replyTo ? (
+          <ReplyForm houseId={Number(houseId)} parentId={Number(replyTo)} />
+        ) : (
+          <CommentForm houseId={houseId} />
+        )}
+
+        <UserComments houseId={houseId} comments={comments} />
+    </Slide>
+      </div>
   );
 };
-export default CommentSection
+export default CommentSection;

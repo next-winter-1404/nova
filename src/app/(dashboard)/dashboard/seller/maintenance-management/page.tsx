@@ -1,3 +1,4 @@
+import FadeIn from "@/src/components/animations/FadeIn";
 import MaintenanceRequestComponent from "@/src/components/dashboard/maintenanceRequestComponent/MaintenanceRequestComponent";
 import { getAllMaintenance } from "@/src/utils/sevices/api/maintenanceRequests/getAllMaintenance";
 import { getSellerHouses } from "@/src/utils/sevices/api/seller/houses/getHouses";
@@ -12,7 +13,7 @@ const SellerMaintenanceManagement = async () => {
     sellerHouseIds?.includes(req.houseId)
   );
   return (
-    <MaintenanceRequestComponent allMaintenance={filteredRequests || []} />
+    <FadeIn><MaintenanceRequestComponent allMaintenance={filteredRequests || []} /></FadeIn>
   );
 };
 

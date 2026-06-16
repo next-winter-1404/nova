@@ -39,42 +39,33 @@ const ChatUI = () => {
   };
 
   return (
-    <div className="flex flex-col h-[400px] text-white">
+    <div className="flex flex-col h-[400px] text-white-pure">
       {/* messages box */}
-      <div
-  className="
-    flex-1 overflow-y-auto p-2 mb-2 rounded-xl
-    border border-white/10
-    bg-gradient-to-br
-    from-[#2c2f33]
-    via-[#23272a]
-    to-[#1e2124]
-  "
->
-        {messages.map((m, i) => (
-          <div
-            key={i}
-            className={`mb-2 flex ${
-              m.role === "user" ? "justify-end" : "justify-start"
-            }`}
-          >
-            <div
-              className={`max-w-[80%] rounded-2xl px-3 py-2 ${
-                m.role === "user"
-                  ? "bg-primary-accent-green text-dark-900"
-                  : "bg-gray-700 text-white"
-              }`}
-            >
-              {m.content}
-            </div>
-          </div>
-        ))}
+      <div className="flex-1 overflow-y-auto border p-2 mb-2 rounded-xl">
+      {messages.map((m, i) => (
+  <div
+    key={i}
+    className={`mb-2 flex ${
+      m.role === "user" ? "justify-end" : "justify-start"
+    }`}
+  >
+    <div
+      className={`max-w-[80%] rounded-2xl px-3 py-2 ${
+        m.role === "user" 
+          ? "bg-primary-accent-green text-dark-900"
+          : "bg-gray-700 text-white-pure"
+      }`}
+    >
+      {m.content}
+    </div>
+  </div>
+))}
 
         {loading && <p>درحال نوشتن...</p>}
       </div>
 
       {/* sen message input */}
-      <div className="flex gap-2 text-white">
+      <div className="flex gap-2 text-white-pure">
         <input
           className="border border-gray-300 flex-1 p-1 rounded-lg text-white-pure"
           value={input}

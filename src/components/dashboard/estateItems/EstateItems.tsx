@@ -88,23 +88,23 @@ const EstateItems: FC<IProp> = ({
   const menuItems = [
     {
       label: "جزییات",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      icon: <FiAlertCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsModalOpen(true),
     },
     {
       label: "افزودن تخفیف به این ملک",
-      icon: <FiAlertCircle className="w-4 h-4 text-white" />,
+      icon: <FiAlertCircle className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsDiscountModalOpen(true),
     },
     {
       label: "ویرایش",
-      icon: <TbEdit className="mt-px text-white" />,
+      icon: <TbEdit className="mt-px text-white-pure" />,
       onClick: () =>
         router.push(`/dashboard/${role}/estate-management/edit/${houseId}`),
     },
     {
       label: "حذف",
-      icon: <TbTrash className="mt-px text-white" />,
+      icon: <TbTrash className="mt-px text-white-pure" />,
       onClick: () => setIsAlertModalOpen(true),
     },
   ];
@@ -192,7 +192,7 @@ const EstateItems: FC<IProp> = ({
                   key={dis.id}
                   type="button"
                   onClick={() => setSelectedDiscount(Number(dis.id))}
-                  className={`p-2 rounded-xl text-white text-right transition ${
+                  className={`p-2 rounded-xl text-white-pure text-right transition ${
                     selectedDiscount === dis.id
                       ? "bg-green-600"
                       : "bg-dark-700 hover:bg-gray-600"
@@ -212,7 +212,7 @@ const EstateItems: FC<IProp> = ({
                 type="button"
                 disabled={selectedDiscount === null}
                 onClick={handleAddDiscount}
-                className={`py-2 rounded-xl text-white ${
+                className={`py-2 rounded-xl text-white-pure ${
                   selectedDiscount === null
                     ? "bg-gray-500 cursor-not-allowed"
                     : "bg-primary-accent-green "
@@ -233,7 +233,7 @@ const EstateItems: FC<IProp> = ({
               در حال بارگزاری....
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3 text-white" dir="rtl">
+            <div className="grid grid-cols-2 gap-3 text-white-pure" dir="rtl">
               {houseInfo.map((item, index) => (
                 <div
                   key={index}
@@ -243,7 +243,7 @@ const EstateItems: FC<IProp> = ({
                     {item.icon}
                     <span className="text-sm">{item.label}</span>
                   </div>
-                  <span className="text-white font-medium">
+                  <span className="text-white-pure font-medium">
                     {item.value ?? "--"}
                   </span>
                 </div>

@@ -74,7 +74,7 @@ const NotificationPage: FC<IProps> = async ({ searchParams }) => {
                       key={notification.id}
                       className="flex justify-between w-full"
                     >
-                      <div className="grid grid-cols-2  w-[80%] text-white mr-15 gap-5 ">
+                      <div className="grid grid-cols-2  w-[80%] text-white-pure mr-15 gap-5 ">
                         <span>{notification.title}</span>
                         <span>{notification.createdAt?.slice(0, 10)}</span>
                       </div>
@@ -100,7 +100,7 @@ const NotificationPage: FC<IProps> = async ({ searchParams }) => {
                   readNotifications.map((notification) => (
                     <div
                       key={notification.id}
-                      className="grid grid-cols-2  w-[80%] text-white mr-15 gap-5 "
+                      className="grid grid-cols-2  w-[80%] text-white-pure mr-15 gap-5 "
                     >
                       <span>{notification.title}</span>
                       <span>{notification.createdAt?.slice(0, 10)}</span>

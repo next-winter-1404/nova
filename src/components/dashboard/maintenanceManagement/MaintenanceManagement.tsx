@@ -41,42 +41,21 @@ const MaintenanceManagement: FC<IProp> = ({ MaintenanceId, description }) => {
       console.error(error);
     }
   };
-  //   const handleSubmit = async () => {
-  //     try {
-  //       const apiParams = {
-  //         appointmentTime: date,
-  //         type: typeOfVisit,
-  //       };
-  //       if (!date || !typeOfVisit) {
-  //         toast.error("لطفاً همه فیلدها را پر کنید");
-  //         return;
-  //       }
-  //       await editVisitAppointment(visitId, apiParams);
-
-  //       toast.success("قرار ملاقات ویرایش شد ");
-  //       setIsEditModal(false);
-  //     } catch (err) {
-  //       toast.error("خطا در ویرایش قرار ");
-  //       console.error(err);
-  //     }
-  //   };
-
-  // drop down items with their functions
 
   const menuItems = [
     {
       label: "جزییات",
-      icon: <TbEdit className="w-4 h-4 text-white" />,
+      icon: <TbEdit className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsDetailModal(true),
     },
     {
       label: "تایید",
-      icon: <TbCheck className="w-4 h-4 text-white" />,
+      icon: <TbCheck className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsAcceptModalOpen(true),
     },
     {
       label: "حذف",
-      icon: <TbTrash className="w-4 h-4 text-white" />,
+      icon: <TbTrash className="w-4 h-4 text-white-pure" />,
       onClick: () => setIsCancelModalOpen(true),
     },
   ];

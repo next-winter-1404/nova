@@ -6,13 +6,12 @@ import {
 } from "@/src/components/common/breadCrumbs";
 import HousePicture from "@/src/assets/images/singleHouse.png";
 import Location from "@/src/assets/icons/Location.svg";
-import { FiHelpCircle, FiPhoneCall } from "react-icons/fi";
+import { FiPhoneCall } from "react-icons/fi";
 import { FiCalendar } from "react-icons/fi";
 import dolor from "@/public/icons/grayDollor.svg";
 import Vector from "@/public/icons/Vector.svg";
 import moneyCheck from "@/public/icons/money-check-edit1.svg";
 import InfoCardContainer from "@/src/components/reserveHouse/InfoCardContainer";
-import Button from "@/src/components/common/button/page";
 import { getHousesDetail } from "@/src/utils/sevices/api/houses/getHousesDetail";
 import {
   FaRegCommentDots,
@@ -38,6 +37,8 @@ import DepositRentCalculator from "@/src/components/common/depositRentCalculater
 import { getWeatherQuery } from "@/src/utils/helper/weatherQuery/weatherQuery";
 import { getWeather } from "@/src/utils/sevices/api/weather/getWeather";
 import WeatherCard from "@/src/components/common/weatherCard/WeatherCard";
+import Slide from "@/src/components/animations/Slide";
+import GlareHover from "@/src/components/animations/GlareHover/GlareHover";
 
 interface IProps {
   params: Promise<{ id: number }>;
@@ -92,17 +93,9 @@ const SingleHousePage = async ({ params }: IProps) => {
       href: "/mortgageandhouserent",
       label: "رهن و اجاره",
     },
-    // {
-    //   href: "/reserve-house",
-    //   label: "رهن و اجاره آپارتمان",
-    // },
     {
-      href: "/reserve-house",
-      label: "رهن و اجاره آپارتمان",
-    },
-    {
-      href: "/reserve-house",
-      label: `رهن و اجاره ${getHouseInfo?.address}`,
+      href: "/mortgageandhouserent",
+      label: `${getHouseInfo?.address}`,
     },
     {
       label: `${getHouseInfo?.title}`,
@@ -132,6 +125,7 @@ const SingleHousePage = async ({ params }: IProps) => {
     },
   ];
   return (
+    <Slide direction="right">
     <div className="padding-section flex-col-center sm:mt-24 mt-15">
       <div className="flex-col-center sm:gap-6 gap-3">
         <Breadcrumb
@@ -145,6 +139,15 @@ const SingleHousePage = async ({ params }: IProps) => {
                 <HousesPicturesSlider imagesSrc={getHouseInfo?.photos} />
               </div>
               <div className="sm:hidden flex-center gap-4">
+              <GlareHover
+                    glareColor="var(--color-gray-300)"
+                    glareOpacity={0.3}
+                    glareAngle={-30}
+                    glareSize={300}
+                    transitionDuration={800}
+                    playOnce={false}
+                    className="rounded-[10px]"
+                  >
                 <span className="w-[82px] flex-center gap-1 px-3 py-1.5 whitespace-nowrap text-white bg-blue-purple-500 rounded-lg">
                   ستاره
                   <span
@@ -159,16 +162,27 @@ const SingleHousePage = async ({ params }: IProps) => {
                     <FaStar className="w-4 h-4" />
                   </span>
                 </span>
+                </GlareHover>
                 <i className="h-[21px] w-0.5 bg-gray-300"></i>
                 <div className="flex-center gap-4">
                   {tags?.map((tag) => {
                     return (
+                      <GlareHover
+                    glareColor="var(--color-gray-300)"
+                    glareOpacity={0.3}
+                    glareAngle={-30}
+                    glareSize={300}
+                    transitionDuration={800}
+                    playOnce={false}
+                    className="rounded-[10px]"
+                  >
                       <div
                         key={tag}
                         className="text-gray-300 text-[16px] bg-dark-700 border border-gray-200 rounded-xl p-8-16"
                       >
                         {tag}#
                       </div>
+                      </GlareHover>
                     );
                   })}
                 </div>
@@ -273,8 +287,8 @@ const SingleHousePage = async ({ params }: IProps) => {
             </div>
           </div>
           <div className="hidden sm:flex">
-            <div className="flex-col-center gap-2.5 max-w-[350px] rounded rounded-[32px]">
-              <div className="rounded rounded-[32px]">
+            <div className="flex-col-center gap-2.5 max-w-[350px]  rounded-[32px]">
+              <div className=" rounded-[32px]">
                 <Image
                   src={HousePicture}
                   className="h-[172px]"
@@ -296,7 +310,7 @@ const SingleHousePage = async ({ params }: IProps) => {
                 </span>
               </div>
             </div>
-            <div className="flex flex-2 rounded rounded-[32px] shadow-000-8">
+            <div className="flex flex-2 rounded-[32px] shadow-000-8">
               <Image src={HousePicture} alt="home pic" />
             </div>
           </div>
@@ -343,7 +357,7 @@ const SingleHousePage = async ({ params }: IProps) => {
             </div>
           </div>
           {weather && (
-            <div className="w-1/2 mt-42 ml-20 md:-ml-0 md:mt-6">
+            <div className="md:w-1/2 w-3/4 mt-55 ml-12 md:-ml-0 md:mt-6">
               <WeatherCard weather={weather} />
             </div>
           )}
@@ -387,6 +401,7 @@ const SingleHousePage = async ({ params }: IProps) => {
         <SliderSection cardData={result} />
       </Container>
     </div>
+    </Slide>
   );
 };
 
