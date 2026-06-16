@@ -21,16 +21,16 @@ const SearchContainer = async () => {
   // console.log(data)
   return (
     <div className="w-full">
-      <GlareHover
+      {/* <GlareHover
         glareColor="var(--color-gray-300)"
         glareOpacity={0.3}
         glareAngle={-30}
         glareSize={300}
         transitionDuration={800}
         playOnce={false}
-      >
+      > */}
         <SearchWrapper cityOptions={citiesOptions} />
-      </GlareHover>
+      {/* </GlareHover> */}
     </div>
   );
 };

@@ -60,12 +60,12 @@ const SpecialOfferSection = async () => {
                   alignItems: "center",
                 }}
               >
-                <StarBorder
+                {/* <StarBorder
                   as="button"
                   className="custom-class"
                   color="#7569ff"
                   speed="5s"
-                >
+                > */}
                   <Button
                     text=" مشاهده همه"
                     width="w-[137px]"
@@ -83,7 +83,7 @@ const SpecialOfferSection = async () => {
                       <ArrowAnimation duration={1.5} distance={2}><Image src={smallLeftArrowWhite} alt="smallLeftArrow" /></ArrowAnimation>
                     }
                   />
-                </StarBorder>
+                {/* </StarBorder> */}
                 <h3 className="flex-center justify-end text-32-medium">
                   پیشنهادا ویژه دلتا
                 </h3>

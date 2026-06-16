@@ -8,6 +8,7 @@ interface FadeInProps {
   delay?: number;
   y?: number;
   x?: number;
+  width?: string;
 }
 
 const FadeIn = ({
@@ -16,9 +17,11 @@ const FadeIn = ({
   delay = 0,
   y = 20,
   x = 0,
+  width
 }: FadeInProps) => {
   return (
     <motion.div
+    className={`${width}`}
       initial={{ opacity: 0, x, y }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{

@@ -36,7 +36,7 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
     { label: `${BlogDetail?.title}` },
   ];
   const user = await getUserPublicProfile(Number(BlogDetail?.author_id));
-  console.log("users", user);
+  // console.log("users", user);
   return (
     <Slide direction="right">
       <div className="w-full flex-center">
@@ -99,7 +99,7 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
                                 {formatDateTime(BlogDetail?.created_at)}{" "}
                               </span>
                               <span>-</span>
-                              <span>{BlogDetail?.estimated_reading_time}</span>
+                              <span>{BlogDetail?.estimated_reading_time||"--"}</span>
                             </div>
                           </div>
                         </div>
@@ -111,7 +111,7 @@ const BlogDetailPage: FC<IBlogDetailProp> = async ({ params }) => {
               <div className="md:flex flex-col w-1/2 hidden gap-4" dir="rtl">
                 <h2 className="lg:text-[32px] text-[18px] text-white-pure font-semibold">
                   <ShinyText
-                    text={BlogDetail?.title}
+                    text={BlogDetail?.title||"عنوانی وجود ندارد"}
                     speed={1}
                     delay={0}
                     color="var(--color-white-pure)"

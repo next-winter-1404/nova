@@ -151,6 +151,7 @@ const Footer = () => {
                       onChange={handleChange}
                       name='title'
                       dir='rtl'
+                      textColor='text-black'
                     />            
                 </div>
                 <div className='md:w-full w-[330px] h-[156px]' >
@@ -168,6 +169,7 @@ const Footer = () => {
                       value={formData.message}
                       name='message'
                       onChange={handleChange}
+                      textColor='text-black'
                     />
                 </div>
                 <LoginButton

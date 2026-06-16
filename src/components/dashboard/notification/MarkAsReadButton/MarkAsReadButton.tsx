@@ -31,7 +31,7 @@ const MarkAsReadButton: FC<IProp> = ({ notifId }) => {
   return (
     <div
       onClick={handleMarkAsRead}
-      className={`bg-primary-accent-green rounded-xl w-[200px] flex items-center p-0.5 gap-1 cursor-pointer transition ${
+      className={`bg-primary-accent-green rounded-xl text-[14px] whitespace-nowrap text-black w-[200px] flex items-center p-0.5 gap-1 cursor-pointer transition ${
         isLoading ? "opacity-50 pointer-events-none" : "hover:opacity-80"
       }`}
     >

@@ -26,7 +26,6 @@ const SetPasswordAndPhonePage = () => {
   }, [state, router]);
 
   return (
-    <FadeIn>
     <form
       action={formAction}
       className="md:w-1/2 w-full flex flex-col gap-9"
@@ -79,7 +78,6 @@ const SetPasswordAndPhonePage = () => {
         }
       />
     </form>
-    </FadeIn>
   );
 };
 

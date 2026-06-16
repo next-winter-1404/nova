@@ -19,7 +19,7 @@ const StarBorder = <T extends React.ElementType = 'button'>({
   children,
   ...rest
 }: StarBorderProps<T>) => {
-  const Component = as || 'button';
+  const Component = as || 'div';
 
   return (
     <Component
