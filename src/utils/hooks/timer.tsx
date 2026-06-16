@@ -33,7 +33,7 @@ const Timer = () => {
         type="button"
         className={` md:rounded-[10px] rounded-md h-full  flex-center md:gap-2 ${secondsElapsed==0?"w-full":"w-[60%] bg-white"}`}
       >
-        <span className="cursor-pointer text-[13px] whitespace-nowrap ">
+        <span className="cursor-pointer text-[13px] whitespace-nowrap  text-black ">
           ارسال دوباره رمز
         </span>
         <Image alt="arrow" src={smallLeftArrow} />

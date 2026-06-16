@@ -145,7 +145,7 @@ const Footer = () => {
                       parentWidth='md:w-full w-[150px]'
                       borderColor='border-selectedButtonText'               
                       labelTextSize='md:text-[16px] text-[12px] text-selectedButtonText'
-                      textSize='md:text-[16px] text-[14px] text-gray-300'
+                      textSize='md:text-[16px] text-[14px] '
                       tagBgStyle={{background:"var(--color-primary-accent-green)"}}
                       value={formData.title}
                       onChange={handleChange}
@@ -170,6 +170,7 @@ const Footer = () => {
                       name='message'
                       onChange={handleChange}
                       textColor='text-black'
+                      dir='rtl'
                     />
                 </div>
                 <LoginButton
