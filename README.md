@@ -161,8 +161,7 @@ Make sure you have the following installed:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/<username>/delta.git
-cd delta
+git clone https://github.com/next-winter-1404/nova.git
 ```
 
 ### Install Dependencies
