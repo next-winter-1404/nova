@@ -13,7 +13,7 @@
 - [About](#user-content--about)
 - [Features](#user-content--features)
 - [Tech Stack](#user-content-️-tech-stack)
-- [Application Architecture](#user-content-️-application-architecture)
+- [Application Architecture](#user-content-️-project-architecture)
 - [Screenshots](#user-content--screenshots)
 - [Getting Started](#user-content--getting-started)
 - [Project Structure](#user-content--project-structure)
