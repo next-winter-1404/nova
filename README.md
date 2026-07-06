@@ -190,6 +190,21 @@ http://localhost:3000
 npm run build
 ```
 
+<br/>
 
+## 🤝 Team
+
+Nova was collaboratively developed by a team of developers as an educational software project.
+
+The project reflects a collaborative effort in designing, implementing, and integrating different parts of a modern programming e-learning platform.
+
+---
+<div align="center">
+
+Made with ❤️ by **Nova Team**
+
+⭐ If you like this project, consider giving it a star on GitHub.
+
+</div>
 
 
