@@ -5,12 +5,17 @@ import { getServerSideCookie } from "../../helper/cookies/serverCookie/serverSid
 import { ServerRefreshToken } from "../../helper/refreshToken/ServerRefreshToken";
 import { redirect } from "next/navigation";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+console.log("BASE_URL:", BASE_URL);
+
+if (!BASE_URL) {
+  throw new Error("NEXT_PUBLIC_API_URL is not defined");
+}
 
 const instance = axios.create({
   baseURL: BASE_URL,
 });
-
 let isRefreshing = false;
 let refreshSubscribers: ((token: string) => void)[] = [];
 
